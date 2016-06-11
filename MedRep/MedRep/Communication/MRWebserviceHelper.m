@@ -851,7 +851,8 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
     
    // http://183.82.106.234:8080//MedRepApplication/api/doctor/getMyAppointment/20150101?access_token=8c4ccf50-f09a-495b-a8ef-be6c354fb07a
     //appointmentDate = @"20150101";
-    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/api/doctor/getMyAppointment/%@?access_token=%@",kBaseURL,appointmentDate,[MRDefaults objectForKey:kAuthenticationToken]];
+    //NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/api/doctor/getMyAppointment/%@?access_token=%@",kBaseURL,appointmentDate,[MRDefaults objectForKey:kAuthenticationToken]];
+    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/api/doctor/getMyAppointment?access_token=%@",kBaseURL,[MRDefaults objectForKey:kAuthenticationToken]];
     
     NSURL *url = [NSURL URLWithString:stringFormOfUrl];
     NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
@@ -880,6 +881,36 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
     self.serviceType = kMRWebServiceTypeGetMyNotifications;
     [self sendServiceRequest:urlRequest withHandler:responceHandler];
 
+}
+
+- (void)getNewswithHandler:(completionHandler)responceHandler
+{
+    // http://183.82.106.234:8080/MedRepApplication/api/doctor/getMyNotifications/20150101?access_token=8c4ccf50-f09a-495b-a8ef-be6c354fb07a
+    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/api/doctor/getMyNotifications?access_token=%@",kBaseURL,[MRDefaults objectForKey:kAuthenticationToken]];
+    
+    NSURL *url = [NSURL URLWithString:stringFormOfUrl];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [urlRequest setTimeoutInterval:120];
+    [urlRequest setHTTPMethod:@"GET"];
+    [urlRequest setValue:@"text/plain" forHTTPHeaderField:@"Content-Type"];
+    self.serviceType = kMRWebServiceTypeGetMyNotifications;
+    [self sendServiceRequest:urlRequest withHandler:responceHandler];
+}
+
+- (void)getMaterialwithHandler:(completionHandler)responceHandler
+{
+    // http://183.82.106.234:8080/MedRepApplication/api/doctor/getMyNotifications/20150101?access_token=8c4ccf50-f09a-495b-a8ef-be6c354fb07a
+    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/api/doctor/getMyNotifications?access_token=%@",kBaseURL,[MRDefaults objectForKey:kAuthenticationToken]];
+    
+    NSURL *url = [NSURL URLWithString:stringFormOfUrl];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [urlRequest setTimeoutInterval:120];
+    [urlRequest setHTTPMethod:@"GET"];
+    [urlRequest setValue:@"text/plain" forHTTPHeaderField:@"Content-Type"];
+    self.serviceType = kMRWebServiceTypeGetMyNotifications;
+    [self sendServiceRequest:urlRequest withHandler:responceHandler];
 }
 
 
