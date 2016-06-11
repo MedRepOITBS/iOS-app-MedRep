@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1808" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="pendingCell" rowHeight="48" id="JXl-EC-I1p" customClass="PendingContactCustomFilterTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="319" height="48"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JXl-EC-I1p" id="tCS-5b-cZz">
+                <rect key="frame" x="0.0" y="0.0" width="319" height="47.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TBV-D0-ttD">
+                        <rect key="frame" x="8" y="11" width="27" height="22"/>
+                        <state key="normal" image="uncheck"/>
+                        <connections>
+                            <action selector="checkButtonTapped:" destination="JXl-EC-I1p" eventType="touchUpInside" id="waS-QJ-CSH"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Namit Nayak" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VPl-jx-Wwh">
+                        <rect key="frame" x="43" y="12" width="242" height="21"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                            <rect key="frame" x="50" y="8" width="221" height="27.5"/>
+                        </variation>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" red="0.23500327797202797" green="0.40441979895104896" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                <variation key="default">
+                    <mask key="subviews">
+                        <exclude reference="VPl-jx-Wwh"/>
+                    </mask>
+                </variation>
+                <variation key="heightClass=regular-widthClass=compact">
+                    <mask key="subviews">
+                        <include reference="VPl-jx-Wwh"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="checkImage" destination="TBV-D0-ttD" id="jDT-Fw-sFq"/>
+                <outlet property="customFilterName" destination="VPl-jx-Wwh" id="u6M-QS-9xU"/>
+            </connections>
+            <point key="canvasLocation" x="191.5" y="-128"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="uncheck" width="20" height="20"/>
+    </resources>
+</document>
