@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MRDevEnvironmentConfig.h"
+
 @import UIKit;
 
 @interface MRCommon : NSObject

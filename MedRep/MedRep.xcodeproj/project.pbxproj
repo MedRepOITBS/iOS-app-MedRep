@@ -134,9 +134,6 @@
 		79421F1E1BB83A4B0055D9B7 /* MRDoctorScoreTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79421F191BB83A4B0055D9B7 /* MRDoctorScoreTableCell.xib */; };
 		79421F331BB83ABE0055D9B7 /* MRPHDashBoardViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79421F2B1BB83ABE0055D9B7 /* MRPHDashBoardViewController_iPad.xib */; };
 		79421F351BB83ABE0055D9B7 /* MRPHDashBoardViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79421F2D1BB83ABE0055D9B7 /* MRPHDashBoardViewController_iPhone.xib */; };
-		79421F361BB83ABE0055D9B7 /* MRPHDashBoardViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79421F2E1BB83ABE0055D9B7 /* MRPHDashBoardViewController_iPhone5.xib */; };
-		79421F371BB83ABE0055D9B7 /* MRPHDashBoardViewController_iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79421F2F1BB83ABE0055D9B7 /* MRPHDashBoardViewController_iPhone6.xib */; };
-		79421F381BB83ABE0055D9B7 /* MRPHDashBoardViewController_iPhone6Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79421F301BB83ABE0055D9B7 /* MRPHDashBoardViewController_iPhone6Plus.xib */; };
 		79421F391BB83ABE0055D9B7 /* MRPHDashBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79421F321BB83ABE0055D9B7 /* MRPHDashBoardViewController.m */; };
 		79421F401BB83BAE0055D9B7 /* MRDoctorDetailsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79421F3B1BB83BAE0055D9B7 /* MRDoctorDetailsTableViewCell.m */; };
 		79421F411BB83BAE0055D9B7 /* MRDoctorDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79421F3C1BB83BAE0055D9B7 /* MRDoctorDetailsTableViewCell.xib */; };
@@ -503,6 +500,499 @@
 		83C127FC1B77C88B00D2F08E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C127FB1B77C88B00D2F08E /* ViewController.m */; };
 		83C128011B77C88B00D2F08E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83C128001B77C88B00D2F08E /* Images.xcassets */; };
 		83C128101B77C88B00D2F08E /* MedRepTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C1280F1B77C88B00D2F08E /* MedRepTests.m */; };
+		CC7DB0221D0C8BEC007DFE4C /* MRAppointmentListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79169E241BEBE70500C11D13 /* MRAppointmentListViewController.m */; };
+		CC7DB0231D0C8BEC007DFE4C /* MRCompaignsDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7930A3921BB9153A003112E4 /* MRCompaignsDetailsViewController.m */; };
+		CC7DB0241D0C8BEC007DFE4C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B7820E1B7919EA0070645C /* Reachability.m */; };
+		CC7DB0251D0C8BEC007DFE4C /* MRNotificationsDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79AC942D1B9DFB0300B81452 /* MRNotificationsDetailsViewController.m */; };
+		CC7DB0261D0C8BEC007DFE4C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C127F51B77C88B00D2F08E /* AppDelegate.m */; };
+		CC7DB0271D0C8BEC007DFE4C /* WYPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7969CFC41BAF2AF6004C2009 /* WYPopoverController.m */; };
+		CC7DB0281D0C8BEC007DFE4C /* MRViewRepAppointmnetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 792230E21BF271F800084891 /* MRViewRepAppointmnetViewController.m */; };
+		CC7DB0291D0C8BEC007DFE4C /* MRForgotPasswordTwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7920D6911C1C87C9008D3386 /* MRForgotPasswordTwoViewController.m */; };
+		CC7DB02A1D0C8BEC007DFE4C /* MRDoctorDetailsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79421F3B1BB83BAE0055D9B7 /* MRDoctorDetailsTableViewCell.m */; };
+		CC7DB02B1D0C8BEC007DFE4C /* MRFeedBackResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7930A3971BB91629003112E4 /* MRFeedBackResultCell.m */; };
+		CC7DB02C1D0C8BEC007DFE4C /* MPAppointmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F416781B9F596B0089729B /* MPAppointmentViewController.m */; };
+		CC7DB02D1D0C8BEC007DFE4C /* MRMedRepListTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DC37161BE7DEA90027F7DB /* MRMedRepListTableCell.m */; };
+		CC7DB02E1D0C8BEC007DFE4C /* MRProfileDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7920D6971C1C9B69008D3386 /* MRProfileDetailsViewController.m */; };
+		CC7DB02F1D0C8BEC007DFE4C /* MRMedRepMeetingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F5C9EF1BB0586100435B6C /* MRMedRepMeetingsViewController.m */; };
+		CC7DB0301D0C8BEC007DFE4C /* MRNotificationType.m in Sources */ = {isa = PBXBuildFile; fileRef = 797560401BBFE3AA0034D0AC /* MRNotificationType.m */; };
+		CC7DB0311D0C8BEC007DFE4C /* Base64Transcoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 79708A6E1BB71D68007CE81D /* Base64Transcoder.m */; };
+		CC7DB0321D0C8BEC007DFE4C /* MRCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B781F81B7916900070645C /* MRCommon.m */; };
+		CC7DB0331D0C8BEC007DFE4C /* MRPharmaNotificationDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79314AD61BD2776A00EB3A48 /* MRPharmaNotificationDetailsViewController.m */; };
+		CC7DB0341D0C8BEC007DFE4C /* MRCompetitorAnalasysCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 796E93961BB8790A0031EA34 /* MRCompetitorAnalasysCell.m */; };
+		CC7DB0351D0C8BEC007DFE4C /* MRMedRepListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DC37111BE7DDCF0027F7DB /* MRMedRepListViewController.m */; };
+		CC7DB0361D0C8BEC007DFE4C /* MRNotificationInsiderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79314AD01BD2773E00EB3A48 /* MRNotificationInsiderViewController.m */; };
+		CC7DB0371D0C8BEC007DFE4C /* MRRole.m in Sources */ = {isa = PBXBuildFile; fileRef = 7975603D1BBFE3AA0034D0AC /* MRRole.m */; };
+		CC7DB0381D0C8BEC007DFE4C /* MRCompetitorAnalasysViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 796E93911BB8784D0031EA34 /* MRCompetitorAnalasysViewController.m */; };
+		CC7DB0391D0C8BEC007DFE4C /* MRAppointmentCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7929E3B21B9C8E5F001F1373 /* MRAppointmentCollectionViewCell.m */; };
+		CC7DB03A1D0C8BEC007DFE4C /* MRViewAppointmnetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F84B1E1BE938310081613A /* MRViewAppointmnetViewController.m */; };
+		CC7DB03B1D0C8BEC007DFE4C /* MRTherapeuticArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 797560431BBFE3AA0034D0AC /* MRTherapeuticArea.m */; };
+		CC7DB03C1D0C8BEC007DFE4C /* MRListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7969CFCC1BAF2E38004C2009 /* MRListViewController.m */; };
+		CC7DB03D1D0C8BEC007DFE4C /* MRDRActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D5EA9E1C1E00D50037CE23 /* MRDRActivityTableViewCell.m */; };
+		CC7DB03E1D0C8BEC007DFE4C /* MRMedrepMeetingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F5C9F41BB061BE00435B6C /* MRMedrepMeetingsCell.m */; };
+		CC7DB03F1D0C8BEC007DFE4C /* GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79A4F8A91BC186B200E58DC7 /* GraphView.m */; };
+		CC7DB0401D0C8BEC007DFE4C /* MRAppControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B781F21B7916670070645C /* MRAppControl.m */; };
+		CC7DB0411D0C8BEC007DFE4C /* MPNotificatinsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79AC94471B9E011D00B81452 /* MPNotificatinsTableViewCell.m */; };
+		CC7DB0421D0C8BEC007DFE4C /* MRSurveyDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7950AF221BBF91D700A93106 /* MRSurveyDetailsViewController.m */; };
+		CC7DB0431D0C8BEC007DFE4C /* MRMedRepDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F84B121BE92CB70081613A /* MRMedRepDetailsViewController.m */; };
+		CC7DB0441D0C8BEC007DFE4C /* MRLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BD27DA1B809FD1007CA448 /* MRLoginViewController.m */; };
+		CC7DB0451D0C8BEC007DFE4C /* MRDoctorActivityScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F29A6E1BE6330300063DC2 /* MRDoctorActivityScoreViewController.m */; };
+		CC7DB0461D0C8BEC007DFE4C /* MRRegistrationRoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FFD24D1BB9B83700CEE606 /* MRRegistrationRoleViewController.m */; };
+		CC7DB0471D0C8BEC007DFE4C /* MRDoctorActivityScoreDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7920D6A11C1CB236008D3386 /* MRDoctorActivityScoreDetailsViewController.m */; };
+		CC7DB0481D0C8BEC007DFE4C /* MRForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7920D68C1C1C874C008D3386 /* MRForgotPasswordViewController.m */; };
+		CC7DB0491D0C8BEC007DFE4C /* MRParserHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B782011B7916E10070645C /* MRParserHelper.m */; };
+		CC7DB04A1D0C8BEC007DFE4C /* MRConvertAppointmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 796E938B1BB869FA0031EA34 /* MRConvertAppointmentCell.m */; };
+		CC7DB04B1D0C8BEC007DFE4C /* MRDoctorScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F29A681BE632D500063DC2 /* MRDoctorScoreViewController.m */; };
+		CC7DB04C1D0C8BEC007DFE4C /* MRAppointmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79A360B71BA5821400F286E0 /* MRAppointmentCell.m */; };
+		CC7DB04D1D0C8BEC007DFE4C /* WYStoryboardPopoverSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7969CFC71BAF2AF6004C2009 /* WYStoryboardPopoverSegue.m */; };
+		CC7DB04E1D0C8BEC007DFE4C /* MRWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7961A9771B8F4E520035D63A /* MRWelcomeViewController.m */; };
+		CC7DB04F1D0C8BEC007DFE4C /* MRMedRepTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DC370B1BE7DC5F0027F7DB /* MRMedRepTableCell.m */; };
+		CC7DB0501D0C8BEC007DFE4C /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B782081B7919EA0070645C /* NSDate+Utilities.m */; };
+		CC7DB0511D0C8BEC007DFE4C /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B7820C1B7919EA0070645C /* SVProgressHUD.m */; };
+		CC7DB0521D0C8BEC007DFE4C /* MPNotificationAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79A5DC5A1BA1EBBF001D872C /* MPNotificationAlertViewController.m */; };
+		CC7DB0531D0C8BEC007DFE4C /* MRFavoritesNotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 795366191BA0B7E40021CE4D /* MRFavoritesNotificationsViewController.m */; };
+		CC7DB0541D0C8BEC007DFE4C /* MRAddressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D8CD8A1B83A59B0089F770 /* MRAddressView.m */; };
+		CC7DB0551D0C8BEC007DFE4C /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B782171B7920BB0070645C /* SWRevealViewController.m */; };
+		CC7DB0561D0C8BEC007DFE4C /* MRPharmaMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79421F481BB83BBB0055D9B7 /* MRPharmaMenuViewController.m */; };
+		CC7DB0571D0C8BEC007DFE4C /* MRPHDashBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79421F321BB83ABE0055D9B7 /* MRPHDashBoardViewController.m */; };
+		CC7DB0581D0C8BEC007DFE4C /* MRSurveyListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7950AF1D1BBF8B1600A93106 /* MRSurveyListViewController.m */; };
+		CC7DB0591D0C8BEC007DFE4C /* MRDoctorDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79421F3E1BB83BAE0055D9B7 /* MRDoctorDetailsViewController.m */; };
+		CC7DB05A1D0C8BEC007DFE4C /* MRMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79539E981B90941D001516C3 /* MRMenuViewController.m */; };
+		CC7DB05B1D0C8BEC007DFE4C /* MRRegHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 798A118A1B8AEBF6003FF457 /* MRRegHeaderView.m */; };
+		CC7DB05C1D0C8BEC007DFE4C /* MRLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 795881A91C63CF8600462868 /* MRLocationManager.m */; };
+		CC7DB05D1D0C8BEC007DFE4C /* MRDashBoardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 799820931BA4D01C0069128A /* MRDashBoardVC.m */; };
+		CC7DB05E1D0C8BEC007DFE4C /* MRFavoriteFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7953662C1BA0C0300021CE4D /* MRFavoriteFilterViewController.m */; };
+		CC7DB05F1D0C8BEC007DFE4C /* MPCallMedrepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79A5DC601BA1ED21001D872C /* MPCallMedrepViewController.m */; };
+		CC7DB0601D0C8BEC007DFE4C /* MRNewProductCompaignsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 796E936F1BB861E10031EA34 /* MRNewProductCompaignsViewController.m */; };
+		CC7DB0611D0C8BEC007DFE4C /* MRNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 79115CEA1BCD872900151806 /* MRNotifications.m */; };
+		CC7DB0621D0C8BEC007DFE4C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C127F21B77C88B00D2F08E /* main.m */; };
+		CC7DB0631D0C8BEC007DFE4C /* MRMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F066901B94E13C00D113F0 /* MRMenuTableViewCell.m */; };
+		CC7DB0641D0C8BEC007DFE4C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C127FB1B77C88B00D2F08E /* ViewController.m */; };
+		CC7DB0651D0C8BEC007DFE4C /* MRWebserviceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B781FB1B7916B40070645C /* MRWebserviceHelper.m */; };
+		CC7DB0661D0C8BEC007DFE4C /* MRDatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 797560461BBFE4940034D0AC /* MRDatabaseHelper.m */; };
+		CC7DB0671D0C8BEC007DFE4C /* MRReadNotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 795366141BA0B7A90021CE4D /* MRReadNotificationsViewController.m */; };
+		CC7DB0681D0C8BEC007DFE4C /* MRDoctorScoreTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79421F181BB83A4B0055D9B7 /* MRDoctorScoreTableCell.m */; };
+		CC7DB0691D0C8BEC007DFE4C /* MRConvertAppointmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 796E937A1BB867FF0031EA34 /* MRConvertAppointmentViewController.m */; };
+		CC7DB06A1D0C8BEC007DFE4C /* MRNotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79AC94281B9DFAF000B81452 /* MRNotificationsViewController.m */; };
+		CC7DB06B1D0C8BEC007DFE4C /* MRRegistationTwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7961A9711B8F26160035D63A /* MRRegistationTwoViewController.m */; };
+		CC7DB06C1D0C8BEC007DFE4C /* UILabel+WhiteUIDatePickerLabels.m in Sources */ = {isa = PBXBuildFile; fileRef = 79A4AA721BA75850004F6E1E /* UILabel+WhiteUIDatePickerLabels.m */; };
+		CC7DB06D1D0C8BEC007DFE4C /* MRRegistationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BD27E61B80A11D007CA448 /* MRRegistationViewController.m */; };
+		CC7DB06E1D0C8BEC007DFE4C /* MROTPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BD28101B80C6A5007CA448 /* MROTPViewController.m */; };
+		CC7DB06F1D0C8BEC007DFE4C /* MRAppointmentListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79169E251BEBE70500C11D13 /* MRAppointmentListCell.m */; };
+		CC7DB0701D0C8BEC007DFE4C /* MRDocotrActivityScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7940000F1BE61BAC0066151A /* MRDocotrActivityScoreViewController.m */; };
+		CC7DB0711D0C8BEC007DFE4C /* MRHomeViewContoller.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BD27B21B809982007CA448 /* MRHomeViewContoller.m */; };
+		CC7DB0721D0C8BEC007DFE4C /* GraphPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 79A4F8AB1BC186B200E58DC7 /* GraphPoint.m */; };
+		CC7DB0731D0C8BEC007DFE4C /* MedRep.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 83C127F71B77C88B00D2F08E /* MedRep.xcdatamodeld */; };
+		CC7DB0741D0C8BEC007DFE4C /* MRPharmaMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79421F451BB83BBB0055D9B7 /* MRPharmaMenuCell.m */; };
+		CC7DB0751D0C8BEC007DFE4C /* MROptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BD27E11B80A0FB007CA448 /* MROptionsViewController.m */; };
+		CC7DB0761D0C8BEC007DFE4C /* MRFeedBackResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7930A38D1BB9151C003112E4 /* MRFeedBackResultViewController.m */; };
+		CC7DB0771D0C8BEC007DFE4C /* MRCompanyDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 797560491BC02B3A0034D0AC /* MRCompanyDetails.m */; };
+		CC7DB0781D0C8BEC007DFE4C /* MRMedRepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79C709DE1BE7D7F200223562 /* MRMedRepViewController.m */; };
+		CC7DB0791D0C8BEC007DFE4C /* MROTPVerifiedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79841DD61B989B5B00535916 /* MROTPVerifiedViewController.m */; };
+		CC7DB07A1D0C8BEC007DFE4C /* NSData+Base64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 79708A6C1BB71D67007CE81D /* NSData+Base64Additions.m */; };
+		CC7DB07B1D0C8BEC007DFE4C /* MRDataManger.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B782041B7917010070645C /* MRDataManger.m */; };
+		CC7DB07C1D0C8BEC007DFE4C /* MRNewProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 796E93741BB862530031EA34 /* MRNewProductCell.m */; };
+		CC7DB07D1D0C8BEC007DFE4C /* MRProductBrocherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F84B181BE9354B0081613A /* MRProductBrocherViewController.m */; };
+		CC7DB07E1D0C8BEC007DFE4C /* MRRegTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 798A11851B8AEAD2003FF457 /* MRRegTableViewCell.m */; };
+		CC7DB07F1D0C8BEC007DFE4C /* MRRegistrationRoleCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FFD2521BB9BA7D00CEE606 /* MRRegistrationRoleCellTableViewCell.m */; };
+		CC7DB0821D0C8BEC007DFE4C /* logout@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3651B9C78B5001F1373 /* logout@3x.png */; };
+		CC7DB0831D0C8BEC007DFE4C /* MRPharmaMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79421F461BB83BBB0055D9B7 /* MRPharmaMenuCell.xib */; };
+		CC7DB0841D0C8BEC007DFE4C /* news@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E36B1B9C78B5001F1373 /* news@3x.png */; };
+		CC7DB0851D0C8BEC007DFE4C /* dsbg@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 796E93B01BB881E90031EA34 /* dsbg@3x.jpg */; };
+		CC7DB0861D0C8BEC007DFE4C /* feedback@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 795365F71BA09EBF0021CE4D /* feedback@3x.png */; };
+		CC7DB0871D0C8BEC007DFE4C /* Icon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD278F1B80980F007CA448 /* Icon-60@3x.png */; };
+		CC7DB0881D0C8BEC007DFE4C /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27901B80980F007CA448 /* Icon-72.png */; };
+		CC7DB0891D0C8BEC007DFE4C /* email@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27ED1B80A8C3007CA448 /* email@3x.png */; };
+		CC7DB08A1D0C8BEC007DFE4C /* calender-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F4167F1B9F5CDB0089729B /* calender-icon@2x.png */; };
+		CC7DB08B1D0C8BEC007DFE4C /* PHsurveys@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79173C591BB48EE100842E4C /* PHsurveys@3x.png */; };
+		CC7DB08C1D0C8BEC007DFE4C /* reminderSelected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 791C37F11C502D6D00914728 /* reminderSelected@3x.png */; };
+		CC7DB08D1D0C8BEC007DFE4C /* MRHomeViewContoller.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27B41B80999E007CA448 /* MRHomeViewContoller.xib */; };
+		CC7DB08E1D0C8BEC007DFE4C /* otptic@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79841DDB1B98A02A00535916 /* otptic@3x.png */; };
+		CC7DB08F1D0C8BEC007DFE4C /* call-medrep@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 795365F11BA09EBF0021CE4D /* call-medrep@3x.png */; };
+		CC7DB0901D0C8BEC007DFE4C /* categoryBG@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27FD1B80B37F007CA448 /* categoryBG@2x.jpg */; };
+		CC7DB0911D0C8BEC007DFE4C /* categoryBG-568h@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27FA1B80B37F007CA448 /* categoryBG-568h@2x.jpg */; };
+		CC7DB0921D0C8BEC007DFE4C /* pageviewdots@2x~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27BD1B809A80007CA448 /* pageviewdots@2x~iPad.png */; };
+		CC7DB0931D0C8BEC007DFE4C /* MROTPVerifiedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79841DD71B989B5B00535916 /* MROTPVerifiedViewController.xib */; };
+		CC7DB0941D0C8BEC007DFE4C /* MRMedRepViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79C709E01BE7D7F200223562 /* MRMedRepViewController.xib */; };
+		CC7DB0951D0C8BEC007DFE4C /* pcminus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79169E1B1BEBDD6800C11D13 /* pcminus@2x.png */; };
+		CC7DB0961D0C8BEC007DFE4C /* pageviewdots~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27BF1B809A80007CA448 /* pageviewdots~iPad.png */; };
+		CC7DB0971D0C8BEC007DFE4C /* navLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F066981B94E7AD00D113F0 /* navLogo.png */; };
+		CC7DB0981D0C8BEC007DFE4C /* pcselect@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E93641BB8528B0031EA34 /* pcselect@3x.png */; };
+		CC7DB0991D0C8BEC007DFE4C /* otptic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79841DDA1B98A02A00535916 /* otptic@2x.png */; };
+		CC7DB09A1D0C8BEC007DFE4C /* password@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27F01B80A8C3007CA448 /* password@3x.png */; };
+		CC7DB09B1D0C8BEC007DFE4C /* MRMedRepListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79DC37121BE7DDCF0027F7DB /* MRMedRepListViewController.xib */; };
+		CC7DB09C1D0C8BEC007DFE4C /* PHdashboard-banner@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79173C4E1BB48EE100842E4C /* PHdashboard-banner@2x.png */; };
+		CC7DB09D1D0C8BEC007DFE4C /* pcright-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E93611BB8528B0031EA34 /* pcright-arrow@2x.png */; };
+		CC7DB09E1D0C8BEC007DFE4C /* MRMedRepTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79DC370C1BE7DC5F0027F7DB /* MRMedRepTableCell.xib */; };
+		CC7DB09F1D0C8BEC007DFE4C /* privateHospital_selection@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7961A9631B8F25DA0035D63A /* privateHospital_selection@2x.png */; };
+		CC7DB0A01D0C8BEC007DFE4C /* otpTiccMark@2x~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 7991FABE1B810AB100516DDF /* otpTiccMark@2x~iPad.png */; };
+		CC7DB0A11D0C8BEC007DFE4C /* ndcompany3@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94531B9E0DA000B81452 /* ndcompany3@2x.jpg */; };
+		CC7DB0A21D0C8BEC007DFE4C /* comapny-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94321B9DFDB800B81452 /* comapny-logo@2x.png */; };
+		CC7DB0A31D0C8BEC007DFE4C /* MRMedRepListTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79DC37171BE7DEA90027F7DB /* MRMedRepListTableCell.xib */; };
+		CC7DB0A41D0C8BEC007DFE4C /* MRConvertAppointmentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 796E938C1BB869FA0031EA34 /* MRConvertAppointmentCell.xib */; };
+		CC7DB0A51D0C8BEC007DFE4C /* notificationbody-bg@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94371B9DFDB800B81452 /* notificationbody-bg@3x.jpg */; };
+		CC7DB0A61D0C8BEC007DFE4C /* splashLogo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27851B8096D6007CA448 /* splashLogo@3x.png */; };
+		CC7DB0A71D0C8BEC007DFE4C /* MRRegTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 798A11861B8AEAD2003FF457 /* MRRegTableViewCell.xib */; };
+		CC7DB0A81D0C8BEC007DFE4C /* meetings@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3691B9C78B5001F1373 /* meetings@3x.png */; };
+		CC7DB0A91D0C8BEC007DFE4C /* bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27B81B809A80007CA448 /* bg@3x.png */; };
+		CC7DB0AA1D0C8BEC007DFE4C /* NDcomapny-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79AC944D1B9E0DA000B81452 /* NDcomapny-logo@2x.png */; };
+		CC7DB0AB1D0C8BEC007DFE4C /* categoryBG~iPad.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27F81B80B37F007CA448 /* categoryBG~iPad.jpg */; };
+		CC7DB0AC1D0C8BEC007DFE4C /* MRNotificationInsiderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79314AD11BD2773E00EB3A48 /* MRNotificationInsiderViewController.xib */; };
+		CC7DB0AD1D0C8BEC007DFE4C /* cathera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E93801BB869120031EA34 /* cathera@2x.png */; };
+		CC7DB0AE1D0C8BEC007DFE4C /* addressPinIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7961A9601B8F25DA0035D63A /* addressPinIcon@2x.png */; };
+		CC7DB0AF1D0C8BEC007DFE4C /* time-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F416851B9F5CDB0089729B /* time-icon@2x.png */; };
+		CC7DB0B01D0C8BEC007DFE4C /* search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3D21B9CC674001F1373 /* search@2x.png */; };
+		CC7DB0B11D0C8BEC007DFE4C /* medrep@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27831B8096D6007CA448 /* medrep@3x.png */; };
+		CC7DB0B21D0C8BEC007DFE4C /* NDcomapny-logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79AC944E1B9E0DA000B81452 /* NDcomapny-logo@3x.png */; };
+		CC7DB0B31D0C8BEC007DFE4C /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83B781E91B7915C10070645C /* Default@2x.png */; };
+		CC7DB0B41D0C8BEC007DFE4C /* comapny-logo2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94351B9DFDB800B81452 /* comapny-logo2@3x.png */; };
+		CC7DB0B51D0C8BEC007DFE4C /* search@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3D31B9CC674001F1373 /* search@3x.png */; };
+		CC7DB0B61D0C8BEC007DFE4C /* Signup_plain@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27C51B809A80007CA448 /* Signup_plain@2x.png */; };
+		CC7DB0B71D0C8BEC007DFE4C /* addicon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 798A11801B8AE17B003FF457 /* addicon@3x.png */; };
+		CC7DB0B81D0C8BEC007DFE4C /* ndcompany3@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94541B9E0DA000B81452 /* ndcompany3@3x.jpg */; };
+		CC7DB0B91D0C8BEC007DFE4C /* dashboard-bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3C71B9CBE4C001F1373 /* dashboard-bg@3x.png */; };
+		CC7DB0BA1D0C8BEC007DFE4C /* crgreyup-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79A5DC6B1BA2092E001D872C /* crgreyup-arrow@2x.png */; };
+		CC7DB0BB1D0C8BEC007DFE4C /* MROptionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27E21B80A0FB007CA448 /* MROptionsViewController.xib */; };
+		CC7DB0BC1D0C8BEC007DFE4C /* pageviewdots@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27BE1B809A80007CA448 /* pageviewdots@3x.png */; };
+		CC7DB0BD1D0C8BEC007DFE4C /* MPCallMedrepViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 799820901BA471FB0069128A /* MPCallMedrepViewController_iPhone.xib */; };
+		CC7DB0BE1D0C8BEC007DFE4C /* crgreyup-arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79A5DC6C1BA2092E001D872C /* crgreyup-arrow@3x.png */; };
+		CC7DB0BF1D0C8BEC007DFE4C /* PHdoctor@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79708A941BB73C67007CE81D /* PHdoctor@3x.png */; };
+		CC7DB0C01D0C8BEC007DFE4C /* password@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27EF1B80A8C3007CA448 /* password@2x.png */; };
+		CC7DB0C11D0C8BEC007DFE4C /* NDcompany1@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79AC944F1B9E0DA000B81452 /* NDcompany1@2x.jpg */; };
+		CC7DB0C21D0C8BEC007DFE4C /* reveal-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 79539E9C1B90C6AE001516C3 /* reveal-icon.png */; };
+		CC7DB0C31D0C8BEC007DFE4C /* readnotification3@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 793602E41BA35D6800BB85E6 /* readnotification3@2x.jpg */; };
+		CC7DB0C41D0C8BEC007DFE4C /* reminder@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 795365FD1BA09EBF0021CE4D /* reminder@3x.png */; };
+		CC7DB0C51D0C8BEC007DFE4C /* PHlocations@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79708A991BB73C67007CE81D /* PHlocations@3x.png */; };
+		CC7DB0C61D0C8BEC007DFE4C /* downArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79DE1BDD1B826245005289D6 /* downArrow@2x.png */; };
+		CC7DB0C71D0C8BEC007DFE4C /* medrep@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27821B8096D6007CA448 /* medrep@2x.png */; };
+		CC7DB0C81D0C8BEC007DFE4C /* dddoctor-analysis-normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E93A61BB8816D0031EA34 /* dddoctor-analysis-normal@3x.png */; };
+		CC7DB0C91D0C8BEC007DFE4C /* MRDRActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79D5EA9F1C1E00D50037CE23 /* MRDRActivityTableViewCell.xib */; };
+		CC7DB0CA1D0C8BEC007DFE4C /* btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7991FABC1B810AB100516DDF /* btn@2x.png */; };
+		CC7DB0CB1D0C8BEC007DFE4C /* pcplus@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E93601BB8528B0031EA34 /* pcplus@3x.png */; };
+		CC7DB0CC1D0C8BEC007DFE4C /* White-right-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94571B9E0DA000B81452 /* White-right-arrow@2x.png */; };
+		CC7DB0CD1D0C8BEC007DFE4C /* call-medrep@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 795365F01BA09EBF0021CE4D /* call-medrep@2x.png */; };
+		CC7DB0CE1D0C8BEC007DFE4C /* reg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79FFD2561BB9BAA300CEE606 /* reg@2x.png */; };
+		CC7DB0CF1D0C8BEC007DFE4C /* readnotification3@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 793602E51BA35D6800BB85E6 /* readnotification3@3x.jpg */; };
+		CC7DB0D01D0C8BEC007DFE4C /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83B781DC1B79128F0070645C /* ViewController.xib */; };
+		CC7DB0D11D0C8BEC007DFE4C /* crthera@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79A5DC6E1BA2092E001D872C /* crthera@3x.png */; };
+		CC7DB0D21D0C8BEC007DFE4C /* surveys_dashboard@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3D51B9CC674001F1373 /* surveys_dashboard@3x.png */; };
+		CC7DB0D31D0C8BEC007DFE4C /* MRDashBoardVC_iPhone6Plus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79A360B21BA56E2D00F286E0 /* MRDashBoardVC_iPhone6Plus.xib */; };
+		CC7DB0D41D0C8BEC007DFE4C /* PHdrugsales@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79421EE51BB7EF950055D9B7 /* PHdrugsales@3x.png */; };
+		CC7DB0D51D0C8BEC007DFE4C /* cnsort@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F4169F1B9F6E560089729B /* cnsort@3x.png */; };
+		CC7DB0D61D0C8BEC007DFE4C /* email@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27EC1B80A8C3007CA448 /* email@2x.png */; };
+		CC7DB0D71D0C8BEC007DFE4C /* input@2x~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 79DE1BD81B826245005289D6 /* input@2x~iPad.png */; };
+		CC7DB0D81D0C8BEC007DFE4C /* minus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 791C37DB1C4FF96400914728 /* minus@2x.png */; };
+		CC7DB0D91D0C8BEC007DFE4C /* dashboard_menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 791432A61C32EB7D0031FB91 /* dashboard_menu@2x.png */; };
+		CC7DB0DA1D0C8BEC007DFE4C /* MRAppointmentListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79169E201BEBE70500C11D13 /* MRAppointmentListViewController.xib */; };
+		CC7DB0DB1D0C8BEC007DFE4C /* PHthera@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79708A9F1BB73C67007CE81D /* PHthera@3x.png */; };
+		CC7DB0DC1D0C8BEC007DFE4C /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD278E1B80980F007CA448 /* Icon-60@2x.png */; };
+		CC7DB0DD1D0C8BEC007DFE4C /* drug-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F416821B9F5CDB0089729B /* drug-icon@3x.png */; };
+		CC7DB0DE1D0C8BEC007DFE4C /* favFilter-checked@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 795366211BA0BFD20021CE4D /* favFilter-checked@3x.png */; };
+		CC7DB0DF1D0C8BEC007DFE4C /* navLogo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F0669A1B94E7AD00D113F0 /* navLogo@3x.png */; };
+		CC7DB0E01D0C8BEC007DFE4C /* reminder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 795365FC1BA09EBF0021CE4D /* reminder@2x.png */; };
+		CC7DB0E11D0C8BEC007DFE4C /* surveys@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3731B9C78B5001F1373 /* surveys@3x.png */; };
+		CC7DB0E21D0C8BEC007DFE4C /* favFilter-checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 795366201BA0BFD20021CE4D /* favFilter-checked@2x.png */; };
+		CC7DB0E31D0C8BEC007DFE4C /* favFilter-wrong@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 795366221BA0BFD20021CE4D /* favFilter-wrong@2x.png */; };
+		CC7DB0E41D0C8BEC007DFE4C /* fbUnSelectedRadio@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79FFD25C1BB9DC3100CEE606 /* fbUnSelectedRadio@2x.png */; };
+		CC7DB0E51D0C8BEC007DFE4C /* HomeLogo@2x~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27BA1B809A80007CA448 /* HomeLogo@2x~iPad.png */; };
+		CC7DB0E61D0C8BEC007DFE4C /* addicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 798A117E1B8AE17B003FF457 /* addicon.png */; };
+		CC7DB0E71D0C8BEC007DFE4C /* pageviewdots@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27C41B809A80007CA448 /* pageviewdots@2x.png */; };
+		CC7DB0E81D0C8BEC007DFE4C /* upArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79DE1BD91B826245005289D6 /* upArrow@2x.png */; };
+		CC7DB0E91D0C8BEC007DFE4C /* left-arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3901B9C8979001F1373 /* left-arrow@3x.png */; };
+		CC7DB0EA1D0C8BEC007DFE4C /* img1@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 795365FB1BA09EBF0021CE4D /* img1@3x.jpg */; };
+		CC7DB0EB1D0C8BEC007DFE4C /* building-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F4167D1B9F5CDB0089729B /* building-icon@2x.png */; };
+		CC7DB0EC1D0C8BEC007DFE4C /* crdown-arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79A5DC661BA2092E001D872C /* crdown-arrow@3x.png */; };
+		CC7DB0ED1D0C8BEC007DFE4C /* fbUnSelectedRadio@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79FFD25D1BB9DC3100CEE606 /* fbUnSelectedRadio@3x.png */; };
+		CC7DB0EE1D0C8BEC007DFE4C /* search-for-drugs@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E36F1B9C78B5001F1373 /* search-for-drugs@3x.png */; };
+		CC7DB0EF1D0C8BEC007DFE4C /* profileIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7977C47F1C63ED8F00A7C49A /* profileIcon@3x.png */; };
+		CC7DB0F01D0C8BEC007DFE4C /* MRViewRepAppointmnetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 792230E31BF271F800084891 /* MRViewRepAppointmnetViewController.xib */; };
+		CC7DB0F11D0C8BEC007DFE4C /* MRDashBoardVC_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79173C331BB470B500842E4C /* MRDashBoardVC_iPad.xib */; };
+		CC7DB0F21D0C8BEC007DFE4C /* Default-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83B781E71B7915C10070645C /* Default-667h@2x.png */; };
+		CC7DB0F31D0C8BEC007DFE4C /* reveal-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79539E9D1B90C6AE001516C3 /* reveal-icon@2x.png */; };
+		CC7DB0F41D0C8BEC007DFE4C /* left-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E38F1B9C8979001F1373 /* left-arrow@2x.png */; };
+		CC7DB0F51D0C8BEC007DFE4C /* PHdashboard-bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79173C511BB48EE100842E4C /* PHdashboard-bg@3x.png */; };
+		CC7DB0F61D0C8BEC007DFE4C /* otpTiccMark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7991FABD1B810AB100516DDF /* otpTiccMark@2x.png */; };
+		CC7DB0F71D0C8BEC007DFE4C /* catransparent@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 796E93821BB869120031EA34 /* catransparent@2x.jpg */; };
+		CC7DB0F81D0C8BEC007DFE4C /* smallTickmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79DE1BE11B826245005289D6 /* smallTickmark@2x.png */; };
+		CC7DB0F91D0C8BEC007DFE4C /* MRCompetitorAnalasysCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 796E93971BB8790A0031EA34 /* MRCompetitorAnalasysCell.xib */; };
+		CC7DB0FA1D0C8BEC007DFE4C /* froverdue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7930A39B1BB91ECF003112E4 /* froverdue@2x.png */; };
+		CC7DB0FB1D0C8BEC007DFE4C /* ddpresent-activity-normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E939E1BB880C20031EA34 /* ddpresent-activity-normal@2x.png */; };
+		CC7DB0FC1D0C8BEC007DFE4C /* team@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 791C37E51C50256E00914728 /* team@3x.png */; };
+		CC7DB0FD1D0C8BEC007DFE4C /* MRDoctorActivityScoreDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7920D6A21C1CB236008D3386 /* MRDoctorActivityScoreDetailsViewController.xib */; };
+		CC7DB0FE1D0C8BEC007DFE4C /* starunselected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79FFD2611BB9DC3100CEE606 /* starunselected@3x.png */; };
+		CC7DB0FF1D0C8BEC007DFE4C /* MRForgotPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7920D68D1C1C874C008D3386 /* MRForgotPasswordViewController.xib */; };
+		CC7DB1001D0C8BEC007DFE4C /* crup-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79A5DC6F1BA2092E001D872C /* crup-arrow@2x.png */; };
+		CC7DB1011D0C8BEC007DFE4C /* dddoctor-analysis-hover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E939B1BB880C20031EA34 /* dddoctor-analysis-hover@2x.png */; };
+		CC7DB1021D0C8BEC007DFE4C /* navLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F066991B94E7AD00D113F0 /* navLogo@2x.png */; };
+		CC7DB1031D0C8BEC007DFE4C /* notification@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E36D1B9C78B5001F1373 /* notification@3x.png */; };
+		CC7DB1041D0C8BEC007DFE4C /* star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79FFD25E1BB9DC3100CEE606 /* star@2x.png */; };
+		CC7DB1051D0C8BEC007DFE4C /* crdown-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79A5DC651BA2092E001D872C /* crdown-arrow@2x.png */; };
+		CC7DB1061D0C8BEC007DFE4C /* otpTiccMark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7991FABF1B810AB100516DDF /* otpTiccMark@3x.png */; };
+		CC7DB1071D0C8BEC007DFE4C /* MRMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79F066911B94E13C00D113F0 /* MRMenuTableViewCell.xib */; };
+		CC7DB1081D0C8BEC007DFE4C /* full-screen@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 795365F91BA09EBF0021CE4D /* full-screen@3x.png */; };
+		CC7DB1091D0C8BEC007DFE4C /* Icon-40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD278C1B80980F007CA448 /* Icon-40@3x.png */; };
+		CC7DB10A1D0C8BEC007DFE4C /* completed_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 791C37E11C50256E00914728 /* completed_icon@3x.png */; };
+		CC7DB10B1D0C8BEC007DFE4C /* dddoctor-analysis-hover@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E93A51BB8816D0031EA34 /* dddoctor-analysis-hover@3x.png */; };
+		CC7DB10C1D0C8BEC007DFE4C /* MRDoctorScoreTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79421F191BB83A4B0055D9B7 /* MRDoctorScoreTableCell.xib */; };
+		CC7DB10D1D0C8BEC007DFE4C /* MRConvertAppointmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 796E937B1BB867FF0031EA34 /* MRConvertAppointmentViewController.xib */; };
+		CC7DB10E1D0C8BEC007DFE4C /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 83B7820A1B7919EA0070645C /* SVProgressHUD.bundle */; };
+		CC7DB10F1D0C8BEC007DFE4C /* MROTPViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79BD28111B80C6A5007CA448 /* MROTPViewController.xib */; };
+		CC7DB1101D0C8BEC007DFE4C /* favorite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 795365F41BA09EBF0021CE4D /* favorite@2x.png */; };
+		CC7DB1111D0C8BEC007DFE4C /* MRDoctorDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79421F3C1BB83BAE0055D9B7 /* MRDoctorDetailsTableViewCell.xib */; };
+		CC7DB1121D0C8BEC007DFE4C /* reg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79FFD2571BB9BAA300CEE606 /* reg@3x.png */; };
+		CC7DB1131D0C8BEC007DFE4C /* frpie@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7930A3A01BB91ECF003112E4 /* frpie@3x.png */; };
+		CC7DB1141D0C8BEC007DFE4C /* reminderSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 791C37F01C502D6D00914728 /* reminderSelected@2x.png */; };
+		CC7DB1151D0C8BEC007DFE4C /* Signup_plain~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27C11B809A80007CA448 /* Signup_plain~iPad.png */; };
+		CC7DB1161D0C8BEC007DFE4C /* radioSelection@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD28071B80B991007CA448 /* radioSelection@3x.png */; };
+		CC7DB1171D0C8BEC007DFE4C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83C128001B77C88B00D2F08E /* Images.xcassets */; };
+		CC7DB1181D0C8BEC007DFE4C /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27971B80980F007CA448 /* Icon-Small@2x.png */; };
+		CC7DB1191D0C8BEC007DFE4C /* transperent-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94381B9DFDB800B81452 /* transperent-bg@2x.png */; };
+		CC7DB11A1D0C8BEC007DFE4C /* PHactivity@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79173C4D1BB48EE100842E4C /* PHactivity@3x.png */; };
+		CC7DB11B1D0C8BEC007DFE4C /* full-screen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 795365F81BA09EBF0021CE4D /* full-screen@2x.png */; };
+		CC7DB11C1D0C8BEC007DFE4C /* PHmail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79708A9A1BB73C67007CE81D /* PHmail@2x.png */; };
+		CC7DB11D1D0C8BEC007DFE4C /* nabar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F066941B94E4E900D113F0 /* nabar@2x.png */; };
+		CC7DB11E1D0C8BEC007DFE4C /* PHmedrep@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79421EE91BB7EF950055D9B7 /* PHmedrep@3x.png */; };
+		CC7DB11F1D0C8BEC007DFE4C /* PHprescription@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79421EEB1BB7EF950055D9B7 /* PHprescription@3x.png */; };
+		CC7DB1201D0C8BEC007DFE4C /* wallet@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 791432AB1C32EF9D0031FB91 /* wallet@3x.png */; };
+		CC7DB1211D0C8BEC007DFE4C /* radioUnSelection@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD28091B80B991007CA448 /* radioUnSelection@3x.png */; };
+		CC7DB1231D0C8BEC007DFE4C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83B781E61B7915C10070645C /* Default-568h@2x.png */; };
+		CC7DB1241D0C8BEC007DFE4C /* MRSurveyListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7950AF1E1BBF8B1600A93106 /* MRSurveyListViewController.xib */; };
+		CC7DB1251D0C8BEC007DFE4C /* notificationback@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79AC943B1B9DFDB800B81452 /* notificationback@3x.png */; };
+		CC7DB1261D0C8BEC007DFE4C /* fbSelectedRadio@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79FFD25B1BB9DC3100CEE606 /* fbSelectedRadio@3x.png */; };
+		CC7DB1271D0C8BEC007DFE4C /* Icon-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD278B1B80980F007CA448 /* Icon-40@2x.png */; };
+		CC7DB1281D0C8BEC007DFE4C /* notification_dash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3E21B9CC98D001F1373 /* notification_dash@2x.png */; };
+		CC7DB1291D0C8BEC007DFE4C /* PHproductcampaigns@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79421EED1BB7EF950055D9B7 /* PHproductcampaigns@2x.png */; };
+		CC7DB12A1D0C8BEC007DFE4C /* star@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79FFD25F1BB9DC3100CEE606 /* star@3x.png */; };
+		CC7DB12B1D0C8BEC007DFE4C /* pcselect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E93631BB8528B0031EA34 /* pcselect@2x.png */; };
+		CC7DB12C1D0C8BEC007DFE4C /* news@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E36A1B9C78B5001F1373 /* news@2x.png */; };
+		CC7DB12D1D0C8BEC007DFE4C /* starunselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79FFD2601BB9DC3100CEE606 /* starunselected@2x.png */; };
+		CC7DB12E1D0C8BEC007DFE4C /* locationPin@2x~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 79DE1BE01B826245005289D6 /* locationPin@2x~iPad.png */; };
+		CC7DB12F1D0C8BEC007DFE4C /* MRPHDashBoardViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79421F2D1BB83ABE0055D9B7 /* MRPHDashBoardViewController_iPhone.xib */; };
+		CC7DB1301D0C8BEC007DFE4C /* searc--for-drugs@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E36E1B9C78B5001F1373 /* searc--for-drugs@2x.png */; };
+		CC7DB1311D0C8BEC007DFE4C /* camara-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7961A97D1B8F53C60035D63A /* camara-icon@2x.png */; };
+		CC7DB1321D0C8BEC007DFE4C /* hospital@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7961A9621B8F25DA0035D63A /* hospital@2x.png */; };
+		CC7DB1331D0C8BEC007DFE4C /* dropDownButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79DE1BD51B826245005289D6 /* dropDownButton@2x.png */; };
+		CC7DB1341D0C8BEC007DFE4C /* PHnotification@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79173C561BB48EE100842E4C /* PHnotification@3x.png */; };
+		CC7DB1351D0C8BEC007DFE4C /* MRViewAppointmnetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79F84B1F1BE938310081613A /* MRViewAppointmnetViewController.xib */; };
+		CC7DB1361D0C8BEC007DFE4C /* crup-arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79A5DC701BA2092E001D872C /* crup-arrow@3x.png */; };
+		CC7DB1371D0C8BEC007DFE4C /* pcfedback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E935D1BB8528B0031EA34 /* pcfedback@2x.png */; };
+		CC7DB1381D0C8BEC007DFE4C /* frsnooze@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7930A3A11BB91ECF003112E4 /* frsnooze@2x.png */; };
+		CC7DB1391D0C8BEC007DFE4C /* ndchecked@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79AC945A1B9E0DA000B81452 /* ndchecked@3x.png */; };
+		CC7DB13A1D0C8BEC007DFE4C /* ActivityScore@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3CA1B9CC674001F1373 /* ActivityScore@2x.png */; };
+		CC7DB13B1D0C8BEC007DFE4C /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27911B80980F007CA448 /* Icon-72@2x.png */; };
+		CC7DB13C1D0C8BEC007DFE4C /* PHdrugsales@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79421EE41BB7EF950055D9B7 /* PHdrugsales@2x.png */; };
+		CC7DB13D1D0C8BEC007DFE4C /* activity-score@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3601B9C78B5001F1373 /* activity-score@2x.png */; };
+		CC7DB13E1D0C8BEC007DFE4C /* MRRegistationTwoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7961A9721B8F26160035D63A /* MRRegistationTwoViewController.xib */; };
+		CC7DB13F1D0C8BEC007DFE4C /* favorite@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 795365F51BA09EBF0021CE4D /* favorite@3x.png */; };
+		CC7DB1401D0C8BEC007DFE4C /* ndInput@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79AC946A1B9E116000B81452 /* ndInput@3x.png */; };
+		CC7DB1411D0C8BEC007DFE4C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 83B781E81B7915C10070645C /* Default.png */; };
+		CC7DB1421D0C8BEC007DFE4C /* MRFavoritesNotificationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7953661A1BA0B7E40021CE4D /* MRFavoritesNotificationsViewController.xib */; };
+		CC7DB1431D0C8BEC007DFE4C /* cncompany2@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79F4169A1B9F6E560089729B /* cncompany2@2x.jpg */; };
+		CC7DB1441D0C8BEC007DFE4C /* frpie-bg@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7930A39D1BB91ECF003112E4 /* frpie-bg@2x.jpg */; };
+		CC7DB1451D0C8BEC007DFE4C /* MRListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7969CFCD1BAF2E38004C2009 /* MRListViewController.xib */; };
+		CC7DB1461D0C8BEC007DFE4C /* feedback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 795365F61BA09EBF0021CE4D /* feedback@2x.png */; };
+		CC7DB1471D0C8BEC007DFE4C /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27961B80980F007CA448 /* Icon-Small.png */; };
+		CC7DB1481D0C8BEC007DFE4C /* NDcompany2-BG@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94511B9E0DA000B81452 /* NDcompany2-BG@2x.jpg */; };
+		CC7DB1491D0C8BEC007DFE4C /* cnsort@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F4169E1B9F6E560089729B /* cnsort@2x.png */; };
+		CC7DB14A1D0C8BEC007DFE4C /* Icon-40.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD278A1B80980F007CA448 /* Icon-40.png */; };
+		CC7DB14B1D0C8BEC007DFE4C /* MRWelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7961A9781B8F4E520035D63A /* MRWelcomeViewController.xib */; };
+		CC7DB14C1D0C8BEC007DFE4C /* minus@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 791C37DC1C4FF96400914728 /* minus@3x.png */; };
+		CC7DB14D1D0C8BEC007DFE4C /* calender-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F416801B9F5CDB0089729B /* calender-icon@3x.png */; };
+		CC7DB14E1D0C8BEC007DFE4C /* team@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 791C37E41C50256E00914728 /* team@2x.png */; };
+		CC7DB14F1D0C8BEC007DFE4C /* MRAppointmentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79A360B81BA5821400F286E0 /* MRAppointmentCell.xib */; };
+		CC7DB1501D0C8BEC007DFE4C /* comapny-logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94331B9DFDB800B81452 /* comapny-logo@3x.png */; };
+		CC7DB1511D0C8BEC007DFE4C /* caclock-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E937E1BB869120031EA34 /* caclock-icon@2x.png */; };
+		CC7DB1521D0C8BEC007DFE4C /* discussion-forum@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3631B9C78B5001F1373 /* discussion-forum@3x.png */; };
+		CC7DB1531D0C8BEC007DFE4C /* meetings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3681B9C78B5001F1373 /* meetings@2x.png */; };
+		CC7DB1541D0C8BEC007DFE4C /* completed_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 791C37E01C50256E00914728 /* completed_icon@2x.png */; };
+		CC7DB1551D0C8BEC007DFE4C /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD279A1B80980F007CA448 /* Icon@2x.png */; };
+		CC7DB1561D0C8BEC007DFE4C /* MRAppointmentListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79169E221BEBE70500C11D13 /* MRAppointmentListCell.xib */; };
+		CC7DB1571D0C8BEC007DFE4C /* hospital_selection@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7961A9611B8F25DA0035D63A /* hospital_selection@2x.png */; };
+		CC7DB1581D0C8BEC007DFE4C /* dashboard_menu@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 791432A71C32EB7D0031FB91 /* dashboard_menu@3x.png */; };
+		CC7DB1591D0C8BEC007DFE4C /* catrnsparent@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 796E93831BB869120031EA34 /* catrnsparent@3x.jpg */; };
+		CC7DB15A1D0C8BEC007DFE4C /* categoryBG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27FC1B80B37F007CA448 /* categoryBG.jpg */; };
+		CC7DB15B1D0C8BEC007DFE4C /* surveys@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3721B9C78B5001F1373 /* surveys@2x.png */; };
+		CC7DB15C1D0C8BEC007DFE4C /* frpie@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7930A39F1BB91ECF003112E4 /* frpie@2x.png */; };
+		CC7DB15D1D0C8BEC007DFE4C /* MRRegistrationRoleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79FFD24E1BB9B83700CEE606 /* MRRegistrationRoleViewController.xib */; };
+		CC7DB15E1D0C8BEC007DFE4C /* marketing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3661B9C78B5001F1373 /* marketing@2x.png */; };
+		CC7DB15F1D0C8BEC007DFE4C /* picklocation@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79FAA66E1C68DF71003F7518 /* picklocation@3x.png */; };
+		CC7DB1601D0C8BEC007DFE4C /* PHphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79708A9C1BB73C67007CE81D /* PHphone@2x.png */; };
+		CC7DB1611D0C8BEC007DFE4C /* bg@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27C71B809A80007CA448 /* bg@2x.jpg */; };
+		CC7DB1621D0C8BEC007DFE4C /* comapny-logo2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94341B9DFDB800B81452 /* comapny-logo2@2x.png */; };
+		CC7DB1631D0C8BEC007DFE4C /* caclock-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E937F1BB869120031EA34 /* caclock-icon@3x.png */; };
+		CC7DB1641D0C8BEC007DFE4C /* password.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27EE1B80A8C3007CA448 /* password.png */; };
+		CC7DB1651D0C8BEC007DFE4C /* MRDoctorActivityScoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79F29A6F1BE6330300063DC2 /* MRDoctorActivityScoreViewController.xib */; };
+		CC7DB1661D0C8BEC007DFE4C /* upcoming_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 791C37E71C50256E00914728 /* upcoming_icon@3x.png */; };
+		CC7DB1671D0C8BEC007DFE4C /* ddpresent-activity-hover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E939D1BB880C20031EA34 /* ddpresent-activity-hover@2x.png */; };
+		CC7DB1681D0C8BEC007DFE4C /* MRNotificationsDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79AC942E1B9DFB0300B81452 /* MRNotificationsDetailsViewController.xib */; };
+		CC7DB1691D0C8BEC007DFE4C /* HomeLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27C21B809A80007CA448 /* HomeLogo@2x.png */; };
+		CC7DB16B1D0C8BEC007DFE4C /* ActivityScore@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3CB1B9CC674001F1373 /* ActivityScore@3x.png */; };
+		CC7DB16C1D0C8BEC007DFE4C /* MRDashBoardVC_iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79A360B01BA56DE800F286E0 /* MRDashBoardVC_iPhone6.xib */; };
+		CC7DB16D1D0C8BEC007DFE4C /* input@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79DE1BD71B826245005289D6 /* input@2x.png */; };
+		CC7DB16E1D0C8BEC007DFE4C /* news_dash@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3CF1B9CC674001F1373 /* news_dash@3x.png */; };
+		CC7DB16F1D0C8BEC007DFE4C /* wallet@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 791432AA1C32EF9D0031FB91 /* wallet@2x.png */; };
+		CC7DB1701D0C8BEC007DFE4C /* PHmarketingMenu@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79421EE71BB7EF950055D9B7 /* PHmarketingMenu@3x.png */; };
+		CC7DB1711D0C8BEC007DFE4C /* MRDoctorScoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79F29A6A1BE632D500063DC2 /* MRDoctorScoreViewController.xib */; };
+		CC7DB1721D0C8BEC007DFE4C /* privateHospital@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7961A9641B8F25DA0035D63A /* privateHospital@2x.png */; };
+		CC7DB1731D0C8BEC007DFE4C /* favFilter-unchecked@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7953661F1BA0BFD20021CE4D /* favFilter-unchecked@3x.png */; };
+		CC7DB1741D0C8BEC007DFE4C /* PHactivity@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79173C4C1BB48EE100842E4C /* PHactivity@2x.png */; };
+		CC7DB1751D0C8BEC007DFE4C /* MRNewProductCompaignsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 796E93701BB861E10031EA34 /* MRNewProductCompaignsViewController.xib */; };
+		CC7DB1761D0C8BEC007DFE4C /* dddoctor-analysis-normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E939C1BB880C20031EA34 /* dddoctor-analysis-normal@2x.png */; };
+		CC7DB1771D0C8BEC007DFE4C /* email.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27EB1B80A8C3007CA448 /* email.png */; };
+		CC7DB1781D0C8BEC007DFE4C /* PHdividers@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79173C521BB48EE100842E4C /* PHdividers@2x.png */; };
+		CC7DB1791D0C8BEC007DFE4C /* addicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 798A117F1B8AE17B003FF457 /* addicon@2x.png */; };
+		CC7DB17A1D0C8BEC007DFE4C /* latestNotificatins@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E38A1B9C8979001F1373 /* latestNotificatins@3x.png */; };
+		CC7DB17B1D0C8BEC007DFE4C /* MRDocotrActivityScoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 794000101BE61BAC0066151A /* MRDocotrActivityScoreViewController.xib */; };
+		CC7DB17C1D0C8BEC007DFE4C /* notification_dash@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3E31B9CC98D001F1373 /* notification_dash@3x.png */; };
+		CC7DB17D1D0C8BEC007DFE4C /* fbSelectedRadio@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79FFD25A1BB9DC3000CEE606 /* fbSelectedRadio@2x.png */; };
+		CC7DB17E1D0C8BEC007DFE4C /* profileIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7977C47E1C63ED8F00A7C49A /* profileIcon@2x.png */; };
+		CC7DB17F1D0C8BEC007DFE4C /* Icon-76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27931B80980F007CA448 /* Icon-76@2x.png */; };
+		CC7DB1801D0C8BEC007DFE4C /* NDcompany2-BG@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94521B9E0DA000B81452 /* NDcompany2-BG@3x.jpg */; };
+		CC7DB1811D0C8BEC007DFE4C /* MRSurveyDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7950AF231BBF91D700A93106 /* MRSurveyDetailsViewController.xib */; };
+		CC7DB1821D0C8BEC007DFE4C /* MRAddressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79D8CD8C1B83A5AE0089F770 /* MRAddressView.xib */; };
+		CC7DB1831D0C8BEC007DFE4C /* feedbackSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F074981BBF16970049FDE7 /* feedbackSelected@2x.png */; };
+		CC7DB1841D0C8BEC007DFE4C /* img1@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 795365FA1BA09EBF0021CE4D /* img1@2x.jpg */; };
+		CC7DB1851D0C8BEC007DFE4C /* MRPharmaNotificationDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79314AD71BD2776A00EB3A48 /* MRPharmaNotificationDetailsViewController.xib */; };
+		CC7DB1861D0C8BEC007DFE4C /* crthera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79A5DC6D1BA2092E001D872C /* crthera@2x.png */; };
+		CC7DB1871D0C8BEC007DFE4C /* MRPharmaMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79421F491BB83BBB0055D9B7 /* MRPharmaMenuViewController.xib */; };
+		CC7DB1881D0C8BEC007DFE4C /* White-right-arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94581B9E0DA000B81452 /* White-right-arrow@3x.png */; };
+		CC7DB1891D0C8BEC007DFE4C /* NDcompany1@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94501B9E0DA000B81452 /* NDcompany1@3x.jpg */; };
+		CC7DB18A1D0C8BEC007DFE4C /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27921B80980F007CA448 /* Icon-76.png */; };
+		CC7DB18B1D0C8BEC007DFE4C /* PHsurveys@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79173C581BB48EE100842E4C /* PHsurveys@2x.png */; };
+		CC7DB18C1D0C8BEC007DFE4C /* frsnoozed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7930A3A21BB91ECF003112E4 /* frsnoozed@3x.png */; };
+		CC7DB18D1D0C8BEC007DFE4C /* PHphone@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79708A9D1BB73C67007CE81D /* PHphone@3x.png */; };
+		CC7DB18E1D0C8BEC007DFE4C /* MRFeedBackResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7930A3981BB91629003112E4 /* MRFeedBackResultCell.xib */; };
+		CC7DB18F1D0C8BEC007DFE4C /* activity-score@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3611B9C78B5001F1373 /* activity-score@3x.png */; };
+		CC7DB1901D0C8BEC007DFE4C /* right-arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3981B9C8979001F1373 /* right-arrow@3x.png */; };
+		CC7DB1911D0C8BEC007DFE4C /* PHmarketing@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79173C551BB48EE100842E4C /* PHmarketing@3x.png */; };
+		CC7DB1921D0C8BEC007DFE4C /* ndchecked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94591B9E0DA000B81452 /* ndchecked@2x.png */; };
+		CC7DB1931D0C8BEC007DFE4C /* discussion-forum@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3621B9C78B5001F1373 /* discussion-forum@2x.png */; };
+		CC7DB1941D0C8BEC007DFE4C /* MRDashBoardVC_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79A360AE1BA56DDB00F286E0 /* MRDashBoardVC_iPhone5.xib */; };
+		CC7DB1951D0C8BEC007DFE4C /* dsbg@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 796E93AE1BB881C90031EA34 /* dsbg@2x.jpg */; };
+		CC7DB1961D0C8BEC007DFE4C /* MRAppointmentCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3B31B9C8E5F001F1373 /* MRAppointmentCollectionViewCell.xib */; };
+		CC7DB1971D0C8BEC007DFE4C /* PHmail@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79708A9B1BB73C67007CE81D /* PHmail@3x.png */; };
+		CC7DB1981D0C8BEC007DFE4C /* notificationbody-bg@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94361B9DFDB800B81452 /* notificationbody-bg@2x.jpg */; };
+		CC7DB1991D0C8BEC007DFE4C /* NDcompany4@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94551B9E0DA000B81452 /* NDcompany4@2x.jpg */; };
+		CC7DB19A1D0C8BEC007DFE4C /* marketing@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3671B9C78B5001F1373 /* marketing@3x.png */; };
+		CC7DB19B1D0C8BEC007DFE4C /* ndInput@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94691B9E116000B81452 /* ndInput@2x.png */; };
+		CC7DB19C1D0C8BEC007DFE4C /* setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3701B9C78B5001F1373 /* setting@2x.png */; };
+		CC7DB19D1D0C8BEC007DFE4C /* dashboard-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3C61B9CBE4C001F1373 /* dashboard-bg@2x.png */; };
+		CC7DB19E1D0C8BEC007DFE4C /* ddpresent-activity-hover@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E93A71BB8816D0031EA34 /* ddpresent-activity-hover@3x.png */; };
+		CC7DB19F1D0C8BEC007DFE4C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83B782131B791E900070645C /* InfoPlist.strings */; };
+		CC7DB1A01D0C8BEC007DFE4C /* MPNotificationAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79A5DC5B1BA1EBBF001D872C /* MPNotificationAlertViewController.xib */; };
+		CC7DB1A11D0C8BEC007DFE4C /* pcfeedback@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E935E1BB8528B0031EA34 /* pcfeedback@3x.png */; };
+		CC7DB1A21D0C8BEC007DFE4C /* dropDownButton@2x~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 79DE1BD61B826245005289D6 /* dropDownButton@2x~iPad.png */; };
+		CC7DB1A31D0C8BEC007DFE4C /* splashLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27841B8096D6007CA448 /* splashLogo@2x.png */; };
+		CC7DB1A41D0C8BEC007DFE4C /* MPNotificatinsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94481B9E011D00B81452 /* MPNotificatinsTableViewCell.xib */; };
+		CC7DB1A51D0C8BEC007DFE4C /* froverdue@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7930A39C1BB91ECF003112E4 /* froverdue@3x.png */; };
+		CC7DB1A61D0C8BEC007DFE4C /* PHdashboard-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79173C501BB48EE100842E4C /* PHdashboard-bg@2x.png */; };
+		CC7DB1A71D0C8BEC007DFE4C /* Signup_plain@2x~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27C01B809A80007CA448 /* Signup_plain@2x~iPad.png */; };
+		CC7DB1A81D0C8BEC007DFE4C /* MRRegistationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27E71B80A11D007CA448 /* MRRegistationViewController.xib */; };
+		CC7DB1A91D0C8BEC007DFE4C /* PHdoctor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79708A931BB73C67007CE81D /* PHdoctor@2x.png */; };
+		CC7DB1AA1D0C8BEC007DFE4C /* news_dash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3CE1B9CC674001F1373 /* news_dash@2x.png */; };
+		CC7DB1AB1D0C8BEC007DFE4C /* favoriteSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F074961BBF16970049FDE7 /* favoriteSelected@2x.png */; };
+		CC7DB1AC1D0C8BEC007DFE4C /* cncompany3@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79F4169D1B9F6E560089729B /* cncompany3@3x.jpg */; };
+		CC7DB1AD1D0C8BEC007DFE4C /* MRMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79539E991B90941D001516C3 /* MRMenuViewController.xib */; };
+		CC7DB1AE1D0C8BEC007DFE4C /* PHthera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79708A9E1BB73C67007CE81D /* PHthera@2x.png */; };
+		CC7DB1AF1D0C8BEC007DFE4C /* camara-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7961A97C1B8F53C60035D63A /* camara-icon@3x.png */; };
+		CC7DB1B01D0C8BEC007DFE4C /* crgreydown-arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79A5DC6A1BA2092E001D872C /* crgreydown-arrow@3x.png */; };
+		CC7DB1B11D0C8BEC007DFE4C /* MRReadNotificationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 795366151BA0B7A90021CE4D /* MRReadNotificationsViewController.xib */; };
+		CC7DB1B21D0C8BEC007DFE4C /* feedbackSelected@3.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F074991BBF16970049FDE7 /* feedbackSelected@3.png */; };
+		CC7DB1B31D0C8BEC007DFE4C /* HomeLogo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27C31B809A80007CA448 /* HomeLogo@3x.png */; };
+		CC7DB1B41D0C8BEC007DFE4C /* PHdividers@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79173C531BB48EE100842E4C /* PHdividers@3x.png */; };
+		CC7DB1B51D0C8BEC007DFE4C /* PHdashboard-banner@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79173C4F1BB48EE100842E4C /* PHdashboard-banner@3x.png */; };
+		CC7DB1B61D0C8BEC007DFE4C /* settings@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3711B9C78B5001F1373 /* settings@3x.png */; };
+		CC7DB1B71D0C8BEC007DFE4C /* ddpresent-activity-normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E93A81BB8816D0031EA34 /* ddpresent-activity-normal@3x.png */; };
+		CC7DB1B81D0C8BEC007DFE4C /* MRRegHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 798A118C1B8AEC90003FF457 /* MRRegHeaderView.xib */; };
+		CC7DB1B91D0C8BEC007DFE4C /* reveal-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F066961B94E6D200D113F0 /* reveal-icon@3x.png */; };
+		CC7DB1BA1D0C8BEC007DFE4C /* MRNotificationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94291B9DFAF000B81452 /* MRNotificationsViewController.xib */; };
+		CC7DB1BB1D0C8BEC007DFE4C /* MRMedRepDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79F84B131BE92CB70081613A /* MRMedRepDetailsViewController.xib */; };
+		CC7DB1BC1D0C8BEC007DFE4C /* categoryBG@2x~iPad.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27F91B80B37F007CA448 /* categoryBG@2x~iPad.jpg */; };
+		CC7DB1BD1D0C8BEC007DFE4C /* radioUnSelection@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD28081B80B991007CA448 /* radioUnSelection@2x.png */; };
+		CC7DB1BE1D0C8BEC007DFE4C /* PHmedrep@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79421EE81BB7EF950055D9B7 /* PHmedrep@2x.png */; };
+		CC7DB1BF1D0C8BEC007DFE4C /* transperent-bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79AC944B1B9E029A00B81452 /* transperent-bg@3x.png */; };
+		CC7DB1C01D0C8BEC007DFE4C /* stepThree@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7961A9661B8F25DA0035D63A /* stepThree@2x.png */; };
+		CC7DB1C11D0C8BEC007DFE4C /* MRCompaignsDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7930A3931BB9153A003112E4 /* MRCompaignsDetailsViewController.xib */; };
+		CC7DB1C21D0C8BEC007DFE4C /* latestNotificatins@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3891B9C8979001F1373 /* latestNotificatins@2x.png */; };
+		CC7DB1C31D0C8BEC007DFE4C /* MRMedrepMeetingsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79F5C9F51BB061BE00435B6C /* MRMedrepMeetingsCell.xib */; };
+		CC7DB1C41D0C8BEC007DFE4C /* favFilter-wrong@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 795366231BA0BFD20021CE4D /* favFilter-wrong@3x.png */; };
+		CC7DB1C51D0C8BEC007DFE4C /* PHmarketingMenu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79421EE61BB7EF950055D9B7 /* PHmarketingMenu@2x.png */; };
+		CC7DB1C61D0C8BEC007DFE4C /* MRDoctorDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79421F3F1BB83BAE0055D9B7 /* MRDoctorDetailsViewController.xib */; };
+		CC7DB1C71D0C8BEC007DFE4C /* logout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3641B9C78B5001F1373 /* logout@2x.png */; };
+		CC7DB1C81D0C8BEC007DFE4C /* pcminus@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79169E1C1BEBDD6800C11D13 /* pcminus@3x.png */; };
+		CC7DB1C91D0C8BEC007DFE4C /* PHproduct-campaigns@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79421EEC1BB7EF950055D9B7 /* PHproduct-campaigns@3x.png */; };
+		CC7DB1CA1D0C8BEC007DFE4C /* pcplus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E935F1BB8528B0031EA34 /* pcplus@2x.png */; };
+		CC7DB1CB1D0C8BEC007DFE4C /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27941B80980F007CA448 /* Icon-Small-50.png */; };
+		CC7DB1CC1D0C8BEC007DFE4C /* PHmarketing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79173C541BB48EE100842E4C /* PHmarketing@2x.png */; };
+		CC7DB1CD1D0C8BEC007DFE4C /* categoryBG-667h@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27FB1B80B37F007CA448 /* categoryBG-667h@2x.jpg */; };
+		CC7DB1CE1D0C8BEC007DFE4C /* stepOne@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7961A9651B8F25DA0035D63A /* stepOne@2x.png */; };
+		CC7DB1CF1D0C8BEC007DFE4C /* HomeLogo~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27BB1B809A80007CA448 /* HomeLogo~iPad.png */; };
+		CC7DB1D01D0C8BEC007DFE4C /* Signup_plain@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27C61B809A80007CA448 /* Signup_plain@3x.png */; };
+		CC7DB1D11D0C8BEC007DFE4C /* building-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F4167E1B9F5CDB0089729B /* building-icon@3x.png */; };
+		CC7DB1D21D0C8BEC007DFE4C /* stepTwo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7961A9671B8F25DA0035D63A /* stepTwo@2x.png */; };
+		CC7DB1D31D0C8BEC007DFE4C /* download@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 795365F31BA09EBF0021CE4D /* download@3x.png */; };
+		CC7DB1D51D0C8BEC007DFE4C /* download@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 795365F21BA09EBF0021CE4D /* download@2x.png */; };
+		CC7DB1D61D0C8BEC007DFE4C /* MRMedRepMeetingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79F5C9F01BB0586100435B6C /* MRMedRepMeetingsViewController.xib */; };
+		CC7DB1D71D0C8BEC007DFE4C /* picklocation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79FAA66D1C68DF71003F7518 /* picklocation@2x.png */; };
+		CC7DB1D81D0C8BEC007DFE4C /* Icon-Small-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27951B80980F007CA448 /* Icon-Small-50@2x.png */; };
+		CC7DB1D91D0C8BEC007DFE4C /* cathera@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E93811BB869120031EA34 /* cathera@3x.png */; };
+		CC7DB1DA1D0C8BEC007DFE4C /* cncompany1@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79F416981B9F6E560089729B /* cncompany1@2x.jpg */; };
+		CC7DB1DB1D0C8BEC007DFE4C /* time-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F416861B9F5CDB0089729B /* time-icon@3x.png */; };
+		CC7DB1DC1D0C8BEC007DFE4C /* Default@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83B781EA1B7915C10070645C /* Default@3x.png */; };
+		CC7DB1DD1D0C8BEC007DFE4C /* locationPin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79DE1BDF1B826245005289D6 /* locationPin@2x.png */; };
+		CC7DB1DE1D0C8BEC007DFE4C /* MRFeedBackResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7930A38E1BB9151C003112E4 /* MRFeedBackResultViewController.xib */; };
+		CC7DB1DF1D0C8BEC007DFE4C /* favFilter-unchecked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7953661E1BA0BFD20021CE4D /* favFilter-unchecked@2x.png */; };
+		CC7DB1E01D0C8BEC007DFE4C /* radioSelection@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD28061B80B991007CA448 /* radioSelection@2x.png */; };
+		CC7DB1E11D0C8BEC007DFE4C /* Icon-Small@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27981B80980F007CA448 /* Icon-Small@3x.png */; };
+		CC7DB1E21D0C8BEC007DFE4C /* MRCompetitorAnalasysViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 796E93921BB8784D0031EA34 /* MRCompetitorAnalasysViewController.xib */; };
+		CC7DB1E31D0C8BEC007DFE4C /* pending_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 791C37E31C50256E00914728 /* pending_icon@3x.png */; };
+		CC7DB1E41D0C8BEC007DFE4C /* MPCallMedrepViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79A5DC611BA1ED21001D872C /* MPCallMedrepViewController.xib */; };
+		CC7DB1E51D0C8BEC007DFE4C /* cncompany1@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79F416991B9F6E560089729B /* cncompany1@3x.jpg */; };
+		CC7DB1E61D0C8BEC007DFE4C /* cncompany3@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79F4169C1B9F6E560089729B /* cncompany3@2x.jpg */; };
+		CC7DB1E71D0C8BEC007DFE4C /* MRNewProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 796E93751BB862530031EA34 /* MRNewProductCell.xib */; };
+		CC7DB1E81D0C8BEC007DFE4C /* favoriteSelected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F074971BBF16970049FDE7 /* favoriteSelected@3x.png */; };
+		CC7DB1E91D0C8BEC007DFE4C /* surveys_dashboard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3D41B9CC674001F1373 /* surveys_dashboard@2x.png */; };
+		CC7DB1EA1D0C8BEC007DFE4C /* NDcompany4@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94561B9E0DA000B81452 /* NDcompany4@3x.jpg */; };
+		CC7DB1EB1D0C8BEC007DFE4C /* PHnotifications@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79173C571BB48EE100842E4C /* PHnotifications@2x.png */; };
+		CC7DB1EC1D0C8BEC007DFE4C /* minus.png in Resources */ = {isa = PBXBuildFile; fileRef = 791C37DA1C4FF96400914728 /* minus.png */; };
+		CC7DB1ED1D0C8BEC007DFE4C /* pcright-arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E93621BB8528B0031EA34 /* pcright-arrow@3x.png */; };
+		CC7DB1EE1D0C8BEC007DFE4C /* notification@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E36C1B9C78B5001F1373 /* notification@2x.png */; };
+		CC7DB1EF1D0C8BEC007DFE4C /* smallTickmark@2x~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 79DE1BE21B826245005289D6 /* smallTickmark@2x~iPad.png */; };
+		CC7DB1F01D0C8BEC007DFE4C /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = 79BD279C1B80980F007CA448 /* iTunesArtwork@2x */; };
+		CC7DB1F11D0C8BEC007DFE4C /* cncompany2@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79F4169B1B9F6E560089729B /* cncompany2@3x.jpg */; };
+		CC7DB1F21D0C8BEC007DFE4C /* MRDashBoardVC_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79A360AC1BA56DBF00F286E0 /* MRDashBoardVC_iPhone.xib */; };
+		CC7DB1F31D0C8BEC007DFE4C /* bg~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27B91B809A80007CA448 /* bg~iPad.png */; };
+		CC7DB1F41D0C8BEC007DFE4C /* downArrow@2x~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 79DE1BDE1B826245005289D6 /* downArrow@2x~iPad.png */; };
+		CC7DB1F51D0C8BEC007DFE4C /* PHprescription@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79421EEA1BB7EF950055D9B7 /* PHprescription@2x.png */; };
+		CC7DB1F61D0C8BEC007DFE4C /* notificationback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79AC943A1B9DFDB800B81452 /* notificationback@2x.png */; };
+		CC7DB1F71D0C8BEC007DFE4C /* pending_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 791C37E21C50256E00914728 /* pending_icon@2x.png */; };
+		CC7DB1F81D0C8BEC007DFE4C /* MRLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27DB1B809FD1007CA448 /* MRLoginViewController.xib */; };
+		CC7DB1F91D0C8BEC007DFE4C /* crgreydown-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79A5DC691BA2092E001D872C /* crgreydown-arrow@2x.png */; };
+		CC7DB1FA1D0C8BEC007DFE4C /* upArrow@2x~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 79DE1BDA1B826245005289D6 /* upArrow@2x~iPad.png */; };
+		CC7DB1FB1D0C8BEC007DFE4C /* drug-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F416811B9F5CDB0089729B /* drug-icon@2x.png */; };
+		CC7DB1FC1D0C8BEC007DFE4C /* upcoming_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 791C37E61C50256E00914728 /* upcoming_icon@2x.png */; };
+		CC7DB1FD1D0C8BEC007DFE4C /* navigation-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F416831B9F5CDB0089729B /* navigation-icon@2x.png */; };
+		CC7DB1FE1D0C8BEC007DFE4C /* right-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3971B9C8979001F1373 /* right-arrow@2x.png */; };
+		CC7DB1FF1D0C8BEC007DFE4C /* bg@2x~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27B71B809A80007CA448 /* bg@2x~iPad.png */; };
+		CC7DB2001D0C8BEC007DFE4C /* mrkt-cmpn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3CD1B9CC674001F1373 /* mrkt-cmpn@3x.png */; };
+		CC7DB2011D0C8BEC007DFE4C /* pageviewdots@2x~iPad copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27BC1B809A80007CA448 /* pageviewdots@2x~iPad copy.png */; };
+		CC7DB2021D0C8BEC007DFE4C /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 79BD279B1B80980F007CA448 /* iTunesArtwork */; };
+		CC7DB2031D0C8BEC007DFE4C /* PHlocations@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79708A981BB73C67007CE81D /* PHlocations@2x.png */; };
+		CC7DB2041D0C8BEC007DFE4C /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27991B80980F007CA448 /* Icon.png */; };
+		CC7DB2051D0C8BEC007DFE4C /* MRProfileDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7920D6981C1C9B69008D3386 /* MRProfileDetailsViewController.xib */; };
+		CC7DB2061D0C8BEC007DFE4C /* MRPHDashBoardViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79421F2B1BB83ABE0055D9B7 /* MRPHDashBoardViewController_iPad.xib */; };
+		CC7DB2071D0C8BEC007DFE4C /* MRForgotPasswordTwoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7920D6921C1C87C9008D3386 /* MRForgotPasswordTwoViewController.xib */; };
+		CC7DB2081D0C8BEC007DFE4C /* MRRegistrationRoleCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79FFD2531BB9BA7D00CEE606 /* MRRegistrationRoleCellTableViewCell.xib */; };
+		CC7DB2091D0C8BEC007DFE4C /* categoryBG@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27FE1B80B37F007CA448 /* categoryBG@3x.jpg */; };
+		CC7DB20A1D0C8BEC007DFE4C /* MRFavoriteFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7953662D1BA0C0300021CE4D /* MRFavoriteFilterViewController.xib */; };
+		CC7DB20B1D0C8BEC007DFE4C /* MPAppointmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79F416791B9F596B0089729B /* MPAppointmentViewController.xib */; };
+		CC7DB20C1D0C8BEC007DFE4C /* frpie-bg@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7930A39E1BB91ECF003112E4 /* frpie-bg@3x.jpg */; };
+		CC7DB20D1D0C8BEC007DFE4C /* mrkt-cmpn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3CC1B9CC674001F1373 /* mrkt-cmpn@2x.png */; };
+		CC7DB20E1D0C8BEC007DFE4C /* MRProductBrocherViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79F84B191BE9354B0081613A /* MRProductBrocherViewController.xib */; };
+		CC7DB20F1D0C8BEC007DFE4C /* ddbg@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 796E939A1BB880C20031EA34 /* ddbg@2x.jpg */; };
+		CC7DB2101D0C8BEC007DFE4C /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD278D1B80980F007CA448 /* Icon-60.png */; };
+		CC7DB2111D0C8BEC007DFE4C /* ddbg@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 796E93A41BB8816D0031EA34 /* ddbg@3x.jpg */; };
+		CC7DB2121D0C8BEC007DFE4C /* navigation-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F416841B9F5CDB0089729B /* navigation-icon@3x.png */; };
+		CC7DB21A1D0C8CF2007DFE4C /* MRDevEnvironmentConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB2191D0C8CF2007DFE4C /* MRDevEnvironmentConfig.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -659,9 +1149,6 @@
 		79421F191BB83A4B0055D9B7 /* MRDoctorScoreTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRDoctorScoreTableCell.xib; sourceTree = "<group>"; };
 		79421F2B1BB83ABE0055D9B7 /* MRPHDashBoardViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRPHDashBoardViewController_iPad.xib; sourceTree = "<group>"; };
 		79421F2D1BB83ABE0055D9B7 /* MRPHDashBoardViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRPHDashBoardViewController_iPhone.xib; sourceTree = "<group>"; };
-		79421F2E1BB83ABE0055D9B7 /* MRPHDashBoardViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRPHDashBoardViewController_iPhone5.xib; sourceTree = "<group>"; };
-		79421F2F1BB83ABE0055D9B7 /* MRPHDashBoardViewController_iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRPHDashBoardViewController_iPhone6.xib; sourceTree = "<group>"; };
-		79421F301BB83ABE0055D9B7 /* MRPHDashBoardViewController_iPhone6Plus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRPHDashBoardViewController_iPhone6Plus.xib; sourceTree = "<group>"; };
 		79421F311BB83ABE0055D9B7 /* MRPHDashBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRPHDashBoardViewController.h; sourceTree = "<group>"; };
 		79421F321BB83ABE0055D9B7 /* MRPHDashBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRPHDashBoardViewController.m; sourceTree = "<group>"; };
 		79421F3A1BB83BAE0055D9B7 /* MRDoctorDetailsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRDoctorDetailsTableViewCell.h; sourceTree = "<group>"; };
@@ -1110,6 +1597,10 @@
 		83C128091B77C88B00D2F08E /* MedRepTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MedRepTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		83C1280E1B77C88B00D2F08E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		83C1280F1B77C88B00D2F08E /* MedRepTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedRepTests.m; sourceTree = "<group>"; };
+		CC7DB2161D0C8BEC007DFE4C /* MedRepDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MedRepDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC7DB2171D0C8BEC007DFE4C /* MedRep copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MedRep copy-Info.plist"; path = "/Users/vkatra/Documents/Vamsi_Backup/Personal/DoctorPlus/GitHub/develop/iOS-app-MedRep/MedRep/MedRep copy-Info.plist"; sourceTree = "<absolute>"; };
+		CC7DB2181D0C8C46007DFE4C /* MRDevEnvironmentConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRDevEnvironmentConfig.h; sourceTree = "<group>"; };
+		CC7DB2191D0C8CF2007DFE4C /* MRDevEnvironmentConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRDevEnvironmentConfig.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1121,6 +1612,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		83C128061B77C88B00D2F08E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CC7DB0801D0C8BEC007DFE4C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1374,9 +1872,6 @@
 			children = (
 				79421F2B1BB83ABE0055D9B7 /* MRPHDashBoardViewController_iPad.xib */,
 				79421F2D1BB83ABE0055D9B7 /* MRPHDashBoardViewController_iPhone.xib */,
-				79421F2E1BB83ABE0055D9B7 /* MRPHDashBoardViewController_iPhone5.xib */,
-				79421F2F1BB83ABE0055D9B7 /* MRPHDashBoardViewController_iPhone6.xib */,
-				79421F301BB83ABE0055D9B7 /* MRPHDashBoardViewController_iPhone6Plus.xib */,
 				79421F311BB83ABE0055D9B7 /* MRPHDashBoardViewController.h */,
 				79421F321BB83ABE0055D9B7 /* MRPHDashBoardViewController.m */,
 			);
@@ -2146,6 +2641,8 @@
 				83B781FD1B7916CB0070645C /* MRWebserviceConstants.h */,
 				83B782001B7916E10070645C /* MRParserHelper.h */,
 				83B782011B7916E10070645C /* MRParserHelper.m */,
+				CC7DB2181D0C8C46007DFE4C /* MRDevEnvironmentConfig.h */,
+				CC7DB2191D0C8CF2007DFE4C /* MRDevEnvironmentConfig.m */,
 			);
 			path = Communication;
 			sourceTree = "<group>";
@@ -2281,6 +2778,7 @@
 				83C127EF1B77C88B00D2F08E /* MedRep */,
 				83C1280C1B77C88B00D2F08E /* MedRepTests */,
 				83C127EE1B77C88B00D2F08E /* Products */,
+				CC7DB2171D0C8BEC007DFE4C /* MedRep copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2289,6 +2787,7 @@
 			children = (
 				83C127ED1B77C88B00D2F08E /* MedRep.app */,
 				83C128091B77C88B00D2F08E /* MedRepTests.xctest */,
+				CC7DB2161D0C8BEC007DFE4C /* MedRepDev.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2401,6 +2900,23 @@
 			productReference = 83C128091B77C88B00D2F08E /* MedRepTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		CC7DB0201D0C8BEC007DFE4C /* MedRepDev */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CC7DB2131D0C8BEC007DFE4C /* Build configuration list for PBXNativeTarget "MedRepDev" */;
+			buildPhases = (
+				CC7DB0211D0C8BEC007DFE4C /* Sources */,
+				CC7DB0801D0C8BEC007DFE4C /* Frameworks */,
+				CC7DB0811D0C8BEC007DFE4C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MedRepDev;
+			productName = MedRep;
+			productReference = CC7DB2161D0C8BEC007DFE4C /* MedRepDev.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -2415,13 +2931,16 @@
 						DevelopmentTeam = 9Y7Y82N227;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
 					83C128081B77C88B00D2F08E = {
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 83C127EC1B77C88B00D2F08E;
+					};
+					CC7DB0201D0C8BEC007DFE4C = {
+						DevelopmentTeam = 9Y7Y82N227;
 					};
 				};
 			};
@@ -2440,6 +2959,7 @@
 			targets = (
 				83C127EC1B77C88B00D2F08E /* MedRep */,
 				83C128081B77C88B00D2F08E /* MedRepTests */,
+				CC7DB0201D0C8BEC007DFE4C /* MedRepDev */,
 			);
 		};
 /* End PBXProject section */
@@ -2609,7 +3129,6 @@
 				79421EF51BB7EF950055D9B7 /* PHprescription@3x.png in Resources */,
 				791432AD1C32EF9D0031FB91 /* wallet@3x.png in Resources */,
 				79BD280D1B80B991007CA448 /* radioUnSelection@3x.png in Resources */,
-				79421F381BB83ABE0055D9B7 /* MRPHDashBoardViewController_iPhone6Plus.xib in Resources */,
 				83B781EC1B7915C10070645C /* Default-568h@2x.png in Resources */,
 				7950AF201BBF8B1600A93106 /* MRSurveyListViewController.xib in Resources */,
 				79AC94451B9DFDB800B81452 /* notificationback@3x.png in Resources */,
@@ -2681,7 +3200,6 @@
 				796E93A21BB880C20031EA34 /* ddpresent-activity-hover@2x.png in Resources */,
 				79AC94301B9DFB0300B81452 /* MRNotificationsDetailsViewController.xib in Resources */,
 				79BD27D31B809A80007CA448 /* HomeLogo@2x.png in Resources */,
-				79421F371BB83ABE0055D9B7 /* MRPHDashBoardViewController_iPhone6.xib in Resources */,
 				7929E3D71B9CC674001F1373 /* ActivityScore@3x.png in Resources */,
 				79A360B11BA56DE800F286E0 /* MRDashBoardVC_iPhone6.xib in Resources */,
 				79DE1BE51B826245005289D6 /* input@2x.png in Resources */,
@@ -2787,7 +3305,6 @@
 				79F416881B9F5CDB0089729B /* building-icon@3x.png in Resources */,
 				7961A96F1B8F25DA0035D63A /* stepTwo@2x.png in Resources */,
 				795366011BA09EBF0021CE4D /* download@3x.png in Resources */,
-				79421F361BB83ABE0055D9B7 /* MRPHDashBoardViewController_iPhone5.xib in Resources */,
 				795366001BA09EBF0021CE4D /* download@2x.png in Resources */,
 				79F5C9F21BB0586100435B6C /* MRMedRepMeetingsViewController.xib in Resources */,
 				79FAA66F1C68DF71003F7518 /* picklocation@2x.png in Resources */,
@@ -2857,6 +3374,411 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CC7DB0811D0C8BEC007DFE4C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CC7DB0821D0C8BEC007DFE4C /* logout@3x.png in Resources */,
+				CC7DB0831D0C8BEC007DFE4C /* MRPharmaMenuCell.xib in Resources */,
+				CC7DB0841D0C8BEC007DFE4C /* news@3x.png in Resources */,
+				CC7DB0851D0C8BEC007DFE4C /* dsbg@3x.jpg in Resources */,
+				CC7DB0861D0C8BEC007DFE4C /* feedback@3x.png in Resources */,
+				CC7DB0871D0C8BEC007DFE4C /* Icon-60@3x.png in Resources */,
+				CC7DB0881D0C8BEC007DFE4C /* Icon-72.png in Resources */,
+				CC7DB0891D0C8BEC007DFE4C /* email@3x.png in Resources */,
+				CC7DB08A1D0C8BEC007DFE4C /* calender-icon@2x.png in Resources */,
+				CC7DB08B1D0C8BEC007DFE4C /* PHsurveys@3x.png in Resources */,
+				CC7DB08C1D0C8BEC007DFE4C /* reminderSelected@3x.png in Resources */,
+				CC7DB08D1D0C8BEC007DFE4C /* MRHomeViewContoller.xib in Resources */,
+				CC7DB08E1D0C8BEC007DFE4C /* otptic@3x.png in Resources */,
+				CC7DB08F1D0C8BEC007DFE4C /* call-medrep@3x.png in Resources */,
+				CC7DB0901D0C8BEC007DFE4C /* categoryBG@2x.jpg in Resources */,
+				CC7DB0911D0C8BEC007DFE4C /* categoryBG-568h@2x.jpg in Resources */,
+				CC7DB0921D0C8BEC007DFE4C /* pageviewdots@2x~iPad.png in Resources */,
+				CC7DB0931D0C8BEC007DFE4C /* MROTPVerifiedViewController.xib in Resources */,
+				CC7DB0941D0C8BEC007DFE4C /* MRMedRepViewController.xib in Resources */,
+				CC7DB0951D0C8BEC007DFE4C /* pcminus@2x.png in Resources */,
+				CC7DB0961D0C8BEC007DFE4C /* pageviewdots~iPad.png in Resources */,
+				CC7DB0971D0C8BEC007DFE4C /* navLogo.png in Resources */,
+				CC7DB0981D0C8BEC007DFE4C /* pcselect@3x.png in Resources */,
+				CC7DB0991D0C8BEC007DFE4C /* otptic@2x.png in Resources */,
+				CC7DB09A1D0C8BEC007DFE4C /* password@3x.png in Resources */,
+				CC7DB09B1D0C8BEC007DFE4C /* MRMedRepListViewController.xib in Resources */,
+				CC7DB09C1D0C8BEC007DFE4C /* PHdashboard-banner@2x.png in Resources */,
+				CC7DB09D1D0C8BEC007DFE4C /* pcright-arrow@2x.png in Resources */,
+				CC7DB09E1D0C8BEC007DFE4C /* MRMedRepTableCell.xib in Resources */,
+				CC7DB09F1D0C8BEC007DFE4C /* privateHospital_selection@2x.png in Resources */,
+				CC7DB0A01D0C8BEC007DFE4C /* otpTiccMark@2x~iPad.png in Resources */,
+				CC7DB0A11D0C8BEC007DFE4C /* ndcompany3@2x.jpg in Resources */,
+				CC7DB0A21D0C8BEC007DFE4C /* comapny-logo@2x.png in Resources */,
+				CC7DB0A31D0C8BEC007DFE4C /* MRMedRepListTableCell.xib in Resources */,
+				CC7DB0A41D0C8BEC007DFE4C /* MRConvertAppointmentCell.xib in Resources */,
+				CC7DB0A51D0C8BEC007DFE4C /* notificationbody-bg@3x.jpg in Resources */,
+				CC7DB0A61D0C8BEC007DFE4C /* splashLogo@3x.png in Resources */,
+				CC7DB0A71D0C8BEC007DFE4C /* MRRegTableViewCell.xib in Resources */,
+				CC7DB0A81D0C8BEC007DFE4C /* meetings@3x.png in Resources */,
+				CC7DB0A91D0C8BEC007DFE4C /* bg@3x.png in Resources */,
+				CC7DB0AA1D0C8BEC007DFE4C /* NDcomapny-logo@2x.png in Resources */,
+				CC7DB0AB1D0C8BEC007DFE4C /* categoryBG~iPad.jpg in Resources */,
+				CC7DB0AC1D0C8BEC007DFE4C /* MRNotificationInsiderViewController.xib in Resources */,
+				CC7DB0AD1D0C8BEC007DFE4C /* cathera@2x.png in Resources */,
+				CC7DB0AE1D0C8BEC007DFE4C /* addressPinIcon@2x.png in Resources */,
+				CC7DB0AF1D0C8BEC007DFE4C /* time-icon@2x.png in Resources */,
+				CC7DB0B01D0C8BEC007DFE4C /* search@2x.png in Resources */,
+				CC7DB0B11D0C8BEC007DFE4C /* medrep@3x.png in Resources */,
+				CC7DB0B21D0C8BEC007DFE4C /* NDcomapny-logo@3x.png in Resources */,
+				CC7DB0B31D0C8BEC007DFE4C /* Default@2x.png in Resources */,
+				CC7DB0B41D0C8BEC007DFE4C /* comapny-logo2@3x.png in Resources */,
+				CC7DB0B51D0C8BEC007DFE4C /* search@3x.png in Resources */,
+				CC7DB0B61D0C8BEC007DFE4C /* Signup_plain@2x.png in Resources */,
+				CC7DB0B71D0C8BEC007DFE4C /* addicon@3x.png in Resources */,
+				CC7DB0B81D0C8BEC007DFE4C /* ndcompany3@3x.jpg in Resources */,
+				CC7DB0B91D0C8BEC007DFE4C /* dashboard-bg@3x.png in Resources */,
+				CC7DB0BA1D0C8BEC007DFE4C /* crgreyup-arrow@2x.png in Resources */,
+				CC7DB0BB1D0C8BEC007DFE4C /* MROptionsViewController.xib in Resources */,
+				CC7DB0BC1D0C8BEC007DFE4C /* pageviewdots@3x.png in Resources */,
+				CC7DB0BD1D0C8BEC007DFE4C /* MPCallMedrepViewController_iPhone.xib in Resources */,
+				CC7DB0BE1D0C8BEC007DFE4C /* crgreyup-arrow@3x.png in Resources */,
+				CC7DB0BF1D0C8BEC007DFE4C /* PHdoctor@3x.png in Resources */,
+				CC7DB0C01D0C8BEC007DFE4C /* password@2x.png in Resources */,
+				CC7DB0C11D0C8BEC007DFE4C /* NDcompany1@2x.jpg in Resources */,
+				CC7DB0C21D0C8BEC007DFE4C /* reveal-icon.png in Resources */,
+				CC7DB0C31D0C8BEC007DFE4C /* readnotification3@2x.jpg in Resources */,
+				CC7DB0C41D0C8BEC007DFE4C /* reminder@3x.png in Resources */,
+				CC7DB0C51D0C8BEC007DFE4C /* PHlocations@3x.png in Resources */,
+				CC7DB0C61D0C8BEC007DFE4C /* downArrow@2x.png in Resources */,
+				CC7DB0C71D0C8BEC007DFE4C /* medrep@2x.png in Resources */,
+				CC7DB0C81D0C8BEC007DFE4C /* dddoctor-analysis-normal@3x.png in Resources */,
+				CC7DB0C91D0C8BEC007DFE4C /* MRDRActivityTableViewCell.xib in Resources */,
+				CC7DB0CA1D0C8BEC007DFE4C /* btn@2x.png in Resources */,
+				CC7DB0CB1D0C8BEC007DFE4C /* pcplus@3x.png in Resources */,
+				CC7DB0CC1D0C8BEC007DFE4C /* White-right-arrow@2x.png in Resources */,
+				CC7DB0CD1D0C8BEC007DFE4C /* call-medrep@2x.png in Resources */,
+				CC7DB0CE1D0C8BEC007DFE4C /* reg@2x.png in Resources */,
+				CC7DB0CF1D0C8BEC007DFE4C /* readnotification3@3x.jpg in Resources */,
+				CC7DB0D01D0C8BEC007DFE4C /* ViewController.xib in Resources */,
+				CC7DB0D11D0C8BEC007DFE4C /* crthera@3x.png in Resources */,
+				CC7DB0D21D0C8BEC007DFE4C /* surveys_dashboard@3x.png in Resources */,
+				CC7DB0D31D0C8BEC007DFE4C /* MRDashBoardVC_iPhone6Plus.xib in Resources */,
+				CC7DB0D41D0C8BEC007DFE4C /* PHdrugsales@3x.png in Resources */,
+				CC7DB0D51D0C8BEC007DFE4C /* cnsort@3x.png in Resources */,
+				CC7DB0D61D0C8BEC007DFE4C /* email@2x.png in Resources */,
+				CC7DB0D71D0C8BEC007DFE4C /* input@2x~iPad.png in Resources */,
+				CC7DB0D81D0C8BEC007DFE4C /* minus@2x.png in Resources */,
+				CC7DB0D91D0C8BEC007DFE4C /* dashboard_menu@2x.png in Resources */,
+				CC7DB0DA1D0C8BEC007DFE4C /* MRAppointmentListViewController.xib in Resources */,
+				CC7DB0DB1D0C8BEC007DFE4C /* PHthera@3x.png in Resources */,
+				CC7DB0DC1D0C8BEC007DFE4C /* Icon-60@2x.png in Resources */,
+				CC7DB0DD1D0C8BEC007DFE4C /* drug-icon@3x.png in Resources */,
+				CC7DB0DE1D0C8BEC007DFE4C /* favFilter-checked@3x.png in Resources */,
+				CC7DB0DF1D0C8BEC007DFE4C /* navLogo@3x.png in Resources */,
+				CC7DB0E01D0C8BEC007DFE4C /* reminder@2x.png in Resources */,
+				CC7DB0E11D0C8BEC007DFE4C /* surveys@3x.png in Resources */,
+				CC7DB0E21D0C8BEC007DFE4C /* favFilter-checked@2x.png in Resources */,
+				CC7DB0E31D0C8BEC007DFE4C /* favFilter-wrong@2x.png in Resources */,
+				CC7DB0E41D0C8BEC007DFE4C /* fbUnSelectedRadio@2x.png in Resources */,
+				CC7DB0E51D0C8BEC007DFE4C /* HomeLogo@2x~iPad.png in Resources */,
+				CC7DB0E61D0C8BEC007DFE4C /* addicon.png in Resources */,
+				CC7DB0E71D0C8BEC007DFE4C /* pageviewdots@2x.png in Resources */,
+				CC7DB0E81D0C8BEC007DFE4C /* upArrow@2x.png in Resources */,
+				CC7DB0E91D0C8BEC007DFE4C /* left-arrow@3x.png in Resources */,
+				CC7DB0EA1D0C8BEC007DFE4C /* img1@3x.jpg in Resources */,
+				CC7DB0EB1D0C8BEC007DFE4C /* building-icon@2x.png in Resources */,
+				CC7DB0EC1D0C8BEC007DFE4C /* crdown-arrow@3x.png in Resources */,
+				CC7DB0ED1D0C8BEC007DFE4C /* fbUnSelectedRadio@3x.png in Resources */,
+				CC7DB0EE1D0C8BEC007DFE4C /* search-for-drugs@3x.png in Resources */,
+				CC7DB0EF1D0C8BEC007DFE4C /* profileIcon@3x.png in Resources */,
+				CC7DB0F01D0C8BEC007DFE4C /* MRViewRepAppointmnetViewController.xib in Resources */,
+				CC7DB0F11D0C8BEC007DFE4C /* MRDashBoardVC_iPad.xib in Resources */,
+				CC7DB0F21D0C8BEC007DFE4C /* Default-667h@2x.png in Resources */,
+				CC7DB0F31D0C8BEC007DFE4C /* reveal-icon@2x.png in Resources */,
+				CC7DB0F41D0C8BEC007DFE4C /* left-arrow@2x.png in Resources */,
+				CC7DB0F51D0C8BEC007DFE4C /* PHdashboard-bg@3x.png in Resources */,
+				CC7DB0F61D0C8BEC007DFE4C /* otpTiccMark@2x.png in Resources */,
+				CC7DB0F71D0C8BEC007DFE4C /* catransparent@2x.jpg in Resources */,
+				CC7DB0F81D0C8BEC007DFE4C /* smallTickmark@2x.png in Resources */,
+				CC7DB0F91D0C8BEC007DFE4C /* MRCompetitorAnalasysCell.xib in Resources */,
+				CC7DB0FA1D0C8BEC007DFE4C /* froverdue@2x.png in Resources */,
+				CC7DB0FB1D0C8BEC007DFE4C /* ddpresent-activity-normal@2x.png in Resources */,
+				CC7DB0FC1D0C8BEC007DFE4C /* team@3x.png in Resources */,
+				CC7DB0FD1D0C8BEC007DFE4C /* MRDoctorActivityScoreDetailsViewController.xib in Resources */,
+				CC7DB0FE1D0C8BEC007DFE4C /* starunselected@3x.png in Resources */,
+				CC7DB0FF1D0C8BEC007DFE4C /* MRForgotPasswordViewController.xib in Resources */,
+				CC7DB1001D0C8BEC007DFE4C /* crup-arrow@2x.png in Resources */,
+				CC7DB1011D0C8BEC007DFE4C /* dddoctor-analysis-hover@2x.png in Resources */,
+				CC7DB1021D0C8BEC007DFE4C /* navLogo@2x.png in Resources */,
+				CC7DB1031D0C8BEC007DFE4C /* notification@3x.png in Resources */,
+				CC7DB1041D0C8BEC007DFE4C /* star@2x.png in Resources */,
+				CC7DB1051D0C8BEC007DFE4C /* crdown-arrow@2x.png in Resources */,
+				CC7DB1061D0C8BEC007DFE4C /* otpTiccMark@3x.png in Resources */,
+				CC7DB1071D0C8BEC007DFE4C /* MRMenuTableViewCell.xib in Resources */,
+				CC7DB1081D0C8BEC007DFE4C /* full-screen@3x.png in Resources */,
+				CC7DB1091D0C8BEC007DFE4C /* Icon-40@3x.png in Resources */,
+				CC7DB10A1D0C8BEC007DFE4C /* completed_icon@3x.png in Resources */,
+				CC7DB10B1D0C8BEC007DFE4C /* dddoctor-analysis-hover@3x.png in Resources */,
+				CC7DB10C1D0C8BEC007DFE4C /* MRDoctorScoreTableCell.xib in Resources */,
+				CC7DB10D1D0C8BEC007DFE4C /* MRConvertAppointmentViewController.xib in Resources */,
+				CC7DB10E1D0C8BEC007DFE4C /* SVProgressHUD.bundle in Resources */,
+				CC7DB10F1D0C8BEC007DFE4C /* MROTPViewController.xib in Resources */,
+				CC7DB1101D0C8BEC007DFE4C /* favorite@2x.png in Resources */,
+				CC7DB1111D0C8BEC007DFE4C /* MRDoctorDetailsTableViewCell.xib in Resources */,
+				CC7DB1121D0C8BEC007DFE4C /* reg@3x.png in Resources */,
+				CC7DB1131D0C8BEC007DFE4C /* frpie@3x.png in Resources */,
+				CC7DB1141D0C8BEC007DFE4C /* reminderSelected@2x.png in Resources */,
+				CC7DB1151D0C8BEC007DFE4C /* Signup_plain~iPad.png in Resources */,
+				CC7DB1161D0C8BEC007DFE4C /* radioSelection@3x.png in Resources */,
+				CC7DB1171D0C8BEC007DFE4C /* Images.xcassets in Resources */,
+				CC7DB1181D0C8BEC007DFE4C /* Icon-Small@2x.png in Resources */,
+				CC7DB1191D0C8BEC007DFE4C /* transperent-bg@2x.png in Resources */,
+				CC7DB11A1D0C8BEC007DFE4C /* PHactivity@3x.png in Resources */,
+				CC7DB11B1D0C8BEC007DFE4C /* full-screen@2x.png in Resources */,
+				CC7DB11C1D0C8BEC007DFE4C /* PHmail@2x.png in Resources */,
+				CC7DB11D1D0C8BEC007DFE4C /* nabar@2x.png in Resources */,
+				CC7DB11E1D0C8BEC007DFE4C /* PHmedrep@3x.png in Resources */,
+				CC7DB11F1D0C8BEC007DFE4C /* PHprescription@3x.png in Resources */,
+				CC7DB1201D0C8BEC007DFE4C /* wallet@3x.png in Resources */,
+				CC7DB1211D0C8BEC007DFE4C /* radioUnSelection@3x.png in Resources */,
+				CC7DB1231D0C8BEC007DFE4C /* Default-568h@2x.png in Resources */,
+				CC7DB1241D0C8BEC007DFE4C /* MRSurveyListViewController.xib in Resources */,
+				CC7DB1251D0C8BEC007DFE4C /* notificationback@3x.png in Resources */,
+				CC7DB1261D0C8BEC007DFE4C /* fbSelectedRadio@3x.png in Resources */,
+				CC7DB1271D0C8BEC007DFE4C /* Icon-40@2x.png in Resources */,
+				CC7DB1281D0C8BEC007DFE4C /* notification_dash@2x.png in Resources */,
+				CC7DB1291D0C8BEC007DFE4C /* PHproductcampaigns@2x.png in Resources */,
+				CC7DB12A1D0C8BEC007DFE4C /* star@3x.png in Resources */,
+				CC7DB12B1D0C8BEC007DFE4C /* pcselect@2x.png in Resources */,
+				CC7DB12C1D0C8BEC007DFE4C /* news@2x.png in Resources */,
+				CC7DB12D1D0C8BEC007DFE4C /* starunselected@2x.png in Resources */,
+				CC7DB12E1D0C8BEC007DFE4C /* locationPin@2x~iPad.png in Resources */,
+				CC7DB12F1D0C8BEC007DFE4C /* MRPHDashBoardViewController_iPhone.xib in Resources */,
+				CC7DB1301D0C8BEC007DFE4C /* searc--for-drugs@2x.png in Resources */,
+				CC7DB1311D0C8BEC007DFE4C /* camara-icon@2x.png in Resources */,
+				CC7DB1321D0C8BEC007DFE4C /* hospital@2x.png in Resources */,
+				CC7DB1331D0C8BEC007DFE4C /* dropDownButton@2x.png in Resources */,
+				CC7DB1341D0C8BEC007DFE4C /* PHnotification@3x.png in Resources */,
+				CC7DB1351D0C8BEC007DFE4C /* MRViewAppointmnetViewController.xib in Resources */,
+				CC7DB1361D0C8BEC007DFE4C /* crup-arrow@3x.png in Resources */,
+				CC7DB1371D0C8BEC007DFE4C /* pcfedback@2x.png in Resources */,
+				CC7DB1381D0C8BEC007DFE4C /* frsnooze@2x.png in Resources */,
+				CC7DB1391D0C8BEC007DFE4C /* ndchecked@3x.png in Resources */,
+				CC7DB13A1D0C8BEC007DFE4C /* ActivityScore@2x.png in Resources */,
+				CC7DB13B1D0C8BEC007DFE4C /* Icon-72@2x.png in Resources */,
+				CC7DB13C1D0C8BEC007DFE4C /* PHdrugsales@2x.png in Resources */,
+				CC7DB13D1D0C8BEC007DFE4C /* activity-score@2x.png in Resources */,
+				CC7DB13E1D0C8BEC007DFE4C /* MRRegistationTwoViewController.xib in Resources */,
+				CC7DB13F1D0C8BEC007DFE4C /* favorite@3x.png in Resources */,
+				CC7DB1401D0C8BEC007DFE4C /* ndInput@3x.png in Resources */,
+				CC7DB1411D0C8BEC007DFE4C /* Default.png in Resources */,
+				CC7DB1421D0C8BEC007DFE4C /* MRFavoritesNotificationsViewController.xib in Resources */,
+				CC7DB1431D0C8BEC007DFE4C /* cncompany2@2x.jpg in Resources */,
+				CC7DB1441D0C8BEC007DFE4C /* frpie-bg@2x.jpg in Resources */,
+				CC7DB1451D0C8BEC007DFE4C /* MRListViewController.xib in Resources */,
+				CC7DB1461D0C8BEC007DFE4C /* feedback@2x.png in Resources */,
+				CC7DB1471D0C8BEC007DFE4C /* Icon-Small.png in Resources */,
+				CC7DB1481D0C8BEC007DFE4C /* NDcompany2-BG@2x.jpg in Resources */,
+				CC7DB1491D0C8BEC007DFE4C /* cnsort@2x.png in Resources */,
+				CC7DB14A1D0C8BEC007DFE4C /* Icon-40.png in Resources */,
+				CC7DB14B1D0C8BEC007DFE4C /* MRWelcomeViewController.xib in Resources */,
+				CC7DB14C1D0C8BEC007DFE4C /* minus@3x.png in Resources */,
+				CC7DB14D1D0C8BEC007DFE4C /* calender-icon@3x.png in Resources */,
+				CC7DB14E1D0C8BEC007DFE4C /* team@2x.png in Resources */,
+				CC7DB14F1D0C8BEC007DFE4C /* MRAppointmentCell.xib in Resources */,
+				CC7DB1501D0C8BEC007DFE4C /* comapny-logo@3x.png in Resources */,
+				CC7DB1511D0C8BEC007DFE4C /* caclock-icon@2x.png in Resources */,
+				CC7DB1521D0C8BEC007DFE4C /* discussion-forum@3x.png in Resources */,
+				CC7DB1531D0C8BEC007DFE4C /* meetings@2x.png in Resources */,
+				CC7DB1541D0C8BEC007DFE4C /* completed_icon@2x.png in Resources */,
+				CC7DB1551D0C8BEC007DFE4C /* Icon@2x.png in Resources */,
+				CC7DB1561D0C8BEC007DFE4C /* MRAppointmentListCell.xib in Resources */,
+				CC7DB1571D0C8BEC007DFE4C /* hospital_selection@2x.png in Resources */,
+				CC7DB1581D0C8BEC007DFE4C /* dashboard_menu@3x.png in Resources */,
+				CC7DB1591D0C8BEC007DFE4C /* catrnsparent@3x.jpg in Resources */,
+				CC7DB15A1D0C8BEC007DFE4C /* categoryBG.jpg in Resources */,
+				CC7DB15B1D0C8BEC007DFE4C /* surveys@2x.png in Resources */,
+				CC7DB15C1D0C8BEC007DFE4C /* frpie@2x.png in Resources */,
+				CC7DB15D1D0C8BEC007DFE4C /* MRRegistrationRoleViewController.xib in Resources */,
+				CC7DB15E1D0C8BEC007DFE4C /* marketing@2x.png in Resources */,
+				CC7DB15F1D0C8BEC007DFE4C /* picklocation@3x.png in Resources */,
+				CC7DB1601D0C8BEC007DFE4C /* PHphone@2x.png in Resources */,
+				CC7DB1611D0C8BEC007DFE4C /* bg@2x.jpg in Resources */,
+				CC7DB1621D0C8BEC007DFE4C /* comapny-logo2@2x.png in Resources */,
+				CC7DB1631D0C8BEC007DFE4C /* caclock-icon@3x.png in Resources */,
+				CC7DB1641D0C8BEC007DFE4C /* password.png in Resources */,
+				CC7DB1651D0C8BEC007DFE4C /* MRDoctorActivityScoreViewController.xib in Resources */,
+				CC7DB1661D0C8BEC007DFE4C /* upcoming_icon@3x.png in Resources */,
+				CC7DB1671D0C8BEC007DFE4C /* ddpresent-activity-hover@2x.png in Resources */,
+				CC7DB1681D0C8BEC007DFE4C /* MRNotificationsDetailsViewController.xib in Resources */,
+				CC7DB1691D0C8BEC007DFE4C /* HomeLogo@2x.png in Resources */,
+				CC7DB16B1D0C8BEC007DFE4C /* ActivityScore@3x.png in Resources */,
+				CC7DB16C1D0C8BEC007DFE4C /* MRDashBoardVC_iPhone6.xib in Resources */,
+				CC7DB16D1D0C8BEC007DFE4C /* input@2x.png in Resources */,
+				CC7DB16E1D0C8BEC007DFE4C /* news_dash@3x.png in Resources */,
+				CC7DB16F1D0C8BEC007DFE4C /* wallet@2x.png in Resources */,
+				CC7DB1701D0C8BEC007DFE4C /* PHmarketingMenu@3x.png in Resources */,
+				CC7DB1711D0C8BEC007DFE4C /* MRDoctorScoreViewController.xib in Resources */,
+				CC7DB1721D0C8BEC007DFE4C /* privateHospital@2x.png in Resources */,
+				CC7DB1731D0C8BEC007DFE4C /* favFilter-unchecked@3x.png in Resources */,
+				CC7DB1741D0C8BEC007DFE4C /* PHactivity@2x.png in Resources */,
+				CC7DB1751D0C8BEC007DFE4C /* MRNewProductCompaignsViewController.xib in Resources */,
+				CC7DB1761D0C8BEC007DFE4C /* dddoctor-analysis-normal@2x.png in Resources */,
+				CC7DB1771D0C8BEC007DFE4C /* email.png in Resources */,
+				CC7DB1781D0C8BEC007DFE4C /* PHdividers@2x.png in Resources */,
+				CC7DB1791D0C8BEC007DFE4C /* addicon@2x.png in Resources */,
+				CC7DB17A1D0C8BEC007DFE4C /* latestNotificatins@3x.png in Resources */,
+				CC7DB17B1D0C8BEC007DFE4C /* MRDocotrActivityScoreViewController.xib in Resources */,
+				CC7DB17C1D0C8BEC007DFE4C /* notification_dash@3x.png in Resources */,
+				CC7DB17D1D0C8BEC007DFE4C /* fbSelectedRadio@2x.png in Resources */,
+				CC7DB17E1D0C8BEC007DFE4C /* profileIcon@2x.png in Resources */,
+				CC7DB17F1D0C8BEC007DFE4C /* Icon-76@2x.png in Resources */,
+				CC7DB1801D0C8BEC007DFE4C /* NDcompany2-BG@3x.jpg in Resources */,
+				CC7DB1811D0C8BEC007DFE4C /* MRSurveyDetailsViewController.xib in Resources */,
+				CC7DB1821D0C8BEC007DFE4C /* MRAddressView.xib in Resources */,
+				CC7DB1831D0C8BEC007DFE4C /* feedbackSelected@2x.png in Resources */,
+				CC7DB1841D0C8BEC007DFE4C /* img1@2x.jpg in Resources */,
+				CC7DB1851D0C8BEC007DFE4C /* MRPharmaNotificationDetailsViewController.xib in Resources */,
+				CC7DB1861D0C8BEC007DFE4C /* crthera@2x.png in Resources */,
+				CC7DB1871D0C8BEC007DFE4C /* MRPharmaMenuViewController.xib in Resources */,
+				CC7DB1881D0C8BEC007DFE4C /* White-right-arrow@3x.png in Resources */,
+				CC7DB1891D0C8BEC007DFE4C /* NDcompany1@3x.jpg in Resources */,
+				CC7DB18A1D0C8BEC007DFE4C /* Icon-76.png in Resources */,
+				CC7DB18B1D0C8BEC007DFE4C /* PHsurveys@2x.png in Resources */,
+				CC7DB18C1D0C8BEC007DFE4C /* frsnoozed@3x.png in Resources */,
+				CC7DB18D1D0C8BEC007DFE4C /* PHphone@3x.png in Resources */,
+				CC7DB18E1D0C8BEC007DFE4C /* MRFeedBackResultCell.xib in Resources */,
+				CC7DB18F1D0C8BEC007DFE4C /* activity-score@3x.png in Resources */,
+				CC7DB1901D0C8BEC007DFE4C /* right-arrow@3x.png in Resources */,
+				CC7DB1911D0C8BEC007DFE4C /* PHmarketing@3x.png in Resources */,
+				CC7DB1921D0C8BEC007DFE4C /* ndchecked@2x.png in Resources */,
+				CC7DB1931D0C8BEC007DFE4C /* discussion-forum@2x.png in Resources */,
+				CC7DB1941D0C8BEC007DFE4C /* MRDashBoardVC_iPhone5.xib in Resources */,
+				CC7DB1951D0C8BEC007DFE4C /* dsbg@2x.jpg in Resources */,
+				CC7DB1961D0C8BEC007DFE4C /* MRAppointmentCollectionViewCell.xib in Resources */,
+				CC7DB1971D0C8BEC007DFE4C /* PHmail@3x.png in Resources */,
+				CC7DB1981D0C8BEC007DFE4C /* notificationbody-bg@2x.jpg in Resources */,
+				CC7DB1991D0C8BEC007DFE4C /* NDcompany4@2x.jpg in Resources */,
+				CC7DB19A1D0C8BEC007DFE4C /* marketing@3x.png in Resources */,
+				CC7DB19B1D0C8BEC007DFE4C /* ndInput@2x.png in Resources */,
+				CC7DB19C1D0C8BEC007DFE4C /* setting@2x.png in Resources */,
+				CC7DB19D1D0C8BEC007DFE4C /* dashboard-bg@2x.png in Resources */,
+				CC7DB19E1D0C8BEC007DFE4C /* ddpresent-activity-hover@3x.png in Resources */,
+				CC7DB19F1D0C8BEC007DFE4C /* InfoPlist.strings in Resources */,
+				CC7DB1A01D0C8BEC007DFE4C /* MPNotificationAlertViewController.xib in Resources */,
+				CC7DB1A11D0C8BEC007DFE4C /* pcfeedback@3x.png in Resources */,
+				CC7DB1A21D0C8BEC007DFE4C /* dropDownButton@2x~iPad.png in Resources */,
+				CC7DB1A31D0C8BEC007DFE4C /* splashLogo@2x.png in Resources */,
+				CC7DB1A41D0C8BEC007DFE4C /* MPNotificatinsTableViewCell.xib in Resources */,
+				CC7DB1A51D0C8BEC007DFE4C /* froverdue@3x.png in Resources */,
+				CC7DB1A61D0C8BEC007DFE4C /* PHdashboard-bg@2x.png in Resources */,
+				CC7DB1A71D0C8BEC007DFE4C /* Signup_plain@2x~iPad.png in Resources */,
+				CC7DB1A81D0C8BEC007DFE4C /* MRRegistationViewController.xib in Resources */,
+				CC7DB1A91D0C8BEC007DFE4C /* PHdoctor@2x.png in Resources */,
+				CC7DB1AA1D0C8BEC007DFE4C /* news_dash@2x.png in Resources */,
+				CC7DB1AB1D0C8BEC007DFE4C /* favoriteSelected@2x.png in Resources */,
+				CC7DB1AC1D0C8BEC007DFE4C /* cncompany3@3x.jpg in Resources */,
+				CC7DB1AD1D0C8BEC007DFE4C /* MRMenuViewController.xib in Resources */,
+				CC7DB1AE1D0C8BEC007DFE4C /* PHthera@2x.png in Resources */,
+				CC7DB1AF1D0C8BEC007DFE4C /* camara-icon@3x.png in Resources */,
+				CC7DB1B01D0C8BEC007DFE4C /* crgreydown-arrow@3x.png in Resources */,
+				CC7DB1B11D0C8BEC007DFE4C /* MRReadNotificationsViewController.xib in Resources */,
+				CC7DB1B21D0C8BEC007DFE4C /* feedbackSelected@3.png in Resources */,
+				CC7DB1B31D0C8BEC007DFE4C /* HomeLogo@3x.png in Resources */,
+				CC7DB1B41D0C8BEC007DFE4C /* PHdividers@3x.png in Resources */,
+				CC7DB1B51D0C8BEC007DFE4C /* PHdashboard-banner@3x.png in Resources */,
+				CC7DB1B61D0C8BEC007DFE4C /* settings@3x.png in Resources */,
+				CC7DB1B71D0C8BEC007DFE4C /* ddpresent-activity-normal@3x.png in Resources */,
+				CC7DB1B81D0C8BEC007DFE4C /* MRRegHeaderView.xib in Resources */,
+				CC7DB1B91D0C8BEC007DFE4C /* reveal-icon@3x.png in Resources */,
+				CC7DB1BA1D0C8BEC007DFE4C /* MRNotificationsViewController.xib in Resources */,
+				CC7DB1BB1D0C8BEC007DFE4C /* MRMedRepDetailsViewController.xib in Resources */,
+				CC7DB1BC1D0C8BEC007DFE4C /* categoryBG@2x~iPad.jpg in Resources */,
+				CC7DB1BD1D0C8BEC007DFE4C /* radioUnSelection@2x.png in Resources */,
+				CC7DB1BE1D0C8BEC007DFE4C /* PHmedrep@2x.png in Resources */,
+				CC7DB1BF1D0C8BEC007DFE4C /* transperent-bg@3x.png in Resources */,
+				CC7DB1C01D0C8BEC007DFE4C /* stepThree@2x.png in Resources */,
+				CC7DB1C11D0C8BEC007DFE4C /* MRCompaignsDetailsViewController.xib in Resources */,
+				CC7DB1C21D0C8BEC007DFE4C /* latestNotificatins@2x.png in Resources */,
+				CC7DB1C31D0C8BEC007DFE4C /* MRMedrepMeetingsCell.xib in Resources */,
+				CC7DB1C41D0C8BEC007DFE4C /* favFilter-wrong@3x.png in Resources */,
+				CC7DB1C51D0C8BEC007DFE4C /* PHmarketingMenu@2x.png in Resources */,
+				CC7DB1C61D0C8BEC007DFE4C /* MRDoctorDetailsViewController.xib in Resources */,
+				CC7DB1C71D0C8BEC007DFE4C /* logout@2x.png in Resources */,
+				CC7DB1C81D0C8BEC007DFE4C /* pcminus@3x.png in Resources */,
+				CC7DB1C91D0C8BEC007DFE4C /* PHproduct-campaigns@3x.png in Resources */,
+				CC7DB1CA1D0C8BEC007DFE4C /* pcplus@2x.png in Resources */,
+				CC7DB1CB1D0C8BEC007DFE4C /* Icon-Small-50.png in Resources */,
+				CC7DB1CC1D0C8BEC007DFE4C /* PHmarketing@2x.png in Resources */,
+				CC7DB1CD1D0C8BEC007DFE4C /* categoryBG-667h@2x.jpg in Resources */,
+				CC7DB1CE1D0C8BEC007DFE4C /* stepOne@2x.png in Resources */,
+				CC7DB1CF1D0C8BEC007DFE4C /* HomeLogo~iPad.png in Resources */,
+				CC7DB1D01D0C8BEC007DFE4C /* Signup_plain@3x.png in Resources */,
+				CC7DB1D11D0C8BEC007DFE4C /* building-icon@3x.png in Resources */,
+				CC7DB1D21D0C8BEC007DFE4C /* stepTwo@2x.png in Resources */,
+				CC7DB1D31D0C8BEC007DFE4C /* download@3x.png in Resources */,
+				CC7DB1D51D0C8BEC007DFE4C /* download@2x.png in Resources */,
+				CC7DB1D61D0C8BEC007DFE4C /* MRMedRepMeetingsViewController.xib in Resources */,
+				CC7DB1D71D0C8BEC007DFE4C /* picklocation@2x.png in Resources */,
+				CC7DB1D81D0C8BEC007DFE4C /* Icon-Small-50@2x.png in Resources */,
+				CC7DB1D91D0C8BEC007DFE4C /* cathera@3x.png in Resources */,
+				CC7DB1DA1D0C8BEC007DFE4C /* cncompany1@2x.jpg in Resources */,
+				CC7DB1DB1D0C8BEC007DFE4C /* time-icon@3x.png in Resources */,
+				CC7DB1DC1D0C8BEC007DFE4C /* Default@3x.png in Resources */,
+				CC7DB1DD1D0C8BEC007DFE4C /* locationPin@2x.png in Resources */,
+				CC7DB1DE1D0C8BEC007DFE4C /* MRFeedBackResultViewController.xib in Resources */,
+				CC7DB1DF1D0C8BEC007DFE4C /* favFilter-unchecked@2x.png in Resources */,
+				CC7DB1E01D0C8BEC007DFE4C /* radioSelection@2x.png in Resources */,
+				CC7DB1E11D0C8BEC007DFE4C /* Icon-Small@3x.png in Resources */,
+				CC7DB1E21D0C8BEC007DFE4C /* MRCompetitorAnalasysViewController.xib in Resources */,
+				CC7DB1E31D0C8BEC007DFE4C /* pending_icon@3x.png in Resources */,
+				CC7DB1E41D0C8BEC007DFE4C /* MPCallMedrepViewController.xib in Resources */,
+				CC7DB1E51D0C8BEC007DFE4C /* cncompany1@3x.jpg in Resources */,
+				CC7DB1E61D0C8BEC007DFE4C /* cncompany3@2x.jpg in Resources */,
+				CC7DB1E71D0C8BEC007DFE4C /* MRNewProductCell.xib in Resources */,
+				CC7DB1E81D0C8BEC007DFE4C /* favoriteSelected@3x.png in Resources */,
+				CC7DB1E91D0C8BEC007DFE4C /* surveys_dashboard@2x.png in Resources */,
+				CC7DB1EA1D0C8BEC007DFE4C /* NDcompany4@3x.jpg in Resources */,
+				CC7DB1EB1D0C8BEC007DFE4C /* PHnotifications@2x.png in Resources */,
+				CC7DB1EC1D0C8BEC007DFE4C /* minus.png in Resources */,
+				CC7DB1ED1D0C8BEC007DFE4C /* pcright-arrow@3x.png in Resources */,
+				CC7DB1EE1D0C8BEC007DFE4C /* notification@2x.png in Resources */,
+				CC7DB1EF1D0C8BEC007DFE4C /* smallTickmark@2x~iPad.png in Resources */,
+				CC7DB1F01D0C8BEC007DFE4C /* iTunesArtwork@2x in Resources */,
+				CC7DB1F11D0C8BEC007DFE4C /* cncompany2@3x.jpg in Resources */,
+				CC7DB1F21D0C8BEC007DFE4C /* MRDashBoardVC_iPhone.xib in Resources */,
+				CC7DB1F31D0C8BEC007DFE4C /* bg~iPad.png in Resources */,
+				CC7DB1F41D0C8BEC007DFE4C /* downArrow@2x~iPad.png in Resources */,
+				CC7DB1F51D0C8BEC007DFE4C /* PHprescription@2x.png in Resources */,
+				CC7DB1F61D0C8BEC007DFE4C /* notificationback@2x.png in Resources */,
+				CC7DB1F71D0C8BEC007DFE4C /* pending_icon@2x.png in Resources */,
+				CC7DB1F81D0C8BEC007DFE4C /* MRLoginViewController.xib in Resources */,
+				CC7DB1F91D0C8BEC007DFE4C /* crgreydown-arrow@2x.png in Resources */,
+				CC7DB1FA1D0C8BEC007DFE4C /* upArrow@2x~iPad.png in Resources */,
+				CC7DB1FB1D0C8BEC007DFE4C /* drug-icon@2x.png in Resources */,
+				CC7DB1FC1D0C8BEC007DFE4C /* upcoming_icon@2x.png in Resources */,
+				CC7DB1FD1D0C8BEC007DFE4C /* navigation-icon@2x.png in Resources */,
+				CC7DB1FE1D0C8BEC007DFE4C /* right-arrow@2x.png in Resources */,
+				CC7DB1FF1D0C8BEC007DFE4C /* bg@2x~iPad.png in Resources */,
+				CC7DB2001D0C8BEC007DFE4C /* mrkt-cmpn@3x.png in Resources */,
+				CC7DB2011D0C8BEC007DFE4C /* pageviewdots@2x~iPad copy.png in Resources */,
+				CC7DB2021D0C8BEC007DFE4C /* iTunesArtwork in Resources */,
+				CC7DB2031D0C8BEC007DFE4C /* PHlocations@2x.png in Resources */,
+				CC7DB2041D0C8BEC007DFE4C /* Icon.png in Resources */,
+				CC7DB2051D0C8BEC007DFE4C /* MRProfileDetailsViewController.xib in Resources */,
+				CC7DB2061D0C8BEC007DFE4C /* MRPHDashBoardViewController_iPad.xib in Resources */,
+				CC7DB2071D0C8BEC007DFE4C /* MRForgotPasswordTwoViewController.xib in Resources */,
+				CC7DB2081D0C8BEC007DFE4C /* MRRegistrationRoleCellTableViewCell.xib in Resources */,
+				CC7DB2091D0C8BEC007DFE4C /* categoryBG@3x.jpg in Resources */,
+				CC7DB20A1D0C8BEC007DFE4C /* MRFavoriteFilterViewController.xib in Resources */,
+				CC7DB20B1D0C8BEC007DFE4C /* MPAppointmentViewController.xib in Resources */,
+				CC7DB20C1D0C8BEC007DFE4C /* frpie-bg@3x.jpg in Resources */,
+				CC7DB20D1D0C8BEC007DFE4C /* mrkt-cmpn@2x.png in Resources */,
+				CC7DB20E1D0C8BEC007DFE4C /* MRProductBrocherViewController.xib in Resources */,
+				CC7DB20F1D0C8BEC007DFE4C /* ddbg@2x.jpg in Resources */,
+				CC7DB2101D0C8BEC007DFE4C /* Icon-60.png in Resources */,
+				CC7DB2111D0C8BEC007DFE4C /* ddbg@3x.jpg in Resources */,
+				CC7DB2121D0C8BEC007DFE4C /* navigation-icon@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2972,6 +3894,108 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CC7DB0211D0C8BEC007DFE4C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CC7DB0221D0C8BEC007DFE4C /* MRAppointmentListViewController.m in Sources */,
+				CC7DB0231D0C8BEC007DFE4C /* MRCompaignsDetailsViewController.m in Sources */,
+				CC7DB0241D0C8BEC007DFE4C /* Reachability.m in Sources */,
+				CC7DB0251D0C8BEC007DFE4C /* MRNotificationsDetailsViewController.m in Sources */,
+				CC7DB0261D0C8BEC007DFE4C /* AppDelegate.m in Sources */,
+				CC7DB0271D0C8BEC007DFE4C /* WYPopoverController.m in Sources */,
+				CC7DB0281D0C8BEC007DFE4C /* MRViewRepAppointmnetViewController.m in Sources */,
+				CC7DB0291D0C8BEC007DFE4C /* MRForgotPasswordTwoViewController.m in Sources */,
+				CC7DB02A1D0C8BEC007DFE4C /* MRDoctorDetailsTableViewCell.m in Sources */,
+				CC7DB02B1D0C8BEC007DFE4C /* MRFeedBackResultCell.m in Sources */,
+				CC7DB02C1D0C8BEC007DFE4C /* MPAppointmentViewController.m in Sources */,
+				CC7DB02D1D0C8BEC007DFE4C /* MRMedRepListTableCell.m in Sources */,
+				CC7DB02E1D0C8BEC007DFE4C /* MRProfileDetailsViewController.m in Sources */,
+				CC7DB02F1D0C8BEC007DFE4C /* MRMedRepMeetingsViewController.m in Sources */,
+				CC7DB0301D0C8BEC007DFE4C /* MRNotificationType.m in Sources */,
+				CC7DB21A1D0C8CF2007DFE4C /* MRDevEnvironmentConfig.m in Sources */,
+				CC7DB0311D0C8BEC007DFE4C /* Base64Transcoder.m in Sources */,
+				CC7DB0321D0C8BEC007DFE4C /* MRCommon.m in Sources */,
+				CC7DB0331D0C8BEC007DFE4C /* MRPharmaNotificationDetailsViewController.m in Sources */,
+				CC7DB0341D0C8BEC007DFE4C /* MRCompetitorAnalasysCell.m in Sources */,
+				CC7DB0351D0C8BEC007DFE4C /* MRMedRepListViewController.m in Sources */,
+				CC7DB0361D0C8BEC007DFE4C /* MRNotificationInsiderViewController.m in Sources */,
+				CC7DB0371D0C8BEC007DFE4C /* MRRole.m in Sources */,
+				CC7DB0381D0C8BEC007DFE4C /* MRCompetitorAnalasysViewController.m in Sources */,
+				CC7DB0391D0C8BEC007DFE4C /* MRAppointmentCollectionViewCell.m in Sources */,
+				CC7DB03A1D0C8BEC007DFE4C /* MRViewAppointmnetViewController.m in Sources */,
+				CC7DB03B1D0C8BEC007DFE4C /* MRTherapeuticArea.m in Sources */,
+				CC7DB03C1D0C8BEC007DFE4C /* MRListViewController.m in Sources */,
+				CC7DB03D1D0C8BEC007DFE4C /* MRDRActivityTableViewCell.m in Sources */,
+				CC7DB03E1D0C8BEC007DFE4C /* MRMedrepMeetingsCell.m in Sources */,
+				CC7DB03F1D0C8BEC007DFE4C /* GraphView.m in Sources */,
+				CC7DB0401D0C8BEC007DFE4C /* MRAppControl.m in Sources */,
+				CC7DB0411D0C8BEC007DFE4C /* MPNotificatinsTableViewCell.m in Sources */,
+				CC7DB0421D0C8BEC007DFE4C /* MRSurveyDetailsViewController.m in Sources */,
+				CC7DB0431D0C8BEC007DFE4C /* MRMedRepDetailsViewController.m in Sources */,
+				CC7DB0441D0C8BEC007DFE4C /* MRLoginViewController.m in Sources */,
+				CC7DB0451D0C8BEC007DFE4C /* MRDoctorActivityScoreViewController.m in Sources */,
+				CC7DB0461D0C8BEC007DFE4C /* MRRegistrationRoleViewController.m in Sources */,
+				CC7DB0471D0C8BEC007DFE4C /* MRDoctorActivityScoreDetailsViewController.m in Sources */,
+				CC7DB0481D0C8BEC007DFE4C /* MRForgotPasswordViewController.m in Sources */,
+				CC7DB0491D0C8BEC007DFE4C /* MRParserHelper.m in Sources */,
+				CC7DB04A1D0C8BEC007DFE4C /* MRConvertAppointmentCell.m in Sources */,
+				CC7DB04B1D0C8BEC007DFE4C /* MRDoctorScoreViewController.m in Sources */,
+				CC7DB04C1D0C8BEC007DFE4C /* MRAppointmentCell.m in Sources */,
+				CC7DB04D1D0C8BEC007DFE4C /* WYStoryboardPopoverSegue.m in Sources */,
+				CC7DB04E1D0C8BEC007DFE4C /* MRWelcomeViewController.m in Sources */,
+				CC7DB04F1D0C8BEC007DFE4C /* MRMedRepTableCell.m in Sources */,
+				CC7DB0501D0C8BEC007DFE4C /* NSDate+Utilities.m in Sources */,
+				CC7DB0511D0C8BEC007DFE4C /* SVProgressHUD.m in Sources */,
+				CC7DB0521D0C8BEC007DFE4C /* MPNotificationAlertViewController.m in Sources */,
+				CC7DB0531D0C8BEC007DFE4C /* MRFavoritesNotificationsViewController.m in Sources */,
+				CC7DB0541D0C8BEC007DFE4C /* MRAddressView.m in Sources */,
+				CC7DB0551D0C8BEC007DFE4C /* SWRevealViewController.m in Sources */,
+				CC7DB0561D0C8BEC007DFE4C /* MRPharmaMenuViewController.m in Sources */,
+				CC7DB0571D0C8BEC007DFE4C /* MRPHDashBoardViewController.m in Sources */,
+				CC7DB0581D0C8BEC007DFE4C /* MRSurveyListViewController.m in Sources */,
+				CC7DB0591D0C8BEC007DFE4C /* MRDoctorDetailsViewController.m in Sources */,
+				CC7DB05A1D0C8BEC007DFE4C /* MRMenuViewController.m in Sources */,
+				CC7DB05B1D0C8BEC007DFE4C /* MRRegHeaderView.m in Sources */,
+				CC7DB05C1D0C8BEC007DFE4C /* MRLocationManager.m in Sources */,
+				CC7DB05D1D0C8BEC007DFE4C /* MRDashBoardVC.m in Sources */,
+				CC7DB05E1D0C8BEC007DFE4C /* MRFavoriteFilterViewController.m in Sources */,
+				CC7DB05F1D0C8BEC007DFE4C /* MPCallMedrepViewController.m in Sources */,
+				CC7DB0601D0C8BEC007DFE4C /* MRNewProductCompaignsViewController.m in Sources */,
+				CC7DB0611D0C8BEC007DFE4C /* MRNotifications.m in Sources */,
+				CC7DB0621D0C8BEC007DFE4C /* main.m in Sources */,
+				CC7DB0631D0C8BEC007DFE4C /* MRMenuTableViewCell.m in Sources */,
+				CC7DB0641D0C8BEC007DFE4C /* ViewController.m in Sources */,
+				CC7DB0651D0C8BEC007DFE4C /* MRWebserviceHelper.m in Sources */,
+				CC7DB0661D0C8BEC007DFE4C /* MRDatabaseHelper.m in Sources */,
+				CC7DB0671D0C8BEC007DFE4C /* MRReadNotificationsViewController.m in Sources */,
+				CC7DB0681D0C8BEC007DFE4C /* MRDoctorScoreTableCell.m in Sources */,
+				CC7DB0691D0C8BEC007DFE4C /* MRConvertAppointmentViewController.m in Sources */,
+				CC7DB06A1D0C8BEC007DFE4C /* MRNotificationsViewController.m in Sources */,
+				CC7DB06B1D0C8BEC007DFE4C /* MRRegistationTwoViewController.m in Sources */,
+				CC7DB06C1D0C8BEC007DFE4C /* UILabel+WhiteUIDatePickerLabels.m in Sources */,
+				CC7DB06D1D0C8BEC007DFE4C /* MRRegistationViewController.m in Sources */,
+				CC7DB06E1D0C8BEC007DFE4C /* MROTPViewController.m in Sources */,
+				CC7DB06F1D0C8BEC007DFE4C /* MRAppointmentListCell.m in Sources */,
+				CC7DB0701D0C8BEC007DFE4C /* MRDocotrActivityScoreViewController.m in Sources */,
+				CC7DB0711D0C8BEC007DFE4C /* MRHomeViewContoller.m in Sources */,
+				CC7DB0721D0C8BEC007DFE4C /* GraphPoint.m in Sources */,
+				CC7DB0731D0C8BEC007DFE4C /* MedRep.xcdatamodeld in Sources */,
+				CC7DB0741D0C8BEC007DFE4C /* MRPharmaMenuCell.m in Sources */,
+				CC7DB0751D0C8BEC007DFE4C /* MROptionsViewController.m in Sources */,
+				CC7DB0761D0C8BEC007DFE4C /* MRFeedBackResultViewController.m in Sources */,
+				CC7DB0771D0C8BEC007DFE4C /* MRCompanyDetails.m in Sources */,
+				CC7DB0781D0C8BEC007DFE4C /* MRMedRepViewController.m in Sources */,
+				CC7DB0791D0C8BEC007DFE4C /* MROTPVerifiedViewController.m in Sources */,
+				CC7DB07A1D0C8BEC007DFE4C /* NSData+Base64Additions.m in Sources */,
+				CC7DB07B1D0C8BEC007DFE4C /* MRDataManger.m in Sources */,
+				CC7DB07C1D0C8BEC007DFE4C /* MRNewProductCell.m in Sources */,
+				CC7DB07D1D0C8BEC007DFE4C /* MRProductBrocherViewController.m in Sources */,
+				CC7DB07E1D0C8BEC007DFE4C /* MRRegTableViewCell.m in Sources */,
+				CC7DB07F1D0C8BEC007DFE4C /* MRRegistrationRoleCellTableViewCell.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -3076,7 +4100,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1c38d910-76cb-47e2-a6f4-fbc2c17092f7";
+				PROVISIONING_PROFILE = "84d7e433-cd15-4c50-bd15-66b4f23af092";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -3092,7 +4116,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "07702eb4-d4a1-44d8-af86-14dd5fb84f7d";
+				PROVISIONING_PROFILE = "84d7e433-cd15-4c50-bd15-66b4f23af092";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -3131,6 +4155,38 @@
 			};
 			name = Release;
 		};
+		CC7DB2141D0C8BEC007DFE4C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ramesh Meesala (PR3BTD2UVE)";
+				INFOPLIST_FILE = "MedRep copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "84d7e433-cd15-4c50-bd15-66b4f23af092";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		CC7DB2151D0C8BEC007DFE4C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ramesh Meesala (9Y7Y82N227)";
+				INFOPLIST_FILE = "MedRep copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "84d7e433-cd15-4c50-bd15-66b4f23af092";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -3157,6 +4213,15 @@
 			buildConfigurations = (
 				83C128171B77C88B00D2F08E /* Debug */,
 				83C128181B77C88B00D2F08E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CC7DB2131D0C8BEC007DFE4C /* Build configuration list for PBXNativeTarget "MedRepDev" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CC7DB2141D0C8BEC007DFE4C /* Debug */,
+				CC7DB2151D0C8BEC007DFE4C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

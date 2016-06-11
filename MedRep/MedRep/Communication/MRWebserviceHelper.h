@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MRWebserviceConstants.h"
+#import "MRDevEnvironmentConfig.h"
 
 typedef void(^completionHandler)(BOOL status, NSString *details, NSDictionary *responce);
 
