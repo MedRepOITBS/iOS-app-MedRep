@@ -9,7 +9,8 @@
 
 //#define kBaseURL        @"http://medreplb-84253066.ap-southeast-1.elb.amazonaws.com" //live
 
-#define kBaseURL            @"http://45.114.142.241:8080/MedRepApplication"  //Appstore
+// Vamsi Commented
+//#define kBaseURL            @"http://45.114.142.241:8080/MedRepApplication"  //Appstore
 
 //#define kBaseURL            @"http://183.82.106.234:8080/MedRepApplication" //test
 
