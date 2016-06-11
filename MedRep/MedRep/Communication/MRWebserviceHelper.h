@@ -162,6 +162,10 @@ withComplitionHandler:(completionHandler)responceHandler;
 
 - (void)getMyTeamPendingAppointments:(completionHandler)responceHandler;
 
+- (void)getNewswithHandler:(completionHandler)responceHandler;
+
+- (void)getMaterialwithHandler:(completionHandler)responceHandler;
+
 @end
 
 @interface NSDictionary (CategoryName)

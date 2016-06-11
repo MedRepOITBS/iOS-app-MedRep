@@ -993,6 +993,28 @@
 		CC7DB2111D0C8BEC007DFE4C /* ddbg@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 796E93A41BB8816D0031EA34 /* ddbg@3x.jpg */; };
 		CC7DB2121D0C8BEC007DFE4C /* navigation-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F416841B9F5CDB0089729B /* navigation-icon@3x.png */; };
 		CC7DB21A1D0C8CF2007DFE4C /* MRDevEnvironmentConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB2191D0C8CF2007DFE4C /* MRDevEnvironmentConfig.m */; };
+		CC7DB2741D0C9E15007DFE4C /* MPTransformTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB26C1D0C9E15007DFE4C /* MPTransformTableViewCell.m */; };
+		CC7DB2751D0C9E15007DFE4C /* MPTransformTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB26D1D0C9E15007DFE4C /* MPTransformTableViewCell.xib */; };
+		CC7DB2761D0C9E15007DFE4C /* MRTransformDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB26F1D0C9E15007DFE4C /* MRTransformDetailViewController.m */; };
+		CC7DB2771D0C9E15007DFE4C /* MRTransformDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB2701D0C9E15007DFE4C /* MRTransformDetailViewController.xib */; };
+		CC7DB2781D0C9E15007DFE4C /* MRTransformViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB2721D0C9E15007DFE4C /* MRTransformViewController.m */; };
+		CC7DB2791D0C9E15007DFE4C /* MRTransformViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB2731D0C9E15007DFE4C /* MRTransformViewController.xib */; };
+		CC7DB27A1D0C9E20007DFE4C /* MPTransformTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB26C1D0C9E15007DFE4C /* MPTransformTableViewCell.m */; };
+		CC7DB27B1D0C9E20007DFE4C /* MPTransformTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB26D1D0C9E15007DFE4C /* MPTransformTableViewCell.xib */; };
+		CC7DB27C1D0C9E20007DFE4C /* MRTransformDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB26F1D0C9E15007DFE4C /* MRTransformDetailViewController.m */; };
+		CC7DB27D1D0C9E20007DFE4C /* MRTransformDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB2701D0C9E15007DFE4C /* MRTransformDetailViewController.xib */; };
+		CC7DB27E1D0C9E20007DFE4C /* MRTransformViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB2721D0C9E15007DFE4C /* MRTransformViewController.m */; };
+		CC7DB27F1D0C9E20007DFE4C /* MRTransformViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB2731D0C9E15007DFE4C /* MRTransformViewController.xib */; };
+		CC7DB2841D0C9E75007DFE4C /* NotificationWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB2821D0C9E75007DFE4C /* NotificationWebViewController.m */; };
+		CC7DB2851D0C9E75007DFE4C /* NotificationWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB2831D0C9E75007DFE4C /* NotificationWebViewController.xib */; };
+		CC7DB2861D0C9E7B007DFE4C /* NotificationWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB2821D0C9E75007DFE4C /* NotificationWebViewController.m */; };
+		CC7DB2871D0C9E7B007DFE4C /* NotificationWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB2831D0C9E75007DFE4C /* NotificationWebViewController.xib */; };
+		CC7DB28C1D0C9EC2007DFE4C /* MRShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB28A1D0C9EC2007DFE4C /* MRShareViewController.m */; };
+		CC7DB28D1D0C9EC2007DFE4C /* MRShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB28B1D0C9EC2007DFE4C /* MRShareViewController.xib */; };
+		CC7DB28E1D0C9ECA007DFE4C /* MRShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB28A1D0C9EC2007DFE4C /* MRShareViewController.m */; };
+		CC7DB28F1D0C9ECA007DFE4C /* MRShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB28B1D0C9EC2007DFE4C /* MRShareViewController.xib */; };
+		CC7DB2921D0CA2D0007DFE4C /* MPTransformData.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB2911D0CA2D0007DFE4C /* MPTransformData.m */; };
+		CC7DB2931D0CA2D0007DFE4C /* MPTransformData.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB2911D0CA2D0007DFE4C /* MPTransformData.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1601,6 +1623,23 @@
 		CC7DB2171D0C8BEC007DFE4C /* MedRep copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MedRep copy-Info.plist"; path = "/Users/vkatra/Documents/Vamsi_Backup/Personal/DoctorPlus/GitHub/develop/iOS-app-MedRep/MedRep/MedRep copy-Info.plist"; sourceTree = "<absolute>"; };
 		CC7DB2181D0C8C46007DFE4C /* MRDevEnvironmentConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRDevEnvironmentConfig.h; sourceTree = "<group>"; };
 		CC7DB2191D0C8CF2007DFE4C /* MRDevEnvironmentConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRDevEnvironmentConfig.m; sourceTree = "<group>"; };
+		CC7DB26B1D0C9E15007DFE4C /* MPTransformTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPTransformTableViewCell.h; sourceTree = "<group>"; };
+		CC7DB26C1D0C9E15007DFE4C /* MPTransformTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPTransformTableViewCell.m; sourceTree = "<group>"; };
+		CC7DB26D1D0C9E15007DFE4C /* MPTransformTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MPTransformTableViewCell.xib; sourceTree = "<group>"; };
+		CC7DB26E1D0C9E15007DFE4C /* MRTransformDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRTransformDetailViewController.h; sourceTree = "<group>"; };
+		CC7DB26F1D0C9E15007DFE4C /* MRTransformDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRTransformDetailViewController.m; sourceTree = "<group>"; };
+		CC7DB2701D0C9E15007DFE4C /* MRTransformDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRTransformDetailViewController.xib; sourceTree = "<group>"; };
+		CC7DB2711D0C9E15007DFE4C /* MRTransformViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRTransformViewController.h; sourceTree = "<group>"; };
+		CC7DB2721D0C9E15007DFE4C /* MRTransformViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRTransformViewController.m; sourceTree = "<group>"; };
+		CC7DB2731D0C9E15007DFE4C /* MRTransformViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRTransformViewController.xib; sourceTree = "<group>"; };
+		CC7DB2811D0C9E75007DFE4C /* NotificationWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationWebViewController.h; sourceTree = "<group>"; };
+		CC7DB2821D0C9E75007DFE4C /* NotificationWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationWebViewController.m; sourceTree = "<group>"; };
+		CC7DB2831D0C9E75007DFE4C /* NotificationWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationWebViewController.xib; sourceTree = "<group>"; };
+		CC7DB2891D0C9EC2007DFE4C /* MRShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRShareViewController.h; sourceTree = "<group>"; };
+		CC7DB28A1D0C9EC2007DFE4C /* MRShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRShareViewController.m; sourceTree = "<group>"; };
+		CC7DB28B1D0C9EC2007DFE4C /* MRShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRShareViewController.xib; sourceTree = "<group>"; };
+		CC7DB2901D0CA2D0007DFE4C /* MPTransformData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPTransformData.h; sourceTree = "<group>"; };
+		CC7DB2911D0CA2D0007DFE4C /* MPTransformData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPTransformData.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2257,6 +2296,7 @@
 		79AC94261B9DFA9200B81452 /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
+				CC7DB2801D0C9E75007DFE4C /* NotificationWebView */,
 				79A5DC581BA1EB7A001D872C /* NotificationAlert */,
 				7953662A1BA0BFE80021CE4D /* Notification Fav Filter */,
 				795366121BA0B7560021CE4D /* Read Notifications */,
@@ -2795,6 +2835,8 @@
 		83C127EF1B77C88B00D2F08E /* MedRep */ = {
 			isa = PBXGroup;
 			children = (
+				CC7DB2881D0C9EC2007DFE4C /* Share */,
+				CC7DB26A1D0C9E15007DFE4C /* Transform */,
 				7920D6951C1C9A61008D3386 /* ProfileDetails */,
 				79FDB3FE1C1C863E00CC52CF /* ForgotPassword */,
 				79A4F8A81BC1866B00E58DC7 /* Graph */,
@@ -2860,6 +2902,44 @@
 				83C1280E1B77C88B00D2F08E /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CC7DB26A1D0C9E15007DFE4C /* Transform */ = {
+			isa = PBXGroup;
+			children = (
+				CC7DB26B1D0C9E15007DFE4C /* MPTransformTableViewCell.h */,
+				CC7DB26C1D0C9E15007DFE4C /* MPTransformTableViewCell.m */,
+				CC7DB26D1D0C9E15007DFE4C /* MPTransformTableViewCell.xib */,
+				CC7DB26E1D0C9E15007DFE4C /* MRTransformDetailViewController.h */,
+				CC7DB26F1D0C9E15007DFE4C /* MRTransformDetailViewController.m */,
+				CC7DB2701D0C9E15007DFE4C /* MRTransformDetailViewController.xib */,
+				CC7DB2711D0C9E15007DFE4C /* MRTransformViewController.h */,
+				CC7DB2721D0C9E15007DFE4C /* MRTransformViewController.m */,
+				CC7DB2731D0C9E15007DFE4C /* MRTransformViewController.xib */,
+				CC7DB2901D0CA2D0007DFE4C /* MPTransformData.h */,
+				CC7DB2911D0CA2D0007DFE4C /* MPTransformData.m */,
+			);
+			path = Transform;
+			sourceTree = "<group>";
+		};
+		CC7DB2801D0C9E75007DFE4C /* NotificationWebView */ = {
+			isa = PBXGroup;
+			children = (
+				CC7DB2811D0C9E75007DFE4C /* NotificationWebViewController.h */,
+				CC7DB2821D0C9E75007DFE4C /* NotificationWebViewController.m */,
+				CC7DB2831D0C9E75007DFE4C /* NotificationWebViewController.xib */,
+			);
+			path = NotificationWebView;
+			sourceTree = "<group>";
+		};
+		CC7DB2881D0C9EC2007DFE4C /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				CC7DB2891D0C9EC2007DFE4C /* MRShareViewController.h */,
+				CC7DB28A1D0C9EC2007DFE4C /* MRShareViewController.m */,
+				CC7DB28B1D0C9EC2007DFE4C /* MRShareViewController.xib */,
+			);
+			path = Share;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -3050,6 +3130,7 @@
 				83B781DD1B79128F0070645C /* ViewController.xib in Resources */,
 				79A5DC7A1BA2092E001D872C /* crthera@3x.png in Resources */,
 				7929E3E11B9CC674001F1373 /* surveys_dashboard@3x.png in Resources */,
+				CC7DB2791D0C9E15007DFE4C /* MRTransformViewController.xib in Resources */,
 				79A360B31BA56E2D00F286E0 /* MRDashBoardVC_iPhone6Plus.xib in Resources */,
 				79421EEF1BB7EF950055D9B7 /* PHdrugsales@3x.png in Resources */,
 				79F416A71B9F6E560089729B /* cnsort@3x.png in Resources */,
@@ -3096,6 +3177,7 @@
 				79FFD2691BB9DC3100CEE606 /* starunselected@3x.png in Resources */,
 				7920D68F1C1C874C008D3386 /* MRForgotPasswordViewController.xib in Resources */,
 				79A5DC7B1BA2092E001D872C /* crup-arrow@2x.png in Resources */,
+				CC7DB2851D0C9E75007DFE4C /* NotificationWebViewController.xib in Resources */,
 				796E93A01BB880C20031EA34 /* dddoctor-analysis-hover@2x.png in Resources */,
 				79F0669C1B94E7AD00D113F0 /* navLogo@2x.png in Resources */,
 				7929E3811B9C78B5001F1373 /* notification@3x.png in Resources */,
@@ -3212,6 +3294,7 @@
 				79173C5A1BB48EE100842E4C /* PHactivity@2x.png in Resources */,
 				796E93721BB861E10031EA34 /* MRNewProductCompaignsViewController.xib in Resources */,
 				796E93A11BB880C20031EA34 /* dddoctor-analysis-normal@2x.png in Resources */,
+				CC7DB28D1D0C9EC2007DFE4C /* MRShareViewController.xib in Resources */,
 				79BD27F11B80A8C3007CA448 /* email.png in Resources */,
 				79173C601BB48EE100842E4C /* PHdividers@2x.png in Resources */,
 				798A11821B8AE17B003FF457 /* addicon@2x.png in Resources */,
@@ -3266,6 +3349,7 @@
 				7929E3DA1B9CC674001F1373 /* news_dash@2x.png in Resources */,
 				79F0749A1BBF16970049FDE7 /* favoriteSelected@2x.png in Resources */,
 				79F416A51B9F6E560089729B /* cncompany3@3x.jpg in Resources */,
+				CC7DB2771D0C9E15007DFE4C /* MRTransformDetailViewController.xib in Resources */,
 				79539E9B1B90941D001516C3 /* MRMenuViewController.xib in Resources */,
 				79708AAB1BB73C67007CE81D /* PHthera@2x.png in Resources */,
 				7961A97E1B8F53C60035D63A /* camara-icon@3x.png in Resources */,
@@ -3340,6 +3424,7 @@
 				79421EF41BB7EF950055D9B7 /* PHprescription@2x.png in Resources */,
 				79AC94441B9DFDB800B81452 /* notificationback@2x.png in Resources */,
 				791C37EA1C50256E00914728 /* pending_icon@2x.png in Resources */,
+				CC7DB2751D0C9E15007DFE4C /* MPTransformTableViewCell.xib in Resources */,
 				79BD27DD1B809FD1007CA448 /* MRLoginViewController.xib in Resources */,
 				79A5DC751BA2092E001D872C /* crgreydown-arrow@2x.png in Resources */,
 				79DE1BE81B826245005289D6 /* upArrow@2x~iPad.png in Resources */,
@@ -3462,6 +3547,7 @@
 				CC7DB0D01D0C8BEC007DFE4C /* ViewController.xib in Resources */,
 				CC7DB0D11D0C8BEC007DFE4C /* crthera@3x.png in Resources */,
 				CC7DB0D21D0C8BEC007DFE4C /* surveys_dashboard@3x.png in Resources */,
+				CC7DB27F1D0C9E20007DFE4C /* MRTransformViewController.xib in Resources */,
 				CC7DB0D31D0C8BEC007DFE4C /* MRDashBoardVC_iPhone6Plus.xib in Resources */,
 				CC7DB0D41D0C8BEC007DFE4C /* PHdrugsales@3x.png in Resources */,
 				CC7DB0D51D0C8BEC007DFE4C /* cnsort@3x.png in Resources */,
@@ -3508,6 +3594,7 @@
 				CC7DB0FE1D0C8BEC007DFE4C /* starunselected@3x.png in Resources */,
 				CC7DB0FF1D0C8BEC007DFE4C /* MRForgotPasswordViewController.xib in Resources */,
 				CC7DB1001D0C8BEC007DFE4C /* crup-arrow@2x.png in Resources */,
+				CC7DB2871D0C9E7B007DFE4C /* NotificationWebViewController.xib in Resources */,
 				CC7DB1011D0C8BEC007DFE4C /* dddoctor-analysis-hover@2x.png in Resources */,
 				CC7DB1021D0C8BEC007DFE4C /* navLogo@2x.png in Resources */,
 				CC7DB1031D0C8BEC007DFE4C /* notification@3x.png in Resources */,
@@ -3624,6 +3711,7 @@
 				CC7DB1741D0C8BEC007DFE4C /* PHactivity@2x.png in Resources */,
 				CC7DB1751D0C8BEC007DFE4C /* MRNewProductCompaignsViewController.xib in Resources */,
 				CC7DB1761D0C8BEC007DFE4C /* dddoctor-analysis-normal@2x.png in Resources */,
+				CC7DB28F1D0C9ECA007DFE4C /* MRShareViewController.xib in Resources */,
 				CC7DB1771D0C8BEC007DFE4C /* email.png in Resources */,
 				CC7DB1781D0C8BEC007DFE4C /* PHdividers@2x.png in Resources */,
 				CC7DB1791D0C8BEC007DFE4C /* addicon@2x.png in Resources */,
@@ -3678,6 +3766,7 @@
 				CC7DB1AA1D0C8BEC007DFE4C /* news_dash@2x.png in Resources */,
 				CC7DB1AB1D0C8BEC007DFE4C /* favoriteSelected@2x.png in Resources */,
 				CC7DB1AC1D0C8BEC007DFE4C /* cncompany3@3x.jpg in Resources */,
+				CC7DB27D1D0C9E20007DFE4C /* MRTransformDetailViewController.xib in Resources */,
 				CC7DB1AD1D0C8BEC007DFE4C /* MRMenuViewController.xib in Resources */,
 				CC7DB1AE1D0C8BEC007DFE4C /* PHthera@2x.png in Resources */,
 				CC7DB1AF1D0C8BEC007DFE4C /* camara-icon@3x.png in Resources */,
@@ -3752,6 +3841,7 @@
 				CC7DB1F51D0C8BEC007DFE4C /* PHprescription@2x.png in Resources */,
 				CC7DB1F61D0C8BEC007DFE4C /* notificationback@2x.png in Resources */,
 				CC7DB1F71D0C8BEC007DFE4C /* pending_icon@2x.png in Resources */,
+				CC7DB27B1D0C9E20007DFE4C /* MPTransformTableViewCell.xib in Resources */,
 				CC7DB1F81D0C8BEC007DFE4C /* MRLoginViewController.xib in Resources */,
 				CC7DB1F91D0C8BEC007DFE4C /* crgreydown-arrow@2x.png in Resources */,
 				CC7DB1FA1D0C8BEC007DFE4C /* upArrow@2x~iPad.png in Resources */,
@@ -3815,6 +3905,7 @@
 				7929E3B41B9C8E5F001F1373 /* MRAppointmentCollectionViewCell.m in Sources */,
 				79F84B201BE938310081613A /* MRViewAppointmnetViewController.m in Sources */,
 				797560441BBFE3AA0034D0AC /* MRTherapeuticArea.m in Sources */,
+				CC7DB2741D0C9E15007DFE4C /* MPTransformTableViewCell.m in Sources */,
 				7969CFCE1BAF2E38004C2009 /* MRListViewController.m in Sources */,
 				79D5EAA01C1E00D50037CE23 /* MRDRActivityTableViewCell.m in Sources */,
 				79F5C9F61BB061BE00435B6C /* MRMedrepMeetingsCell.m in Sources */,
@@ -3847,6 +3938,7 @@
 				79421F421BB83BAE0055D9B7 /* MRDoctorDetailsViewController.m in Sources */,
 				79539E9A1B90941D001516C3 /* MRMenuViewController.m in Sources */,
 				798A118B1B8AEBF6003FF457 /* MRRegHeaderView.m in Sources */,
+				CC7DB2761D0C9E15007DFE4C /* MRTransformDetailViewController.m in Sources */,
 				795881AA1C63CF8600462868 /* MRLocationManager.m in Sources */,
 				799820941BA4D01C0069128A /* MRDashBoardVC.m in Sources */,
 				7953662E1BA0C0300021CE4D /* MRFavoriteFilterViewController.m in Sources */,
@@ -3854,6 +3946,7 @@
 				796E93711BB861E10031EA34 /* MRNewProductCompaignsViewController.m in Sources */,
 				79115CEB1BCD872900151806 /* MRNotifications.m in Sources */,
 				83C127F31B77C88B00D2F08E /* main.m in Sources */,
+				CC7DB2921D0CA2D0007DFE4C /* MPTransformData.m in Sources */,
 				79F066921B94E13C00D113F0 /* MRMenuTableViewCell.m in Sources */,
 				83C127FC1B77C88B00D2F08E /* ViewController.m in Sources */,
 				83B781FC1B7916B40070645C /* MRWebserviceHelper.m in Sources */,
@@ -3861,6 +3954,7 @@
 				795366161BA0B7A90021CE4D /* MRReadNotificationsViewController.m in Sources */,
 				79421F1D1BB83A4B0055D9B7 /* MRDoctorScoreTableCell.m in Sources */,
 				796E937C1BB867FF0031EA34 /* MRConvertAppointmentViewController.m in Sources */,
+				CC7DB2781D0C9E15007DFE4C /* MRTransformViewController.m in Sources */,
 				79AC942A1B9DFAF000B81452 /* MRNotificationsViewController.m in Sources */,
 				7961A9731B8F26160035D63A /* MRRegistationTwoViewController.m in Sources */,
 				79A4AA731BA75850004F6E1E /* UILabel+WhiteUIDatePickerLabels.m in Sources */,
@@ -3868,6 +3962,8 @@
 				79BD28121B80C6A5007CA448 /* MROTPViewController.m in Sources */,
 				79169E291BEBE70500C11D13 /* MRAppointmentListCell.m in Sources */,
 				794000111BE61BAC0066151A /* MRDocotrActivityScoreViewController.m in Sources */,
+				CC7DB2841D0C9E75007DFE4C /* NotificationWebViewController.m in Sources */,
+				CC7DB28C1D0C9EC2007DFE4C /* MRShareViewController.m in Sources */,
 				79BD27B31B809982007CA448 /* MRHomeViewContoller.m in Sources */,
 				79A4F8AE1BC186B200E58DC7 /* GraphPoint.m in Sources */,
 				83C127F91B77C88B00D2F08E /* MedRep.xcdatamodeld in Sources */,
@@ -3901,10 +3997,12 @@
 				CC7DB0221D0C8BEC007DFE4C /* MRAppointmentListViewController.m in Sources */,
 				CC7DB0231D0C8BEC007DFE4C /* MRCompaignsDetailsViewController.m in Sources */,
 				CC7DB0241D0C8BEC007DFE4C /* Reachability.m in Sources */,
+				CC7DB2861D0C9E7B007DFE4C /* NotificationWebViewController.m in Sources */,
 				CC7DB0251D0C8BEC007DFE4C /* MRNotificationsDetailsViewController.m in Sources */,
 				CC7DB0261D0C8BEC007DFE4C /* AppDelegate.m in Sources */,
 				CC7DB0271D0C8BEC007DFE4C /* WYPopoverController.m in Sources */,
 				CC7DB0281D0C8BEC007DFE4C /* MRViewRepAppointmnetViewController.m in Sources */,
+				CC7DB2931D0CA2D0007DFE4C /* MPTransformData.m in Sources */,
 				CC7DB0291D0C8BEC007DFE4C /* MRForgotPasswordTwoViewController.m in Sources */,
 				CC7DB02A1D0C8BEC007DFE4C /* MRDoctorDetailsTableViewCell.m in Sources */,
 				CC7DB02B1D0C8BEC007DFE4C /* MRFeedBackResultCell.m in Sources */,
@@ -3938,15 +4036,18 @@
 				CC7DB0461D0C8BEC007DFE4C /* MRRegistrationRoleViewController.m in Sources */,
 				CC7DB0471D0C8BEC007DFE4C /* MRDoctorActivityScoreDetailsViewController.m in Sources */,
 				CC7DB0481D0C8BEC007DFE4C /* MRForgotPasswordViewController.m in Sources */,
+				CC7DB27E1D0C9E20007DFE4C /* MRTransformViewController.m in Sources */,
 				CC7DB0491D0C8BEC007DFE4C /* MRParserHelper.m in Sources */,
 				CC7DB04A1D0C8BEC007DFE4C /* MRConvertAppointmentCell.m in Sources */,
 				CC7DB04B1D0C8BEC007DFE4C /* MRDoctorScoreViewController.m in Sources */,
 				CC7DB04C1D0C8BEC007DFE4C /* MRAppointmentCell.m in Sources */,
 				CC7DB04D1D0C8BEC007DFE4C /* WYStoryboardPopoverSegue.m in Sources */,
+				CC7DB28E1D0C9ECA007DFE4C /* MRShareViewController.m in Sources */,
 				CC7DB04E1D0C8BEC007DFE4C /* MRWelcomeViewController.m in Sources */,
 				CC7DB04F1D0C8BEC007DFE4C /* MRMedRepTableCell.m in Sources */,
 				CC7DB0501D0C8BEC007DFE4C /* NSDate+Utilities.m in Sources */,
 				CC7DB0511D0C8BEC007DFE4C /* SVProgressHUD.m in Sources */,
+				CC7DB27A1D0C9E20007DFE4C /* MPTransformTableViewCell.m in Sources */,
 				CC7DB0521D0C8BEC007DFE4C /* MPNotificationAlertViewController.m in Sources */,
 				CC7DB0531D0C8BEC007DFE4C /* MRFavoritesNotificationsViewController.m in Sources */,
 				CC7DB0541D0C8BEC007DFE4C /* MRAddressView.m in Sources */,
@@ -3971,6 +4072,7 @@
 				CC7DB0671D0C8BEC007DFE4C /* MRReadNotificationsViewController.m in Sources */,
 				CC7DB0681D0C8BEC007DFE4C /* MRDoctorScoreTableCell.m in Sources */,
 				CC7DB0691D0C8BEC007DFE4C /* MRConvertAppointmentViewController.m in Sources */,
+				CC7DB27C1D0C9E20007DFE4C /* MRTransformDetailViewController.m in Sources */,
 				CC7DB06A1D0C8BEC007DFE4C /* MRNotificationsViewController.m in Sources */,
 				CC7DB06B1D0C8BEC007DFE4C /* MRRegistationTwoViewController.m in Sources */,
 				CC7DB06C1D0C8BEC007DFE4C /* UILabel+WhiteUIDatePickerLabels.m in Sources */,
