@@ -18,6 +18,7 @@
 #import "MPAppointmentViewController.h"
 #import "MRSurveyListViewController.h"
 #import "MRDoctorActivityScoreViewController.h"
+#import "MRTransformViewController.h"
 
 @interface MRDashBoardVC () <UITableViewDataSource, UITableViewDelegate, SWRevealViewControllerDelegate>
 
@@ -48,15 +49,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.marketingCompaginsButton.alpha = 0.5f;
     self.searchButton.alpha = 0.5f;
     self.newsButon.alpha = 0.5;
     
     self.marketingCompaginsButton.enabled = NO;
     self.searchButton.enabled = NO;
-    self.newsButon.enabled = NO;
     
-    self.newsImage.alpha =
     self.searchImage.alpha =
     self.marketingCampImage.alpha = 0.4f;
     
@@ -255,7 +253,8 @@
 
 - (IBAction)newsButtonAction:(id)sender
 {
-   // [MRCommon showAlert:kComingsoonMSG delegate:nil];
+    MRTransformViewController *notiFicationViewController = [[MRTransformViewController alloc] initWithNibName:@"MRTransformViewController" bundle:nil];
+    [self.navigationController pushViewController:notiFicationViewController animated:YES];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

@@ -13,6 +13,10 @@
 #import "MRCompanyDetails.h"
 #import "MRNotifications.h"
 #import "MRCommon.h"
+#import "MRContact.h"
+#import "MRSuggestedContact.h"
+#import "MRGroup.h"
+#import "MRGroupPost.h"
 
 
 static MRDatabaseHelper *sharedDataManager = nil;
@@ -28,6 +32,111 @@ static MRDatabaseHelper *sharedDataManager = nil;
     });
     return sharedInstance;
 
+}
+
++ (void)addContacts:(NSArray*)contacts {
+    for (NSDictionary *myDict in contacts) {
+        MRContact *contact  = (MRContact*)[[MRDataManger sharedManager] createObjectForEntity:kContactEntity];
+        contact.contactId = [[myDict objectForKey:@"id"] integerValue];
+        contact.name = [myDict objectForKey:@"name"];
+        contact.profilePic  = [myDict objectForKey:@"profile_pic"];
+        contact.role      = [myDict objectForKey:@"role"];
+        NSArray* groupIds = [myDict objectForKey:@"groupId"];
+        if (groupIds.count > 0) {
+            NSArray* groups = [MRDatabaseHelper getGroupsForIds:groupIds];
+            if (groups.count > 0) {
+                contact.groups = [NSSet setWithArray:groups];
+            }
+        }
+        
+    }
+    [[MRDataManger sharedManager] saveContext];
+}
+
++ (void)addSuggestedContacts:(NSArray*)contacts {
+    for (NSDictionary *myDict in contacts) {
+        MRSuggestedContact *contact  = (MRSuggestedContact*)[[MRDataManger sharedManager] createObjectForEntity:kSuggestedContactEntity];
+        contact.contactId = [[myDict objectForKey:@"id"] integerValue];
+        contact.name = [myDict objectForKey:@"name"];
+        contact.profilePic  = [myDict objectForKey:@"profile_pic"];
+        contact.role      = [myDict objectForKey:@"role"];
+    }
+    [[MRDataManger sharedManager] saveContext];
+}
+
+//{"name":"John Doe","postText":"Guys, these drugs look promising!","likes":10,"comments":23,"shares":3,"profile_pic":"","post_pic":"medicine.jpg"}
++ (void)addGroups:(NSArray*)groups {
+    for (NSDictionary *myDict in groups) {
+        MRGroup *group  = (MRGroup*)[[MRDataManger sharedManager] createObjectForEntity:kGroupEntity];
+        group.groupId = [[myDict objectForKey:@"id"] integerValue];
+        group.name = [myDict objectForKey:@"name"];
+        group.groupPicture = [myDict objectForKey:@"groupPicture"];
+    }
+    [[MRDataManger sharedManager] saveContext];
+}
+
++ (void)addGroupPosts:(NSArray*)posts {
+    for (NSDictionary *myDict in posts) {
+        MRGroupPost *post  = (MRGroupPost*)[[MRDataManger sharedManager] createObjectForEntity:kGroupPostEntity];
+        post.groupPostId = [[myDict objectForKey:@"id"] integerValue];
+        post.postPic = [myDict objectForKey:@"post_pic"];
+        post.postText = [myDict objectForKey:@"postText"];
+        post.numberOfComments = [[myDict objectForKey:@"comments"] integerValue];
+        post.numberOfLikes = [[myDict objectForKey:@"likes"] integerValue];
+        post.numberOfShares = [[myDict objectForKey:@"shares"] integerValue];
+        NSInteger contactId = [[myDict objectForKey:@"contactId"] integerValue];
+        if (contactId) {
+            MRContact* contact = [MRDatabaseHelper getContactForId:contactId];
+            if (contact) {
+                [post setContact:contact];
+            }
+        }
+        NSInteger groupId = [[myDict objectForKey:@"groupId"] integerValue];
+        if (groupId) {
+            MRGroup* group = [MRDatabaseHelper getGroupForId:groupId];
+            if (group) {
+                [post setGroup:group];
+            }
+        }
+    }
+    [[MRDataManger sharedManager] saveContext];
+}
+
++ (MRContact*)getContactForId:(NSInteger)contactId {
+    MRContact* contact = [[MRDataManger sharedManager] fetchObject:kContactEntity predicate:[NSPredicate predicateWithFormat:@"contactId == %@",[NSNumber numberWithInteger:contactId]]];
+    return contact;
+}
+
++ (NSArray*)getGroupsForIds:(NSArray*)groupIds {
+    NSMutableArray* groups = [NSMutableArray array];
+    for (id groupIdObject in groupIds) {
+        NSInteger groupId = [groupIdObject integerValue];
+        MRGroup* group = [MRDatabaseHelper getGroupForId:groupId];
+        if (group) {
+            [groups addObject:group];
+        }
+    }
+    return groups;
+}
+
++ (MRGroup*)getGroupForId:(NSInteger)groupId {
+    MRGroup* group = [[MRDataManger sharedManager] fetchObject:kGroupEntity predicate:[NSPredicate predicateWithFormat:@"groupId == %@",[NSNumber numberWithInteger:groupId]]];
+    return group;
+}
+
++ (NSArray*)getContacts {
+    NSArray *contacts = [[MRDataManger sharedManager] fetchObjectList:kContactEntity];
+    return contacts;
+}
+
++ (NSArray*)getGroups {
+    NSArray *groups = [[MRDataManger sharedManager] fetchObjectList:kGroupEntity];
+    return groups;
+}
+
++ (NSArray*)getSuggestedContacts {
+    NSArray *groups = [[MRDataManger sharedManager] fetchObjectList:kSuggestedContactEntity];
+    return groups;
 }
 
 + (void)addRole:(NSArray*)roles
