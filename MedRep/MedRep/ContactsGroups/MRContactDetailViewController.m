@@ -9,11 +9,11 @@
 #import "MRContactDetailViewController.h"
 #import "MRGroupPostItemTableViewCell.h"
 #import "MRContactWithinGroupCollectionCellCollectionViewCell.h"
-
+#import "KLCPopup.h"
 #import "MRContact.h"
 #import "MRGroup.h"
-
-@interface MRContactDetailViewController ()
+#import "CommonBoxView.h"
+@interface MRContactDetailViewController ()<MRGroupPostItemTableViewCellDelegate,CommonBoxViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView* mainImageView;
 @property (weak, nonatomic) IBOutlet UILabel* mainLabel;
@@ -27,7 +27,8 @@
 
 @property (strong, nonatomic) MRContact* mainContact;
 @property (strong, nonatomic) MRGroup* mainGroup;
-
+@property (strong,nonatomic) KLCPopup *commentBoxKLCPopView;
+@property (strong,nonatomic) CommonBoxView *commentBoxView;
 
 @end
 
@@ -67,7 +68,7 @@
 
 - (void)setGroup:(MRGroup*)group {
     self.mainGroup = group;
-   
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -76,19 +77,48 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MRGroupPostItemTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"groupCell"];
+    cell.delegate = self;
     [cell setPostContent:[self.posts objectAtIndex:indexPath.row]];
     return cell;
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)mrGroupPostItemTableViewCell:(MRGroupPostItemTableViewCell *)cell withCommentButtonTapped:(id)sender{
+    [self setupCommentBox];
+    //    [self.commentBoxKLCPopView show];
+    [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutAboveCenter)];
 }
-*/
+
+-(void)setupCommentBox{
+    NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"commentBox" owner:self options:nil];
+    
+    _commentBoxView = (CommonBoxView *)[arr objectAtIndex:0];
+    
+    self.commentBoxView.delegate = self;
+    
+    self.commentBoxView.frame =     CGRectMake(self.commentBoxView.frame.origin.x, self.commentBoxView.frame.origin.y, 300,316);
+    [self.commentBoxView setContact:self.mainContact];
+    [self.commentBoxView setGroup:self.mainGroup];
+    [self.commentBoxView setData];
+    
+    _commentBoxKLCPopView = [KLCPopup popupWithContentView:self.commentBoxView];
+    
+    
+}
+-(void)commonBoxCameraButtonTapped{
+    [self takePhoto];
+    
+}
+
+/*
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -107,7 +137,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MRContactWithinGroupCollectionCellCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"contactWithinGroupCell" forIndexPath:indexPath];
     if (self.contactsUnderGroup.count > 0) {
-    [cell setContact:self.contactsUnderGroup[indexPath.row]];
+        [cell setContact:self.contactsUnderGroup[indexPath.row]];
     } else {
         [cell setGroup:self.groupsUnderContact[indexPath.row]];
     }
@@ -126,12 +156,47 @@
 - (IBAction)moreOptionsTapped:(id)sender {
     if (!self.moreOptions) {
         self.moreOptions = [[UIActionSheet alloc] initWithTitle:@"More Options"
-                                                delegate:self
-                                       cancelButtonTitle:@"Cancel"
-                                  destructiveButtonTitle:nil
-                                       otherButtonTitles:@"Add Members",@"Pending Members", nil];
+                                                       delegate:self
+                                              cancelButtonTitle:@"Cancel"
+                                         destructiveButtonTitle:nil
+                                              otherButtonTitles:@"Add Members",@"Pending Members", nil];
     }
     [self.moreOptions showInView:self.view];
+}
+#pragma mark
+#pragma CAMERA IMAGE CAPTURE
+
+-(void)takePhoto {
+    [_commentBoxKLCPopView dismiss:YES];
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    
+    [self presentViewController:picker animated:YES completion:NULL];
+    
+}
+
+#pragma mark - Image Picker Controller delegate methods
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
+    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    //    self.imageView.image = chosenImage;
+    
+    
+    [_commentBoxView setImageForShareImage:chosenImage];
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutAboveCenter)];
+    
+    
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    
 }
 
 

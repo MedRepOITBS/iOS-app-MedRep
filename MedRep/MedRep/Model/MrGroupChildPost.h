@@ -1,5 +1,5 @@
 //
-//  MRGroupPost.h
+//  MrGroupChildPost.h
 //  MedRep
 //
 //  Created by Namit Nayak on 6/11/16.
@@ -9,11 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class MRContact, MRGroup, MrGroupChildPost;
-
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MRGroupPost : NSManagedObject
+@interface MrGroupChildPost : NSManagedObject
 
 // Insert code here to declare functionality of your managed object subclass
 
@@ -21,4 +19,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-#import "MRGroupPost+CoreDataProperties.h"
+#import "MrGroupChildPost+CoreDataProperties.h"

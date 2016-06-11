@@ -2,7 +2,7 @@
 //  MRGroupPost+CoreDataProperties.m
 //  MedRep
 //
-//  Created by Vivekan Arther Subaharan on 5/21/16.
+//  Created by Namit Nayak on 6/11/16.
 //  Copyright © 2016 MedRep. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -13,13 +13,14 @@
 
 @implementation MRGroupPost (CoreDataProperties)
 
-@dynamic postText;
-@dynamic postPic;
-@dynamic numberOfLikes;
-@dynamic numberOfComments;
-@dynamic numberOfShares;
 @dynamic groupPostId;
-@dynamic group;
+@dynamic numberOfComments;
+@dynamic numberOfLikes;
+@dynamic numberOfShares;
+@dynamic postPic;
+@dynamic postText;
 @dynamic contact;
+@dynamic group;
+@dynamic replyPost;
 
 @end
