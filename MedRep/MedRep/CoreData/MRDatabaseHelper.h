@@ -16,6 +16,10 @@
 #define kCompanyDetailsEntity       @"MRCompanyDetails"
 #define kNotificationsEntity        @"MRNotifications"
 
+#define kContactEntity              @"MRContact"
+#define kGroupEntity                @"MRGroup"
+#define kGroupPostEntity            @"MRGroupPost"
+#define kSuggestedContactEntity     @"MRSuggestedContact"
 
 
 @interface MRDatabaseHelper : NSObject
@@ -24,6 +28,17 @@
 }
 
 + (MRDatabaseHelper *)sharedHelper;
+
++ (void)addContacts:(NSArray*)contacts;
++ (void)addSuggestedContacts:(NSArray*)contacts;
++ (void)addGroups:(NSArray*)groups;
++ (void)addGroupPosts:(NSArray*)groupPosts;
+
+
++ (NSArray*)getContacts;
++ (NSArray*)getSuggestedContacts;
++ (NSArray*)getGroups;
+
 
 + (void)addRole:(NSArray*)roles;
 + (void)addTherapeuticArea:(NSArray*)therapeuticAreaList;

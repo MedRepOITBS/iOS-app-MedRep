@@ -15,6 +15,9 @@
 #import "MRAppControl.h"
 #import "MRShareViewController.h"
 #import "MPTransformData.h"
+#import "MRContactsViewController.h"
+#import "MRGroupsListViewController.h"
+#import "PendingContactsViewController.h"
 
 @interface MRTransformViewController ()<UISearchBarDelegate>{
     UILabel *infoLbl;
@@ -149,6 +152,33 @@
 
 - (IBAction)connect:(id)sender {
     [self sliderButtonTapped:nil];
+    
+    MRContactsViewController* contactsViewCont = [[MRContactsViewController alloc] initWithNibName:@"MRContactsViewController" bundle:nil];
+    MRGroupsListViewController* groupsListViewController = [[MRGroupsListViewController alloc] initWithNibName:@"MRGroupsListViewController" bundle:[NSBundle mainBundle]];
+    contactsViewCont.groupsListViewController = groupsListViewController;
+    
+    PendingContactsViewController *pendingViewController =[[PendingContactsViewController alloc] initWithNibName:@"PendingContactsViewController" bundle:[NSBundle mainBundle]];
+    
+    contactsViewCont.pendingContactsViewController = pendingViewController;
+    [self.navigationController pushViewController:contactsViewCont animated:true];
+    
+//    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:contactsViewCont];
+//    navigationController.title = @"MedRep";
+//    
+//    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon.png"]
+//                                                                         style:UIBarButtonItemStylePlain target:revealController action:@selector(revealToggle:)];
+//    
+//    contactsViewCont.navigationItem.leftBarButtonItem = revealButtonItem;
+//    groupsListViewController.navigationItem.leftBarButtonItem = revealButtonItem;
+//    pendingViewController.navigationItem.leftBarButtonItem = revealButtonItem;
+//    
+//    UIImageView* titleImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"navLogo.png"]];
+//    [contactsViewCont.navigationItem setTitleView:titleImage];
+//    [groupsListViewController.navigationItem setTitleView:titleImage];
+//    [pendingViewController.navigationItem setTitleView:titleImage];
+//    
+//    [revealController pushFrontViewController:navigationController animated:YES];
+    
 }
 
 - (IBAction)share:(id)sender {
@@ -439,6 +469,32 @@
     [transformData setShortDescription:@"Heroin is cheaper, easier to obtain than narcotics like OxyContin experts say..."];
     [transformData setDetailDescription:@"Heroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts say"];
     [self.contentData addObject:transformData];
+    
+    if ([MRDatabaseHelper getContacts].count == 0) {
+        
+        NSString* filePath = [[NSBundle mainBundle] pathForResource:@"groupList" ofType:@"json"];
+        NSData* data = [NSData dataWithContentsOfFile:filePath];
+        NSError *error;
+        NSArray* groupsArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+        [MRDatabaseHelper addGroups:groupsArray];
+        
+        filePath = [[NSBundle mainBundle] pathForResource:@"my_contacts" ofType:@"json"];
+        data = [NSData dataWithContentsOfFile:filePath];
+        NSArray* contactsArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+        [MRDatabaseHelper addContacts:contactsArray];
+        
+        filePath = [[NSBundle mainBundle] pathForResource:@"suggested_contacts" ofType:@"json"];
+        data = [NSData dataWithContentsOfFile:filePath];
+        contactsArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+        [MRDatabaseHelper addSuggestedContacts:contactsArray];
+        
+        filePath = [[NSBundle mainBundle] pathForResource:@"posts" ofType:@"json"];
+        data = [NSData dataWithContentsOfFile:filePath];
+        NSArray* postsArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+        [MRDatabaseHelper addGroupPosts:postsArray];
+        
+        
+    }
 }
 
 @end
