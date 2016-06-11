@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController">
+            <connections>
+                <outlet property="spImage" destination="eXk-Em-onc" id="cRf-bl-FgL"/>
+                <outlet property="splashLogo" destination="9oP-g7-EMg" id="gJ3-bl-DXw"/>
+                <outlet property="view" destination="iN0-l3-epB" id="t2b-bW-Zht"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="Default.png" translatesAutoresizingMaskIntoConstraints="NO" id="eXk-Em-onc">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <animations/>
+                </imageView>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="splashLogo@3x.png" translatesAutoresizingMaskIntoConstraints="NO" id="9oP-g7-EMg">
+                    <rect key="frame" x="238" y="238" width="123" height="124"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="123" id="8FT-NL-cxd"/>
+                        <constraint firstAttribute="height" constant="124" id="KF5-rF-bdw"/>
+                    </constraints>
+                </imageView>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="medrep@3x.png" translatesAutoresizingMaskIntoConstraints="NO" id="o9W-8X-ggR">
+                    <rect key="frame" x="210" y="388" width="180" height="45"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="180" id="t8V-K8-Gut"/>
+                        <constraint firstAttribute="height" constant="45" id="zFN-ee-JLb"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="eXk-Em-onc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="0cM-5t-5Uw"/>
+                <constraint firstAttribute="trailing" secondItem="eXk-Em-onc" secondAttribute="trailing" id="2yR-Vi-ZFT"/>
+                <constraint firstAttribute="centerY" secondItem="9oP-g7-EMg" secondAttribute="centerY" id="FZD-W5-uAj"/>
+                <constraint firstItem="o9W-8X-ggR" firstAttribute="top" secondItem="9oP-g7-EMg" secondAttribute="bottom" constant="26" id="O0z-Lf-uvn"/>
+                <constraint firstAttribute="bottom" secondItem="eXk-Em-onc" secondAttribute="bottom" id="Tbk-He-YXy"/>
+                <constraint firstAttribute="centerX" secondItem="9oP-g7-EMg" secondAttribute="centerX" id="Vhn-4s-d9v"/>
+                <constraint firstItem="eXk-Em-onc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="axy-YG-9el"/>
+                <constraint firstAttribute="centerX" secondItem="o9W-8X-ggR" secondAttribute="centerX" id="qIC-tF-eAj"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="Default.png" width="320" height="480"/>
+        <image name="medrep@3x.png" width="670" height="160"/>
+        <image name="splashLogo@3x.png" width="448" height="449"/>
+    </resources>
+</document>

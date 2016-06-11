@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MRFeedBackResultViewController">
+            <connections>
+                <outlet property="backButton" destination="FUn-Db-Dc7" id="kBu-nA-161"/>
+                <outlet property="feedBackTable" destination="Dgl-Tg-j8R" id="Skt-3u-3R2"/>
+                <outlet property="feedbackTitle" destination="dOh-TO-lyy" id="xoR-FR-UdU"/>
+                <outlet property="navView" destination="FdY-MH-C8s" id="F33-DM-HLc"/>
+                <outlet property="view" destination="zyf-64-abh" id="Dhb-rj-ExW"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="FdY-MH-C8s">
+            <rect key="frame" x="0.0" y="0.0" width="123" height="33"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="navLogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="vK9-Ch-KqC">
+                    <rect key="frame" x="0.0" y="0.0" width="123" height="33"/>
+                    <animations/>
+                </imageView>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="87.5" y="291.5"/>
+        </view>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="zyf-64-abh">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="REJ-Dy-FhT" userLabel="Title View">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Avastin Feedback Result" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dOh-TO-lyy">
+                            <rect key="frame" x="44" y="0.0" width="546" height="44"/>
+                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="KGi-Vy-Dqw"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="notificationback.png" translatesAutoresizingMaskIntoConstraints="NO" id="M07-i7-Tnj">
+                            <rect key="frame" x="5" y="5" width="30" height="30"/>
+                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="mqk-y8-uuR"/>
+                                <constraint firstAttribute="height" constant="30" id="z9c-nn-Qw1"/>
+                            </constraints>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FUn-Db-Dc7">
+                            <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="8nv-49-R3Q"/>
+                                <constraint firstAttribute="width" constant="44" id="zvx-cs-73Y"/>
+                            </constraints>
+                            <connections>
+                                <action selector="backButtonAction:" destination="-1" eventType="touchUpInside" id="uzn-0L-sy8"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <animations/>
+                    <color key="backgroundColor" red="0.1843137255" green="0.1843137255" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="dOh-TO-lyy" firstAttribute="leading" secondItem="REJ-Dy-FhT" secondAttribute="leading" constant="44" id="GoQ-Ze-OWC"/>
+                        <constraint firstAttribute="trailing" secondItem="dOh-TO-lyy" secondAttribute="trailing" constant="10" id="OyN-cs-TzH"/>
+                        <constraint firstAttribute="height" constant="44" id="QwW-Wl-0pt"/>
+                        <constraint firstItem="FUn-Db-Dc7" firstAttribute="leading" secondItem="REJ-Dy-FhT" secondAttribute="leading" id="To6-44-JYK"/>
+                        <constraint firstItem="FUn-Db-Dc7" firstAttribute="top" secondItem="REJ-Dy-FhT" secondAttribute="top" id="Ues-Gv-x7s"/>
+                        <constraint firstAttribute="bottom" secondItem="dOh-TO-lyy" secondAttribute="bottom" id="bAw-sO-0dx"/>
+                        <constraint firstItem="M07-i7-Tnj" firstAttribute="top" secondItem="REJ-Dy-FhT" secondAttribute="top" constant="5" id="cVd-V4-9f7"/>
+                        <constraint firstItem="M07-i7-Tnj" firstAttribute="leading" secondItem="REJ-Dy-FhT" secondAttribute="leading" constant="5" id="itX-jz-6eA"/>
+                        <constraint firstItem="dOh-TO-lyy" firstAttribute="top" secondItem="REJ-Dy-FhT" secondAttribute="top" id="r3F-Qb-blp"/>
+                        <constraint firstAttribute="bottom" secondItem="FUn-Db-Dc7" secondAttribute="bottom" id="yZ7-3b-AkD"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="120" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="Dgl-Tg-j8R">
+                    <rect key="frame" x="0.0" y="44" width="600" height="492"/>
+                    <animations/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="CI1-vu-iUY"/>
+                        <outlet property="delegate" destination="-1" id="Y9m-9o-Xib"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="REJ-Dy-FhT" secondAttribute="trailing" id="AXK-aS-TAn"/>
+                <constraint firstAttribute="trailing" secondItem="Dgl-Tg-j8R" secondAttribute="trailing" id="DbX-62-tgT"/>
+                <constraint firstItem="Dgl-Tg-j8R" firstAttribute="leading" secondItem="zyf-64-abh" secondAttribute="leading" id="Jdr-bB-sOZ"/>
+                <constraint firstAttribute="bottom" secondItem="Dgl-Tg-j8R" secondAttribute="bottom" id="Wtw-QU-7bZ"/>
+                <constraint firstItem="REJ-Dy-FhT" firstAttribute="leading" secondItem="zyf-64-abh" secondAttribute="leading" id="qfS-b1-uRi"/>
+                <constraint firstItem="REJ-Dy-FhT" firstAttribute="top" secondItem="zyf-64-abh" secondAttribute="top" id="wqG-Fe-Rse"/>
+                <constraint firstItem="Dgl-Tg-j8R" firstAttribute="top" secondItem="REJ-Dy-FhT" secondAttribute="bottom" id="y0B-TG-u3w"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+            <point key="canvasLocation" x="210" y="250"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="navLogo.png" width="123" height="33"/>
+        <image name="notificationback.png" width="44" height="47"/>
+    </resources>
+</document>

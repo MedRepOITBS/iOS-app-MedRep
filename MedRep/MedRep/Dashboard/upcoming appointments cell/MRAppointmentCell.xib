@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="KGk-i7-Jjw" customClass="MRAppointmentCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ICg-te-wgY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fWx-W9-gPt">
+                                <rect key="frame" x="10" y="0.0" width="255" height="30"/>
+                                <animations/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="3ej-vr-oy1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="03" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="92H-4v-wgx">
+                                <rect key="frame" x="267" y="35" width="50" height="25"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="TQr-jP-iL2"/>
+                                    <constraint firstAttribute="height" constant="25" id="zUj-uM-VHY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <color key="textColor" red="0.0" green="0.47450980390000003" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AUG" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a4l-vm-1tl">
+                                <rect key="frame" x="267" y="0.0" width="50" height="30"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="IwU-E0-n3h"/>
+                                    <constraint firstAttribute="width" constant="50" id="abg-LO-bJ0"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Peracetmol, Ranbaxy" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="omL-AK-WdU">
+                                <rect key="frame" x="10" y="30" width="255" height="30"/>
+                                <animations/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Rc1-OR-t5y"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="92H-4v-wgx" secondAttribute="trailing" constant="3" id="4eS-4g-Q4X"/>
+                            <constraint firstItem="omL-AK-WdU" firstAttribute="bottom" secondItem="92H-4v-wgx" secondAttribute="bottom" id="5wm-RU-OVf"/>
+                            <constraint firstItem="omL-AK-WdU" firstAttribute="leading" secondItem="ICg-te-wgY" secondAttribute="leading" constant="10" id="AUp-bp-CXL"/>
+                            <constraint firstItem="omL-AK-WdU" firstAttribute="top" secondItem="fWx-W9-gPt" secondAttribute="bottom" id="Dq8-DU-yGG"/>
+                            <constraint firstItem="fWx-W9-gPt" firstAttribute="leading" secondItem="ICg-te-wgY" secondAttribute="leading" constant="10" id="PcW-SO-pIP"/>
+                            <constraint firstItem="a4l-vm-1tl" firstAttribute="top" secondItem="ICg-te-wgY" secondAttribute="top" id="Py9-SR-37F"/>
+                            <constraint firstAttribute="bottom" secondItem="92H-4v-wgx" secondAttribute="bottom" id="QXp-29-1BV"/>
+                            <constraint firstItem="a4l-vm-1tl" firstAttribute="leading" secondItem="fWx-W9-gPt" secondAttribute="trailing" constant="2" id="bRo-fE-iQP"/>
+                            <constraint firstItem="fWx-W9-gPt" firstAttribute="top" secondItem="ICg-te-wgY" secondAttribute="top" id="jVH-44-o2g"/>
+                            <constraint firstAttribute="trailing" secondItem="a4l-vm-1tl" secondAttribute="trailing" constant="3" id="kzU-fh-o1t"/>
+                            <constraint firstItem="92H-4v-wgx" firstAttribute="leading" secondItem="omL-AK-WdU" secondAttribute="trailing" constant="2" id="oAO-ah-0A7"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <animations/>
+                <constraints>
+                    <constraint firstItem="ICg-te-wgY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Lyk-k4-ofH"/>
+                    <constraint firstAttribute="trailing" secondItem="ICg-te-wgY" secondAttribute="trailing" id="MRB-EO-pLE"/>
+                    <constraint firstAttribute="centerY" secondItem="ICg-te-wgY" secondAttribute="centerY" id="dQ4-ba-Kjh"/>
+                </constraints>
+            </tableViewCellContentView>
+            <animations/>
+            <connections>
+                <outlet property="appointmentDescription" destination="omL-AK-WdU" id="s78-CU-bft"/>
+                <outlet property="appointmentMonth" destination="a4l-vm-1tl" id="ZGa-OU-bgl"/>
+                <outlet property="appointmentName" destination="fWx-W9-gPt" id="4Jc-Q0-BzJ"/>
+                <outlet property="appointmnetDate" destination="92H-4v-wgx" id="K7K-A8-bfR"/>
+            </connections>
+            <point key="canvasLocation" x="279" y="216"/>
+        </tableViewCell>
+    </objects>
+</document>

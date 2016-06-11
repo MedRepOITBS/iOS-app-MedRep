@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="MRRegHeaderView">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="40"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ADD MOBILE NUMBER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="0V3-fC-MSI">
+                    <rect key="frame" x="30" y="0.0" width="470" height="25"/>
+                    <animations/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="25" id="j6S-i9-tf1"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView hidden="YES" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="picklocation.png" translatesAutoresizingMaskIntoConstraints="NO" id="Qjo-sD-iBe">
+                    <rect key="frame" x="500" y="0.0" width="90" height="30"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="awx-fG-GeZ"/>
+                        <constraint firstAttribute="width" constant="90" id="oKU-ZI-3Yo"/>
+                    </constraints>
+                </imageView>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="addicon.png" translatesAutoresizingMaskIntoConstraints="NO" id="7AS-4x-6Og">
+                    <rect key="frame" x="0.0" y="3" width="20" height="20"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="WNl-pF-iOt"/>
+                        <constraint firstAttribute="width" constant="20" id="xfh-mm-hbe"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eXK-uo-2Ue">
+                    <rect key="frame" x="0.0" y="0.0" width="460" height="40"/>
+                    <animations/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Ymp-ZP-3Kn"/>
+                    </constraints>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="addButtonAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="P2d-qK-uJP"/>
+                    </connections>
+                </button>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ihr-en-2Vp">
+                    <rect key="frame" x="460" y="0.0" width="140" height="40"/>
+                    <animations/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Fcn-C2-8EK"/>
+                        <constraint firstAttribute="width" constant="140" id="iMa-wp-slz"/>
+                    </constraints>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="pickLocationButtonAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="3OI-uv-eYR"/>
+                    </connections>
+                </button>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Ihr-en-2Vp" secondAttribute="trailing" id="8IH-mA-tMq"/>
+                <constraint firstAttribute="trailing" secondItem="Qjo-sD-iBe" secondAttribute="trailing" constant="10" id="8iv-Gz-M5V"/>
+                <constraint firstItem="Qjo-sD-iBe" firstAttribute="leading" secondItem="0V3-fC-MSI" secondAttribute="trailing" id="EeF-ie-VjD"/>
+                <constraint firstItem="eXK-uo-2Ue" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="KBm-yd-lhE"/>
+                <constraint firstItem="7AS-4x-6Og" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="3" id="Nub-nC-DRw"/>
+                <constraint firstItem="Qjo-sD-iBe" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="R2o-Fq-jBr"/>
+                <constraint firstItem="0V3-fC-MSI" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="TAH-lj-5sP"/>
+                <constraint firstItem="0V3-fC-MSI" firstAttribute="leading" secondItem="7AS-4x-6Og" secondAttribute="trailing" constant="10" id="TWN-mk-BIL"/>
+                <constraint firstItem="7AS-4x-6Og" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="UXZ-e7-DUQ"/>
+                <constraint firstItem="Ihr-en-2Vp" firstAttribute="leading" secondItem="eXK-uo-2Ue" secondAttribute="trailing" id="nmQ-RC-jhi"/>
+                <constraint firstItem="eXK-uo-2Ue" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="uWA-3i-OGL"/>
+                <constraint firstItem="Ihr-en-2Vp" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="xXc-Rm-spA"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="addButton" destination="eXK-uo-2Ue" id="K5M-Cp-m01"/>
+                <outlet property="addIconImage" destination="7AS-4x-6Og" id="DL4-pH-hWZ"/>
+                <outlet property="addLabel" destination="0V3-fC-MSI" id="5r2-gf-oEO"/>
+                <outlet property="pickLocationButton" destination="Ihr-en-2Vp" id="k9r-Hb-mbP"/>
+                <outlet property="pickLocationButtonWidthConstraint" destination="iMa-wp-slz" id="n7p-gP-Jsb"/>
+                <outlet property="pickLocationImage" destination="Qjo-sD-iBe" id="dVj-6p-uQP"/>
+                <outlet property="pickLocationImageWidthConstraint" destination="oKU-ZI-3Yo" id="juT-g1-35j"/>
+            </connections>
+            <point key="canvasLocation" x="189" y="448"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="addicon.png" width="25" height="25"/>
+        <image name="picklocation.png" width="90" height="30"/>
+    </resources>
+</document>

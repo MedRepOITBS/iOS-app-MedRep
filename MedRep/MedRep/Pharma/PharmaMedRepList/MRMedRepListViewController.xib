@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MRMedRepListViewController">
+            <connections>
+                <outlet property="backButton" destination="kwG-1h-vFG" id="rlr-jq-4KC"/>
+                <outlet property="companyImage" destination="sfF-kt-pjg" id="NOs-9m-gBm"/>
+                <outlet property="navView" destination="ah2-nS-W5v" id="qtQ-j4-LPA"/>
+                <outlet property="pcTableView" destination="IET-RK-cQI" id="otv-un-B34"/>
+                <outlet property="titlelabel" destination="WNt-v6-hsW" id="QzW-fk-sND"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tSe-uw-2NA" userLabel="Title View">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WNt-v6-hsW">
+                            <rect key="frame" x="44" y="0.0" width="546" height="44"/>
+                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="noq-Bv-stO"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="notificationback.png" translatesAutoresizingMaskIntoConstraints="NO" id="rGa-wC-lq0">
+                            <rect key="frame" x="5" y="5" width="30" height="30"/>
+                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="sz3-DH-c7d"/>
+                                <constraint firstAttribute="height" constant="30" id="xPJ-P9-Qbn"/>
+                            </constraints>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kwG-1h-vFG">
+                            <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="44" id="8T7-uB-iFg"/>
+                                <constraint firstAttribute="height" constant="44" id="cSH-mL-eOi"/>
+                            </constraints>
+                            <connections>
+                                <action selector="backButttonAction:" destination="-1" eventType="touchUpInside" id="q5t-Md-7cL"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <animations/>
+                    <color key="backgroundColor" red="0.18431372549019609" green="0.18431372549019609" blue="0.18431372549019609" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="rGa-wC-lq0" firstAttribute="leading" secondItem="tSe-uw-2NA" secondAttribute="leading" constant="5" id="93J-qD-jxB"/>
+                        <constraint firstItem="WNt-v6-hsW" firstAttribute="top" secondItem="tSe-uw-2NA" secondAttribute="top" id="9w3-n3-KgC"/>
+                        <constraint firstAttribute="trailing" secondItem="WNt-v6-hsW" secondAttribute="trailing" constant="10" id="FvL-mz-756"/>
+                        <constraint firstItem="kwG-1h-vFG" firstAttribute="top" secondItem="tSe-uw-2NA" secondAttribute="top" id="M56-lt-Ytx"/>
+                        <constraint firstItem="kwG-1h-vFG" firstAttribute="leading" secondItem="tSe-uw-2NA" secondAttribute="leading" id="NVj-ci-IQX"/>
+                        <constraint firstItem="WNt-v6-hsW" firstAttribute="leading" secondItem="tSe-uw-2NA" secondAttribute="leading" constant="44" id="TdA-Bj-Oen"/>
+                        <constraint firstAttribute="height" constant="44" id="Zha-WA-DHI"/>
+                        <constraint firstAttribute="bottom" secondItem="WNt-v6-hsW" secondAttribute="bottom" id="cct-3k-Ppz"/>
+                        <constraint firstAttribute="bottom" secondItem="kwG-1h-vFG" secondAttribute="bottom" id="vc8-yp-pQf"/>
+                        <constraint firstItem="rGa-wC-lq0" firstAttribute="top" secondItem="tSe-uw-2NA" secondAttribute="top" constant="5" id="yOV-QZ-hOZ"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3oT-YR-VMb" userLabel="Company View">
+                    <rect key="frame" x="0.0" y="44" width="600" height="126"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NDcompany1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Kjf-1T-9jF">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="126"/>
+                            <animations/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NDcomapny-logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="sfF-kt-pjg">
+                            <rect key="frame" x="50" y="0.0" width="500" height="126"/>
+                            <animations/>
+                        </imageView>
+                    </subviews>
+                    <animations/>
+                    <color key="backgroundColor" red="0.96078431369999995" green="0.19215686269999999" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="sfF-kt-pjg" firstAttribute="top" secondItem="3oT-YR-VMb" secondAttribute="top" id="3Ih-x3-kQi"/>
+                        <constraint firstItem="Kjf-1T-9jF" firstAttribute="top" secondItem="3oT-YR-VMb" secondAttribute="top" id="4El-VO-uAb"/>
+                        <constraint firstAttribute="trailing" secondItem="Kjf-1T-9jF" secondAttribute="trailing" id="4WG-HY-Zfk"/>
+                        <constraint firstItem="Kjf-1T-9jF" firstAttribute="leading" secondItem="3oT-YR-VMb" secondAttribute="leading" id="C0y-he-MmR"/>
+                        <constraint firstAttribute="bottom" secondItem="Kjf-1T-9jF" secondAttribute="bottom" id="K6H-gW-Rev"/>
+                        <constraint firstAttribute="height" constant="126" id="Kgg-qp-2ZS"/>
+                        <constraint firstAttribute="bottom" secondItem="sfF-kt-pjg" secondAttribute="bottom" id="QcK-lV-QxA"/>
+                        <constraint firstItem="sfF-kt-pjg" firstAttribute="leading" secondItem="3oT-YR-VMb" secondAttribute="leading" constant="50" id="aq0-kQ-YdU"/>
+                        <constraint firstAttribute="trailing" secondItem="sfF-kt-pjg" secondAttribute="trailing" constant="50" id="udk-k0-jOG"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="70" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="IET-RK-cQI">
+                    <rect key="frame" x="0.0" y="170" width="600" height="366"/>
+                    <animations/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="6pP-z6-EEv"/>
+                        <outlet property="delegate" destination="-1" id="2oj-2y-sDd"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="IET-RK-cQI" secondAttribute="trailing" id="0gz-sW-0Dj"/>
+                <constraint firstItem="IET-RK-cQI" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="5Cc-tb-zeT"/>
+                <constraint firstAttribute="trailing" secondItem="3oT-YR-VMb" secondAttribute="trailing" id="5Kj-ql-Efv"/>
+                <constraint firstItem="tSe-uw-2NA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="fEF-om-3D7"/>
+                <constraint firstItem="3oT-YR-VMb" firstAttribute="top" secondItem="tSe-uw-2NA" secondAttribute="bottom" id="gLA-Id-KQK"/>
+                <constraint firstAttribute="bottom" secondItem="IET-RK-cQI" secondAttribute="bottom" id="kwm-sG-SQN"/>
+                <constraint firstAttribute="trailing" secondItem="tSe-uw-2NA" secondAttribute="trailing" id="l1f-Vu-oHb"/>
+                <constraint firstItem="tSe-uw-2NA" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="lGu-H2-bAb"/>
+                <constraint firstItem="IET-RK-cQI" firstAttribute="top" secondItem="3oT-YR-VMb" secondAttribute="bottom" id="lcc-vd-80s"/>
+                <constraint firstItem="3oT-YR-VMb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="xT4-mc-wqI"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+            <point key="canvasLocation" x="210" y="250"/>
+        </view>
+        <view contentMode="scaleToFill" id="ah2-nS-W5v">
+            <rect key="frame" x="0.0" y="0.0" width="123" height="33"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="navLogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="AaT-PZ-xGl">
+                    <rect key="frame" x="0.0" y="0.0" width="123" height="33"/>
+                    <animations/>
+                </imageView>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="87.5" y="291.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="NDcomapny-logo.png" width="115" height="76"/>
+        <image name="NDcompany1.jpg" width="320" height="106"/>
+        <image name="navLogo.png" width="123" height="33"/>
+        <image name="notificationback.png" width="44" height="47"/>
+    </resources>
+</document>

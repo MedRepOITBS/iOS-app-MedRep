@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="15B42" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="MRCompanyDetails" representedClassName="MRCompanyDetails" syncable="YES">
+        <attribute name="companyDesc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companyId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="companyName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contactName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contactNo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="displayPicture" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="location" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="MRNotifications" representedClassName="MRNotifications" syncable="YES">
+        <attribute name="companyId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="companyName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdBy" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdOn" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="externalRef" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="favNotification" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="feedback" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="fileList" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="notificationDesc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="notificationDetails" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="notificationId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="notificationName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="readNotification" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="therapeuticDropDownValues" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="therapeuticId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="therapeuticName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="totalConvertedToAppointment" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="totalPendingNotifcation" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="totalSentNotification" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="totalViewedNotifcation" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="typeId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="updatedBy" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updatedOn" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="validUpto" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="MRNotificationType" representedClassName="MRNotificationType" syncable="YES">
+        <attribute name="typeDesc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="typeId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="typeName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="MRRole" representedClassName="MRRole" syncable="YES">
+        <attribute name="authority" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="roleDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="roleId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="MRTherapeuticArea" representedClassName="MRTherapeuticArea" syncable="YES">
+        <attribute name="therapeuticDesc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="therapeuticId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="therapeuticName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="MRCompanyDetails" positionX="-18" positionY="27" width="128" height="165"/>
+        <element name="MRNotifications" positionX="-36" positionY="63" width="128" height="420"/>
+        <element name="MRNotificationType" positionX="-36" positionY="9" width="128" height="90"/>
+        <element name="MRRole" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="MRTherapeuticArea" positionX="-54" positionY="-9" width="128" height="90"/>
+    </elements>
+</model>

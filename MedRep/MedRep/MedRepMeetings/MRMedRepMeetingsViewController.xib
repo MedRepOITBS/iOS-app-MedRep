@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MRMedRepMeetingsViewController">
+            <connections>
+                <outlet property="backButton" destination="66P-Ty-S8Y" id="LYQ-59-hZC"/>
+                <outlet property="medrepMeetingsTableView" destination="6mk-q6-30z" id="Ly7-Zq-4MP"/>
+                <outlet property="navView" destination="kQA-pv-Zn9" id="lcC-Ue-cCD"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ObF-J7-Svd">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="40"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MedRep Meeting" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="3L5-gJ-qxH">
+                            <rect key="frame" x="81" y="0.0" width="465" height="40"/>
+                            <animations/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="meetings@3x.png" translatesAutoresizingMaskIntoConstraints="NO" id="i9U-83-mpG">
+                            <rect key="frame" x="560" y="5" width="29" height="29"/>
+                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="29" id="BMS-em-gBh"/>
+                                <constraint firstAttribute="width" constant="29" id="xSC-pw-Xye"/>
+                            </constraints>
+                        </imageView>
+                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="notificationback.png" translatesAutoresizingMaskIntoConstraints="NO" id="94W-rf-OOr">
+                            <rect key="frame" x="5" y="5" width="30" height="30"/>
+                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="XSR-Jc-zxv"/>
+                                <constraint firstAttribute="width" constant="30" id="zAt-53-rcZ"/>
+                            </constraints>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="66P-Ty-S8Y">
+                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="40" id="CHC-VI-wmu"/>
+                                <constraint firstAttribute="height" constant="40" id="tuA-mx-1gj"/>
+                            </constraints>
+                            <state key="normal">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="backButtonAction:" destination="-1" eventType="touchUpInside" id="NdV-PX-XLX"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <animations/>
+                    <color key="backgroundColor" red="0.1019607843" green="0.52156862749999999" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="i9U-83-mpG" secondAttribute="trailing" constant="11" id="6nv-TX-c1D"/>
+                        <constraint firstAttribute="centerY" secondItem="i9U-83-mpG" secondAttribute="centerY" id="AXF-3C-Oif"/>
+                        <constraint firstAttribute="bottom" secondItem="66P-Ty-S8Y" secondAttribute="bottom" id="CVG-nf-TRk"/>
+                        <constraint firstItem="94W-rf-OOr" firstAttribute="leading" secondItem="ObF-J7-Svd" secondAttribute="leading" constant="5" id="D9H-il-eko"/>
+                        <constraint firstItem="66P-Ty-S8Y" firstAttribute="top" secondItem="ObF-J7-Svd" secondAttribute="top" id="Lve-Xy-hMf"/>
+                        <constraint firstAttribute="trailing" secondItem="3L5-gJ-qxH" secondAttribute="trailing" constant="54" id="OVG-S4-aC4"/>
+                        <constraint firstItem="3L5-gJ-qxH" firstAttribute="leading" secondItem="ObF-J7-Svd" secondAttribute="leading" constant="81" id="TWX-jD-mNZ"/>
+                        <constraint firstAttribute="height" constant="40" id="VKk-OK-3Ug"/>
+                        <constraint firstItem="3L5-gJ-qxH" firstAttribute="top" secondItem="ObF-J7-Svd" secondAttribute="top" id="nBv-Ue-Lna"/>
+                        <constraint firstAttribute="bottom" secondItem="3L5-gJ-qxH" secondAttribute="bottom" id="ngA-0x-h3p"/>
+                        <constraint firstItem="94W-rf-OOr" firstAttribute="top" secondItem="ObF-J7-Svd" secondAttribute="top" constant="5" id="pps-UI-Z9m"/>
+                        <constraint firstItem="66P-Ty-S8Y" firstAttribute="leading" secondItem="ObF-J7-Svd" secondAttribute="leading" id="s6d-A3-LjP"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="70" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="6mk-q6-30z">
+                    <rect key="frame" x="0.0" y="40" width="600" height="560"/>
+                    <animations/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="eeG-Ap-lZI"/>
+                        <outlet property="delegate" destination="-1" id="zz2-Le-fmL"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="6mk-q6-30z" secondAttribute="bottom" id="Of3-kz-aqE"/>
+                <constraint firstAttribute="trailing" secondItem="ObF-J7-Svd" secondAttribute="trailing" id="SMK-QN-yX9"/>
+                <constraint firstItem="ObF-J7-Svd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Yln-zR-g1U"/>
+                <constraint firstItem="ObF-J7-Svd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="if0-UW-iws"/>
+                <constraint firstItem="6mk-q6-30z" firstAttribute="top" secondItem="ObF-J7-Svd" secondAttribute="bottom" id="n6R-Vm-obl"/>
+                <constraint firstItem="6mk-q6-30z" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="vGf-dL-j5F"/>
+                <constraint firstAttribute="trailing" secondItem="6mk-q6-30z" secondAttribute="trailing" id="zTs-1F-B8U"/>
+            </constraints>
+            <point key="canvasLocation" x="205" y="377"/>
+        </view>
+        <view contentMode="scaleToFill" id="kQA-pv-Zn9">
+            <rect key="frame" x="0.0" y="0.0" width="123" height="33"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="navLogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="Q3B-iA-bKB">
+                    <rect key="frame" x="0.0" y="0.0" width="123" height="33"/>
+                    <animations/>
+                </imageView>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="228.5" y="291.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="meetings@3x.png" width="99" height="100"/>
+        <image name="navLogo.png" width="123" height="33"/>
+        <image name="notificationback.png" width="44" height="47"/>
+    </resources>
+</document>

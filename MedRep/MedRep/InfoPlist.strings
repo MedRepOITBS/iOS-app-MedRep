@@ -1,0 +1,16 @@
+/* 
+  InfoPlist.strings
+  MedRep
+
+  Created by MedRep Developer on 10/08/15.
+  Copyright (c) 2015 MedRep. All rights reserved.
+*/
+
+"ALERT_OK"                                                      = "OK";
+"ALERT_CANCEL"                                                  = "Cancel";
+"ALERT_YES"                                                     = "YES";
+"ALERT_NO"                                                      = "NO";
+"NETWORK_ERROR_MSG"                                             = "You are not in WIFI range at present.";
+"NETWORK_ERROR_MESSAGE"                                         = "Network error. Internet access is required.";
+"NO_RESPONSE_MESSAGE"                                           = "There was no response from the server.";
+

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MRRegistationTwoViewController">
+            <connections>
+                <outlet property="addressViewHeader" destination="70f-JZ-icC" id="FN6-Or-UAf"/>
+                <outlet property="hospitalButton" destination="mDy-Zu-J8p" id="rGe-Xa-NBI"/>
+                <outlet property="nextButton" destination="sLF-yi-QCN" id="VUX-ai-PB6"/>
+                <outlet property="nextButtonBottomConstraint" destination="dbg-kX-WeW" id="HVG-QA-la9"/>
+                <outlet property="nextButtonBottomSpace" destination="dbg-kX-WeW" id="eLI-7Q-n0I"/>
+                <outlet property="nextButtonTopConstraint" destination="qnN-wo-3YI" id="ctK-zZ-rFs"/>
+                <outlet property="privateClinicButton" destination="DOG-hB-OnP" id="LEj-gU-y5D"/>
+                <outlet property="regTableView" destination="I6I-iv-zfA" id="ipE-z1-rNN"/>
+                <outlet property="tableviewTopConstarint" destination="f9s-Ao-FrV" id="Kgf-jx-jAE"/>
+                <outlet property="topClinicViewConstraint" destination="beR-iZ-gXI" id="rZO-6f-1JO"/>
+                <outlet property="view" destination="giJ-qi-IgN" id="EYA-Db-HvQ"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="giJ-qi-IgN">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="categoryBG-667h.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="1vb-qg-yXn">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                </imageView>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="HomeLogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="6JJ-QA-A83">
+                    <rect key="frame" x="180" y="30" width="239" height="57"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="57" id="Tt3-XC-hlx"/>
+                    </constraints>
+                </imageView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="I6I-iv-zfA">
+                    <rect key="frame" x="20" y="215" width="560" height="325"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="cFZ-Nr-b0e"/>
+                        <outlet property="delegate" destination="-1" id="CjF-2V-Apx"/>
+                    </connections>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sLF-yi-QCN">
+                    <rect key="frame" x="305" y="545" width="275" height="50"/>
+                    <color key="backgroundColor" red="0.078431372550000003" green="0.76470588240000004" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="Wtl-hi-gVh"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                    <state key="normal" title="NEXT">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="nextButtonAction:" destination="-1" eventType="touchUpInside" id="jcH-U9-G4l"/>
+                    </connections>
+                </button>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="stepTwo.png" translatesAutoresizingMaskIntoConstraints="NO" id="xHY-zA-Pv6">
+                    <rect key="frame" x="255" y="97" width="90" height="12"/>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="70f-JZ-icC">
+                    <rect key="frame" x="20" y="120" width="560" height="90"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ADDRESS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RhB-KI-efe">
+                            <rect key="frame" x="40" y="0.0" width="179" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="179" id="Kh5-QE-4e7"/>
+                                <constraint firstAttribute="height" constant="30" id="kGc-A6-kP7"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="addressPinIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="hDh-xK-YeY">
+                            <rect key="frame" x="10" y="0.0" width="20" height="26"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="26" id="bE7-6s-GFD"/>
+                                <constraint firstAttribute="width" constant="20" id="htr-Y0-mx0"/>
+                            </constraints>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mDy-Zu-J8p">
+                            <rect key="frame" x="0.0" y="30" width="280" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="60" id="IY3-k5-aIY"/>
+                            </constraints>
+                            <state key="normal" backgroundImage="hospital_selection.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="hospitalButtonAction:" destination="-1" eventType="touchUpInside" id="gWQ-Cr-gAi"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DOG-hB-OnP">
+                            <rect key="frame" x="280" y="30" width="280" height="60"/>
+                            <state key="normal" backgroundImage="privateHospital.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="privateButtonAction:" destination="-1" eventType="touchUpInside" id="Ufl-Ya-Qft"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="DOG-hB-OnP" firstAttribute="width" secondItem="mDy-Zu-J8p" secondAttribute="width" id="EyM-6C-qtO"/>
+                        <constraint firstItem="mDy-Zu-J8p" firstAttribute="leading" secondItem="70f-JZ-icC" secondAttribute="leading" id="JL9-Tb-PmX"/>
+                        <constraint firstItem="hDh-xK-YeY" firstAttribute="top" secondItem="70f-JZ-icC" secondAttribute="top" id="LBI-29-qpv"/>
+                        <constraint firstItem="DOG-hB-OnP" firstAttribute="leading" secondItem="mDy-Zu-J8p" secondAttribute="trailing" id="MIE-C3-gKB"/>
+                        <constraint firstAttribute="height" constant="90" id="Q7V-YS-fws"/>
+                        <constraint firstItem="RhB-KI-efe" firstAttribute="leading" secondItem="hDh-xK-YeY" secondAttribute="trailing" constant="10" id="T2D-Nj-GZr"/>
+                        <constraint firstItem="DOG-hB-OnP" firstAttribute="height" secondItem="mDy-Zu-J8p" secondAttribute="height" id="bh7-lA-je5"/>
+                        <constraint firstAttribute="trailing" secondItem="DOG-hB-OnP" secondAttribute="trailing" id="f3y-o6-0Ik"/>
+                        <constraint firstItem="DOG-hB-OnP" firstAttribute="top" secondItem="70f-JZ-icC" secondAttribute="top" constant="30" id="nTB-gy-CoB"/>
+                        <constraint firstItem="hDh-xK-YeY" firstAttribute="leading" secondItem="70f-JZ-icC" secondAttribute="leading" constant="10" id="nzU-gh-9EQ"/>
+                        <constraint firstItem="RhB-KI-efe" firstAttribute="top" secondItem="70f-JZ-icC" secondAttribute="top" id="reO-SO-A3M"/>
+                        <constraint firstItem="mDy-Zu-J8p" firstAttribute="top" secondItem="70f-JZ-icC" secondAttribute="top" constant="30" id="zBn-iH-P55"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IGI-OF-Yyx">
+                    <rect key="frame" x="20" y="545" width="275" height="50"/>
+                    <color key="backgroundColor" red="0.078431372550000003" green="0.76470588240000004" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="iL9-c7-jMM"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                    <state key="normal" title="BACK">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="backButtonAction:" destination="-1" eventType="touchUpInside" id="5Nm-Ry-aEt"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="xHY-zA-Pv6" firstAttribute="top" secondItem="giJ-qi-IgN" secondAttribute="top" constant="97" id="1KO-eO-xH4"/>
+                <constraint firstItem="1vb-qg-yXn" firstAttribute="leading" secondItem="giJ-qi-IgN" secondAttribute="leading" id="51s-r3-Lyi"/>
+                <constraint firstItem="I6I-iv-zfA" firstAttribute="leading" secondItem="giJ-qi-IgN" secondAttribute="leading" constant="20" id="6QC-9n-4tT"/>
+                <constraint firstItem="70f-JZ-icC" firstAttribute="leading" secondItem="giJ-qi-IgN" secondAttribute="leading" constant="20" id="CSx-c8-RAP"/>
+                <constraint firstItem="6JJ-QA-A83" firstAttribute="top" secondItem="giJ-qi-IgN" secondAttribute="top" constant="30" id="EHT-qB-wZC"/>
+                <constraint firstAttribute="trailing" secondItem="1vb-qg-yXn" secondAttribute="trailing" id="LN3-JP-cjR"/>
+                <constraint firstAttribute="trailing" secondItem="sLF-yi-QCN" secondAttribute="trailing" constant="20" id="LxX-dm-QH3"/>
+                <constraint firstAttribute="bottom" secondItem="1vb-qg-yXn" secondAttribute="bottom" id="OLC-uD-OQ3"/>
+                <constraint firstItem="sLF-yi-QCN" firstAttribute="width" secondItem="IGI-OF-Yyx" secondAttribute="width" id="U6M-Jb-9Kx"/>
+                <constraint firstItem="sLF-yi-QCN" firstAttribute="leading" secondItem="IGI-OF-Yyx" secondAttribute="trailing" constant="10" id="WD5-lW-Asn"/>
+                <constraint firstItem="sLF-yi-QCN" firstAttribute="bottom" secondItem="IGI-OF-Yyx" secondAttribute="bottom" id="X0u-5o-5ws"/>
+                <constraint firstItem="70f-JZ-icC" firstAttribute="top" secondItem="giJ-qi-IgN" secondAttribute="top" constant="120" id="beR-iZ-gXI"/>
+                <constraint firstAttribute="bottom" secondItem="sLF-yi-QCN" secondAttribute="bottom" constant="5" id="dbg-kX-WeW"/>
+                <constraint firstAttribute="trailing" secondItem="70f-JZ-icC" secondAttribute="trailing" constant="20" id="duz-MP-Pd2"/>
+                <constraint firstItem="I6I-iv-zfA" firstAttribute="top" secondItem="giJ-qi-IgN" secondAttribute="top" constant="215" id="f9s-Ao-FrV"/>
+                <constraint firstItem="sLF-yi-QCN" firstAttribute="top" secondItem="IGI-OF-Yyx" secondAttribute="top" id="gsa-BT-xQz"/>
+                <constraint firstAttribute="centerX" secondItem="6JJ-QA-A83" secondAttribute="centerX" id="lyJ-Kz-VDK"/>
+                <constraint firstAttribute="centerX" secondItem="xHY-zA-Pv6" secondAttribute="centerX" id="pwt-4U-EfJ"/>
+                <constraint firstItem="1vb-qg-yXn" firstAttribute="top" secondItem="giJ-qi-IgN" secondAttribute="top" id="q1w-Vb-Gpq"/>
+                <constraint firstItem="sLF-yi-QCN" firstAttribute="top" secondItem="I6I-iv-zfA" secondAttribute="bottom" constant="5" id="qnN-wo-3YI"/>
+                <constraint firstItem="IGI-OF-Yyx" firstAttribute="leading" secondItem="giJ-qi-IgN" secondAttribute="leading" constant="20" id="uV2-hJ-X5V"/>
+                <constraint firstAttribute="trailing" secondItem="I6I-iv-zfA" secondAttribute="trailing" constant="20" id="zyZ-7W-4M5"/>
+            </constraints>
+            <point key="canvasLocation" x="144" y="293"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="HomeLogo.png" width="239" height="57"/>
+        <image name="addressPinIcon.png" width="20" height="26"/>
+        <image name="categoryBG-667h.jpg" width="375" height="667"/>
+        <image name="hospital_selection.png" width="135" height="58"/>
+        <image name="privateHospital.png" width="150" height="58"/>
+        <image name="stepTwo.png" width="90" height="12"/>
+    </resources>
+</document>
