@@ -26,14 +26,14 @@
 - (IBAction)okButtonTapped:(id)sender;
 - (IBAction)cancelButtonTapped:(id)sender;
 -(void)setImageForShareImage:(UIImage *)image;
--(void)setData;
+-(void)setData:(NSIndexPath *)indexPath;
 @end
 
 @protocol CommonBoxViewDelegate <NSObject>
 @optional
 
 -(void)commonBoxCameraButtonTapped;
--(void)commonBoxOkButtonPressed;
+-(void)commonBoxOkButtonPressedWithData:(NSDictionary *)dictData withIndexPath:(NSIndexPath *)indexPath;
 -(void)commonBoxCancelButtonPressed;
 
 

@@ -23,7 +23,7 @@
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
-
+-(NSInteger)counterForChildPost;
 
 @end
 

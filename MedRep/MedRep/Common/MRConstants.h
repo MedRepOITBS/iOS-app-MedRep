@@ -27,6 +27,9 @@ typedef enum
     SORT_ORDER_DESCENDING
 } SORT_ORDER;
 
+
+#define APP_DELEGATE ((AppDelegate *)[UIApplication sharedApplication].delegate)
+
 #define kAppName                @"MedRep"
 
 #define MPLocalizedString(key)      [[NSBundle mainBundle] localizedStringForKey:(key) value:@"" table:@"InfoPlist"]

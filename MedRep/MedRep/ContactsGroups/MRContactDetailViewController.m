@@ -11,8 +11,14 @@
 #import "MRContactWithinGroupCollectionCellCollectionViewCell.h"
 #import "KLCPopup.h"
 #import "MRContact.h"
+#import "MRGroupPost.h"
 #import "MRGroup.h"
 #import "CommonBoxView.h"
+#import "AppDelegate.h"
+#import "MRDatabaseHelper.h"
+#import "MRConstants.h"
+#import "GroupPostChildTableViewCell.h"
+#import "MrGroupChildPost.h"
 @interface MRContactDetailViewController ()<MRGroupPostItemTableViewCellDelegate,CommonBoxViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView* mainImageView;
@@ -41,7 +47,7 @@
     
     // Do any additional setup after loading the view from its nib.
     [self.collectionView registerNib:[UINib nibWithNibName:@"MRContactWithinGroupCollectionCellCollectionViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"contactWithinGroupCell"];
-    [self.postsTableView registerNib:[UINib nibWithNibName:@"MRGroupPostItemTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"groupCell"];
+//    [self.postsTableView registerNib:[UINib nibWithNibName:@"MRGroupPostItemTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"groupCell"];
     self.postsTableView.estimatedRowHeight = 250;
     self.postsTableView.rowHeight = UITableViewAutomaticDimension;
     if (self.mainContact) {
@@ -55,6 +61,9 @@
         self.contactsUnderGroup = [self.mainGroup.contacts allObjects];
         self.posts = [self.mainGroup.groupPosts allObjects];
     }
+    
+    [self totalPosts];
+    [self.postsTableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -72,21 +81,112 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.posts.count;
+    return [self countForTableView];
+}
+
+-(void)totalPosts {
+   __block NSMutableArray *arra = [NSMutableArray array];
+    
+    [self.posts enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        MRGroupPost *postGroup = (MRGroupPost *)obj;
+        [arra addObject:postGroup];
+        if (postGroup.replyPost!=nil && postGroup.replyPost.count >0) {
+            
+            [postGroup.replyPost enumerateObjectsUsingBlock:^(MrGroupChildPost * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                [arra addObject:(MrGroupChildPost *)obj];
+                
+            }];
+        }
+        
+    }];
+    
+    self.posts = nil;
+    self.posts = [NSMutableArray arrayWithArray:arra] ;
+    
+    }
+-(NSInteger)countForTableView{
+
+    
+   return  self.posts.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    id postObject = [self.posts objectAtIndex:indexPath.row];
+    if ([postObject isKindOfClass:[MRGroupPost class]]) {
+        
+        return 260;
+    }else {
+        
+        MrGroupChildPost *childPost = (MrGroupChildPost *)postObject;
+        
+        if ([childPost.postPic isEqualToString:@""]) {
+            return 44;
+            
+        }else {
+            
+            return 182;
+        }
+       
+    }
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MRGroupPostItemTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"groupCell"];
-    cell.delegate = self;
-    [cell setPostContent:[self.posts objectAtIndex:indexPath.row]];
-    return cell;
+    
+    
+   
+    id postObject = [self.posts objectAtIndex:indexPath.row];
+    if ([postObject isKindOfClass:[MRGroupPost class]]) {
+        
+        MRGroupPostItemTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"groupCell"];
+    
+        if (cell == nil) {
+            NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"MRGroupPostItemTableViewCell" owner:self options:nil];
+            cell = (MRGroupPostItemTableViewCell *)[arr objectAtIndex:0];
+        }
+        
+        cell.delegate = self;
+        [cell setPostContent:[self.posts objectAtIndex:indexPath.row]];
+         return cell;
+    }else {
+    
+        GroupPostChildTableViewCell *cell  = [tableView dequeueReusableCellWithIdentifier:@"groupChildCell"];
+        if (cell == nil) {
+            NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"GroupPostChildTableViewCell" owner:self options:nil];
+            cell = (GroupPostChildTableViewCell *)[arr objectAtIndex:0];
+        }
+        MrGroupChildPost *childPost = (MrGroupChildPost *)postObject;
+        
+        if ([childPost.postPic isEqualToString:@""]) {
+           cell.heightConstraint.constant = 0;
+            cell.verticalContstraint.constant = 0;
+            [cell setNeedsUpdateConstraints];
+        }else {
+            NSString * imagePath = childPost.postPic;
+            
+            cell.commentPic.image = [UIImage imageWithData:[NSData dataWithContentsOfFile:imagePath]];
+            
+        }
+          cell.postText.text = childPost.postText;
+        return cell;
+        
+    }
+    
+    
+    return nil;
 }
 
 
 -(void)mrGroupPostItemTableViewCell:(MRGroupPostItemTableViewCell *)cell withCommentButtonTapped:(id)sender{
     [self setupCommentBox];
     //    [self.commentBoxKLCPopView show];
+    
+    NSIndexPath *indexPath = [self.postsTableView indexPathForCell:cell];
+    
+    
     [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutAboveCenter)];
+    
+    [_commentBoxView setData:indexPath];
 }
 
 -(void)setupCommentBox{
@@ -99,14 +199,44 @@
     self.commentBoxView.frame =     CGRectMake(self.commentBoxView.frame.origin.x, self.commentBoxView.frame.origin.y, 300,316);
     [self.commentBoxView setContact:self.mainContact];
     [self.commentBoxView setGroup:self.mainGroup];
-    [self.commentBoxView setData];
-    
     _commentBoxKLCPopView = [KLCPopup popupWithContentView:self.commentBoxView];
     
     
 }
 -(void)commonBoxCameraButtonTapped{
     [self takePhoto];
+    
+}
+-(void)commonBoxOkButtonPressedWithData:(NSDictionary *)dictData withIndexPath:(NSIndexPath *)indexPath{
+    
+    [_commentBoxKLCPopView dismiss:YES];
+    
+    MRGroupPost *post = [self.posts objectAtIndex:indexPath.row];
+    //obtaining saving path
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSInteger childPostCounter =[APP_DELEGATE counterForChildPost];
+    
+    NSString *postID = [NSString stringWithFormat:@"%lld_%ld",post.groupPostId,(long)childPostCounter];
+    
+    NSString *imagePath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",postID]];
+    NSDictionary *saveData;
+    //extracting image from the picker and saving it
+    if (![[dictData objectForKey:@"profile_pic"] isKindOfClass:[NSString class]]) {
+        UIImage *editedImage = [dictData objectForKey:@"profile_pic"];
+        NSData *webData = UIImagePNGRepresentation(editedImage);
+        [webData writeToFile:imagePath atomically:YES];
+       saveData = [NSDictionary dictionaryWithObjectsAndKeys:[dictData objectForKey:@"postText"],@"postText",imagePath,@"post_pic",postID,@"postID", nil];
+
+    }else {
+        saveData = [NSDictionary dictionaryWithObjectsAndKeys:[dictData objectForKey:@"postText"],@"postText",@"",@"post_pic",postID,@"postID", nil];
+        
+
+    }
+    
+
+    [MRDatabaseHelper addGroupChildPost:post withPostDict:saveData];
+    
     
 }
 
@@ -189,8 +319,6 @@
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
     [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutAboveCenter)];
-    
-    
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {

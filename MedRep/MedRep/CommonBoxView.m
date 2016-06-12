@@ -15,7 +15,8 @@
 @interface CommonBoxView()
 @property (strong, nonatomic) MRContact* mainContact;
 @property (strong, nonatomic) MRGroup* mainGroup;
-
+@property (nonatomic)BOOL isPhotoDone;
+@property (strong,nonatomic) NSIndexPath *cellIndexPath;
 @end
 @implementation CommonBoxView
 
@@ -43,6 +44,7 @@
 }
 -(void)setImageForShareImage:(UIImage *)image{
     _shareImageView.hidden = NO;
+    _isPhotoDone = YES;
     _shareImageView.image = image;
     [self setCameraElementVisibilty:YES];
 }
@@ -61,8 +63,9 @@
     }
     return self;
 }
--(void)setData{
+-(void)setData:(NSIndexPath *)indexPath{
     NSString *combinedTitle = @"";
+    _cellIndexPath = indexPath;
     
     if (self.mainGroup) {
         combinedTitle = self.mainGroup.name;
@@ -93,6 +96,20 @@
 
 - (IBAction)okButtonTapped:(id)sender {
 
+    if ([self.delegate respondsToSelector:@selector(commonBoxOkButtonPressedWithData:withIndexPath:)]){
+         NSDictionary *myDict;
+        if (!_isPhotoDone) {
+           myDict = [NSDictionary dictionaryWithObjectsAndKeys:@"",@"profile_pic",self.commentTextView.text,@"postText" ,nil];
+        }else{
+            myDict = [NSDictionary dictionaryWithObjectsAndKeys:self.shareImageView.image,@"profile_pic",self.commentTextView.text,@"postText" ,nil];
+        }
+      
+        
+        [self.delegate commonBoxOkButtonPressedWithData:myDict withIndexPath:_cellIndexPath];
+        
+    }
+  
+    
 }
 
 - (IBAction)cancelButtonTapped:(id)sender {

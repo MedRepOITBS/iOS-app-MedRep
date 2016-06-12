@@ -514,6 +514,10 @@
 		B41746DE1D0CD740009B7E7E /* MRGroupPost+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B41746DA1D0CD740009B7E7E /* MRGroupPost+CoreDataProperties.m */; };
 		B41746DF1D0CD740009B7E7E /* MRGroupPost.m in Sources */ = {isa = PBXBuildFile; fileRef = B41746DC1D0CD740009B7E7E /* MRGroupPost.m */; };
 		B41746E01D0CD740009B7E7E /* MRGroupPost.m in Sources */ = {isa = PBXBuildFile; fileRef = B41746DC1D0CD740009B7E7E /* MRGroupPost.m */; };
+		B41746E41D0CE628009B7E7E /* GroupPostChildTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B41746E21D0CE628009B7E7E /* GroupPostChildTableViewCell.m */; };
+		B41746E51D0CE628009B7E7E /* GroupPostChildTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B41746E21D0CE628009B7E7E /* GroupPostChildTableViewCell.m */; };
+		B41746E61D0CE628009B7E7E /* GroupPostChildTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B41746E31D0CE628009B7E7E /* GroupPostChildTableViewCell.xib */; };
+		B41746E71D0CE628009B7E7E /* GroupPostChildTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B41746E31D0CE628009B7E7E /* GroupPostChildTableViewCell.xib */; };
 		CC7DB0221D0C8BEC007DFE4C /* MRAppointmentListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79169E241BEBE70500C11D13 /* MRAppointmentListViewController.m */; };
 		CC7DB0231D0C8BEC007DFE4C /* MRCompaignsDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7930A3921BB9153A003112E4 /* MRCompaignsDetailsViewController.m */; };
 		CC7DB0241D0C8BEC007DFE4C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B7820E1B7919EA0070645C /* Reachability.m */; };
@@ -1764,6 +1768,9 @@
 		B41746DA1D0CD740009B7E7E /* MRGroupPost+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MRGroupPost+CoreDataProperties.m"; sourceTree = "<group>"; };
 		B41746DB1D0CD740009B7E7E /* MRGroupPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRGroupPost.h; sourceTree = "<group>"; };
 		B41746DC1D0CD740009B7E7E /* MRGroupPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRGroupPost.m; sourceTree = "<group>"; };
+		B41746E11D0CE628009B7E7E /* GroupPostChildTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupPostChildTableViewCell.h; sourceTree = "<group>"; };
+		B41746E21D0CE628009B7E7E /* GroupPostChildTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupPostChildTableViewCell.m; sourceTree = "<group>"; };
+		B41746E31D0CE628009B7E7E /* GroupPostChildTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupPostChildTableViewCell.xib; sourceTree = "<group>"; };
 		CC7DB2161D0C8BEC007DFE4C /* MedRepDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MedRepDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC7DB2171D0C8BEC007DFE4C /* MedRep copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MedRep copy-Info.plist"; path = "/Users/vkatra/Documents/Vamsi_Backup/Personal/DoctorPlus/GitHub/develop/iOS-app-MedRep/MedRep/MedRep copy-Info.plist"; sourceTree = "<absolute>"; };
 		CC7DB2181D0C8C46007DFE4C /* MRDevEnvironmentConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRDevEnvironmentConfig.h; sourceTree = "<group>"; };
@@ -3268,6 +3275,9 @@
 				CC7DB2BA1D0CC433007DFE4C /* suggested_contacts.json */,
 				CC7DB2BB1D0CC433007DFE4C /* UIPopoverController+iPhone.h */,
 				CC7DB2BC1D0CC433007DFE4C /* UIPopoverController+iPhone.m */,
+				B41746E11D0CE628009B7E7E /* GroupPostChildTableViewCell.h */,
+				B41746E21D0CE628009B7E7E /* GroupPostChildTableViewCell.m */,
+				B41746E31D0CE628009B7E7E /* GroupPostChildTableViewCell.xib */,
 			);
 			path = ContactsGroups;
 			sourceTree = "<group>";
@@ -3769,6 +3779,7 @@
 				79F0749A1BBF16970049FDE7 /* favoriteSelected@2x.png in Resources */,
 				79F416A51B9F6E560089729B /* cncompany3@3x.jpg in Resources */,
 				CC7DB2771D0C9E15007DFE4C /* MRTransformDetailViewController.xib in Resources */,
+				B41746E61D0CE628009B7E7E /* GroupPostChildTableViewCell.xib in Resources */,
 				79539E9B1B90941D001516C3 /* MRMenuViewController.xib in Resources */,
 				79708AAB1BB73C67007CE81D /* PHthera@2x.png in Resources */,
 				7961A97E1B8F53C60035D63A /* camara-icon@3x.png in Resources */,
@@ -3978,6 +3989,7 @@
 				CC7DB0CF1D0C8BEC007DFE4C /* readnotification3@3x.jpg in Resources */,
 				CC7DB0D01D0C8BEC007DFE4C /* ViewController.xib in Resources */,
 				CC7DB0D11D0C8BEC007DFE4C /* crthera@3x.png in Resources */,
+				B41746E71D0CE628009B7E7E /* GroupPostChildTableViewCell.xib in Resources */,
 				CC7DB0D21D0C8BEC007DFE4C /* surveys_dashboard@3x.png in Resources */,
 				CC7DB27F1D0C9E20007DFE4C /* MRTransformViewController.xib in Resources */,
 				CC7DB0D31D0C8BEC007DFE4C /* MRDashBoardVC_iPhone6Plus.xib in Resources */,
@@ -4403,6 +4415,7 @@
 				7950AF241BBF91D700A93106 /* MRSurveyDetailsViewController.m in Sources */,
 				79F84B141BE92CB70081613A /* MRMedRepDetailsViewController.m in Sources */,
 				CC7DB2C51D0CC433007DFE4C /* MRCollectionView.m in Sources */,
+				B41746E41D0CE628009B7E7E /* GroupPostChildTableViewCell.m in Sources */,
 				79BD27DC1B809FD1007CA448 /* MRLoginViewController.m in Sources */,
 				79F29A701BE6330300063DC2 /* MRDoctorActivityScoreViewController.m in Sources */,
 				79FFD24F1BB9B83700CEE606 /* MRRegistrationRoleViewController.m in Sources */,
@@ -4522,6 +4535,7 @@
 				CC7DB02B1D0C8BEC007DFE4C /* MRFeedBackResultCell.m in Sources */,
 				CC7DB02C1D0C8BEC007DFE4C /* MPAppointmentViewController.m in Sources */,
 				CC7DB2C41D0CC433007DFE4C /* PieView.m in Sources */,
+				B41746E51D0CE628009B7E7E /* GroupPostChildTableViewCell.m in Sources */,
 				CC7DB02D1D0C8BEC007DFE4C /* MRMedRepListTableCell.m in Sources */,
 				CC7DB02E1D0C8BEC007DFE4C /* MRProfileDetailsViewController.m in Sources */,
 				B41746D01D0CD5CE009B7E7E /* KLCPopup.m in Sources */,

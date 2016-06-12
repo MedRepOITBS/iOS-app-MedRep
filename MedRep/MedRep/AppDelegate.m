@@ -13,7 +13,7 @@
 #import "MRLocationManager.h"
 
 @interface AppDelegate ()
-
+@property (nonatomic) NSInteger counterChildPost;
 @end
 
 @implementation AppDelegate
@@ -35,9 +35,14 @@
     self.window.backgroundColor = [UIColor whiteColor];
    // [self registerForNotification];
     [self.window makeKeyAndVisible];
+    _counterChildPost = 1000;
     return YES;
 }
+-(NSInteger)counterForChildPost{
+    
+    return _counterChildPost ++;
 
+}
 - (void)registerForNotification
 {
     if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)])
