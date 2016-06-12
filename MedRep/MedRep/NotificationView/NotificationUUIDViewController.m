@@ -10,7 +10,7 @@
 #import "MRAppControl.h"
 
 @interface NotificationUUIDViewController ()
-@property (weak, nonatomic) IBOutlet UILabel *uuidLabel;
+@property (weak, nonatomic) IBOutlet UITextView *uuidLabel;
 
 @end
 
