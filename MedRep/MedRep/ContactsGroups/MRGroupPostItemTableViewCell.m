@@ -25,13 +25,37 @@
 
 @implementation MRGroupPostItemTableViewCell
 
+
+-(IBAction)likeButtonTapped:(id)sender{
+    
+    NSInteger likeCount = [_shareCountLabel.text integerValue];
+    
+    likeCount = likeCount +1;
+    
+    _shareCountLabel.text = [NSString stringWithFormat:@"%ld",(long)likeCount];
+    
+}
+
+-(IBAction)shareButtonTapped:(id)sender{
+    
+}
+
+-(IBAction)commentButtonTapped:(id)sender{
+    
+    if([self.delegate respondsToSelector:@selector(mrGroupPostItemTableViewCell:withCommentButtonTapped:)]){
+        [self.delegate mrGroupPostItemTableViewCell:self withCommentButtonTapped:sender];
+        
+    }
+    
+    
+}
 - (void)awakeFromNib {
     // Initialization code
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 

@@ -11,7 +11,7 @@
 @class MRContact;
 @class MRGroup;
 
-@interface MRContactDetailViewController : UIViewController
+@interface MRContactDetailViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 - (void)setContact:(MRContact*)contact;
 - (void)setGroup:(MRGroup*)group;

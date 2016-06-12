@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1808" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="groupChildCell" rowHeight="182" id="KGk-i7-Jjw" customClass="GroupPostChildTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="364" height="182"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="364" height="181.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fFT-jG-kpf">
+                        <rect key="frame" x="76" y="0.0" width="288" height="106"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="288" id="EJ1-pl-xdv"/>
+                            <constraint firstAttribute="height" constant="106" id="kjO-Rv-Ohb"/>
+                        </constraints>
+                    </imageView>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Hola" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="raE-tX-42r">
+                        <rect key="frame" x="76" y="102" width="288" height="71.5"/>
+                        <color key="backgroundColor" red="0.91372549020000005" green="0.95686274510000002" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="71.5" id="XUd-0S-mbu"/>
+                            <constraint firstAttribute="width" constant="288" id="d49-oj-Uvq"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-MediumItalic" family="Helvetica Neue" pointSize="12"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        <connections>
+                            <outlet property="delegate" destination="KGk-i7-Jjw" id="3D5-7G-hJq"/>
+                        </connections>
+                    </textView>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="raE-tX-42r" secondAttribute="trailing" constant="-8" id="Dtz-at-3uf"/>
+                    <constraint firstItem="raE-tX-42r" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="68" id="Ffi-he-c7M"/>
+                    <constraint firstItem="fFT-jG-kpf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="68" id="iMT-sD-lDW"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="fFT-jG-kpf" secondAttribute="trailing" constant="-8" id="qLR-ap-sjg"/>
+                    <constraint firstItem="fFT-jG-kpf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="utS-RP-O2S"/>
+                    <constraint firstItem="raE-tX-42r" firstAttribute="top" secondItem="fFT-jG-kpf" secondAttribute="bottom" constant="-4" id="ysI-Id-n26"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="commentPic" destination="fFT-jG-kpf" id="dAs-CT-Rof"/>
+                <outlet property="heightConstraint" destination="kjO-Rv-Ohb" id="PEW-gy-seI"/>
+                <outlet property="postText" destination="raE-tX-42r" id="AZ0-qO-JR8"/>
+                <outlet property="verticalContstraint" destination="ysI-Id-n26" id="Qvv-bi-i5Y"/>
+            </connections>
+            <point key="canvasLocation" x="285" y="402"/>
+        </tableViewCell>
+    </objects>
+</document>

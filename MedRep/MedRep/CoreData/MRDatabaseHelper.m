@@ -17,8 +17,8 @@
 #import "MRSuggestedContact.h"
 #import "MRGroup.h"
 #import "MRGroupPost.h"
-
-
+#import "MrGroupChildPost.h"
+#import "AppDelegate.h"
 static MRDatabaseHelper *sharedDataManager = nil;
 
 @implementation MRDatabaseHelper
@@ -72,6 +72,19 @@ static MRDatabaseHelper *sharedDataManager = nil;
         group.name = [myDict objectForKey:@"name"];
         group.groupPicture = [myDict objectForKey:@"groupPicture"];
     }
+    [[MRDataManger sharedManager] saveContext];
+}
++ (void)addGroupChildPost:(MRGroupPost*)post withPostDict:(NSDictionary *)myDict{
+   
+        MrGroupChildPost *postChild  = (MrGroupChildPost*)[[MRDataManger sharedManager] createObjectForEntity:kGroupChildPostEntity];
+    
+    
+        postChild.postId = [myDict objectForKey:@"postID"];
+        postChild.postPic = [myDict objectForKey:@"post_pic"];
+        postChild.postText = [myDict objectForKey:@"postText"];
+    
+    [post addReplyPostObject:postChild];
+    
     [[MRDataManger sharedManager] saveContext];
 }
 

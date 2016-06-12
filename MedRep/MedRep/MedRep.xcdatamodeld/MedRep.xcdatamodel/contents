@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="15B42" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="14F1808" minimumToolsVersion="Automatic">
     <entity name="MRCompanyDetails" representedClassName="MRCompanyDetails" syncable="YES">
         <attribute name="companyDesc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="companyId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -25,6 +25,11 @@
         <relationship name="contacts" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="MRContact" inverseName="groups" inverseEntity="MRContact" syncable="YES"/>
         <relationship name="groupPosts" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="MRGroupPost" inverseName="group" inverseEntity="MRGroupPost" syncable="YES"/>
     </entity>
+    <entity name="MrGroupChildPost" representedClassName="MrGroupChildPost" syncable="YES">
+        <attribute name="postId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="postPic" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="postText" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="MRGroupPost" representedClassName="MRGroupPost" syncable="YES">
         <attribute name="groupPostId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="numberOfComments" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -34,6 +39,7 @@
         <attribute name="postText" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="contact" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="MRContact" inverseName="groupPosts" inverseEntity="MRContact" syncable="YES"/>
         <relationship name="group" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="MRGroup" inverseName="groupPosts" inverseEntity="MRGroup" syncable="YES"/>
+        <relationship name="replyPost" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="MrGroupChildPost" syncable="YES"/>
     </entity>
     <entity name="MRNotifications" representedClassName="MRNotifications" syncable="YES">
         <attribute name="companyId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -86,13 +92,14 @@
     </entity>
     <elements>
         <element name="MRCompanyDetails" positionX="-18" positionY="27" width="128" height="165"/>
+        <element name="MRContact" positionX="-36" positionY="135" width="128" height="135"/>
+        <element name="MRGroup" positionX="-27" positionY="144" width="128" height="120"/>
+        <element name="MRGroupPost" positionX="-18" positionY="153" width="128" height="180"/>
         <element name="MRNotifications" positionX="-36" positionY="63" width="128" height="420"/>
         <element name="MRNotificationType" positionX="-36" positionY="9" width="128" height="90"/>
         <element name="MRRole" positionX="-63" positionY="-18" width="128" height="105"/>
-        <element name="MRTherapeuticArea" positionX="-54" positionY="-9" width="128" height="90"/>
-        <element name="MRContact" positionX="-36" positionY="135" width="128" height="135"/>
-        <element name="MRGroup" positionX="-27" positionY="144" width="128" height="120"/>
-        <element name="MRGroupPost" positionX="-18" positionY="153" width="128" height="165"/>
         <element name="MRSuggestedContact" positionX="-9" positionY="162" width="128" height="105"/>
+        <element name="MRTherapeuticArea" positionX="-54" positionY="-9" width="128" height="90"/>
+        <element name="MrGroupChildPost" positionX="-27" positionY="144" width="128" height="90"/>
     </elements>
 </model>

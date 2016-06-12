@@ -20,8 +20,9 @@
 #define kGroupEntity                @"MRGroup"
 #define kGroupPostEntity            @"MRGroupPost"
 #define kSuggestedContactEntity     @"MRSuggestedContact"
+#define kGroupChildPostEntity       @"MrGroupChildPost"
 
-
+@class MRGroupPost;
 @interface MRDatabaseHelper : NSObject
 {
     
@@ -74,5 +75,6 @@
            withNotificationsList:(void (^)(NSArray *fetchList))objectsListt;
 
 + (void)cleanDatabaseOnLogout;
++ (void)addGroupChildPost:(MRGroupPost*)post withPostDict:(NSDictionary *)myDict;
 
 @end

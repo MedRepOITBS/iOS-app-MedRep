@@ -17,6 +17,8 @@
 
 @property (nonatomic)  NotificationUUIDViewController *notificationViewController;
 
+@property (nonatomic) NSInteger counterChildPost;
+
 @end
 
 @implementation AppDelegate
@@ -38,11 +40,16 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    
-    
+
+    _counterChildPost = 1000;
+
     return YES;
 }
+-(NSInteger)counterForChildPost{
+    
+    return _counterChildPost ++;
 
+}
 - (void)registerForNotification
 {
     BOOL appRegisteredForAPNS = [[UIApplication sharedApplication] isRegisteredForRemoteNotifications];
