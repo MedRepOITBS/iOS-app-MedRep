@@ -188,7 +188,7 @@
 
     NSArray *location = [details objectOrNilForKey:@"locations"];
     
-    if (location.count > 0)
+    if (location != nil && location.count > 0)
     {
         NSMutableArray *array = [[NSMutableArray alloc] init];
         
@@ -238,8 +238,9 @@
 {
     [self.viewController.activityIndicator stopAnimating];
     [self applyFadeAnimation];
-    //[self loadHomeScreen];
+    [self loadHomeScreen];
     //[self loadPharmaDashboard];
+    /*
     if (nil == [MRDefaults objectForKey:kRefreshToken])
     {
         [self loadHomeScreen];
@@ -302,6 +303,7 @@
              }
          }];
     }
+    */
 }
 
 - (void)applyFadeAnimation

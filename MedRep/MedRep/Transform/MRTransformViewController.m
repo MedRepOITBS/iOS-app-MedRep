@@ -116,8 +116,8 @@
 }
 
 - (void)setButtonStates:(UIButton*) deactivate activateButton:(UIButton *)activate {
-    [deactivate setBackgroundColor:[UIColor colorWithRed:32/255.0 green:177/255.0 blue:138/255.0 alpha:1.0]];
-    [activate setBackgroundColor:[UIColor colorWithRed:32/255.0 green:150/255.0 blue:138/255.0 alpha:1.0]];
+    [activate setBackgroundColor:[UIColor colorWithRed:32/255.0 green:177/255.0 blue:138/255.0 alpha:1.0]];
+    [deactivate setBackgroundColor:[UIColor colorWithRed:32/255.0 green:150/255.0 blue:138/255.0 alpha:1.0]];
 }
 
 -(void)swipeHandler:(UISwipeGestureRecognizer *)recognizer {
@@ -183,9 +183,9 @@
 
 - (IBAction)share:(id)sender {
     [self sliderButtonTapped:nil];
-//    MRShareViewController *notiFicationViewController = [[MRShareViewController alloc] initWithNibName:@"MRShareViewController" bundle:nil];
+    MRShareViewController *notiFicationViewController = [[MRShareViewController alloc] initWithNibName:@"MRShareViewController" bundle:nil];
 //    //notiFicationViewController.selectedContent = [self.contentData objectAtIndex:indexPath.row];
-//    [self.navigationController pushViewController:notiFicationViewController animated:YES];
+    [self.navigationController pushViewController:notiFicationViewController animated:YES];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

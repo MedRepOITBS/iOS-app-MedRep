@@ -19,6 +19,7 @@
 #import "MRSurveyListViewController.h"
 #import "MRDoctorActivityScoreViewController.h"
 #import "MRTransformViewController.h"
+#import "MRDrugSearchViewController.h"
 
 @interface MRDashBoardVC () <UITableViewDataSource, UITableViewDelegate, SWRevealViewControllerDelegate>
 
@@ -49,13 +50,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.searchButton.alpha = 0.5f;
-    self.newsButon.alpha = 0.5;
-    
+    self.marketingCompaginsButton.alpha = 0.5;
     self.marketingCompaginsButton.enabled = NO;
-    self.searchButton.enabled = NO;
-    
-    self.searchImage.alpha =
     self.marketingCampImage.alpha = 0.4f;
     
     SWRevealViewController *revealController = [self revealViewController];
@@ -248,7 +244,8 @@
 
 - (IBAction)searchButtonAction:(id)sender
 {
-    //[MRCommon showAlert:kComingsoonMSG delegate:nil];
+    MRDrugSearchViewController *notiFicationViewController = [[MRDrugSearchViewController alloc] initWithNibName:@"MRDrugSearchViewController" bundle:nil];
+    [self.navigationController pushViewController:notiFicationViewController animated:YES];
 }
 
 - (IBAction)newsButtonAction:(id)sender

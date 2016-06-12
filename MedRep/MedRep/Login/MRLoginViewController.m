@@ -82,10 +82,27 @@
 
 - (IBAction)signinButtonAction:(id)sender
 {
+    [self.view endEditing:true];
+    
     if ([self validateFields])
     {
         [MRCommon showActivityIndicator:@"Processing..."];
+        
+        // vamsi, dummy
+        NSMutableDictionary *dict = [NSMutableDictionary new];
+        [dict setValue:@"Dinesh" forKey:@"firstName"];
+        [dict setValue:@"Reddy" forKey:@"lastName"];
+        [dict setValue:[NSNumber numberWithInteger:1] forKey:@"roleId"];
+        [dict setValue:@"1" forKey:@"therapeuticId"];
+        [dict setValue:[NSDictionary new] forKey:@"locations"];
+        
+        [MRCommon stopActivityIndicator];
+        [[MRAppControl sharedHelper] setUserDetails:dict];
+        [[MRAppControl sharedHelper] loadDashboardScreen];
+        return;
+        
         [[MRWebserviceHelper sharedWebServiceHelper] userLogin:self.emailTextField.text andPasword:self.passwordTxtField.text withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+            
             if (status)
             {
                 [MRCommon setLoginEmail:self.emailTextField.text];
@@ -150,6 +167,18 @@
                 NSArray *erros =  [details componentsSeparatedByString:@"-"];
                 if (erros.count > 0)
                 [MRCommon showAlert:[erros lastObject] delegate:nil];
+            } else {
+                // vamsi, dummy
+                NSMutableDictionary *dict = [NSMutableDictionary new];
+                [dict setValue:@"Dinesh" forKey:@"firstName"];
+                [dict setValue:@"Reddy" forKey:@"lastName"];
+                [dict setValue:[NSNumber numberWithInteger:1] forKey:@"roleId"];
+                [dict setValue:@"1" forKey:@"therapeuticId"];
+                [dict setValue:[NSDictionary new] forKey:@"locations"];
+                
+                [MRCommon stopActivityIndicator];
+                 [[MRAppControl sharedHelper] setUserDetails:dict];
+                         [[MRAppControl sharedHelper] loadDashboardScreen];
             }
         }];
     }
