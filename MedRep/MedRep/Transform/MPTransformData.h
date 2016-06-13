@@ -14,5 +14,6 @@
 @property NSString *title;
 @property NSString *shortDescription;
 @property NSString *detailDescription;
+@property NSString *source;
 
 @end

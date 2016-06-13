@@ -10,13 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MedRep/Transform/MRTransformViewController.m"
-            timestampString = "487376768.564611"
+            timestampString = "487546161.798995"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
-            landmarkName = "-eduTapped:"
-            landmarkType = "5">
+            startingLineNumber = "339"
+            endingLineNumber = "339">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

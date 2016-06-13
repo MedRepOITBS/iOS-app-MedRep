@@ -1030,14 +1030,10 @@
 		CC7DB2751D0C9E15007DFE4C /* MPTransformTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB26D1D0C9E15007DFE4C /* MPTransformTableViewCell.xib */; };
 		CC7DB2761D0C9E15007DFE4C /* MRTransformDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB26F1D0C9E15007DFE4C /* MRTransformDetailViewController.m */; };
 		CC7DB2771D0C9E15007DFE4C /* MRTransformDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB2701D0C9E15007DFE4C /* MRTransformDetailViewController.xib */; };
-		CC7DB2781D0C9E15007DFE4C /* MRTransformViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB2721D0C9E15007DFE4C /* MRTransformViewController.m */; };
-		CC7DB2791D0C9E15007DFE4C /* MRTransformViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB2731D0C9E15007DFE4C /* MRTransformViewController.xib */; };
 		CC7DB27A1D0C9E20007DFE4C /* MPTransformTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB26C1D0C9E15007DFE4C /* MPTransformTableViewCell.m */; };
 		CC7DB27B1D0C9E20007DFE4C /* MPTransformTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB26D1D0C9E15007DFE4C /* MPTransformTableViewCell.xib */; };
 		CC7DB27C1D0C9E20007DFE4C /* MRTransformDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB26F1D0C9E15007DFE4C /* MRTransformDetailViewController.m */; };
 		CC7DB27D1D0C9E20007DFE4C /* MRTransformDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB2701D0C9E15007DFE4C /* MRTransformDetailViewController.xib */; };
-		CC7DB27E1D0C9E20007DFE4C /* MRTransformViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB2721D0C9E15007DFE4C /* MRTransformViewController.m */; };
-		CC7DB27F1D0C9E20007DFE4C /* MRTransformViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB2731D0C9E15007DFE4C /* MRTransformViewController.xib */; };
 		CC7DB2841D0C9E75007DFE4C /* NotificationWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB2821D0C9E75007DFE4C /* NotificationWebViewController.m */; };
 		CC7DB2851D0C9E75007DFE4C /* NotificationWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB2831D0C9E75007DFE4C /* NotificationWebViewController.xib */; };
 		CC7DB2861D0C9E7B007DFE4C /* NotificationWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB2821D0C9E75007DFE4C /* NotificationWebViewController.m */; };
@@ -1166,6 +1162,14 @@
 		CC7DB3AD1D0CCA0D007DFE4C /* person.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3AB1D0CCA0D007DFE4C /* person.png */; };
 		CC7DB3AF1D0CCA96007DFE4C /* MRGroupTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3AE1D0CCA96007DFE4C /* MRGroupTableViewCell.xib */; };
 		CC7DB3B01D0CCA96007DFE4C /* MRGroupTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3AE1D0CCA96007DFE4C /* MRGroupTableViewCell.xib */; };
+		CC9BCEC11D0F2A3900702EBC /* MRTransformViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9BCEBF1D0F2A3900702EBC /* MRTransformViewController.m */; };
+		CC9BCEC21D0F2A3900702EBC /* MRTransformViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9BCEBF1D0F2A3900702EBC /* MRTransformViewController.m */; };
+		CC9BCEC31D0F2A3900702EBC /* MRTransformViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC9BCEC01D0F2A3900702EBC /* MRTransformViewController.xib */; };
+		CC9BCEC41D0F2A3900702EBC /* MRTransformViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC9BCEC01D0F2A3900702EBC /* MRTransformViewController.xib */; };
+		CC9BCEC81D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9BCEC61D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.m */; };
+		CC9BCEC91D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9BCEC61D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.m */; };
+		CC9BCECA1D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC9BCEC71D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.xib */; };
+		CC9BCECB1D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC9BCEC71D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1810,9 +1814,6 @@
 		CC7DB26E1D0C9E15007DFE4C /* MRTransformDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRTransformDetailViewController.h; sourceTree = "<group>"; };
 		CC7DB26F1D0C9E15007DFE4C /* MRTransformDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRTransformDetailViewController.m; sourceTree = "<group>"; };
 		CC7DB2701D0C9E15007DFE4C /* MRTransformDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRTransformDetailViewController.xib; sourceTree = "<group>"; };
-		CC7DB2711D0C9E15007DFE4C /* MRTransformViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRTransformViewController.h; sourceTree = "<group>"; };
-		CC7DB2721D0C9E15007DFE4C /* MRTransformViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRTransformViewController.m; sourceTree = "<group>"; };
-		CC7DB2731D0C9E15007DFE4C /* MRTransformViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRTransformViewController.xib; sourceTree = "<group>"; };
 		CC7DB2811D0C9E75007DFE4C /* NotificationWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationWebViewController.h; sourceTree = "<group>"; };
 		CC7DB2821D0C9E75007DFE4C /* NotificationWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationWebViewController.m; sourceTree = "<group>"; };
 		CC7DB2831D0C9E75007DFE4C /* NotificationWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationWebViewController.xib; sourceTree = "<group>"; };
@@ -1926,6 +1927,12 @@
 		CC7DB3A81D0CC994007DFE4C /* MRGroupTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRGroupTableViewCell.m; sourceTree = "<group>"; };
 		CC7DB3AB1D0CCA0D007DFE4C /* person.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = person.png; sourceTree = "<group>"; };
 		CC7DB3AE1D0CCA96007DFE4C /* MRGroupTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRGroupTableViewCell.xib; sourceTree = "<group>"; };
+		CC9BCEBE1D0F2A3900702EBC /* MRTransformViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRTransformViewController.h; sourceTree = "<group>"; };
+		CC9BCEBF1D0F2A3900702EBC /* MRTransformViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRTransformViewController.m; sourceTree = "<group>"; };
+		CC9BCEC01D0F2A3900702EBC /* MRTransformViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRTransformViewController.xib; sourceTree = "<group>"; };
+		CC9BCEC51D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRTransformTitleCollectionViewCell.h; sourceTree = "<group>"; };
+		CC9BCEC61D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRTransformTitleCollectionViewCell.m; sourceTree = "<group>"; };
+		CC9BCEC71D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRTransformTitleCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3273,11 +3280,14 @@
 				CC7DB26E1D0C9E15007DFE4C /* MRTransformDetailViewController.h */,
 				CC7DB26F1D0C9E15007DFE4C /* MRTransformDetailViewController.m */,
 				CC7DB2701D0C9E15007DFE4C /* MRTransformDetailViewController.xib */,
-				CC7DB2711D0C9E15007DFE4C /* MRTransformViewController.h */,
-				CC7DB2721D0C9E15007DFE4C /* MRTransformViewController.m */,
-				CC7DB2731D0C9E15007DFE4C /* MRTransformViewController.xib */,
 				CC7DB2901D0CA2D0007DFE4C /* MPTransformData.h */,
 				CC7DB2911D0CA2D0007DFE4C /* MPTransformData.m */,
+				CC9BCEBE1D0F2A3900702EBC /* MRTransformViewController.h */,
+				CC9BCEBF1D0F2A3900702EBC /* MRTransformViewController.m */,
+				CC9BCEC01D0F2A3900702EBC /* MRTransformViewController.xib */,
+				CC9BCEC51D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.h */,
+				CC9BCEC61D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.m */,
+				CC9BCEC71D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.xib */,
 			);
 			path = Transform;
 			sourceTree = "<group>";
@@ -3598,6 +3608,7 @@
 				79A5DC781BA2092E001D872C /* crgreyup-arrow@3x.png in Resources */,
 				79708AA11BB73C67007CE81D /* PHdoctor@3x.png in Resources */,
 				79BD27F51B80A8C3007CA448 /* password@2x.png in Resources */,
+				CC9BCEC31D0F2A3900702EBC /* MRTransformViewController.xib in Resources */,
 				79AC945D1B9E0DA000B81452 /* NDcompany1@2x.jpg in Resources */,
 				79539E9E1B90C6AE001516C3 /* reveal-icon.png in Resources */,
 				793602E61BA35D6800BB85E6 /* readnotification3@2x.jpg in Resources */,
@@ -3617,7 +3628,6 @@
 				83B781DD1B79128F0070645C /* ViewController.xib in Resources */,
 				79A5DC7A1BA2092E001D872C /* crthera@3x.png in Resources */,
 				7929E3E11B9CC674001F1373 /* surveys_dashboard@3x.png in Resources */,
-				CC7DB2791D0C9E15007DFE4C /* MRTransformViewController.xib in Resources */,
 				79A360B31BA56E2D00F286E0 /* MRDashBoardVC_iPhone6Plus.xib in Resources */,
 				79421EEF1BB7EF950055D9B7 /* PHdrugsales@3x.png in Resources */,
 				79F416A71B9F6E560089729B /* cnsort@3x.png in Resources */,
@@ -3920,6 +3930,7 @@
 				79DE1BF01B826245005289D6 /* smallTickmark@2x~iPad.png in Resources */,
 				79BD27AF1B80980F007CA448 /* iTunesArtwork@2x in Resources */,
 				79F416A31B9F6E560089729B /* cncompany2@3x.jpg in Resources */,
+				CC9BCECA1D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.xib in Resources */,
 				79A360AD1BA56DBF00F286E0 /* MRDashBoardVC_iPhone.xib in Resources */,
 				79BD27CA1B809A80007CA448 /* bg~iPad.png in Resources */,
 				79DE1BEC1B826245005289D6 /* downArrow@2x~iPad.png in Resources */,
@@ -4061,7 +4072,6 @@
 				CC7DB0D11D0C8BEC007DFE4C /* crthera@3x.png in Resources */,
 				B41746E71D0CE628009B7E7E /* GroupPostChildTableViewCell.xib in Resources */,
 				CC7DB0D21D0C8BEC007DFE4C /* surveys_dashboard@3x.png in Resources */,
-				CC7DB27F1D0C9E20007DFE4C /* MRTransformViewController.xib in Resources */,
 				CC7DB0D31D0C8BEC007DFE4C /* MRDashBoardVC_iPhone6Plus.xib in Resources */,
 				CC7DB3881D0CC8A6007DFE4C /* profile_pic9.jpeg in Resources */,
 				CC7DB0D41D0C8BEC007DFE4C /* PHdrugsales@3x.png in Resources */,
@@ -4081,6 +4091,7 @@
 				CC7DB3741D0CC8A6007DFE4C /* profile_pic13.jpeg in Resources */,
 				CC7DB0E11D0C8BEC007DFE4C /* surveys@3x.png in Resources */,
 				CC7DB0E21D0C8BEC007DFE4C /* favFilter-checked@2x.png in Resources */,
+				CC9BCEC41D0F2A3900702EBC /* MRTransformViewController.xib in Resources */,
 				CC7DB0E31D0C8BEC007DFE4C /* favFilter-wrong@2x.png in Resources */,
 				CC7DB0E41D0C8BEC007DFE4C /* fbUnSelectedRadio@2x.png in Resources */,
 				CC7DB0E51D0C8BEC007DFE4C /* HomeLogo@2x~iPad.png in Resources */,
@@ -4408,6 +4419,7 @@
 				CC7DB3A61D0CC8C8007DFE4C /* share.png in Resources */,
 				CC7DB1F71D0C8BEC007DFE4C /* pending_icon@2x.png in Resources */,
 				CC649F4F1D0D181E0012289C /* NotificationUUIDViewController.xib in Resources */,
+				CC9BCECB1D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.xib in Resources */,
 				CC7DB3641D0CC8A6007DFE4C /* post_image6.jpeg in Resources */,
 				CC7DB27B1D0C9E20007DFE4C /* MPTransformTableViewCell.xib in Resources */,
 				CC7DB1F81D0C8BEC007DFE4C /* MRLoginViewController.xib in Resources */,
@@ -4553,8 +4565,8 @@
 				796E937C1BB867FF0031EA34 /* MRConvertAppointmentViewController.m in Sources */,
 				CC7DB2BF1D0CC433007DFE4C /* PieMenu.m in Sources */,
 				CC7DB3051D0CC4E2007DFE4C /* MRGroup.m in Sources */,
-				CC7DB2781D0C9E15007DFE4C /* MRTransformViewController.m in Sources */,
 				CC7DB2D51D0CC433007DFE4C /* MRContactWithinGroupCollectionCellCollectionViewCell.m in Sources */,
+				CC9BCEC81D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.m in Sources */,
 				79AC942A1B9DFAF000B81452 /* MRNotificationsViewController.m in Sources */,
 				7961A9731B8F26160035D63A /* MRRegistationTwoViewController.m in Sources */,
 				79A4AA731BA75850004F6E1E /* UILabel+WhiteUIDatePickerLabels.m in Sources */,
@@ -4575,6 +4587,7 @@
 				7930A38F1BB9151C003112E4 /* MRFeedBackResultViewController.m in Sources */,
 				7975604A1BC02B3A0034D0AC /* MRCompanyDetails.m in Sources */,
 				79C709E41BE7D7F200223562 /* MRMedRepViewController.m in Sources */,
+				CC9BCEC11D0F2A3900702EBC /* MRTransformViewController.m in Sources */,
 				79841DD81B989B5B00535916 /* MROTPVerifiedViewController.m in Sources */,
 				79708A6F1BB71D68007CE81D /* NSData+Base64Additions.m in Sources */,
 				83B782051B7917010070645C /* MRDataManger.m in Sources */,
@@ -4640,6 +4653,7 @@
 				CC7DB2D21D0CC433007DFE4C /* MRContactsViewController.m in Sources */,
 				CC7DB03C1D0C8BEC007DFE4C /* MRListViewController.m in Sources */,
 				CC7DB2E21D0CC433007DFE4C /* MRGroupsViewController.m in Sources */,
+				CC9BCEC91D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.m in Sources */,
 				CC7DB03D1D0C8BEC007DFE4C /* MRDRActivityTableViewCell.m in Sources */,
 				CC7DB3081D0CC4E2007DFE4C /* MRGroup+CoreDataProperties.m in Sources */,
 				CC7DB03E1D0C8BEC007DFE4C /* MRMedrepMeetingsCell.m in Sources */,
@@ -4653,7 +4667,6 @@
 				CC7DB0461D0C8BEC007DFE4C /* MRRegistrationRoleViewController.m in Sources */,
 				CC7DB0471D0C8BEC007DFE4C /* MRDoctorActivityScoreDetailsViewController.m in Sources */,
 				CC7DB0481D0C8BEC007DFE4C /* MRForgotPasswordViewController.m in Sources */,
-				CC7DB27E1D0C9E20007DFE4C /* MRTransformViewController.m in Sources */,
 				CC7DB0491D0C8BEC007DFE4C /* MRParserHelper.m in Sources */,
 				CC7DB04A1D0C8BEC007DFE4C /* MRConvertAppointmentCell.m in Sources */,
 				CC7DB04B1D0C8BEC007DFE4C /* MRDoctorScoreViewController.m in Sources */,
@@ -4710,6 +4723,7 @@
 				CC7DB06E1D0C8BEC007DFE4C /* MROTPViewController.m in Sources */,
 				CC7DB06F1D0C8BEC007DFE4C /* MRAppointmentListCell.m in Sources */,
 				CC7DB0701D0C8BEC007DFE4C /* MRDocotrActivityScoreViewController.m in Sources */,
+				CC9BCEC21D0F2A3900702EBC /* MRTransformViewController.m in Sources */,
 				CC7DB0711D0C8BEC007DFE4C /* MRHomeViewContoller.m in Sources */,
 				CC7DB2C01D0CC433007DFE4C /* PieMenu.m in Sources */,
 				B41746E01D0CD740009B7E7E /* MRGroupPost.m in Sources */,
