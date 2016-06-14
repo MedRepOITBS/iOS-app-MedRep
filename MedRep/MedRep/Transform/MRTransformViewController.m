@@ -2,43 +2,43 @@
 //  MRTransformViewController.m
 //  MedRep
 //
-//  Created by Yerramreddy, Dinesh (Contractor) on 6/8/16.
+//  Created by Vamsi Katragadda on 6/13/16.
 //  Copyright © 2016 MedRep. All rights reserved.
 //
 
 #import "MRTransformViewController.h"
-#import "MPTransformTableViewCell.h"
-#import "MRTransformDetailViewController.h"
-#import "MRWebserviceHelper.h"
-#import "MRCommon.h"
-#import "MRDatabaseHelper.h"
-#import "MRAppControl.h"
-#import "MRShareViewController.h"
+#import "MRTransformTitleCollectionViewCell.h"
 #import "MPTransformData.h"
-#import "MRContactsViewController.h"
-#import "MRGroupsListViewController.h"
-#import "PendingContactsViewController.h"
+#import "MRDatabaseHelper.h"
+#import "MRTransformDetailViewController.h"
+#import "MPTransformTableViewCell.h"
+#import "SWRevealViewController.h"
 
-@interface MRTransformViewController ()<UISearchBarDelegate>{
-    UILabel *infoLbl;
-}
+@interface MRTransformViewController () <UICollectionViewDelegate, UICollectionViewDataSource,
+                                         UITableViewDelegate, UITableViewDataSource,
+                                        SWRevealViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *navView;
-@property (weak, nonatomic) IBOutlet UIView *slideView;
-@property (weak, nonatomic) IBOutlet UIButton *newsButton;
-@property (weak, nonatomic) IBOutlet UIButton *eduButton;
-@property (weak, nonatomic) IBOutlet UIButton *slideButton;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *slideViewWidth;
-@property (weak, nonatomic) IBOutlet UISearchBar *search;
-@property (weak, nonatomic) IBOutlet UITableView *table;
-@property (strong, nonatomic) NSMutableArray *contentData;
 
-- (IBAction)newsTapped:(UIButton *)sender;
-- (IBAction)eduTapped:(UIButton *)sender;
-- (IBAction)sortTapped:(UIButton *)sender;
-- (IBAction)sliderButtonTapped:(UIButton *)sender;
-- (IBAction)connect:(id)sender;
-- (IBAction)share:(id)sender;
+@property (weak, nonatomic) IBOutlet UICollectionView *titleCollectionView;
+
+@property (weak, nonatomic) IBOutlet UITableView *contentTableView;
+
+@property (weak, nonatomic) IBOutlet UIView *connectView;
+
+@property (weak, nonatomic) IBOutlet UIView *transformView;
+
+@property (weak, nonatomic) IBOutlet UIView *shareView;
+
+@property (weak, nonatomic) IBOutlet UIView *serveView;
+
+@property UIView *activeView;
+
+@property NSArray *categories;
+@property (strong, nonatomic) NSMutableArray *contentData;
+@property (strong, nonatomic) NSMutableArray *filteredData;
+
+@property NSInteger currentIndex;
 
 @end
 
@@ -46,31 +46,44 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view from its nib.
+    SWRevealViewController *revealController = [self revealViewController];
+    revealController.delegate = self;
+    [revealController panGestureRecognizer];
+    [revealController tapGestureRecognizer];
     
-    self.navigationItem.title = @"Transform";
-    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
+    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon.png"]
+                                                                         style:UIBarButtonItemStylePlain target:revealController
+                                                                        action:@selector(revealToggle:)];
     
-    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonAction)];
     self.navigationItem.leftBarButtonItem = revealButtonItem;
+    self.navigationItem.title = @"VAMSI";
+    self.navigationController.navigationBar.topItem.title = @"VAMSI";
+    self.title = @"VAMSI";
+    UILabel *titleLabel = [UILabel new];
+    titleLabel.text = @"XXX";
+    self.navigationItem.titleView = titleLabel;
     
     UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navView];
     self.navigationItem.rightBarButtonItem = rightButtonItem;
     
-    //[self.view bringSubviewToFront:_slideButton];
-    [self flashOn:_slideButton];
-    _slideButton.transform=CGAffineTransformMakeRotation(M_PI / 4);
+    self.currentIndex = 0;
+    self.activeView = self.transformView;
+//    self.prevIndex = 0;
+    self.categories = @[@"Latest", @"Trending", @"BBC", @"Journals", @"Case Studies"];
     
-    UISwipeGestureRecognizer *gestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeHandler:)];
-    [gestureRecognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
-    [self.slideView addGestureRecognizer:gestureRecognizer];
-    _contentData = [NSMutableArray array];
+    [self.contentTableView setDelegate:self];
+    [self.contentTableView setDataSource:self];
+    [self.contentTableView registerNib:[UINib nibWithNibName:@"MPTransformTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"MPTransformTableViewCell"];
     
-//    [self getNews];
+    [self.titleCollectionView setDelegate:self];
+    [self.titleCollectionView setDataSource:self];
     
-    [self setButtonStates:self.eduButton activateButton:self.newsButton];
+    [self.titleCollectionView registerNib:[UINib nibWithNibName:@"MRTransformTitleCollectionViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"transformTitleCollectionViewCell"];
     
     [self createDummyData];
+    self.filteredData = self.contentData;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -78,124 +91,54 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark - UICollectionView methods
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-- (void)backButtonAction
-{
-    [self.navigationController popViewControllerAnimated:YES];
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.categories.count;
 }
 
-- (IBAction)sortTapped:(UIButton *)sender {
-
-}
-
-- (IBAction)newsTapped:(UIButton *)sender {
-    [self setButtonStates:self.eduButton activateButton:self.newsButton];
-//    [_eduButton setBackgroundColor:[UIColor colorWithRed:32/255.0 green:177/255.0 blue:138/255.0 alpha:1.0]];//green
-//    [_newsButton setBackgroundColor:[UIColor colorWithRed:26/255.0 green:133/255.0 blue:213/255.0 alpha:1.0]];//blue
+// The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    MRTransformTitleCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"transformTitleCollectionViewCell" forIndexPath:indexPath];
+    [cell setHeading:self.categories[indexPath.row]];
     
-    //[self getNews];
-}
-
-- (IBAction)eduTapped:(UIButton *)sender {
-    
-    [self setButtonStates:self.newsButton activateButton:self.eduButton];
-    
-//    [_newsButton setBackgroundColor:[UIColor colorWithRed:32/255.0 green:177/255.0 blue:138/255.0 alpha:1.0]];//green
-//    [_eduButton setBackgroundColor:[UIColor colorWithRed:26/255.0 green:133/255.0 blue:213/255.0 alpha:1.0]];//blue
-    
-    //[self getMaterial];
-}
-
-- (void)setButtonStates:(UIButton*) deactivate activateButton:(UIButton *)activate {
-    [deactivate setBackgroundColor:[UIColor colorWithRed:32/255.0 green:177/255.0 blue:138/255.0 alpha:1.0]];
-    [activate setBackgroundColor:[UIColor colorWithRed:32/255.0 green:150/255.0 blue:138/255.0 alpha:1.0]];
-}
-
--(void)swipeHandler:(UISwipeGestureRecognizer *)recognizer {
-    [self sliderButtonTapped:nil];
-}
-
-- (IBAction)sliderButtonTapped:(UIButton *)sender {
-    if (_slideView.frame.origin.x < self.view.frame.size.width) {
-        CGRect basketTopFrame = _slideView.frame;
-        basketTopFrame.origin.x = self.view.frame.size.width;
-        //CGRect basketTopFrame1 = _slideButton.frame;
-        //basketTopFrame1.origin.x = self.view.frame.size.width-15;
-        [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-            _slideView.frame = basketTopFrame;
-            //_slideButton.frame = basketTopFrame1;
-        } completion:^(BOOL finished){
-            _slideButton.hidden = false;
-        }];
-    }else{
-        CGRect napkinBottomFrame = _slideView.frame;
-        napkinBottomFrame.origin.x = self.view.frame.size.width-90;
-        //CGRect napkinBottomFrame1 = _slideButton.frame;
-        //napkinBottomFrame1.origin.x = self.view.frame.size.width-125;
-        [UIView animateWithDuration:0.5 delay:0.0 options: UIViewAnimationOptionCurveEaseOut animations:^{
-            _slideView.frame = napkinBottomFrame;
-            //_slideButton.frame = napkinBottomFrame1;
-        } completion:^(BOOL finished){
-            _slideButton.hidden = true;
-        }];
+    if (self.currentIndex == indexPath.row) {
+        [cell setCorners];
+    } else {
+        [cell clearCorners];
     }
+    
+    return cell;
 }
 
-- (IBAction)connect:(id)sender {
-    [self sliderButtonTapped:nil];
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSInteger prevIndex = self.currentIndex;
+    self.currentIndex = indexPath.row;
     
-    MRContactsViewController* contactsViewCont = [[MRContactsViewController alloc] initWithNibName:@"MRContactsViewController" bundle:nil];
-    MRGroupsListViewController* groupsListViewController = [[MRGroupsListViewController alloc] initWithNibName:@"MRGroupsListViewController" bundle:[NSBundle mainBundle]];
-    contactsViewCont.groupsListViewController = groupsListViewController;
+    NSString *currentCategory = self.categories[indexPath.row];
+    if (currentCategory != nil && [currentCategory caseInsensitiveCompare:@"Latest"] == NSOrderedSame) {
+        self.filteredData = self.contentData;
+    } else {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self.source == %@", currentCategory];
+        self.filteredData = [self.contentData filteredArrayUsingPredicate:predicate];
+    }
     
-    PendingContactsViewController *pendingViewController =[[PendingContactsViewController alloc] initWithNibName:@"PendingContactsViewController" bundle:[NSBundle mainBundle]];
-    
-    contactsViewCont.pendingContactsViewController = pendingViewController;
-    [self.navigationController pushViewController:contactsViewCont animated:true];
-    
-//    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:contactsViewCont];
-//    navigationController.title = @"MedRep";
-//    
-//    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon.png"]
-//                                                                         style:UIBarButtonItemStylePlain target:revealController action:@selector(revealToggle:)];
-//    
-//    contactsViewCont.navigationItem.leftBarButtonItem = revealButtonItem;
-//    groupsListViewController.navigationItem.leftBarButtonItem = revealButtonItem;
-//    pendingViewController.navigationItem.leftBarButtonItem = revealButtonItem;
-//    
-//    UIImageView* titleImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"navLogo.png"]];
-//    [contactsViewCont.navigationItem setTitleView:titleImage];
-//    [groupsListViewController.navigationItem setTitleView:titleImage];
-//    [pendingViewController.navigationItem setTitleView:titleImage];
-//    
-//    [revealController pushFrontViewController:navigationController animated:YES];
-    
+    [self.titleCollectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:prevIndex
+                                                                           inSection:0],
+                                                        indexPath]];
+    [self.contentTableView reloadData];
 }
 
-- (IBAction)share:(id)sender {
-    [self sliderButtonTapped:nil];
-//    MRShareViewController *notiFicationViewController = [[MRShareViewController alloc] initWithNibName:@"MRShareViewController" bundle:nil];
-//    //notiFicationViewController.selectedContent = [self.contentData objectAtIndex:indexPath.row];
-//    [self.navigationController pushViewController:notiFicationViewController animated:YES];
-}
+#pragma mark - UITableView methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.contentData.count;
+    return self.filteredData.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100.0;
+    return 112.0;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -209,7 +152,7 @@
         regCell = (MPTransformTableViewCell *)[nibViews lastObject];
     }
     
-    MPTransformData *transformData = self.contentData[indexPath.row];
+    MPTransformData *transformData = self.filteredData[indexPath.row];
     if (transformData != nil) {
         if (transformData.icon != nil && transformData.icon.length > 0) {
             regCell.img.image = [UIImage imageNamed:transformData.icon];
@@ -217,10 +160,16 @@
         
         if (transformData.title != nil && transformData.title.length > 0) {
             regCell.titleLbl.text = transformData.title;
+            [regCell.titleLbl sizeToFit];
+            [regCell.titleLbl layoutIfNeeded];
         }
         
         if (transformData.shortDescription != nil && transformData.shortDescription.length > 0) {
             regCell.descLbl.text = transformData.shortDescription;
+        }
+        
+        if (transformData.source != nil && transformData.source.length > 0) {
+            regCell.sourceLabel.text = [NSString stringWithFormat:@"SOURCE : %@", transformData.source];
         }
     }
     
@@ -229,206 +178,38 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (_slideView.frame.origin.x < self.view.frame.size.width) {
-        [self sliderButtonTapped:nil];
-    }
     MRTransformDetailViewController *notiFicationViewController = [[MRTransformDetailViewController alloc] initWithNibName:@"MRTransformDetailViewController" bundle:nil];
     notiFicationViewController.selectedContent = self.contentData[indexPath.row];
     //notiFicationViewController.selectedContent = [self.contentData objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:notiFicationViewController animated:YES];
 }
 
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
-    [searchBar resignFirstResponder];
+- (IBAction)connectButtonTapped:(id)sender {
+    self.activeView = sender;
 }
 
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
-    [searchBar resignFirstResponder];
+- (IBAction)transformButtonTapped:(id)sender {
+    self.transformView = sender;
 }
 
--(BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{
-    if (_slideView.frame.origin.x < self.view.frame.size.width) {
-        [self sliderButtonTapped:nil];
-    }
-    
-    return YES;
+- (IBAction)shareButtonTapped:(id)sender {
+    self.shareView = sender;
 }
 
--(BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar{
-    if (_slideView.frame.origin.x < self.view.frame.size.width) {
-        [self sliderButtonTapped:nil];
-    }
-    
-    return YES;
+- (IBAction)serveButtonTapped:(id)sender {
+    self.serveView = sender;
 }
 
-- (void)flashOff:(UIView *)v
-{
-    [UIView animateWithDuration:1.05 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^ {
-        v.alpha = .3;  //don't animate alpha to 0, otherwise you won't be able to interact with it
-    } completion:^(BOOL finished) {
-        [self flashOn:v];
-    }];
-}
 
-- (void)flashOn:(UIView *)v
-{
-    [UIView animateWithDuration:1.05 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^ {
-        v.alpha = 1;
-    } completion:^(BOOL finished) {
-        [self flashOff:v];
-    }];
-}
 
-- (void)getNews{
-    [[MRWebserviceHelper sharedWebServiceHelper] getNewswithHandler:^(BOOL status, NSString *details, NSDictionary *responce)
-     {
-         if (status)
-         {
-             //dummy data
-             NSMutableArray *myArray = [NSMutableArray array];
-             NSDictionary *d1 = [NSDictionary dictionaryWithObjectsAndKeys:@"Medrep",@"titile",@"It's a notification",@"message",@"20160617103000",@"startDate",@"NEW",@"status",[NSNumber numberWithInt:1],@"notificationId",@"Image",@"type",[NSNumber numberWithInt:1],@"companyId",@"Eye",@"therapeuticName", nil];
-             [myArray addObject:d1];
-             [myArray addObject:d1];
-             [myArray addObject:d1];
-             [myArray addObject:d1];
-             [myArray addObject:d1];
-             //responce = [NSDictionary dictionaryWithObject:myArray forKey:kResponce];
-             //end of dummy data
-             
-             [MRCommon stopActivityIndicator];
-             _contentData = [responce objectForKey:kResponce];
-             [MRAppControl sharedHelper].notifications = [responce objectForKey:kResponce];
-             
-             if (self.contentData.count == 0){
-                 infoLbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, _table.frame.size.width, 25)];
-                 infoLbl.textAlignment = NSTextAlignmentCenter;
-                 infoLbl.text = @"No Articles found!!";
-                 [_table addSubview:infoLbl];
-             }else{
-                 [infoLbl removeFromSuperview];
-             }
-             
-             [self.table reloadData];
-         }
-         else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
-         {
-             [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
-              {
-                  [MRCommon savetokens:responce];
-                  [[MRWebserviceHelper sharedWebServiceHelper] getMyNotifications:[MRCommon stringFromDate:[NSDate date] withDateFormate:@"YYYYMMdd"] withHandler:^(BOOL status, NSString *details, NSDictionary *responce)
-                   {
-                       [MRCommon stopActivityIndicator];
-                       if (status)
-                       {
-                           [MRAppControl sharedHelper].notifications = [responce objectForKey:kResponce];
-                           
-                           if (self.contentData.count == 0){
-                               infoLbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, _table.frame.size.width, 25)];
-                               infoLbl.textAlignment = NSTextAlignmentCenter;
-                               infoLbl.text = @"No Notifications found!!";
-                               [_table addSubview:infoLbl];
-                           }else{
-                               [infoLbl removeFromSuperview];
-                           }
-                           
-                           [self.table reloadData];
-                       }
-                   }];
-              }];
-         }
-         else
-         {
-             [MRCommon stopActivityIndicator];
-             if (self.contentData.count == 0){
-                 infoLbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, _table.frame.size.width, 25)];
-                 infoLbl.textAlignment = NSTextAlignmentCenter;
-                 infoLbl.text = @"No Notifications found!!";
-                 [_table addSubview:infoLbl];
-             }else{
-                 [infoLbl removeFromSuperview];
-             }
-         }
-         
-     }];
-}
-
-- (void)getMaterial{
-    [[MRWebserviceHelper sharedWebServiceHelper] getMaterialwithHandler:^(BOOL status, NSString *details, NSDictionary *responce)
-     {
-         if (status)
-         {
-             //dummy data
-             NSMutableArray *myArray = [NSMutableArray array];
-             NSDictionary *d1 = [NSDictionary dictionaryWithObjectsAndKeys:@"Medrep",@"titile",@"It's a notification",@"message",@"20160617103000",@"startDate",@"NEW",@"status",[NSNumber numberWithInt:1],@"notificationId",@"Image",@"type",[NSNumber numberWithInt:1],@"companyId",@"Eye",@"therapeuticName", nil];
-             [myArray addObject:d1];
-             [myArray addObject:d1];
-             [myArray addObject:d1];
-             [myArray addObject:d1];
-             [myArray addObject:d1];
-             //responce = [NSDictionary dictionaryWithObject:myArray forKey:kResponce];
-             //end of dummy data
-             
-             [MRCommon stopActivityIndicator];
-             _contentData = [responce objectForKey:kResponce];
-             [MRAppControl sharedHelper].notifications = [responce objectForKey:kResponce];
-             
-             if (self.contentData.count == 0){
-                 infoLbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, _table.frame.size.width, 25)];
-                 infoLbl.textAlignment = NSTextAlignmentCenter;
-                 infoLbl.text = @"No Articles found!!";
-                 [_table addSubview:infoLbl];
-             }else{
-                 [infoLbl removeFromSuperview];
-             }
-             
-             [self.table reloadData];
-         }
-         else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
-         {
-             [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
-              {
-                  [MRCommon savetokens:responce];
-                  [[MRWebserviceHelper sharedWebServiceHelper] getMyNotifications:[MRCommon stringFromDate:[NSDate date] withDateFormate:@"YYYYMMdd"] withHandler:^(BOOL status, NSString *details, NSDictionary *responce)
-                   {
-                       [MRCommon stopActivityIndicator];
-                       if (status)
-                       {
-                           [MRAppControl sharedHelper].notifications = [responce objectForKey:kResponce];
-                           
-                           if (self.contentData.count == 0){
-                               infoLbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, _table.frame.size.width, 25)];
-                               infoLbl.textAlignment = NSTextAlignmentCenter;
-                               infoLbl.text = @"No Notifications found!!";
-                               [_table addSubview:infoLbl];
-                           }else{
-                               [infoLbl removeFromSuperview];
-                           }
-                           
-                           [self.table reloadData];
-                       }
-                   }];
-              }];
-         }
-         else
-         {
-             [MRCommon stopActivityIndicator];
-             if (self.contentData.count == 0){
-                 infoLbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, _table.frame.size.width, 25)];
-                 infoLbl.textAlignment = NSTextAlignmentCenter;
-                 infoLbl.text = @"No Notifications found!!";
-                 [_table addSubview:infoLbl];
-             }else{
-                 [infoLbl removeFromSuperview];
-             }
-         }
-         
-     }];
-}
+#pragma mark - Dummy Data
 
 - (void)createDummyData {
     // Create Dummy Data
+    self.contentData = [NSMutableArray new];
+    
     MPTransformData *transformData = [MPTransformData new];
+    [transformData setSource:@"BBC"];
     [transformData setIcon:@"comapny-logo.png"];
     [transformData setTitle:@"Could High-Dose Vitamin D Help Fight Multiple Sclerosis"];
     [transformData setShortDescription:@"Supplementation appears safe but experts says it's too soon for general..."];
@@ -436,6 +217,7 @@
     [self.contentData addObject:transformData];
     
     transformData = [MPTransformData new];
+    [transformData setSource:@"BBC"];
     [transformData setIcon:@"PHdashboard-banner.png"];
     [transformData setTitle:@"Painkillers Often Gateway to Heroin for U.S Teens: Survey"];
     [transformData setShortDescription:@"Heroin is cheaper, easier to obtain than narcotics like OxyContin experts say..."];
@@ -443,6 +225,7 @@
     [self.contentData addObject:transformData];
     
     transformData = [MPTransformData new];
+    [transformData setSource:@"BBC"];
     [transformData setIcon:@"PHdashboard-bg.png"];
     [transformData setTitle:@"It's Not Too late"];
     [transformData setShortDescription:@"Influenza activity usually active in Janurary or February..."];
@@ -450,6 +233,7 @@
     [self.contentData addObject:transformData];
     
     transformData = [MPTransformData new];
+    [transformData setSource:@"My own source defined"];
     [transformData setIcon:@"comapny-logo2.png"];
     [transformData setTitle:@"Best Cancer Screening Methods"];
     [transformData setShortDescription:@"Source:HealthDay - Related Medline Plus"];
@@ -457,6 +241,7 @@
     [self.contentData addObject:transformData];
     
     transformData = [MPTransformData new];
+    [transformData setSource:@"ABC"];
     [transformData setIcon:@"bg.png"];
     [transformData setTitle:@"Could High-Dose Vitamin D Help Fight Multiple Sclerosis"];
     [transformData setShortDescription:@"Supplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for general"];
@@ -464,6 +249,7 @@
     [self.contentData addObject:transformData];
     
     transformData = [MPTransformData new];
+    [transformData setSource:@"XYZ"];
     [transformData setIcon:@"latestNotificatins.png"];
     [transformData setTitle:@"Painkillers Often Gateway to Heroin for U.S Teens: Survey"];
     [transformData setShortDescription:@"Heroin is cheaper, easier to obtain than narcotics like OxyContin experts say..."];
@@ -496,5 +282,15 @@
         
     }
 }
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 @end

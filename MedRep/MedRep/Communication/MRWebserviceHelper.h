@@ -206,6 +206,9 @@ withComplitionHandler:(completionHandler)responceHandler;
 
 - (id)objectOrNilForKey:(id)aKey {
     id object = [self objectForKey:aKey];
+    if (object == nil) {
+        return @"";
+    }
     return [object isEqual:[NSNull null]] ? @"" : object;
 }
 

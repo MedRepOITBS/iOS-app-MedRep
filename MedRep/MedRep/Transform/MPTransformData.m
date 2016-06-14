@@ -14,5 +14,6 @@
 @synthesize title;
 @synthesize shortDescription;
 @synthesize detailDescription;
+@synthesize source;
 
 @end

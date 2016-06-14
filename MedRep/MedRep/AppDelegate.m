@@ -11,9 +11,14 @@
 #import "MRWebserviceHelper.h"
 #import "MRCommon.h"
 #import "MRLocationManager.h"
+#import "NotificationUUIDViewController.h"
 
 @interface AppDelegate ()
+
+@property (nonatomic)  NotificationUUIDViewController *notificationViewController;
+
 @property (nonatomic) NSInteger counterChildPost;
+
 @end
 
 @implementation AppDelegate
@@ -28,14 +33,16 @@
      }];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
     // Override point for customization after application launch.
-    MRAppControl *appController = [MRAppControl sharedHelper];
-    [appController launchWithApplicationMainWindow:self.window];
+    [self registerForNotification];
+    
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     self.window.backgroundColor = [UIColor whiteColor];
-   // [self registerForNotification];
     [self.window makeKeyAndVisible];
+
     _counterChildPost = 1000;
+
     return YES;
 }
 -(NSInteger)counterForChildPost{
@@ -45,20 +52,36 @@
 }
 - (void)registerForNotification
 {
-    if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)])
-    {
-        UIUserNotificationType types = UIUserNotificationTypeSound | UIUserNotificationTypeBadge | UIUserNotificationTypeAlert;
-        UIUserNotificationSettings *notificationSettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
-        [[UIApplication sharedApplication] registerUserNotificationSettings:notificationSettings];
-    }
+    BOOL appRegisteredForAPNS = [[UIApplication sharedApplication] isRegisteredForRemoteNotifications];
+    if (appRegisteredForAPNS == false) {
+        
+        // Dummy Code
+        
+        // Launched from push notification
+        self.notificationViewController = [[NotificationUUIDViewController alloc] initWithNibName:@"NotificationUUIDViewController" bundle:nil];
+        self.notificationViewController.appWindow = self.window;
+        
+        self.window.rootViewController = self.notificationViewController;
+        
     
-    if ([UIApplication instancesRespondToSelector:@selector(registerForRemoteNotifications)])
-    {
-        [[UIApplication sharedApplication] registerForRemoteNotifications];
-    }
-    else
-    {
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
+        if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)])
+        {
+            UIUserNotificationType types = UIUserNotificationTypeSound | UIUserNotificationTypeBadge | UIUserNotificationTypeAlert;
+            UIUserNotificationSettings *notificationSettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
+            [[UIApplication sharedApplication] registerUserNotificationSettings:notificationSettings];
+        }
+        
+        if ([UIApplication instancesRespondToSelector:@selector(registerForRemoteNotifications)])
+        {
+            [[UIApplication sharedApplication] registerForRemoteNotifications];
+        }
+        else
+        {
+            //[[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
+        }
+    } else {
+        MRAppControl *appController = [MRAppControl sharedHelper];
+        [appController launchWithApplicationMainWindow:self.window];
     }
 }
 
@@ -92,6 +115,32 @@
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [[UIApplication sharedApplication] cancelLocalNotification:notification];
     [MRCommon showAlert:notification.alertBody delegate:self];
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    NSLog(@"Did Register for Remote Notifications with Device Token (%@)", deviceToken);
+    
+    NSString * deviceTokenString = [[[[deviceToken description]
+                                      stringByReplacingOccurrencesOfString: @"<" withString: @""]
+                                     stringByReplacingOccurrencesOfString: @">" withString: @""]
+                                    stringByReplacingOccurrencesOfString: @" " withString: @""];
+    
+    NSLog(@"The generated device token string is : %@",deviceTokenString);
+    _token = deviceTokenString;
+    self.notificationViewController.token = deviceTokenString;
+    [self.notificationViewController refreshScreen];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    NSLog(@"Did Fail to Register for Remote Notifications");
+    NSLog(@"%@, %@", error, error.localizedDescription);
+    
+    self.notificationViewController.token = @"Did Fail to Register for Remote Notifications";
+    [self.notificationViewController refreshScreen];
+}
+
+- (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    [MRCommon showAlert:[NSString stringWithFormat:@"Received Remote Notification\n%@", userInfo] delegate:self];
 }
 
 #pragma mark - Core Data stack
