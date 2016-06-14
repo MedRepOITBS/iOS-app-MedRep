@@ -74,7 +74,7 @@
     NSURLSessionDataTask *dTask = [authSession dataTaskWithRequest:theRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         
         __block NSString *theResponse = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-
+        NSLog(@"URL: %@\nResponse: %@", theRequest.URL, theResponse);
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
         if ([data length] > 0 && error == 0 && [httpResponse statusCode] == 200)
         {
@@ -152,6 +152,24 @@
     [urlRequest setHTTPMethod:@"GET"];
     [urlRequest setValue:@"text/plain" forHTTPHeaderField:@"Content-Type"];
     self.serviceType = kMRWebServiceTypeLogin;
+    [self sendServiceRequest:urlRequest withHandler:responceHandler];
+}
+
+- (void)createGroup:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler{
+    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/createGroup?token=%@",kHostName,[MRDefaults objectForKey:kAuthenticationToken]];
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:reqDict
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:nil];
+    NSURL *url = [NSURL URLWithString:stringFormOfUrl];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [urlRequest setTimeoutInterval:120];
+    [urlRequest setHTTPMethod:@"POST"];
+    [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [urlRequest setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[jsonData length]] forHTTPHeaderField:@"Content-Length"];
+    [urlRequest setHTTPBody: jsonData];
+    self.serviceType = kMRWebServiceTypeCreateGroup;
     [self sendServiceRequest:urlRequest withHandler:responceHandler];
 }
 
@@ -885,7 +903,6 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
 
 - (void)getNewswithHandler:(completionHandler)responceHandler
 {
-    // http://183.82.106.234:8080/MedRepApplication/api/doctor/getMyNotifications/20150101?access_token=8c4ccf50-f09a-495b-a8ef-be6c354fb07a
     NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/api/doctor/getMyNotifications?access_token=%@",kBaseURL,[MRDefaults objectForKey:kAuthenticationToken]];
     
     NSURL *url = [NSURL URLWithString:stringFormOfUrl];
@@ -894,13 +911,12 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
     [urlRequest setTimeoutInterval:120];
     [urlRequest setHTTPMethod:@"GET"];
     [urlRequest setValue:@"text/plain" forHTTPHeaderField:@"Content-Type"];
-    self.serviceType = kMRWebServiceTypeGetMyNotifications;
+    self.serviceType = kMRWebServiceTypeGetNews;
     [self sendServiceRequest:urlRequest withHandler:responceHandler];
 }
 
 - (void)getMaterialwithHandler:(completionHandler)responceHandler
 {
-    // http://183.82.106.234:8080/MedRepApplication/api/doctor/getMyNotifications/20150101?access_token=8c4ccf50-f09a-495b-a8ef-be6c354fb07a
     NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/api/doctor/getMyNotifications?access_token=%@",kBaseURL,[MRDefaults objectForKey:kAuthenticationToken]];
     
     NSURL *url = [NSURL URLWithString:stringFormOfUrl];
@@ -909,10 +925,66 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
     [urlRequest setTimeoutInterval:120];
     [urlRequest setHTTPMethod:@"GET"];
     [urlRequest setValue:@"text/plain" forHTTPHeaderField:@"Content-Type"];
-    self.serviceType = kMRWebServiceTypeGetMyNotifications;
+    self.serviceType = kMRWebServiceTypeGetMaterial;
     [self sendServiceRequest:urlRequest withHandler:responceHandler];
 }
 
+- (void)getMoreConnectionswithHandler:(completionHandler)responceHandler{
+    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/getDoctorContacts?token=%@",kHostName,[MRDefaults objectForKey:kAuthenticationToken]];
+    
+    NSURL *url = [NSURL URLWithString:stringFormOfUrl];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [urlRequest setTimeoutInterval:120];
+    [urlRequest setHTTPMethod:@"GET"];
+    [urlRequest setValue:@"text/plain" forHTTPHeaderField:@"Content-Type"];
+    self.serviceType = kMRWebServiceTypeGetMoreConnections;
+    [self sendServiceRequest:urlRequest withHandler:responceHandler];
+}
+
+- (void)getGroupListwithHandler:(completionHandler)responceHandler{
+    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/getGroups?token=%@",kHostName,[MRDefaults objectForKey:kAuthenticationToken]];
+    
+    NSURL *url = [NSURL URLWithString:stringFormOfUrl];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [urlRequest setTimeoutInterval:120];
+    [urlRequest setHTTPMethod:@"GET"];
+    [urlRequest setValue:@"text/plain" forHTTPHeaderField:@"Content-Type"];
+    self.serviceType = kMRWebServiceTypeGetGroupList;
+    [self sendServiceRequest:urlRequest withHandler:responceHandler];
+}
+
+- (void)getGroupMembersStatuswithHandler:(completionHandler)responceHandler{
+    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/fetchAllGroupMembers?token=%@",kHostName,[MRDefaults objectForKey:kAuthenticationToken]];
+    
+    NSURL *url = [NSURL URLWithString:stringFormOfUrl];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [urlRequest setTimeoutInterval:120];
+    [urlRequest setHTTPMethod:@"GET"];
+    [urlRequest setValue:@"text/plain" forHTTPHeaderField:@"Content-Type"];
+    self.serviceType = kMRWebServiceTypeGetGroupMemberStatus;
+    [self sendServiceRequest:urlRequest withHandler:responceHandler];
+}
+
+- (void)updateGroupMembersStatus:(NSDictionary *)dict withHandler:(completionHandler)responceHandler{
+    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/updateMemberStatus?token=%@",kHostName,[MRDefaults objectForKey:kAuthenticationToken]];
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:nil];
+    NSURL *url = [NSURL URLWithString:stringFormOfUrl];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [urlRequest setTimeoutInterval:120];
+    [urlRequest setHTTPMethod:@"POST"];
+    [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [urlRequest setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[jsonData length]] forHTTPHeaderField:@"Content-Length"];
+    [urlRequest setHTTPBody: jsonData];
+    self.serviceType = kMRWebServiceTypeUpdateGroupMemberStatus;
+    [self sendServiceRequest:urlRequest withHandler:responceHandler];
+}
 
 #pragma mark ------------------------------
 #pragma mark -  Pharma Rep Services

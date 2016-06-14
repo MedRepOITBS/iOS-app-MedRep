@@ -13,6 +13,9 @@
 #import "MRTransformDetailViewController.h"
 #import "MPTransformTableViewCell.h"
 #import "SWRevealViewController.h"
+#import "MRContactsViewController.h"
+#import "MRGroupsListViewController.h"
+#import "PendingContactsViewController.h"
 
 @interface MRTransformViewController () <UICollectionViewDelegate, UICollectionViewDataSource,
                                          UITableViewDelegate, UITableViewDataSource,
@@ -120,7 +123,7 @@
         self.filteredData = self.contentData;
     } else {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self.source == %@", currentCategory];
-        self.filteredData = [self.contentData filteredArrayUsingPredicate:predicate];
+        self.filteredData = [[self.contentData filteredArrayUsingPredicate:predicate] mutableCopy];
     }
     
     [self.titleCollectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:prevIndex
@@ -186,6 +189,16 @@
 
 - (IBAction)connectButtonTapped:(id)sender {
     self.activeView = sender;
+    
+    MRContactsViewController* contactsViewCont = [[MRContactsViewController alloc] initWithNibName:@"MRContactsViewController" bundle:nil];
+    MRGroupsListViewController* groupsListViewController = [[MRGroupsListViewController alloc] initWithNibName:@"MRGroupsListViewController" bundle:[NSBundle mainBundle]];
+    contactsViewCont.groupsListViewController = groupsListViewController;
+    
+    PendingContactsViewController *pendingViewController =[[PendingContactsViewController alloc] initWithNibName:@"PendingContactsViewController" bundle:[NSBundle mainBundle]];
+    
+    contactsViewCont.pendingContactsViewController = pendingViewController;
+    [self.navigationController pushViewController:contactsViewCont animated:true];
+
 }
 
 - (IBAction)transformButtonTapped:(id)sender {

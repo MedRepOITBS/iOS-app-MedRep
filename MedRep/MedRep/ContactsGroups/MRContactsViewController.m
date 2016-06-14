@@ -15,6 +15,8 @@
 #import "MRDatabaseHelper.h"
 #import "PendingContactsViewController.h"
 #import "PieMenu.h"
+#import "MRWebserviceHelper.h"
+#import "MRCommon.h"
 
 @interface MRContactsViewController () <UICollectionViewDataSource,UICollectionViewDelegate,UIActionSheetDelegate,UISearchBarDelegate>
 
@@ -215,11 +217,7 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet
 clickedButtonAtIndex:(NSInteger)buttonIndex {
- 
-    NSLog(@"%ld",(long)buttonIndex);
-
-
-    if (buttonIndex ==0 ) {
+    if (buttonIndex == 0) {
         [UIView transitionWithView:self.navigationController.view
                           duration:0.75
                            options:UIViewAnimationOptionTransitionCurlUp
@@ -227,9 +225,28 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
                             [self.navigationController pushViewController:self.pendingContactsViewController animated:NO];
                         }
                         completion:nil];
+    }else if (buttonIndex == 1){
+        [self getMoreConnections];
     }
    
 // PendingContactsViewController * pendingContactVC = [UIStoryboard]
+}
+
+- (void)getMoreConnections{
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] getMoreConnectionswithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [MRCommon stopActivityIndicator];
+        if (status)
+        {
+            //Success
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }];
 }
 
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {

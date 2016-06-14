@@ -19,7 +19,14 @@
 #import "MRConstants.h"
 #import "GroupPostChildTableViewCell.h"
 #import "MrGroupChildPost.h"
-@interface MRContactDetailViewController ()<MRGroupPostItemTableViewCellDelegate,CommonBoxViewDelegate>
+#import "MRCommon.h"
+#import "MRWebserviceHelper.h"
+#import "MRGroupObject.h"
+#import "MRGroupUserObject.h"
+
+@interface MRContactDetailViewController () <MRGroupPostItemTableViewCellDelegate, CommonBoxViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
+    MRGroupUserObject *groupMemberObj;
+}
 
 @property (weak, nonatomic) IBOutlet UIImageView* mainImageView;
 @property (weak, nonatomic) IBOutlet UILabel* mainLabel;
@@ -64,6 +71,11 @@
     
     [self totalPosts];
     [self.postsTableView reloadData];
+    
+    [self getGroupMembersStatus];
+    
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@"1",@"group_id",@"2",@"member_id",@"ACTIVE",@"status", nil];
+    [self updateGroupMembersStatus:dict];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -327,5 +339,48 @@
     
 }
 
+- (void)getGroupMembersStatus{
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] getGroupMembersStatuswithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [MRCommon stopActivityIndicator];
+        if (status)
+        {
+            NSDictionary *responseDict = responce[@"Responce"];
+            
+            NSArray *resultGroupData = responseDict[@"RESULT_GROUP_DATA"][@"GROUPS"];
+            NSMutableArray *groupsArrayObj = [NSMutableArray array];
+            for (NSDictionary *dic in resultGroupData) {
+                MRGroupObject *groupObj = [[MRGroupObject alloc] initWithDict:dic];
+                [groupsArrayObj addObject:groupObj];
+            }
+            
+            NSDictionary *resultMemberData = responseDict[@"RESULT_MEMBER_DATA"][@"GROUP_2"];
+            groupMemberObj = [[MRGroupUserObject alloc] initWithDict:resultMemberData];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }];
+}
+
+- (void)updateGroupMembersStatus:(NSDictionary *)dict{
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] updateGroupMembersStatus:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [MRCommon stopActivityIndicator];
+        if (status)
+        {
+            //Success
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }];
+}
 
 @end

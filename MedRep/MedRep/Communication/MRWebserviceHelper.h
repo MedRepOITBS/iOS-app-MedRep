@@ -166,6 +166,16 @@ withComplitionHandler:(completionHandler)responceHandler;
 
 - (void)getMaterialwithHandler:(completionHandler)responceHandler;
 
+- (void)createGroup:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
+
+- (void)getMoreConnectionswithHandler:(completionHandler)responceHandler;
+
+- (void)getGroupListwithHandler:(completionHandler)responceHandler;
+
+- (void)getGroupMembersStatuswithHandler:(completionHandler)responceHandler;
+
+- (void)updateGroupMembersStatus:(NSDictionary *)dict withHandler:(completionHandler)responceHandler;
+
 @end
 
 @interface NSDictionary (CategoryName)
