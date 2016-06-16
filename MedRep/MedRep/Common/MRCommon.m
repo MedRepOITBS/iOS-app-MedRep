@@ -401,7 +401,12 @@
         
         if (nil == thedata)
         {
-            NSString *str = (NSString*)data;
+            NSString *str = @"";
+            if ([data isKindOfClass:[NSString class]]) {
+                str = (NSString*)data;
+            }else{
+                str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            }
             thedata = [NSData decodeBase64ForString:str];
         }
         

@@ -20,7 +20,7 @@
 @property (strong, nonatomic) UITapGestureRecognizer* tapGesture;
 @property (weak, nonatomic) IBOutlet UITableView *pendingTableView;
 @property (nonatomic,strong) NSMutableArray *pendingContactListArra;
-
+@property (strong, nonatomic) IBOutlet UIView *navView;
 
 @end
 
@@ -38,7 +38,7 @@
                       duration:0.75
                        options:UIViewAnimationOptionTransitionCurlDown
                     animations:^{
-                        [self.navigationController popToRootViewControllerAnimated:NO];
+                        [self.navigationController popViewControllerAnimated:YES];
                     }
                     completion:nil];
 }
@@ -64,8 +64,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIImageView* titleImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"navLogo.png"]];
-    [self.navigationItem setTitleView:titleImage];
     self.customFilterTableView.delegate  = self;
     self.customFilterTableView.dataSource = self;
     self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
@@ -78,12 +76,26 @@
     self.pendingTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
    
     // Do any additional setup after loading the view from its nib.
+    
+    self.navigationItem.title = @"Pending Connections";
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
+    
+    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonAction)];
+    self.navigationItem.leftBarButtonItem = revealButtonItem;
+    
+    UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navView];
+    self.navigationItem.rightBarButtonItem = rightButtonItem;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)backButtonAction{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }

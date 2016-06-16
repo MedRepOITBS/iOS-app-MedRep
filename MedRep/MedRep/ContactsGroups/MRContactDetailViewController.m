@@ -23,9 +23,13 @@
 #import "MRWebserviceHelper.h"
 #import "MRGroupObject.h"
 #import "MRGroupUserObject.h"
+#import "MRContactWithinGroupCollectionViewCell.h"
+#import "MRGroupUserObject.h"
+#import "MRAddMembersViewController.h"
 
 @interface MRContactDetailViewController () <MRGroupPostItemTableViewCellDelegate, CommonBoxViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
     MRGroupUserObject *groupMemberObj;
+    NSMutableArray *groupsArrayObj;
 }
 
 @property (weak, nonatomic) IBOutlet UIImageView* mainImageView;
@@ -40,8 +44,10 @@
 
 @property (strong, nonatomic) MRContact* mainContact;
 @property (strong, nonatomic) MRGroup* mainGroup;
+@property (strong, nonatomic) MRGroupObject* mainGroupObj;
 @property (strong,nonatomic) KLCPopup *commentBoxKLCPopView;
 @property (strong,nonatomic) CommonBoxView *commentBoxView;
+@property (strong, nonatomic) IBOutlet UIView *navView;
 
 @end
 
@@ -49,8 +55,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIImageView* titleImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"navLogo.png"]];
-    [self.navigationItem setTitleView:titleImage];
+    self.navigationItem.title = @"Contact Details";
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
+    
+    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonAction)];
+    self.navigationItem.leftBarButtonItem = revealButtonItem;
+    
+    UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navView];
+    self.navigationItem.rightBarButtonItem = rightButtonItem;
     
     // Do any additional setup after loading the view from its nib.
     [self.collectionView registerNib:[UINib nibWithNibName:@"MRContactWithinGroupCollectionCellCollectionViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"contactWithinGroupCell"];
@@ -63,10 +75,14 @@
         self.groupsUnderContact = [self.mainContact.groups allObjects];
         self.posts = [self.mainContact.groupPosts allObjects];
     } else {
-        self.mainImageView.image = [UIImage imageNamed:self.mainGroup.groupPicture];
-        self.mainLabel.text = self.mainGroup.name;
-        self.contactsUnderGroup = [self.mainGroup.contacts allObjects];
-        self.posts = [self.mainGroup.groupPosts allObjects];
+//        self.mainImageView.image = [UIImage imageNamed:self.mainGroup.groupPicture];
+//        self.mainLabel.text = self.mainGroup.name;
+//        self.contactsUnderGroup = [self.mainGroup.contacts allObjects];
+//        self.posts = [self.mainGroup.groupPosts allObjects];
+        self.mainImageView.image = [MRCommon getImageFromBase64Data:[self.mainGroupObj.group_img_data dataUsingEncoding:NSUTF8StringEncoding]];
+        self.mainLabel.text = self.mainGroupObj.group_name;
+        self.contactsUnderGroup = @[];
+        self.posts = @[];
     }
     
     [self totalPosts];
@@ -83,6 +99,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)backButtonAction{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)setContact:(MRContact*)contact {
     self.mainContact = contact;
 }
@@ -90,6 +110,10 @@
 - (void)setGroup:(MRGroup*)group {
     self.mainGroup = group;
     
+}
+
+- (void)setGroupData:(MRGroupObject*)group {
+    self.mainGroupObj = group;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -268,8 +292,14 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    if (self.contactsUnderGroup.count > 0) {
-        return self.contactsUnderGroup.count;
+//    if (self.contactsUnderGroup.count > 0) {
+//        return self.contactsUnderGroup.count;
+//    } else {
+//        return self.groupsUnderContact.count;
+//    }
+    
+    if (groupsArrayObj.count) {
+        return groupsArrayObj.count;
     } else {
         return self.groupsUnderContact.count;
     }
@@ -277,18 +307,31 @@
 
 // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    MRContactWithinGroupCollectionCellCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"contactWithinGroupCell" forIndexPath:indexPath];
+    /*MRContactWithinGroupCollectionCellCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"contactWithinGroupCell" forIndexPath:indexPath];
     if (self.contactsUnderGroup.count > 0) {
         [cell setContact:self.contactsUnderGroup[indexPath.row]];
     } else {
         [cell setGroup:self.groupsUnderContact[indexPath.row]];
     }
-    return cell;
+    return cell;*/
+    
+    if (groupsArrayObj.count > 0) {
+        MRContactWithinGroupCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MRContactWithinGroupCollectionViewCell" forIndexPath:indexPath];
+        MRGroupUserObject *user = groupsArrayObj[indexPath.row];
+        cell.nameTxt.text = user.firstName;
+        cell.imgView.image = [MRCommon getImageFromBase64Data:[user.imgData dataUsingEncoding:NSUTF8StringEncoding]];
+        return cell;
+    } else {
+        MRContactWithinGroupCollectionCellCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"contactWithinGroupCell" forIndexPath:indexPath];
+        [cell setGroup:self.groupsUnderContact[indexPath.row]];
+        return cell;
+    }
 }
 
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(110, collectionView.bounds.size.height);
+    //return CGSizeMake(110, collectionView.bounds.size.height);
+    return CGSizeMake(collectionView.bounds.size.width, collectionView.bounds.size.height);
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionView *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
@@ -305,6 +348,14 @@
     }
     [self.moreOptions showInView:self.view];
 }
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        MRAddMembersViewController* detailViewController = [[MRAddMembersViewController alloc] init];
+        [self.navigationController pushViewController:detailViewController animated:NO];
+    }
+}
+
 #pragma mark
 #pragma CAMERA IMAGE CAPTURE
 
@@ -348,12 +399,12 @@
             NSDictionary *responseDict = responce[@"Responce"];
             
             NSArray *resultGroupData = responseDict[@"RESULT_GROUP_DATA"][@"GROUPS"];
-            NSMutableArray *groupsArrayObj = [NSMutableArray array];
+            groupsArrayObj = [NSMutableArray array];
             for (NSDictionary *dic in resultGroupData) {
                 MRGroupObject *groupObj = [[MRGroupObject alloc] initWithDict:dic];
                 [groupsArrayObj addObject:groupObj];
             }
-            
+            [self.collectionView reloadData];
             NSDictionary *resultMemberData = responseDict[@"RESULT_MEMBER_DATA"][@"GROUP_2"];
             groupMemberObj = [[MRGroupUserObject alloc] initWithDict:resultMemberData];
         }

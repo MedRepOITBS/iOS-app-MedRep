@@ -37,7 +37,7 @@
 @property (strong, nonatomic) NSArray* suggestedContacts;
 @property (weak, nonatomic) IBOutlet UILabel *noContactErrorMsgLbl;
 @property (weak, nonatomic) IBOutlet UIButton *clickHereToAddBtn;
-
+@property (strong, nonatomic) IBOutlet UIView *navView;
 
 @end
 
@@ -164,10 +164,17 @@
     [self.suggestedContactsCollectionView registerNib:[UINib nibWithNibName:@"MRContactCollectionCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"contactCell"];
     [self readData];
     self.fileredContacts = self.myContacts;
-    self.navigationItem.title = @"MedRep";
-    self.title = @"MedRep";
+    self.navigationItem.title = @"Connect";
     self.edgesForExtendedLayout = UIRectEdgeNone;
     // Do any additional setup after loading the view from its nib.
+    
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
+    
+    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonAction)];
+    self.navigationItem.leftBarButtonItem = revealButtonItem;
+    
+    UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navView];
+    self.navigationItem.rightBarButtonItem = rightButtonItem;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -179,6 +186,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)backButtonAction{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 /*
@@ -290,6 +301,12 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
     self.tapGesture.enabled = YES;
 }
 
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+    [searchBar resignFirstResponder];
+}
 
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
+    [searchBar resignFirstResponder];
+}
 
 @end

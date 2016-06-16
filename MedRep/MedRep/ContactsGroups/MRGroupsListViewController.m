@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UIButton* moreOptions;
 @property (strong, nonatomic) UIActionSheet *menu;
 @property (strong, nonatomic) UITapGestureRecognizer* tapGesture;
+@property (strong, nonatomic) IBOutlet UIView *navView;
 
 @property (strong, nonatomic) NSArray* groups;
 @property (strong, nonatomic) NSArray* filteredGroups;
@@ -52,8 +53,15 @@
     self.tapGesture.enabled = NO;
     [self.view addGestureRecognizer:self.tapGesture];
     
-    UIImageView* titleImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"navLogo.png"]];
-    [self.navigationItem setTitleView:titleImage];
+    self.navigationItem.title = @"Groups";
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
+    
+    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonAction)];
+    self.navigationItem.leftBarButtonItem = revealButtonItem;
+    
+    UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navView];
+    self.navigationItem.rightBarButtonItem = rightButtonItem;
+    
     [self.groupList registerNib:[UINib nibWithNibName:@"MRGroupTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"groupCell"];
     // Do any additional setup after loading the view from its nib.
     self.groups = [MRDatabaseHelper getGroups];
@@ -73,6 +81,10 @@
     [self.searchBar resignFirstResponder];
     
     [self getGroupList];
+}
+
+- (void)backButtonAction{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 /*
@@ -103,7 +115,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     MRContactDetailViewController* detailViewController = [[MRContactDetailViewController alloc] init];
-    [detailViewController setGroup:self.filteredGroups[indexPath.row]];
+    [detailViewController setGroupData:filteredGroupsArray[indexPath.row]];
     [self.navigationController pushViewController:detailViewController animated:YES];
 }
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1808" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PendingContactsViewController">
@@ -10,6 +10,7 @@
                 <outlet property="customFilterTableView" destination="coy-XS-M30" id="5rI-7m-T52"/>
                 <outlet property="customFilterView" destination="FzY-S0-K9K" id="na0-3n-OeA"/>
                 <outlet property="heightConstraint" destination="vkw-9B-TLB" id="flb-bv-nc5"/>
+                <outlet property="navView" destination="X3B-0o-bWJ" id="5cv-ps-SX6"/>
                 <outlet property="pendingTableView" destination="FWL-it-OZ0" id="tmV-Mh-poX"/>
                 <outlet property="searchBar" destination="WZy-6b-lIs" id="D2c-ZV-ri7"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -205,6 +206,8 @@
                     <exclude reference="6Sz-o9-MmJ"/>
                 </mask>
                 <mask key="constraints">
+                    <exclude reference="BZG-w0-FLj"/>
+                    <exclude reference="I2E-fl-m6b"/>
                     <exclude reference="bVR-fM-j9L"/>
                     <exclude reference="c3T-o6-59D"/>
                     <exclude reference="4Xc-h4-fGN"/>
@@ -214,8 +217,6 @@
                     <exclude reference="0S1-ah-Fcb"/>
                     <exclude reference="i2I-Vz-qEI"/>
                     <exclude reference="trH-jy-EwF"/>
-                    <exclude reference="BZG-w0-FLj"/>
-                    <exclude reference="I2E-fl-m6b"/>
                     <exclude reference="31g-qN-w8K"/>
                     <exclude reference="DeR-ag-tcc"/>
                     <exclude reference="a7b-l7-fDZ"/>
@@ -230,6 +231,8 @@
                     <include reference="6Sz-o9-MmJ"/>
                 </mask>
                 <mask key="constraints">
+                    <include reference="BZG-w0-FLj"/>
+                    <include reference="I2E-fl-m6b"/>
                     <include reference="bVR-fM-j9L"/>
                     <include reference="c3T-o6-59D"/>
                     <include reference="4Xc-h4-fGN"/>
@@ -239,8 +242,6 @@
                     <include reference="0S1-ah-Fcb"/>
                     <include reference="i2I-Vz-qEI"/>
                     <include reference="trH-jy-EwF"/>
-                    <include reference="BZG-w0-FLj"/>
-                    <include reference="I2E-fl-m6b"/>
                     <include reference="31g-qN-w8K"/>
                     <include reference="DeR-ag-tcc"/>
                     <include reference="a7b-l7-fDZ"/>
@@ -249,9 +250,24 @@
             </variation>
             <point key="canvasLocation" x="214" y="339"/>
         </view>
+        <view contentMode="scaleToFill" id="X3B-0o-bWJ">
+            <rect key="frame" x="0.0" y="0.0" width="40" height="33"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="Icon-40.png" translatesAutoresizingMaskIntoConstraints="NO" id="kR2-9a-zFf">
+                    <rect key="frame" x="0.0" y="0.0" width="40" height="33"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="48" y="-50.5"/>
+        </view>
     </objects>
     <resources>
         <image name="Contact.png" width="50" height="50"/>
+        <image name="Icon-40.png" width="40" height="40"/>
         <image name="Triangle 1" width="13" height="12"/>
     </resources>
 </document>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MRContactWithinGroupCollectionViewCell" id="gTV-IL-0wX" customClass="MRContactWithinGroupCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="350" height="60"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="350" height="60"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2ZV-6L-Lc0">
+                        <rect key="frame" x="8" y="8" width="44" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="44" id="N7q-hn-nPZ"/>
+                            <constraint firstAttribute="height" constant="44" id="eB8-ic-sGE"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tfo-Sq-5cQ">
+                        <rect key="frame" x="64" y="19" width="165" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BQe-qI-8Jt">
+                        <rect key="frame" x="293" y="16" width="49" height="28"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="28" id="aTJ-KJ-6t7"/>
+                            <constraint firstAttribute="width" constant="49" id="pck-UY-dh0"/>
+                        </constraints>
+                        <state key="normal" image="success.png"/>
+                        <connections>
+                            <action selector="acceptAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="8Rp-Rg-0Nq"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="09L-s2-yvR">
+                        <rect key="frame" x="234" y="16" width="49" height="28"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="49" id="oFx-OT-eou"/>
+                            <constraint firstAttribute="height" constant="28" id="vyE-gs-tXy"/>
+                        </constraints>
+                        <state key="normal" image="error.png"/>
+                        <connections>
+                            <action selector="rejectAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="IPx-st-c8c"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="Tfo-Sq-5cQ" firstAttribute="leading" secondItem="2ZV-6L-Lc0" secondAttribute="trailing" constant="12" id="DfR-ec-Inc"/>
+                <constraint firstAttribute="bottom" secondItem="09L-s2-yvR" secondAttribute="bottom" constant="16" id="R9H-WG-SMn"/>
+                <constraint firstItem="2ZV-6L-Lc0" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="YL8-WZ-67e"/>
+                <constraint firstAttribute="bottom" secondItem="Tfo-Sq-5cQ" secondAttribute="bottom" constant="20" id="bY7-AK-ZqT"/>
+                <constraint firstItem="Tfo-Sq-5cQ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="19" id="hQb-yb-C43"/>
+                <constraint firstItem="2ZV-6L-Lc0" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="l1Z-ap-bjX"/>
+                <constraint firstAttribute="bottom" secondItem="2ZV-6L-Lc0" secondAttribute="bottom" constant="8" id="qXz-qP-Yjy"/>
+                <constraint firstItem="09L-s2-yvR" firstAttribute="leading" secondItem="Tfo-Sq-5cQ" secondAttribute="trailing" constant="5" id="qmQ-ze-r0N"/>
+                <constraint firstAttribute="trailing" secondItem="BQe-qI-8Jt" secondAttribute="trailing" constant="8" id="sQC-gR-bHw"/>
+                <constraint firstItem="BQe-qI-8Jt" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="16" id="saR-pt-dVh"/>
+                <constraint firstAttribute="bottom" secondItem="BQe-qI-8Jt" secondAttribute="bottom" constant="16" id="tip-W7-BvO"/>
+                <constraint firstItem="BQe-qI-8Jt" firstAttribute="leading" secondItem="09L-s2-yvR" secondAttribute="trailing" constant="10" id="uaQ-VA-vhe"/>
+                <constraint firstItem="09L-s2-yvR" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="16" id="xtg-Hk-aLD"/>
+            </constraints>
+            <connections>
+                <outlet property="acceptBtn" destination="BQe-qI-8Jt" id="Wi8-7O-sDv"/>
+                <outlet property="imgView" destination="2ZV-6L-Lc0" id="5XI-FW-Eal"/>
+                <outlet property="nameTxt" destination="Tfo-Sq-5cQ" id="Uf6-rY-LV5"/>
+                <outlet property="rejectBtn" destination="09L-s2-yvR" id="GYZ-nQ-gQn"/>
+            </connections>
+        </collectionViewCell>
+        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="bHQ-uN-aMk">
+            <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <state key="normal" title="Button"/>
+            <point key="canvasLocation" x="450" y="346"/>
+        </button>
+    </objects>
+    <resources>
+        <image name="error.png" width="28" height="28"/>
+        <image name="success.png" width="28" height="28"/>
+    </resources>
+</document>

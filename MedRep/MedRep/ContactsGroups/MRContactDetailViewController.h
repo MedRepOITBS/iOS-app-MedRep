@@ -10,10 +10,12 @@
 
 @class MRContact;
 @class MRGroup;
+@class MRGroupObject;
 
 @interface MRContactDetailViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 - (void)setContact:(MRContact*)contact;
 - (void)setGroup:(MRGroup*)group;
+- (void)setGroupData:(MRGroupObject*)group;
 
 @end

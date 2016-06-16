@@ -19,7 +19,7 @@
 
 @interface MRTransformViewController () <UICollectionViewDelegate, UICollectionViewDataSource,
                                          UITableViewDelegate, UITableViewDataSource,
-                                        SWRevealViewControllerDelegate>
+                                        SWRevealViewControllerDelegate, UISearchBarDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *navView;
 
@@ -35,11 +35,14 @@
 
 @property (weak, nonatomic) IBOutlet UIView *serveView;
 
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+
 @property UIView *activeView;
 
 @property NSArray *categories;
 @property (strong, nonatomic) NSMutableArray *contentData;
 @property (strong, nonatomic) NSMutableArray *filteredData;
+@property (strong, nonatomic) UITapGestureRecognizer* tapGesture;
 
 @property NSInteger currentIndex;
 
@@ -61,15 +64,12 @@
                                                                         action:@selector(revealToggle:)];
     
     self.navigationItem.leftBarButtonItem = revealButtonItem;
-    self.navigationItem.title = @"VAMSI";
-    self.navigationController.navigationBar.topItem.title = @"VAMSI";
-    self.title = @"VAMSI";
-    UILabel *titleLabel = [UILabel new];
-    titleLabel.text = @"XXX";
-    self.navigationItem.titleView = titleLabel;
     
     UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navView];
     self.navigationItem.rightBarButtonItem = rightButtonItem;
+    
+    self.navigationItem.title = @"Transform";
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
     
     self.currentIndex = 0;
     self.activeView = self.transformView;
@@ -87,11 +87,22 @@
     
     [self createDummyData];
     self.filteredData = self.contentData;
+    
+    self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
+    self.tapGesture.numberOfTapsRequired = 1;
+    self.tapGesture.cancelsTouchesInView = YES;
+    self.tapGesture.enabled = NO;
+    [self.view addGestureRecognizer:self.tapGesture];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewTapped:(UITapGestureRecognizer*)tapGesture {
+    [self.searchBar resignFirstResponder];
+    self.tapGesture.enabled = NO;
 }
 
 #pragma mark - UICollectionView methods
@@ -130,6 +141,18 @@
                                                                            inSection:0],
                                                         indexPath]];
     [self.contentTableView reloadData];
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+    [searchBar resignFirstResponder];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
+    [searchBar resignFirstResponder];
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    self.tapGesture.enabled = YES;
 }
 
 #pragma mark - UITableView methods

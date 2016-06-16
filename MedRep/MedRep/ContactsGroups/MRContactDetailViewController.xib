@@ -10,6 +10,7 @@
                 <outlet property="collectionView" destination="Lro-Ao-ngq" id="gZ1-0Z-hFh"/>
                 <outlet property="mainImageView" destination="nck-Fx-AtI" id="TCP-z5-Tga"/>
                 <outlet property="mainLabel" destination="5E6-ZK-RBQ" id="wPB-T2-nBv"/>
+                <outlet property="navView" destination="ffn-Wn-UWa" id="tq5-dt-DLq"/>
                 <outlet property="postsTableView" destination="FjW-Hl-Vrd" id="kNs-2m-JxQ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -92,10 +93,25 @@
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-            <point key="canvasLocation" x="226.5" y="247.5"/>
+            <point key="canvasLocation" x="311.5" y="266.5"/>
+        </view>
+        <view contentMode="scaleToFill" id="ffn-Wn-UWa">
+            <rect key="frame" x="0.0" y="0.0" width="40" height="33"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="Icon-40.png" translatesAutoresizingMaskIntoConstraints="NO" id="AFS-CT-ZLq">
+                    <rect key="frame" x="0.0" y="0.0" width="40" height="33"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="48" y="-50.5"/>
         </view>
     </objects>
     <resources>
+        <image name="Icon-40.png" width="40" height="40"/>
         <image name="plus.png" width="512" height="512"/>
     </resources>
 </document>
