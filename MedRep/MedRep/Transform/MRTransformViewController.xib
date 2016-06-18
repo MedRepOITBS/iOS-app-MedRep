@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1808" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -230,6 +230,7 @@
                         <constraint firstItem="LCB-O3-0xf" firstAttribute="width" secondItem="u2g-Z6-zwh" secondAttribute="width" multiplier="0.25" id="1X8-G4-sJf"/>
                         <constraint firstItem="HUT-rc-QJQ" firstAttribute="leading" secondItem="3U2-I0-W48" secondAttribute="trailing" constant="-2" id="1iC-WW-XyS"/>
                         <constraint firstItem="y0Y-E4-jYx" firstAttribute="leading" secondItem="I5R-K0-vLh" secondAttribute="trailing" id="6jC-QO-SkC"/>
+                        <constraint firstItem="Nlu-NY-c1u" firstAttribute="leading" secondItem="fZL-Kg-zVV" secondAttribute="trailing" constant="-2" id="9cX-P3-LDb"/>
                         <constraint firstItem="fZL-Kg-zVV" firstAttribute="top" secondItem="u2g-Z6-zwh" secondAttribute="top" id="BIq-5r-QCU"/>
                         <constraint firstItem="LCB-O3-0xf" firstAttribute="top" secondItem="u2g-Z6-zwh" secondAttribute="top" id="CJU-KE-3gY"/>
                         <constraint firstAttribute="bottom" secondItem="Nlu-NY-c1u" secondAttribute="bottom" id="FbW-oU-XOB"/>

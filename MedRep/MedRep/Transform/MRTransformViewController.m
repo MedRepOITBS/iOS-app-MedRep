@@ -13,6 +13,7 @@
 #import "MRTransformDetailViewController.h"
 #import "MPTransformTableViewCell.h"
 #import "SWRevealViewController.h"
+#import "MRContactsViewController.h"
 
 @interface MRTransformViewController () <UICollectionViewDelegate, UICollectionViewDataSource,
                                          UITableViewDelegate, UITableViewDataSource,
@@ -185,19 +186,24 @@
 }
 
 - (IBAction)connectButtonTapped:(id)sender {
-    self.activeView = sender;
+    self.activeView = ((UITapGestureRecognizer *)sender).view;
+    MRContactsViewController *notiFicationViewController = [[MRContactsViewController alloc] initWithNibName:@"MRContactsViewController" bundle:nil];
+       //notiFicationViewController.selectedContent = [self.contentData objectAtIndex:indexPath.row];
+    [self.navigationController pushViewController:notiFicationViewController animated:NO];
+
+    
 }
 
 - (IBAction)transformButtonTapped:(id)sender {
-    self.transformView = sender;
+    self.transformView = ((UITapGestureRecognizer *)sender).view;
 }
 
 - (IBAction)shareButtonTapped:(id)sender {
-    self.shareView = sender;
+    self.shareView = ((UITapGestureRecognizer *)sender).view;
 }
 
 - (IBAction)serveButtonTapped:(id)sender {
-    self.serveView = sender;
+    self.serveView = ((UITapGestureRecognizer *)sender).view;
 }
 
 
