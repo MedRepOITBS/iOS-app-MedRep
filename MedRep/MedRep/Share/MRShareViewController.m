@@ -9,19 +9,26 @@
 #import "MRShareViewController.h"
 #import "MRGroupPostItemTableViewCell.h"
 #import "MRContactWithinGroupCollectionCellCollectionViewCell.h"
-
+#import "MRTabView.h"
 #import "MRDatabaseHelper.h"
-
+#import "SWRevealViewController.h"
 #import "MRContact.h"
 #import "MRGroup.h"
+#import "MRTransformViewController.h"
+#import "MRGroupsListViewController.h"
+#import "PendingContactsViewController.h"
+#import "MRContactsViewController.h"
+#import "MRServeViewController.h"
 
-@interface MRShareViewController ()
+@interface MRShareViewController () <MRTabViewDelegate,SWRevealViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView* postsTableView;
 
 @property (strong, nonatomic) NSArray* contactsUnderGroup;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomHeight;
 @property (strong, nonatomic) NSArray* groupsUnderContact;
 @property (strong, nonatomic) NSArray* posts;
+@property (strong, nonatomic) IBOutlet UIView *navView;
 
 @property (strong, nonatomic) MRContact* mainContact;
 @property (strong, nonatomic) MRGroup* mainGroup;
@@ -33,20 +40,28 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIImageView* titleImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"navLogo.png"]];
-    [self.navigationItem setTitleView:titleImage];
     
     self.navigationItem.title = @"Share";
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
-    self.navigationController.title = @"Share";
     
-//    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonAction)];
-//    self.navigationItem.leftBarButtonItem = revealButtonItem;
-//    
-//    UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navigationController];
-//    self.navigationItem.rightBarButtonItem = rightButtonItem;
+    SWRevealViewController *revealController = [self revealViewController];
+    revealController.delegate = self;
+    [revealController panGestureRecognizer];
+    [revealController tapGestureRecognizer];
     
+    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon.png"]
+                                                                         style:UIBarButtonItemStylePlain target:revealController
+                                                                        action:@selector(revealToggle:)];
+    if (_isFromDetails) {
+        revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonAction)];
+        _bottomHeight.constant = _isFromDetails ? 0 : 50;
+    }
     
+    self.navigationItem.leftBarButtonItem = revealButtonItem;
+    
+    UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navView];
+    self.navigationItem.rightBarButtonItem = rightButtonItem;
+        
     NSArray *myContacts = [MRDatabaseHelper getContacts];
     myContacts = [myContacts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K == %@", @"self.name", @"Chris Martin"]];
     self.mainContact = myContacts.firstObject;
@@ -67,6 +82,33 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"MRTabView" owner:self options:nil];
+    MRTabView *tabView = (MRTabView *)[subviewArray objectAtIndex:0];
+    tabView.delegate = self;
+    tabView.shareView.backgroundColor = [UIColor colorWithRed:26/255.0 green:133/255.0 blue:213/255.0 alpha:1];
+    [self.view addSubview:tabView];
+    
+    [tabView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[view]-0-|" options:NSLayoutFormatAlignAllBottom metrics:nil views:@{@"view":tabView}]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:tabView
+                                                          attribute:NSLayoutAttributeHeight
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:tabView
+                                                          attribute:NSLayoutAttributeHeight
+                                                         multiplier:0
+                                                           constant:_isFromDetails ? 0 : 50]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:tabView
+                                                          attribute:NSLayoutAttributeBottom
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeBottom
+                                                         multiplier:1
+                                                           constant:0]];
 }
 
 - (void)setContact:(MRContact*)contact {
@@ -98,6 +140,9 @@
 }
 */
 
+- (void)backButtonAction{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
@@ -129,6 +174,27 @@
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionView *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
     return 4; // This is the minimum inter item spacing, can be more
+}
+
+- (void)connectButtonTapped {
+    MRContactsViewController* contactsViewCont = [[MRContactsViewController alloc] initWithNibName:@"MRContactsViewController" bundle:nil];
+    MRGroupsListViewController* groupsListViewController = [[MRGroupsListViewController alloc] initWithNibName:@"MRGroupsListViewController" bundle:[NSBundle mainBundle]];
+    contactsViewCont.groupsListViewController = groupsListViewController;
+    
+    PendingContactsViewController *pendingViewController =[[PendingContactsViewController alloc] initWithNibName:@"PendingContactsViewController" bundle:[NSBundle mainBundle]];
+    
+    contactsViewCont.pendingContactsViewController = pendingViewController;
+    [self.navigationController pushViewController:contactsViewCont animated:NO];
+}
+
+- (void)transformButtonTapped {
+    MRTransformViewController *notiFicationViewController = [[MRTransformViewController alloc] initWithNibName:@"MRTransformViewController" bundle:nil];
+    [self.navigationController pushViewController:notiFicationViewController animated:NO];
+}
+
+- (void)serveButtonTapped {
+    MRServeViewController *notiFicationViewController = [[MRServeViewController alloc] initWithNibName:@"MRServeViewController" bundle:nil];
+    [self.navigationController pushViewController:notiFicationViewController animated:NO];
 }
 
 @end

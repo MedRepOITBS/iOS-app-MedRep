@@ -8,6 +8,7 @@
 
 #import "MRContactCollectionCell.h"
 #import "MRContact.h"
+#import "MRCommon.h"
 
 @interface MRContactCollectionCell()
 
@@ -23,6 +24,11 @@
     // Initialization code
 }
 
+- (void)setGroupData:(MRGroupObject*)group{
+    self.picture.image = [MRCommon getImageFromBase64Data:[group.group_img_data dataUsingEncoding:NSUTF8StringEncoding]];
+    self.name.text = group.group_name;
+    self.detail.text = group.group_short_desc;
+}
 
 //{"name":"John Doe","description":"ortho","profile_pic":""}
 - (void)setData:(MRContact*)contact {

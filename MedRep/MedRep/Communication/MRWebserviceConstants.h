@@ -85,6 +85,9 @@ typedef enum kMRWebServiceType
     kMRWebServiceTypeGetMaterial,
     kMRWebServiceTypeGetMoreConnections,
     kMRWebServiceTypeGetGroupList,
+    kMRWebServiceTypeGetSuggestedGroupList,
+    kMRWebServiceTypeGetContactList,
+    kMRWebServiceTypeGetSuggestedContactList,
     kMRWebServiceTypeGetGroupMemberStatus,
     kMRWebServiceTypeUpdateGroupMemberStatus
 } kMRWebServiceType;

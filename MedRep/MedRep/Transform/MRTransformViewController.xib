@@ -26,7 +26,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="QE3-ah-syi">
-                    <rect key="frame" x="0.0" y="0.0" width="450" height="44"/>
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="02a-Px-Nnr"/>
                     </constraints>
@@ -35,15 +35,6 @@
                         <outlet property="delegate" destination="-1" id="J71-F7-pGS"/>
                     </connections>
                 </searchBar>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P7v-4P-VkB">
-                    <rect key="frame" x="450" y="0.0" width="150" height="44"/>
-                    <color key="backgroundColor" red="0.12549019610000001" green="0.69411764710000001" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="P7v-4P-VkB" secondAttribute="height" multiplier="75:22" id="mHP-3E-z79"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
-                    <state key="normal" title="SORT"/>
-                </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u2g-Z6-zwh">
                     <rect key="frame" x="0.0" y="550" width="600" height="50"/>
                     <subviews>
@@ -323,14 +314,12 @@
             <constraints>
                 <constraint firstItem="u2g-Z6-zwh" firstAttribute="top" secondItem="DFd-vW-gB4" secondAttribute="bottom" id="2Ie-SC-XjV"/>
                 <constraint firstAttribute="trailing" secondItem="DFd-vW-gB4" secondAttribute="trailing" id="2jx-Et-IuK"/>
+                <constraint firstAttribute="trailing" secondItem="QE3-ah-syi" secondAttribute="trailing" id="6Q8-yv-F9x"/>
                 <constraint firstItem="DFd-vW-gB4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ADj-Mq-to6"/>
                 <constraint firstItem="z7C-H3-umC" firstAttribute="top" secondItem="QE3-ah-syi" secondAttribute="bottom" id="Hzz-0f-3DG"/>
                 <constraint firstItem="DFd-vW-gB4" firstAttribute="top" secondItem="6BV-9L-5I0" secondAttribute="bottom" id="IVl-L6-x3U"/>
                 <constraint firstItem="z7C-H3-umC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="NBD-hK-E6h"/>
                 <constraint firstItem="27a-DK-TyQ" firstAttribute="top" secondItem="QE3-ah-syi" secondAttribute="bottom" id="QaK-6s-Zca"/>
-                <constraint firstItem="P7v-4P-VkB" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="SZy-I7-UbQ"/>
-                <constraint firstAttribute="trailing" secondItem="P7v-4P-VkB" secondAttribute="trailing" id="W0a-FQ-I3W"/>
-                <constraint firstItem="27a-DK-TyQ" firstAttribute="top" secondItem="P7v-4P-VkB" secondAttribute="bottom" id="W3x-WL-0Ye"/>
                 <constraint firstAttribute="trailing" secondItem="z7C-H3-umC" secondAttribute="trailing" id="a8B-IT-HtD"/>
                 <constraint firstAttribute="bottom" secondItem="u2g-Z6-zwh" secondAttribute="bottom" id="a8G-fu-z4c"/>
                 <constraint firstItem="27a-DK-TyQ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="aIn-4X-q6B"/>
@@ -341,9 +330,7 @@
                 <constraint firstItem="QE3-ah-syi" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="kie-u0-qbg"/>
                 <constraint firstAttribute="trailing" secondItem="6BV-9L-5I0" secondAttribute="trailing" id="lpH-pK-VWt"/>
                 <constraint firstAttribute="trailing" secondItem="27a-DK-TyQ" secondAttribute="trailing" constant="30" id="nPa-rl-Zh8"/>
-                <constraint firstItem="P7v-4P-VkB" firstAttribute="leading" secondItem="QE3-ah-syi" secondAttribute="trailing" id="oCa-GT-Q3M"/>
                 <constraint firstItem="6BV-9L-5I0" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="qQR-tM-3iY"/>
-                <constraint firstItem="P7v-4P-VkB" firstAttribute="leading" secondItem="QE3-ah-syi" secondAttribute="trailing" id="vFY-5S-b0s"/>
             </constraints>
         </view>
         <view contentMode="scaleToFill" id="yyW-D5-5hm">

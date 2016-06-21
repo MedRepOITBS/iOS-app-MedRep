@@ -172,6 +172,12 @@ withComplitionHandler:(completionHandler)responceHandler;
 
 - (void)getGroupListwithHandler:(completionHandler)responceHandler;
 
+- (void)getSuggestedGroupListwithHandler:(completionHandler)responceHandler;
+
+- (void)getContactListwithHandler:(completionHandler)responceHandler;
+
+- (void)getSuggestedContactListwithHandler:(completionHandler)responceHandler;
+
 - (void)getGroupMembersStatuswithHandler:(completionHandler)responceHandler;
 
 - (void)updateGroupMembersStatus:(NSDictionary *)dict withHandler:(completionHandler)responceHandler;

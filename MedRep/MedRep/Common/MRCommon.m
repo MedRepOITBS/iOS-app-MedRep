@@ -370,7 +370,7 @@
     
     [parentView addConstraint:[NSLayoutConstraint constraintWithItem:childView attribute:NSLayoutAttributeTrailing
                                                            relatedBy:NSLayoutRelationEqual
-                                                              toItem:parentView attribute:NSLayoutAttributeRight multiplier:1.0f constant:0.0f]];
+                                                              toItem:parentView attribute:NSLayoutAttributeTrailing multiplier:1.0f constant:0.0f]];
     
     [parentView addConstraint:[NSLayoutConstraint constraintWithItem:childView attribute:NSLayoutAttributeTop
                                                            relatedBy:NSLayoutRelationEqual

@@ -16,10 +16,14 @@
 #import "MRContactsViewController.h"
 #import "MRGroupsListViewController.h"
 #import "PendingContactsViewController.h"
+#import "MRShareViewController.h"
+#import <AVFoundation/AVFoundation.h>
+#import "MRTabView.h"
+#import "MRServeViewController.h"
 
 @interface MRTransformViewController () <UICollectionViewDelegate, UICollectionViewDataSource,
                                          UITableViewDelegate, UITableViewDataSource,
-                                        SWRevealViewControllerDelegate, UISearchBarDelegate>
+                                        SWRevealViewControllerDelegate, UISearchBarDelegate, MRTabViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *navView;
 
@@ -98,6 +102,33 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"MRTabView" owner:self options:nil];
+    MRTabView *tabView = (MRTabView *)[subviewArray objectAtIndex:0];
+    tabView.delegate = self;
+    tabView.transformView.backgroundColor = [UIColor colorWithRed:26/255.0 green:133/255.0 blue:213/255.0 alpha:1];
+    [self.view addSubview:tabView];
+    
+    [tabView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[view]-0-|" options:NSLayoutFormatAlignAllBottom metrics:nil views:@{@"view":tabView}]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:tabView
+                                                          attribute:NSLayoutAttributeHeight
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:tabView
+                                                          attribute:NSLayoutAttributeHeight
+                                                         multiplier:0
+                                                           constant:50]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:tabView
+                                                          attribute:NSLayoutAttributeBottom
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeBottom
+                                                         multiplier:1
+                                                           constant:0]];
 }
 
 - (void)viewTapped:(UITapGestureRecognizer*)tapGesture {
@@ -182,6 +213,10 @@
     if (transformData != nil) {
         if (transformData.icon != nil && transformData.icon.length > 0) {
             regCell.img.image = [UIImage imageNamed:transformData.icon];
+            
+            /*if ([transformData.contentType isEqualToString:@"Video"]) {
+                regCell.img.image = [self generateImageForVideoLink:@"https://dl.dropboxusercontent.com/u/104553173/PK%20Song.mp4"];
+            }*/
         }
         
         if (transformData.title != nil && transformData.title.length > 0) {
@@ -206,12 +241,11 @@
 {
     MRTransformDetailViewController *notiFicationViewController = [[MRTransformDetailViewController alloc] initWithNibName:@"MRTransformDetailViewController" bundle:nil];
     notiFicationViewController.selectedContent = self.contentData[indexPath.row];
-    //notiFicationViewController.selectedContent = [self.contentData objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:notiFicationViewController animated:YES];
 }
 
 - (IBAction)connectButtonTapped:(id)sender {
-    self.activeView = sender;
+    self.connectView = sender;
     
     MRContactsViewController* contactsViewCont = [[MRContactsViewController alloc] initWithNibName:@"MRContactsViewController" bundle:nil];
     MRGroupsListViewController* groupsListViewController = [[MRGroupsListViewController alloc] initWithNibName:@"MRGroupsListViewController" bundle:[NSBundle mainBundle]];
@@ -230,13 +264,35 @@
 
 - (IBAction)shareButtonTapped:(id)sender {
     self.shareView = sender;
+    
+    MRShareViewController* contactsViewCont = [[MRShareViewController alloc] initWithNibName:@"MRShareViewController" bundle:nil];
+    [self.navigationController pushViewController:contactsViewCont animated:true];
 }
 
 - (IBAction)serveButtonTapped:(id)sender {
     self.serveView = sender;
 }
 
+- (void)connectButtonTapped {
+    MRContactsViewController* contactsViewCont = [[MRContactsViewController alloc] initWithNibName:@"MRContactsViewController" bundle:nil];
+    MRGroupsListViewController* groupsListViewController = [[MRGroupsListViewController alloc] initWithNibName:@"MRGroupsListViewController" bundle:[NSBundle mainBundle]];
+    contactsViewCont.groupsListViewController = groupsListViewController;
+    
+    PendingContactsViewController *pendingViewController =[[PendingContactsViewController alloc] initWithNibName:@"PendingContactsViewController" bundle:[NSBundle mainBundle]];
+    
+    contactsViewCont.pendingContactsViewController = pendingViewController;
+    [self.navigationController pushViewController:contactsViewCont animated:NO];
+}
 
+- (void)shareButtonTapped {
+    MRShareViewController* contactsViewCont = [[MRShareViewController alloc] initWithNibName:@"MRShareViewController" bundle:nil];
+    [self.navigationController pushViewController:contactsViewCont animated:NO];
+}
+
+- (void)serveButtonTapped {
+    MRServeViewController *notiFicationViewController = [[MRServeViewController alloc] initWithNibName:@"MRServeViewController" bundle:nil];
+    [self.navigationController pushViewController:notiFicationViewController animated:NO];
+}
 
 #pragma mark - Dummy Data
 
@@ -247,6 +303,7 @@
     MPTransformData *transformData = [MPTransformData new];
     [transformData setSource:@"BBC"];
     [transformData setIcon:@"comapny-logo.png"];
+    [transformData setContentType:@"Image"];
     [transformData setTitle:@"Could High-Dose Vitamin D Help Fight Multiple Sclerosis"];
     [transformData setShortDescription:@"Supplementation appears safe but experts says it's too soon for general..."];
     [transformData setDetailDescription:@"Supplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for general"];
@@ -254,7 +311,8 @@
     
     transformData = [MPTransformData new];
     [transformData setSource:@"BBC"];
-    [transformData setIcon:@"PHdashboard-banner.png"];
+    [transformData setIcon:@"pdf"];
+    [transformData setContentType:@"Pdf"];
     [transformData setTitle:@"Painkillers Often Gateway to Heroin for U.S Teens: Survey"];
     [transformData setShortDescription:@"Heroin is cheaper, easier to obtain than narcotics like OxyContin experts say..."];
     [transformData setDetailDescription:@""];
@@ -262,7 +320,8 @@
     
     transformData = [MPTransformData new];
     [transformData setSource:@"BBC"];
-    [transformData setIcon:@"PHdashboard-bg.png"];
+    [transformData setIcon:@"video"];
+    [transformData setContentType:@"Video"];
     [transformData setTitle:@"It's Not Too late"];
     [transformData setShortDescription:@"Influenza activity usually active in Janurary or February..."];
     [transformData setDetailDescription:@""];
@@ -271,6 +330,7 @@
     transformData = [MPTransformData new];
     [transformData setSource:@"My own source defined"];
     [transformData setIcon:@"comapny-logo2.png"];
+    [transformData setContentType:@"Text"];
     [transformData setTitle:@"Best Cancer Screening Methods"];
     [transformData setShortDescription:@"Source:HealthDay - Related Medline Plus"];
     [transformData setDetailDescription:@""];
@@ -279,6 +339,7 @@
     transformData = [MPTransformData new];
     [transformData setSource:@"ABC"];
     [transformData setIcon:@"bg.png"];
+    [transformData setContentType:@"Image"];
     [transformData setTitle:@"Could High-Dose Vitamin D Help Fight Multiple Sclerosis"];
     [transformData setShortDescription:@"Supplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for general"];
     [transformData setDetailDescription:@""];
@@ -287,6 +348,7 @@
     transformData = [MPTransformData new];
     [transformData setSource:@"XYZ"];
     [transformData setIcon:@"latestNotificatins.png"];
+    [transformData setContentType:@"Image"];
     [transformData setTitle:@"Painkillers Often Gateway to Heroin for U.S Teens: Survey"];
     [transformData setShortDescription:@"Heroin is cheaper, easier to obtain than narcotics like OxyContin experts say..."];
     [transformData setDetailDescription:@"Heroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts say"];
@@ -317,6 +379,26 @@
         
         
     }
+}
+
+-(UIImage *)generateImageForVideoLink:(NSString *)str
+{
+    AVURLAsset *asset=[[AVURLAsset alloc] initWithURL:[NSURL URLWithString:str] options:nil];
+    AVAssetImageGenerator *generator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+    generator.appliesPreferredTrackTransform=TRUE;
+    CMTime thumbTime = CMTimeMakeWithSeconds(0,30);
+    __block UIImage *thumbImg;
+    AVAssetImageGeneratorCompletionHandler handler = ^(CMTime requestedTime, CGImageRef im, CMTime actualTime, AVAssetImageGeneratorResult result, NSError *error){
+        if (result != AVAssetImageGeneratorSucceeded) {
+            NSLog(@"couldn't generate thumbnail, error:%@", error);
+        }
+        thumbImg=[UIImage imageWithCGImage:im];
+    };
+    
+    CGSize maxSize = CGSizeMake(320, 180);
+    generator.maximumSize = maxSize;
+    [generator generateCGImagesAsynchronouslyForTimes:[NSArray arrayWithObject:[NSValue valueWithCMTime:thumbTime]] completionHandler:handler];
+    return thumbImg;
 }
 
 /*

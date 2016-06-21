@@ -41,21 +41,21 @@
     UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navView];
     self.navigationItem.rightBarButtonItem = rightButtonItem;
     
-    [[self.txtName layer] setBorderColor:[[UIColor grayColor] CGColor]];
+    [[self.txtName layer] setBorderColor:[[UIColor blackColor] CGColor]];
     [[self.txtName layer] setBorderWidth:1.0];
-    [[self.txtName layer] setCornerRadius:3];
+    [[self.txtName layer] setCornerRadius:5];
     
-    [[self.txtLongDesc layer] setBorderColor:[[UIColor grayColor] CGColor]];
+    [[self.txtLongDesc layer] setBorderColor:[[UIColor blackColor] CGColor]];
     [[self.txtLongDesc layer] setBorderWidth:1.0];
-    [[self.txtLongDesc layer] setCornerRadius:3];
+    [[self.txtLongDesc layer] setCornerRadius:5];
     
-    [[self.txtShortDesc layer] setBorderColor:[[UIColor grayColor] CGColor]];
+    [[self.txtShortDesc layer] setBorderColor:[[UIColor blackColor] CGColor]];
     [[self.txtShortDesc layer] setBorderWidth:1.0];
-    [[self.txtShortDesc layer] setCornerRadius:3];
+    [[self.txtShortDesc layer] setCornerRadius:5];
     
-    [[self.imgView layer] setBorderColor:[[UIColor grayColor] CGColor]];
+    [[self.imgView layer] setBorderColor:[[UIColor blackColor] CGColor]];
     [[self.imgView layer] setBorderWidth:1.0];
-    [[self.imgView layer] setCornerRadius:3];
+    [[self.imgView layer] setCornerRadius:5];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imgTapped)];
     [_imgView addGestureRecognizer:tap];

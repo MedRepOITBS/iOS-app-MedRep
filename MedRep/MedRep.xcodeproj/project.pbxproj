@@ -500,6 +500,14 @@
 		83C127FC1B77C88B00D2F08E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C127FB1B77C88B00D2F08E /* ViewController.m */; };
 		83C128011B77C88B00D2F08E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83C128001B77C88B00D2F08E /* Images.xcassets */; };
 		83C128101B77C88B00D2F08E /* MedRepTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C1280F1B77C88B00D2F08E /* MedRepTests.m */; };
+		8AC93CD91D17E92500C2A864 /* MRTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC93CD81D17E92500C2A864 /* MRTabView.m */; };
+		8AC93CDA1D17E92500C2A864 /* MRTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC93CD81D17E92500C2A864 /* MRTabView.m */; };
+		8AC93CDC1D17E93300C2A864 /* MRTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AC93CDB1D17E93300C2A864 /* MRTabView.xib */; };
+		8AC93CDD1D17E93300C2A864 /* MRTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AC93CDB1D17E93300C2A864 /* MRTabView.xib */; };
+		8AC93CE21D183CCF00C2A864 /* MRServeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC93CE01D183CCF00C2A864 /* MRServeViewController.m */; };
+		8AC93CE31D183CCF00C2A864 /* MRServeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC93CE01D183CCF00C2A864 /* MRServeViewController.m */; };
+		8AC93CE41D183CCF00C2A864 /* MRServeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AC93CE11D183CCF00C2A864 /* MRServeViewController.xib */; };
+		8AC93CE51D183CCF00C2A864 /* MRServeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AC93CE11D183CCF00C2A864 /* MRServeViewController.xib */; };
 		8AFE8CD31D0EFFD30000382E /* MRCreateGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFE8CD11D0EFFD30000382E /* MRCreateGroupViewController.m */; };
 		8AFE8CD41D0EFFD30000382E /* MRCreateGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFE8CD11D0EFFD30000382E /* MRCreateGroupViewController.m */; };
 		8AFE8CD51D0EFFD30000382E /* MRCreateGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AFE8CD21D0EFFD30000382E /* MRCreateGroupViewController.xib */; };
@@ -1843,6 +1851,12 @@
 		83C128091B77C88B00D2F08E /* MedRepTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MedRepTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		83C1280E1B77C88B00D2F08E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		83C1280F1B77C88B00D2F08E /* MedRepTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedRepTests.m; sourceTree = "<group>"; };
+		8AC93CD71D17E92500C2A864 /* MRTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRTabView.h; sourceTree = "<group>"; };
+		8AC93CD81D17E92500C2A864 /* MRTabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRTabView.m; sourceTree = "<group>"; };
+		8AC93CDB1D17E93300C2A864 /* MRTabView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRTabView.xib; sourceTree = "<group>"; };
+		8AC93CDF1D183CCF00C2A864 /* MRServeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRServeViewController.h; sourceTree = "<group>"; };
+		8AC93CE01D183CCF00C2A864 /* MRServeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRServeViewController.m; sourceTree = "<group>"; };
+		8AC93CE11D183CCF00C2A864 /* MRServeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRServeViewController.xib; sourceTree = "<group>"; };
 		8AFE8CD01D0EFFD30000382E /* MRCreateGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRCreateGroupViewController.h; sourceTree = "<group>"; };
 		8AFE8CD11D0EFFD30000382E /* MRCreateGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRCreateGroupViewController.m; sourceTree = "<group>"; };
 		8AFE8CD21D0EFFD30000382E /* MRCreateGroupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRCreateGroupViewController.xib; sourceTree = "<group>"; };
@@ -1890,7 +1904,6 @@
 		CC649F731D0D2C0E0012289C /* selvit.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = selvit.jpeg; sourceTree = "<group>"; };
 		CC649F741D0D2C0E0012289C /* Trycin-Tabs.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Trycin-Tabs.jpg"; sourceTree = "<group>"; };
 		CC7DB2161D0C8BEC007DFE4C /* MedRepDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MedRepDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		CC7DB2171D0C8BEC007DFE4C /* MedRep copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MedRep copy-Info.plist"; path = "/Users/vkatra/Documents/Vamsi_Backup/Personal/DoctorPlus/GitHub/develop/iOS-app-MedRep/MedRep/MedRep copy-Info.plist"; sourceTree = "<absolute>"; };
 		CC7DB2181D0C8C46007DFE4C /* MRDevEnvironmentConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRDevEnvironmentConfig.h; sourceTree = "<group>"; };
 		CC7DB2191D0C8CF2007DFE4C /* MRDevEnvironmentConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRDevEnvironmentConfig.m; sourceTree = "<group>"; };
 		CC7DB26B1D0C9E15007DFE4C /* MPTransformTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPTransformTableViewCell.h; sourceTree = "<group>"; };
@@ -3219,7 +3232,6 @@
 				83C127EF1B77C88B00D2F08E /* MedRep */,
 				83C1280C1B77C88B00D2F08E /* MedRepTests */,
 				83C127EE1B77C88B00D2F08E /* Products */,
-				CC7DB2171D0C8BEC007DFE4C /* MedRep copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -3242,6 +3254,7 @@
 				CC7DB3111D0CC530007DFE4C /* PendingConnection */,
 				CC7DB2941D0CC433007DFE4C /* ContactsGroups */,
 				CC7DB2881D0C9EC2007DFE4C /* Share */,
+				8AC93CDE1D183CB600C2A864 /* Serve */,
 				CC7DB26A1D0C9E15007DFE4C /* Transform */,
 				7920D6951C1C9A61008D3386 /* ProfileDetails */,
 				79FDB3FE1C1C863E00CC52CF /* ForgotPassword */,
@@ -3308,6 +3321,26 @@
 				83C1280E1B77C88B00D2F08E /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8AC93CD61D17E90A00C2A864 /* TabView */ = {
+			isa = PBXGroup;
+			children = (
+				8AC93CD71D17E92500C2A864 /* MRTabView.h */,
+				8AC93CD81D17E92500C2A864 /* MRTabView.m */,
+				8AC93CDB1D17E93300C2A864 /* MRTabView.xib */,
+			);
+			path = TabView;
+			sourceTree = "<group>";
+		};
+		8AC93CDE1D183CB600C2A864 /* Serve */ = {
+			isa = PBXGroup;
+			children = (
+				8AC93CDF1D183CCF00C2A864 /* MRServeViewController.h */,
+				8AC93CE01D183CCF00C2A864 /* MRServeViewController.m */,
+				8AC93CE11D183CCF00C2A864 /* MRServeViewController.xib */,
+			);
+			path = Serve;
 			sourceTree = "<group>";
 		};
 		8AFE8CCF1D0EFFB60000382E /* Groups */ = {
@@ -3403,6 +3436,7 @@
 		CC7DB26A1D0C9E15007DFE4C /* Transform */ = {
 			isa = PBXGroup;
 			children = (
+				8AC93CD61D17E90A00C2A864 /* TabView */,
 				CC7DB26B1D0C9E15007DFE4C /* MPTransformTableViewCell.h */,
 				CC7DB26C1D0C9E15007DFE4C /* MPTransformTableViewCell.m */,
 				CC7DB26D1D0C9E15007DFE4C /* MPTransformTableViewCell.xib */,
@@ -4070,6 +4104,7 @@
 				79173C621BB48EE100842E4C /* PHmarketing@2x.png in Resources */,
 				79BD28021B80B37F007CA448 /* categoryBG-667h@2x.jpg in Resources */,
 				7961A96D1B8F25DA0035D63A /* stepOne@2x.png in Resources */,
+				8AC93CE41D183CCF00C2A864 /* MRServeViewController.xib in Resources */,
 				8AFE8CFA1D0F21BF0000382E /* post_image9.jpeg in Resources */,
 				79BD27CC1B809A80007CA448 /* HomeLogo~iPad.png in Resources */,
 				79BD27D71B809A80007CA448 /* Signup_plain@3x.png in Resources */,
@@ -4132,6 +4167,7 @@
 				7929E3D91B9CC674001F1373 /* mrkt-cmpn@3x.png in Resources */,
 				79BD27CD1B809A80007CA448 /* pageviewdots@2x~iPad copy.png in Resources */,
 				79BD27AE1B80980F007CA448 /* iTunesArtwork in Resources */,
+				8AC93CDC1D17E93300C2A864 /* MRTabView.xib in Resources */,
 				79708AA51BB73C67007CE81D /* PHlocations@2x.png in Resources */,
 				79BD27AC1B80980F007CA448 /* Icon.png in Resources */,
 				8AFE8CEE1D0F21BF0000382E /* group_pic4.jpeg in Resources */,
@@ -4378,6 +4414,7 @@
 				CC7DB1341D0C8BEC007DFE4C /* PHnotification@3x.png in Resources */,
 				CC7DB1351D0C8BEC007DFE4C /* MRViewAppointmnetViewController.xib in Resources */,
 				CC7DB1361D0C8BEC007DFE4C /* crup-arrow@3x.png in Resources */,
+				8AC93CDD1D17E93300C2A864 /* MRTabView.xib in Resources */,
 				CC7DB1371D0C8BEC007DFE4C /* pcfedback@2x.png in Resources */,
 				CC7DB3A21D0CC8C8007DFE4C /* medicine.jpg in Resources */,
 				CC7DB2E81D0CC433007DFE4C /* MRPopoverControllerViewController.xib in Resources */,
@@ -4527,6 +4564,7 @@
 				CC7DB1B51D0C8BEC007DFE4C /* PHdashboard-banner@3x.png in Resources */,
 				CC7DB1B61D0C8BEC007DFE4C /* settings@3x.png in Resources */,
 				CC649F7D1D0D2C1F0012289C /* selvit.jpeg in Resources */,
+				8AC93CE51D183CCF00C2A864 /* MRServeViewController.xib in Resources */,
 				CC7DB1B71D0C8BEC007DFE4C /* ddpresent-activity-normal@3x.png in Resources */,
 				CC7DB1B81D0C8BEC007DFE4C /* MRRegHeaderView.xib in Resources */,
 				CC7DB3681D0CC8A6007DFE4C /* post_image8.jpeg in Resources */,
@@ -4710,7 +4748,9 @@
 				7961A9791B8F4E520035D63A /* MRWelcomeViewController.m in Sources */,
 				79DC370D1BE7DC5F0027F7DB /* MRMedRepTableCell.m in Sources */,
 				83B7820F1B7919EA0070645C /* NSDate+Utilities.m in Sources */,
+				8AC93CE21D183CCF00C2A864 /* MRServeViewController.m in Sources */,
 				83B782111B7919EA0070645C /* SVProgressHUD.m in Sources */,
+				8AC93CD91D17E92500C2A864 /* MRTabView.m in Sources */,
 				CC7DB2D11D0CC433007DFE4C /* MRContactsViewController.m in Sources */,
 				CC7DB30D1D0CC4E2007DFE4C /* MRSuggestedContact.m in Sources */,
 				79A5DC5C1BA1EBBF001D872C /* MPNotificationAlertViewController.m in Sources */,
@@ -4866,7 +4906,9 @@
 				CC7DB0471D0C8BEC007DFE4C /* MRDoctorActivityScoreDetailsViewController.m in Sources */,
 				CC7DB0481D0C8BEC007DFE4C /* MRForgotPasswordViewController.m in Sources */,
 				CC7DB0491D0C8BEC007DFE4C /* MRParserHelper.m in Sources */,
+				8AC93CE31D183CCF00C2A864 /* MRServeViewController.m in Sources */,
 				CC7DB04A1D0C8BEC007DFE4C /* MRConvertAppointmentCell.m in Sources */,
+				8AC93CDA1D17E92500C2A864 /* MRTabView.m in Sources */,
 				CC7DB04B1D0C8BEC007DFE4C /* MRDoctorScoreViewController.m in Sources */,
 				CC7DB04C1D0C8BEC007DFE4C /* MRAppointmentCell.m in Sources */,
 				CC7DB04D1D0C8BEC007DFE4C /* WYStoryboardPopoverSegue.m in Sources */,
