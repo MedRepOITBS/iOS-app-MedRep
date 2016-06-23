@@ -44,7 +44,7 @@
         self.emailId = [[infoDictionary objectForKey:@"emailId"] isKindOfClass:[NSString class]] ? [infoDictionary objectForKey:@"emailId"] : @"";
         self.alternateEmailId = [[infoDictionary objectForKey:@"alternateEmailId"] isKindOfClass:[NSString class]] ? [infoDictionary objectForKey:@"alternateEmailId"] : @"";
         self.status = [[infoDictionary objectForKey:@"status"] isKindOfClass:[NSString class]] ? [infoDictionary objectForKey:@"status"] : @"";
-        self.imgData = [[infoDictionary objectForKey:@"imgData"] isKindOfClass:[NSString class]] ? [infoDictionary objectForKey:@"imgData"] : @"";
+        self.imgData = [[infoDictionary objectForKey:@"data"] isKindOfClass:[NSString class]] ? [infoDictionary objectForKey:@"data"] : @"";
         self.mimeType = [[infoDictionary objectForKey:@"mimeType"] isKindOfClass:[NSString class]] ? [infoDictionary objectForKey:@"mimeType"] : @"";
         self.therapeuticName = [[infoDictionary objectForKey:@"therapeuticName"] isKindOfClass:[NSString class]] ? [infoDictionary objectForKey:@"therapeuticName"] : @"";
     }

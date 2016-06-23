@@ -7,6 +7,7 @@
 //
 
 #import "MRGroupObject.h"
+#import "MRGroupUserObject.h"
 
 @implementation MRGroupObject
 
@@ -22,6 +23,8 @@
         self.group_img_data = @"";
         self.group_mimeType = @"";
         self.group_id = @"";
+        
+        _member = [NSMutableArray array];
     }
     
     return self;
@@ -39,6 +42,12 @@
         self.group_img_data = [[infoDictionary objectForKey:@"group_img_data"] isKindOfClass:[NSString class]] ? [infoDictionary objectForKey:@"group_img_data"] : @"";
         self.group_mimeType = [[infoDictionary objectForKey:@"group_mimeType"] isKindOfClass:[NSString class]] ? [infoDictionary objectForKey:@"group_mimeType"] : @"";
         self.group_id = [[infoDictionary objectForKey:@"group_id"] isKindOfClass:[NSString class]] ? [infoDictionary objectForKey:@"group_id"] : @"";
+        
+        NSArray *memberData = [[infoDictionary objectForKey:@"member"] isKindOfClass:[NSArray class]] ? [infoDictionary objectForKey:@"member"] : @[];
+        
+        for (NSDictionary *dic in memberData) {
+            [_member addObject:[[MRGroupUserObject alloc] initWithDict:dic]];
+        }
     }
     
     return self;

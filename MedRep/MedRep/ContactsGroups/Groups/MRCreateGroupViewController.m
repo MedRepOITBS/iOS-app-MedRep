@@ -59,6 +59,15 @@
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imgTapped)];
     [_imgView addGestureRecognizer:tap];
+    
+    if (_group) {
+        self.txtName.text = self.group.group_name;
+        self.txtLongDesc.text = self.group.group_long_desc;
+        self.txtShortDesc.text = self.group.group_short_desc;
+        UIImage *theImage= [MRCommon getImageFromBase64Data:[self.group.group_img_data dataUsingEncoding:NSUTF8StringEncoding]];
+        groupIconData = UIImageJPEGRepresentation(theImage, 1.0);
+        self.imgView.image = theImage;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -115,6 +124,11 @@
         if (status)
         {
             [MRCommon showAlert:@"Group created!" delegate:nil];
+            _txtName.text = @"";
+            _txtLongDesc.text = @"";
+            _txtShortDesc.text = @"";
+            [_imgView setImage:[UIImage imageNamed:@"Group.png"]];
+            groupIconData = nil;
         }
         else
         {

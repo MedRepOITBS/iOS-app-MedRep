@@ -18,6 +18,8 @@
 @property (nonatomic, strong) NSString *group_img_data;
 @property (nonatomic, strong) NSString *group_mimeType;
 
+@property (nonatomic, strong) NSMutableArray *member;
+
 - (id) initWithDict:(NSDictionary*)infoDictionary;
 
 

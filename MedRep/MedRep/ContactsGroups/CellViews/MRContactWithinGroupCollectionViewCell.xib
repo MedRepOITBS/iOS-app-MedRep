@@ -23,7 +23,7 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tfo-Sq-5cQ">
                         <rect key="frame" x="64" y="19" width="165" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BQe-qI-8Jt">
@@ -32,7 +32,7 @@
                             <constraint firstAttribute="height" constant="28" id="aTJ-KJ-6t7"/>
                             <constraint firstAttribute="width" constant="49" id="pck-UY-dh0"/>
                         </constraints>
-                        <state key="normal" image="success.png"/>
+                        <state key="normal" image="favFilter-checked.png"/>
                         <connections>
                             <action selector="acceptAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="8Rp-Rg-0Nq"/>
                         </connections>
@@ -43,7 +43,7 @@
                             <constraint firstAttribute="width" constant="49" id="oFx-OT-eou"/>
                             <constraint firstAttribute="height" constant="28" id="vyE-gs-tXy"/>
                         </constraints>
-                        <state key="normal" image="error.png"/>
+                        <state key="normal" image="favFilter-wrong.png"/>
                         <connections>
                             <action selector="rejectAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="IPx-st-c8c"/>
                         </connections>
@@ -51,7 +51,7 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
-            <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="Tfo-Sq-5cQ" firstAttribute="leading" secondItem="2ZV-6L-Lc0" secondAttribute="trailing" constant="12" id="DfR-ec-Inc"/>
                 <constraint firstAttribute="bottom" secondItem="09L-s2-yvR" secondAttribute="bottom" constant="16" id="R9H-WG-SMn"/>
@@ -74,15 +74,9 @@
                 <outlet property="rejectBtn" destination="09L-s2-yvR" id="GYZ-nQ-gQn"/>
             </connections>
         </collectionViewCell>
-        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="bHQ-uN-aMk">
-            <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <state key="normal" title="Button"/>
-            <point key="canvasLocation" x="450" y="346"/>
-        </button>
     </objects>
     <resources>
-        <image name="error.png" width="28" height="28"/>
-        <image name="success.png" width="28" height="28"/>
+        <image name="favFilter-checked.png" width="17" height="17"/>
+        <image name="favFilter-wrong.png" width="9" height="11"/>
     </resources>
 </document>

@@ -20,7 +20,7 @@
 #import "MRContactsViewController.h"
 #import "MRServeViewController.h"
 
-@interface MRShareViewController () <MRTabViewDelegate,SWRevealViewControllerDelegate>
+@interface MRShareViewController () <MRTabViewDelegate, UISearchBarDelegate, SWRevealViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView* postsTableView;
 
@@ -29,10 +29,10 @@
 @property (strong, nonatomic) NSArray* groupsUnderContact;
 @property (strong, nonatomic) NSArray* posts;
 @property (strong, nonatomic) IBOutlet UIView *navView;
-
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) MRContact* mainContact;
 @property (strong, nonatomic) MRGroup* mainGroup;
-
+@property (strong, nonatomic) UITapGestureRecognizer* tapGesture;
 
 @end
 
@@ -61,6 +61,12 @@
     
     UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navView];
     self.navigationItem.rightBarButtonItem = rightButtonItem;
+    
+    self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
+    self.tapGesture.numberOfTapsRequired = 1;
+    self.tapGesture.cancelsTouchesInView = YES;
+    self.tapGesture.enabled = NO;
+    [self.view addGestureRecognizer:self.tapGesture];
         
     NSArray *myContacts = [MRDatabaseHelper getContacts];
     myContacts = [myContacts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K == %@", @"self.name", @"Chris Martin"]];
@@ -195,6 +201,23 @@
 - (void)serveButtonTapped {
     MRServeViewController *notiFicationViewController = [[MRServeViewController alloc] initWithNibName:@"MRServeViewController" bundle:nil];
     [self.navigationController pushViewController:notiFicationViewController animated:NO];
+}
+
+- (void)viewTapped:(UITapGestureRecognizer*)tapGesture {
+    [self.searchBar resignFirstResponder];
+    self.tapGesture.enabled = NO;
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+    [searchBar resignFirstResponder];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
+    [searchBar resignFirstResponder];
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    self.tapGesture.enabled = YES;
 }
 
 @end

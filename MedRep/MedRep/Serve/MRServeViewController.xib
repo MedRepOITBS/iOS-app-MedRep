@@ -16,6 +16,9 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NDcompany2-BG.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="MMm-D2-haK">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pnk-F4-8ph">
                     <rect key="frame" x="20" y="20" width="335" height="200"/>
                     <constraints>
@@ -23,12 +26,16 @@
                     </constraints>
                     <string key="text">“Serve” allows a doctor to serve the patient community digitally. This feature is going to be launched soon, and would allow doctors the ability to connect with Patients through Online &amp; Remote consultation facilities, as well as, managing their patient appointments. </string>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="MMm-D2-haK" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="IkZ-N3-sVk"/>
+                <constraint firstAttribute="trailing" secondItem="MMm-D2-haK" secondAttribute="trailing" id="PtE-53-MoQ"/>
+                <constraint firstAttribute="bottom" secondItem="MMm-D2-haK" secondAttribute="bottom" id="WEP-s4-Va4"/>
+                <constraint firstItem="MMm-D2-haK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="cXR-5L-dSA"/>
                 <constraint firstAttribute="trailing" secondItem="Pnk-F4-8ph" secondAttribute="trailing" constant="20" id="kSp-YN-AgX"/>
                 <constraint firstItem="Pnk-F4-8ph" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="xBg-JY-VgN"/>
                 <constraint firstItem="Pnk-F4-8ph" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="xGS-vM-4Ib"/>
@@ -54,5 +61,6 @@
     </objects>
     <resources>
         <image name="Icon-40.png" width="40" height="40"/>
+        <image name="NDcompany2-BG.jpg" width="320" height="351"/>
     </resources>
 </document>
