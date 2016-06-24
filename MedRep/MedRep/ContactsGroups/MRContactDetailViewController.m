@@ -75,21 +75,80 @@
     self.postsTableView.estimatedRowHeight = 250;
     self.postsTableView.rowHeight = UITableViewAutomaticDimension;
     if (self.mainContact) {
+        for (UIView *view in self.mainImageView.subviews) {
+            if ([view isKindOfClass:[UILabel class]]) {
+                [view removeFromSuperview];
+            }
+        }
+        
         self.mainImageView.image = [UIImage imageNamed:self.mainContact.profilePic];
         self.mainLabel.text = self.mainContact.name;
         self.groupsUnderContact = [self.mainContact.groups allObjects];
         self.posts = [self.mainContact.groupPosts allObjects];
         _collectionHeight.constant = 0;
+        
+        if (!self.mainContact.profilePic.length)
+        {
+            self.mainImageView.image = nil;
+            if (self.mainContact.name.length > 0) {
+                UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:self.mainImageView.bounds];
+                subscriptionTitleLabel.textAlignment = NSTextAlignmentCenter;
+                subscriptionTitleLabel.font = [UIFont systemFontOfSize:15.0];
+                subscriptionTitleLabel.textColor = [UIColor lightGrayColor];
+                subscriptionTitleLabel.layer.cornerRadius = 5.0;
+                subscriptionTitleLabel.layer.masksToBounds = YES;
+                subscriptionTitleLabel.layer.borderWidth =1.0;
+                subscriptionTitleLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
+                
+                NSArray *substrngs = [self.mainContact.name componentsSeparatedByString:@" "];
+                NSString *imageString = @"";
+                for(NSString *str in substrngs){
+                    if (str.length > 0) {
+                        imageString = [imageString stringByAppendingString:[NSString stringWithFormat:@"%c",[str characterAtIndex:0]]];
+                    }
+                }
+                subscriptionTitleLabel.text = imageString.length > 2 ? [imageString substringToIndex:2] : imageString;
+                [self.mainImageView addSubview:subscriptionTitleLabel];
+            }
+        }
+        
     } else {
 //        self.mainImageView.image = [UIImage imageNamed:self.mainGroup.groupPicture];
 //        self.mainLabel.text = self.mainGroup.name;
 //        self.contactsUnderGroup = [self.mainGroup.contacts allObjects];
 //        self.posts = [self.mainGroup.groupPosts allObjects];
+        for (UIView *view in self.mainImageView.subviews) {
+            if ([view isKindOfClass:[UILabel class]]) {
+                [view removeFromSuperview];
+            }
+        }
+        
         self.mainImageView.image = [MRCommon getImageFromBase64Data:[self.mainGroupObj.group_img_data dataUsingEncoding:NSUTF8StringEncoding]];
         self.mainLabel.text = self.mainGroupObj.group_name;
         self.contactsUnderGroup = @[];
         self.posts = @[];
         _collectionHeight.constant = self.view.frame.size.height - 65;
+        
+        if (self.mainGroupObj.group_name.length > 0 && !self.mainGroupObj.group_img_data.length) {
+            UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:self.mainImageView.bounds];
+            subscriptionTitleLabel.textAlignment = NSTextAlignmentCenter;
+            subscriptionTitleLabel.font = [UIFont systemFontOfSize:15.0];
+            subscriptionTitleLabel.textColor = [UIColor lightGrayColor];
+            subscriptionTitleLabel.layer.cornerRadius = 5.0;
+            subscriptionTitleLabel.layer.masksToBounds = YES;
+            subscriptionTitleLabel.layer.borderWidth =1.0;
+            subscriptionTitleLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
+            
+            NSArray *substrngs = [self.mainGroupObj.group_name componentsSeparatedByString:@" "];
+            NSString *imageString = @"";
+            for(NSString *str in substrngs){
+                if (str.length > 0) {
+                    imageString = [imageString stringByAppendingString:[NSString stringWithFormat:@"%c",[str characterAtIndex:0]]];
+                }
+            }
+            subscriptionTitleLabel.text = imageString.length > 2 ? [imageString substringToIndex:2] : imageString;
+            [self.mainImageView addSubview:subscriptionTitleLabel];
+        }
         
         [self getGroupMembersStatus];
     }
@@ -364,7 +423,7 @@
                                               otherButtonTitles:@"Add Members",@"Pending Members", nil];
     }
     
-    canEditGroup = [MRAppControl sharedHelper].userType == 1 && !self.mainContact;
+    canEditGroup = self.mainGroupObj && (self.mainGroupObj.admin_id == [MRAppControl sharedHelper].userRegData[@"doctorId"]);
     if (canEditGroup) {
         self.moreOptions = [[UIActionSheet alloc] initWithTitle:@"More Options"
                                                        delegate:self
@@ -385,6 +444,31 @@
         createGroupVC.group = self.mainGroupObj;
         [self.navigationController pushViewController:createGroupVC animated:NO];
     }else if (buttonIndex == 3 && canEditGroup) {
+        [self removeGroup];
+    }
+}
+
+-(void) removeGroup{
+    [MRCommon showActivityIndicator:@"Deleting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] removeGroup:[NSDictionary dictionaryWithObjectsAndKeys:self.mainGroupObj.group_id, @"group_id", nil] withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [MRCommon stopActivityIndicator];
+        if (status)
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Group Deleted!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            alert.tag = 11;
+            [alert show];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }];
+}
+
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == 11) {
         [self.navigationController popViewControllerAnimated:YES];
     }
 }

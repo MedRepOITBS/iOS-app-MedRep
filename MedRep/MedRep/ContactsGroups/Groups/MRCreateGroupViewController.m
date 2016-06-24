@@ -12,16 +12,19 @@
 #import "MRCommon.h"
 #import "MRConstants.h"
 #import <AVFoundation/AVFoundation.h>
+#import "MRContactsViewController.h"
 
-@interface MRCreateGroupViewController () <UITextViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
+@interface MRCreateGroupViewController () <UITextViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate> {
     UITextView *activeTxtView;
     NSData *groupIconData;
+    BOOL isUpdateMode;
 }
 
 @property (weak, nonatomic) IBOutlet UITextView *txtShortDesc;
 @property (weak, nonatomic) IBOutlet UITextView *txtLongDesc;
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
 @property (weak, nonatomic) IBOutlet UITextView *txtName;
+@property (weak, nonatomic) IBOutlet UIButton *createBtn;
 @property (strong, nonatomic) IBOutlet UIView *navView;
 
 @end
@@ -67,6 +70,11 @@
         UIImage *theImage= [MRCommon getImageFromBase64Data:[self.group.group_img_data dataUsingEncoding:NSUTF8StringEncoding]];
         groupIconData = UIImageJPEGRepresentation(theImage, 1.0);
         self.imgView.image = theImage;
+        isUpdateMode = YES;
+        self.navigationItem.title = @"Update Group";
+        [_createBtn setTitle:@"Update Group" forState:UIControlStateNormal];
+    }else{
+        isUpdateMode = NO;
     }
 }
 
@@ -110,7 +118,7 @@
         return;
     }
     
-    NSDictionary *dictReq = [NSDictionary dictionaryWithObjectsAndKeys:
+    NSMutableDictionary *dictReq = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                              _txtName.text,@"group_name",
                              _txtShortDesc.text, @"group_short_desc",
                              _txtLongDesc.text, @"group_long_desc",
@@ -118,25 +126,68 @@
                              @"png",@"group_mimeType",
                              nil];
     
-    [MRCommon showActivityIndicator:@"Creating..."];
-    [[MRWebserviceHelper sharedWebServiceHelper] createGroup:dictReq withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-        [MRCommon stopActivityIndicator];
-        if (status)
-        {
-            [MRCommon showAlert:@"Group created!" delegate:nil];
-            _txtName.text = @"";
-            _txtLongDesc.text = @"";
-            _txtShortDesc.text = @"";
-            [_imgView setImage:[UIImage imageNamed:@"Group.png"]];
-            groupIconData = nil;
+    if (isUpdateMode) {
+        [MRCommon showActivityIndicator:@"Updating..."];
+        
+        [dictReq setValue:self.group.group_id forKey:@"group_id"];
+        [[MRWebserviceHelper sharedWebServiceHelper] updateGroup:dictReq withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+            [MRCommon stopActivityIndicator];
+            if (status)
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Group updated!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                alert.tag = 11;
+                [alert show];
+                
+                _txtName.text = @"";
+                _txtLongDesc.text = @"";
+                _txtShortDesc.text = @"";
+                [_imgView setImage:[UIImage imageNamed:@"Group.png"]];
+                groupIconData = nil;
+            }
+            else
+            {
+                NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                if (erros.count > 0)
+                    [MRCommon showAlert:[erros lastObject] delegate:nil];
+            }
+        }];
+    }else{
+        [MRCommon showActivityIndicator:@"Creating..."];
+        
+        [[MRWebserviceHelper sharedWebServiceHelper] createGroup:dictReq withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+            [MRCommon stopActivityIndicator];
+            if (status)
+            {
+                //[MRCommon showAlert:@"Group created!" delegate:nil];
+                
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Group created!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                alert.tag = 11;
+                [alert show];
+                
+                _txtName.text = @"";
+                _txtLongDesc.text = @"";
+                _txtShortDesc.text = @"";
+                [_imgView setImage:[UIImage imageNamed:@"Group.png"]];
+                groupIconData = nil;
+            }
+            else
+            {
+                NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                if (erros.count > 0)
+                    [MRCommon showAlert:[erros lastObject] delegate:nil];
+            }
+        }];
+    }
+}
+
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == 11) {
+        for (UIViewController *vc in self.parentViewController.childViewControllers) {
+            if ([vc isKindOfClass:[MRContactsViewController class]]) {
+                [self.navigationController popToViewController:vc animated:YES];
+            }
         }
-        else
-        {
-            NSArray *erros =  [details componentsSeparatedByString:@"-"];
-            if (erros.count > 0)
-                [MRCommon showAlert:[erros lastObject] delegate:nil];
-        }
-    }];
+    }
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView{
@@ -191,7 +242,6 @@
 }
 
 #pragma mark - Image Picker Controller Delegate
-
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     [picker dismissViewControllerAnimated:YES completion:nil];

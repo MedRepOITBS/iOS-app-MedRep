@@ -22,7 +22,7 @@
 @property (strong, nonatomic) ViewController *viewController;
 @property (assign, nonatomic) NSInteger userType;
 @property (assign, nonatomic) NSInteger addressType;
-
+@property (strong, nonatomic) NSMutableDictionary *userPreferenceData;
 @property (strong, nonatomic) NSMutableDictionary *userRegData;
 @property (strong, nonatomic) NSArray *therapeuticAreaDetails;
 @property (strong, nonatomic) NSArray *myAppointments;

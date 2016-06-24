@@ -168,6 +168,10 @@ withComplitionHandler:(completionHandler)responceHandler;
 
 - (void)createGroup:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
 
+- (void)updateGroup:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
+
+- (void)removeGroup:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
+
 - (void)getMoreConnectionswithHandler:(completionHandler)responceHandler;
 
 - (void)getGroupListwithHandler:(completionHandler)responceHandler;
@@ -181,6 +185,8 @@ withComplitionHandler:(completionHandler)responceHandler;
 - (void)getGroupMembersStatuswithHandler:(completionHandler)responceHandler;
 
 - (void)updateGroupMembersStatus:(NSDictionary *)dict withHandler:(completionHandler)responceHandler;
+
+- (void)getUserPreferences:(completionHandler)responceHandler;
 
 @end
 

@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MRCreateGroupViewController">
             <connections>
+                <outlet property="createBtn" destination="yCe-wQ-J5s" id="sHA-lg-hR9"/>
                 <outlet property="imgView" destination="F7O-gB-U6c" id="bcC-GY-cpT"/>
                 <outlet property="navView" destination="luh-ae-E9Y" id="DtO-zE-dtL"/>
                 <outlet property="txtLongDesc" destination="kp7-xJ-6me" id="U80-RJ-TbE"/>

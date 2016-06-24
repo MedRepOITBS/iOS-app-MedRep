@@ -36,12 +36,12 @@
     if(self)
     {
         self.group_name = [[infoDictionary objectForKey:@"group_name"] isKindOfClass:[NSString class]] ? [infoDictionary objectForKey:@"group_name"] : @"";
-        self.admin_id = [[infoDictionary objectForKey:@"admin_id"] isKindOfClass:[NSString class]] ? [infoDictionary objectForKey:@"admin_id"] : @"";
+        self.admin_id = [infoDictionary objectForKey:@"admin_id"];
         self.group_long_desc = [[infoDictionary objectForKey:@"group_long_desc"] isKindOfClass:[NSString class]] ? [infoDictionary objectForKey:@"group_long_desc"] : @"";
         self.group_short_desc = [[infoDictionary objectForKey:@"group_short_desc"] isKindOfClass:[NSString class]] ? [infoDictionary objectForKey:@"group_short_desc"] : @"";
         self.group_img_data = [[infoDictionary objectForKey:@"group_img_data"] isKindOfClass:[NSString class]] ? [infoDictionary objectForKey:@"group_img_data"] : @"";
         self.group_mimeType = [[infoDictionary objectForKey:@"group_mimeType"] isKindOfClass:[NSString class]] ? [infoDictionary objectForKey:@"group_mimeType"] : @"";
-        self.group_id = [[infoDictionary objectForKey:@"group_id"] isKindOfClass:[NSString class]] ? [infoDictionary objectForKey:@"group_id"] : @"";
+        self.group_id = [infoDictionary objectForKey:@"group_id"];
         
         NSArray *memberData = [[infoDictionary objectForKey:@"member"] isKindOfClass:[NSArray class]] ? [infoDictionary objectForKey:@"member"] : @[];
         
