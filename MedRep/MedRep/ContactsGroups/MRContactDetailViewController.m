@@ -19,8 +19,24 @@
 #import "MRConstants.h"
 #import "GroupPostChildTableViewCell.h"
 #import "MrGroupChildPost.h"
-@interface MRContactDetailViewController ()<MRGroupPostItemTableViewCellDelegate,CommonBoxViewDelegate>
+#import "MRCommon.h"
+#import "MRWebserviceHelper.h"
+#import "MRGroupObject.h"
+#import "MRGroupUserObject.h"
+#import "MRContactWithinGroupCollectionViewCell.h"
+#import "MRGroupUserObject.h"
+#import "MRAddMembersViewController.h"
+#import "MRAppControl.h"
+#import "MRCreateGroupViewController.h"
+#import "PendingContactsViewController.h"
 
+@interface MRContactDetailViewController () <MRGroupPostItemTableViewCellDelegate, CommonBoxViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MRUpdateMemberProtocol> {
+    NSMutableArray *groupsArrayObj;
+    NSMutableArray *groupMemberArray;
+    BOOL canEditGroup;
+}
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionHeight;
 @property (weak, nonatomic) IBOutlet UIImageView* mainImageView;
 @property (weak, nonatomic) IBOutlet UILabel* mainLabel;
 @property (weak, nonatomic) IBOutlet UICollectionView* collectionView;
@@ -31,10 +47,13 @@
 @property (strong, nonatomic) NSArray* groupsUnderContact;
 @property (strong, nonatomic) NSArray* posts;
 
-@property (strong, nonatomic) MRContact* mainContact;
+@property (strong, nonatomic) MRGroupUserObject* mainContact;
+//@property (strong, nonatomic) MRContact* mainContact;
 @property (strong, nonatomic) MRGroup* mainGroup;
+@property (strong, nonatomic) MRGroupObject* mainGroupObj;
 @property (strong,nonatomic) KLCPopup *commentBoxKLCPopView;
 @property (strong,nonatomic) CommonBoxView *commentBoxView;
+@property (strong, nonatomic) IBOutlet UIView *navView;
 
 @end
 
@@ -42,28 +61,104 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIImageView* titleImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"navLogo.png"]];
-    [self.navigationItem setTitleView:titleImage];
+    self.navigationItem.title = @"Contact Details";
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
+    
+    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonAction)];
+    self.navigationItem.leftBarButtonItem = revealButtonItem;
+    
+    UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navView];
+    self.navigationItem.rightBarButtonItem = rightButtonItem;
     
     // Do any additional setup after loading the view from its nib.
     [self.collectionView registerNib:[UINib nibWithNibName:@"MRContactWithinGroupCollectionCellCollectionViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"contactWithinGroupCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"MRContactWithinGroupCollectionViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"MRContactWithinGroupCollectionViewCell"];
 //    [self.postsTableView registerNib:[UINib nibWithNibName:@"MRGroupPostItemTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"groupCell"];
     self.postsTableView.estimatedRowHeight = 250;
     self.postsTableView.rowHeight = UITableViewAutomaticDimension;
     if (self.mainContact) {
-        self.mainImageView.image = [UIImage imageNamed:self.mainContact.profilePic];
-        self.mainLabel.text = self.mainContact.name;
-        self.groupsUnderContact = [self.mainContact.groups allObjects];
-        self.posts = [self.mainContact.groupPosts allObjects];
+        for (UIView *view in self.mainImageView.subviews) {
+            if ([view isKindOfClass:[UILabel class]]) {
+                [view removeFromSuperview];
+            }
+        }
+        
+        self.mainImageView.image = [MRCommon getImageFromBase64Data:[_mainContact.imgData dataUsingEncoding:NSUTF8StringEncoding]];
+        self.mainLabel.text = [NSString stringWithFormat:@"%@ %@",_mainContact.firstName, _mainContact.lastName];
+        self.groupsUnderContact = @[]; //[self.mainContact.groups allObjects];
+        self.posts = @[]; //[self.mainContact.groupPosts allObjects];
+        _collectionHeight.constant = 0;
+        
+        if (!_mainContact.imgData.length)
+        {
+            NSString *fullName = [NSString stringWithFormat:@"%@ %@",_mainContact.firstName, _mainContact.lastName];
+            self.mainImageView.image = nil;
+            if (fullName.length > 0) {
+                UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:self.mainImageView.bounds];
+                subscriptionTitleLabel.textAlignment = NSTextAlignmentCenter;
+                subscriptionTitleLabel.font = [UIFont systemFontOfSize:15.0];
+                subscriptionTitleLabel.textColor = [UIColor lightGrayColor];
+                subscriptionTitleLabel.layer.cornerRadius = 5.0;
+                subscriptionTitleLabel.layer.masksToBounds = YES;
+                subscriptionTitleLabel.layer.borderWidth =1.0;
+                subscriptionTitleLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
+                
+                NSArray *substrngs = [fullName componentsSeparatedByString:@" "];
+                NSString *imageString = @"";
+                for(NSString *str in substrngs){
+                    if (str.length > 0) {
+                        imageString = [imageString stringByAppendingString:[NSString stringWithFormat:@"%c",[str characterAtIndex:0]]];
+                    }
+                }
+                subscriptionTitleLabel.text = imageString.length > 2 ? [imageString substringToIndex:2] : imageString;
+                [self.mainImageView addSubview:subscriptionTitleLabel];
+            }
+        }
+        
     } else {
-        self.mainImageView.image = [UIImage imageNamed:self.mainGroup.groupPicture];
-        self.mainLabel.text = self.mainGroup.name;
-        self.contactsUnderGroup = [self.mainGroup.contacts allObjects];
-        self.posts = [self.mainGroup.groupPosts allObjects];
+//        self.mainImageView.image = [UIImage imageNamed:self.mainGroup.groupPicture];
+//        self.mainLabel.text = self.mainGroup.name;
+//        self.contactsUnderGroup = [self.mainGroup.contacts allObjects];
+//        self.posts = [self.mainGroup.groupPosts allObjects];
+        for (UIView *view in self.mainImageView.subviews) {
+            if ([view isKindOfClass:[UILabel class]]) {
+                [view removeFromSuperview];
+            }
+        }
+        
+        self.mainImageView.image = [MRCommon getImageFromBase64Data:[self.mainGroupObj.group_img_data dataUsingEncoding:NSUTF8StringEncoding]];
+        self.mainLabel.text = self.mainGroupObj.group_name;
+        self.contactsUnderGroup = @[];
+        self.posts = @[];
+        _collectionHeight.constant = self.view.frame.size.height - 65;
+        
+        if (self.mainGroupObj.group_name.length > 0 && !self.mainGroupObj.group_img_data.length) {
+            UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:self.mainImageView.bounds];
+            subscriptionTitleLabel.textAlignment = NSTextAlignmentCenter;
+            subscriptionTitleLabel.font = [UIFont systemFontOfSize:15.0];
+            subscriptionTitleLabel.textColor = [UIColor lightGrayColor];
+            subscriptionTitleLabel.layer.cornerRadius = 5.0;
+            subscriptionTitleLabel.layer.masksToBounds = YES;
+            subscriptionTitleLabel.layer.borderWidth =1.0;
+            subscriptionTitleLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
+            
+            NSArray *substrngs = [self.mainGroupObj.group_name componentsSeparatedByString:@" "];
+            NSString *imageString = @"";
+            for(NSString *str in substrngs){
+                if (str.length > 0) {
+                    imageString = [imageString stringByAppendingString:[NSString stringWithFormat:@"%c",[str characterAtIndex:0]]];
+                }
+            }
+            subscriptionTitleLabel.text = imageString.length > 2 ? [imageString substringToIndex:2] : imageString;
+            [self.mainImageView addSubview:subscriptionTitleLabel];
+        }
+        
+        [self getGroupMembersStatusWithGroupId:self.mainGroupObj.group_id];
     }
     
     [self totalPosts];
     [self.postsTableView reloadData];
+    self.postsTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -71,13 +166,25 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)setContact:(MRContact*)contact {
+- (void)backButtonAction{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+/*- (void)setContact:(MRContact*)contact {
+    self.mainContact = contact;
+}*/
+
+- (void)setContact:(MRGroupUserObject*)contact {
     self.mainContact = contact;
 }
 
 - (void)setGroup:(MRGroup*)group {
     self.mainGroup = group;
     
+}
+
+- (void)setGroupData:(MRGroupObject*)group {
+    self.mainGroupObj = group;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -256,8 +363,14 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    if (self.contactsUnderGroup.count > 0) {
-        return self.contactsUnderGroup.count;
+//    if (self.contactsUnderGroup.count > 0) {
+//        return self.contactsUnderGroup.count;
+//    } else {
+//        return self.groupsUnderContact.count;
+//    }
+    
+    if (groupMemberArray.count) {
+        return groupMemberArray.count;
     } else {
         return self.groupsUnderContact.count;
     }
@@ -265,22 +378,87 @@
 
 // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    MRContactWithinGroupCollectionCellCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"contactWithinGroupCell" forIndexPath:indexPath];
+    /*MRContactWithinGroupCollectionCellCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"contactWithinGroupCell" forIndexPath:indexPath];
     if (self.contactsUnderGroup.count > 0) {
         [cell setContact:self.contactsUnderGroup[indexPath.row]];
     } else {
         [cell setGroup:self.groupsUnderContact[indexPath.row]];
     }
-    return cell;
+    return cell;*/
+    
+    if (groupMemberArray.count > 0) {
+        MRContactWithinGroupCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MRContactWithinGroupCollectionViewCell" forIndexPath:indexPath];
+        cell.cellDelegate = self;
+        cell.acceptBtn.tag = indexPath.row;
+        cell.rejectBtn.tag = indexPath.row;
+        
+        MRGroupUserObject *user = groupMemberArray[indexPath.row];
+        cell.nameTxt.text = user.firstName;
+        cell.imgView.image = [MRCommon getImageFromBase64Data:[user.imgData dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        if ([user.status caseInsensitiveCompare:@"Active"] == NSOrderedSame) {
+            cell.acceptBtn.hidden = YES;
+            cell.rejectBtn.hidden = YES;
+        }else{
+            cell.acceptBtn.hidden = NO;
+            cell.rejectBtn.hidden = NO;
+        }
+        
+        return cell;
+    } else {
+        MRContactWithinGroupCollectionCellCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"contactWithinGroupCell" forIndexPath:indexPath];
+        [cell setGroup:self.groupsUnderContact[indexPath.row]];
+        return cell;
+    }
 }
 
-
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(110, collectionView.bounds.size.height);
+    //return CGSizeMake(110, collectionView.bounds.size.height);
+    return CGSizeMake(collectionView.bounds.size.width, 60);
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionView *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
     return 4; // This is the minimum inter item spacing, can be more
+}
+
+-(void) acceptAction:(NSInteger)index{
+    MRGroupUserObject *user = groupMemberArray[index];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:self.mainGroupObj.group_id,@"group_id", [NSString stringWithFormat:@"%@",user.member_id],@"member_id",@"ACTIVE",@"status", nil];
+    
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] updateGroupMembersStatus:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [MRCommon stopActivityIndicator];
+        if (status)
+        {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }];
+}
+
+-(void) rejectAction:(NSInteger)index{
+    MRGroupUserObject *user = groupMemberArray[index];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:self.mainGroupObj.group_id,@"group_id",@[[NSString stringWithFormat:@"%@",user.member_id]],@"memberList", nil];
+    
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] removeGroupMember:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [MRCommon stopActivityIndicator];
+        if (status)
+        {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }];
 }
 
 - (IBAction)moreOptionsTapped:(id)sender {
@@ -289,10 +467,69 @@
                                                        delegate:self
                                               cancelButtonTitle:@"Cancel"
                                          destructiveButtonTitle:nil
-                                              otherButtonTitles:@"Add Members",@"Pending Members", nil];
+                                              otherButtonTitles:@"Add Connections",@"Pending Connections", nil];
     }
+    
+    canEditGroup = self.mainGroupObj && (self.mainGroupObj.admin_id == [MRAppControl sharedHelper].userRegData[@"doctorId"]);
+    if (canEditGroup) {
+        self.moreOptions = [[UIActionSheet alloc] initWithTitle:@"More Options"
+                                                       delegate:self
+                                              cancelButtonTitle:@"Cancel"
+                                         destructiveButtonTitle:nil
+                                              otherButtonTitles:@"Add Members",@"Pending Members", @"Update Group", @"Delete Group", nil];
+    }
+    
     [self.moreOptions showInView:self.view];
 }
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        MRAddMembersViewController* detailViewController = [[MRAddMembersViewController alloc] init];
+        if (self.mainGroupObj)
+            detailViewController.groupID = [self.mainGroupObj.group_id integerValue];
+        else
+            detailViewController.groupID = 0;
+        [self.navigationController pushViewController:detailViewController animated:NO];
+    }else if (buttonIndex == 1) {
+        PendingContactsViewController* pendingContactsViewController = [[PendingContactsViewController alloc] init];
+        pendingContactsViewController.isFromGroup = NO;
+        pendingContactsViewController.isFromMember = canEditGroup;
+        pendingContactsViewController.gid = self.mainGroupObj.group_id;
+        [self.navigationController pushViewController:pendingContactsViewController animated:NO];
+    }else if (buttonIndex == 2 && canEditGroup) {
+        MRCreateGroupViewController* createGroupVC = [[MRCreateGroupViewController alloc] init];
+        createGroupVC.group = self.mainGroupObj;
+        [self.navigationController pushViewController:createGroupVC animated:NO];
+    }else if (buttonIndex == 3 && canEditGroup) {
+        [self removeGroup];
+    }
+}
+
+-(void) removeGroup{
+    [MRCommon showActivityIndicator:@"Deleting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] removeGroup:[NSDictionary dictionaryWithObjectsAndKeys:self.mainGroupObj.group_id, @"group_id", nil] withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [MRCommon stopActivityIndicator];
+        if (status)
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Group Deleted!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            alert.tag = 11;
+            [alert show];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }];
+}
+
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == 11) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
 #pragma mark
 #pragma CAMERA IMAGE CAPTURE
 
@@ -327,5 +564,60 @@
     
 }
 
+- (void)getGroupMembersStatus{
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] getGroupMembersStatuswithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [MRCommon stopActivityIndicator];
+        if (status)
+        {
+            NSArray *responseArray = responce[@"Responce"];
+            groupsArrayObj = [NSMutableArray array];
+            groupMemberArray = [NSMutableArray array];
+            
+            for (NSDictionary *memberDict in responseArray) {
+                MRGroupObject *groupObj = [[MRGroupObject alloc] initWithDict:memberDict];
+                [groupsArrayObj addObject:groupObj];
+                if ([groupObj.group_name isEqualToString:self.mainGroupObj.group_name]) {
+                    groupMemberArray = groupObj.member;
+                }
+            }
+            [self.collectionView reloadData];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }];
+}
+
+- (void)getGroupMembersStatusWithGroupId:(NSString *)groupId{
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] getGroupMembersStatusWithId:groupId withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [MRCommon stopActivityIndicator];
+        if (status)
+        {
+            NSArray *responseArray = responce[@"Responce"];
+            groupsArrayObj = [NSMutableArray array];
+            groupMemberArray = [NSMutableArray array];
+            
+            for (NSDictionary *memberDict in responseArray) {
+                MRGroupObject *groupObj = [[MRGroupObject alloc] initWithDict:memberDict];
+                [groupsArrayObj addObject:groupObj];
+                if ([groupObj.group_name isEqualToString:self.mainGroupObj.group_name]) {
+                    groupMemberArray = groupObj.member;
+                }
+            }
+            [self.collectionView reloadData];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }];
+}
 
 @end

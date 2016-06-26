@@ -47,6 +47,7 @@
     [self setupReachability];
     
     self.userRegData = [[NSMutableDictionary alloc] init];
+    self.userPreferenceData = [[NSMutableDictionary alloc] init];
     
     [self resetUserData];
 //    [self.userRegData setObject:@"" forKey:KFirstName];
@@ -136,6 +137,8 @@
     self.userType = [[details objectForKey:@"roleId"] integerValue];
     [self.userRegData setObject:[details objectOrNilForKey:@"firstName"] forKey:KFirstName];
     [self.userRegData setObject:[details objectOrNilForKey:@"lastName"] forKey:KLastName];
+    [self.userRegData setObject:[details objectOrNilForKey:@"userId"] forKey:@"userId"];
+    [self.userRegData setObject:[details objectOrNilForKey:@"status"] forKey:@"status"];
     
     if (self.userType == 1 || self.userType == 2)
     {
@@ -146,6 +149,11 @@
         else
         {
             [self.userRegData setObject:@"" forKey:KDoctorRegID];
+        }
+        
+        if ([details objectOrNilForKey:@"doctorId"])
+        {
+            [self.userRegData setObject:[details objectOrNilForKey:@"doctorId"] forKey:@"doctorId"];
         }
         
         [self.userRegData setObject:[details objectOrNilForKey:@"therapeuticId"] forKey:@"therapeuticId"];
@@ -188,7 +196,7 @@
 
     NSArray *location = [details objectOrNilForKey:@"locations"];
     
-    if (location != nil && location.count > 0)
+    if (location != nil && [location isKindOfClass:[NSArray class]] && location.count > 0)
     {
         NSMutableArray *array = [[NSMutableArray alloc] init];
         
@@ -199,6 +207,17 @@
         
         [self.userRegData setObject:array forKey:KRegistarionStageTwo];
     }
+}
+
+- (void)setUserPreferenceDetails:(NSDictionary*)details
+{
+    self.userType = [[details objectForKey:@"roleId"] integerValue];
+    [self.userPreferenceData setObject:[details objectOrNilForKey:@"firstName"] forKey:KFirstName];
+    [self.userPreferenceData setObject:[details objectOrNilForKey:@"lastName"] forKey:KLastName];
+    [self.userPreferenceData setObject:[details objectOrNilForKey:@"userId"] forKey:@"userId"];
+    [self.userPreferenceData setObject:[details objectOrNilForKey:@"status"] forKey:@"status"];
+    [self.userPreferenceData setObject:[details objectOrNilForKey:@"therapeuticArea"] forKey:@"therapeuticArea"];
+    [self.userPreferenceData setObject:[details objectOrNilForKey:@"city"] forKey:@"city"];
 }
 
 - (void)launchSplashView
@@ -439,11 +458,40 @@
         [self loadPharmaDashboard];
     }
     
+    //Get user preferences
+    [[MRWebserviceHelper sharedWebServiceHelper] getUserPreferences:^(BOOL status, NSString *details, NSDictionary *responce)
+     {
+         if (status)
+         {
+             NSArray *resArray = responce[@"Responce"];
+             if (resArray.count) {
+                 [self setUserPreferenceDetails:resArray[0]];
+             }
+         }
+         else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+         {
+             [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+              {
+                  [MRCommon savetokens:responce];
+                  [[MRWebserviceHelper sharedWebServiceHelper] getUserPreferences:^(BOOL status, NSString *details, NSDictionary *responce)
+                   {
+                       if (status)
+                       {
+                           NSArray *resArray = responce[@"Responce"];
+                           if (resArray.count) {
+                               [self setUserPreferenceDetails:resArray[0]];
+                           }
+                       }
+                   }];
+              }];
+         }
+     }];
 }
 
 - (void)loadLoginView
 {
     [self.userRegData removeAllObjects];
+    [self.userPreferenceData removeAllObjects];
     [self resetUserData];
     MRLoginViewController *homeViewController = [[MRLoginViewController alloc] initWithNibName:@"MRLoginViewController" bundle:nil];
     homeViewController.isFromHome = NO;

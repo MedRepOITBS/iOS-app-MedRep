@@ -42,7 +42,9 @@
     [self.window makeKeyAndVisible];
 
     _counterChildPost = 1000;
-
+    //_launchScreen = @"Survey";
+    //_launchScreen = @"Notifications";
+    
     return YES;
 }
 -(NSInteger)counterForChildPost{

@@ -15,5 +15,6 @@
 @synthesize shortDescription;
 @synthesize detailDescription;
 @synthesize source;
+@synthesize contentType;
 
 @end
