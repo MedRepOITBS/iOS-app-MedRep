@@ -154,6 +154,7 @@
         }
         
         [self getGroupMembersStatusWithGroupId:self.mainGroupObj.group_id];
+        self.navigationItem.title = @"Group Details";
     }
     
     [self totalPosts];
@@ -471,12 +472,20 @@
     }
     
     canEditGroup = self.mainGroupObj && (self.mainGroupObj.admin_id == [MRAppControl sharedHelper].userRegData[@"doctorId"]);
-    if (canEditGroup) {
+    
+    if (self.mainGroupObj) {
         self.moreOptions = [[UIActionSheet alloc] initWithTitle:@"More Options"
                                                        delegate:self
                                               cancelButtonTitle:@"Cancel"
                                          destructiveButtonTitle:nil
-                                              otherButtonTitles:@"Add Members",@"Pending Members", @"Update Group", @"Delete Group", nil];
+                                              otherButtonTitles:@"Add Members",@"Pending Members", nil];
+        if (canEditGroup) {
+            self.moreOptions = [[UIActionSheet alloc] initWithTitle:@"More Options"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Cancel"
+                                             destructiveButtonTitle:nil
+                                                  otherButtonTitles:@"Add Members",@"Pending Members", @"Update Group", @"Delete Group", nil];
+        }
     }
     
     [self.moreOptions showInView:self.view];

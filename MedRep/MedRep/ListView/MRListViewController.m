@@ -64,6 +64,15 @@
         case MRListVIewTypeTherapetic:
            appointmentCell.textLabel.text = [[self.listItems objectAtIndex:indexPath.row] objectForKey:@"therapeuticName"];
             break;
+            
+        case MRListVIewTypeRegYear:
+            appointmentCell.textLabel.text = [self.listItems objectAtIndex:indexPath.row];
+            break;
+            
+        case MRListVIewTypeStateCouncil:
+            appointmentCell.textLabel.text = [self.listItems objectAtIndex:indexPath.row];
+            break;
+            
         case MRListVIewTypeAddress:
         {
             appointmentCell.textLabel.text = (self.isFromCallMedrep && self.listItems.count == indexPath.row) ? @"Current Location": [self getAddressString:[self.listItems objectAtIndex:indexPath.row]];
@@ -146,6 +155,14 @@
         if (self.listType == MRListVIewTypeNotificationTherapetic)
         {
             [self.delegate selectedListItem:[NSDictionary dictionaryWithObject:[self.listItems objectAtIndex:indexPath.row] forKey:@"therapeuticName"]];
+        }
+        else if (self.listType == MRListVIewTypeRegYear)
+        {
+            [self.delegate selectedListItem:[NSDictionary dictionaryWithObject:[self.listItems objectAtIndex:indexPath.row] forKey:@"yearReg"]];
+        }
+        else if (self.listType == MRListVIewTypeStateCouncil)
+        {
+            [self.delegate selectedListItem:[NSDictionary dictionaryWithObject:[self.listItems objectAtIndex:indexPath.row] forKey:@"stateCouncil"]];
         }
         else
         {

@@ -18,7 +18,7 @@
 #import "MRLocationManager.h"
 
 #define kHeaderView     [NSArray arrayWithObjects:@"ADD MOBILE NUMBER",@"ALTERNATIVE EMAIL ADDRESS", nil]
-#define kPlaceHolders   [NSArray arrayWithObjects:@"DOCTOR REGISTRATION ID", @"FIRST NAME", @"LAST NAME", @"MOBILE NUMBER", @"MOBILE NUMBER", nil]
+#define kPlaceHolders   [NSArray arrayWithObjects:@"MCI REGISTRATION ID", @"FIRST NAME", @"LAST NAME", @"MOBILE NUMBER", @"MOBILE NUMBER", nil]
 
 //@"PRIMARY MOBILE NUMBER"
 
@@ -709,11 +709,11 @@ typedef void(^selectedComapany)(NSString *companyName);
 - (BOOL)validateData
 {
     BOOL isSuccess = YES;
-    if ([MRAppControl sharedHelper].userType == 1)
+    if ([MRAppControl sharedHelper].userType == 2)
     {
         if ([MRCommon isStringEmpty:[self.userDeatils objectForKey:KDoctorRegID]])
         {
-            [MRCommon showAlert:@"Doctor registration ID should not be empty." delegate:nil];
+            [MRCommon showAlert:@"MCI registration ID should not be empty." delegate:nil];
             isSuccess = NO;
             return isSuccess;
         }

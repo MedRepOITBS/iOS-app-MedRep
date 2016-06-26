@@ -20,8 +20,8 @@
     self.spImage.image = [UIImage imageNamed:[self getImageForDevice]];
     
     CABasicAnimation* shrink    = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
-    shrink.fromValue            = [NSNumber numberWithDouble:0.5];
-    shrink.toValue              = [NSNumber numberWithDouble:1.0];
+    shrink.fromValue            = [NSNumber numberWithDouble:1.0];
+    shrink.toValue              = [NSNumber numberWithDouble:0.5];
     shrink.duration             = 0.5;
     shrink.autoreverses         = YES;
     shrink.removedOnCompletion  = NO;

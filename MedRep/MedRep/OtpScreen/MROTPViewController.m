@@ -28,6 +28,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tickMarkBottomConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *passwordBottomConstraint;
 @property (weak, nonatomic) IBOutlet UIButton *therapeuticButton;
+@property (weak, nonatomic) IBOutlet UIButton *yearRegButton;
+@property (weak, nonatomic) IBOutlet UIButton *stateCouncilButton;
 @end
 
 @implementation MROTPViewController
@@ -37,6 +39,12 @@
     // Do any additional setup after loading the view from its nib.
     self.therapeuticButton.layer.borderWidth = 1.0;
     self.therapeuticButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    
+    self.yearRegButton.layer.borderWidth = 1.0;
+    self.yearRegButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    
+    self.stateCouncilButton.layer.borderWidth = 1.0;
+    self.stateCouncilButton.layer.borderColor = [UIColor whiteColor].CGColor;
     
     if ([MRCommon deviceHasThreePointFiveInchScreen])
     {
@@ -56,6 +64,19 @@
         [MRCommon showAlert:@"Select Therapeutic Area" delegate:nil];
         return;
     }
+    
+    if ([self.yearRegButton.titleLabel.text isEqualToString:@"Year of Registration"])
+    {
+        [MRCommon showAlert:@"Year of Registration" delegate:nil];
+        return;
+    }
+    
+    if ([self.stateCouncilButton.titleLabel.text isEqualToString:@"State Medical Council"])
+    {
+        [MRCommon showAlert:@"State Medical Council" delegate:nil];
+        return;
+    }
+    
     if (![MRCommon isStringEmpty:self.desiredPasswordTextField.text] && ![MRCommon isStringEmpty:self.repeatPasswordTextField.text])
     {
         if (![self.desiredPasswordTextField.text isEqualToString:self.repeatPasswordTextField.text])
@@ -257,6 +278,63 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(NSArray *) yearsOfRegistration {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy"];
+    int year = [[formatter stringFromDate:[NSDate date]] intValue];
+    
+    NSMutableArray *arr = [NSMutableArray array];
+    
+    for (int i= 0; i < 50 ; i++) {
+        [arr addObject:[NSString stringWithFormat:@"%d",year--]];
+    }
+    return [NSArray arrayWithArray:arr];
+}
+
+-(NSDictionary *) stateMedicalCouncilList {
+    return @{@"AND" : @"Andhra Pradesh Medical Council",
+               @"TSMC" : @"Tripura State Medical Council",
+               @"ARU" : @"Arunachal Pradesh Medical Council",
+               @"ASS" : @"Assam Medical Council",
+               @"BHO" : @"Bhopal Medical Council",
+               @"BIH" : @"Bihar Medical Council",
+               @"BOM" : @"Bombay Medical Council",
+               @"CHG" : @"Chandigarh Medical Council",
+               @"CHA" : @"Chattisgarh Medical Council",
+               @"DEL" : @"Delhi Medical Council",
+               @"DCI" : @"Dental Council of India",
+               @"GOA" : @"Goa Medical Council",
+               @"GUJ" : @"Gujarat Medical Council",
+               @"HAR" : @"Haryana Dental &amp; Medical Councils",
+               @"HIM" : @"Himanchal  Pradesh Medical Council",
+               @"HYD" : @"Hyderabad Medical Council",
+               @"JAM" : @"Jammu &amp; Kashmir Medical Council",
+               @"JHA" : @"Jharkhand Medical Council",
+               @"KAR" : @"Karnataka Medical Council",
+               @"KER" : @"Kerala Medical Council",
+               @"MAD" : @"Madhya Pradesh Medical Council",
+               @"MRS" : @"Madras Medical Council",
+               @"MAC" : @"Mahakoshal Medical Council",
+               @"MAH" : @"Maharashtra Medical Council",
+               @"MAN" : @"Manipur Medical Council",
+               @"MCI" : @"Medical Council of India",
+               @"MYS" : @"Mysore Medical Council",
+               @"NMC" : @"Nagaland Medical Council",
+               @"ORI" : @"Orissa Council of Medical Registration",
+               @"OTH" : @"Others",
+               @"PUN" : @"Punjab Medical Council",
+               @"RAJ" : @"Rajasthan Medical Council",
+               @"SIK" : @"Sikkim Medical Council",
+               @"TAM" : @"Tamil Nadu Medical Council",
+               @"TEL" : @"Telangana State Medical Council",
+               @"TC" : @"Travancore-Cochin Medical Council, Trivandrum",
+               @"TRI" : @"Tripura State Medical Council ",
+               @"UP" : @"Uttar Pradesh Medical Council",
+               @"UTT" : @"Uttarakhand Medical Council",
+               @"VID" : @"Vidharba Medical Council",
+               @"WES" : @"West Bengal Medical Council"};
+}
+
 /*
 #pragma mark - Navigation
 
@@ -267,6 +345,16 @@
 }
 */
 - (IBAction)selectTherapeuitcAraeaButtonActin:(id)sender
+{
+    [self showPopoverInView:sender];
+}
+
+- (IBAction)selectYearRegButtonActin:(id)sender
+{
+    [self showPopoverInView:sender];
+}
+
+- (IBAction)selectStateCouncilButtonActin:(id)sender
 {
     [self showPopoverInView:sender];
 }
@@ -283,20 +371,27 @@
     popOverTheme.outerStrokeColor = [UIColor lightGrayColor];
     [WYPopoverController setDefaultTheme:popOverTheme];
     
-    
     MRListViewController *moreViewController = [[MRListViewController alloc] initWithNibName:@"MRListViewController" bundle:nil];
     
     moreViewController.modalInPopover = NO;
     moreViewController.delegate = self;
-    moreViewController.listType = MRListVIewTypeTherapetic;
-    moreViewController.listItems = [MRAppControl sharedHelper].therapeuticAreaDetails;
+    
+    if (button.tag == 1) {
+        moreViewController.listType = MRListVIewTypeRegYear;
+        moreViewController.listItems = [self yearsOfRegistration];
+    }else if(button.tag == 2){
+        moreViewController.listType = MRListVIewTypeStateCouncil;
+        moreViewController.listItems = [[[self stateMedicalCouncilList] allValues]  sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    }else if (button.tag == 3){
+        moreViewController.listType = MRListVIewTypeTherapetic;
+        moreViewController.listItems = [MRAppControl sharedHelper].therapeuticAreaDetails;
+    }
     
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     moreViewController.preferredContentSize = CGSizeMake(width, 200);
     
     UINavigationController *contentViewController = [[UINavigationController alloc] initWithRootViewController:moreViewController] ;
     contentViewController.navigationBar.hidden = YES;
-    
     
     self.myPopoverController = [[WYPopoverController alloc] initWithContentViewController:contentViewController];
     self.myPopoverController.delegate = self;
@@ -339,9 +434,22 @@
 - (void)selectedListItem:(id)listItem
 {
     NSDictionary *item = (NSDictionary*)listItem;
-    [self.therapeuticButton setTitle:[item objectForKey:@"therapeuticName"] forState:UIControlStateNormal];
-    [[MRAppControl sharedHelper].userRegData setObject:[item objectForKey:@"therapeuticId"] forKey:@"therapeuticId"];
-    //[myTherapeuticDict objectForKey:@"therapeuticId"];
+    
+    if ([item objectForKey:@"therapeuticId"]) {
+        [self.therapeuticButton setTitle:[item objectForKey:@"therapeuticName"] forState:UIControlStateNormal];
+        [[MRAppControl sharedHelper].userRegData setObject:[item objectForKey:@"therapeuticId"] forKey:@"therapeuticId"];
+        //[myTherapeuticDict objectForKey:@"therapeuticId"];
+    }
+    
+    if ([item objectForKey:@"yearReg"]) {
+        [self.yearRegButton setTitle:[item objectForKey:@"yearReg"] forState:UIControlStateNormal];
+        [[MRAppControl sharedHelper].userRegData setObject:[item objectForKey:@"yearReg"] forKey:@"registrationYear"];
+    }
+    
+    if ([item objectForKey:@"stateCouncil"]) {
+        [self.stateCouncilButton setTitle:[item objectForKey:@"stateCouncil"] forState:UIControlStateNormal];
+        [[MRAppControl sharedHelper].userRegData setObject:[item objectForKey:@"stateCouncil"] forKey:@"stateMedCouncil"];
+    }
 }
 
 @end

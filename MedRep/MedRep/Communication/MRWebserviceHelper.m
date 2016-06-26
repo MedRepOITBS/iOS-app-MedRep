@@ -74,7 +74,9 @@
     NSURLSessionDataTask *dTask = [authSession dataTaskWithRequest:theRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         
         __block NSString *theResponse = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(@"URL: %@\nResponse: %@", theRequest.URL, theResponse);
+        
+        NSLog(@"URL: %@\nRequest body %@\nResponse: %@", theRequest.URL, [[NSString alloc] initWithData:[theRequest HTTPBody] encoding:NSUTF8StringEncoding], theResponse);
+        
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
         if ([data length] > 0 && error == 0 && [httpResponse statusCode] == 200)
         {
@@ -581,8 +583,8 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
     [dict setObject:[userDetails objectForKey:KDoctorRegID] forKey:@"registrationNumber"];
     [dict setObject:[MRCommon getQulification:[MRAppControl sharedHelper].userType] forKey:@"qualification"];
 
-    [dict setObject:[NSString stringWithFormat:@"%ld",(long)[NSDate date].year] forKey:@"registrationYear"];
-    [dict setObject:@"XP" forKey:@"stateMedCouncil"];
+    [dict setObject:[userDetails objectForKey:@"registrationYear"] forKey:@"registrationYear"];
+    [dict setObject:[userDetails objectForKey:@"stateMedCouncil"] forKey:@"stateMedCouncil"];
     [dict setObject:[userDetails objectForKey:@"therapeuticId"] forKey:@"therapeuticId"];
 
     NSMutableArray *array = [[NSMutableArray alloc] init];
