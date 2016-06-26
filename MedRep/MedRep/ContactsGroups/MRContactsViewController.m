@@ -54,6 +54,12 @@
     }
 }
 
+#pragma mark - UICollectionView methods
+
+
+
+
+
 -(void)setErrorMessageBtnVisibility:(BOOL)isVisible {
     self.noContactErrorMsgLbl.hidden = isVisible;
     self.clickHereToAddBtn.hidden = isVisible;
@@ -165,6 +171,10 @@
     self.navigationItem.title = @"MedRep";
     self.title = @"MedRep";
     self.edgesForExtendedLayout = UIRectEdgeNone;
+    
+    
+    
+
     // Do any additional setup after loading the view from its nib.
 }
 

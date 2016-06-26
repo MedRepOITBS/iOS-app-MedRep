@@ -11,6 +11,8 @@
 @interface GroupPostChildTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *commentPic;
 @property (weak, nonatomic) IBOutlet UITextView *postText;
+@property (weak,nonatomic) IBOutlet UILabel *profileNameLabel;
 @property (strong,nonatomic) IBOutlet NSLayoutConstraint *heightConstraint;
+@property (weak, nonatomic) IBOutlet UIImageView *profilePic;
 @property (strong,nonatomic) IBOutlet NSLayoutConstraint *verticalContstraint;
 @end

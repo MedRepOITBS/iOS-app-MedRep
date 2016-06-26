@@ -141,6 +141,13 @@ static MRDatabaseHelper *sharedDataManager = nil;
     NSArray *contacts = [[MRDataManger sharedManager] fetchObjectList:kContactEntity];
     return contacts;
 }
++(NSArray *)getContactListForContactID:(int64_t)contactID {
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"contactId = %d",contactID];
+    
+    NSArray *contacts = [[MRDataManger sharedManager] fetchObjectList:kContactEntity predicate:predicate];
+    return contacts;
+}
 
 + (NSArray*)getGroups {
     NSArray *groups = [[MRDataManger sharedManager] fetchObjectList:kGroupEntity];

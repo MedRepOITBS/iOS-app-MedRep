@@ -19,6 +19,8 @@
 #import "MRConstants.h"
 #import "GroupPostChildTableViewCell.h"
 #import "MrGroupChildPost.h"
+#import "MRAppControl.h"
+#import "MRCommon.h"
 @interface MRContactDetailViewController ()<MRGroupPostItemTableViewCellDelegate,CommonBoxViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView* mainImageView;
@@ -35,7 +37,8 @@
 @property (strong, nonatomic) MRGroup* mainGroup;
 @property (strong,nonatomic) KLCPopup *commentBoxKLCPopView;
 @property (strong,nonatomic) CommonBoxView *commentBoxView;
-
+@property (strong,nonatomic)NSDictionary *userdata;
+@property (nonatomic) NSInteger userType;
 @end
 
 @implementation MRContactDetailViewController
@@ -61,6 +64,11 @@
         self.contactsUnderGroup = [self.mainGroup.contacts allObjects];
         self.posts = [self.mainGroup.groupPosts allObjects];
     }
+    _userdata = [MRAppControl sharedHelper].userRegData;
+    
+    
+    _userType = [MRAppControl sharedHelper].userType;
+   
     
     [self totalPosts];
     [self.postsTableView reloadData];
@@ -120,11 +128,11 @@
         MrGroupChildPost *childPost = (MrGroupChildPost *)postObject;
         
         if ([childPost.postPic isEqualToString:@""]) {
-            return 44;
+            return 84;
             
         }else {
             
-            return 182;
+            return 260;
         }
        
     }
@@ -167,6 +175,12 @@
             cell.commentPic.image = [UIImage imageWithData:[NSData dataWithContentsOfFile:imagePath]];
             
         }
+        
+        cell.layoutMargins = UIEdgeInsetsZero;
+        cell.separatorInset = UIEdgeInsetsMake(0, 10000, 0, 0);
+         cell.profileNameLabel.text              = (_userType == 2 || _userType == 1) ? [NSString stringWithFormat:@"Dr. %@ %@", [_userdata objectForKey:KFirstName],[_userdata objectForKey:KLastName]] : [NSString stringWithFormat:@"Mr. %@ %@", [_userdata objectForKey:KFirstName],[_userdata objectForKey:KLastName]];
+        cell.profilePic.image = [MRCommon getImageFromBase64Data:[_userdata objectForKey:KProfilePicture]];
+        
           cell.postText.text = childPost.postText;
         return cell;
         
@@ -236,8 +250,10 @@
     
 
     [MRDatabaseHelper addGroupChildPost:post withPostDict:saveData];
-    
-    
+    self.mainContact =  [[MRDatabaseHelper getContactListForContactID:self.mainContact.contactId]  objectAtIndex:0];
+    self.posts = [self.mainContact.groupPosts allObjects];
+    [self totalPosts];
+    [self.postsTableView reloadData];
 }
 
 /*

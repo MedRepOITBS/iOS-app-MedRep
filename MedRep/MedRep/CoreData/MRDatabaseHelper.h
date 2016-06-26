@@ -76,5 +76,5 @@
 
 + (void)cleanDatabaseOnLogout;
 + (void)addGroupChildPost:(MRGroupPost*)post withPostDict:(NSDictionary *)myDict;
-
++(NSArray *)getContactListForContactID:(int64_t)contactID;
 @end
