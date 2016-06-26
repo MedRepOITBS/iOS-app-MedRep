@@ -8,7 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol MRAddMemberProtocol <NSObject>
+
+-(void) selectedMemberAtIndex:(NSInteger)index;
+
+@end
+
 @interface MRAddMemberTableViewCell : UITableViewCell
+
+@property (nonatomic, assign) id<MRAddMemberProtocol> cellDelegate;
 
 @property (weak, nonatomic) IBOutlet UIImageView *profilePic;
 @property (weak, nonatomic) IBOutlet UILabel *userName;

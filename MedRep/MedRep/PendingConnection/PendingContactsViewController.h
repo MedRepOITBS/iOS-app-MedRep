@@ -10,5 +10,8 @@
 
 @interface PendingContactsViewController : UIViewController <UITableViewDataSource ,UITableViewDelegate>
 
+@property (nonatomic, assign) BOOL isFromGroup;
+@property (nonatomic, assign) BOOL isFromMember;
+@property (strong, nonatomic) NSString *gid;
 
 @end

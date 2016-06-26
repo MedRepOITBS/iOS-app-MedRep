@@ -28,8 +28,9 @@
 #import "MRAddMembersViewController.h"
 #import "MRAppControl.h"
 #import "MRCreateGroupViewController.h"
+#import "PendingContactsViewController.h"
 
-@interface MRContactDetailViewController () <MRGroupPostItemTableViewCellDelegate, CommonBoxViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
+@interface MRContactDetailViewController () <MRGroupPostItemTableViewCellDelegate, CommonBoxViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MRUpdateMemberProtocol> {
     NSMutableArray *groupsArrayObj;
     NSMutableArray *groupMemberArray;
     BOOL canEditGroup;
@@ -46,7 +47,8 @@
 @property (strong, nonatomic) NSArray* groupsUnderContact;
 @property (strong, nonatomic) NSArray* posts;
 
-@property (strong, nonatomic) MRContact* mainContact;
+@property (strong, nonatomic) MRGroupUserObject* mainContact;
+//@property (strong, nonatomic) MRContact* mainContact;
 @property (strong, nonatomic) MRGroup* mainGroup;
 @property (strong, nonatomic) MRGroupObject* mainGroupObj;
 @property (strong,nonatomic) KLCPopup *commentBoxKLCPopView;
@@ -81,16 +83,17 @@
             }
         }
         
-        self.mainImageView.image = [UIImage imageNamed:self.mainContact.profilePic];
-        self.mainLabel.text = self.mainContact.name;
-        self.groupsUnderContact = [self.mainContact.groups allObjects];
-        self.posts = [self.mainContact.groupPosts allObjects];
+        self.mainImageView.image = [MRCommon getImageFromBase64Data:[_mainContact.imgData dataUsingEncoding:NSUTF8StringEncoding]];
+        self.mainLabel.text = [NSString stringWithFormat:@"%@ %@",_mainContact.firstName, _mainContact.lastName];
+        self.groupsUnderContact = @[]; //[self.mainContact.groups allObjects];
+        self.posts = @[]; //[self.mainContact.groupPosts allObjects];
         _collectionHeight.constant = 0;
         
-        if (!self.mainContact.profilePic.length)
+        if (!_mainContact.imgData.length)
         {
+            NSString *fullName = [NSString stringWithFormat:@"%@ %@",_mainContact.firstName, _mainContact.lastName];
             self.mainImageView.image = nil;
-            if (self.mainContact.name.length > 0) {
+            if (fullName.length > 0) {
                 UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:self.mainImageView.bounds];
                 subscriptionTitleLabel.textAlignment = NSTextAlignmentCenter;
                 subscriptionTitleLabel.font = [UIFont systemFontOfSize:15.0];
@@ -100,7 +103,7 @@
                 subscriptionTitleLabel.layer.borderWidth =1.0;
                 subscriptionTitleLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
                 
-                NSArray *substrngs = [self.mainContact.name componentsSeparatedByString:@" "];
+                NSArray *substrngs = [fullName componentsSeparatedByString:@" "];
                 NSString *imageString = @"";
                 for(NSString *str in substrngs){
                     if (str.length > 0) {
@@ -150,15 +153,12 @@
             [self.mainImageView addSubview:subscriptionTitleLabel];
         }
         
-        [self getGroupMembersStatus];
+        [self getGroupMembersStatusWithGroupId:self.mainGroupObj.group_id];
     }
     
     [self totalPosts];
     [self.postsTableView reloadData];
     self.postsTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    
-    //NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@"1",@"group_id",@"2",@"member_id",@"ACTIVE",@"status", nil];
-    //[self updateGroupMembersStatus:dict];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -170,7 +170,11 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)setContact:(MRContact*)contact {
+/*- (void)setContact:(MRContact*)contact {
+    self.mainContact = contact;
+}*/
+
+- (void)setContact:(MRGroupUserObject*)contact {
     self.mainContact = contact;
 }
 
@@ -384,11 +388,15 @@
     
     if (groupMemberArray.count > 0) {
         MRContactWithinGroupCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MRContactWithinGroupCollectionViewCell" forIndexPath:indexPath];
+        cell.cellDelegate = self;
+        cell.acceptBtn.tag = indexPath.row;
+        cell.rejectBtn.tag = indexPath.row;
+        
         MRGroupUserObject *user = groupMemberArray[indexPath.row];
         cell.nameTxt.text = user.firstName;
         cell.imgView.image = [MRCommon getImageFromBase64Data:[user.imgData dataUsingEncoding:NSUTF8StringEncoding]];
         
-        if ([user.status isEqualToString:@"Active"]) {
+        if ([user.status caseInsensitiveCompare:@"Active"] == NSOrderedSame) {
             cell.acceptBtn.hidden = YES;
             cell.rejectBtn.hidden = YES;
         }else{
@@ -404,7 +412,6 @@
     }
 }
 
-
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     //return CGSizeMake(110, collectionView.bounds.size.height);
     return CGSizeMake(collectionView.bounds.size.width, 60);
@@ -414,13 +421,53 @@
     return 4; // This is the minimum inter item spacing, can be more
 }
 
+-(void) acceptAction:(NSInteger)index{
+    MRGroupUserObject *user = groupMemberArray[index];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:self.mainGroupObj.group_id,@"group_id", [NSString stringWithFormat:@"%@",user.member_id],@"member_id",@"ACTIVE",@"status", nil];
+    
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] updateGroupMembersStatus:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [MRCommon stopActivityIndicator];
+        if (status)
+        {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }];
+}
+
+-(void) rejectAction:(NSInteger)index{
+    MRGroupUserObject *user = groupMemberArray[index];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:self.mainGroupObj.group_id,@"group_id",@[[NSString stringWithFormat:@"%@",user.member_id]],@"memberList", nil];
+    
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] removeGroupMember:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [MRCommon stopActivityIndicator];
+        if (status)
+        {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }];
+}
+
 - (IBAction)moreOptionsTapped:(id)sender {
     if (!self.moreOptions) {
         self.moreOptions = [[UIActionSheet alloc] initWithTitle:@"More Options"
                                                        delegate:self
                                               cancelButtonTitle:@"Cancel"
                                          destructiveButtonTitle:nil
-                                              otherButtonTitles:@"Add Members",@"Pending Members", nil];
+                                              otherButtonTitles:@"Add Connections",@"Pending Connections", nil];
     }
     
     canEditGroup = self.mainGroupObj && (self.mainGroupObj.admin_id == [MRAppControl sharedHelper].userRegData[@"doctorId"]);
@@ -438,7 +485,17 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 0) {
         MRAddMembersViewController* detailViewController = [[MRAddMembersViewController alloc] init];
+        if (self.mainGroupObj)
+            detailViewController.groupID = [self.mainGroupObj.group_id integerValue];
+        else
+            detailViewController.groupID = 0;
         [self.navigationController pushViewController:detailViewController animated:NO];
+    }else if (buttonIndex == 1) {
+        PendingContactsViewController* pendingContactsViewController = [[PendingContactsViewController alloc] init];
+        pendingContactsViewController.isFromGroup = NO;
+        pendingContactsViewController.isFromMember = canEditGroup;
+        pendingContactsViewController.gid = self.mainGroupObj.group_id;
+        [self.navigationController pushViewController:pendingContactsViewController animated:NO];
     }else if (buttonIndex == 2 && canEditGroup) {
         MRCreateGroupViewController* createGroupVC = [[MRCreateGroupViewController alloc] init];
         createGroupVC.group = self.mainGroupObj;
@@ -535,13 +592,24 @@
     }];
 }
 
-- (void)updateGroupMembersStatus:(NSDictionary *)dict{
+- (void)getGroupMembersStatusWithGroupId:(NSString *)groupId{
     [MRCommon showActivityIndicator:@"Requesting..."];
-    [[MRWebserviceHelper sharedWebServiceHelper] updateGroupMembersStatus:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+    [[MRWebserviceHelper sharedWebServiceHelper] getGroupMembersStatusWithId:groupId withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
         [MRCommon stopActivityIndicator];
         if (status)
         {
-            //Success
+            NSArray *responseArray = responce[@"Responce"];
+            groupsArrayObj = [NSMutableArray array];
+            groupMemberArray = [NSMutableArray array];
+            
+            for (NSDictionary *memberDict in responseArray) {
+                MRGroupObject *groupObj = [[MRGroupObject alloc] initWithDict:memberDict];
+                [groupsArrayObj addObject:groupObj];
+                if ([groupObj.group_name isEqualToString:self.mainGroupObj.group_name]) {
+                    groupMemberArray = groupObj.member;
+                }
+            }
+            [self.collectionView reloadData];
         }
         else
         {

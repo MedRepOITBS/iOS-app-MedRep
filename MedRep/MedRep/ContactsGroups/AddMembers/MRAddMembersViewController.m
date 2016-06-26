@@ -8,8 +8,14 @@
 
 #import "MRAddMembersViewController.h"
 #import "MRAddMemberTableViewCell.h"
+#import "MRGroupUserObject.h"
+#import "MRCommon.h"
+#import "MRWebserviceHelper.h"
+#import "MRContactsViewController.h"
 
-@interface MRAddMembersViewController ()
+@interface MRAddMembersViewController () <MRAddMemberProtocol>{
+    NSMutableArray *selectedContacts;
+}
 
 @property (weak, nonatomic) IBOutlet UITableView *tableViewMembers;
 @property (strong, nonatomic) IBOutlet UIView *navView;
@@ -32,11 +38,42 @@
     
     UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navView];
     self.navigationItem.rightBarButtonItem = rightButtonItem;
+    
+    selectedContacts = [NSMutableArray array];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    [self getAllContactsByCity];
+}
+
+- (void)getAllContactsByCity{
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] getAllContactsByCityListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [MRCommon stopActivityIndicator];
+        if (status)
+        {
+            _pendingContactListArray = [NSMutableArray array];
+            NSArray *responseArray = responce[@"Responce"];
+            for (NSDictionary *dic in responseArray) {
+                MRGroupUserObject *groupObj = [[MRGroupUserObject alloc] initWithDict:dic];
+                [_pendingContactListArray addObject:groupObj];
+            }
+            [_tableViewMembers reloadData];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }];
 }
 
 - (void)backButtonAction{
@@ -54,11 +91,67 @@
 */
 
 - (IBAction)addMembers:(id)sender {
+    if (!selectedContacts.count){
+        [[[UIAlertView alloc] initWithTitle:@"" message:@"Please select at least one contact to add" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+        return;
+    }
     
+    [self addMember];
+}
+
+-(void) addMember{
+    if (_groupID) {
+        NSMutableDictionary *dictReq = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                        [NSString stringWithFormat:@"%ld",(long)_groupID], @"group_id",
+                                        selectedContacts, @"memberList",
+                                        @"PENDING", @"status",
+                                        @"false",@"is_admin",
+                                        nil];
+        
+        [MRCommon showActivityIndicator:@"Adding..."];
+        [[MRWebserviceHelper sharedWebServiceHelper] addMembersToGroup:dictReq withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+            [MRCommon stopActivityIndicator];
+            if (status) {
+                for (UIViewController *vc in self.parentViewController.childViewControllers) {
+                    if ([vc isKindOfClass:[MRContactsViewController class]]) {
+                        [self.navigationController popToViewController:vc animated:YES];
+                    }
+                }
+            }
+            else
+            {
+                NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                if (erros.count > 0)
+                    [MRCommon showAlert:[erros lastObject] delegate:nil];
+            }
+        }];
+    }else{
+        NSMutableDictionary *dictReq = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                        selectedContacts, @"connIdList",
+                                        nil];
+        
+        [MRCommon showActivityIndicator:@"Adding..."];
+        [[MRWebserviceHelper sharedWebServiceHelper] addMembers:dictReq withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+            [MRCommon stopActivityIndicator];
+            if (status) {
+                for (UIViewController *vc in self.parentViewController.childViewControllers) {
+                    if ([vc isKindOfClass:[MRContactsViewController class]]) {
+                        [self.navigationController popToViewController:vc animated:YES];
+                    }
+                }
+            }
+            else
+            {
+                NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                if (erros.count > 0)
+                    [MRCommon showAlert:[erros lastObject] delegate:nil];
+            }
+        }];
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return _pendingContactListArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -70,11 +163,44 @@
         cell = (MRAddMemberTableViewCell *)[arr objectAtIndex:0];
     }
     
-    NSDictionary *dict = [[self getFilterDataFromModel] objectAtIndex:indexPath.row];
+    MRGroupUserObject *contact = [_pendingContactListArray objectAtIndex:indexPath.row];
     
-    [cell.profilePic setImage:[UIImage imageNamed:[dict objectForKey:@"profile_pic"]]];
-    [cell.userName setText:[dict objectForKey:@"name"]];
-    [cell.phoneNo setText:[dict objectForKey:@"contactNo"]];
+    for (UIView *view in cell.profilePic.subviews) {
+        if ([view isKindOfClass:[UILabel class]]) {
+            [view removeFromSuperview];
+        }
+    }
+    
+    NSString *fullName = [NSString stringWithFormat:@"%@ %@",contact.firstName, contact.lastName];
+    cell.userName.text = fullName;
+    cell.phoneNo.text = contact.therapeuticName;
+    cell.checkBtn.tag = indexPath.row;
+    cell.cellDelegate = self;
+    if (contact.imgData.length) {
+        cell.profilePic.image = [MRCommon getImageFromBase64Data:[contact.imgData dataUsingEncoding:NSUTF8StringEncoding]];
+    } else {
+        cell.profilePic.image = nil;
+        if (fullName.length > 0) {
+            UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:cell.profilePic.bounds];
+            subscriptionTitleLabel.textAlignment = NSTextAlignmentCenter;
+            subscriptionTitleLabel.font = [UIFont systemFontOfSize:15.0];
+            subscriptionTitleLabel.textColor = [UIColor lightGrayColor];
+            subscriptionTitleLabel.layer.cornerRadius = 5.0;
+            subscriptionTitleLabel.layer.masksToBounds = YES;
+            subscriptionTitleLabel.layer.borderWidth =1.0;
+            subscriptionTitleLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
+            
+            NSArray *substrngs = [fullName componentsSeparatedByString:@" "];
+            NSString *imageString = @"";
+            for(NSString *str in substrngs){
+                if (str.length > 0) {
+                    imageString = [imageString stringByAppendingString:[NSString stringWithFormat:@"%c",[str characterAtIndex:0]]];
+                }
+            }
+            subscriptionTitleLabel.text = imageString.length > 2 ? [imageString substringToIndex:2] : imageString;
+            [cell.profilePic addSubview:subscriptionTitleLabel];
+        }
+    }
     
     return cell;
 }
@@ -83,16 +209,22 @@
     return 72;
 }
 
--(NSArray *)getFilterDataFromModel {
+-(void) selectedMemberAtIndex:(NSInteger)index{
+    MRGroupUserObject *contact = [_pendingContactListArray objectAtIndex:index];
     
-    NSMutableArray * _pendingContactListArra = [NSMutableArray array];
-    
-    [_pendingContactListArra addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"Namit Nayak",@"name",@"(732)-234-1234",@"contactNo",@"profile_pic1.jpeg",@"profile_pic", nil]];
-    [_pendingContactListArra addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"Adam Johns",@"name",@"(732)-234-4321",@"contactNo",@"profile_pic2.jpeg",@"profile_pic", nil]];
-    [_pendingContactListArra addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"Bill Paraon",@"name",@"(732)-234-9803",@"contactNo",@"profile_pic3.jpeg",@"profile_pic", nil]];
-    [_pendingContactListArra addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"Vamsi Katragadda",@"name",@"(732)-234-456",@"contactNo",@"profile_pic4.jpeg",@"profile_pic", nil]];
-    
-    return _pendingContactListArra;
+    if (_groupID) {
+        if ([selectedContacts containsObject:contact.doctorId]) {
+            [selectedContacts removeObject:contact.doctorId];
+        }else{
+            [selectedContacts addObject:contact.doctorId];
+        }
+    }else{
+        if ([selectedContacts containsObject:contact.userId]) {
+            [selectedContacts removeObject:contact.userId];
+        }else{
+            [selectedContacts addObject:contact.userId];
+        }
+    }
 }
 
 @end

@@ -16,11 +16,17 @@
 }
 
 - (IBAction)rejectAction:(id)sender {
-
+    if (self.cellDelegate && [self.cellDelegate respondsToSelector:@selector(rejectAction:)])
+    {
+        [self.cellDelegate rejectAction:((UIButton *)sender).tag];
+    }
 }
 
 - (IBAction)acceptAction:(id)sender {
-
+    if (self.cellDelegate && [self.cellDelegate respondsToSelector:@selector(acceptAction:)])
+    {
+        [self.cellDelegate acceptAction:((UIButton *)sender).tag];
+    }
 }
 
 @end

@@ -8,7 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol MRUpdateMemberProtocol <NSObject>
+
+-(void) rejectAction:(NSInteger)index;
+-(void) acceptAction:(NSInteger)index;
+
+@end
+
 @interface MRContactWithinGroupCollectionViewCell : UICollectionViewCell
+
+@property (nonatomic, assign) id<MRUpdateMemberProtocol> cellDelegate;
 
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
 @property (weak, nonatomic) IBOutlet UILabel *nameTxt;

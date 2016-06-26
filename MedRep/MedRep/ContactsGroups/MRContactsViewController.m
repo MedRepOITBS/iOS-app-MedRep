@@ -25,12 +25,16 @@
 #import "MRTransformTitleCollectionViewCell.h"
 #import "MRGroupObject.h"
 #import "MRCreateGroupViewController.h"
+#import "MRGroupUserObject.h"
+#import "MRAddMembersViewController.h"
 
 @interface MRContactsViewController () <UICollectionViewDataSource,UICollectionViewDelegate,UIActionSheetDelegate,UISearchBarDelegate, SWRevealViewControllerDelegate, MRTabViewDelegate>{
     NSMutableArray *groupsArray;
     NSMutableArray *filteredGroupsArray;
     NSMutableArray *suggestedGroupsArray;
     NSMutableArray *filteredSuggestedGroupsArray;
+    int i;
+    NSTimer *timer;
 }
 
 @property (weak, nonatomic) IBOutlet UICollectionView* myContactsCollectionView;
@@ -50,6 +54,8 @@
 @property (strong, nonatomic) NSMutableArray* myContacts;
 @property (strong, nonatomic) NSMutableArray* fileredContacts;
 @property (strong, nonatomic) NSMutableArray* suggestedContacts;
+@property (strong, nonatomic) NSMutableArray* allContactsByCity;
+@property (strong, nonatomic) NSMutableArray* doctorContacts;
 @property (strong, nonatomic) NSMutableArray* fileredSuggestedContacts;
 @property (weak, nonatomic) IBOutlet UILabel *noContactErrorMsgLbl;
 @property (weak, nonatomic) IBOutlet UIButton *clickHereToAddBtn;
@@ -109,6 +115,8 @@
     [self.searchBar resignFirstResponder];
     
     [self getGroupList];
+    [self getContactList];
+    [self getSuggestedContactList];
     
     NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"MRTabView" owner:self options:nil];
     MRTabView *tabView = (MRTabView *)[subviewArray objectAtIndex:0];
@@ -139,6 +147,32 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void) viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(AutoScroll) userInfo:nil repeats:YES];
+}
+
+-(void) viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    i = 0;
+    [timer invalidate];
+}
+
+-(void)AutoScroll
+{
+    int width = _titlesCollectionView.contentSize.width - _titlesCollectionView.frame.size.width;
+    if (i >= (width > 0 ? width + 10 : 0)) {
+        i= 0;
+    }
+    [self.titlesCollectionView setContentOffset:CGPointMake(i++, 0)];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    i = scrollView.contentOffset.x;
+}
+
 /*
 #pragma mark - Navigation
 
@@ -150,8 +184,8 @@
 */
 
 - (void)readData {
-    self.myContacts = [[MRDatabaseHelper getContacts] mutableCopy];
-    self.suggestedContacts = [[MRDatabaseHelper getSuggestedContacts] mutableCopy];
+    self.myContacts = [NSMutableArray array];//[[MRDatabaseHelper getContacts] mutableCopy];
+    self.suggestedContacts = [NSMutableArray array];//[[MRDatabaseHelper getSuggestedContacts] mutableCopy];
     
     if (self.myContacts != nil && self.myContacts.count >0) {
         self.noContactErrorMsgLbl.hidden = YES;
@@ -284,12 +318,14 @@
     if (self.currentIndex == 0) {
         MRContactDetailViewController* detailViewController = [[MRContactDetailViewController alloc] init];
         [detailViewController setContact:self.fileredContacts[indexPath.row]];
+        detailViewController.contactList = _myContacts;
         [self.navigationController pushViewController:detailViewController animated:YES];
     }else if (self.currentIndex == 1) {
         
     }else if (self.currentIndex == 2) {
         MRContactDetailViewController* detailViewController = [[MRContactDetailViewController alloc] init];
         [detailViewController setGroupData:filteredGroupsArray[indexPath.row]];
+        detailViewController.contactList = _myContacts;
         [self.navigationController pushViewController:detailViewController animated:YES];
     }else if (self.currentIndex == 3) {
         
@@ -349,36 +385,61 @@
 }
 
 - (IBAction)popOverTapped:(id)sender {
-    if (!self.menu) {
+    if (self.currentIndex == 0 || self.currentIndex == 1) {
         self.menu = [[UIActionSheet alloc] initWithTitle:@"More Options"
                                                 delegate:self
                                        cancelButtonTitle:@"Cancel"
                                   destructiveButtonTitle:nil
-                                       otherButtonTitles:@"Pending Connections",@"More Connections",@"Create Group", nil];
+                                       otherButtonTitles:@"Pending Connections",@"Add Connections", nil];
+    }else{
+        self.menu = [[UIActionSheet alloc] initWithTitle:@"More Options"
+                                                delegate:self
+                                       cancelButtonTitle:@"Cancel"
+                                  destructiveButtonTitle:nil
+                                       otherButtonTitles:@"Pending Groups",@"Create Group", nil];
     }
+    
     [self.menu showFromRect:self.moreOptions.frame inView:self.view animated:YES];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 0) {
-        [UIView transitionWithView:self.navigationController.view
-                          duration:0.75
-                           options:UIViewAnimationOptionTransitionCurlUp
-                        animations:^{
-                            [self.navigationController pushViewController:self.pendingContactsViewController animated:NO];
-                        }
-                        completion:nil];
-    }else if (buttonIndex == 1){
-        [self getMoreConnections];
-    }else if (buttonIndex == 2 ) {
-        [UIView transitionWithView:self.navigationController.view
-                          duration:0.75
-                           options:UIViewAnimationOptionTransitionCurlUp
-                        animations:^{
-                            MRCreateGroupViewController* detailViewController = [[MRCreateGroupViewController alloc] init];
-                            [self.navigationController pushViewController:detailViewController animated:NO];
-                        }
-                        completion:nil];
+    if (self.currentIndex == 0 || self.currentIndex == 1) {
+        if (buttonIndex == 0) {
+            [UIView transitionWithView:self.navigationController.view
+                              duration:0.75
+                               options:UIViewAnimationOptionTransitionCurlUp
+                            animations:^{
+                                _pendingContactsViewController.isFromGroup = NO;
+                                _pendingContactsViewController.gid = 0;
+                                [self.navigationController pushViewController:self.pendingContactsViewController animated:NO];
+                            }
+                            completion:nil];
+        }else if (buttonIndex == 1){
+            MRAddMembersViewController* detailViewController = [[MRAddMembersViewController alloc] init];
+            detailViewController.groupID = 0;
+            [self.navigationController pushViewController:detailViewController animated:NO];
+        }
+    }else{
+        if (buttonIndex == 0) {
+            [UIView transitionWithView:self.navigationController.view
+                              duration:0.75
+                               options:UIViewAnimationOptionTransitionCurlUp
+                            animations:^{
+                                _pendingContactsViewController.isFromGroup = YES;
+                                _pendingContactsViewController.gid = 0;
+                                [self.navigationController pushViewController:self.pendingContactsViewController animated:NO];
+                            }
+                            completion:nil];
+        }else if (buttonIndex == 1) {
+            [UIView transitionWithView:self.navigationController.view
+                              duration:0.75
+                               options:UIViewAnimationOptionTransitionCurlUp
+                            animations:^{
+                                MRCreateGroupViewController* detailViewController = [[MRCreateGroupViewController alloc] init];
+                                [self.navigationController pushViewController:detailViewController animated:NO];
+                            }
+                            completion:nil];
+        }
     }
 }
 
@@ -456,10 +517,19 @@
             _myContacts = [NSMutableArray array];
             NSArray *responseArray = responce[@"Responce"];
             for (NSDictionary *dic in responseArray) {
-                MRGroupObject *groupObj = [[MRGroupObject alloc] initWithDict:dic];
+                MRGroupUserObject *groupObj = [[MRGroupUserObject alloc] initWithDict:dic];
                 [_myContacts addObject:groupObj];
             }
             _fileredContacts = _myContacts;
+            
+            if (self.myContacts != nil && self.myContacts.count >0) {
+                self.noContactErrorMsgLbl.hidden = YES;
+                self.clickHereToAddBtn.hidden = YES;
+            }else {
+                self.noContactErrorMsgLbl.hidden = NO;
+                self.clickHereToAddBtn.hidden = NO;
+            }
+            
             [_myContactsCollectionView reloadData];
         }
         else
@@ -480,10 +550,33 @@
             _suggestedContacts = [NSMutableArray array];
             NSArray *responseArray = responce[@"Responce"];
             for (NSDictionary *dic in responseArray) {
-                MRGroupObject *groupObj = [[MRGroupObject alloc] initWithDict:dic];
+                MRGroupUserObject *groupObj = [[MRGroupUserObject alloc] initWithDict:dic];
                 [_suggestedContacts addObject:groupObj];
             }
             _fileredSuggestedContacts = _suggestedContacts;
+            [_myContactsCollectionView reloadData];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }];
+}
+
+- (void)getDoctorContacts{
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] getDoctorContactsListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [MRCommon stopActivityIndicator];
+        if (status)
+        {
+            _doctorContacts = [NSMutableArray array];
+            NSArray *responseArray = responce[@"Responce"];
+            for (NSDictionary *dic in responseArray) {
+                MRGroupUserObject *groupObj = [[MRGroupUserObject alloc] initWithDict:dic];
+                [_doctorContacts addObject:groupObj];
+            }
             [_myContactsCollectionView reloadData];
         }
         else
@@ -519,13 +612,13 @@
         if (searchText.length == 0) {
             self.fileredContacts = self.myContacts;
         } else {
-            self.fileredContacts = [[self.myContacts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K contains[cd] %@",@"name",searchText]] mutableCopy];
+            self.fileredContacts = [[self.myContacts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K contains[cd] %@",@"displayName",searchText]] mutableCopy];
         }
     } else if(self.currentIndex == 1){
         if (searchText.length == 0) {
             self.fileredSuggestedContacts = self.suggestedContacts;
         } else {
-            self.fileredSuggestedContacts = [[self.suggestedContacts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K contains[cd] %@",@"name",searchText]] mutableCopy];
+            self.fileredSuggestedContacts = [[self.suggestedContacts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K contains[cd] %@",@"displayName",searchText]] mutableCopy];
         }
     }else if (self.currentIndex == 2){
         if (searchText.length == 0) {
@@ -549,10 +642,28 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     [searchBar resignFirstResponder];
-}
-
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
-    [searchBar resignFirstResponder];
+    
+    [MRCommon showActivityIndicator:@"searching..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] getSearchContactList:searchBar.text withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [MRCommon stopActivityIndicator];
+        if (status)
+        {
+            NSMutableArray *searchContacts = [NSMutableArray array];
+            NSArray *responseArray = responce[@"Responce"];
+            for (NSDictionary *dic in responseArray) {
+                MRGroupUserObject *groupObj = [[MRGroupUserObject alloc] initWithDict:dic];
+                [searchContacts addObject:groupObj];
+            }
+            _fileredContacts = searchContacts;
+            [_myContactsCollectionView reloadData];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }];
 }
 
 - (void)transformButtonTapped {

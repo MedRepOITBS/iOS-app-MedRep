@@ -21,6 +21,13 @@
 @property (nonatomic, strong) NSString *imgData;
 @property (nonatomic, strong) NSString *mimeType;
 @property (nonatomic, strong) NSString *therapeuticName;
+@property (nonatomic, strong) NSString *member_id;
+@property (nonatomic, strong) NSString *displayName;
+@property (nonatomic, strong) NSString *doctorId;
+@property (nonatomic, strong) NSString *therapeuticId;
+@property (nonatomic, strong) NSString *therapeuticArea;
+@property (nonatomic, strong) NSString *dPicture;
+@property (nonatomic, strong) NSString *userId;
 
 - (id) initWithDict:(NSDictionary*)infoDictionary;
 

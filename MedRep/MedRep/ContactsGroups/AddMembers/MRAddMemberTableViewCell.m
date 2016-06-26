@@ -29,6 +29,10 @@
         [sender setImage:[UIImage imageNamed:@"selected"] forState:UIControlStateSelected];
         [sender setSelected:YES];
     }
+    if (self.cellDelegate && [self.cellDelegate respondsToSelector:@selector(selectedMemberAtIndex:)])
+    {
+        [self.cellDelegate selectedMemberAtIndex:((UIButton *)sender).tag];
+    }
 }
 
 @end

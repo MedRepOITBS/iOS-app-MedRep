@@ -10,4 +10,7 @@
 
 @interface MRAddMembersViewController : UIViewController
 
+@property (assign, nonatomic) NSInteger groupID;
+@property (strong, nonatomic) NSMutableArray *pendingContactListArray;
+
 @end

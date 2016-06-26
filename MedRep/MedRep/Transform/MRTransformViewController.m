@@ -23,7 +23,10 @@
 
 @interface MRTransformViewController () <UICollectionViewDelegate, UICollectionViewDataSource,
                                          UITableViewDelegate, UITableViewDataSource,
-                                        SWRevealViewControllerDelegate, UISearchBarDelegate, MRTabViewDelegate>
+SWRevealViewControllerDelegate, UISearchBarDelegate, MRTabViewDelegate>{
+    int i;
+    NSTimer *timer;
+}
 
 @property (strong, nonatomic) IBOutlet UIView *navView;
 
@@ -129,6 +132,32 @@
                                                           attribute:NSLayoutAttributeBottom
                                                          multiplier:1
                                                            constant:0]];
+}
+
+-(void) viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(AutoScroll) userInfo:nil repeats:YES];
+}
+
+-(void) viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    i = 0;
+    [timer invalidate];
+}
+
+-(void)AutoScroll
+{
+    int width = _titleCollectionView.contentSize.width - _titleCollectionView.frame.size.width;
+    if (i >= (width > 0 ? width + 10 : 0)) {
+        i= 0;
+    }
+    [self.titleCollectionView setContentOffset:CGPointMake(i++, 0)];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    i = scrollView.contentOffset.x;
 }
 
 - (void)viewTapped:(UITapGestureRecognizer*)tapGesture {

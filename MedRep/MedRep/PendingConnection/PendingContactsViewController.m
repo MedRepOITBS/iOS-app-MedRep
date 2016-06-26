@@ -9,7 +9,14 @@
 #import "PendingContactsViewController.h"
 #import "PendingContactCustomFilterTableViewCell.h"
 #import "PendingContactTableViewCell.h"
-@interface PendingContactsViewController ()
+#import "MRCommon.h"
+#import "MRWebserviceHelper.h"
+#import "MRGroupUserObject.h"
+#import "MRGroupObject.h"
+
+@interface PendingContactsViewController () <MRPendingMemberProtocol> {
+    NSMutableArray *fileredContacts;
+}
 @property (nonatomic)BOOL isCustomFilterViewOpen;
 @property (nonatomic,strong) NSMutableArray *customFilterArray;
 //@property (weak, nonatomic) IBOutlet UITableView *pendingContactTableView;
@@ -25,14 +32,96 @@
 @end
 
 @implementation PendingContactsViewController
+
 - (void)viewTapped:(UITapGestureRecognizer*)tapGesture {
     [self.searchBar resignFirstResponder];
     self.tapGesture.enabled = NO;
 }
+
 - (IBAction)tapGesture:(id)sender {
-    NSLog(@"aaa");
     _customFilterView.hidden = YES;
 }
+
+-(void) acceptAction:(NSInteger)index{
+    if (_gid > 0) {
+        MRGroupUserObject *user = _pendingContactListArra[index];
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:_gid,@"group_id", [NSString stringWithFormat:@"%@",user.userId],@"member_id",@"ACTIVE",@"status", nil];
+        
+        [MRCommon showActivityIndicator:@"Requesting..."];
+        [[MRWebserviceHelper sharedWebServiceHelper] updateGroupMembersStatus:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+            [MRCommon stopActivityIndicator];
+            if (status)
+            {
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+            else
+            {
+                NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                if (erros.count > 0)
+                    [MRCommon showAlert:[erros lastObject] delegate:nil];
+            }
+        }];
+    }else{
+        MRGroupUserObject *user = _pendingContactListArra[index];
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",user.userId],@"member_id",@"ACTIVE",@"status", nil];
+        
+        [MRCommon showActivityIndicator:@"Requesting..."];
+        [[MRWebserviceHelper sharedWebServiceHelper] updateConnectionStatus:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+            [MRCommon stopActivityIndicator];
+            if (status)
+            {
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+            else
+            {
+                NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                if (erros.count > 0)
+                    [MRCommon showAlert:[erros lastObject] delegate:nil];
+            }
+        }];
+    }
+}
+
+-(void) rejectAction:(NSInteger)index{
+    if (_gid > 0) {
+        MRGroupUserObject *user = _pendingContactListArra[index];
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:_gid,@"group_id",@[[NSString stringWithFormat:@"%@",user.userId]],@"memberList", nil];
+        
+        [MRCommon showActivityIndicator:@"Requesting..."];
+        [[MRWebserviceHelper sharedWebServiceHelper] removeGroupMember:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+            [MRCommon stopActivityIndicator];
+            if (status)
+            {
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+            else
+            {
+                NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                if (erros.count > 0)
+                    [MRCommon showAlert:[erros lastObject] delegate:nil];
+            }
+        }];
+    }else{
+        MRGroupUserObject *user = _pendingContactListArra[index];
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@[[NSString stringWithFormat:@"%@",user.userId]],@"memberList", nil];
+        
+        [MRCommon showActivityIndicator:@"Requesting..."];
+        [[MRWebserviceHelper sharedWebServiceHelper] removeConnection:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+            [MRCommon stopActivityIndicator];
+            if (status)
+            {
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+            else
+            {
+                NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                if (erros.count > 0)
+                    [MRCommon showAlert:[erros lastObject] delegate:nil];
+            }
+        }];
+    }
+}
+
 -(IBAction)backButtonTapped:(id)sender{
     [UIView transitionWithView:self.navigationController.view
                       duration:0.75
@@ -42,6 +131,7 @@
                     }
                     completion:nil];
 }
+
 - (IBAction)dropDownButtonTapped:(id)sender {
     if (_customFilterView.hidden) {
 //        self.heightConstraint.constant = 0;
@@ -58,7 +148,6 @@
     }else{
         _isCustomFilterViewOpen = NO;
         _customFilterView.hidden = YES;
-
     }
 }
 
@@ -66,12 +155,14 @@
     [super viewDidLoad];
     self.customFilterTableView.delegate  = self;
     self.customFilterTableView.dataSource = self;
+    
     self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
     self.pendingTableView.hidden = NO;
     self.tapGesture.numberOfTapsRequired = 1;
     self.tapGesture.cancelsTouchesInView = YES;
-    self.tapGesture.enabled = NO;
+    self.tapGesture.enabled = YES;
     [self.view addGestureRecognizer:self.tapGesture];
+    
     [self.pendingTableView reloadData];
     self.pendingTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
    
@@ -87,9 +178,99 @@
     self.navigationItem.rightBarButtonItem = rightButtonItem;
 }
 
+-(void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if (_isFromGroup) {
+        [self getPendingGroups];
+        self.navigationItem.title = @"Pending Groups";
+    }else if (_isFromMember) {
+        [self getPendingMembers];
+        self.navigationItem.title = @"Pending Members";
+    }else{
+        [self getPendingConnections];
+        self.navigationItem.title = @"Pending Connections";
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)getPendingConnections {
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] fetchPendingConnectionsListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [MRCommon stopActivityIndicator];
+        if (status)
+        {
+            fileredContacts = [NSMutableArray array];
+            _pendingContactListArra = [NSMutableArray array];
+            NSArray *responseArray = responce[@"Responce"];
+            for (NSDictionary *dic in responseArray) {
+                MRGroupUserObject *groupObj = [[MRGroupUserObject alloc] initWithDict:dic];
+                [_pendingContactListArra addObject:groupObj];
+            }
+            fileredContacts = _pendingContactListArra;
+            [_pendingTableView reloadData];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }];
+}
+
+-(void)getPendingMembers {
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] fetchPendingMembersListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [MRCommon stopActivityIndicator];
+        if (status)
+        {
+            fileredContacts = [NSMutableArray array];
+            _pendingContactListArra = [NSMutableArray array];
+            NSArray *responseArray = responce[@"Responce"];
+            for (NSDictionary *dic in responseArray) {
+                MRGroupUserObject *groupObj = [[MRGroupUserObject alloc] initWithDict:dic];
+                [_pendingContactListArra addObject:groupObj];
+            }
+            fileredContacts = _pendingContactListArra;
+            [_pendingTableView reloadData];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }];
+}
+
+-(void)getPendingGroups {
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] fetchPendingGroupsListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [MRCommon stopActivityIndicator];
+        if (status)
+        {
+            fileredContacts = [NSMutableArray array];
+            _pendingContactListArra = [NSMutableArray array];
+            NSArray *responseArray = responce[@"Responce"];
+            for (NSDictionary *dic in responseArray) {
+                MRGroupObject *groupObj = [[MRGroupObject alloc] initWithDict:dic];
+                [_pendingContactListArra addObject:groupObj];
+            }
+            fileredContacts = _pendingContactListArra;
+            [_pendingTableView reloadData];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }];
 }
 
 - (void)backButtonAction{
@@ -104,52 +285,119 @@
     if (_isCustomFilterViewOpen) {
         return 2;
     }else {
-        return 4;
+        return fileredContacts.count;
         
     }
     return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     if (_isCustomFilterViewOpen) {
         static  NSString *ident = @"pendingCell";
-     PendingContactCustomFilterTableViewCell *   cell = (PendingContactCustomFilterTableViewCell *)[tableView dequeueReusableCellWithIdentifier:ident];
+        PendingContactCustomFilterTableViewCell *   cell = (PendingContactCustomFilterTableViewCell *)[tableView dequeueReusableCellWithIdentifier:ident];
         
-       
         if (cell == nil) {
             NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"PendingContactCustomCell" owner:self options:nil];
             cell = (PendingContactCustomFilterTableViewCell *)[arr objectAtIndex:0];
         }
         
-        
-        
         NSDictionary *dict = [[self getDataForCustomFilter] objectAtIndex:indexPath.row];
-        
         ((PendingContactCustomFilterTableViewCell *)cell).customFilterName.text = [dict objectForKey:@"name"];
         
         return cell;
     }else {
-        
-         static  NSString *ident1 = @"pendingContactTable";
-     PendingContactTableViewCell *   cell = (PendingContactTableViewCell *)[tableView dequeueReusableCellWithIdentifier:ident1];
-        
+        static  NSString *ident1 = @"pendingContactTable";
+        PendingContactTableViewCell *   cell = (PendingContactTableViewCell *)[tableView dequeueReusableCellWithIdentifier:ident1];
         
         if (cell == nil) {
             NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"PendingContactTableViewCell" owner:self options:nil];
             cell = (PendingContactTableViewCell *)[arr objectAtIndex:0];
         }
         
-        NSDictionary *dict = [[self getFilterDataFromModel] objectAtIndex:indexPath.row];
+        cell.cellDelegate = self;
+        cell.acceptBtn.tag = indexPath.row;
+        cell.rejectBtn.tag = indexPath.row;
         
-        [cell.profilePic setImage:[UIImage imageNamed:[dict objectForKey:@"profile_pic"]]];
-        [cell.userName setText:[dict objectForKey:@"name"]];
-        [cell.phoneNo setText:[dict objectForKey:@"contactNo"]];
+        if (_isFromGroup) {
+            MRGroupObject *contact = [fileredContacts objectAtIndex:indexPath.row];
+            for (UIView *view in cell.profilePic.subviews) {
+                if ([view isKindOfClass:[UILabel class]]) {
+                    [view removeFromSuperview];
+                }
+            }
+            
+            NSString *fullName = [NSString stringWithFormat:@"%@",contact.group_name];
+            cell.userName.text = fullName;
+            cell.phoneNo.text = contact.group_short_desc;
+            if (contact.group_img_data.length) {
+                cell.profilePic.image = [MRCommon getImageFromBase64Data:[contact.group_img_data dataUsingEncoding:NSUTF8StringEncoding]];
+            } else {
+                cell.profilePic.image = nil;
+                if (fullName.length > 0) {
+                    UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:cell.profilePic.bounds];
+                    subscriptionTitleLabel.textAlignment = NSTextAlignmentCenter;
+                    subscriptionTitleLabel.font = [UIFont systemFontOfSize:15.0];
+                    subscriptionTitleLabel.textColor = [UIColor lightGrayColor];
+                    subscriptionTitleLabel.layer.cornerRadius = 5.0;
+                    subscriptionTitleLabel.layer.masksToBounds = YES;
+                    subscriptionTitleLabel.layer.borderWidth =1.0;
+                    subscriptionTitleLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
+                    
+                    NSArray *substrngs = [fullName componentsSeparatedByString:@" "];
+                    NSString *imageString = @"";
+                    for(NSString *str in substrngs){
+                        if (str.length > 0) {
+                            imageString = [imageString stringByAppendingString:[NSString stringWithFormat:@"%c",[str characterAtIndex:0]]];
+                        }
+                    }
+                    subscriptionTitleLabel.text = imageString.length > 2 ? [imageString substringToIndex:2] : imageString;
+                    [cell.profilePic addSubview:subscriptionTitleLabel];
+                }
+            }
+            
+            cell.acceptBtn.hidden = YES;
+            cell.rejectBtn.hidden = YES;
+            
+            return cell;
+        }
+        MRGroupUserObject *contact = [fileredContacts objectAtIndex:indexPath.row];
+        for (UIView *view in cell.profilePic.subviews) {
+            if ([view isKindOfClass:[UILabel class]]) {
+                [view removeFromSuperview];
+            }
+        }
+        
+        NSString *fullName = [NSString stringWithFormat:@"%@ %@",contact.firstName, contact.lastName];
+        cell.userName.text = fullName;
+        cell.phoneNo.text = contact.therapeuticArea;
+        if (contact.imgData.length) {
+            cell.profilePic.image = [MRCommon getImageFromBase64Data:[contact.imgData dataUsingEncoding:NSUTF8StringEncoding]];
+        } else {
+            cell.profilePic.image = nil;
+            if (fullName.length > 0) {
+                UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:cell.profilePic.bounds];
+                subscriptionTitleLabel.textAlignment = NSTextAlignmentCenter;
+                subscriptionTitleLabel.font = [UIFont systemFontOfSize:15.0];
+                subscriptionTitleLabel.textColor = [UIColor lightGrayColor];
+                subscriptionTitleLabel.layer.cornerRadius = 5.0;
+                subscriptionTitleLabel.layer.masksToBounds = YES;
+                subscriptionTitleLabel.layer.borderWidth =1.0;
+                subscriptionTitleLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
+                
+                NSArray *substrngs = [fullName componentsSeparatedByString:@" "];
+                NSString *imageString = @"";
+                for(NSString *str in substrngs){
+                    if (str.length > 0) {
+                        imageString = [imageString stringByAppendingString:[NSString stringWithFormat:@"%c",[str characterAtIndex:0]]];
+                    }
+                }
+                subscriptionTitleLabel.text = imageString.length > 2 ? [imageString substringToIndex:2] : imageString;
+                [cell.profilePic addSubview:subscriptionTitleLabel];
+            }
+        }
         
         return cell;
     }
-    
-   
     return nil;
 }
 
@@ -159,18 +407,13 @@
     }else {
         return 72;
     }
-    
-
 }
-//"profile_pic1.jpeg"},{"id":"2","groupId":["1"],"name":"Joseph King","role":"ortho","profile_pic":"profile_pic2.jpeg"},{"id":"3","groupId":["1"],"name":"Daniel Johnson","role":"ortho","profile_pic":"profile_pic3.jpeg"},{"id":"4","groupId":["1"],"name":"David Beckham","role":"ortho","profile_pic":"profile_pic4.jpeg"},{"id":"5","groupId":["1"],"name":"Fan Kid","role":"ortho","profile_pic":"profile_p
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
 }
 
-
-
 -(NSArray *)getDataForCustomFilter{
-    
     _customFilterArray = [NSMutableArray array];
     
     [_customFilterArray addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"Therauptic Area",@"name",@"1",@"fitlerId", nil]];
@@ -178,8 +421,7 @@
     return _customFilterArray ;
 }
 
-
--(NSArray *)getFilterDataFromModel {
+/*-(NSArray *)getFilterDataFromModel {
     
     _pendingContactListArra = [NSMutableArray array];
     
@@ -189,33 +431,25 @@
     [_pendingContactListArra addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"Vamsi Katragadda",@"name",@"(732)-234-456",@"contactNo",@"profile_pic4.jpeg",@"profile_pic", nil]];
     
     return _pendingContactListArra;
-}
+}*/
 
-
-
-- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar                     // called when text starts editing
-{
-}
-- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar                      // called when text ends editing
-{
-    }
-- (void)searchBarResultsListButtonClicked:(UISearchBar *)searchBar{
-    
-    [searchBar resignFirstResponder];
-    
-}
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar{
     [searchBar resignFirstResponder];
 }
+
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     [searchBar resignFirstResponder];
-    
-    
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
-
+    if (searchText.length == 0) {
+        fileredContacts = _pendingContactListArra;
+    } else {
+        fileredContacts = [[_pendingContactListArra filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K contains[cd] %@",@"firstName",searchText]] mutableCopy];
+    }
+    [_pendingTableView reloadData];
 }
+
 /*
 #pragma mark - Navigation
 
