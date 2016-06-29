@@ -301,6 +301,24 @@
     [self sendServiceRequest:urlRequest withHandler:responceHandler];
 }
 
+- (void)deleteConnection:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler{
+    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/deleteConnection?token=%@",kHostName,[MRDefaults objectForKey:kAuthenticationToken]];
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:reqDict
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:nil];
+    NSURL *url = [NSURL URLWithString:stringFormOfUrl];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [urlRequest setTimeoutInterval:120];
+    [urlRequest setHTTPMethod:@"POST"];
+    [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [urlRequest setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[jsonData length]] forHTTPHeaderField:@"Content-Length"];
+    [urlRequest setHTTPBody: jsonData];
+    self.serviceType = kMRWebServiceTypeDeleteConnection;
+    [self sendServiceRequest:urlRequest withHandler:responceHandler];
+}
+
 - (void)refreshToken:(completionHandler)responceHandler
 {
     NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/oauth/token?grant_type=refresh_token&client_id=restapp&client_secret=restapp&refresh_token=%@",kBaseURL,[MRDefaults objectForKey:kRefreshToken]];

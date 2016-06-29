@@ -220,6 +220,8 @@ withComplitionHandler:(completionHandler)responceHandler;
 
 - (void)leaveGroup:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
 
+- (void)deleteConnection:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
+
 @end
 
 @interface NSDictionary (CategoryName)

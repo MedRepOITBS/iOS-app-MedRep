@@ -60,6 +60,7 @@
 @property (strong,nonatomic) KLCPopup *commentBoxKLCPopView;
 @property (strong,nonatomic) CommonBoxView *commentBoxView;
 @property (strong, nonatomic) IBOutlet UIView *navView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *deleteBtnHeight;
 
 @end
 
@@ -94,6 +95,7 @@
         self.groupsUnderContact = @[]; //[self.mainContact.groups allObjects];
         self.posts = @[]; //[self.mainContact.groupPosts allObjects];
         _collectionHeight.constant = 0;
+        _deleteBtnHeight.constant = 40;
         _contactDetailView.hidden = NO;
         _groupDetailView.hidden = YES;
         _plusBtn.hidden = YES;
@@ -146,6 +148,7 @@
         _groupDesc.text = _mainGroupObj.group_long_desc;
         _plusBtn.hidden = _isSuggestedGroup;
         _collectionHeight.constant = self.view.frame.size.height - 65;
+        _deleteBtnHeight.constant = 0;
         
         if (self.mainGroupObj.group_name.length > 0 && !self.mainGroupObj.group_img_data.length) {
             UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:self.mainImageView.bounds];
@@ -581,6 +584,12 @@
     if (alertView.tag == 11) {
         [self.navigationController popViewControllerAnimated:YES];
     }
+    
+    if (alertView.tag == 12) {
+        if (buttonIndex) {
+            [self deleteConnection];
+        }
+    }
 }
 
 #pragma mark
@@ -671,6 +680,31 @@
                 [MRCommon showAlert:[erros lastObject] delegate:nil];
         }
     }];
+}
+
+-(void) deleteConnection{
+    [MRCommon showActivityIndicator:@"Deleting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] deleteConnection:[NSDictionary dictionaryWithObjectsAndKeys:self.mainContact.contactId, @"connId", nil] withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [MRCommon stopActivityIndicator];
+        if (status)
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Connection deleted!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            alert.tag = 11;
+            [alert show];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }];
+}
+
+- (IBAction)deleteConnection:(id)sender {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Are you sure you want to delete connection?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+    alert.tag = 12;
+    [alert show];
 }
 
 @end

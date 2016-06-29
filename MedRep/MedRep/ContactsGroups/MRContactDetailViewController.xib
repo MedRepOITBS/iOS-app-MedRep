@@ -11,6 +11,7 @@
                 <outlet property="collectionHeight" destination="bbl-13-x8V" id="D9c-6b-xzC"/>
                 <outlet property="collectionView" destination="Lro-Ao-ngq" id="gZ1-0Z-hFh"/>
                 <outlet property="contactDetailView" destination="zt8-yx-sdT" id="DoS-ly-nB8"/>
+                <outlet property="deleteBtnHeight" destination="VnH-U8-Br2" id="AWI-eO-oGw"/>
                 <outlet property="groupDesc" destination="eOy-jv-Fxs" id="tA7-pq-j3O"/>
                 <outlet property="groupDetailView" destination="CHq-e0-kZx" id="uiX-Rm-Igr"/>
                 <outlet property="mainImageView" destination="nck-Fx-AtI" id="TCP-z5-Tga"/>
@@ -57,7 +58,7 @@
                     </connections>
                 </collectionView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FjW-Hl-Vrd">
-                    <rect key="frame" x="8" y="217" width="359" height="373"/>
+                    <rect key="frame" x="8" y="217" width="359" height="345"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="4tc-jZ-ypg"/>
@@ -130,6 +131,18 @@
                         <constraint firstAttribute="height" constant="70" id="lp7-n4-xqS"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9kR-sQ-lYy">
+                    <rect key="frame" x="0.0" y="563" width="375" height="40"/>
+                    <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="0.74765625000000002" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="VnH-U8-Br2"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                    <state key="normal" title="Delete Connection"/>
+                    <connections>
+                        <action selector="deleteConnection:" destination="-1" eventType="touchUpInside" id="PmW-Jl-TIz"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -137,8 +150,8 @@
                 <constraint firstItem="nrT-89-pM0" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="3AF-sG-Qk0"/>
                 <constraint firstItem="zt8-yx-sdT" firstAttribute="top" secondItem="nck-Fx-AtI" secondAttribute="bottom" constant="8" id="5rf-Mi-FLv"/>
                 <constraint firstItem="nrT-89-pM0" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="6R6-8h-9rk"/>
+                <constraint firstAttribute="trailing" secondItem="9kR-sQ-lYy" secondAttribute="trailing" id="7yg-hp-OHL"/>
                 <constraint firstItem="Cil-I9-ph5" firstAttribute="leading" secondItem="5E6-ZK-RBQ" secondAttribute="trailing" constant="8" id="F9l-Vl-HEd"/>
-                <constraint firstAttribute="bottom" secondItem="FjW-Hl-Vrd" secondAttribute="bottom" constant="13" id="Fyh-Ph-hg1"/>
                 <constraint firstAttribute="trailing" secondItem="nrT-89-pM0" secondAttribute="trailing" id="L0d-Sg-gtd"/>
                 <constraint firstItem="CHq-e0-kZx" firstAttribute="top" secondItem="nck-Fx-AtI" secondAttribute="bottom" constant="8" id="Lpq-Gv-Xug"/>
                 <constraint firstItem="zt8-yx-sdT" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="MDS-rA-8mO"/>
@@ -147,9 +160,11 @@
                 <constraint firstItem="nck-Fx-AtI" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="26" id="SHh-ax-bel"/>
                 <constraint firstAttribute="trailing" secondItem="zt8-yx-sdT" secondAttribute="trailing" constant="8" id="Tf8-dA-7vZ"/>
                 <constraint firstAttribute="trailing" secondItem="FjW-Hl-Vrd" secondAttribute="trailing" constant="8" id="WlQ-NI-gNa"/>
+                <constraint firstItem="9kR-sQ-lYy" firstAttribute="top" secondItem="FjW-Hl-Vrd" secondAttribute="bottom" constant="1" id="ZmX-vf-PSr"/>
                 <constraint firstAttribute="trailing" secondItem="Cil-I9-ph5" secondAttribute="trailing" constant="11" id="aZb-AB-faZ"/>
                 <constraint firstItem="Lro-Ao-ngq" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="cF9-Jf-BRq"/>
                 <constraint firstItem="FjW-Hl-Vrd" firstAttribute="top" secondItem="Lro-Ao-ngq" secondAttribute="bottom" constant="8" id="clf-c6-msX"/>
+                <constraint firstItem="9kR-sQ-lYy" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="fkx-nA-yHv"/>
                 <constraint firstItem="Lro-Ao-ngq" firstAttribute="top" secondItem="CHq-e0-kZx" secondAttribute="bottom" constant="8" id="gi6-US-olq"/>
                 <constraint firstItem="5E6-ZK-RBQ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="jn9-f8-973"/>
                 <constraint firstItem="nck-Fx-AtI" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="8" id="meu-Kh-goh"/>
@@ -158,6 +173,7 @@
                 <constraint firstItem="Cil-I9-ph5" firstAttribute="leading" secondItem="5E6-ZK-RBQ" secondAttribute="trailing" constant="8" id="udr-Ji-CCC"/>
                 <constraint firstAttribute="trailing" secondItem="CHq-e0-kZx" secondAttribute="trailing" constant="8" id="uvm-SQ-iae"/>
                 <constraint firstAttribute="bottom" secondItem="nrT-89-pM0" secondAttribute="bottom" id="vgD-Vh-pge"/>
+                <constraint firstAttribute="bottom" secondItem="9kR-sQ-lYy" secondAttribute="bottom" id="ysb-NC-cpc"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
