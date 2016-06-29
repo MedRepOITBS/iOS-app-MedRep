@@ -33,6 +33,8 @@
         self.therapeuticArea = @"";
         self.dPicture = @"";
         self.userId = @"";
+        self.contactId = @"";
+        self.city = @"";
     }
     
     return self;
@@ -55,9 +57,11 @@
         self.mimeType = [[infoDictionary objectForKey:@"mimeType"] isKindOfClass:[NSString class]] ? [infoDictionary objectForKey:@"mimeType"] : @"";
         self.therapeuticName = [[infoDictionary objectForKey:@"therapeuticName"] isKindOfClass:[NSString class]] ? [infoDictionary objectForKey:@"therapeuticName"] : @"";
         self.therapeuticArea = [[infoDictionary objectForKey:@"therapeuticArea"] isKindOfClass:[NSString class]] ? [infoDictionary objectForKey:@"therapeuticArea"] : @"";
+        self.city = [[infoDictionary objectForKey:@"city"] isKindOfClass:[NSString class]] ? [infoDictionary objectForKey:@"city"] : @"";
         self.member_id = [infoDictionary objectForKey:@"member_id"];
         self.doctorId = [infoDictionary objectForKey:@"doctorId"];
         self.userId = [infoDictionary objectForKey:@"userId"];
+        self.contactId = [infoDictionary objectForKey:@"contactId"];
         self.displayName = [[infoDictionary objectForKey:@"displayName"] isKindOfClass:[NSString class]] ? [infoDictionary objectForKey:@"displayName"] : @"";
         self.therapeuticId = [[infoDictionary objectForKey:@"therapeuticId"] isKindOfClass:[NSString class]] ? [infoDictionary objectForKey:@"therapeuticId"] : @"";
         

@@ -14,7 +14,7 @@
 
 @interface MRContactDetailViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property (strong, nonatomic) NSMutableArray *contactList;
+@property (nonatomic, assign) BOOL isSuggestedGroup;
 
 - (void)setContact:(MRContact*)contact;
 - (void)setGroup:(MRGroup*)group;

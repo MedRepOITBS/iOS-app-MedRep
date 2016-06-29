@@ -210,7 +210,13 @@ withComplitionHandler:(completionHandler)responceHandler;
 
 - (void)removeConnection:(NSDictionary *)dict withHandler:(completionHandler)responceHandler;
 
-- (void)fetchPendingMembersListwithHandler:(completionHandler)responceHandler;
+- (void)getAllGroupListwithHandler:(completionHandler)responceHandler;
+
+- (void)joinGroup:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
+
+- (void)inviteContacts:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
+
+- (void)fetchPendingMembersList:(NSString *)groupID withHandler:(completionHandler)responceHandler;
 
 @end
 

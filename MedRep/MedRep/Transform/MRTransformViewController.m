@@ -137,7 +137,7 @@ SWRevealViewControllerDelegate, UISearchBarDelegate, MRTabViewDelegate>{
 -(void) viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
-    timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(AutoScroll) userInfo:nil repeats:YES];
+    //timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(AutoScroll) userInfo:nil repeats:YES];
 }
 
 -(void) viewWillDisappear:(BOOL)animated{

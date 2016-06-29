@@ -13,6 +13,7 @@
 #import "MRWebserviceHelper.h"
 #import "MRGroupUserObject.h"
 #import "MRGroupObject.h"
+#import "MRContactsViewController.h"
 
 @interface PendingContactsViewController () <MRPendingMemberProtocol> {
     NSMutableArray *fileredContacts;
@@ -45,14 +46,18 @@
 -(void) acceptAction:(NSInteger)index{
     if (_gid > 0) {
         MRGroupUserObject *user = _pendingContactListArra[index];
-        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:_gid,@"group_id", [NSString stringWithFormat:@"%@",user.userId],@"member_id",@"ACTIVE",@"status", nil];
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:_gid,@"group_id", [NSString stringWithFormat:@"%@",user.member_id],@"member_id",@"ACTIVE",@"status", nil];
         
         [MRCommon showActivityIndicator:@"Requesting..."];
         [[MRWebserviceHelper sharedWebServiceHelper] updateGroupMembersStatus:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
             [MRCommon stopActivityIndicator];
             if (status)
             {
-                [self.navigationController popViewControllerAnimated:YES];
+                for (UIViewController *vc in self.parentViewController.childViewControllers) {
+                    if ([vc isKindOfClass:[MRContactsViewController class]]) {
+                        [self.navigationController popToViewController:vc animated:YES];
+                    }
+                }
             }
             else
             {
@@ -63,14 +68,18 @@
         }];
     }else{
         MRGroupUserObject *user = _pendingContactListArra[index];
-        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",user.userId],@"member_id",@"ACTIVE",@"status", nil];
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@[[NSString stringWithFormat:@"%@",user.contactId]],@"connList",@"ACTIVE",@"status", nil];
         
         [MRCommon showActivityIndicator:@"Requesting..."];
         [[MRWebserviceHelper sharedWebServiceHelper] updateConnectionStatus:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
             [MRCommon stopActivityIndicator];
             if (status)
             {
-                [self.navigationController popViewControllerAnimated:YES];
+                for (UIViewController *vc in self.parentViewController.childViewControllers) {
+                    if ([vc isKindOfClass:[MRContactsViewController class]]) {
+                        [self.navigationController popToViewController:vc animated:YES];
+                    }
+                }
             }
             else
             {
@@ -85,14 +94,18 @@
 -(void) rejectAction:(NSInteger)index{
     if (_gid > 0) {
         MRGroupUserObject *user = _pendingContactListArra[index];
-        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:_gid,@"group_id",@[[NSString stringWithFormat:@"%@",user.userId]],@"memberList", nil];
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:_gid,@"group_id",@[[NSString stringWithFormat:@"%@",user.member_id]],@"memberList", nil];
         
         [MRCommon showActivityIndicator:@"Requesting..."];
         [[MRWebserviceHelper sharedWebServiceHelper] removeGroupMember:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
             [MRCommon stopActivityIndicator];
             if (status)
             {
-                [self.navigationController popViewControllerAnimated:YES];
+                for (UIViewController *vc in self.parentViewController.childViewControllers) {
+                    if ([vc isKindOfClass:[MRContactsViewController class]]) {
+                        [self.navigationController popToViewController:vc animated:YES];
+                    }
+                }
             }
             else
             {
@@ -103,14 +116,18 @@
         }];
     }else{
         MRGroupUserObject *user = _pendingContactListArra[index];
-        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@[[NSString stringWithFormat:@"%@",user.userId]],@"memberList", nil];
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@[[NSString stringWithFormat:@"%@",user.contactId]],@"connList",@"REJECT",@"status", nil];
         
         [MRCommon showActivityIndicator:@"Requesting..."];
         [[MRWebserviceHelper sharedWebServiceHelper] removeConnection:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
             [MRCommon stopActivityIndicator];
             if (status)
             {
-                [self.navigationController popViewControllerAnimated:YES];
+                for (UIViewController *vc in self.parentViewController.childViewControllers) {
+                    if ([vc isKindOfClass:[MRContactsViewController class]]) {
+                        [self.navigationController popToViewController:vc animated:YES];
+                    }
+                }
             }
             else
             {
@@ -225,7 +242,7 @@
 
 -(void)getPendingMembers {
     [MRCommon showActivityIndicator:@"Requesting..."];
-    [[MRWebserviceHelper sharedWebServiceHelper] fetchPendingMembersListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+    [[MRWebserviceHelper sharedWebServiceHelper] fetchPendingMembersList:_gid withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
         [MRCommon stopActivityIndicator];
         if (status)
         {
@@ -360,6 +377,12 @@
             
             return cell;
         }
+        
+        if (!_canEdit && _isFromMember) {
+            cell.acceptBtn.hidden = YES;
+            cell.rejectBtn.hidden = YES;
+        }
+        
         MRGroupUserObject *contact = [fileredContacts objectAtIndex:indexPath.row];
         for (UIView *view in cell.profilePic.subviews) {
             if ([view isKindOfClass:[UILabel class]]) {

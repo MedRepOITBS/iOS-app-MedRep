@@ -41,7 +41,11 @@
 @property (weak, nonatomic) IBOutlet UILabel* mainLabel;
 @property (weak, nonatomic) IBOutlet UICollectionView* collectionView;
 @property (weak, nonatomic) IBOutlet UITableView* postsTableView;
+@property (weak, nonatomic) IBOutlet UIButton* plusBtn;
+@property (weak, nonatomic) IBOutlet UILabel *city;
 @property (strong, nonatomic) UIActionSheet* moreOptions;
+@property (weak, nonatomic) IBOutlet UILabel *therapueticArea;
+@property (weak, nonatomic) IBOutlet UIView *contactDetailView;
 
 @property (strong, nonatomic) NSArray* contactsUnderGroup;
 @property (strong, nonatomic) NSArray* groupsUnderContact;
@@ -87,7 +91,11 @@
         self.mainLabel.text = [NSString stringWithFormat:@"%@ %@",_mainContact.firstName, _mainContact.lastName];
         self.groupsUnderContact = @[]; //[self.mainContact.groups allObjects];
         self.posts = @[]; //[self.mainContact.groupPosts allObjects];
-        _collectionHeight.constant = 0;
+        //_collectionHeight.constant = 0;
+        _contactDetailView.hidden = NO;
+        _plusBtn.hidden = YES;
+        _therapueticArea.text = [NSString stringWithFormat:@"Therapeutic Area: %@",_mainContact.therapeuticArea.length ? _mainContact.therapeuticArea : _mainContact.therapeuticName];
+        _city.text = [NSString stringWithFormat:@"City: %@",_mainContact.city];
         
         if (!_mainContact.imgData.length)
         {
@@ -130,7 +138,9 @@
         self.mainLabel.text = self.mainGroupObj.group_name;
         self.contactsUnderGroup = @[];
         self.posts = @[];
-        _collectionHeight.constant = self.view.frame.size.height - 65;
+        _contactDetailView.hidden = YES;
+        _plusBtn.hidden = _isSuggestedGroup;
+        //_collectionHeight.constant = self.view.frame.size.height - 65;
         
         if (self.mainGroupObj.group_name.length > 0 && !self.mainGroupObj.group_img_data.length) {
             UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:self.mainImageView.bounds];
@@ -468,7 +478,7 @@
                                                        delegate:self
                                               cancelButtonTitle:@"Cancel"
                                          destructiveButtonTitle:nil
-                                              otherButtonTitles:@"Add Connections",@"Pending Connections", nil];
+                                              otherButtonTitles:@"Pending Connections", @"Add Connections", nil];
     }
     
     canEditGroup = self.mainGroupObj && (self.mainGroupObj.admin_id == [MRAppControl sharedHelper].userRegData[@"doctorId"]);
@@ -478,13 +488,13 @@
                                                        delegate:self
                                               cancelButtonTitle:@"Cancel"
                                          destructiveButtonTitle:nil
-                                              otherButtonTitles:@"Add Members",@"Pending Members", nil];
+                                              otherButtonTitles:@"Pending Members", nil];
         if (canEditGroup) {
             self.moreOptions = [[UIActionSheet alloc] initWithTitle:@"More Options"
                                                            delegate:self
                                                   cancelButtonTitle:@"Cancel"
                                              destructiveButtonTitle:nil
-                                                  otherButtonTitles:@"Add Members",@"Pending Members", @"Update Group", @"Delete Group", nil];
+                                                  otherButtonTitles:@"Pending Members", @"Add Members", @"Update Group", @"Delete Group", nil];
         }
     }
     
@@ -492,17 +502,20 @@
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 0) {
-        MRAddMembersViewController* detailViewController = [[MRAddMembersViewController alloc] init];
-        if (self.mainGroupObj)
-            detailViewController.groupID = [self.mainGroupObj.group_id integerValue];
-        else
-            detailViewController.groupID = 0;
-        [self.navigationController pushViewController:detailViewController animated:NO];
-    }else if (buttonIndex == 1) {
+    if (buttonIndex == 1) {
+        if (!_mainGroupObj || canEditGroup) {
+            MRAddMembersViewController* detailViewController = [[MRAddMembersViewController alloc] init];
+            if (self.mainGroupObj)
+                detailViewController.groupID = [self.mainGroupObj.group_id integerValue];
+            else
+                detailViewController.groupID = 0;
+            [self.navigationController pushViewController:detailViewController animated:NO];
+        }
+    }else if (buttonIndex == 0) {
         PendingContactsViewController* pendingContactsViewController = [[PendingContactsViewController alloc] init];
         pendingContactsViewController.isFromGroup = NO;
-        pendingContactsViewController.isFromMember = canEditGroup;
+        pendingContactsViewController.isFromMember = _mainGroupObj ? YES : NO;
+        pendingContactsViewController.canEdit = canEditGroup;
         pendingContactsViewController.gid = self.mainGroupObj.group_id;
         [self.navigationController pushViewController:pendingContactsViewController animated:NO];
     }else if (buttonIndex == 2 && canEditGroup) {

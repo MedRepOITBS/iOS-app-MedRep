@@ -20,10 +20,11 @@
 #import "MRSurveyListViewController.h"
 #import "MRProfileDetailsViewController.h"
 #import "MRDoctorActivityScoreViewController.h"
+#import "MRInviteViewController.h"
 
-#define kMenuList [NSArray arrayWithObjects:@"My Profile", @"Dashboard", @"Notifications", @"Surveys", @"Activity Score", @"Marketing Campaigns", @"MedRep Meeting", @"Discussion Forum", @"Search For Drugs", @"News & Updates", @"Settings", @"Logout", nil]
+#define kMenuList [NSArray arrayWithObjects:@"My Profile", @"Dashboard", @"Notifications", @"Surveys", @"Activity Score", @"Marketing Campaigns", @"MedRep Meeting", @"Discussion Forum", @"Search For Drugs", @"News & Updates", @"Invite Contacts",  @"Settings", @"Logout", nil]
 
-#define kMenuListImages [NSArray arrayWithObjects:@"dashboard_menu@2x.png", @"notification@2x.png", @"surveys@2x.png", @"activity-score@2x.png", @"marketing@2x.png", @"meetings@2x.png", @"discussion-forum@2x.png", @"searc--for-drugs@2x.png", @"news@2x.png", @"setting@2x.png", @"logout@2x.png", nil]
+#define kMenuListImages [NSArray arrayWithObjects:@"dashboard_menu@2x.png", @"notification@2x.png", @"surveys@2x.png", @"activity-score@2x.png", @"marketing@2x.png", @"meetings@2x.png", @"discussion-forum@2x.png", @"searc--for-drugs@2x.png", @"news@2x.png", @"discussion-forum@2x.png", @"setting@2x.png", @"logout@2x.png", nil]
 
 
 @interface MRMenuViewController ()<UITableViewDataSource, UITableViewDelegate>
@@ -123,7 +124,7 @@
     
     regCell.menuTitle.text = [kMenuList objectAtIndex:indexPath.row];
     
-    if (indexPath.row == 5 || indexPath.row ==7 || indexPath.row ==8 || indexPath.row ==9 || indexPath.row ==10) {
+    if (indexPath.row == 5 || indexPath.row ==7 || indexPath.row ==8 || indexPath.row ==9 || indexPath.row ==11) {
         regCell.menuTitle.alpha = 0.5f;
     }
     else {
@@ -257,10 +258,25 @@
             break;
         case 10:
         {
-            //[MRCommon showAlert:kComingsoonMSG delegate:nil];
+            if (![frontNavigationController.topViewController isKindOfClass:[MRInviteViewController class]])
+            {
+                MRInviteViewController *notifications = [[MRInviteViewController alloc] initWithNibName:@"MRInviteViewController" bundle:nil];
+                notifications.isFromMenu = YES;
+                UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:notifications];
+                [revealController pushFrontViewController:navigationController animated:YES];
+            }
+            else
+            {
+                [revealController revealToggle:self];
+            }
         }
             break;
         case 11:
+        {
+            //[MRCommon showAlert:kComingsoonMSG delegate:nil];
+        }
+            break;
+        case 12:
         {
             if (self.delegate && [self.delegate respondsToSelector:@selector(loadLoginView)]) {
                 [MRCommon removedTokens];

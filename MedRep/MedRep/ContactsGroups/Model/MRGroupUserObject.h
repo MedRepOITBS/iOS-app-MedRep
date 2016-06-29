@@ -28,6 +28,8 @@
 @property (nonatomic, strong) NSString *therapeuticArea;
 @property (nonatomic, strong) NSString *dPicture;
 @property (nonatomic, strong) NSString *userId;
+@property (nonatomic, strong) NSString *contactId;
+@property (nonatomic, strong) NSString *city;
 
 - (id) initWithDict:(NSDictionary*)infoDictionary;
 

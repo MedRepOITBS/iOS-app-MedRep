@@ -27,6 +27,7 @@
 #import "MRCreateGroupViewController.h"
 #import "MRGroupUserObject.h"
 #import "MRAddMembersViewController.h"
+#import "MRJoinGroupViewController.h"
 
 @interface MRContactsViewController () <UICollectionViewDataSource,UICollectionViewDelegate,UIActionSheetDelegate,UISearchBarDelegate, SWRevealViewControllerDelegate, MRTabViewDelegate>{
     NSMutableArray *groupsArray;
@@ -117,6 +118,7 @@
     [self getGroupList];
     [self getContactList];
     [self getSuggestedContactList];
+    [self getSuggestedGroupList];
     
     NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"MRTabView" owner:self options:nil];
     MRTabView *tabView = (MRTabView *)[subviewArray objectAtIndex:0];
@@ -150,7 +152,7 @@
 -(void) viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
-    timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(AutoScroll) userInfo:nil repeats:YES];
+    //timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(AutoScroll) userInfo:nil repeats:YES];
 }
 
 -(void) viewWillDisappear:(BOOL)animated{
@@ -266,49 +268,7 @@
         //NSString *currentString = self.categories[indexPath.row];
         self.currentIndex = indexPath.row;
         
-        if (self.currentIndex == 0) {
-            self.fileredContacts = self.myContacts;
-            if (self.myContacts != nil && self.myContacts.count >0) {
-                self.noContactErrorMsgLbl.hidden = YES;
-                self.clickHereToAddBtn.hidden = YES;
-            }else {
-                self.noContactErrorMsgLbl.text = @"LOOKS LIKE YOU DON'T HAVE ANY CONNECTIONS";
-                self.noContactErrorMsgLbl.hidden = NO;
-                self.clickHereToAddBtn.hidden = NO;
-            }
-            [self.myContactsCollectionView reloadData];
-        } else if (self.currentIndex == 1) {
-            self.fileredSuggestedContacts = self.suggestedContacts;
-            if (self.suggestedContacts != nil && self.suggestedContacts.count >0) {
-                self.noContactErrorMsgLbl.hidden = YES;
-                self.clickHereToAddBtn.hidden = YES;
-            }else {
-                self.noContactErrorMsgLbl.text = @"LOOKS LIKE YOU DON'T HAVE ANY SUGGESTED CONNECTIONS";
-                self.noContactErrorMsgLbl.hidden = NO;
-                self.clickHereToAddBtn.hidden = YES;
-            }
-            [self.myContactsCollectionView reloadData];
-        } else if (self.currentIndex == 2) {
-            if (filteredGroupsArray.count > 0) {
-                self.noContactErrorMsgLbl.hidden = YES;
-                self.clickHereToAddBtn.hidden = YES;
-            }else {
-                self.noContactErrorMsgLbl.text = @"LOOKS LIKE YOU DON'T HAVE ANY GROUPS";
-                self.noContactErrorMsgLbl.hidden = NO;
-                self.clickHereToAddBtn.hidden = NO;
-            }
-            [self.myContactsCollectionView reloadData];
-        } else if (self.currentIndex == 3) {
-            if (filteredSuggestedGroupsArray.count > 0) {
-                self.noContactErrorMsgLbl.hidden = YES;
-                self.clickHereToAddBtn.hidden = YES;
-            }else {
-                self.noContactErrorMsgLbl.text = @"LOOKS LIKE YOU DON'T HAVE ANY SUGGESTED GROUPS";
-                self.noContactErrorMsgLbl.hidden = NO;
-                self.clickHereToAddBtn.hidden = YES;
-            }
-            [self.myContactsCollectionView reloadData];
-        }
+        [self refreshLabels];
         
         self.searchBar.text = @"";
         [self.titlesCollectionView reloadData];
@@ -318,17 +278,66 @@
     if (self.currentIndex == 0) {
         MRContactDetailViewController* detailViewController = [[MRContactDetailViewController alloc] init];
         [detailViewController setContact:self.fileredContacts[indexPath.row]];
-        detailViewController.contactList = _myContacts;
         [self.navigationController pushViewController:detailViewController animated:YES];
     }else if (self.currentIndex == 1) {
-        
+        MRContactDetailViewController* detailViewController = [[MRContactDetailViewController alloc] init];
+        [detailViewController setContact:self.fileredSuggestedContacts[indexPath.row]];
+        [self.navigationController pushViewController:detailViewController animated:YES];
     }else if (self.currentIndex == 2) {
         MRContactDetailViewController* detailViewController = [[MRContactDetailViewController alloc] init];
         [detailViewController setGroupData:filteredGroupsArray[indexPath.row]];
-        detailViewController.contactList = _myContacts;
         [self.navigationController pushViewController:detailViewController animated:YES];
     }else if (self.currentIndex == 3) {
-        
+        MRContactDetailViewController* detailViewController = [[MRContactDetailViewController alloc] init];
+        [detailViewController setGroupData:filteredSuggestedGroupsArray[indexPath.row]];
+        detailViewController.isSuggestedGroup = YES;
+        [self.navigationController pushViewController:detailViewController animated:YES];
+    }
+}
+
+-(void) refreshLabels{
+    if (self.currentIndex == 0) {
+        self.fileredContacts = self.myContacts;
+        if (self.myContacts != nil && self.myContacts.count >0) {
+            self.noContactErrorMsgLbl.hidden = YES;
+            self.clickHereToAddBtn.hidden = YES;
+        }else {
+            self.noContactErrorMsgLbl.text = @"LOOKS LIKE YOU DON'T HAVE ANY CONNECTIONS";
+            self.noContactErrorMsgLbl.hidden = NO;
+            self.clickHereToAddBtn.hidden = NO;
+        }
+        [self.myContactsCollectionView reloadData];
+    } else if (self.currentIndex == 1) {
+        self.fileredSuggestedContacts = self.suggestedContacts;
+        if (self.suggestedContacts != nil && self.suggestedContacts.count >0) {
+            self.noContactErrorMsgLbl.hidden = YES;
+            self.clickHereToAddBtn.hidden = YES;
+        }else {
+            self.noContactErrorMsgLbl.text = @"LOOKS LIKE YOU DON'T HAVE ANY SUGGESTED CONNECTIONS";
+            self.noContactErrorMsgLbl.hidden = NO;
+            self.clickHereToAddBtn.hidden = YES;
+        }
+        [self.myContactsCollectionView reloadData];
+    } else if (self.currentIndex == 2) {
+        if (filteredGroupsArray.count > 0) {
+            self.noContactErrorMsgLbl.hidden = YES;
+            self.clickHereToAddBtn.hidden = YES;
+        }else {
+            self.noContactErrorMsgLbl.text = @"LOOKS LIKE YOU DON'T HAVE ANY GROUPS";
+            self.noContactErrorMsgLbl.hidden = NO;
+            self.clickHereToAddBtn.hidden = NO;
+        }
+        [self.myContactsCollectionView reloadData];
+    } else if (self.currentIndex == 3) {
+        if (filteredSuggestedGroupsArray.count > 0) {
+            self.noContactErrorMsgLbl.hidden = YES;
+            self.clickHereToAddBtn.hidden = YES;
+        }else {
+            self.noContactErrorMsgLbl.text = @"LOOKS LIKE YOU DON'T HAVE ANY SUGGESTED GROUPS";
+            self.noContactErrorMsgLbl.hidden = NO;
+            self.clickHereToAddBtn.hidden = YES;
+        }
+        [self.myContactsCollectionView reloadData];
     }
 }
 
@@ -396,7 +405,7 @@
                                                 delegate:self
                                        cancelButtonTitle:@"Cancel"
                                   destructiveButtonTitle:nil
-                                       otherButtonTitles:@"Pending Groups",@"Create Group", nil];
+                                       otherButtonTitles:@"Pending Groups", @"Create Group", @"More Groups", nil];
     }
     
     [self.menu showFromRect:self.moreOptions.frame inView:self.view animated:YES];
@@ -439,6 +448,9 @@
                                 [self.navigationController pushViewController:detailViewController animated:NO];
                             }
                             completion:nil];
+        }else if (buttonIndex == 2){
+            MRJoinGroupViewController* detailViewController = [[MRJoinGroupViewController alloc] init];
+            [self.navigationController pushViewController:detailViewController animated:NO];
         }
     }
 }
@@ -473,6 +485,7 @@
                 [groupsArray addObject:groupObj];
             }
             filteredGroupsArray = groupsArray;
+            [self refreshLabels];
             [_myContactsCollectionView reloadData];
         }
         else
@@ -497,6 +510,7 @@
                 [suggestedGroupsArray addObject:groupObj];
             }
             filteredSuggestedGroupsArray = suggestedGroupsArray;
+            [self refreshLabels];
             [_myContactsCollectionView reloadData];
         }
         else
@@ -521,15 +535,7 @@
                 [_myContacts addObject:groupObj];
             }
             _fileredContacts = _myContacts;
-            
-            if (self.myContacts != nil && self.myContacts.count >0) {
-                self.noContactErrorMsgLbl.hidden = YES;
-                self.clickHereToAddBtn.hidden = YES;
-            }else {
-                self.noContactErrorMsgLbl.hidden = NO;
-                self.clickHereToAddBtn.hidden = NO;
-            }
-            
+            [self refreshLabels];
             [_myContactsCollectionView reloadData];
         }
         else
@@ -554,6 +560,7 @@
                 [_suggestedContacts addObject:groupObj];
             }
             _fileredSuggestedContacts = _suggestedContacts;
+            [self refreshLabels];
             [_myContactsCollectionView reloadData];
         }
         else
@@ -612,13 +619,13 @@
         if (searchText.length == 0) {
             self.fileredContacts = self.myContacts;
         } else {
-            self.fileredContacts = [[self.myContacts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K contains[cd] %@",@"displayName",searchText]] mutableCopy];
+            self.fileredContacts = [[self.myContacts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(%K contains[cd] %@) OR (%K contains[cd] %@)",@"firstName",searchText,@"lastName",searchText]] mutableCopy];
         }
     } else if(self.currentIndex == 1){
         if (searchText.length == 0) {
             self.fileredSuggestedContacts = self.suggestedContacts;
         } else {
-            self.fileredSuggestedContacts = [[self.suggestedContacts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K contains[cd] %@",@"displayName",searchText]] mutableCopy];
+            self.fileredSuggestedContacts = [[self.suggestedContacts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(%K contains[cd] %@) OR (%K contains[cd] %@)",@"firstName",searchText,@"lastName",searchText]] mutableCopy];
         }
     }else if (self.currentIndex == 2){
         if (searchText.length == 0) {
@@ -626,7 +633,7 @@
         } else {
             filteredGroupsArray = [[groupsArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K contains[cd] %@",@"group_name",searchText]] mutableCopy];
         }
-    }else if (self.currentIndex == 2){
+    }else if (self.currentIndex == 3){
         if (searchText.length == 0) {
             filteredSuggestedGroupsArray = suggestedGroupsArray;
         } else {
@@ -642,28 +649,6 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     [searchBar resignFirstResponder];
-    
-    [MRCommon showActivityIndicator:@"searching..."];
-    [[MRWebserviceHelper sharedWebServiceHelper] getSearchContactList:searchBar.text withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-        [MRCommon stopActivityIndicator];
-        if (status)
-        {
-            NSMutableArray *searchContacts = [NSMutableArray array];
-            NSArray *responseArray = responce[@"Responce"];
-            for (NSDictionary *dic in responseArray) {
-                MRGroupUserObject *groupObj = [[MRGroupUserObject alloc] initWithDict:dic];
-                [searchContacts addObject:groupObj];
-            }
-            _fileredContacts = searchContacts;
-            [_myContactsCollectionView reloadData];
-        }
-        else
-        {
-            NSArray *erros =  [details componentsSeparatedByString:@"-"];
-            if (erros.count > 0)
-                [MRCommon showAlert:[erros lastObject] delegate:nil];
-        }
-    }];
 }
 
 - (void)transformButtonTapped {

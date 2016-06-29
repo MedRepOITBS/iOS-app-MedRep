@@ -1,22 +1,22 @@
 //
-//  MRAddMembersViewController.m
+//  MRJoinGroupViewController.m
 //  MedRep
 //
-//  Created by Yerramreddy, Dinesh (Contractor) on 6/16/16.
+//  Created by Yerramreddy, Dinesh (Contractor) on 6/28/16.
 //  Copyright © 2016 MedRep. All rights reserved.
 //
 
-#import "MRAddMembersViewController.h"
+#import "MRJoinGroupViewController.h"
 #import "MRAddMemberTableViewCell.h"
-#import "MRGroupUserObject.h"
+#import "MRGroupObject.h"
 #import "MRCommon.h"
 #import "MRWebserviceHelper.h"
-#import "MRContactsViewController.h"
 
-@interface MRAddMembersViewController () <MRAddMemberProtocol, UISearchBarDelegate>{
+@interface MRJoinGroupViewController () <MRAddMemberProtocol, UISearchBarDelegate>{
     NSMutableArray *selectedContacts;
 }
 
+@property (strong, nonatomic) NSMutableArray *pendingContactListArray;
 @property (weak, nonatomic) IBOutlet UITableView *tableViewMembers;
 @property (strong, nonatomic) IBOutlet UIView *navView;
 @property (weak, nonatomic) IBOutlet UISearchBar* searchBar;
@@ -27,17 +27,13 @@
 
 @end
 
-@implementation MRAddMembersViewController
+@implementation MRJoinGroupViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    if (_groupID) {
-        self.navigationItem.title = @"Add Members";
-    }else{
-        self.navigationItem.title = @"Add Connections";
-    }
+    self.navigationItem.title = @"Groups List";
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
     
     UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonAction)];
@@ -55,16 +51,11 @@
     [self.view addGestureRecognizer:self.tapGesture];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-        
+    
     [self.searchBar resignFirstResponder];
-    [self getAllContactsByCity];
+    [self getAllGroups];
 }
 
 - (void)viewTapped:(UITapGestureRecognizer*)tapGesture {
@@ -72,16 +63,16 @@
     self.tapGesture.enabled = NO;
 }
 
-- (void)getAllContactsByCity{
+- (void)getAllGroups{
     [MRCommon showActivityIndicator:@"Requesting..."];
-    [[MRWebserviceHelper sharedWebServiceHelper] getAllContactsByCityListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+    [[MRWebserviceHelper sharedWebServiceHelper] getAllGroupListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
         [MRCommon stopActivityIndicator];
         if (status)
         {
             _pendingContactListArray = [NSMutableArray array];
             NSArray *responseArray = responce[@"Responce"];
             for (NSDictionary *dic in responseArray) {
-                MRGroupUserObject *groupObj = [[MRGroupUserObject alloc] initWithDict:dic];
+                MRGroupObject *groupObj = [[MRGroupObject alloc] initWithDict:dic];
                 [_pendingContactListArray addObject:groupObj];
             }
             _fileredContacts = _pendingContactListArray;
@@ -100,6 +91,11 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 /*
 #pragma mark - Navigation
 
@@ -112,7 +108,7 @@
 
 - (IBAction)addMembers:(id)sender {
     if (!selectedContacts.count){
-        [[[UIAlertView alloc] initWithTitle:@"" message:@"Please select at least one contact to add" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+        [[[UIAlertView alloc] initWithTitle:@"" message:@"Please select at least one group to add" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
         return;
     }
     
@@ -120,54 +116,23 @@
 }
 
 -(void) addMember{
-    if (_groupID) {
-        NSMutableDictionary *dictReq = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                        [NSString stringWithFormat:@"%ld",(long)_groupID], @"group_id",
-                                        selectedContacts, @"memberList",
-                                        @"PENDING", @"status",
-                                        @"false",@"is_admin",
-                                        nil];
-        
-        [MRCommon showActivityIndicator:@"Adding..."];
-        [[MRWebserviceHelper sharedWebServiceHelper] addMembersToGroup:dictReq withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-            [MRCommon stopActivityIndicator];
-            if (status) {
-                for (UIViewController *vc in self.parentViewController.childViewControllers) {
-                    if ([vc isKindOfClass:[MRContactsViewController class]]) {
-                        [self.navigationController popToViewController:vc animated:YES];
-                    }
-                }
-            }
-            else
-            {
-                NSArray *erros =  [details componentsSeparatedByString:@"-"];
-                if (erros.count > 0)
-                    [MRCommon showAlert:[erros lastObject] delegate:nil];
-            }
-        }];
-    }else{
-        NSMutableDictionary *dictReq = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                        selectedContacts, @"connIdList",
-                                        nil];
-        
-        [MRCommon showActivityIndicator:@"Adding..."];
-        [[MRWebserviceHelper sharedWebServiceHelper] addMembers:dictReq withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-            [MRCommon stopActivityIndicator];
-            if (status) {
-                for (UIViewController *vc in self.parentViewController.childViewControllers) {
-                    if ([vc isKindOfClass:[MRContactsViewController class]]) {
-                        [self.navigationController popToViewController:vc animated:YES];
-                    }
-                }
-            }
-            else
-            {
-                NSArray *erros =  [details componentsSeparatedByString:@"-"];
-                if (erros.count > 0)
-                    [MRCommon showAlert:[erros lastObject] delegate:nil];
-            }
-        }];
-    }
+    NSMutableDictionary *dictReq = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                    selectedContacts, @"groupIdList",
+                                    nil];
+    
+    [MRCommon showActivityIndicator:@"Adding..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] joinGroup:dictReq withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [MRCommon stopActivityIndicator];
+        if (status) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -183,7 +148,7 @@
         cell = (MRAddMemberTableViewCell *)[arr objectAtIndex:0];
     }
     
-    MRGroupUserObject *contact = [_fileredContacts objectAtIndex:indexPath.row];
+    MRGroupObject *contact = [_fileredContacts objectAtIndex:indexPath.row];
     
     for (UIView *view in cell.profilePic.subviews) {
         if ([view isKindOfClass:[UILabel class]]) {
@@ -191,13 +156,13 @@
         }
     }
     
-    NSString *fullName = [NSString stringWithFormat:@"%@ %@",contact.firstName, contact.lastName];
+    NSString *fullName = contact.group_name;
     cell.userName.text = fullName;
-    cell.phoneNo.text = contact.therapeuticName;
+    cell.phoneNo.text = contact.group_short_desc;
     cell.checkBtn.tag = indexPath.row;
     cell.cellDelegate = self;
-    if (contact.imgData.length) {
-        cell.profilePic.image = [MRCommon getImageFromBase64Data:[contact.imgData dataUsingEncoding:NSUTF8StringEncoding]];
+    if (contact.group_img_data.length) {
+        cell.profilePic.image = [MRCommon getImageFromBase64Data:[contact.group_img_data dataUsingEncoding:NSUTF8StringEncoding]];
     } else {
         cell.profilePic.image = nil;
         if (fullName.length > 0) {
@@ -230,26 +195,19 @@
 }
 
 -(void) selectedMemberAtIndex:(NSInteger)index{
-    MRGroupUserObject *contact = [_fileredContacts objectAtIndex:index];
-    
-    if (_groupID) {
-        if ([selectedContacts containsObject:contact.doctorId]) {
-            [selectedContacts removeObject:contact.doctorId];
-        }else{
-            [selectedContacts addObject:contact.doctorId];
-        }
+    MRGroupObject *contact = [_fileredContacts objectAtIndex:index];
+    if ([selectedContacts containsObject:contact.group_id]) {
+        [selectedContacts removeObject:contact.group_id];
     }else{
-        if ([selectedContacts containsObject:contact.userId]) {
-            [selectedContacts removeObject:contact.userId];
-        }else{
-            [selectedContacts addObject:contact.userId];
-        }
+        [selectedContacts addObject:contact.group_id];
     }
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     if (searchText.length == 0) {
         self.fileredContacts = _pendingContactListArray;
+    }else{
+        self.fileredContacts = [[self.pendingContactListArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K contains[cd] %@",@"group_name",searchText]] mutableCopy];
     }
     [self.tableViewMembers reloadData];
 }
@@ -260,28 +218,6 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     [searchBar resignFirstResponder];
-    
-    [MRCommon showActivityIndicator:@"searching..."];
-    [[MRWebserviceHelper sharedWebServiceHelper] getSearchContactList:searchBar.text withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-        [MRCommon stopActivityIndicator];
-        if (status)
-        {
-            NSMutableArray *searchContacts = [NSMutableArray array];
-            NSArray *responseArray = responce[@"Responce"];
-            for (NSDictionary *dic in responseArray) {
-                MRGroupUserObject *groupObj = [[MRGroupUserObject alloc] initWithDict:dic];
-                [searchContacts addObject:groupObj];
-            }
-            _fileredContacts = searchContacts;
-            [_tableViewMembers reloadData];
-        }
-        else
-        {
-            NSArray *erros =  [details componentsSeparatedByString:@"-"];
-            if (erros.count > 0)
-                [MRCommon showAlert:[erros lastObject] delegate:nil];
-        }
-    }];
 }
 
 @end

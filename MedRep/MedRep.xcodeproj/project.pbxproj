@@ -508,6 +508,8 @@
 		8AC93CE31D183CCF00C2A864 /* MRServeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC93CE01D183CCF00C2A864 /* MRServeViewController.m */; };
 		8AC93CE41D183CCF00C2A864 /* MRServeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AC93CE11D183CCF00C2A864 /* MRServeViewController.xib */; };
 		8AC93CE51D183CCF00C2A864 /* MRServeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AC93CE11D183CCF00C2A864 /* MRServeViewController.xib */; };
+		8ADAC6361D22BDE900D708F4 /* GroupBG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8ADAC6351D22BDE900D708F4 /* GroupBG.jpg */; };
+		8ADAC6371D22BDE900D708F4 /* GroupBG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8ADAC6351D22BDE900D708F4 /* GroupBG.jpg */; };
 		8AFE8CD31D0EFFD30000382E /* MRCreateGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFE8CD11D0EFFD30000382E /* MRCreateGroupViewController.m */; };
 		8AFE8CD41D0EFFD30000382E /* MRCreateGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFE8CD11D0EFFD30000382E /* MRCreateGroupViewController.m */; };
 		8AFE8CD51D0EFFD30000382E /* MRCreateGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AFE8CD21D0EFFD30000382E /* MRCreateGroupViewController.xib */; };
@@ -577,6 +579,14 @@
 		8AFE8D2B1D12F6A70000382E /* MRAddMemberTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFE8D281D12F6A70000382E /* MRAddMemberTableViewCell.m */; };
 		8AFE8D2C1D12F6A70000382E /* MRAddMemberTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AFE8D291D12F6A70000382E /* MRAddMemberTableViewCell.xib */; };
 		8AFE8D2D1D12F6A70000382E /* MRAddMemberTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AFE8D291D12F6A70000382E /* MRAddMemberTableViewCell.xib */; };
+		8AFF27A81D21BE7B00080DF0 /* MRJoinGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF27A61D21BE7B00080DF0 /* MRJoinGroupViewController.m */; };
+		8AFF27A91D21BE7B00080DF0 /* MRJoinGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF27A61D21BE7B00080DF0 /* MRJoinGroupViewController.m */; };
+		8AFF27AA1D21BE7B00080DF0 /* MRJoinGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AFF27A71D21BE7B00080DF0 /* MRJoinGroupViewController.xib */; };
+		8AFF27AB1D21BE7B00080DF0 /* MRJoinGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AFF27A71D21BE7B00080DF0 /* MRJoinGroupViewController.xib */; };
+		8AFF27B01D21C3DE00080DF0 /* MRInviteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF27AE1D21C3DE00080DF0 /* MRInviteViewController.m */; };
+		8AFF27B11D21C3DE00080DF0 /* MRInviteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF27AE1D21C3DE00080DF0 /* MRInviteViewController.m */; };
+		8AFF27B21D21C3DE00080DF0 /* MRInviteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AFF27AF1D21C3DE00080DF0 /* MRInviteViewController.xib */; };
+		8AFF27B31D21C3DE00080DF0 /* MRInviteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AFF27AF1D21C3DE00080DF0 /* MRInviteViewController.xib */; };
 		B41746C71D0CD434009B7E7E /* commentBox.xib in Resources */ = {isa = PBXBuildFile; fileRef = B41746C61D0CD434009B7E7E /* commentBox.xib */; };
 		B41746CA1D0CD455009B7E7E /* CommonBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = B41746C91D0CD455009B7E7E /* CommonBoxView.m */; };
 		B41746CB1D0CD455009B7E7E /* CommonBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = B41746C91D0CD455009B7E7E /* CommonBoxView.m */; };
@@ -1857,6 +1867,7 @@
 		8AC93CDF1D183CCF00C2A864 /* MRServeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRServeViewController.h; sourceTree = "<group>"; };
 		8AC93CE01D183CCF00C2A864 /* MRServeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRServeViewController.m; sourceTree = "<group>"; };
 		8AC93CE11D183CCF00C2A864 /* MRServeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRServeViewController.xib; sourceTree = "<group>"; };
+		8ADAC6351D22BDE900D708F4 /* GroupBG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = GroupBG.jpg; sourceTree = "<group>"; };
 		8AFE8CD01D0EFFD30000382E /* MRCreateGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRCreateGroupViewController.h; sourceTree = "<group>"; };
 		8AFE8CD11D0EFFD30000382E /* MRCreateGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRCreateGroupViewController.m; sourceTree = "<group>"; };
 		8AFE8CD21D0EFFD30000382E /* MRCreateGroupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRCreateGroupViewController.xib; sourceTree = "<group>"; };
@@ -1873,6 +1884,12 @@
 		8AFE8D271D12F6A70000382E /* MRAddMemberTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRAddMemberTableViewCell.h; sourceTree = "<group>"; };
 		8AFE8D281D12F6A70000382E /* MRAddMemberTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRAddMemberTableViewCell.m; sourceTree = "<group>"; };
 		8AFE8D291D12F6A70000382E /* MRAddMemberTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRAddMemberTableViewCell.xib; sourceTree = "<group>"; };
+		8AFF27A51D21BE7B00080DF0 /* MRJoinGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRJoinGroupViewController.h; sourceTree = "<group>"; };
+		8AFF27A61D21BE7B00080DF0 /* MRJoinGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRJoinGroupViewController.m; sourceTree = "<group>"; };
+		8AFF27A71D21BE7B00080DF0 /* MRJoinGroupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRJoinGroupViewController.xib; sourceTree = "<group>"; };
+		8AFF27AD1D21C3DE00080DF0 /* MRInviteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRInviteViewController.h; sourceTree = "<group>"; };
+		8AFF27AE1D21C3DE00080DF0 /* MRInviteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRInviteViewController.m; sourceTree = "<group>"; };
+		8AFF27AF1D21C3DE00080DF0 /* MRInviteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRInviteViewController.xib; sourceTree = "<group>"; };
 		B41746C61D0CD434009B7E7E /* commentBox.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = commentBox.xib; sourceTree = "<group>"; };
 		B41746C81D0CD455009B7E7E /* CommonBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonBoxView.h; sourceTree = "<group>"; };
 		B41746C91D0CD455009B7E7E /* CommonBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonBoxView.m; sourceTree = "<group>"; };
@@ -3251,6 +3268,7 @@
 				CC649F501D0D1BA10012289C /* DrugSearch */,
 				CC649F401D0D13900012289C /* NotificationView */,
 				B41746C51D0CD428009B7E7E /* CommentBox */,
+				8AFF27AC1D21C3BE00080DF0 /* Invite */,
 				CC7DB3111D0CC530007DFE4C /* PendingConnection */,
 				CC7DB2941D0CC433007DFE4C /* ContactsGroups */,
 				CC7DB2881D0C9EC2007DFE4C /* Share */,
@@ -3343,6 +3361,14 @@
 			path = Serve;
 			sourceTree = "<group>";
 		};
+		8ADAC6341D22BDE900D708F4 /* DummyImages */ = {
+			isa = PBXGroup;
+			children = (
+				8ADAC6351D22BDE900D708F4 /* GroupBG.jpg */,
+			);
+			path = DummyImages;
+			sourceTree = "<group>";
+		};
 		8AFE8CCF1D0EFFB60000382E /* Groups */ = {
 			isa = PBXGroup;
 			children = (
@@ -3383,8 +3409,21 @@
 				8AFE8D271D12F6A70000382E /* MRAddMemberTableViewCell.h */,
 				8AFE8D281D12F6A70000382E /* MRAddMemberTableViewCell.m */,
 				8AFE8D291D12F6A70000382E /* MRAddMemberTableViewCell.xib */,
+				8AFF27A51D21BE7B00080DF0 /* MRJoinGroupViewController.h */,
+				8AFF27A61D21BE7B00080DF0 /* MRJoinGroupViewController.m */,
+				8AFF27A71D21BE7B00080DF0 /* MRJoinGroupViewController.xib */,
 			);
 			path = AddMembers;
+			sourceTree = "<group>";
+		};
+		8AFF27AC1D21C3BE00080DF0 /* Invite */ = {
+			isa = PBXGroup;
+			children = (
+				8AFF27AD1D21C3DE00080DF0 /* MRInviteViewController.h */,
+				8AFF27AE1D21C3DE00080DF0 /* MRInviteViewController.m */,
+				8AFF27AF1D21C3DE00080DF0 /* MRInviteViewController.xib */,
+			);
+			path = Invite;
 			sourceTree = "<group>";
 		};
 		B41746C51D0CD428009B7E7E /* CommentBox */ = {
@@ -3478,6 +3517,7 @@
 		CC7DB2941D0CC433007DFE4C /* ContactsGroups */ = {
 			isa = PBXGroup;
 			children = (
+				8ADAC6341D22BDE900D708F4 /* DummyImages */,
 				8AFE8D1F1D12EB150000382E /* AddMembers */,
 				8AFE8D171D11A3760000382E /* CellViews */,
 				8AFE8D0A1D1055120000382E /* Model */,
@@ -3917,6 +3957,7 @@
 				7929E37E1B9C78B5001F1373 /* news@2x.png in Resources */,
 				79FFD2681BB9DC3100CEE606 /* starunselected@2x.png in Resources */,
 				CC7DB2CB1D0CC433007DFE4C /* MRContactCollectionCell.xib in Resources */,
+				8AFF27AA1D21BE7B00080DF0 /* MRJoinGroupViewController.xib in Resources */,
 				79DE1BEE1B826245005289D6 /* locationPin@2x~iPad.png in Resources */,
 				79421F351BB83ABE0055D9B7 /* MRPHDashBoardViewController_iPhone.xib in Resources */,
 				7929E3821B9C78B5001F1373 /* searc--for-drugs@2x.png in Resources */,
@@ -3958,6 +3999,7 @@
 				79F4168A1B9F5CDB0089729B /* calender-icon@3x.png in Resources */,
 				791C37EC1C50256E00914728 /* team@2x.png in Resources */,
 				79A360BA1BA5821400F286E0 /* MRAppointmentCell.xib in Resources */,
+				8AFF27B21D21C3DE00080DF0 /* MRInviteViewController.xib in Resources */,
 				79AC943D1B9DFDB800B81452 /* comapny-logo@3x.png in Resources */,
 				796E93841BB869120031EA34 /* caclock-icon@2x.png in Resources */,
 				7929E3771B9C78B5001F1373 /* discussion-forum@3x.png in Resources */,
@@ -4063,6 +4105,7 @@
 				7929E3DA1B9CC674001F1373 /* news_dash@2x.png in Resources */,
 				79F0749A1BBF16970049FDE7 /* favoriteSelected@2x.png in Resources */,
 				79F416A51B9F6E560089729B /* cncompany3@3x.jpg in Resources */,
+				8ADAC6361D22BDE900D708F4 /* GroupBG.jpg in Resources */,
 				CC7DB2771D0C9E15007DFE4C /* MRTransformDetailViewController.xib in Resources */,
 				8AFE8CF31D0F21BF0000382E /* post_image2.jpeg in Resources */,
 				B41746E61D0CE628009B7E7E /* GroupPostChildTableViewCell.xib in Resources */,
@@ -4400,6 +4443,7 @@
 				CC7DB3781D0CC8A6007DFE4C /* profile_pic15.jpeg in Resources */,
 				CC7DB12B1D0C8BEC007DFE4C /* pcselect@2x.png in Resources */,
 				CC7DB3721D0CC8A6007DFE4C /* profile_pic12.jpeg in Resources */,
+				8AFF27AB1D21BE7B00080DF0 /* MRJoinGroupViewController.xib in Resources */,
 				CC7DB3861D0CC8A6007DFE4C /* profile_pic8.jpeg in Resources */,
 				CC7DB12C1D0C8BEC007DFE4C /* news@2x.png in Resources */,
 				CC7DB12D1D0C8BEC007DFE4C /* starunselected@2x.png in Resources */,
@@ -4456,6 +4500,7 @@
 				CC7DB1551D0C8BEC007DFE4C /* Icon@2x.png in Resources */,
 				CC7DB1561D0C8BEC007DFE4C /* MRAppointmentListCell.xib in Resources */,
 				CC7DB1571D0C8BEC007DFE4C /* hospital_selection@2x.png in Resources */,
+				8ADAC6371D22BDE900D708F4 /* GroupBG.jpg in Resources */,
 				CC7DB1581D0C8BEC007DFE4C /* dashboard_menu@3x.png in Resources */,
 				CC7DB1591D0C8BEC007DFE4C /* catrnsparent@3x.jpg in Resources */,
 				CC7DB15A1D0C8BEC007DFE4C /* categoryBG.jpg in Resources */,
@@ -4638,6 +4683,7 @@
 				CC7DB1F21D0C8BEC007DFE4C /* MRDashBoardVC_iPhone.xib in Resources */,
 				CC7DB1F31D0C8BEC007DFE4C /* bg~iPad.png in Resources */,
 				CC7DB1F41D0C8BEC007DFE4C /* downArrow@2x~iPad.png in Resources */,
+				8AFF27B31D21C3DE00080DF0 /* MRInviteViewController.xib in Resources */,
 				CC7DB1F51D0C8BEC007DFE4C /* PHprescription@2x.png in Resources */,
 				CC7DB1F61D0C8BEC007DFE4C /* notificationback@2x.png in Resources */,
 				CC7DB34E1D0CC8A6007DFE4C /* group_pic2.jpeg in Resources */,
@@ -4769,6 +4815,7 @@
 				CC7DB2761D0C9E15007DFE4C /* MRTransformDetailViewController.m in Sources */,
 				795881AA1C63CF8600462868 /* MRLocationManager.m in Sources */,
 				799820941BA4D01C0069128A /* MRDashBoardVC.m in Sources */,
+				8AFF27A81D21BE7B00080DF0 /* MRJoinGroupViewController.m in Sources */,
 				8AFE8D0D1D10552F0000382E /* MRGroupUserObject.m in Sources */,
 				CC7DB2C31D0CC433007DFE4C /* PieView.m in Sources */,
 				CC7DB2E51D0CC433007DFE4C /* MRPopoverControllerViewController.m in Sources */,
@@ -4779,6 +4826,7 @@
 				8AFE8CDA1D0F20BC0000382E /* NotificationUUIDViewController.m in Sources */,
 				B41746DD1D0CD740009B7E7E /* MRGroupPost+CoreDataProperties.m in Sources */,
 				8AFE8D2A1D12F6A70000382E /* MRAddMemberTableViewCell.m in Sources */,
+				8AFF27B01D21C3DE00080DF0 /* MRInviteViewController.m in Sources */,
 				CC7DB3031D0CC4E2007DFE4C /* MRContact+CoreDataProperties.m in Sources */,
 				CC7DB2EF1D0CC433007DFE4C /* UIPopoverController+iPhone.m in Sources */,
 				CC7DB3011D0CC4E2007DFE4C /* MRContact.m in Sources */,
@@ -4927,6 +4975,7 @@
 				CC7DB0551D0C8BEC007DFE4C /* SWRevealViewController.m in Sources */,
 				CC7DB0561D0C8BEC007DFE4C /* MRPharmaMenuViewController.m in Sources */,
 				CC7DB0571D0C8BEC007DFE4C /* MRPHDashBoardViewController.m in Sources */,
+				8AFF27A91D21BE7B00080DF0 /* MRJoinGroupViewController.m in Sources */,
 				8AFE8D0E1D10552F0000382E /* MRGroupUserObject.m in Sources */,
 				B41746D81D0CD6E1009B7E7E /* MrGroupChildPost.m in Sources */,
 				CC7DB0581D0C8BEC007DFE4C /* MRSurveyListViewController.m in Sources */,
@@ -4937,6 +4986,7 @@
 				CC7DB05C1D0C8BEC007DFE4C /* MRLocationManager.m in Sources */,
 				CC7DB05D1D0C8BEC007DFE4C /* MRDashBoardVC.m in Sources */,
 				8AFE8D2B1D12F6A70000382E /* MRAddMemberTableViewCell.m in Sources */,
+				8AFF27B11D21C3DE00080DF0 /* MRInviteViewController.m in Sources */,
 				CC7DB05E1D0C8BEC007DFE4C /* MRFavoriteFilterViewController.m in Sources */,
 				CC7DB3041D0CC4E2007DFE4C /* MRContact+CoreDataProperties.m in Sources */,
 				CC7DB05F1D0C8BEC007DFE4C /* MPCallMedrepViewController.m in Sources */,
