@@ -391,7 +391,7 @@
         }
         
         NSString *fullName = [NSString stringWithFormat:@"%@ %@",contact.firstName, contact.lastName];
-        cell.userName.text = fullName;
+        cell.userName.text = [NSString stringWithFormat:@"Dr. %@",fullName];
         cell.phoneNo.text = contact.therapeuticArea;
         if (contact.imgData.length) {
             cell.profilePic.image = [MRCommon getImageFromBase64Data:[contact.imgData dataUsingEncoding:NSUTF8StringEncoding]];
@@ -468,7 +468,7 @@
     if (searchText.length == 0) {
         fileredContacts = _pendingContactListArra;
     } else {
-        fileredContacts = [[_pendingContactListArra filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K contains[cd] %@",@"firstName",searchText]] mutableCopy];
+        fileredContacts = [[_pendingContactListArra filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(%K contains[cd] %@) OR (%K contains[cd] %@)",@"firstName",searchText,@"lastName",searchText]] mutableCopy];
     }
     [_pendingTableView reloadData];
 }

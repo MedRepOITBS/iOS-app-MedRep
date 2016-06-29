@@ -87,6 +87,7 @@ typedef enum kMRWebServiceType
     kMRWebServiceTypeInviteContact,
     kMRWebServiceTypeJoinGroup,
     kMRWebServiceTypeRemoveGroup,
+    kMRWebServiceTypeLeaveGroup,
     kMRWebServiceTypeGetNews,
     kMRWebServiceTypeGetMaterial,
     kMRWebServiceTypeGetMoreConnections,

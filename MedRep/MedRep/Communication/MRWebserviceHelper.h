@@ -218,6 +218,8 @@ withComplitionHandler:(completionHandler)responceHandler;
 
 - (void)fetchPendingMembersList:(NSString *)groupID withHandler:(completionHandler)responceHandler;
 
+- (void)leaveGroup:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
+
 @end
 
 @interface NSDictionary (CategoryName)

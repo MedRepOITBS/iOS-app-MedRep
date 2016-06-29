@@ -103,7 +103,7 @@
     }
     
     NSString *fullName = [NSString stringWithFormat:@"%@ %@",contact.firstName, contact.lastName];
-    self.name.text = fullName;
+    self.name.text = [NSString stringWithFormat:@"Dr. %@",fullName];
     self.detail.text = contact.therapeuticArea.length ? contact.therapeuticArea : contact.therapeuticName;
     if (contact.imgData.length) {
         self.picture.image = [MRCommon getImageFromBase64Data:[contact.imgData dataUsingEncoding:NSUTF8StringEncoding]];

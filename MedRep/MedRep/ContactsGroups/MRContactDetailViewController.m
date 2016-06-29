@@ -46,6 +46,8 @@
 @property (strong, nonatomic) UIActionSheet* moreOptions;
 @property (weak, nonatomic) IBOutlet UILabel *therapueticArea;
 @property (weak, nonatomic) IBOutlet UIView *contactDetailView;
+@property (weak, nonatomic) IBOutlet UIView *groupDetailView;
+@property (weak, nonatomic) IBOutlet UILabel *groupDesc;
 
 @property (strong, nonatomic) NSArray* contactsUnderGroup;
 @property (strong, nonatomic) NSArray* groupsUnderContact;
@@ -88,11 +90,12 @@
         }
         
         self.mainImageView.image = [MRCommon getImageFromBase64Data:[_mainContact.imgData dataUsingEncoding:NSUTF8StringEncoding]];
-        self.mainLabel.text = [NSString stringWithFormat:@"%@ %@",_mainContact.firstName, _mainContact.lastName];
+        self.mainLabel.text = [NSString stringWithFormat:@"Dr. %@ %@",_mainContact.firstName, _mainContact.lastName];
         self.groupsUnderContact = @[]; //[self.mainContact.groups allObjects];
         self.posts = @[]; //[self.mainContact.groupPosts allObjects];
-        //_collectionHeight.constant = 0;
+        _collectionHeight.constant = 0;
         _contactDetailView.hidden = NO;
+        _groupDetailView.hidden = YES;
         _plusBtn.hidden = YES;
         _therapueticArea.text = [NSString stringWithFormat:@"Therapeutic Area: %@",_mainContact.therapeuticArea.length ? _mainContact.therapeuticArea : _mainContact.therapeuticName];
         _city.text = [NSString stringWithFormat:@"City: %@",_mainContact.city];
@@ -139,8 +142,10 @@
         self.contactsUnderGroup = @[];
         self.posts = @[];
         _contactDetailView.hidden = YES;
+        _groupDetailView.hidden = NO;
+        _groupDesc.text = _mainGroupObj.group_long_desc;
         _plusBtn.hidden = _isSuggestedGroup;
-        //_collectionHeight.constant = self.view.frame.size.height - 65;
+        _collectionHeight.constant = self.view.frame.size.height - 65;
         
         if (self.mainGroupObj.group_name.length > 0 && !self.mainGroupObj.group_img_data.length) {
             UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:self.mainImageView.bounds];
@@ -404,7 +409,7 @@
         cell.rejectBtn.tag = indexPath.row;
         
         MRGroupUserObject *user = groupMemberArray[indexPath.row];
-        cell.nameTxt.text = user.firstName;
+        cell.nameTxt.text = [NSString stringWithFormat:@"Dr. %@ %@",user.firstName, user.lastName];;
         cell.imgView.image = [MRCommon getImageFromBase64Data:[user.imgData dataUsingEncoding:NSUTF8StringEncoding]];
         
         if ([user.status caseInsensitiveCompare:@"Active"] == NSOrderedSame) {
@@ -488,13 +493,13 @@
                                                        delegate:self
                                               cancelButtonTitle:@"Cancel"
                                          destructiveButtonTitle:nil
-                                              otherButtonTitles:@"Pending Members", nil];
+                                              otherButtonTitles:@"Pending Members", @"Leave Group", nil];
         if (canEditGroup) {
             self.moreOptions = [[UIActionSheet alloc] initWithTitle:@"More Options"
                                                            delegate:self
                                                   cancelButtonTitle:@"Cancel"
                                              destructiveButtonTitle:nil
-                                                  otherButtonTitles:@"Pending Members", @"Add Members", @"Update Group", @"Delete Group", nil];
+                                                  otherButtonTitles:@"Pending Members", @"Invite Members", @"Update Group", @"Delete Group", @"Leave Group", nil];
         }
     }
     
@@ -503,13 +508,18 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
-        if (!_mainGroupObj || canEditGroup) {
+        if (!_mainGroupObj) {
             MRAddMembersViewController* detailViewController = [[MRAddMembersViewController alloc] init];
-            if (self.mainGroupObj)
-                detailViewController.groupID = [self.mainGroupObj.group_id integerValue];
-            else
-                detailViewController.groupID = 0;
+            detailViewController.groupID = 0;
             [self.navigationController pushViewController:detailViewController animated:NO];
+        }else{
+            if (canEditGroup) {
+                MRAddMembersViewController* detailViewController = [[MRAddMembersViewController alloc] init];
+                detailViewController.groupID = [self.mainGroupObj.group_id integerValue];
+                [self.navigationController pushViewController:detailViewController animated:NO];
+            }else{
+                [self leaveGroup];
+            }
         }
     }else if (buttonIndex == 0) {
         PendingContactsViewController* pendingContactsViewController = [[PendingContactsViewController alloc] init];
@@ -524,6 +534,8 @@
         [self.navigationController pushViewController:createGroupVC animated:NO];
     }else if (buttonIndex == 3 && canEditGroup) {
         [self removeGroup];
+    }else if (buttonIndex == 4 && canEditGroup) {
+        [self leaveGroup];
     }
 }
 
@@ -534,6 +546,25 @@
         if (status)
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Group Deleted!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            alert.tag = 11;
+            [alert show];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }];
+}
+
+-(void) leaveGroup{
+    [MRCommon showActivityIndicator:@"Leaving..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] leaveGroup:[NSDictionary dictionaryWithObjectsAndKeys:self.mainGroupObj.group_id, @"group_id", nil] withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [MRCommon stopActivityIndicator];
+        if (status)
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"You left group!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
             alert.tag = 11;
             [alert show];
         }

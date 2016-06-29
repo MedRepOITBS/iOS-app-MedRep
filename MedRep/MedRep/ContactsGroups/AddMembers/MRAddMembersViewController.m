@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableViewMembers;
 @property (strong, nonatomic) IBOutlet UIView *navView;
 @property (weak, nonatomic) IBOutlet UISearchBar* searchBar;
+@property (weak, nonatomic) IBOutlet UIButton *addBtn;
 @property (strong, nonatomic) UITapGestureRecognizer* tapGesture;
 @property (strong, nonatomic) NSMutableArray* fileredContacts;
 
@@ -34,9 +35,11 @@
     // Do any additional setup after loading the view from its nib.
     
     if (_groupID) {
-        self.navigationItem.title = @"Add Members";
+        self.navigationItem.title = @"Invite Members";
+        [self.addBtn setTitle:@"Invite Members" forState:UIControlStateNormal];
     }else{
         self.navigationItem.title = @"Add Connections";
+        [self.addBtn setTitle:@"Add Connections" forState:UIControlStateNormal];
     }
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
     
@@ -192,7 +195,7 @@
     }
     
     NSString *fullName = [NSString stringWithFormat:@"%@ %@",contact.firstName, contact.lastName];
-    cell.userName.text = fullName;
+    cell.userName.text = [NSString stringWithFormat:@"Dr. %@",fullName];
     cell.phoneNo.text = contact.therapeuticName;
     cell.checkBtn.tag = indexPath.row;
     cell.cellDelegate = self;

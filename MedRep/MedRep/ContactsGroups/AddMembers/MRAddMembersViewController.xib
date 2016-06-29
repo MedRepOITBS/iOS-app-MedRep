@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MRAddMembersViewController">
             <connections>
+                <outlet property="addBtn" destination="Ht4-1t-5zE" id="5Om-te-sFg"/>
                 <outlet property="navView" destination="g06-gS-MXz" id="B7O-Tg-Rax"/>
                 <outlet property="searchBar" destination="oeM-Jj-rj4" id="Obd-As-ybp"/>
                 <outlet property="tableViewMembers" destination="JhP-Of-lB4" id="1f3-IK-8qt"/>
@@ -24,7 +25,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="57H-XW-436"/>
                     </constraints>
-                    <state key="normal" title="Add Members"/>
+                    <state key="normal" title="Add Connections"/>
                     <connections>
                         <action selector="addMembers:" destination="-1" eventType="touchUpInside" id="t1T-Kn-Evc"/>
                     </connections>
