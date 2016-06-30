@@ -10,6 +10,7 @@
 #import "MRAddMemberTableViewCell.h"
 #import "MRGroupObject.h"
 #import "MRCommon.h"
+#import "MRAppControl.h"
 #import "MRWebserviceHelper.h"
 
 @interface MRJoinGroupViewController () <MRAddMemberProtocol, UISearchBarDelegate>{
@@ -117,7 +118,9 @@
 
 -(void) addMember{
     NSMutableDictionary *dictReq = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                    selectedContacts, @"groupIdList",
+                                    selectedContacts, @"groupList",
+                                    @"PENDING", @"status",
+                                    [MRAppControl sharedHelper].userRegData[@"doctorId"], @"member_id",
                                     nil];
     
     [MRCommon showActivityIndicator:@"Adding..."];

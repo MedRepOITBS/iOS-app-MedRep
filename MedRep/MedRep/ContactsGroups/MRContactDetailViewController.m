@@ -562,8 +562,14 @@
 }
 
 -(void) leaveGroup{
+    NSDictionary *dict =[NSDictionary dictionaryWithObjectsAndKeys:
+                         self.mainGroupObj.group_id, @"group_id",
+                         @"EXIT", @"status",
+                         [MRAppControl sharedHelper].userRegData[@"doctorId"], @"member_id",
+                         nil];
+    
     [MRCommon showActivityIndicator:@"Leaving..."];
-    [[MRWebserviceHelper sharedWebServiceHelper] leaveGroup:[NSDictionary dictionaryWithObjectsAndKeys:self.mainGroupObj.group_id, @"group_id", nil] withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+    [[MRWebserviceHelper sharedWebServiceHelper] leaveGroup:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
         [MRCommon stopActivityIndicator];
         if (status)
         {

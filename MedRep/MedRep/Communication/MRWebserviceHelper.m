@@ -248,7 +248,7 @@
 }
 
 - (void)joinGroup:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler{
-    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/addContacts?token=%@",kHostName,[MRDefaults objectForKey:kAuthenticationToken]];
+    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/joinGroups?token=%@",kHostName,[MRDefaults objectForKey:kAuthenticationToken]];
     
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:reqDict
                                                        options:NSJSONWritingPrettyPrinted
@@ -284,7 +284,7 @@
 }
 
 - (void)leaveGroup:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler{
-    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/leaveGroup?token=%@",kHostName,[MRDefaults objectForKey:kAuthenticationToken]];
+    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/exitGroup?token=%@",kHostName,[MRDefaults objectForKey:kAuthenticationToken]];
     
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:reqDict
                                                        options:NSJSONWritingPrettyPrinted
@@ -1116,7 +1116,7 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
 }
 
 - (void)getAllGroupListwithHandler:(completionHandler)responceHandler{
-    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/getSuggestedGroups?token=%@",kHostName,[MRDefaults objectForKey:kAuthenticationToken]];
+    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/moreGroups?token=%@",kHostName,[MRDefaults objectForKey:kAuthenticationToken]];
     
     NSURL *url = [NSURL URLWithString:stringFormOfUrl];
     NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
