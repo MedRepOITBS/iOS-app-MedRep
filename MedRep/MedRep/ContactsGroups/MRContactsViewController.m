@@ -109,16 +109,24 @@
     groupsArray = [NSMutableArray array];
     filteredSuggestedGroupsArray = [NSMutableArray array];
     suggestedGroupsArray = [NSMutableArray array];
+    
+    self.noContactErrorMsgLbl.hidden = YES;
+    self.clickHereToAddBtn.hidden = YES;
 }
 
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.searchBar resignFirstResponder];
     
-    [self getGroupList];
-    [self getContactList];
-    [self getSuggestedContactList];
-    [self getSuggestedGroupList];
+    if (self.currentIndex == 0) {
+        [self getContactList];
+    }else if (self.currentIndex == 1) {
+        [self getSuggestedContactList];
+    }else if (self.currentIndex == 2) {
+        [self getGroupList];
+    }else if (self.currentIndex == 3) {
+        [self getSuggestedGroupList];
+    }
     
     NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"MRTabView" owner:self options:nil];
     MRTabView *tabView = (MRTabView *)[subviewArray objectAtIndex:0];
@@ -267,9 +275,17 @@
         //NSInteger prevIndex = self.currentIndex;
         //NSString *currentString = self.categories[indexPath.row];
         self.currentIndex = indexPath.row;
+        if (self.currentIndex == 0) {
+            [self getContactList];
+        }else if (self.currentIndex == 1) {
+            [self getSuggestedContactList];
+        }else if (self.currentIndex == 2) {
+            [self getGroupList];
+        }else if (self.currentIndex == 3) {
+            [self getSuggestedGroupList];
+        }
         
-        [self refreshLabels];
-        
+        [self.myContactsCollectionView reloadData];
         self.searchBar.text = @"";
         [self.titlesCollectionView reloadData];
         return;
