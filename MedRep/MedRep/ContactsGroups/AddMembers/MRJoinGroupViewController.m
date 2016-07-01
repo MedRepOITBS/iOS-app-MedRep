@@ -79,6 +79,32 @@
             _fileredContacts = _pendingContactListArray;
             [_tableViewMembers reloadData];
         }
+        else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+        {
+            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+             {
+                 [MRCommon savetokens:responce];
+                 [[MRWebserviceHelper sharedWebServiceHelper] getAllGroupListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                     [MRCommon stopActivityIndicator];
+                     if (status)
+                     {
+                         _pendingContactListArray = [NSMutableArray array];
+                         NSArray *responseArray = responce[@"Responce"];
+                         for (NSDictionary *dic in responseArray) {
+                             MRGroupObject *groupObj = [[MRGroupObject alloc] initWithDict:dic];
+                             [_pendingContactListArray addObject:groupObj];
+                         }
+                         _fileredContacts = _pendingContactListArray;
+                         [_tableViewMembers reloadData];
+                     }else
+                     {
+                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                         if (erros.count > 0)
+                             [MRCommon showAlert:[erros lastObject] delegate:nil];
+                     }
+                 }];
+             }];
+        }
         else
         {
             NSArray *erros =  [details componentsSeparatedByString:@"-"];
@@ -128,6 +154,24 @@
         [MRCommon stopActivityIndicator];
         if (status) {
             [self.navigationController popViewControllerAnimated:YES];
+        }
+        else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+        {
+            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+             {
+                 [MRCommon savetokens:responce];
+                 [[MRWebserviceHelper sharedWebServiceHelper] joinGroup:dictReq withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                     [MRCommon stopActivityIndicator];
+                     if (status) {
+                         [self.navigationController popViewControllerAnimated:YES];
+                     }else
+                     {
+                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                         if (erros.count > 0)
+                             [MRCommon showAlert:[erros lastObject] delegate:nil];
+                     }
+                 }];
+             }];
         }
         else
         {

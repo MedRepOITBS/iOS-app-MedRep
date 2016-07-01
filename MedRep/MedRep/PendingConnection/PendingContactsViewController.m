@@ -59,6 +59,29 @@
                     }
                 }
             }
+            else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+            {
+                [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+                 {
+                     [MRCommon savetokens:responce];
+                     [[MRWebserviceHelper sharedWebServiceHelper] updateGroupMembersStatus:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                         [MRCommon stopActivityIndicator];
+                         if (status)
+                         {
+                             for (UIViewController *vc in self.parentViewController.childViewControllers) {
+                                 if ([vc isKindOfClass:[MRContactsViewController class]]) {
+                                     [self.navigationController popToViewController:vc animated:YES];
+                                 }
+                             }
+                         }else
+                         {
+                             NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                             if (erros.count > 0)
+                                 [MRCommon showAlert:[erros lastObject] delegate:nil];
+                         }
+                     }];
+                 }];
+            }
             else
             {
                 NSArray *erros =  [details componentsSeparatedByString:@"-"];
@@ -80,6 +103,29 @@
                         [self.navigationController popToViewController:vc animated:YES];
                     }
                 }
+            }
+            else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+            {
+                [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+                 {
+                     [MRCommon savetokens:responce];
+                     [[MRWebserviceHelper sharedWebServiceHelper] updateConnectionStatus:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                         [MRCommon stopActivityIndicator];
+                         if (status)
+                         {
+                             for (UIViewController *vc in self.parentViewController.childViewControllers) {
+                                 if ([vc isKindOfClass:[MRContactsViewController class]]) {
+                                     [self.navigationController popToViewController:vc animated:YES];
+                                 }
+                             }
+                         }else
+                         {
+                             NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                             if (erros.count > 0)
+                                 [MRCommon showAlert:[erros lastObject] delegate:nil];
+                         }
+                     }];
+                 }];
             }
             else
             {
@@ -107,6 +153,29 @@
                     }
                 }
             }
+            else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+            {
+                [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+                 {
+                     [MRCommon savetokens:responce];
+                     [[MRWebserviceHelper sharedWebServiceHelper] removeGroupMember:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                         [MRCommon stopActivityIndicator];
+                         if (status)
+                         {
+                             for (UIViewController *vc in self.parentViewController.childViewControllers) {
+                                 if ([vc isKindOfClass:[MRContactsViewController class]]) {
+                                     [self.navigationController popToViewController:vc animated:YES];
+                                 }
+                             }
+                         }else
+                         {
+                             NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                             if (erros.count > 0)
+                                 [MRCommon showAlert:[erros lastObject] delegate:nil];
+                         }
+                     }];
+                 }];
+            }
             else
             {
                 NSArray *erros =  [details componentsSeparatedByString:@"-"];
@@ -128,6 +197,29 @@
                         [self.navigationController popToViewController:vc animated:YES];
                     }
                 }
+            }
+            else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+            {
+                [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+                 {
+                     [MRCommon savetokens:responce];
+                     [[MRWebserviceHelper sharedWebServiceHelper] removeConnection:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                         [MRCommon stopActivityIndicator];
+                         if (status)
+                         {
+                             for (UIViewController *vc in self.parentViewController.childViewControllers) {
+                                 if ([vc isKindOfClass:[MRContactsViewController class]]) {
+                                     [self.navigationController popToViewController:vc animated:YES];
+                                 }
+                             }
+                         }else
+                         {
+                             NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                             if (erros.count > 0)
+                                 [MRCommon showAlert:[erros lastObject] delegate:nil];
+                         }
+                     }];
+                 }];
             }
             else
             {
@@ -231,6 +323,33 @@
             fileredContacts = _pendingContactListArra;
             [_pendingTableView reloadData];
         }
+        else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+        {
+            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+             {
+                 [MRCommon savetokens:responce];
+                 [[MRWebserviceHelper sharedWebServiceHelper] fetchPendingConnectionsListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                     [MRCommon stopActivityIndicator];
+                     if (status)
+                     {
+                         fileredContacts = [NSMutableArray array];
+                         _pendingContactListArra = [NSMutableArray array];
+                         NSArray *responseArray = responce[@"Responce"];
+                         for (NSDictionary *dic in responseArray) {
+                             MRGroupUserObject *groupObj = [[MRGroupUserObject alloc] initWithDict:dic];
+                             [_pendingContactListArra addObject:groupObj];
+                         }
+                         fileredContacts = _pendingContactListArra;
+                         [_pendingTableView reloadData];
+                     }else
+                     {
+                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                         if (erros.count > 0)
+                             [MRCommon showAlert:[erros lastObject] delegate:nil];
+                     }
+                 }];
+             }];
+        }
         else
         {
             NSArray *erros =  [details componentsSeparatedByString:@"-"];
@@ -256,6 +375,33 @@
             fileredContacts = _pendingContactListArra;
             [_pendingTableView reloadData];
         }
+        else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+        {
+            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+             {
+                 [MRCommon savetokens:responce];
+                 [[MRWebserviceHelper sharedWebServiceHelper] fetchPendingMembersList:_gid withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                     [MRCommon stopActivityIndicator];
+                     if (status)
+                     {
+                         fileredContacts = [NSMutableArray array];
+                         _pendingContactListArra = [NSMutableArray array];
+                         NSArray *responseArray = responce[@"Responce"];
+                         for (NSDictionary *dic in responseArray) {
+                             MRGroupUserObject *groupObj = [[MRGroupUserObject alloc] initWithDict:dic];
+                             [_pendingContactListArra addObject:groupObj];
+                         }
+                         fileredContacts = _pendingContactListArra;
+                         [_pendingTableView reloadData];
+                     }else
+                     {
+                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                         if (erros.count > 0)
+                             [MRCommon showAlert:[erros lastObject] delegate:nil];
+                     }
+                 }];
+             }];
+        }
         else
         {
             NSArray *erros =  [details componentsSeparatedByString:@"-"];
@@ -280,6 +426,33 @@
             }
             fileredContacts = _pendingContactListArra;
             [_pendingTableView reloadData];
+        }
+        else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+        {
+            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+             {
+                 [MRCommon savetokens:responce];
+                 [[MRWebserviceHelper sharedWebServiceHelper] fetchPendingGroupsListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                     [MRCommon stopActivityIndicator];
+                     if (status)
+                     {
+                         fileredContacts = [NSMutableArray array];
+                         _pendingContactListArra = [NSMutableArray array];
+                         NSArray *responseArray = responce[@"Responce"];
+                         for (NSDictionary *dic in responseArray) {
+                             MRGroupObject *groupObj = [[MRGroupObject alloc] initWithDict:dic];
+                             [_pendingContactListArra addObject:groupObj];
+                         }
+                         fileredContacts = _pendingContactListArra;
+                         [_pendingTableView reloadData];
+                     } else
+                     {
+                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                         if (erros.count > 0)
+                             [MRCommon showAlert:[erros lastObject] delegate:nil];
+                     }
+                 }];
+             }];
         }
         else
         {
