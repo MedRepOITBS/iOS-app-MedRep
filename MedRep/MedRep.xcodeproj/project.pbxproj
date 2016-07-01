@@ -508,8 +508,6 @@
 		8AC93CE31D183CCF00C2A864 /* MRServeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC93CE01D183CCF00C2A864 /* MRServeViewController.m */; };
 		8AC93CE41D183CCF00C2A864 /* MRServeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AC93CE11D183CCF00C2A864 /* MRServeViewController.xib */; };
 		8AC93CE51D183CCF00C2A864 /* MRServeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AC93CE11D183CCF00C2A864 /* MRServeViewController.xib */; };
-		8ADAC6361D22BDE900D708F4 /* GroupBG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8ADAC6351D22BDE900D708F4 /* GroupBG.jpg */; };
-		8ADAC6371D22BDE900D708F4 /* GroupBG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8ADAC6351D22BDE900D708F4 /* GroupBG.jpg */; };
 		8AFE8CD31D0EFFD30000382E /* MRCreateGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFE8CD11D0EFFD30000382E /* MRCreateGroupViewController.m */; };
 		8AFE8CD41D0EFFD30000382E /* MRCreateGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFE8CD11D0EFFD30000382E /* MRCreateGroupViewController.m */; };
 		8AFE8CD51D0EFFD30000382E /* MRCreateGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AFE8CD21D0EFFD30000382E /* MRCreateGroupViewController.xib */; };
@@ -1867,7 +1865,6 @@
 		8AC93CDF1D183CCF00C2A864 /* MRServeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRServeViewController.h; sourceTree = "<group>"; };
 		8AC93CE01D183CCF00C2A864 /* MRServeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRServeViewController.m; sourceTree = "<group>"; };
 		8AC93CE11D183CCF00C2A864 /* MRServeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRServeViewController.xib; sourceTree = "<group>"; };
-		8ADAC6351D22BDE900D708F4 /* GroupBG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = GroupBG.jpg; sourceTree = "<group>"; };
 		8AFE8CD01D0EFFD30000382E /* MRCreateGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRCreateGroupViewController.h; sourceTree = "<group>"; };
 		8AFE8CD11D0EFFD30000382E /* MRCreateGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRCreateGroupViewController.m; sourceTree = "<group>"; };
 		8AFE8CD21D0EFFD30000382E /* MRCreateGroupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRCreateGroupViewController.xib; sourceTree = "<group>"; };
@@ -3361,14 +3358,6 @@
 			path = Serve;
 			sourceTree = "<group>";
 		};
-		8ADAC6341D22BDE900D708F4 /* DummyImages */ = {
-			isa = PBXGroup;
-			children = (
-				8ADAC6351D22BDE900D708F4 /* GroupBG.jpg */,
-			);
-			path = DummyImages;
-			sourceTree = "<group>";
-		};
 		8AFE8CCF1D0EFFB60000382E /* Groups */ = {
 			isa = PBXGroup;
 			children = (
@@ -3517,7 +3506,6 @@
 		CC7DB2941D0CC433007DFE4C /* ContactsGroups */ = {
 			isa = PBXGroup;
 			children = (
-				8ADAC6341D22BDE900D708F4 /* DummyImages */,
 				8AFE8D1F1D12EB150000382E /* AddMembers */,
 				8AFE8D171D11A3760000382E /* CellViews */,
 				8AFE8D0A1D1055120000382E /* Model */,
@@ -4105,7 +4093,6 @@
 				7929E3DA1B9CC674001F1373 /* news_dash@2x.png in Resources */,
 				79F0749A1BBF16970049FDE7 /* favoriteSelected@2x.png in Resources */,
 				79F416A51B9F6E560089729B /* cncompany3@3x.jpg in Resources */,
-				8ADAC6361D22BDE900D708F4 /* GroupBG.jpg in Resources */,
 				CC7DB2771D0C9E15007DFE4C /* MRTransformDetailViewController.xib in Resources */,
 				8AFE8CF31D0F21BF0000382E /* post_image2.jpeg in Resources */,
 				B41746E61D0CE628009B7E7E /* GroupPostChildTableViewCell.xib in Resources */,
@@ -4500,7 +4487,6 @@
 				CC7DB1551D0C8BEC007DFE4C /* Icon@2x.png in Resources */,
 				CC7DB1561D0C8BEC007DFE4C /* MRAppointmentListCell.xib in Resources */,
 				CC7DB1571D0C8BEC007DFE4C /* hospital_selection@2x.png in Resources */,
-				8ADAC6371D22BDE900D708F4 /* GroupBG.jpg in Resources */,
 				CC7DB1581D0C8BEC007DFE4C /* dashboard_menu@3x.png in Resources */,
 				CC7DB1591D0C8BEC007DFE4C /* catrnsparent@3x.jpg in Resources */,
 				CC7DB15A1D0C8BEC007DFE4C /* categoryBG.jpg in Resources */,

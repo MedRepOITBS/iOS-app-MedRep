@@ -144,6 +144,33 @@
                 [_imgView setImage:[UIImage imageNamed:@"Group.png"]];
                 groupIconData = nil;
             }
+            else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+            {
+                [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+                 {
+                     [MRCommon savetokens:responce];
+                     [[MRWebserviceHelper sharedWebServiceHelper] updateGroup:dictReq withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                         [MRCommon stopActivityIndicator];
+                         if (status)
+                         {
+                             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Group updated!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                             alert.tag = 11;
+                             [alert show];
+                             
+                             _txtName.text = @"";
+                             _txtLongDesc.text = @"";
+                             _txtShortDesc.text = @"";
+                             [_imgView setImage:[UIImage imageNamed:@"Group.png"]];
+                             groupIconData = nil;
+                         }else
+                         {
+                             NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                             if (erros.count > 0)
+                                 [MRCommon showAlert:[erros lastObject] delegate:nil];
+                         }
+                     }];
+                 }];
+            }
             else
             {
                 NSArray *erros =  [details componentsSeparatedByString:@"-"];
@@ -169,6 +196,35 @@
                 _txtShortDesc.text = @"";
                 [_imgView setImage:[UIImage imageNamed:@"Group.png"]];
                 groupIconData = nil;
+            }
+            else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+            {
+                [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+                 {
+                     [MRCommon savetokens:responce];
+                     [[MRWebserviceHelper sharedWebServiceHelper] createGroup:dictReq withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                         [MRCommon stopActivityIndicator];
+                         if (status)
+                         {
+                             //[MRCommon showAlert:@"Group created!" delegate:nil];
+                             
+                             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Group created!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                             alert.tag = 11;
+                             [alert show];
+                             
+                             _txtName.text = @"";
+                             _txtLongDesc.text = @"";
+                             _txtShortDesc.text = @"";
+                             [_imgView setImage:[UIImage imageNamed:@"Group.png"]];
+                             groupIconData = nil;
+                         }else
+                         {
+                             NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                             if (erros.count > 0)
+                                 [MRCommon showAlert:[erros lastObject] delegate:nil];
+                         }
+                     }];
+                 }];
             }
             else
             {
@@ -268,13 +324,13 @@
         else if(authStatus == AVAuthorizationStatusDenied)
         {
             // denied
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Camera access disabled" message:@"SYW Relay needs access to your camera. Please check your privacy settings." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Camera access disabled" message:@"Medrep needs access to your camera. Please check your privacy settings." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
         }
         else if(authStatus == AVAuthorizationStatusRestricted)
         {
             // restricted, normally won't happen
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Camera access disabled" message:@"SYW Relay needs access to your camera. Please check your privacy settings." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Camera access disabled" message:@"Medrep needs access to your camera. Please check your privacy settings." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
         }
         else if(authStatus == AVAuthorizationStatusNotDetermined)

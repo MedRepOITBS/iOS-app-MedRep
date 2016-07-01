@@ -471,23 +471,6 @@
     }
 }
 
-- (void)getMoreConnections{
-    [MRCommon showActivityIndicator:@"Requesting..."];
-    [[MRWebserviceHelper sharedWebServiceHelper] getMoreConnectionswithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-        [MRCommon stopActivityIndicator];
-        if (status)
-        {
-            //Success
-        }
-        else
-        {
-            NSArray *erros =  [details componentsSeparatedByString:@"-"];
-            if (erros.count > 0)
-                [MRCommon showAlert:[erros lastObject] delegate:nil];
-        }
-    }];
-}
-
 - (void)getGroupList{
     [MRCommon showActivityIndicator:@"Requesting..."];
     [[MRWebserviceHelper sharedWebServiceHelper] getGroupListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
@@ -503,6 +486,33 @@
             filteredGroupsArray = groupsArray;
             [self refreshLabels];
             [_myContactsCollectionView reloadData];
+        }
+        else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+        {
+            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+             {
+                 [MRCommon savetokens:responce];
+                 [[MRWebserviceHelper sharedWebServiceHelper] getGroupListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                     [MRCommon stopActivityIndicator];
+                     if (status)
+                     {
+                         groupsArray = [NSMutableArray array];
+                         NSArray *responseArray = responce[@"Responce"];
+                         for (NSDictionary *dic in responseArray) {
+                             MRGroupObject *groupObj = [[MRGroupObject alloc] initWithDict:dic];
+                             [groupsArray addObject:groupObj];
+                         }
+                         filteredGroupsArray = groupsArray;
+                         [self refreshLabels];
+                         [_myContactsCollectionView reloadData];
+                     }else
+                     {
+                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                         if (erros.count > 0)
+                             [MRCommon showAlert:[erros lastObject] delegate:nil];
+                     }
+                 }];
+             }];
         }
         else
         {
@@ -529,6 +539,33 @@
             [self refreshLabels];
             [_myContactsCollectionView reloadData];
         }
+        else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+        {
+            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+             {
+                 [MRCommon savetokens:responce];
+                 [[MRWebserviceHelper sharedWebServiceHelper] getSuggestedGroupListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                     [MRCommon stopActivityIndicator];
+                     if (status)
+                     {
+                         suggestedGroupsArray = [NSMutableArray array];
+                         NSArray *responseArray = responce[@"Responce"];
+                         for (NSDictionary *dic in responseArray) {
+                             MRGroupObject *groupObj = [[MRGroupObject alloc] initWithDict:dic];
+                             [suggestedGroupsArray addObject:groupObj];
+                         }
+                         filteredSuggestedGroupsArray = suggestedGroupsArray;
+                         [self refreshLabels];
+                         [_myContactsCollectionView reloadData];
+                     }else
+                     {
+                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                         if (erros.count > 0)
+                             [MRCommon showAlert:[erros lastObject] delegate:nil];
+                     }
+                 }];
+             }];
+        }
         else
         {
             NSArray *erros =  [details componentsSeparatedByString:@"-"];
@@ -553,6 +590,33 @@
             _fileredContacts = _myContacts;
             [self refreshLabels];
             [_myContactsCollectionView reloadData];
+        }
+        else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+        {
+            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+             {
+                 [MRCommon savetokens:responce];
+                 [[MRWebserviceHelper sharedWebServiceHelper] getContactListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                     [MRCommon stopActivityIndicator];
+                     if (status)
+                     {
+                         _myContacts = [NSMutableArray array];
+                         NSArray *responseArray = responce[@"Responce"];
+                         for (NSDictionary *dic in responseArray) {
+                             MRGroupUserObject *groupObj = [[MRGroupUserObject alloc] initWithDict:dic];
+                             [_myContacts addObject:groupObj];
+                         }
+                         _fileredContacts = _myContacts;
+                         [self refreshLabels];
+                         [_myContactsCollectionView reloadData];
+                     } else
+                     {
+                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                         if (erros.count > 0)
+                             [MRCommon showAlert:[erros lastObject] delegate:nil];
+                     }
+                 }];
+             }];
         }
         else
         {
@@ -579,28 +643,32 @@
             [self refreshLabels];
             [_myContactsCollectionView reloadData];
         }
-        else
+        else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
         {
-            NSArray *erros =  [details componentsSeparatedByString:@"-"];
-            if (erros.count > 0)
-                [MRCommon showAlert:[erros lastObject] delegate:nil];
-        }
-    }];
-}
-
-- (void)getDoctorContacts{
-    [MRCommon showActivityIndicator:@"Requesting..."];
-    [[MRWebserviceHelper sharedWebServiceHelper] getDoctorContactsListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-        [MRCommon stopActivityIndicator];
-        if (status)
-        {
-            _doctorContacts = [NSMutableArray array];
-            NSArray *responseArray = responce[@"Responce"];
-            for (NSDictionary *dic in responseArray) {
-                MRGroupUserObject *groupObj = [[MRGroupUserObject alloc] initWithDict:dic];
-                [_doctorContacts addObject:groupObj];
-            }
-            [_myContactsCollectionView reloadData];
+            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+             {
+                 [MRCommon savetokens:responce];
+                 [[MRWebserviceHelper sharedWebServiceHelper] getSuggestedContactListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                     [MRCommon stopActivityIndicator];
+                     if (status)
+                     {
+                         _suggestedContacts = [NSMutableArray array];
+                         NSArray *responseArray = responce[@"Responce"];
+                         for (NSDictionary *dic in responseArray) {
+                             MRGroupUserObject *groupObj = [[MRGroupUserObject alloc] initWithDict:dic];
+                             [_suggestedContacts addObject:groupObj];
+                         }
+                         _fileredSuggestedContacts = _suggestedContacts;
+                         [self refreshLabels];
+                         [_myContactsCollectionView reloadData];
+                     }else
+                     {
+                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                         if (erros.count > 0)
+                             [MRCommon showAlert:[erros lastObject] delegate:nil];
+                     }
+                 }];
+             }];
         }
         else
         {
