@@ -500,10 +500,6 @@
 		83C127FC1B77C88B00D2F08E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C127FB1B77C88B00D2F08E /* ViewController.m */; };
 		83C128011B77C88B00D2F08E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83C128001B77C88B00D2F08E /* Images.xcassets */; };
 		83C128101B77C88B00D2F08E /* MedRepTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C1280F1B77C88B00D2F08E /* MedRepTests.m */; };
-		8AC93CD91D17E92500C2A864 /* MRTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC93CD81D17E92500C2A864 /* MRTabView.m */; };
-		8AC93CDA1D17E92500C2A864 /* MRTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC93CD81D17E92500C2A864 /* MRTabView.m */; };
-		8AC93CDC1D17E93300C2A864 /* MRTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AC93CDB1D17E93300C2A864 /* MRTabView.xib */; };
-		8AC93CDD1D17E93300C2A864 /* MRTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AC93CDB1D17E93300C2A864 /* MRTabView.xib */; };
 		8AC93CE21D183CCF00C2A864 /* MRServeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC93CE01D183CCF00C2A864 /* MRServeViewController.m */; };
 		8AC93CE31D183CCF00C2A864 /* MRServeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC93CE01D183CCF00C2A864 /* MRServeViewController.m */; };
 		8AC93CE41D183CCF00C2A864 /* MRServeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AC93CE11D183CCF00C2A864 /* MRServeViewController.xib */; };
@@ -605,6 +601,8 @@
 		B41746E51D0CE628009B7E7E /* GroupPostChildTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B41746E21D0CE628009B7E7E /* GroupPostChildTableViewCell.m */; };
 		B41746E61D0CE628009B7E7E /* GroupPostChildTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B41746E31D0CE628009B7E7E /* GroupPostChildTableViewCell.xib */; };
 		B41746E71D0CE628009B7E7E /* GroupPostChildTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B41746E31D0CE628009B7E7E /* GroupPostChildTableViewCell.xib */; };
+		CC0123C11D25A66B001134F3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0123C01D25A66B001134F3 /* CoreGraphics.framework */; };
+		CC0123C21D25A677001134F3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0123C01D25A66B001134F3 /* CoreGraphics.framework */; };
 		CC649F4E1D0D181E0012289C /* NotificationUUIDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC649F4C1D0D181E0012289C /* NotificationUUIDViewController.m */; };
 		CC649F4F1D0D181E0012289C /* NotificationUUIDViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC649F4D1D0D181E0012289C /* NotificationUUIDViewController.xib */; };
 		CC649F5D1D0D1BA10012289C /* MRDrugDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC649F521D0D1BA10012289C /* MRDrugDetailViewController.m */; };
@@ -1257,6 +1255,10 @@
 		CC9BCEC91D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9BCEC61D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.m */; };
 		CC9BCECA1D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC9BCEC71D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.xib */; };
 		CC9BCECB1D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC9BCEC71D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.xib */; };
+		CCE29B241D26E6C4006DED8E /* MRCustomTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = CCE29B231D26E6C4006DED8E /* MRCustomTabBar.m */; };
+		CCE29B251D26E6C4006DED8E /* MRCustomTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = CCE29B231D26E6C4006DED8E /* MRCustomTabBar.m */; };
+		CCE29B271D26E870006DED8E /* MRCustomTabBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCE29B261D26E870006DED8E /* MRCustomTabBar.xib */; };
+		CCE29B281D26E870006DED8E /* MRCustomTabBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCE29B261D26E870006DED8E /* MRCustomTabBar.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1861,9 +1863,6 @@
 		83C128091B77C88B00D2F08E /* MedRepTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MedRepTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		83C1280E1B77C88B00D2F08E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		83C1280F1B77C88B00D2F08E /* MedRepTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedRepTests.m; sourceTree = "<group>"; };
-		8AC93CD71D17E92500C2A864 /* MRTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRTabView.h; sourceTree = "<group>"; };
-		8AC93CD81D17E92500C2A864 /* MRTabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRTabView.m; sourceTree = "<group>"; };
-		8AC93CDB1D17E93300C2A864 /* MRTabView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRTabView.xib; sourceTree = "<group>"; };
 		8AC93CDF1D183CCF00C2A864 /* MRServeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRServeViewController.h; sourceTree = "<group>"; };
 		8AC93CE01D183CCF00C2A864 /* MRServeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRServeViewController.m; sourceTree = "<group>"; };
 		8AC93CE11D183CCF00C2A864 /* MRServeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRServeViewController.xib; sourceTree = "<group>"; };
@@ -1906,6 +1905,7 @@
 		B41746E11D0CE628009B7E7E /* GroupPostChildTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupPostChildTableViewCell.h; sourceTree = "<group>"; };
 		B41746E21D0CE628009B7E7E /* GroupPostChildTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupPostChildTableViewCell.m; sourceTree = "<group>"; };
 		B41746E31D0CE628009B7E7E /* GroupPostChildTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupPostChildTableViewCell.xib; sourceTree = "<group>"; };
+		CC0123C01D25A66B001134F3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		CC649F4B1D0D181E0012289C /* NotificationUUIDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationUUIDViewController.h; sourceTree = "<group>"; };
 		CC649F4C1D0D181E0012289C /* NotificationUUIDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationUUIDViewController.m; sourceTree = "<group>"; };
 		CC649F4D1D0D181E0012289C /* NotificationUUIDViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationUUIDViewController.xib; sourceTree = "<group>"; };
@@ -2048,6 +2048,9 @@
 		CC9BCEC51D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRTransformTitleCollectionViewCell.h; sourceTree = "<group>"; };
 		CC9BCEC61D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRTransformTitleCollectionViewCell.m; sourceTree = "<group>"; };
 		CC9BCEC71D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRTransformTitleCollectionViewCell.xib; sourceTree = "<group>"; };
+		CCE29B221D26E6C4006DED8E /* MRCustomTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRCustomTabBar.h; path = TabBar/MRCustomTabBar.h; sourceTree = "<group>"; };
+		CCE29B231D26E6C4006DED8E /* MRCustomTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRCustomTabBar.m; path = TabBar/MRCustomTabBar.m; sourceTree = "<group>"; };
+		CCE29B261D26E870006DED8E /* MRCustomTabBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MRCustomTabBar.xib; path = TabBar/MRCustomTabBar.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2055,6 +2058,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC0123C11D25A66B001134F3 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2069,6 +2073,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC0123C21D25A677001134F3 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3265,6 +3270,7 @@
 		83C127EF1B77C88B00D2F08E /* MedRep */ = {
 			isa = PBXGroup;
 			children = (
+				CC0123B41D259161001134F3 /* TabBar */,
 				CC649F501D0D1BA10012289C /* DrugSearch */,
 				CC649F401D0D13900012289C /* NotificationView */,
 				B41746C51D0CD428009B7E7E /* CommentBox */,
@@ -3317,6 +3323,7 @@
 		83C127F01B77C88B00D2F08E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CC0123C01D25A66B001134F3 /* CoreGraphics.framework */,
 				83C127F11B77C88B00D2F08E /* Info.plist */,
 				83C127F21B77C88B00D2F08E /* main.m */,
 				83B782131B791E900070645C /* InfoPlist.strings */,
@@ -3339,16 +3346,6 @@
 				83C1280E1B77C88B00D2F08E /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		8AC93CD61D17E90A00C2A864 /* TabView */ = {
-			isa = PBXGroup;
-			children = (
-				8AC93CD71D17E92500C2A864 /* MRTabView.h */,
-				8AC93CD81D17E92500C2A864 /* MRTabView.m */,
-				8AC93CDB1D17E93300C2A864 /* MRTabView.xib */,
-			);
-			path = TabView;
 			sourceTree = "<group>";
 		};
 		8AC93CDE1D183CB600C2A864 /* Serve */ = {
@@ -3436,6 +3433,16 @@
 			name = CommentBox;
 			sourceTree = "<group>";
 		};
+		CC0123B41D259161001134F3 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				CCE29B221D26E6C4006DED8E /* MRCustomTabBar.h */,
+				CCE29B231D26E6C4006DED8E /* MRCustomTabBar.m */,
+				CCE29B261D26E870006DED8E /* MRCustomTabBar.xib */,
+			);
+			name = TabBar;
+			sourceTree = "<group>";
+		};
 		CC649F401D0D13900012289C /* NotificationView */ = {
 			isa = PBXGroup;
 			children = (
@@ -3475,7 +3482,6 @@
 		CC7DB26A1D0C9E15007DFE4C /* Transform */ = {
 			isa = PBXGroup;
 			children = (
-				8AC93CD61D17E90A00C2A864 /* TabView */,
 				CC7DB26B1D0C9E15007DFE4C /* MPTransformTableViewCell.h */,
 				CC7DB26C1D0C9E15007DFE4C /* MPTransformTableViewCell.m */,
 				CC7DB26D1D0C9E15007DFE4C /* MPTransformTableViewCell.xib */,
@@ -3854,6 +3860,7 @@
 				79DE1BE61B826245005289D6 /* input@2x~iPad.png in Resources */,
 				CC649F601D0D1BA10012289C /* MRDrugSearchViewController.xib in Resources */,
 				CC7DB3AF1D0CCA96007DFE4C /* MRGroupTableViewCell.xib in Resources */,
+				CCE29B271D26E870006DED8E /* MRCustomTabBar.xib in Resources */,
 				8AFE8CE41D0F21BF0000382E /* Contacts.png in Resources */,
 				791C37DE1C4FF96400914728 /* minus@2x.png in Resources */,
 				8AFE8CE11D0F21BF0000382E /* comment.png in Resources */,
@@ -4210,7 +4217,6 @@
 				7929E3D91B9CC674001F1373 /* mrkt-cmpn@3x.png in Resources */,
 				79BD27CD1B809A80007CA448 /* pageviewdots@2x~iPad copy.png in Resources */,
 				79BD27AE1B80980F007CA448 /* iTunesArtwork in Resources */,
-				8AC93CDC1D17E93300C2A864 /* MRTabView.xib in Resources */,
 				79708AA51BB73C67007CE81D /* PHlocations@2x.png in Resources */,
 				79BD27AC1B80980F007CA448 /* Icon.png in Resources */,
 				8AFE8CEE1D0F21BF0000382E /* group_pic4.jpeg in Resources */,
@@ -4303,6 +4309,7 @@
 				CC7DB0B51D0C8BEC007DFE4C /* search@3x.png in Resources */,
 				CC7DB0B61D0C8BEC007DFE4C /* Signup_plain@2x.png in Resources */,
 				CC7DB0B71D0C8BEC007DFE4C /* addicon@3x.png in Resources */,
+				CCE29B281D26E870006DED8E /* MRCustomTabBar.xib in Resources */,
 				CC7DB0B81D0C8BEC007DFE4C /* ndcompany3@3x.jpg in Resources */,
 				CC7DB0B91D0C8BEC007DFE4C /* dashboard-bg@3x.png in Resources */,
 				CC7DB0BA1D0C8BEC007DFE4C /* crgreyup-arrow@2x.png in Resources */,
@@ -4458,7 +4465,6 @@
 				CC7DB1341D0C8BEC007DFE4C /* PHnotification@3x.png in Resources */,
 				CC7DB1351D0C8BEC007DFE4C /* MRViewAppointmnetViewController.xib in Resources */,
 				CC7DB1361D0C8BEC007DFE4C /* crup-arrow@3x.png in Resources */,
-				8AC93CDD1D17E93300C2A864 /* MRTabView.xib in Resources */,
 				CC7DB1371D0C8BEC007DFE4C /* pcfedback@2x.png in Resources */,
 				CC7DB3A21D0CC8C8007DFE4C /* medicine.jpg in Resources */,
 				CC7DB2E81D0CC433007DFE4C /* MRPopoverControllerViewController.xib in Resources */,
@@ -4796,7 +4802,7 @@
 				83B7820F1B7919EA0070645C /* NSDate+Utilities.m in Sources */,
 				8AC93CE21D183CCF00C2A864 /* MRServeViewController.m in Sources */,
 				83B782111B7919EA0070645C /* SVProgressHUD.m in Sources */,
-				8AC93CD91D17E92500C2A864 /* MRTabView.m in Sources */,
+				CCE29B241D26E6C4006DED8E /* MRCustomTabBar.m in Sources */,
 				CC7DB2D11D0CC433007DFE4C /* MRContactsViewController.m in Sources */,
 				CC7DB30D1D0CC4E2007DFE4C /* MRSuggestedContact.m in Sources */,
 				79A5DC5C1BA1EBBF001D872C /* MPNotificationAlertViewController.m in Sources */,
@@ -4956,7 +4962,7 @@
 				CC7DB0491D0C8BEC007DFE4C /* MRParserHelper.m in Sources */,
 				8AC93CE31D183CCF00C2A864 /* MRServeViewController.m in Sources */,
 				CC7DB04A1D0C8BEC007DFE4C /* MRConvertAppointmentCell.m in Sources */,
-				8AC93CDA1D17E92500C2A864 /* MRTabView.m in Sources */,
+				CCE29B251D26E6C4006DED8E /* MRCustomTabBar.m in Sources */,
 				CC7DB04B1D0C8BEC007DFE4C /* MRDoctorScoreViewController.m in Sources */,
 				CC7DB04C1D0C8BEC007DFE4C /* MRAppointmentCell.m in Sources */,
 				CC7DB04D1D0C8BEC007DFE4C /* WYStoryboardPopoverSegue.m in Sources */,

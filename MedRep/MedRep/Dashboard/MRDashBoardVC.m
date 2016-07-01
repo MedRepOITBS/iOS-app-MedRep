@@ -21,6 +21,7 @@
 #import "MRTransformViewController.h"
 #import "MRDrugSearchViewController.h"
 #import "AppDelegate.h"
+#import "MRCustomTabBar.h"
 
 @interface MRDashBoardVC () <UITableViewDataSource, UITableViewDelegate, SWRevealViewControllerDelegate>
 

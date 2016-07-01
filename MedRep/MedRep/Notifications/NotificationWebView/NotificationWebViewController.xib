@@ -7,9 +7,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NotificationWebViewController">
             <connections>
-                <outlet property="companyLogoImage" destination="f2x-gV-dxn" id="J3o-b1-X4E"/>
-                <outlet property="logoView" destination="275-XE-R7I" id="tIf-bA-6a1"/>
                 <outlet property="navView" destination="cm4-gc-0vU" id="T0g-CI-8kq"/>
+                <outlet property="titleView" destination="tbJ-MA-sHg" id="npq-aD-Yds"/>
+                <outlet property="titleViewHeightConstraint" destination="cQK-ja-j0c" id="XeH-C1-ebg"/>
                 <outlet property="view" destination="b1A-pt-aL1" id="50E-GK-skF"/>
                 <outlet property="web" destination="jPn-hw-GIM" id="uTr-Ug-w29"/>
             </connections>
@@ -33,54 +33,33 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="275-XE-R7I">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="106"/>
-                    <subviews>
-                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="NDcompany1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="NXS-2B-T5a">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="106"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="106" id="He6-YA-Gzb"/>
-                            </constraints>
-                        </imageView>
-                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="NDcomapny-logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="f2x-gV-dxn">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="106"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="106" id="rdh-wf-RUx"/>
-                            </constraints>
-                        </imageView>
-                    </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tbJ-MA-sHg">
+                    <rect key="frame" x="0.0" y="74" width="600" height="21"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="NXS-2B-T5a" secondAttribute="trailing" id="KXE-XW-YBH"/>
-                        <constraint firstItem="f2x-gV-dxn" firstAttribute="top" secondItem="275-XE-R7I" secondAttribute="top" id="OhM-Ov-NhU"/>
-                        <constraint firstItem="f2x-gV-dxn" firstAttribute="leading" secondItem="275-XE-R7I" secondAttribute="leading" id="WqM-mM-iBA"/>
-                        <constraint firstItem="NXS-2B-T5a" firstAttribute="leading" secondItem="275-XE-R7I" secondAttribute="leading" id="WzE-75-B4W"/>
-                        <constraint firstAttribute="trailing" secondItem="f2x-gV-dxn" secondAttribute="trailing" id="Yqx-wB-63J"/>
-                        <constraint firstAttribute="height" constant="106" id="cXD-lY-uMd"/>
-                        <constraint firstItem="NXS-2B-T5a" firstAttribute="top" secondItem="275-XE-R7I" secondAttribute="top" id="fBR-W5-hy1"/>
-                        <constraint firstItem="f2x-gV-dxn" firstAttribute="top" secondItem="275-XE-R7I" secondAttribute="top" id="zyS-bf-c3w"/>
+                        <constraint firstAttribute="height" constant="21" id="cQK-ja-j0c"/>
                     </constraints>
-                </view>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
+                    <color key="textColor" red="0.12549019610000001" green="0.69411764710000001" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jPn-hw-GIM">
-                    <rect key="frame" x="0.0" y="106" width="600" height="494"/>
+                    <rect key="frame" x="0.0" y="110" width="600" height="490"/>
                     <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
                 </webView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="jPn-hw-GIM" firstAttribute="leading" secondItem="b1A-pt-aL1" secondAttribute="leading" id="493-Yg-UCy"/>
-                <constraint firstAttribute="trailing" secondItem="275-XE-R7I" secondAttribute="trailing" id="7vb-Ua-jC1"/>
-                <constraint firstItem="275-XE-R7I" firstAttribute="leading" secondItem="b1A-pt-aL1" secondAttribute="leading" id="9x9-Th-e0h"/>
                 <constraint firstAttribute="trailing" secondItem="jPn-hw-GIM" secondAttribute="trailing" id="EbP-8K-O1T"/>
-                <constraint firstItem="jPn-hw-GIM" firstAttribute="top" secondItem="275-XE-R7I" secondAttribute="bottom" id="JuF-hs-DKE"/>
+                <constraint firstAttribute="trailing" secondItem="tbJ-MA-sHg" secondAttribute="trailing" id="JQS-fZ-hw9"/>
+                <constraint firstItem="jPn-hw-GIM" firstAttribute="top" secondItem="tbJ-MA-sHg" secondAttribute="bottom" constant="15" id="UmC-3y-QK8"/>
                 <constraint firstAttribute="bottom" secondItem="jPn-hw-GIM" secondAttribute="bottom" id="lt9-dY-V8o"/>
-                <constraint firstItem="275-XE-R7I" firstAttribute="top" secondItem="b1A-pt-aL1" secondAttribute="top" id="ltN-JV-lD3"/>
+                <constraint firstItem="tbJ-MA-sHg" firstAttribute="top" secondItem="b1A-pt-aL1" secondAttribute="top" constant="74" id="m7f-Fe-Hgn"/>
+                <constraint firstItem="tbJ-MA-sHg" firstAttribute="leading" secondItem="b1A-pt-aL1" secondAttribute="leading" id="zHf-4R-9He"/>
             </constraints>
         </view>
     </objects>
     <resources>
         <image name="Icon-40.png" width="40" height="40"/>
-        <image name="NDcomapny-logo.png" width="115" height="76"/>
-        <image name="NDcompany1.jpg" width="320" height="106"/>
     </resources>
 </document>

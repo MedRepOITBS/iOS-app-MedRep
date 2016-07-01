@@ -21,15 +21,15 @@
 #import "MRShareViewController.h"
 #import "MRTransformViewController.h"
 #import "SWRevealViewController.h"
-#import "MRTabView.h"
 #import "MRTransformTitleCollectionViewCell.h"
 #import "MRGroupObject.h"
 #import "MRCreateGroupViewController.h"
 #import "MRGroupUserObject.h"
 #import "MRAddMembersViewController.h"
 #import "MRJoinGroupViewController.h"
+#import "MRCustomTabBar.h"
 
-@interface MRContactsViewController () <UICollectionViewDataSource,UICollectionViewDelegate,UIActionSheetDelegate,UISearchBarDelegate, SWRevealViewControllerDelegate, MRTabViewDelegate>{
+@interface MRContactsViewController () <UICollectionViewDataSource,UICollectionViewDelegate,UIActionSheetDelegate,UISearchBarDelegate, SWRevealViewControllerDelegate>{
     NSMutableArray *groupsArray;
     NSMutableArray *filteredGroupsArray;
     NSMutableArray *suggestedGroupsArray;
@@ -112,6 +112,22 @@
     
     self.noContactErrorMsgLbl.hidden = YES;
     self.clickHereToAddBtn.hidden = YES;
+    
+    MRCustomTabBar *tabBarView = (MRCustomTabBar*)[MRCommon createTabBarView:self.view];
+    [tabBarView setNavigationController:self.navigationController];
+    [tabBarView setContactsViewController:self];
+    [tabBarView updateActiveViewController:self andTabIndex:0];
+    
+//    self.tabBarView = (UIView*)tabBarView;
+    
+//    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:self.contentTableView
+//                                                                        attribute:NSLayoutAttributeBottomMargin
+//                                                                        relatedBy:NSLayoutRelationEqual
+//                                                                           toItem:self.view
+//                                                                        attribute:NSLayoutAttributeBottom
+//                                                                       multiplier:1.0 constant:0];
+//    
+//    [self.view addConstraint:bottomConstraint];
 }
 
 -(void) viewWillAppear:(BOOL)animated{
@@ -127,29 +143,6 @@
     }else if (self.currentIndex == 3) {
         [self getSuggestedGroupList];
     }
-    
-    NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"MRTabView" owner:self options:nil];
-    MRTabView *tabView = (MRTabView *)[subviewArray objectAtIndex:0];
-    tabView.delegate = self;
-    tabView.connectView.backgroundColor = [UIColor colorWithRed:26/255.0 green:133/255.0 blue:213/255.0 alpha:1];
-    [self.view addSubview:tabView];
-    
-    [tabView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[view]-0-|" options:NSLayoutFormatAlignAllBottom metrics:nil views:@{@"view":tabView}]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:tabView
-                                                          attribute:NSLayoutAttributeHeight
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:tabView
-                                                          attribute:NSLayoutAttributeHeight
-                                                         multiplier:0
-                                                           constant:50]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:tabView
-                                                          attribute:NSLayoutAttributeBottom
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.view
-                                                          attribute:NSLayoutAttributeBottom
-                                                         multiplier:1
-                                                           constant:0]];
 }
 
 - (void)didReceiveMemoryWarning {

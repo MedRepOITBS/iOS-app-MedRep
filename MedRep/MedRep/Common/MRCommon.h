@@ -109,4 +109,11 @@
 
 + (void)getPharmaNotificationImageByID:(NSInteger)notificationID
                               forImage:(void (^)(UIImage *image))donloadedImage;
+
++ (UIColor *)colorFromHexString:(NSString *)hexString;
+
++ (void)setStatusBarBackgroundColor:(UIColor *)color;
+
++ (UIView*)createTabBarView:(UIView*)parentView;
+
 @end

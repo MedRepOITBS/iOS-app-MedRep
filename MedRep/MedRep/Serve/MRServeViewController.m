@@ -7,7 +7,6 @@
 //
 
 #import "MRServeViewController.h"
-#import "MRTabView.h"
 #import "SWRevealViewController.h"
 #import "MRContactsViewController.h"
 #import "MRGroupsListViewController.h"
@@ -15,7 +14,7 @@
 #import "MRShareViewController.h"
 #import "MRTransformViewController.h"
 
-@interface MRServeViewController () <MRTabViewDelegate, SWRevealViewControllerDelegate>
+@interface MRServeViewController () <SWRevealViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *navView;
 
@@ -58,33 +57,6 @@
     // Pass the selected object to the new view controller.
 }
 */
-
--(void) viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    
-    NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"MRTabView" owner:self options:nil];
-    MRTabView *tabView = (MRTabView *)[subviewArray objectAtIndex:0];
-    tabView.delegate = self;
-    tabView.serveView.backgroundColor = [UIColor colorWithRed:26/255.0 green:133/255.0 blue:213/255.0 alpha:1];
-    [self.view addSubview:tabView];
-    
-    [tabView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[view]-0-|" options:NSLayoutFormatAlignAllBottom metrics:nil views:@{@"view":tabView}]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:tabView
-                                                          attribute:NSLayoutAttributeHeight
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:tabView
-                                                          attribute:NSLayoutAttributeHeight
-                                                         multiplier:0
-                                                           constant:50]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:tabView
-                                                          attribute:NSLayoutAttributeBottom
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.view
-                                                          attribute:NSLayoutAttributeBottom
-                                                         multiplier:1
-                                                           constant:0]];
-}
 
 - (void)connectButtonTapped {
     MRContactsViewController* contactsViewCont = [[MRContactsViewController alloc] initWithNibName:@"MRContactsViewController" bundle:nil];

@@ -9,7 +9,6 @@
 #import "MRShareViewController.h"
 #import "MRGroupPostItemTableViewCell.h"
 #import "MRContactWithinGroupCollectionCellCollectionViewCell.h"
-#import "MRTabView.h"
 #import "MRDatabaseHelper.h"
 #import "SWRevealViewController.h"
 #import "MRContact.h"
@@ -20,7 +19,7 @@
 #import "MRContactsViewController.h"
 #import "MRServeViewController.h"
 
-@interface MRShareViewController () <MRTabViewDelegate, UISearchBarDelegate, SWRevealViewControllerDelegate>
+@interface MRShareViewController () <UISearchBarDelegate, SWRevealViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView* postsTableView;
 
@@ -88,33 +87,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
--(void) viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    
-    NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"MRTabView" owner:self options:nil];
-    MRTabView *tabView = (MRTabView *)[subviewArray objectAtIndex:0];
-    tabView.delegate = self;
-    tabView.shareView.backgroundColor = [UIColor colorWithRed:26/255.0 green:133/255.0 blue:213/255.0 alpha:1];
-    [self.view addSubview:tabView];
-    
-    [tabView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[view]-0-|" options:NSLayoutFormatAlignAllBottom metrics:nil views:@{@"view":tabView}]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:tabView
-                                                          attribute:NSLayoutAttributeHeight
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:tabView
-                                                          attribute:NSLayoutAttributeHeight
-                                                         multiplier:0
-                                                           constant:_isFromDetails ? 0 : 50]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:tabView
-                                                          attribute:NSLayoutAttributeBottom
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.view
-                                                          attribute:NSLayoutAttributeBottom
-                                                         multiplier:1
-                                                           constant:0]];
 }
 
 - (void)setContact:(MRContact*)contact {

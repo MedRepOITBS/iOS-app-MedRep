@@ -17,6 +17,11 @@
 
 @interface MRTransformDetailViewController (){
     AVPlayerViewController *av;
+    __weak IBOutlet UIWebView *webView;
+    __weak IBOutlet UIImageView *thumbnailImage;
+    __weak IBOutlet UIView *separatorView;
+    
+    __weak IBOutlet UIButton *shareButton;
 }
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageHeight;
 @property (strong, nonatomic) IBOutlet UIView *navView;
@@ -47,21 +52,26 @@
         }
         
         if ([self.selectedContent.contentType isEqualToString:@"Pdf"]) {
-            _imageHeight.constant = 350;
+            [thumbnailImage setHidden:YES];
+            [separatorView setHidden:YES];
+            [_detailLbl setHidden:YES];
             
-            //https://dl.dropboxusercontent.com/u/104553173/sample.pdf
-            UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 60, _contentImage.frame.size.width, 350)];
+            [webView setHidden:NO];
+            
             NSURL *targetURL = [NSURL URLWithString:@"https://dl.dropboxusercontent.com/u/104553173/sample.pdf"];
             NSURLRequest *request = [NSURLRequest requestWithURL:targetURL];
             [webView loadRequest:request];
-            webView.scalesPageToFit=YES;
-            [self.view addSubview:webView];
-        }else if ([self.selectedContent.contentType isEqualToString:@"Video"]) {
-            _imageHeight.constant = 250;
+        } else if ([self.selectedContent.contentType isEqualToString:@"Video"]) {
             
-            //https://dl.dropboxusercontent.com/u/104553173/PK%20Song.mp4
+            [thumbnailImage setHidden:YES];
+            [separatorView setHidden:YES];
+            [_detailLbl setHidden:YES];
+            
             av = [[AVPlayerViewController alloc] init];
-            av.view.frame = _contentImage.frame;
+            float startY = _titleLbl.frame.origin.y + _titleLbl.frame.size.height + 10;
+            av.view.frame = CGRectMake(5, startY,
+                                       self.view.frame.size.width - 10,
+                                       _shareButton.frame.origin.y - (startY + 10));
             
             AVAsset *avAsset = [AVAsset assetWithURL:[NSURL URLWithString:@"https://dl.dropboxusercontent.com/u/104553173/PK%20Song.mp4"]];
             AVPlayerItem *avPlayerItem =[[AVPlayerItem alloc]initWithAsset:avAsset];
@@ -74,14 +84,44 @@
             [self.view addSubview:av.view];
             [av didMoveToParentViewController:self];
             [av.contentOverlayView addObserver:self forKeyPath:@"bounds" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+            
+//            [self setAVPlayerConstraints:av.view];
 
         }else { //if ([self.selectedContent.contentType isEqualToString:@"Image"]) {
             if (self.selectedContent.icon != nil && self.selectedContent.icon.length > 0) {
                 _contentImage.image = [UIImage imageNamed:self.selectedContent.icon];
-                _imageHeight.constant = 150;
             }
         }
     }
+}
+
+- (void)setAVPlayerConstraints:(UIView*)view {
+    NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:view
+                                                                      attribute:NSLayoutAttributeLeading
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:self.view
+                                                                      attribute:NSLayoutAttributeLeading
+                                                                     multiplier:1.0 constant:5];
+    NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:view
+                                                                       attribute:NSLayoutAttributeTrailing
+                                                                       relatedBy:NSLayoutRelationEqual
+                                                                          toItem:self.view
+                                                                       attribute:NSLayoutAttributeTrailing
+                                                                      multiplier:1.0 constant:5];
+    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:view
+                                                                        attribute:NSLayoutAttributeBottom
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:_shareButton
+                                                                        attribute:NSLayoutAttributeTopMargin
+                                                                       multiplier:1.0 constant:10];
+    NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:view
+                                                                        attribute:NSLayoutAttributeTopMargin
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:_titleLbl
+                                                                        attribute:NSLayoutAttributeBottom
+                                                                       multiplier:1.0 constant:0.0];
+    
+    [self.view addConstraints:@[leftConstraint, rightConstraint, bottomConstraint, topConstraint]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -145,6 +185,10 @@
 - (IBAction)gotoWebAction:(id)sender {
     NotificationWebViewController *notiFicationViewController = [[NotificationWebViewController alloc] initWithNibName:@"NotificationWebViewController" bundle:nil];
     notiFicationViewController.isFromTransform = YES;
+    if (self.selectedContent != nil && self.selectedContent.title != nil &&
+        self.selectedContent.title.length > 0) {
+        notiFicationViewController.headerTitle = self.selectedContent.title;
+    }
     [self.navigationController pushViewController:notiFicationViewController animated:YES];
 }
 

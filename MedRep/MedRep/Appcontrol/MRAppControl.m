@@ -424,14 +424,19 @@
     {
         MRDashBoardVC *dashboardViewCont = [[MRDashBoardVC alloc] initWithNibName:[MRCommon nibNameForDevice:@"MRDashBoardVC"] bundle:nil];
         
+        [MRCommon setStatusBarBackgroundColor:[UIColor whiteColor]];
+        
         UINavigationController *dashboardNavCont = [[UINavigationController alloc] initWithRootViewController:dashboardViewCont];
         
-        dashboardNavCont.navigationBar.tintColor        = [UIColor whiteColor];
+//        dashboardNavCont.navigationBar.tintColor        = [UIColor whiteColor];
+        dashboardNavCont.navigationBar.barTintColor = [MRCommon colorFromHexString:@"#1A85D5"];
+        dashboardNavCont.navigationBar.translucent = YES;
+        
         UIImage *image = [UIImage imageNamed:@"nabar@2x.png"];
         if([[UINavigationBar class] respondsToSelector:@selector(appearance)]) //iOS >=5.0
         {
-            [[UINavigationBar appearance] setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
-            [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
+//            [[UINavigationBar appearance] setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+//            [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
             [[UIBarButtonItem appearanceWhenContainedIn: [UINavigationBar class], nil] setTintColor:[UIColor blackColor]];
             
             [[UINavigationBar appearance] setTitleTextAttributes:

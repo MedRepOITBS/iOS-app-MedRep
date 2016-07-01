@@ -10,6 +10,7 @@
 
 @interface NotificationWebViewController : UIViewController
 
+@property (strong, nonatomic) NSString *headerTitle;
 @property (nonatomic, retain) NSDictionary *selectedNotification;
 @property (strong, nonatomic) NSString *urlLink;
 @property (nonatomic, retain) NSArray *notificationDetailsList;

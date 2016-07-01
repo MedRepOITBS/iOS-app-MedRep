@@ -6,6 +6,7 @@
 //  Copyright © 2016 MedRep. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import "MRTransformViewController.h"
 #import "MRTransformTitleCollectionViewCell.h"
 #import "MPTransformData.h"
@@ -18,12 +19,13 @@
 #import "PendingContactsViewController.h"
 #import "MRShareViewController.h"
 #import <AVFoundation/AVFoundation.h>
-#import "MRTabView.h"
 #import "MRServeViewController.h"
+#import "MRCommon.h"
+#import "MRCustomTabBar.h"
 
 @interface MRTransformViewController () <UICollectionViewDelegate, UICollectionViewDataSource,
                                          UITableViewDelegate, UITableViewDataSource,
-SWRevealViewControllerDelegate, UISearchBarDelegate, MRTabViewDelegate>{
+SWRevealViewControllerDelegate, UISearchBarDelegate>{
     int i;
     NSTimer *timer;
 }
@@ -34,17 +36,7 @@ SWRevealViewControllerDelegate, UISearchBarDelegate, MRTabViewDelegate>{
 
 @property (weak, nonatomic) IBOutlet UITableView *contentTableView;
 
-@property (weak, nonatomic) IBOutlet UIView *connectView;
-
-@property (weak, nonatomic) IBOutlet UIView *transformView;
-
-@property (weak, nonatomic) IBOutlet UIView *shareView;
-
-@property (weak, nonatomic) IBOutlet UIView *serveView;
-
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-
-@property UIView *activeView;
 
 @property NSArray *categories;
 @property (strong, nonatomic) NSMutableArray *contentData;
@@ -52,6 +44,8 @@ SWRevealViewControllerDelegate, UISearchBarDelegate, MRTabViewDelegate>{
 @property (strong, nonatomic) UITapGestureRecognizer* tapGesture;
 
 @property NSInteger currentIndex;
+
+@property (strong, nonatomic) UIView *tabBarView;
 
 @end
 
@@ -76,10 +70,10 @@ SWRevealViewControllerDelegate, UISearchBarDelegate, MRTabViewDelegate>{
     self.navigationItem.rightBarButtonItem = rightButtonItem;
     
     self.navigationItem.title = @"Transform";
-    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName]];
     
     self.currentIndex = 0;
-    self.activeView = self.transformView;
+
 //    self.prevIndex = 0;
     self.categories = @[@"News & Updates", @"Therapeutic Area", @"Regulatory", @"Education", @"Journals", @"Medical Innovation", @"Podcasts / Webcasts", @"Best Practices", @"Case Studies", @"Whitepapers", @"Videos", @"Clinical Trials"];
     
@@ -100,38 +94,27 @@ SWRevealViewControllerDelegate, UISearchBarDelegate, MRTabViewDelegate>{
     self.tapGesture.cancelsTouchesInView = YES;
     self.tapGesture.enabled = NO;
     [self.view addGestureRecognizer:self.tapGesture];
+    
+    MRCustomTabBar *tabBarView = (MRCustomTabBar*)[MRCommon createTabBarView:self.view];
+    [tabBarView setNavigationController:self.navigationController];
+    [tabBarView setTransformViewController:self];
+    [tabBarView updateActiveViewController:self andTabIndex:1];
+    
+    self.tabBarView = (UIView*)tabBarView;
+
+    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:self.contentTableView
+                                                                        attribute:NSLayoutAttributeBottomMargin
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self.view
+                                                                        attribute:NSLayoutAttributeBottom
+                                                                       multiplier:1.0 constant:0];
+    
+    [self.view addConstraint:bottomConstraint];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
--(void) viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    
-    NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"MRTabView" owner:self options:nil];
-    MRTabView *tabView = (MRTabView *)[subviewArray objectAtIndex:0];
-    tabView.delegate = self;
-    tabView.transformView.backgroundColor = [UIColor colorWithRed:26/255.0 green:133/255.0 blue:213/255.0 alpha:1];
-    [self.view addSubview:tabView];
-    
-    [tabView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[view]-0-|" options:NSLayoutFormatAlignAllBottom metrics:nil views:@{@"view":tabView}]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:tabView
-                                                          attribute:NSLayoutAttributeHeight
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:tabView
-                                                          attribute:NSLayoutAttributeHeight
-                                                         multiplier:0
-                                                           constant:50]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:tabView
-                                                          attribute:NSLayoutAttributeBottom
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.view
-                                                          attribute:NSLayoutAttributeBottom
-                                                         multiplier:1
-                                                           constant:0]];
 }
 
 -(void) viewDidAppear:(BOOL)animated{
@@ -280,56 +263,6 @@ SWRevealViewControllerDelegate, UISearchBarDelegate, MRTabViewDelegate>{
     MRTransformDetailViewController *notiFicationViewController = [[MRTransformDetailViewController alloc] initWithNibName:@"MRTransformDetailViewController" bundle:nil];
     notiFicationViewController.selectedContent = self.contentData[indexPath.row];
     [self.navigationController pushViewController:notiFicationViewController animated:YES];
-}
-
-- (IBAction)connectButtonTapped:(id)sender {
-    self.connectView = sender;
-    
-    MRContactsViewController* contactsViewCont = [[MRContactsViewController alloc] initWithNibName:@"MRContactsViewController" bundle:nil];
-    MRGroupsListViewController* groupsListViewController = [[MRGroupsListViewController alloc] initWithNibName:@"MRGroupsListViewController" bundle:[NSBundle mainBundle]];
-    contactsViewCont.groupsListViewController = groupsListViewController;
-    
-    PendingContactsViewController *pendingViewController =[[PendingContactsViewController alloc] initWithNibName:@"PendingContactsViewController" bundle:[NSBundle mainBundle]];
-    
-    contactsViewCont.pendingContactsViewController = pendingViewController;
-    [self.navigationController pushViewController:contactsViewCont animated:true];
-
-}
-
-- (IBAction)transformButtonTapped:(id)sender {
-    self.transformView = sender;
-}
-
-- (IBAction)shareButtonTapped:(id)sender {
-    self.shareView = sender;
-    
-    MRShareViewController* contactsViewCont = [[MRShareViewController alloc] initWithNibName:@"MRShareViewController" bundle:nil];
-    [self.navigationController pushViewController:contactsViewCont animated:true];
-}
-
-- (IBAction)serveButtonTapped:(id)sender {
-    self.serveView = sender;
-}
-
-- (void)connectButtonTapped {
-    MRContactsViewController* contactsViewCont = [[MRContactsViewController alloc] initWithNibName:@"MRContactsViewController" bundle:nil];
-    MRGroupsListViewController* groupsListViewController = [[MRGroupsListViewController alloc] initWithNibName:@"MRGroupsListViewController" bundle:[NSBundle mainBundle]];
-    contactsViewCont.groupsListViewController = groupsListViewController;
-    
-    PendingContactsViewController *pendingViewController =[[PendingContactsViewController alloc] initWithNibName:@"PendingContactsViewController" bundle:[NSBundle mainBundle]];
-    
-    contactsViewCont.pendingContactsViewController = pendingViewController;
-    [self.navigationController pushViewController:contactsViewCont animated:NO];
-}
-
-- (void)shareButtonTapped {
-    MRShareViewController* contactsViewCont = [[MRShareViewController alloc] initWithNibName:@"MRShareViewController" bundle:nil];
-    [self.navigationController pushViewController:contactsViewCont animated:NO];
-}
-
-- (void)serveButtonTapped {
-    MRServeViewController *notiFicationViewController = [[MRServeViewController alloc] initWithNibName:@"MRServeViewController" bundle:nil];
-    [self.navigationController pushViewController:notiFicationViewController animated:NO];
 }
 
 #pragma mark - Dummy Data

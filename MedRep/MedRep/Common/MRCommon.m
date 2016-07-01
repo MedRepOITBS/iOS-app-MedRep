@@ -659,4 +659,57 @@
     return (nil == theDictionary) ? [NSDictionary dictionary] : theDictionary;
 }
 
++ (UIColor *)colorFromHexString:(NSString *)hexString {
+    unsigned rgbValue = 0;
+    NSScanner *scanner = [NSScanner scannerWithString:hexString];
+    [scanner setScanLocation:1]; // bypass '#' character
+    [scanner scanHexInt:&rgbValue];
+    return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
+}
+
++ (void)setStatusBarBackgroundColor:(UIColor *)color {
+    
+    UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
+    
+    if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
+        statusBar.backgroundColor = color;
+    }
+}
+
++ (UIView*)createTabBarView:(UIView*)parentView {
+    UIView *tabBarView = [[NSBundle mainBundle] loadNibNamed:@"MRCustomTabBar" owner:self
+                                                  options:nil].firstObject;
+    [tabBarView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    [parentView addSubview:tabBarView];
+    
+    NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:tabBarView
+                                                                      attribute:NSLayoutAttributeLeading
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:parentView
+                                                                      attribute:NSLayoutAttributeLeading
+                                                                     multiplier:1.0 constant:0];
+    NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:tabBarView
+                                                                      attribute:NSLayoutAttributeTrailing
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:parentView
+                                                                      attribute:NSLayoutAttributeTrailing
+                                                                     multiplier:1.0 constant:0];
+    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:tabBarView
+                                                                      attribute:NSLayoutAttributeBottom
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:parentView
+                                                                      attribute:NSLayoutAttributeBottom
+                                                                     multiplier:1.0 constant:0];
+    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:tabBarView
+                                                                      attribute:NSLayoutAttributeHeight
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:nil
+                                                                      attribute:NSLayoutAttributeHeight
+                                                                     multiplier:1.0 constant:50.0];
+    
+    [parentView addConstraints:@[leftConstraint, rightConstraint, bottomConstraint, heightConstraint]];
+    return tabBarView;
+}
+
 @end
