@@ -12,4 +12,11 @@
 
 NSString* const kStatusBarColor = @"#1A85D5";
 
+NSString* const kShareOptionsTitle = @"Choose";
+
+NSString* const kContacts = @"Contacts";
+NSString* const kGroups = @"Groups";
+
+NSString* const kDone = @"Done";
+
 @end

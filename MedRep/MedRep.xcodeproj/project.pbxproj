@@ -604,10 +604,10 @@
 		B41746E71D0CE628009B7E7E /* GroupPostChildTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B41746E31D0CE628009B7E7E /* GroupPostChildTableViewCell.xib */; };
 		CC0123C11D25A66B001134F3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0123C01D25A66B001134F3 /* CoreGraphics.framework */; };
 		CC0123C21D25A677001134F3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0123C01D25A66B001134F3 /* CoreGraphics.framework */; };
-		CC463DDE1D279DE7002AE85E /* ShareOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC463DDC1D279DE7002AE85E /* ShareOptionsViewController.m */; };
-		CC463DDF1D279DE7002AE85E /* ShareOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC463DDC1D279DE7002AE85E /* ShareOptionsViewController.m */; };
-		CC463DE01D279DE7002AE85E /* ShareOptionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC463DDD1D279DE7002AE85E /* ShareOptionsViewController.xib */; };
-		CC463DE11D279DE7002AE85E /* ShareOptionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC463DDD1D279DE7002AE85E /* ShareOptionsViewController.xib */; };
+		CC463DDE1D279DE7002AE85E /* MRShareOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC463DDC1D279DE7002AE85E /* MRShareOptionsViewController.m */; };
+		CC463DDF1D279DE7002AE85E /* MRShareOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC463DDC1D279DE7002AE85E /* MRShareOptionsViewController.m */; };
+		CC463DE01D279DE7002AE85E /* MRShareOptionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC463DDD1D279DE7002AE85E /* MRShareOptionsViewController.xib */; };
+		CC463DE11D279DE7002AE85E /* MRShareOptionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC463DDD1D279DE7002AE85E /* MRShareOptionsViewController.xib */; };
 		CC463DE31D27A47E002AE85E /* MRDashBoardVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC463DE21D27A47E002AE85E /* MRDashBoardVC.xib */; };
 		CC463DE41D27A47E002AE85E /* MRDashBoardVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC463DE21D27A47E002AE85E /* MRDashBoardVC.xib */; };
 		CC463DE71D27B37B002AE85E /* MRAppConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CC463DE61D27B37B002AE85E /* MRAppConstants.m */; };
@@ -1907,9 +1907,9 @@
 		B41746E21D0CE628009B7E7E /* GroupPostChildTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupPostChildTableViewCell.m; sourceTree = "<group>"; };
 		B41746E31D0CE628009B7E7E /* GroupPostChildTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupPostChildTableViewCell.xib; sourceTree = "<group>"; };
 		CC0123C01D25A66B001134F3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		CC463DDB1D279DE7002AE85E /* ShareOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareOptionsViewController.h; sourceTree = "<group>"; };
-		CC463DDC1D279DE7002AE85E /* ShareOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareOptionsViewController.m; sourceTree = "<group>"; };
-		CC463DDD1D279DE7002AE85E /* ShareOptionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareOptionsViewController.xib; sourceTree = "<group>"; };
+		CC463DDB1D279DE7002AE85E /* MRShareOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRShareOptionsViewController.h; sourceTree = "<group>"; };
+		CC463DDC1D279DE7002AE85E /* MRShareOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRShareOptionsViewController.m; sourceTree = "<group>"; };
+		CC463DDD1D279DE7002AE85E /* MRShareOptionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRShareOptionsViewController.xib; sourceTree = "<group>"; };
 		CC463DE21D27A47E002AE85E /* MRDashBoardVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRDashBoardVC.xib; sourceTree = "<group>"; };
 		CC463DE51D27B37B002AE85E /* MRAppConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRAppConstants.h; sourceTree = "<group>"; };
 		CC463DE61D27B37B002AE85E /* MRAppConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRAppConstants.m; sourceTree = "<group>"; };
@@ -3537,9 +3537,9 @@
 				CC7DB2891D0C9EC2007DFE4C /* MRShareViewController.h */,
 				CC7DB28A1D0C9EC2007DFE4C /* MRShareViewController.m */,
 				CC7DB28B1D0C9EC2007DFE4C /* MRShareViewController.xib */,
-				CC463DDB1D279DE7002AE85E /* ShareOptionsViewController.h */,
-				CC463DDC1D279DE7002AE85E /* ShareOptionsViewController.m */,
-				CC463DDD1D279DE7002AE85E /* ShareOptionsViewController.xib */,
+				CC463DDB1D279DE7002AE85E /* MRShareOptionsViewController.h */,
+				CC463DDC1D279DE7002AE85E /* MRShareOptionsViewController.m */,
+				CC463DDD1D279DE7002AE85E /* MRShareOptionsViewController.xib */,
 			);
 			path = Share;
 			sourceTree = "<group>";
@@ -3982,7 +3982,7 @@
 				8AFE8D091D0F21BF0000382E /* profile_pic9.jpeg in Resources */,
 				79FFD2671BB9DC3100CEE606 /* star@3x.png in Resources */,
 				796E936B1BB8528B0031EA34 /* pcselect@2x.png in Resources */,
-				CC463DE01D279DE7002AE85E /* ShareOptionsViewController.xib in Resources */,
+				CC463DE01D279DE7002AE85E /* MRShareOptionsViewController.xib in Resources */,
 				7929E37E1B9C78B5001F1373 /* news@2x.png in Resources */,
 				79FFD2681BB9DC3100CEE606 /* starunselected@2x.png in Resources */,
 				CC7DB2CB1D0CC433007DFE4C /* MRContactCollectionCell.xib in Resources */,
@@ -4626,7 +4626,7 @@
 				CC7DB1B01D0C8BEC007DFE4C /* crgreydown-arrow@3x.png in Resources */,
 				CC7DB1B11D0C8BEC007DFE4C /* MRReadNotificationsViewController.xib in Resources */,
 				CC7DB1B21D0C8BEC007DFE4C /* feedbackSelected@3.png in Resources */,
-				CC463DE11D279DE7002AE85E /* ShareOptionsViewController.xib in Resources */,
+				CC463DE11D279DE7002AE85E /* MRShareOptionsViewController.xib in Resources */,
 				CC7DB1B31D0C8BEC007DFE4C /* HomeLogo@3x.png in Resources */,
 				CC7DB1B41D0C8BEC007DFE4C /* PHdividers@3x.png in Resources */,
 				CC7DB1B51D0C8BEC007DFE4C /* PHdashboard-banner@3x.png in Resources */,
@@ -4775,7 +4775,7 @@
 				83B781F91B7916900070645C /* MRCommon.m in Sources */,
 				CC7DB3A91D0CC994007DFE4C /* MRGroupTableViewCell.m in Sources */,
 				79314AD81BD2776A00EB3A48 /* MRPharmaNotificationDetailsViewController.m in Sources */,
-				CC463DDE1D279DE7002AE85E /* ShareOptionsViewController.m in Sources */,
+				CC463DDE1D279DE7002AE85E /* MRShareOptionsViewController.m in Sources */,
 				796E93981BB8790A0031EA34 /* MRCompetitorAnalasysCell.m in Sources */,
 				79DC37131BE7DDCF0027F7DB /* MRMedRepListViewController.m in Sources */,
 				79314AD31BD2773E00EB3A48 /* MRNotificationInsiderViewController.m in Sources */,
@@ -4940,7 +4940,7 @@
 				B41746E51D0CE628009B7E7E /* GroupPostChildTableViewCell.m in Sources */,
 				CC7DB02D1D0C8BEC007DFE4C /* MRMedRepListTableCell.m in Sources */,
 				CC7DB02E1D0C8BEC007DFE4C /* MRProfileDetailsViewController.m in Sources */,
-				CC463DDF1D279DE7002AE85E /* ShareOptionsViewController.m in Sources */,
+				CC463DDF1D279DE7002AE85E /* MRShareOptionsViewController.m in Sources */,
 				B41746D01D0CD5CE009B7E7E /* KLCPopup.m in Sources */,
 				CC7DB02F1D0C8BEC007DFE4C /* MRMedRepMeetingsViewController.m in Sources */,
 				CC7DB30E1D0CC4E2007DFE4C /* MRSuggestedContact.m in Sources */,

@@ -40,6 +40,7 @@
 + (NSArray*)getSuggestedContacts;
 + (NSArray*)getGroups;
 
++ (NSArray*)getObjectsForType:(NSString*)entityName andPredicate:(NSPredicate*)predicate;
 
 + (void)addRole:(NSArray*)roles;
 + (void)addTherapeuticArea:(NSArray*)therapeuticAreaList;

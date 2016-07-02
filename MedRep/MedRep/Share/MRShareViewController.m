@@ -21,8 +21,9 @@
 #import "MRCustomTabBar.h"
 #import "MRCommon.h"
 #import "MRConstants.h"
+#import "MRShareOptionsViewController.h"
 
-@interface MRShareViewController () <UISearchBarDelegate, SWRevealViewControllerDelegate, MRGroupPostItemTableViewCellDelegate>
+@interface MRShareViewController () <UISearchBarDelegate, SWRevealViewControllerDelegate, MRGroupPostItemTableViewCellDelegate, MRShareOptionsSelectionDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView* postsTableView;
 
@@ -37,6 +38,7 @@
 @property (strong, nonatomic) UITapGestureRecognizer* tapGesture;
 
 @property (strong, nonatomic) UIView *tabBarView;
+@property (nonatomic) MRShareOptionsViewController *shareOptionsVC;
 
 @end
 
@@ -229,6 +231,17 @@
 
 - (void)likeButtonTapped {
     [self fetchPosts];
+}
+
+- (void)shareButtonTapped:(MRGroupPost*)groupPost {
+    self.shareOptionsVC = [[MRShareOptionsViewController alloc] initWithNibName:@"MRShareOptionsViewController" bundle:nil];
+    [self.shareOptionsVC setDelegate:self];
+    [self.shareOptionsVC setGroupPost:groupPost];
+    [self.navigationController pushViewController:self.shareOptionsVC animated:YES];
+}
+
+- (void)shareToSelected {
+    [self.postsTableView reloadData];
 }
 
 @end

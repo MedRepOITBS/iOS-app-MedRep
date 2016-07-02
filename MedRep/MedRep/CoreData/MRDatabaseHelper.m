@@ -152,6 +152,19 @@ static MRDatabaseHelper *sharedDataManager = nil;
     return groups;
 }
 
++ (NSArray*)getObjectsForType:(NSString*)entityName andPredicate:(NSPredicate*)predicate {
+    NSArray *objects = nil;
+    
+    if (predicate != nil) {
+        objects = [[MRDataManger sharedManager] fetchObjectList:entityName
+                                                      predicate:predicate];
+    } else {
+        objects = [[MRDataManger sharedManager] fetchObjectList:entityName];
+    }
+    
+    return objects;
+}
+
 + (void)addRole:(NSArray*)roles
 {
     for (NSDictionary *myRoledict in roles)

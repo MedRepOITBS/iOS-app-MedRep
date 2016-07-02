@@ -12,4 +12,11 @@
 
 FOUNDATION_EXPORT NSString* const kStatusBarColor;
 
+FOUNDATION_EXPORT NSString* const kShareOptionsTitle;
+
+FOUNDATION_EXPORT NSString* const kContacts;
+FOUNDATION_EXPORT NSString* const kGroups;
+
+FOUNDATION_EXPORT NSString* const kDone;
+
 @end

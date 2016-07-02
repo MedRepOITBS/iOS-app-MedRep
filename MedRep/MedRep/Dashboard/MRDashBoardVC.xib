@@ -434,10 +434,10 @@
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
+                            <exclude reference="5BQ-sY-hjh"/>
                             <exclude reference="7e3-rQ-9sC"/>
                             <exclude reference="Lgv-qP-f0Q"/>
                             <exclude reference="WBl-i4-w7e"/>
-                            <exclude reference="5BQ-sY-hjh"/>
                             <exclude reference="kry-zp-Qig"/>
                         </mask>
                     </variation>

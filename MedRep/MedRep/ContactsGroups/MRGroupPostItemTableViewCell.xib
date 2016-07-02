@@ -54,14 +54,14 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="61c-Qa-yO0">
                                 <rect key="frame" x="78" y="0.0" width="20" height="20"/>
-                                <state key="normal" image="share.png"/>
+                                <state key="normal" image="comment.png"/>
                                 <connections>
                                     <action selector="shareButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ZbI-iq-w09"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aaq-zQ-ydw">
                                 <rect key="frame" x="150" y="0.0" width="20" height="20"/>
-                                <state key="normal" image="comment.png"/>
+                                <state key="normal" image="share.png"/>
                                 <connections>
                                     <action selector="commentButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="xK2-Qx-fnE"/>
                                 </connections>

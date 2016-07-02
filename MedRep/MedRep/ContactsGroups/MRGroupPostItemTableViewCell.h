@@ -26,5 +26,6 @@
 -(void)mrGroupPostItemTableViewCell:(MRGroupPostItemTableViewCell *)cell withCommentButtonTapped:(id)sender;
 
 - (void)likeButtonTapped;
+- (void)shareButtonTapped:(MRGroupPost*)groupPost;
 
 @end

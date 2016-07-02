@@ -44,7 +44,7 @@
     
     tagIndex = tagIndex / 100;
     
-    if (self.delegate != nil) {
+    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(likeButtonTapped)]) {
         [self.delegate likeButtonTapped];
     }
     [self.parentTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:tagIndex inSection:0]]
@@ -52,7 +52,10 @@
 }
 
 -(IBAction)shareButtonTapped:(id)sender {
-    
+    if (self.delegate != nil &&
+        [self.delegate respondsToSelector:@selector(shareButtonTapped:)]) {
+        [self.delegate shareButtonTapped:self.post];
+    }
 }
 
 -(IBAction)commentButtonTapped:(id)sender{
