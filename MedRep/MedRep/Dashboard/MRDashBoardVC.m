@@ -25,6 +25,8 @@
 
 @interface MRDashBoardVC () <UITableViewDataSource, UITableViewDelegate, SWRevealViewControllerDelegate>
 
+@property (weak, nonatomic) IBOutlet UIView *titleView;
+
 @property (strong, nonatomic) IBOutlet UIView *navView;
 @property (weak, nonatomic) IBOutlet UIButton *leftButton;
 @property (weak, nonatomic) IBOutlet UIButton *rightButton;
@@ -81,6 +83,9 @@
 {
     [super viewWillAppear:animated];
     
+    [self.titleView setBackgroundColor:[MRCommon colorFromHexString:kStatusBarColor]];
+    [MRCommon applyNavigationBarStyling:self.navigationController];
+    
     if ([APP_DELEGATE.launchScreen isEqualToString:@"Survey"]) {
         MRSurveyListViewController *surveyListViewController = [[MRSurveyListViewController alloc] initWithNibName:@"MRSurveyListViewController" bundle:nil];
         surveyListViewController.isFromMenu = NO;
@@ -115,32 +120,29 @@
 }
 - (void)setUpUI
 {
-    self.appointmentsTableView.transform = CGAffineTransformMakeRotation(-M_PI * 0.5);
-    
-    if([MRCommon deviceHasThreePointFiveInchScreen])
-    {
-        [self.appointmentsTableView setFrame:CGRectMake(43 , 50, 234 , 50)];
-    }
-    else if([MRCommon deviceHasFourInchScreen])
-    {
-        [self.appointmentsTableView setFrame:CGRectMake(43 , 65, 234 , 50)];
-    }
-    else if([MRCommon deviceHasFourPointSevenInchScreen])
-    {
-        [self.appointmentsTableView setFrame:CGRectMake(52 , 70, 270 , 90)];
-
-    }
-    else if([MRCommon deviceHasFivePointFiveInchScreen])
-    {
-        [self.appointmentsTableView setFrame:CGRectMake(57 , 80, 300 , 90)];
-    }
+//    self.appointmentsTableView.transform = CGAffineTransformMakeRotation(-M_PI * 0.5);
+//    
+//    if([MRCommon deviceHasThreePointFiveInchScreen])
+//    {
+//        [self.appointmentsTableView setFrame:CGRectMake(0 , 50, 234 , 50)];
+//    }
+//    else if([MRCommon deviceHasFourInchScreen])
+//    {
+//        [self.appointmentsTableView setFrame:CGRectMake(0 , 65, 234 , 50)];
+//    }
+//    else if([MRCommon deviceHasFourPointSevenInchScreen])
+//    {
+//        [self.appointmentsTableView setFrame:CGRectMake(0 , 70, 270 , 90)];
+//
+//    }
+//    else if([MRCommon deviceHasFivePointFiveInchScreen])
+//    {
+//        [self.appointmentsTableView setFrame:CGRectMake(0 , 80, 300 , 90)];
+//    }
 
     
     NSDictionary *userData = [MRAppControl sharedHelper].userRegData;
     self.titleLabel.text = [NSString stringWithFormat:@"Welcome %@. %@ %@", [userData objectForKey:KTitle],[userData objectForKey:KFirstName],[userData objectForKey:KLastName]];
-    self.appointmentsTableView.showsHorizontalScrollIndicator = NO;
-    self.appointmentsTableView.showsVerticalScrollIndicator   = NO;
-    self.appointmentsTableView.scrollEnabled = NO;
 }
 
 - (void)getAppointmnets
@@ -271,11 +273,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.myAppointments.count;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return self.appointmentsTableView.frame.size.width;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

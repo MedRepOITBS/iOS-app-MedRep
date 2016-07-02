@@ -41,7 +41,7 @@
     [self registerForNotification];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.backgroundColor = [MRCommon colorFromHexString:kStatusBarColor];
     [self.window makeKeyAndVisible];
 
     _counterChildPost = 1000;

@@ -20,7 +20,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="QE3-ah-syi">
-                    <rect key="frame" x="0.0" y="95" width="600" height="44"/>
+                    <rect key="frame" x="0.0" y="31" width="600" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="BYh-zr-D66"/>
                     </constraints>
@@ -30,7 +30,7 @@
                     </connections>
                 </searchBar>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z7C-H3-umC">
-                    <rect key="frame" x="0.0" y="64" width="600" height="30"/>
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="30"/>
                     <subviews>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="27a-DK-TyQ">
                             <rect key="frame" x="30" y="0.0" width="540" height="30"/>
@@ -53,7 +53,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6BV-9L-5I0">
-                    <rect key="frame" x="0.0" y="94" width="600" height="1"/>
+                    <rect key="frame" x="0.0" y="30" width="600" height="1"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="wAR-fF-b8o"/>
@@ -71,7 +71,7 @@
                 <constraint firstItem="6BV-9L-5I0" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Mzi-RK-VH2"/>
                 <constraint firstAttribute="trailing" secondItem="QE3-ah-syi" secondAttribute="trailing" id="NHx-hH-c1l"/>
                 <constraint firstItem="DFd-vW-gB4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="P0T-aW-eYy"/>
-                <constraint firstItem="z7C-H3-umC" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="Xvj-v0-fUO"/>
+                <constraint firstItem="z7C-H3-umC" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Xvj-v0-fUO"/>
                 <constraint firstAttribute="trailing" secondItem="6BV-9L-5I0" secondAttribute="trailing" id="ifV-j8-toC"/>
                 <constraint firstAttribute="trailing" secondItem="z7C-H3-umC" secondAttribute="trailing" id="k8c-cl-xfa"/>
                 <constraint firstItem="6BV-9L-5I0" firstAttribute="top" secondItem="z7C-H3-umC" secondAttribute="bottom" id="lVN-xF-bKc"/>

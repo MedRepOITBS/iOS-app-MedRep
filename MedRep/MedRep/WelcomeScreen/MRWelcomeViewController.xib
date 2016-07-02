@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MRWelcomeViewController">
@@ -24,15 +24,12 @@
             <subviews>
                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="categoryBG.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="K0e-Po-F6a">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                    <animations/>
                 </imageView>
                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="splashLogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="CUK-mo-UYY">
                     <rect key="frame" x="239" y="50" width="123" height="124"/>
-                    <animations/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Great !" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HFh-sl-mwT">
                     <rect key="frame" x="0.0" y="180" width="600" height="40"/>
-                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="MD2-Sl-XoS"/>
                     </constraints>
@@ -42,7 +39,6 @@
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dr. XYZ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOd-z5-HUf">
                     <rect key="frame" x="0.0" y="230" width="600" height="30"/>
-                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="Qfl-Af-km2"/>
                     </constraints>
@@ -52,7 +48,6 @@
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="grC-tG-mup">
                     <rect key="frame" x="20" y="515" width="560" height="45"/>
-                    <animations/>
                     <color key="backgroundColor" red="0.078431372550000003" green="0.76470588240000004" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="71r-64-n65"/>
@@ -70,7 +65,6 @@
                     <subviews>
                         <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="camara-icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="oOZ-6N-JTU">
                             <rect key="frame" x="15" y="15" width="30" height="30"/>
-                            <animations/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="30" id="M3o-RO-MgA"/>
@@ -79,7 +73,6 @@
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add photo" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t6g-BX-qR0">
                             <rect key="frame" x="55" y="17" width="124" height="35"/>
-                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="124" id="5fj-6g-Z01"/>
                                 <constraint firstAttribute="height" constant="35" id="8Nq-Wb-9WD"/>
@@ -90,7 +83,6 @@
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sda-tI-IFf">
                             <rect key="frame" x="0.0" y="0.0" width="195" height="60"/>
-                            <animations/>
                             <state key="normal">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -99,7 +91,6 @@
                             </connections>
                         </button>
                     </subviews>
-                    <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="oOZ-6N-JTU" firstAttribute="leading" secondItem="BCN-EY-fs3" secondAttribute="leading" constant="15" id="3N9-cd-I2S"/>
@@ -116,7 +107,6 @@
                 </view>
                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="WMJ-yy-80U">
                     <rect key="frame" x="250" y="275" width="100" height="100"/>
-                    <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="100" id="ENZ-7B-f0v"/>
@@ -125,7 +115,6 @@
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T4H-dV-LCl">
                     <rect key="frame" x="20" y="580" width="560" height="20"/>
-                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="ppZ-N9-dHM"/>
                     </constraints>
@@ -139,7 +128,6 @@
                     </connections>
                 </button>
             </subviews>
-            <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="grC-tG-mup" secondAttribute="trailing" constant="20" id="2Jd-x2-kfL"/>

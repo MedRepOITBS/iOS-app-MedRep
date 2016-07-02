@@ -222,23 +222,6 @@
 
 - (void)launchSplashView
 {
-//    if([[UINavigationBar class] respondsToSelector:@selector(appearance)]) //iOS >=5.0
-//    {
-//         UIImage *image = [UIImage imageNamed:@"nabar@2x.png"];
-//        [[UINavigationBar appearance] setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
-//        [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
-//        [[UIBarButtonItem appearanceWhenContainedIn: [UINavigationBar class], nil] setTintColor:[UIColor blackColor]];
-//        
-//        [[UINavigationBar appearance] setTitleTextAttributes:
-//         [NSDictionary dictionaryWithObjectsAndKeys:
-//          [UIColor whiteColor],
-//          NSForegroundColorAttributeName,nil]];
-//    }
-//
-//    MRPHDashBoardViewController *test = [[MRPHDashBoardViewController alloc] initWithNibName:@"MRPHDashBoardViewController" bundle:nil];
-//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:test];
-//    self.appMainWindow.rootViewController = nav;
-
     [self loadMasterData];
     self.viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
     self.viewController.delegate = self;
@@ -422,35 +405,19 @@
 {
     if (self.userType == 1 || self.userType == 2)
     {
-        MRDashBoardVC *dashboardViewCont = [[MRDashBoardVC alloc] initWithNibName:[MRCommon nibNameForDevice:@"MRDashBoardVC"] bundle:nil];
-        
-        [MRCommon setStatusBarBackgroundColor:[UIColor whiteColor]];
+        MRDashBoardVC *dashboardViewCont = [[MRDashBoardVC alloc] initWithNibName:@"MRDashBoardVC" bundle:nil];
         
         UINavigationController *dashboardNavCont = [[UINavigationController alloc] initWithRootViewController:dashboardViewCont];
-        
-//        dashboardNavCont.navigationBar.tintColor        = [UIColor whiteColor];
-        dashboardNavCont.navigationBar.barTintColor = [MRCommon colorFromHexString:@"#1A85D5"];
-        dashboardNavCont.navigationBar.translucent = YES;
-        
-        UIImage *image = [UIImage imageNamed:@"nabar@2x.png"];
-        if([[UINavigationBar class] respondsToSelector:@selector(appearance)]) //iOS >=5.0
-        {
-//            [[UINavigationBar appearance] setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
-//            [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
-            [[UIBarButtonItem appearanceWhenContainedIn: [UINavigationBar class], nil] setTintColor:[UIColor blackColor]];
-            
-            [[UINavigationBar appearance] setTitleTextAttributes:
-             [NSDictionary dictionaryWithObjectsAndKeys:
-              [UIColor whiteColor],
-              NSForegroundColorAttributeName,nil]];
-        }
+        [MRCommon applyNavigationBarStyling:dashboardNavCont];
         
         MRMenuViewController *menuSlidingViewCont = [[MRMenuViewController alloc] initWithNibName:@"MRMenuViewController" bundle:nil];
         menuSlidingViewCont.delegate = self;
         UINavigationController *menuSlidingNavCont = [[UINavigationController alloc] initWithRootViewController:menuSlidingViewCont];
         menuSlidingNavCont.navigationBar.tintColor        =  [UIColor whiteColor];
+
         SWRevealViewController *revealController = [[SWRevealViewController alloc] initWithRearViewController:menuSlidingNavCont frontViewController:dashboardNavCont];
         revealController.delegate = self;
+        
         [[NSNotificationCenter defaultCenter] addObserver:menuSlidingViewCont selector:@selector(loadDashboard) name:kDashboardNotificationFromRegistartionScren object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:menuSlidingViewCont selector:@selector(loadAppointmentList) name:kMedRepMeetingsNotification object:nil];
         

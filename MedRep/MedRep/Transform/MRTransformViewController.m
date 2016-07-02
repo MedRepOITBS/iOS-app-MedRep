@@ -70,7 +70,8 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
     self.navigationItem.rightBarButtonItem = rightButtonItem;
     
     self.navigationItem.title = @"Transform";
-    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName]];
+    
+//    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName]];
     
     self.currentIndex = 0;
 
@@ -119,6 +120,7 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
 
 -(void) viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    [MRCommon applyNavigationBarStyling:self.navigationController];
     
     //timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(AutoScroll) userInfo:nil repeats:YES];
 }

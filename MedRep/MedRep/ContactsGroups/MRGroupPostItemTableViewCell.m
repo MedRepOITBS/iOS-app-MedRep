@@ -35,7 +35,7 @@
     
     NSInteger tagIndex = ((UIButton*)sender).tag - 1;
     
-    NSInteger likeCount = [_shareCountLabel.text integerValue];
+    NSInteger likeCount = [_likeCountLabel.text integerValue];
     likeCount = likeCount +1;
     self.post.numberOfLikes = likeCount;
     [self.post.managedObjectContext save:nil];
@@ -43,11 +43,15 @@
     _shareCountLabel.text = [NSString stringWithFormat:@"%ld",(long)likeCount];
     
     tagIndex = tagIndex / 100;
+    
+    if (self.delegate != nil) {
+        [self.delegate likeButtonTapped];
+    }
     [self.parentTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:tagIndex inSection:0]]
                                 withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
--(IBAction)shareButtonTapped:(id)sender{
+-(IBAction)shareButtonTapped:(id)sender {
     
 }
 

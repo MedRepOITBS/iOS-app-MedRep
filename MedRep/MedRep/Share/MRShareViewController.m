@@ -22,7 +22,7 @@
 #import "MRCommon.h"
 #import "MRConstants.h"
 
-@interface MRShareViewController () <UISearchBarDelegate, SWRevealViewControllerDelegate>
+@interface MRShareViewController () <UISearchBarDelegate, SWRevealViewControllerDelegate, MRGroupPostItemTableViewCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView* postsTableView;
 
@@ -46,7 +46,6 @@
     [super viewDidLoad];
     
     self.navigationItem.title = @"Share";
-    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
     
     SWRevealViewController *revealController = [self revealViewController];
     revealController.delegate = self;
@@ -72,21 +71,7 @@
     self.tapGesture.enabled = NO;
     [self.view addGestureRecognizer:self.tapGesture];
         
-    NSArray *myContacts = [MRDatabaseHelper getContacts];
-    myContacts = [myContacts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K == %@", @"self.name", @"Chris Martin"]];
-    self.mainContact = myContacts.firstObject;
-    
-    // Do any additional setup after loading the view from its nib.
-    [self.postsTableView registerNib:[UINib nibWithNibName:@"MRGroupPostItemTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"groupCell"];
-    self.postsTableView.estimatedRowHeight = 250;
-    self.postsTableView.rowHeight = UITableViewAutomaticDimension;
-    if (self.mainContact) {
-        self.groupsUnderContact = [self.mainContact.groups allObjects];
-        self.posts = [self.mainContact.groupPosts allObjects];
-    } else {
-        self.contactsUnderGroup = [self.mainGroup.contacts allObjects];
-        self.posts = [self.mainGroup.groupPosts allObjects];
-    }
+    [self fetchPosts];
     
     MRCustomTabBar *tabBarView = (MRCustomTabBar*)[MRCommon createTabBarView:self.view];
     [tabBarView setNavigationController:self.navigationController];
@@ -110,6 +95,30 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [MRCommon applyNavigationBarStyling:self.navigationController];
+}
+
+- (void)fetchPosts {
+    NSArray *myContacts = [MRDatabaseHelper getContacts];
+    myContacts = [myContacts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K == %@", @"self.name", @"Chris Martin"]];
+    self.mainContact = myContacts.firstObject;
+    
+    // Do any additional setup after loading the view from its nib.
+    [self.postsTableView registerNib:[UINib nibWithNibName:@"MRGroupPostItemTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"groupCell"];
+    self.postsTableView.estimatedRowHeight = 250;
+    self.postsTableView.rowHeight = UITableViewAutomaticDimension;
+    if (self.mainContact) {
+        self.groupsUnderContact = [self.mainContact.groups allObjects];
+        self.posts = [self.mainContact.groupPosts allObjects];
+    } else {
+        self.contactsUnderGroup = [self.mainGroup.contacts allObjects];
+        self.posts = [self.mainGroup.groupPosts allObjects];
+    }
+}
+
 - (void)setContact:(MRContact*)contact {
     self.mainContact = contact;
 }
@@ -129,6 +138,7 @@
     NSInteger tagIndex = (indexPath.section + indexPath.row) * 100;
     [cell setTag:tagIndex];
     [cell setParentTableView:self.postsTableView];
+    [cell setDelegate:self];
     [cell setPostContent:[self.posts objectAtIndex:indexPath.row] tagIndex:tagIndex];
     return cell;
 }
@@ -215,6 +225,10 @@
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     self.tapGesture.enabled = YES;
+}
+
+- (void)likeButtonTapped {
+    [self fetchPosts];
 }
 
 @end

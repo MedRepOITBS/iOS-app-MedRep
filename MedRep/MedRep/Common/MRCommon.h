@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MRDevEnvironmentConfig.h"
+#import "MRAppConstants.h"
 
 @import UIKit;
 
@@ -115,5 +116,7 @@
 + (void)setStatusBarBackgroundColor:(UIColor *)color;
 
 + (UIView*)createTabBarView:(UIView*)parentView;
+
++ (void)applyNavigationBarStyling:(UINavigationController*)navigationController;
 
 @end

@@ -15,7 +15,7 @@
 
 - (void)awakeFromNib {
     
-    self.transform = CGAffineTransformMakeRotation(M_PI * 0.5);
+//    self.transform = CGAffineTransformMakeRotation(M_PI * 0.5);
 
     // Initialization code
 }

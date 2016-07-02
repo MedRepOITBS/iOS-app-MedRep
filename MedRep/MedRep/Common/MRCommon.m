@@ -14,6 +14,7 @@
 #import "MRAppControl.h"
 #import "MRWebserviceConstants.h"
 #import "MRDevEnvironmentConfig.h"
+#import "MRGradientView.h"
 
 @import EventKit;
 
@@ -710,6 +711,37 @@
     
     [parentView addConstraints:@[leftConstraint, rightConstraint, bottomConstraint, heightConstraint]];
     return tabBarView;
+}
+
++ (void)applyNavigationBarStyling:(UINavigationController*)navigationController {
+    
+    [[UINavigationBar appearance] setTitleTextAttributes:@{
+                                            NSForegroundColorAttributeName:[UIColor whiteColor],
+                                            NSFontAttributeName: [UIFont boldSystemFontOfSize:16.0]
+                                            }];
+    
+    
+    // shadowImage removes under navigation line
+    navigationController.navigationBar.shadowImage = [UIImage new];
+    navigationController.navigationBar.barTintColor = [MRCommon colorFromHexString:kStatusBarColor];
+    navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    navigationController.navigationBar.translucent = false;
+    [navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    
+//    // Set Navigation Bar as gradient
+//    CGFloat statusHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+//    CGFloat navHeight = navigationController.navigationBar.frame.size.height;
+//    
+//    CGRect bounds = [UIScreen mainScreen].bounds;
+//    CGFloat width = bounds.size.width;
+//    
+//    UIView *gradImage = [[MRGradientView alloc] initWithFrame:CGRectMake(0, 0, width, statusHeight + navHeight)];
+//    
+//    UIGraphicsBeginImageContext(gradImage.frame.size);
+//    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+//    [gradImage.layer renderInContext:UIGraphicsGetCurrentContext()];
+//    UIGraphicsEndImageContext();
+//    [navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
 }
 
 @end

@@ -164,7 +164,7 @@
         {
             if (![frontNavigationController.topViewController isKindOfClass:[MRDashBoardVC class]])
             {
-                MRDashBoardVC *dashboardViewCont = [[MRDashBoardVC alloc] initWithNibName:[MRCommon nibNameForDevice:@"MRDashBoardVC"] bundle:nil];
+                MRDashBoardVC *dashboardViewCont = [[MRDashBoardVC alloc] initWithNibName:@"MRDashBoardVC" bundle:nil];
                 UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:dashboardViewCont];
                 [revealController pushFrontViewController:navigationController animated:YES];
             }

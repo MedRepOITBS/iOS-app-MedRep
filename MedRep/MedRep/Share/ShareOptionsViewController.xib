@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShareOptionsViewController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="yYx-AN-0LD">
+                    <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="rXA-Ya-ZtQ"/>
+                    </constraints>
+                    <textInputTraits key="textInputTraits"/>
+                </searchBar>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cUL-re-3Eg">
+                    <rect key="frame" x="0.0" y="108" width="600" height="492"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="yYx-AN-0LD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="PFe-3z-gbg"/>
+                <constraint firstItem="cUL-re-3Eg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="S1c-d8-gbH"/>
+                <constraint firstAttribute="trailing" secondItem="cUL-re-3Eg" secondAttribute="trailing" id="eaF-V2-bwf"/>
+                <constraint firstAttribute="bottom" secondItem="cUL-re-3Eg" secondAttribute="bottom" id="g2T-tJ-eR9"/>
+                <constraint firstAttribute="trailing" secondItem="yYx-AN-0LD" secondAttribute="trailing" id="j9c-PE-kpi"/>
+                <constraint firstItem="cUL-re-3Eg" firstAttribute="top" secondItem="yYx-AN-0LD" secondAttribute="bottom" id="pd8-B2-AUW"/>
+                <constraint firstItem="yYx-AN-0LD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="rxh-ad-q9T"/>
+            </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+        </view>
+        <view contentMode="scaleToFill" id="bQh-YJ-zar">
+            <rect key="frame" x="0.0" y="0.0" width="40" height="33"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="Icon-40.png" translatesAutoresizingMaskIntoConstraints="NO" id="eEq-LL-jPg">
+                    <rect key="frame" x="0.0" y="0.0" width="40" height="33"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-29" y="-100.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Icon-40.png" width="40" height="40"/>
+    </resources>
+</document>
