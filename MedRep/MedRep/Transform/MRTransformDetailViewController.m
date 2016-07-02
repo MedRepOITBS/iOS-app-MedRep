@@ -11,6 +11,9 @@
 #import "MPTransformData.h"
 #import "MRShareViewController.h"
 #import "AppDelegate.h"
+#import "MRDatabaseHelper.h"
+#import "MRContact.h"
+#import "MRGroupPost.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
@@ -176,7 +179,36 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)postTheTopicToTheWall {
+    NSArray *myContacts = [MRDatabaseHelper getContacts];
+    myContacts = [myContacts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K == %@", @"self.name", @"Chris Martin"]];
+    
+    MRContact *contact = myContacts.firstObject;
+    NSArray *posts = [contact.groupPosts allObjects];
+    
+    MRGroupPost *lastPost = posts.firstObject;
+    NSLog(@"%ld", lastPost.groupPostId);
+    
+    
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"groupPostId" ascending:NO];
+    posts = [posts sortedArrayUsingDescriptors:@[sort]];
+    lastPost = posts.firstObject;
+    
+    NSLog(@"%ld", lastPost.groupPostId);
+    
+    NSMutableDictionary *post = [NSMutableDictionary new];
+    post[@"id"] = [NSNumber numberWithInteger:lastPost.groupPostId + 1];
+    post[@"postText"] = self.selectedContent.detailDescription;
+    post[@"contactId"] = [NSNumber numberWithInt:1];
+    post[@"comments"] = [NSNumber numberWithInt:0];
+    post[@"likes"] = [NSNumber numberWithInt:0];
+    post[@"shares"] = [NSNumber numberWithInt:0];
+    [MRDatabaseHelper addGroupPosts:@[post]];
+}
+
 - (IBAction)shareAction:(UIButton *)sender {
+    [self postTheTopicToTheWall];
+    
     MRShareViewController* contactsViewCont = [[MRShareViewController alloc] initWithNibName:@"MRShareViewController" bundle:nil];
     contactsViewCont.isFromDetails = YES;
     [self.navigationController pushViewController:contactsViewCont animated:true];

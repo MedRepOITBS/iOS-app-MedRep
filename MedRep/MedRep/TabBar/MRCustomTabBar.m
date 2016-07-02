@@ -44,7 +44,10 @@
 
 - (IBAction)transformButtonTapped:(id)sender {
     if (self.transformViewController == nil ||self.activeViewController != self.transformViewController) {
-        
+        if (self.transformViewController == nil) {
+            self.transformViewController = [[MRTransformViewController alloc] initWithNibName:@"MRTransformViewController" bundle:nil];
+        }
+        [self.navigationController pushViewController:self.transformViewController animated:true];
     }
 }
 

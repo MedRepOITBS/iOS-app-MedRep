@@ -18,6 +18,8 @@
 #import "PendingContactsViewController.h"
 #import "MRContactsViewController.h"
 #import "MRServeViewController.h"
+#import "MRCustomTabBar.h"
+#import "MRCommon.h"
 
 @interface MRShareViewController () <UISearchBarDelegate, SWRevealViewControllerDelegate>
 
@@ -32,6 +34,8 @@
 @property (strong, nonatomic) MRContact* mainContact;
 @property (strong, nonatomic) MRGroup* mainGroup;
 @property (strong, nonatomic) UITapGestureRecognizer* tapGesture;
+
+@property (strong, nonatomic) UIView *tabBarView;
 
 @end
 
@@ -82,6 +86,22 @@
         self.contactsUnderGroup = [self.mainGroup.contacts allObjects];
         self.posts = [self.mainGroup.groupPosts allObjects];
     }
+    
+    MRCustomTabBar *tabBarView = (MRCustomTabBar*)[MRCommon createTabBarView:self.view];
+    [tabBarView setNavigationController:self.navigationController];
+    [tabBarView setTransformViewController:self];
+    [tabBarView updateActiveViewController:self andTabIndex:1];
+    
+    self.tabBarView = (UIView*)tabBarView;
+    
+    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:self.postsTableView
+                                                                        attribute:NSLayoutAttributeBottomMargin
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self.view
+                                                                        attribute:NSLayoutAttributeBottom
+                                                                       multiplier:1.0 constant:0];
+    
+    [self.view addConstraint:bottomConstraint];
 }
 
 - (void)didReceiveMemoryWarning {
