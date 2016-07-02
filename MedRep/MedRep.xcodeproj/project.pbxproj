@@ -500,6 +500,17 @@
 		83C127FC1B77C88B00D2F08E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C127FB1B77C88B00D2F08E /* ViewController.m */; };
 		83C128011B77C88B00D2F08E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83C128001B77C88B00D2F08E /* Images.xcassets */; };
 		83C128101B77C88B00D2F08E /* MedRepTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C1280F1B77C88B00D2F08E /* MedRepTests.m */; };
+		8A7169C91D27B04400533A6D /* 3-5-stars.png in Resources */ = {isa = PBXBuildFile; fileRef = CC649F701D0D2C0E0012289C /* 3-5-stars.png */; };
+		8A7169CA1D27B04400533A6D /* CALSHELL.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CC649F711D0D2C0E0012289C /* CALSHELL.jpg */; };
+		8A7169CB1D27B04400533A6D /* Paracetamol.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CC649F721D0D2C0E0012289C /* Paracetamol.jpg */; };
+		8A7169CC1D27B04400533A6D /* selvit.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC649F731D0D2C0E0012289C /* selvit.jpeg */; };
+		8A7169CD1D27B04400533A6D /* Trycin-Tabs.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CC649F741D0D2C0E0012289C /* Trycin-Tabs.jpg */; };
+		8A7169D11D27B07D00533A6D /* MRDrugDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A7169D01D27B07D00533A6D /* MRDrugDetailModel.m */; };
+		8A7169D21D27B07D00533A6D /* MRDrugDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A7169D01D27B07D00533A6D /* MRDrugDetailModel.m */; };
+		8A7169D71D27E23D00533A6D /* MRDrugTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A7169D51D27E23D00533A6D /* MRDrugTableViewCell.m */; };
+		8A7169D81D27E23D00533A6D /* MRDrugTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A7169D51D27E23D00533A6D /* MRDrugTableViewCell.m */; };
+		8A7169D91D27E23D00533A6D /* MRDrugTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A7169D61D27E23D00533A6D /* MRDrugTableViewCell.xib */; };
+		8A7169DA1D27E23D00533A6D /* MRDrugTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A7169D61D27E23D00533A6D /* MRDrugTableViewCell.xib */; };
 		8AC93CE21D183CCF00C2A864 /* MRServeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC93CE01D183CCF00C2A864 /* MRServeViewController.m */; };
 		8AC93CE31D183CCF00C2A864 /* MRServeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC93CE01D183CCF00C2A864 /* MRServeViewController.m */; };
 		8AC93CE41D183CCF00C2A864 /* MRServeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AC93CE11D183CCF00C2A864 /* MRServeViewController.xib */; };
@@ -1861,6 +1872,11 @@
 		83C128091B77C88B00D2F08E /* MedRepTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MedRepTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		83C1280E1B77C88B00D2F08E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		83C1280F1B77C88B00D2F08E /* MedRepTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedRepTests.m; sourceTree = "<group>"; };
+		8A7169CF1D27B07D00533A6D /* MRDrugDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRDrugDetailModel.h; sourceTree = "<group>"; };
+		8A7169D01D27B07D00533A6D /* MRDrugDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRDrugDetailModel.m; sourceTree = "<group>"; };
+		8A7169D41D27E23D00533A6D /* MRDrugTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRDrugTableViewCell.h; sourceTree = "<group>"; };
+		8A7169D51D27E23D00533A6D /* MRDrugTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRDrugTableViewCell.m; sourceTree = "<group>"; };
+		8A7169D61D27E23D00533A6D /* MRDrugTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRDrugTableViewCell.xib; sourceTree = "<group>"; };
 		8AC93CDF1D183CCF00C2A864 /* MRServeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRServeViewController.h; sourceTree = "<group>"; };
 		8AC93CE01D183CCF00C2A864 /* MRServeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRServeViewController.m; sourceTree = "<group>"; };
 		8AC93CE11D183CCF00C2A864 /* MRServeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRServeViewController.xib; sourceTree = "<group>"; };
@@ -3345,6 +3361,25 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		8A7169CE1D27B05C00533A6D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8A7169CF1D27B07D00533A6D /* MRDrugDetailModel.h */,
+				8A7169D01D27B07D00533A6D /* MRDrugDetailModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8A7169D31D27E22000533A6D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8A7169D41D27E23D00533A6D /* MRDrugTableViewCell.h */,
+				8A7169D51D27E23D00533A6D /* MRDrugTableViewCell.m */,
+				8A7169D61D27E23D00533A6D /* MRDrugTableViewCell.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		8AC93CDE1D183CB600C2A864 /* Serve */ = {
 			isa = PBXGroup;
 			children = (
@@ -3445,6 +3480,8 @@
 		CC649F501D0D1BA10012289C /* DrugSearch */ = {
 			isa = PBXGroup;
 			children = (
+				8A7169D31D27E22000533A6D /* Views */,
+				8A7169CE1D27B05C00533A6D /* Model */,
 				CC649F6F1D0D2C0E0012289C /* TempImages */,
 				CC649F511D0D1BA10012289C /* MRDrugDetailViewController.h */,
 				CC649F521D0D1BA10012289C /* MRDrugDetailViewController.m */,
@@ -3784,6 +3821,7 @@
 				79DC37191BE7DEA90027F7DB /* MRMedRepListTableCell.xib in Resources */,
 				796E938E1BB869FA0031EA34 /* MRConvertAppointmentCell.xib in Resources */,
 				79AC94411B9DFDB800B81452 /* notificationbody-bg@3x.jpg in Resources */,
+				8A7169C91D27B04400533A6D /* 3-5-stars.png in Resources */,
 				79BD27891B8096D6007CA448 /* splashLogo@3x.png in Resources */,
 				798A11881B8AEAD2003FF457 /* MRRegTableViewCell.xib in Resources */,
 				7929E37D1B9C78B5001F1373 /* meetings@3x.png in Resources */,
@@ -3815,6 +3853,7 @@
 				79A5DC781BA2092E001D872C /* crgreyup-arrow@3x.png in Resources */,
 				8AFE8CE31D0F21BF0000382E /* Contact.png in Resources */,
 				79708AA11BB73C67007CE81D /* PHdoctor@3x.png in Resources */,
+				8A7169CD1D27B04400533A6D /* Trycin-Tabs.jpg in Resources */,
 				8AFE8CF51D0F21BF0000382E /* post_image4.jpeg in Resources */,
 				79BD27F51B80A8C3007CA448 /* password@2x.png in Resources */,
 				CC9BCEC31D0F2A3900702EBC /* MRTransformViewController.xib in Resources */,
@@ -3926,6 +3965,7 @@
 				83C128011B77C88B00D2F08E /* Images.xcassets in Resources */,
 				79BD27AA1B80980F007CA448 /* Icon-Small@2x.png in Resources */,
 				CC7DB2D71D0CC433007DFE4C /* MRContactWithinGroupCollectionCellCollectionViewCell.xib in Resources */,
+				8A7169CC1D27B04400533A6D /* selvit.jpeg in Resources */,
 				79AC94421B9DFDB800B81452 /* transperent-bg@2x.png in Resources */,
 				79173C5B1BB48EE100842E4C /* PHactivity@3x.png in Resources */,
 				795366061BA09EBF0021CE4D /* full-screen@2x.png in Resources */,
@@ -3970,6 +4010,7 @@
 				79AC94681B9E0DA000B81452 /* ndchecked@3x.png in Resources */,
 				8AFE8CFD1D0F21BF0000382E /* profile_pic11.jpeg in Resources */,
 				7929E3D61B9CC674001F1373 /* ActivityScore@2x.png in Resources */,
+				8A7169CB1D27B04400533A6D /* Paracetamol.jpg in Resources */,
 				79BD27A41B80980F007CA448 /* Icon-72@2x.png in Resources */,
 				79421EEE1BB7EF950055D9B7 /* PHdrugsales@2x.png in Resources */,
 				7929E3741B9C78B5001F1373 /* activity-score@2x.png in Resources */,
@@ -3979,6 +4020,7 @@
 				79AC946C1B9E116000B81452 /* ndInput@3x.png in Resources */,
 				CC7DB2DB1D0CC433007DFE4C /* MRGroupPostItemTableViewCell.xib in Resources */,
 				83B781EE1B7915C20070645C /* Default.png in Resources */,
+				8A7169CA1D27B04400533A6D /* CALSHELL.jpg in Resources */,
 				7953661C1BA0B7E40021CE4D /* MRFavoritesNotificationsViewController.xib in Resources */,
 				79F416A21B9F6E560089729B /* cncompany2@2x.jpg in Resources */,
 				7930A3A51BB91ECF003112E4 /* frpie-bg@2x.jpg in Resources */,
@@ -4004,6 +4046,7 @@
 				79169E271BEBE70500C11D13 /* MRAppointmentListCell.xib in Resources */,
 				7961A9691B8F25DA0035D63A /* hospital_selection@2x.png in Resources */,
 				CC7DB3191D0CC530007DFE4C /* PendingContactsViewController.xib in Resources */,
+				8A7169D91D27E23D00533A6D /* MRDrugTableViewCell.xib in Resources */,
 				791432A91C32EB7D0031FB91 /* dashboard_menu@3x.png in Resources */,
 				8AFE8D021D0F21BF0000382E /* profile_pic2.jpeg in Resources */,
 				796E93891BB869120031EA34 /* catrnsparent@3x.jpg in Resources */,
@@ -4499,6 +4542,7 @@
 				CC7DB15B1D0C8BEC007DFE4C /* surveys@2x.png in Resources */,
 				CC7DB15C1D0C8BEC007DFE4C /* frpie@2x.png in Resources */,
 				CC7DB15D1D0C8BEC007DFE4C /* MRRegistrationRoleViewController.xib in Resources */,
+				8A7169DA1D27E23D00533A6D /* MRDrugTableViewCell.xib in Resources */,
 				CC7DB15E1D0C8BEC007DFE4C /* marketing@2x.png in Resources */,
 				CC7DB2EA1D0CC433007DFE4C /* my_contacts.json in Resources */,
 				CC7DB15F1D0C8BEC007DFE4C /* picklocation@3x.png in Resources */,
@@ -4752,6 +4796,7 @@
 				79314AD31BD2773E00EB3A48 /* MRNotificationInsiderViewController.m in Sources */,
 				7975603E1BBFE3AA0034D0AC /* MRRole.m in Sources */,
 				CC7DB3171D0CC530007DFE4C /* PendingContactsViewController.m in Sources */,
+				8A7169D71D27E23D00533A6D /* MRDrugTableViewCell.m in Sources */,
 				796E93931BB8784D0031EA34 /* MRCompetitorAnalasysViewController.m in Sources */,
 				7929E3B41B9C8E5F001F1373 /* MRAppointmentCollectionViewCell.m in Sources */,
 				79F84B201BE938310081613A /* MRViewAppointmnetViewController.m in Sources */,
@@ -4767,6 +4812,7 @@
 				79AC94491B9E011D00B81452 /* MPNotificatinsTableViewCell.m in Sources */,
 				7950AF241BBF91D700A93106 /* MRSurveyDetailsViewController.m in Sources */,
 				79F84B141BE92CB70081613A /* MRMedRepDetailsViewController.m in Sources */,
+				8A7169D11D27B07D00533A6D /* MRDrugDetailModel.m in Sources */,
 				8AFE8D231D12EB310000382E /* MRAddMembersViewController.m in Sources */,
 				CC7DB2C51D0CC433007DFE4C /* MRCollectionView.m in Sources */,
 				B41746E41D0CE628009B7E7E /* GroupPostChildTableViewCell.m in Sources */,
@@ -4912,6 +4958,7 @@
 				CC7DB30E1D0CC4E2007DFE4C /* MRSuggestedContact.m in Sources */,
 				CC7DB0301D0C8BEC007DFE4C /* MRNotificationType.m in Sources */,
 				CC7DB21A1D0C8CF2007DFE4C /* MRDevEnvironmentConfig.m in Sources */,
+				8A7169D81D27E23D00533A6D /* MRDrugTableViewCell.m in Sources */,
 				CC7DB0311D0C8BEC007DFE4C /* Base64Transcoder.m in Sources */,
 				CC7DB0321D0C8BEC007DFE4C /* MRCommon.m in Sources */,
 				CC7DB0331D0C8BEC007DFE4C /* MRPharmaNotificationDetailsViewController.m in Sources */,
@@ -4927,6 +4974,7 @@
 				CC7DB03B1D0C8BEC007DFE4C /* MRTherapeuticArea.m in Sources */,
 				B41746CB1D0CD455009B7E7E /* CommonBoxView.m in Sources */,
 				B41746D61D0CD6E1009B7E7E /* MrGroupChildPost+CoreDataProperties.m in Sources */,
+				8A7169D21D27B07D00533A6D /* MRDrugDetailModel.m in Sources */,
 				8AFE8D241D12EB310000382E /* MRAddMembersViewController.m in Sources */,
 				CC7DB2D21D0CC433007DFE4C /* MRContactsViewController.m in Sources */,
 				CC7DB03C1D0C8BEC007DFE4C /* MRListViewController.m in Sources */,

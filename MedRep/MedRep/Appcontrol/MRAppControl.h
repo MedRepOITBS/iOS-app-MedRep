@@ -56,4 +56,6 @@
 - (void)resetUserData;
 - (UIImage*)getCompanyImage;
 
+-(void)registerDeviceToken;
+
 @end

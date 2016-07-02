@@ -8,19 +8,40 @@
 
 #import "MRDrugSearchViewController.h"
 #import "MRDrugDetailViewController.h"
+#import "MRCommon.h"
+#import "MRWebserviceHelper.h"
+#import "MRDevEnvironmentConfig.h"
+#import "MRDrugDetailModel.h"
+#import "WYPopoverController.h"
+#import "MRListViewController.h"
+#import "MRConstants.h"
+#import "MRDrugTableViewCell.h"
 
-@interface MRDrugSearchViewController () <UIScrollViewDelegate, UITextFieldDelegate> {
+@interface MRDrugSearchViewController () <UIScrollViewDelegate, UITextFieldDelegate, MRListViewControllerDelegate, WYPopoverControllerDelegate> {
     NSMutableArray *resultarray;
     NSDictionary *selectedDrug;
+    
+    NSString *searchString;
+    NSString *selectedMedicine;
+    NSMutableArray *medicineSuggestions;
+    NSMutableArray *medicineAlterations;
+    NSMutableArray *drugConstituentsArray;
+    
+    MRDrugDetailModel *drugDetail;
 }
 
 @property (strong, nonatomic) IBOutlet UIView *navView;
+@property (weak, nonatomic) IBOutlet UILabel *productType;
+@property (weak, nonatomic) IBOutlet UILabel *composition;
+@property (weak, nonatomic) IBOutlet UIView *suggestionView;
 @property (weak, nonatomic) IBOutlet UILabel *selectedName;
 @property (weak, nonatomic) IBOutlet UILabel *selectedDesc;
-@property (weak, nonatomic) IBOutlet UIImageView *selectedImage;
+@property (weak, nonatomic) IBOutlet UITableView *suggestionsTable;
+@property (weak, nonatomic) IBOutlet UIView *detailView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UILabel *selectedQty;
 @property (weak, nonatomic) IBOutlet UITextField *searchTxt;
+@property (strong, nonatomic) WYPopoverController *myPopoverController;
 
 - (IBAction)rightMove:(id)sender;
 - (IBAction)leftMove:(id)sender;
@@ -71,6 +92,12 @@
     _scrollView.contentSize = CGSizeMake(xOffset,110);
     
     [self mapData:[resultarray objectAtIndex:0]];
+    
+    _detailView.hidden = YES;
+    _suggestionView.hidden = YES;
+    
+    _searchTxt.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 30)];
+    _searchTxt.leftViewMode = UITextFieldViewModeAlways;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -109,6 +136,10 @@
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
+    if (textField.text.length) {
+        searchString = [textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        [self getMedicineSuggestions];
+    }
     return YES;
 }
 
@@ -118,10 +149,240 @@
 
 -(void) mapData:(NSDictionary *)dict{
     selectedDrug = dict;
-    _selectedImage.image = [UIImage imageNamed:dict[@"image"]];
     _selectedName.text = dict[@"title"];
     _selectedDesc.text = dict[@"description"];
     _selectedQty.text = dict[@"qty"];
+}
+
+-(void)setDetailView{
+    _detailView.hidden = NO;
+    
+    _selectedName.text = drugDetail.brand;
+    _productType.text = drugDetail.category;
+    _selectedDesc.text = drugDetail.manufacturer;
+    _selectedQty.text = [NSString stringWithFormat:@"%@ %@ - MRP ₹ %.1f",drugDetail.package_qty, drugDetail.package_type,[drugDetail.package_price doubleValue]];
+    _composition.text = drugConstituentsArray.count ? [self prepareComposition] : @"Compositon details not available";
+}
+
+-(NSString *) prepareComposition {
+    NSString *str = @"";
+    for (MRDrugConstituentsModel *model in drugConstituentsArray) {
+        str = [str stringByAppendingString:[NSString stringWithFormat:@"%@: %@ + ",model.name, model.strength]];
+        str = [str stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+    }
+    return str.length > 3 ? [str substringToIndex:str.length - 3] : @"";
+}
+
+- (void)showPopoverInView:(UITextField*)button
+{
+    UIView *overlayView = [[UIView alloc] initWithFrame:self.view.bounds];
+    overlayView.tag = 2000;
+    overlayView.backgroundColor = kRGBCOLORALPHA(0, 0, 0, 0.5);
+    [self.view addSubview:overlayView];
+    [MRCommon addUpdateConstarintsTo:self.view withChildView:overlayView];
+    
+    WYPopoverTheme *popOverTheme = [WYPopoverController defaultTheme];
+    popOverTheme.outerStrokeColor = [UIColor lightGrayColor];
+    [WYPopoverController setDefaultTheme:popOverTheme];
+    
+    MRListViewController *moreViewController = [[MRListViewController alloc] initWithNibName:@"MRListViewController" bundle:nil];
+    
+    moreViewController.modalInPopover = NO;
+    moreViewController.delegate = self;
+    
+    moreViewController.listType = MRListVIewTypeMedicineList;
+    moreViewController.listItems = medicineSuggestions;
+    
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    moreViewController.preferredContentSize = CGSizeMake(width, 200);
+    
+    UINavigationController *contentViewController = [[UINavigationController alloc] initWithRootViewController:moreViewController] ;
+    contentViewController.navigationBar.hidden = YES;
+    
+    self.myPopoverController = [[WYPopoverController alloc] initWithContentViewController:contentViewController];
+    self.myPopoverController.delegate = self;
+    self.myPopoverController.popoverLayoutMargins = UIEdgeInsetsMake(0,2, 0, 2);
+    self.myPopoverController.wantsDefaultContentAppearance = YES;
+    [self.myPopoverController presentPopoverFromRect:button.bounds
+                                              inView:button
+                            permittedArrowDirections:WYPopoverArrowDirectionUp
+                                            animated:YES
+                                             options:WYPopoverAnimationOptionFadeWithScale];
+    
+}
+
+#pragma mark - WYPopoverControllerDelegate
+- (void)popoverControllerDidPresentPopover:(WYPopoverController *)controller
+{
+}
+
+- (BOOL)popoverControllerShouldDismissPopover:(WYPopoverController *)controller
+{
+    return YES;
+}
+
+- (void)popoverControllerDidDismissPopover:(WYPopoverController *)controller
+{
+    UIView *overlayView = [self.view viewWithTag:2000];
+    [overlayView removeFromSuperview];
+    
+    self.myPopoverController.delegate = nil;
+    self.myPopoverController = nil;
+}
+
+- (void)dismissPopoverController
+{
+    [self.myPopoverController dismissPopoverAnimated:YES completion:^{
+        [self popoverControllerDidDismissPopover:self.myPopoverController];
+    }];
+}
+
+- (void)selectedListItem:(id)listItem
+{
+    NSDictionary *item = (NSDictionary*)listItem;
+    if ([item objectForKey:@"selectedMedicine"]) {
+        selectedMedicine = [item objectForKey:@"selectedMedicine"];
+        _searchTxt.text = selectedMedicine;
+        
+        [self getMedicineDetails];
+        [self getMedicineAlternatives];
+    }
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return medicineAlterations.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static  NSString *ident = @"MRDrugTableViewCell";
+    MRDrugTableViewCell * cell = (MRDrugTableViewCell *)[tableView dequeueReusableCellWithIdentifier:ident];
+    
+    if (cell == nil) {
+        NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"MRDrugTableViewCell" owner:self options:nil];
+        cell = (MRDrugTableViewCell *)[arr objectAtIndex:0];
+    }
+    
+    MRDrugDetailModel *model = [medicineAlterations objectAtIndex:indexPath.row];
+    cell.brand.text = model.brand;
+    cell.company.text = model.manufacturer;
+    cell.type.text = model.category;
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    selectedMedicine = ((MRDrugDetailModel*)[medicineAlterations objectAtIndex:indexPath.row]).brand;
+    [self getMedicineDetails];
+}
+
+-(void) getMedicineSuggestions{
+    NSMutableDictionary *dictReq = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                    searchString, @"id",
+                                    kDrugSearchAPIKey, @"key",
+                                    @"1000", @"limit",
+                                    nil];
+    
+    [MRCommon showActivityIndicator:@"Loading..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] getMedicineSuggestions:dictReq withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [MRCommon stopActivityIndicator];
+        medicineSuggestions = [NSMutableArray array];
+        
+        if (status) {
+            if ([responce[@"status"] isEqualToString:@"ok" ]) {
+                NSDictionary *resp = responce[@"response"];
+                if (resp) {
+                    NSArray *suggestions = resp[@"suggestions"];
+                    for (NSDictionary *dict in suggestions) {
+                        [medicineSuggestions addObject:dict[@"suggestion"]];
+                    }
+                    
+                    if (medicineSuggestions.count) {
+                        [self showPopoverInView:_searchTxt];
+                    }else{
+                        [[[UIAlertView alloc] initWithTitle:@"" message:@"No drugs found!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+                    }
+                }
+            }
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }];
+}
+
+-(void) getMedicineAlternatives{
+    NSMutableDictionary *dictReq = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                    selectedMedicine, @"id",
+                                    kDrugSearchAPIKey, @"key",
+                                    @"1000", @"limit",
+                                    nil];
+    
+    [MRCommon showActivityIndicator:@"Loading..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] getMedicineAlternatives:dictReq withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [MRCommon stopActivityIndicator];
+        medicineAlterations = [NSMutableArray array];
+        
+        if (status) {
+            NSDictionary *resp = responce[@"response"];
+            if (resp) {
+                NSArray *suggestions = resp[@"medicine_alternatives"];
+                for (NSDictionary *dict in suggestions) {
+                    MRDrugDetailModel *drug = [[MRDrugDetailModel alloc] initWithDict:dict];
+                    [medicineAlterations addObject:drug];
+                }
+                
+                if (medicineAlterations.count) {
+                    _suggestionView.hidden = NO;
+                    [_suggestionsTable reloadData];
+                }
+            }
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }];
+}
+
+-(void) getMedicineDetails{
+    NSMutableDictionary *dictReq = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                    selectedMedicine, @"id",
+                                    kDrugSearchAPIKey, @"key",
+                                    nil];
+    
+    [MRCommon showActivityIndicator:@"Loading..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] getMedicineDetails:dictReq withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [MRCommon stopActivityIndicator];
+        drugConstituentsArray = [NSMutableArray array];
+        
+        if (status) {
+            if ([responce[@"status"] isEqualToString:@"ok" ]) {
+                NSDictionary *resp = responce[@"response"];
+                if (resp) {
+                    drugDetail = [[MRDrugDetailModel alloc] initWithDict:resp[@"medicine"]];
+                    
+                    NSArray *suggestions = resp[@"constituents"];
+                    for (NSDictionary *dict in suggestions) {
+                        MRDrugConstituentsModel *drug = [[MRDrugConstituentsModel alloc] initWithDict:dict];
+                        [drugConstituentsArray addObject:drug];
+                    }
+                    
+                    [self setDetailView];
+                }
+            }
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }];
 }
 
 @end

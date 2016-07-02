@@ -17,6 +17,7 @@ typedef enum
     MRListVIewTypeCompanyList,
     MRListVIewTypeRegYear,
     MRListVIewTypeStateCouncil,
+    MRListVIewTypeMedicineList
 } MRListVIewType;
 
 @protocol MRListViewControllerDelegate <NSObject>

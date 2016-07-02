@@ -215,7 +215,8 @@
 -(void) addMember{
     NSMutableDictionary *dictReq = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                     selectedContacts, @"toMobileContactList",
-                                    [NSString stringWithFormat:@"You have beeen invited by %@ to use the Medrep application. You can download the application from https://itunes.apple.com/in/app/medrep/id1087940083?mt=8", [MRAppControl sharedHelper].userRegData[@"FirstName"]], @"message",
+                                    //[NSString stringWithFormat:@"You have beeen invited by %@ to use the Medrep application. You can download the application from https://itunes.apple.com/in/app/medrep/id1087940083?mt=8", [MRAppControl sharedHelper].userRegData[@"FirstName"]], @"message",
+                                    [NSString stringWithFormat:@"Dr. %@ %@ has invited you to join 'MedRep', a digital collboration platform for doctors. Please Download from iTunes and Google Playstore.", [MRAppControl sharedHelper].userRegData[@"FirstName"],[MRAppControl sharedHelper].userRegData[@"LastName"]], @"message",
                                     nil];
     
     [MRCommon showActivityIndicator:@"Sending..."];

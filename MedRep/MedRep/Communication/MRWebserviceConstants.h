@@ -89,6 +89,7 @@ typedef enum kMRWebServiceType
     kMRWebServiceTypeRemoveGroup,
     kMRWebServiceTypeLeaveGroup,
     kMRWebServiceTypeDeleteConnection,
+    kMRWebServiceTypeRegisterDeviceToken,
     kMRWebServiceTypeGetNews,
     kMRWebServiceTypeGetMaterial,
     kMRWebServiceTypeGetMoreConnections,
@@ -109,7 +110,10 @@ typedef enum kMRWebServiceType
     kMRWebServiceTypeRemoveGroupMember,
     kMRWebServiceTypeRemoveConnection,
     kMRWebServiceTypeGetUserPreferences,
-    kMRWebServiceTypeGetSearchContactList
+    kMRWebServiceTypeGetSearchContactList,
+    kMRWebServiceTypeGetMedicineSuggestions,
+    kMRWebServiceTypeGetMedicineAlterations,
+    kMRWebServiceTypeGetMedicineDetails
 } kMRWebServiceType;
 
 

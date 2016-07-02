@@ -834,8 +834,14 @@
 }
 
 -(void) deleteConnection{
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                           self.mainContact.contactId, @"connID",
+                           [MRAppControl sharedHelper].userRegData[@"doctorId"], @"docID",
+                           @"EXIT", @"status",
+                           nil];
+    
     [MRCommon showActivityIndicator:@"Deleting..."];
-    [[MRWebserviceHelper sharedWebServiceHelper] deleteConnection:[NSDictionary dictionaryWithObjectsAndKeys:self.mainContact.contactId, @"connId", nil] withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+    [[MRWebserviceHelper sharedWebServiceHelper] deleteConnection:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
         [MRCommon stopActivityIndicator];
         if (status)
         {
