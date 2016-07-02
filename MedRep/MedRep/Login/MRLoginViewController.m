@@ -14,6 +14,7 @@
 #import "MRCommon.h"
 #import "MROTPVerifiedViewController.h"
 #import "MRForgotPasswordViewController.h"
+#import "AppDelegate.h"
 
 @interface MRLoginViewController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIView *loginInputView;
@@ -136,6 +137,9 @@
                                      {
                                          [[MRAppControl sharedHelper] setUserDetails:responce];
                                          [[MRAppControl sharedHelper] loadDashboardScreen];
+                                         if (APP_DELEGATE.token.length) {
+                                             [[MRAppControl sharedHelper] registerDeviceToken];
+                                         }
                                      }
                                  }];
                             }

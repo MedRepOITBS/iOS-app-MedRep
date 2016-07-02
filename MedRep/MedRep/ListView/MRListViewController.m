@@ -88,6 +88,11 @@
             appointmentCell.textLabel.text = [self.listItems objectAtIndex:indexPath.row];
 \
             break;
+            
+        case MRListVIewTypeMedicineList:
+            appointmentCell.textLabel.text = [self.listItems objectAtIndex:indexPath.row];
+            break;
+            
         case MRListVIewTypeNone:
         default:
             break;
@@ -163,6 +168,10 @@
         else if (self.listType == MRListVIewTypeStateCouncil)
         {
             [self.delegate selectedListItem:[NSDictionary dictionaryWithObject:[self.listItems objectAtIndex:indexPath.row] forKey:@"stateCouncil"]];
+        }
+        else if (self.listType == MRListVIewTypeMedicineList)
+        {
+            [self.delegate selectedListItem:[NSDictionary dictionaryWithObject:[self.listItems objectAtIndex:indexPath.row] forKey:@"selectedMedicine"]];
         }
         else
         {

@@ -88,7 +88,8 @@
                 [theResponse rangeOfString:@"<head>"].location != NSNotFound ||
                 [theResponse rangeOfString:@"</head>"].location != NSNotFound ||
                 [theResponse rangeOfString:@"<faultcode>"].location != NSNotFound ||
-                [theResponse rangeOfString:@"<FAULTCODE>"].location != NSNotFound || [[responceDict objectForKey:@"status"] isEqualToString:@"Error"])
+                [theResponse rangeOfString:@"<FAULTCODE>"].location != NSNotFound ||
+                [[NSString stringWithFormat:@"%@",[responceDict objectForKey:@"status"]] isEqualToString:@"Error"])
             {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                     [MRCommon stopActivityIndicator];
@@ -102,7 +103,7 @@
             else
             {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    if ([[responceDict objectForKey:@"status"] isEqualToString:@"Fail"])
+                    if ([[NSString stringWithFormat:@"%@",[responceDict objectForKey:@"status"]] isEqualToString:@"Fail"])
                     {
                         [MRCommon stopActivityIndicator];
                         [MRCommon showAlert:[responceDict objectForKey:@"message"] delegate:nil];
@@ -302,7 +303,7 @@
 }
 
 - (void)deleteConnection:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler{
-    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/deleteConnection?token=%@",kHostName,[MRDefaults objectForKey:kAuthenticationToken]];
+    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/deleteContact?token=%@",kHostName,[MRDefaults objectForKey:kAuthenticationToken]];
     
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:reqDict
                                                        options:NSJSONWritingPrettyPrinted
@@ -316,6 +317,24 @@
     [urlRequest setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[jsonData length]] forHTTPHeaderField:@"Content-Length"];
     [urlRequest setHTTPBody: jsonData];
     self.serviceType = kMRWebServiceTypeDeleteConnection;
+    [self sendServiceRequest:urlRequest withHandler:responceHandler];
+}
+
+- (void)registerDeviceToken:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler{
+    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/registerDeviceToken?token=%@",kHostName,[MRDefaults objectForKey:kAuthenticationToken]];
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:reqDict
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:nil];
+    NSURL *url = [NSURL URLWithString:stringFormOfUrl];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [urlRequest setTimeoutInterval:120];
+    [urlRequest setHTTPMethod:@"POST"];
+    [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [urlRequest setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[jsonData length]] forHTTPHeaderField:@"Content-Length"];
+    [urlRequest setHTTPBody: jsonData];
+    self.serviceType = kMRWebServiceTypeRegisterDeviceToken;
     [self sendServiceRequest:urlRequest withHandler:responceHandler];
 }
 
@@ -2095,6 +2114,61 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
     [urlRequest setHTTPMethod:@"GET"];
     [urlRequest setValue:@"text/plain" forHTTPHeaderField:@"Content-Type"];
     self.serviceType = kMRWebServiceTypeGetMyMyTeamPendingAppointments;
+    [self sendServiceRequest:urlRequest withHandler:responceHandler];
+}
+
+//Drug Search
+- (void)getMedicineSuggestions:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler{
+    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medicine_suggestions/",kDrugSearchBaseURL];
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:reqDict
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:nil];
+    NSURL *url = [NSURL URLWithString:stringFormOfUrl];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [urlRequest setTimeoutInterval:120];
+    [urlRequest setHTTPMethod:@"POST"];
+    [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [urlRequest setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[jsonData length]] forHTTPHeaderField:@"Content-Length"];
+    [urlRequest setHTTPBody: jsonData];
+    self.serviceType = kMRWebServiceTypeGetMedicineSuggestions;
+    [self sendServiceRequest:urlRequest withHandler:responceHandler];
+}
+
+- (void)getMedicineAlternatives:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler{
+    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medicine_alternatives/",kDrugSearchBaseURL];
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:reqDict
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:nil];
+    NSURL *url = [NSURL URLWithString:stringFormOfUrl];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [urlRequest setTimeoutInterval:120];
+    [urlRequest setHTTPMethod:@"POST"];
+    [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [urlRequest setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[jsonData length]] forHTTPHeaderField:@"Content-Length"];
+    [urlRequest setHTTPBody: jsonData];
+    self.serviceType = kMRWebServiceTypeGetMedicineAlterations;
+    [self sendServiceRequest:urlRequest withHandler:responceHandler];
+}
+
+- (void)getMedicineDetails:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler{
+    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medicine_details/",kDrugSearchBaseURL];
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:reqDict
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:nil];
+    NSURL *url = [NSURL URLWithString:stringFormOfUrl];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [urlRequest setTimeoutInterval:120];
+    [urlRequest setHTTPMethod:@"POST"];
+    [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [urlRequest setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[jsonData length]] forHTTPHeaderField:@"Content-Length"];
+    [urlRequest setHTTPBody: jsonData];
+    self.serviceType = kMRWebServiceTypeGetMedicineDetails;
     [self sendServiceRequest:urlRequest withHandler:responceHandler];
 }
 

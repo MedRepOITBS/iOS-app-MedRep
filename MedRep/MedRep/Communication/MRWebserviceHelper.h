@@ -222,6 +222,14 @@ withComplitionHandler:(completionHandler)responceHandler;
 
 - (void)deleteConnection:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
 
+- (void)getMedicineSuggestions:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
+
+- (void)getMedicineAlternatives:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
+
+- (void)getMedicineDetails:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
+
+- (void)registerDeviceToken:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
+
 @end
 
 @interface NSDictionary (CategoryName)

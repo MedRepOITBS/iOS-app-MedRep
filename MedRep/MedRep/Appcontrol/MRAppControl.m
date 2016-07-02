@@ -21,6 +21,7 @@
 #import "MRPharmaMenuViewController.h"
 #import "MRWelcomeViewController.h"
 #import "MROTPVerifiedViewController.h"
+#import "AppDelegate.h"
 
 @interface MRAppControl () <SWRevealViewControllerDelegate, ViewControllerDelegate,MRMenuViewControllerDelegate,MRPharmaMenuViewControllerDelegate,MRWelcomeViewControllerDelegate>
 
@@ -670,6 +671,17 @@
     NSString *company = [self.userRegData objectForKey:KDoctorRegID];
     NSDictionary *comapnyDetails = [self getCompanyDetailsByID:[company intValue]];
     return  [MRCommon getImageFromBase64Data:[[comapnyDetails objectForKey:@"displayPicture"] objectForKey:@"data"]];
+}
+
+-(void)registerDeviceToken{
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                          APP_DELEGATE.token, @"regDeviceToken",
+                          [MRAppControl sharedHelper].userRegData[@"doctorId"], @"docID",
+                          @"IOS", @"platform",
+                          nil];
+    
+    [[MRWebserviceHelper sharedWebServiceHelper] registerDeviceToken:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+    }];
 }
 
 @end
