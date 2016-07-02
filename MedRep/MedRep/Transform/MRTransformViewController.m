@@ -98,7 +98,7 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
     MRCustomTabBar *tabBarView = (MRCustomTabBar*)[MRCommon createTabBarView:self.view];
     [tabBarView setNavigationController:self.navigationController];
     [tabBarView setTransformViewController:self];
-    [tabBarView updateActiveViewController:self andTabIndex:1];
+    [tabBarView updateActiveViewController:self andTabIndex:DoctorPlusTabTransform];
     
     self.tabBarView = (UIView*)tabBarView;
 

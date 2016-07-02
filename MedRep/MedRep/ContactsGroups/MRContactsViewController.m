@@ -116,7 +116,7 @@
     MRCustomTabBar *tabBarView = (MRCustomTabBar*)[MRCommon createTabBarView:self.view];
     [tabBarView setNavigationController:self.navigationController];
     [tabBarView setContactsViewController:self];
-    [tabBarView updateActiveViewController:self andTabIndex:0];
+    [tabBarView updateActiveViewController:self andTabIndex:DoctorPlusTabConnect];
     
 //    self.tabBarView = (UIView*)tabBarView;
     

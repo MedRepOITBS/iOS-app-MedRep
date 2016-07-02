@@ -10,10 +10,13 @@
 
 @class MRGroupPost;
 @protocol MRGroupPostItemTableViewCellDelegate;
+
 @interface MRGroupPostItemTableViewCell : UITableViewCell
+
 @property (nonatomic,weak) id<MRGroupPostItemTableViewCellDelegate> delegate;
 
-- (void)setPostContent:(MRGroupPost*)post;
+@property (nonatomic,weak) UITableView *parentTableView;
+- (void)setPostContent:(MRGroupPost*)post tagIndex:(NSInteger)tagIndex;
 
 @end
 

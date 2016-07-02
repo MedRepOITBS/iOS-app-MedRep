@@ -20,6 +20,7 @@
 #import "MRServeViewController.h"
 #import "MRCustomTabBar.h"
 #import "MRCommon.h"
+#import "MRConstants.h"
 
 @interface MRShareViewController () <UISearchBarDelegate, SWRevealViewControllerDelegate>
 
@@ -89,8 +90,8 @@
     
     MRCustomTabBar *tabBarView = (MRCustomTabBar*)[MRCommon createTabBarView:self.view];
     [tabBarView setNavigationController:self.navigationController];
-    [tabBarView setTransformViewController:self];
-    [tabBarView updateActiveViewController:self andTabIndex:1];
+    [tabBarView setShareViewController:self];
+    [tabBarView updateActiveViewController:self andTabIndex:DoctorPlusTabShare];
     
     self.tabBarView = (UIView*)tabBarView;
     
@@ -124,7 +125,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MRGroupPostItemTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"groupCell"];
-    [cell setPostContent:[self.posts objectAtIndex:indexPath.row]];
+    
+    NSInteger tagIndex = (indexPath.section + indexPath.row) * 100;
+    [cell setTag:tagIndex];
+    [cell setParentTableView:self.postsTableView];
+    [cell setPostContent:[self.posts objectAtIndex:indexPath.row] tagIndex:tagIndex];
     return cell;
 }
 

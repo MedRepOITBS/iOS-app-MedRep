@@ -272,8 +272,13 @@
         }
         
         cell.delegate = self;
-        [cell setPostContent:[self.posts objectAtIndex:indexPath.row]];
-         return cell;
+        
+        NSInteger tagIndex = (indexPath.section + indexPath.row) * 100;
+        [cell setTag:tagIndex];
+        [cell setParentTableView:self.postsTableView];
+        [cell setPostContent:[self.posts objectAtIndex:indexPath.row] tagIndex:tagIndex];
+    
+        return cell;
     }else {
     
         GroupPostChildTableViewCell *cell  = [tableView dequeueReusableCellWithIdentifier:@"groupChildCell"];

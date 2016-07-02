@@ -135,3 +135,9 @@ typedef enum
 
  */
 
+typedef NS_ENUM(NSInteger, DoctorPlusTabIndex) {
+    DoctorPlusTabConnect,
+    DoctorPlusTabTransform,
+    DoctorPlusTabShare,
+    DoctorPlusTabServe
+};

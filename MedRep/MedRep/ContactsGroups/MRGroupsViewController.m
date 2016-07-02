@@ -62,7 +62,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MRGroupPostItemTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"groupCell"];
-    [cell setPostContent:[self.posts objectAtIndex:indexPath.row]];
+    
+    NSInteger tagIndex = (indexPath.section + indexPath.row) * 100;
+    [cell setTag:tagIndex];
+    [cell setParentTableView:self.tableView];
+    [cell setPostContent:[self.posts objectAtIndex:indexPath.row] tagIndex:tagIndex];
     return cell;
 }
 

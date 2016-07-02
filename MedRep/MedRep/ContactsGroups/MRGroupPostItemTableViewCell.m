@@ -12,6 +12,10 @@
 
 @interface MRGroupPostItemTableViewCell()
 
+@property (weak, nonatomic) IBOutlet UIButton *likeButton;
+@property (weak, nonatomic) IBOutlet UIButton *shareButton;
+@property (weak, nonatomic) IBOutlet UIButton *commentButton;
+
 @property (weak, nonatomic) IBOutlet UIImageView* profilePicImageView;
 @property (weak, nonatomic) IBOutlet UILabel* contactNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel* postLabel;
@@ -20,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel* likeCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel* shareCountLabel;
 
+@property (nonatomic) MRGroupPost *post;
 
 @end
 
@@ -28,12 +33,18 @@
 
 -(IBAction)likeButtonTapped:(id)sender{
     
-    NSInteger likeCount = [_shareCountLabel.text integerValue];
+    NSInteger tagIndex = ((UIButton*)sender).tag - 1;
     
+    NSInteger likeCount = [_shareCountLabel.text integerValue];
     likeCount = likeCount +1;
+    self.post.numberOfLikes = likeCount;
+    [self.post.managedObjectContext save:nil];
     
     _shareCountLabel.text = [NSString stringWithFormat:@"%ld",(long)likeCount];
     
+    tagIndex = tagIndex / 100;
+    [self.parentTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:tagIndex inSection:0]]
+                                withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 -(IBAction)shareButtonTapped:(id)sender{
@@ -61,7 +72,9 @@
 
 //{"name":"John Doe","postText":"Guys, these drugs look promising!","likes":10,"comments":23,"shares":3,"profile_pic":"","post_pic":""}
 
-- (void)setPostContent:(MRGroupPost *)post {
+- (void)setPostContent:(MRGroupPost *)post  tagIndex:(NSInteger)tagIndex {
+    self.post = post;
+    
     self.contactNameLabel.text = post.contact.name;
     self.postLabel.text = post.postText;
     self.profilePicImageView.image = [UIImage imageNamed:post.contact.profilePic];
@@ -71,20 +84,18 @@
     } else {
         self.postImageView.image = nil;
     }
-    NSInteger likeCount = post.numberOfLikes;
-    if (likeCount > 0) {
-        self.likeCountLabel.text = [NSString stringWithFormat:@"%ld",(long)likeCount];
-    }
     
-    NSInteger shareCount = post.numberOfShares;
-    if (likeCount > 0) {
-        self.shareCountLabel.text = [NSString stringWithFormat:@"%ld",shareCount];
-    }
+    tagIndex++;
+    [self.likeButton setTag:tagIndex];
+    self.likeCountLabel.text = [NSString stringWithFormat:@"%lld",post.numberOfLikes];
     
-    NSInteger commentCount = post.numberOfComments;
-    if (likeCount > 0) {
-        self.commentCountLabel.text = [NSString stringWithFormat:@"%ld",commentCount];
-    }
+    tagIndex++;
+    [self.shareButton setTag:tagIndex];
+    self.shareCountLabel.text = [NSString stringWithFormat:@"%lld",post.numberOfShares];
+    
+    tagIndex++;
+    [self.commentButton setTag:tagIndex];
+    self.commentCountLabel.text = [NSString stringWithFormat:@"%lld",post.numberOfComments];
 }
 
 @end
