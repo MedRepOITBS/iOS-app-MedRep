@@ -11,6 +11,7 @@
 @class MRTransformViewController;
 @class MRContactsViewController;
 @class MRShareViewController;
+@class MRServeViewController;
 
 @interface MRCustomTabBar : UIView
 
@@ -19,6 +20,7 @@
 @property (nonatomic) MRTransformViewController *transformViewController;
 @property (nonatomic) MRContactsViewController *contactsViewController;
 @property (nonatomic) MRShareViewController *shareViewController;
+@property (nonatomic) MRServeViewController *serveViewController;
 
 - (void)updateActiveViewController:(UIViewController*)viewController andTabIndex:(NSInteger)tabIndex;
 

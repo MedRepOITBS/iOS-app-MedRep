@@ -12,10 +12,6 @@
 
 @interface MRGroupPostItemTableViewCell()
 
-@property (weak, nonatomic) IBOutlet UIButton *likeButton;
-@property (weak, nonatomic) IBOutlet UIButton *shareButton;
-@property (weak, nonatomic) IBOutlet UIButton *commentButton;
-
 @property (weak, nonatomic) IBOutlet UIImageView* profilePicImageView;
 @property (weak, nonatomic) IBOutlet UILabel* contactNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel* postLabel;
@@ -23,6 +19,9 @@
 @property (weak, nonatomic) IBOutlet UILabel* commentCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel* likeCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel* shareCountLabel;
+@property (weak, nonatomic) IBOutlet UIView *likeView;
+@property (weak, nonatomic) IBOutlet UIView *commentView;
+@property (weak, nonatomic) IBOutlet UIView *shareView;
 
 @property (nonatomic) MRGroupPost *post;
 
@@ -31,9 +30,10 @@
 @implementation MRGroupPostItemTableViewCell
 
 
--(IBAction)likeButtonTapped:(id)sender{
+- (void)likeButtonTapped:(UIGestureRecognizer*)gesture {
+    UIView *sender = gesture.view;
     
-    NSInteger tagIndex = ((UIButton*)sender).tag - 1;
+    NSInteger tagIndex = sender.tag - 1;
     
     NSInteger likeCount = [_likeCountLabel.text integerValue];
     likeCount = likeCount +1;
@@ -51,17 +51,17 @@
                                 withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
--(IBAction)shareButtonTapped:(id)sender {
+- (void)shareButtonTapped:(UIGestureRecognizer*)gesture {
     if (self.delegate != nil &&
         [self.delegate respondsToSelector:@selector(shareButtonTapped:)]) {
         [self.delegate shareButtonTapped:self.post];
     }
 }
 
--(IBAction)commentButtonTapped:(id)sender{
+- (void)commentButtonTapped:(UIGestureRecognizer*)gesture {
     
     if([self.delegate respondsToSelector:@selector(mrGroupPostItemTableViewCell:withCommentButtonTapped:)]){
-        [self.delegate mrGroupPostItemTableViewCell:self withCommentButtonTapped:sender];
+        [self.delegate mrGroupPostItemTableViewCell:self withCommentButtonTapped:gesture.view];
         
     }
     
@@ -69,6 +69,17 @@
 }
 - (void)awakeFromNib {
     // Initialization code
+    UITapGestureRecognizer *likeTapGestureRecognizer =
+            [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(likeButtonTapped:)];
+    [self.likeView addGestureRecognizer:likeTapGestureRecognizer];
+    
+    UITapGestureRecognizer *shareTapGestureRecognizer =
+    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shareButtonTapped:)];
+    [self.shareView addGestureRecognizer:shareTapGestureRecognizer];
+    
+    UITapGestureRecognizer *commentTapGestureRecognizer =
+    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(commentButtonTapped:)];
+    [self.commentView addGestureRecognizer:commentTapGestureRecognizer];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -93,15 +104,15 @@
     }
     
     tagIndex++;
-    [self.likeButton setTag:tagIndex];
+    [self.likeView setTag:tagIndex];
     self.likeCountLabel.text = [NSString stringWithFormat:@"%lld",post.numberOfLikes];
     
     tagIndex++;
-    [self.shareButton setTag:tagIndex];
+    [self.shareView setTag:tagIndex];
     self.shareCountLabel.text = [NSString stringWithFormat:@"%lld",post.numberOfShares];
     
     tagIndex++;
-    [self.commentButton setTag:tagIndex];
+    [self.commentView setTag:tagIndex];
     self.commentCountLabel.text = [NSString stringWithFormat:@"%lld",post.numberOfComments];
 }
 

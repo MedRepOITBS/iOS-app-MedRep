@@ -13,10 +13,16 @@
 #import "PendingContactsViewController.h"
 #import "MRShareViewController.h"
 #import "MRTransformViewController.h"
+#import "MRCommon.h"
+#import "MRCustomTabBar.h"
+#import "MRAppConstants.h"
+#import "MRConstants.h"
 
 @interface MRServeViewController () <SWRevealViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *navView;
+@property (strong, nonatomic) UIView *tabBarView;
+@property (weak, nonatomic) IBOutlet UIImageView *bgView;
 
 @end
 
@@ -26,7 +32,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"Serve";
-    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
     
     SWRevealViewController *revealController = [self revealViewController];
     revealController.delegate = self;
@@ -41,11 +46,32 @@
     
     UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navView];
     self.navigationItem.rightBarButtonItem = rightButtonItem;
+    
+    MRCustomTabBar *tabBarView = (MRCustomTabBar*)[MRCommon createTabBarView:self.view];
+    [tabBarView setNavigationController:self.navigationController];
+    [tabBarView setServeViewController:self];
+    [tabBarView updateActiveViewController:self andTabIndex:DoctorPlusTabServe];
+    
+    self.tabBarView = (UIView*)tabBarView;
+    
+    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:self.bgView
+                                                                        attribute:NSLayoutAttributeBottomMargin
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self.view
+                                                                        attribute:NSLayoutAttributeBottom
+                                                                       multiplier:1.0 constant:0];
+    
+    [self.view addConstraint:bottomConstraint];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MRCommon applyNavigationBarStyling:self.navigationController];
 }
 
 /*

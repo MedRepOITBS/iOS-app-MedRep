@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MRServeViewController">
             <connections>
+                <outlet property="bgView" destination="MMm-D2-haK" id="DaK-Gr-7Er"/>
                 <outlet property="navView" destination="ZLR-Qc-aRk" id="BsS-2I-jyy"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -17,7 +18,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NDcompany2-BG.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="MMm-D2-haK">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="617"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pnk-F4-8ph">
                     <rect key="frame" x="20" y="20" width="335" height="200"/>
@@ -34,7 +35,7 @@
             <constraints>
                 <constraint firstItem="MMm-D2-haK" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="IkZ-N3-sVk"/>
                 <constraint firstAttribute="trailing" secondItem="MMm-D2-haK" secondAttribute="trailing" id="PtE-53-MoQ"/>
-                <constraint firstAttribute="bottom" secondItem="MMm-D2-haK" secondAttribute="bottom" id="WEP-s4-Va4"/>
+                <constraint firstAttribute="bottom" secondItem="MMm-D2-haK" secondAttribute="bottom" constant="50" id="WEP-s4-Va4"/>
                 <constraint firstItem="MMm-D2-haK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="cXR-5L-dSA"/>
                 <constraint firstAttribute="trailing" secondItem="Pnk-F4-8ph" secondAttribute="trailing" constant="20" id="kSp-YN-AgX"/>
                 <constraint firstItem="Pnk-F4-8ph" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="xBg-JY-VgN"/>

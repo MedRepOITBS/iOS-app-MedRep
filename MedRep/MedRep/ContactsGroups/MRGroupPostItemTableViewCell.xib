@@ -45,45 +45,54 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ej0-hE-p3i">
                         <rect key="frame" x="49" y="222" width="344" height="25"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0by-gF-tIU">
-                                <rect key="frame" x="-1" y="0.0" width="20" height="20"/>
-                                <state key="normal" image="like.png"/>
-                                <connections>
-                                    <action selector="likeButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="dzr-CA-YOP"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="61c-Qa-yO0">
-                                <rect key="frame" x="78" y="0.0" width="20" height="20"/>
-                                <state key="normal" image="comment.png"/>
-                                <connections>
-                                    <action selector="shareButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ZbI-iq-w09"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aaq-zQ-ydw">
-                                <rect key="frame" x="150" y="0.0" width="20" height="20"/>
-                                <state key="normal" image="share.png"/>
-                                <connections>
-                                    <action selector="commentButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="xK2-Qx-fnE"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="139" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="In1-CL-S12">
-                                <rect key="frame" x="23" y="-1" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="139" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ipM-bz-6Zo">
-                                <rect key="frame" x="100" y="-1" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="139" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JW4-H1-5Xt">
-                                <rect key="frame" x="173" y="-1" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ryj-ok-xYs">
+                                <rect key="frame" x="0.0" y="0.0" width="70" height="25"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="like.png" translatesAutoresizingMaskIntoConstraints="NO" id="EbM-hj-dYk">
+                                        <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="139" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mUT-Lg-IsJ">
+                                        <rect key="frame" x="23" y="0.0" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hp5-ES-fcv">
+                                <rect key="frame" x="70" y="0.0" width="70" height="25"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="comment.png" translatesAutoresizingMaskIntoConstraints="NO" id="5bq-J2-zQD">
+                                        <rect key="frame" x="8" y="0.0" width="20" height="20"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="139" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9P6-RJ-8Rw">
+                                        <rect key="frame" x="30" y="0.0" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bQo-tq-Giy">
+                                <rect key="frame" x="140" y="0.0" width="70" height="25"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="share.png" translatesAutoresizingMaskIntoConstraints="NO" id="ay4-gy-dpC">
+                                        <rect key="frame" x="10" y="0.0" width="20" height="20"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="139" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3n7-sh-NyL">
+                                        <rect key="frame" x="33" y="0.0" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -110,16 +119,16 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="commentButton" destination="aaq-zQ-ydw" id="kqN-nz-9Xx"/>
-                <outlet property="commentCountLabel" destination="ipM-bz-6Zo" id="Cjg-oU-2QE"/>
+                <outlet property="commentCountLabel" destination="9P6-RJ-8Rw" id="Tqh-GH-h2S"/>
+                <outlet property="commentView" destination="Hp5-ES-fcv" id="yKw-RS-bkg"/>
                 <outlet property="contactNameLabel" destination="jhR-Qo-e9G" id="ECg-Rl-quR"/>
-                <outlet property="likeButton" destination="0by-gF-tIU" id="Anr-qf-tE0"/>
-                <outlet property="likeCountLabel" destination="In1-CL-S12" id="JlU-2V-zzr"/>
+                <outlet property="likeCountLabel" destination="mUT-Lg-IsJ" id="uDQ-Wx-fdX"/>
+                <outlet property="likeView" destination="ryj-ok-xYs" id="QsH-kA-tQ2"/>
                 <outlet property="postImageView" destination="vje-fL-WVv" id="zaW-DG-Fnl"/>
                 <outlet property="postLabel" destination="rNP-m8-iBC" id="p8p-Jh-kWf"/>
                 <outlet property="profilePicImageView" destination="a73-kz-f15" id="OAD-qC-l88"/>
-                <outlet property="shareButton" destination="61c-Qa-yO0" id="S7q-24-7mn"/>
-                <outlet property="shareCountLabel" destination="JW4-H1-5Xt" id="YTT-qb-3uk"/>
+                <outlet property="shareCountLabel" destination="3n7-sh-NyL" id="csg-QH-Kua"/>
+                <outlet property="shareView" destination="bQo-tq-Giy" id="0DT-sB-MeQ"/>
             </connections>
             <point key="canvasLocation" x="320.5" y="329"/>
         </tableViewCell>

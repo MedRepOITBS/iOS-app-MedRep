@@ -12,6 +12,7 @@
 #import "MRTransformViewController.h"
 #import "MRContactsViewController.h"
 #import "MRShareViewController.h"
+#import "MRServeViewController.h"
 
 @interface MRCustomTabBar () {
     
@@ -61,7 +62,12 @@
 }
 
 - (IBAction)serveButtonTapped:(id)sender {
-    
+    if (self.serveViewController == nil || self.activeViewController != self.serveViewController) {
+        if (self.serveViewController == nil) {
+            self.serveViewController = [[MRServeViewController alloc] initWithNibName:@"MRServeViewController" bundle:nil];
+        }
+        [self.navigationController pushViewController:self.serveViewController animated:true];
+    }
 }
 
 - (void)updateTabBarColors:(NSInteger)currentTabIndex {

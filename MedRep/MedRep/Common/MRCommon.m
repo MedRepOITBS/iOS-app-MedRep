@@ -744,4 +744,28 @@
 //    [navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
 }
 
++ (NSString*)stringWithRelativeWordsForDate:(NSDate*)date {
+    NSString *dateString = @"";
+    if (date != nil) {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+        [dateFormatter setDoesRelativeDateFormatting:YES];
+        dateString = [dateFormatter stringFromDate:date];
+    }
+    return dateString;
+}
+
++ (NSString*)convertDateToString:(NSDate*)date andFormat:(NSString*)dateFormat {
+    NSString *dateString = @"";
+    
+    if (date != nil) {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:dateFormat];
+        [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:kStandardTimeZone]];
+        dateString = [dateFormatter stringFromDate:date];
+    }
+    
+    return dateString;
+}
+
 @end

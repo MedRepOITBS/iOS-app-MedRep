@@ -119,4 +119,7 @@
 
 + (void)applyNavigationBarStyling:(UINavigationController*)navigationController;
 
++ (NSString*)stringWithRelativeWordsForDate:(NSDate*)date;
++ (NSString*)convertDateToString:(NSDate*)date andFormat:(NSString*)dateFormat;
+
 @end

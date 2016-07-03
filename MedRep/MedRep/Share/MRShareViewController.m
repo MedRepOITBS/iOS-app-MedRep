@@ -22,8 +22,10 @@
 #import "MRCommon.h"
 #import "MRConstants.h"
 #import "MRShareOptionsViewController.h"
+#import "MRShareDetailViewController.h"
 
-@interface MRShareViewController () <UISearchBarDelegate, SWRevealViewControllerDelegate, MRGroupPostItemTableViewCellDelegate, MRShareOptionsSelectionDelegate>
+@interface MRShareViewController () <UISearchBarDelegate, SWRevealViewControllerDelegate, MRGroupPostItemTableViewCellDelegate, MRShareOptionsSelectionDelegate,
+    UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView* postsTableView;
 
@@ -143,6 +145,15 @@
     [cell setDelegate:self];
     [cell setPostContent:[self.posts objectAtIndex:indexPath.row] tagIndex:tagIndex];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:true];
+    MRShareDetailViewController *shareDetailViewController =
+                [[MRShareDetailViewController alloc] initWithNibName:@"MRShareDetailViewController"
+                                                              bundle:nil];
+    [shareDetailViewController setPost:self.posts[indexPath.row]];
+    [self.navigationController pushViewController:shareDetailViewController animated:true];
 }
 
 /*
