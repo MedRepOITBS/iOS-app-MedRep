@@ -38,7 +38,7 @@
     self.navigationItem.rightBarButtonItem = rightButtonItem;
     
     self.navigationItem.title = _isFromTransform ? @"Details" : @"Notification Details";
-    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
+    //[self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
     
     if (self.headerTitle == nil || self.headerTitle.length == 0) {
         self.titleViewHeightConstraint.constant = 0;

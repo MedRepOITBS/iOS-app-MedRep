@@ -37,6 +37,7 @@
     // Do any additional setup after loading the view from its nib.
     
     self.navigationItem.title = @"Detail";
+    //[self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
     
     UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonAction)];
     self.navigationItem.leftBarButtonItem = revealButtonItem;
@@ -186,14 +187,12 @@
     NSArray *posts = [contact.groupPosts allObjects];
     
     MRGroupPost *lastPost = posts.firstObject;
-    NSLog(@"%ld", lastPost.groupPostId);
-    
+    NSLog(@"%lld", lastPost.groupPostId);
     
     NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"groupPostId" ascending:NO];
     posts = [posts sortedArrayUsingDescriptors:@[sort]];
     lastPost = posts.firstObject;
-    
-    NSLog(@"%ld", lastPost.groupPostId);
+    NSLog(@"%lld", lastPost.groupPostId);
     
     NSMutableDictionary *post = [NSMutableDictionary new];
     post[@"id"] = [NSNumber numberWithInteger:lastPost.groupPostId + 1];

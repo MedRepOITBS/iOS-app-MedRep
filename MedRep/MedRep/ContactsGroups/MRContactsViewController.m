@@ -87,7 +87,7 @@
     
     self.navigationItem.title = @"Connect";
     self.edgesForExtendedLayout = UIRectEdgeNone;
-    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
+    //[self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
     
     SWRevealViewController *revealController = [self revealViewController];
     revealController.delegate = self;

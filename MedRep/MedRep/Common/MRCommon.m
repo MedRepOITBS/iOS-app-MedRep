@@ -727,6 +727,7 @@
     navigationController.navigationBar.tintColor = [UIColor whiteColor];
     navigationController.navigationBar.translucent = false;
     [navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    [navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName]];
     
 //    // Set Navigation Bar as gradient
 //    CGFloat statusHeight = [UIApplication sharedApplication].statusBarFrame.size.height;

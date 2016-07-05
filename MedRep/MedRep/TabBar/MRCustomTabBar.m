@@ -39,7 +39,7 @@
             self.contactsViewController = [[MRContactsViewController alloc] initWithNibName:@"MRContactsViewController" bundle:nil];
         }
         
-        [self.navigationController pushViewController:self.contactsViewController animated:true];
+        [self.navigationController pushViewController:self.contactsViewController animated:NO];
     }
 }
 
@@ -48,7 +48,7 @@
         if (self.transformViewController == nil) {
             self.transformViewController = [[MRTransformViewController alloc] initWithNibName:@"MRTransformViewController" bundle:nil];
         }
-        [self.navigationController pushViewController:self.transformViewController animated:true];
+        [self.navigationController pushViewController:self.transformViewController animated:NO];
     }
 }
 
@@ -57,7 +57,7 @@
         if (self.shareViewController == nil) {
             self.shareViewController = [[MRShareViewController alloc] initWithNibName:@"MRShareViewController" bundle:nil];
         }
-        [self.navigationController pushViewController:self.shareViewController animated:true];
+        [self.navigationController pushViewController:self.shareViewController animated:NO];
     }
 }
 
@@ -66,7 +66,7 @@
         if (self.serveViewController == nil) {
             self.serveViewController = [[MRServeViewController alloc] initWithNibName:@"MRServeViewController" bundle:nil];
         }
-        [self.navigationController pushViewController:self.serveViewController animated:true];
+        [self.navigationController pushViewController:self.serveViewController animated:NO];
     }
 }
 

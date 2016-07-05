@@ -51,7 +51,7 @@
     self.navigationItem.rightBarButtonItem = rightButtonItem;
     
     self.navigationItem.title = @"Invite Contacts";
-    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
+    //[self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
     
     selectedContacts = [NSMutableArray array];
     
@@ -111,6 +111,7 @@
     
     contactList = [NSMutableArray array];
     [self requestForContacts];
+    [MRCommon applyNavigationBarStyling:self.navigationController];
 }
 
 -(void) requestForContacts{
