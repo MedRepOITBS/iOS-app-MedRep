@@ -18,7 +18,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
 
-@interface MRTransformDetailViewController (){
+@interface MRTransformDetailViewController () <UIWebViewDelegate>{
     AVPlayerViewController *av;
     __weak IBOutlet UIWebView *webView;
     __weak IBOutlet UIImageView *thumbnailImage;
@@ -28,6 +28,8 @@
 }
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageHeight;
 @property (strong, nonatomic) IBOutlet UIView *navView;
+
+@property (nonatomic) UIActivityIndicatorView *activityIndicator;
 @end
 
 @implementation MRTransformDetailViewController
@@ -59,6 +61,7 @@
             [separatorView setHidden:YES];
             [_detailLbl setHidden:YES];
             
+            [webView setDelegate:self];
             [webView setHidden:NO];
             
             NSURL *targetURL = [NSURL URLWithString:@"https://dl.dropboxusercontent.com/u/104553173/sample.pdf"];
@@ -127,6 +130,23 @@
     [self.view addConstraints:@[leftConstraint, rightConstraint, bottomConstraint, topConstraint]];
 }
 
+- (void)setActivityIndicatorConstriants {
+    NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:self.activityIndicator
+                                                                      attribute:NSLayoutAttributeCenterX
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:self.view
+                                                                      attribute:NSLayoutAttributeCenterX
+                                                                     multiplier:1.0 constant:0];
+    NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:self.activityIndicator
+                                                                       attribute:NSLayoutAttributeCenterY
+                                                                       relatedBy:NSLayoutRelationEqual
+                                                                          toItem:self.view
+                                                                       attribute:NSLayoutAttributeCenterY
+                                                                      multiplier:1.0 constant:0];
+    
+    [self.view addConstraints:@[leftConstraint, rightConstraint]];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -180,27 +200,31 @@
 }
 
 - (void)postTheTopicToTheWall {
-    NSArray *myContacts = [MRDatabaseHelper getContacts];
-    myContacts = [myContacts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K == %@", @"self.name", @"Chris Martin"]];
-    
-    MRContact *contact = myContacts.firstObject;
-    NSArray *posts = [contact.groupPosts allObjects];
-    
-    MRGroupPost *lastPost = posts.firstObject;
-    NSLog(@"%lld", lastPost.groupPostId);
-    
-    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"groupPostId" ascending:NO];
-    posts = [posts sortedArrayUsingDescriptors:@[sort]];
-    lastPost = posts.firstObject;
-    NSLog(@"%lld", lastPost.groupPostId);
+//    NSArray *myContacts = [MRDatabaseHelper getContacts];
+//    myContacts = [myContacts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K == %@", @"self.name", @"Chris Martin"]];
+//    
+//    MRContact *contact = myContacts.firstObject;
+//    NSArray *posts = [contact.groupPosts allObjects];
+//    
+//    MRGroupPost *lastPost = posts.firstObject;
+//    NSLog(@"%ld", lastPost.groupPostId.longValue);
+//    
+//    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"groupPostId" ascending:NO];
+//    posts = [posts sortedArrayUsingDescriptors:@[sort]];
+//    lastPost = posts.firstObject;
+//    NSLog(@"%ld", lastPost.groupPostId.longValue);
     
     NSMutableDictionary *post = [NSMutableDictionary new];
-    post[@"id"] = [NSNumber numberWithInteger:lastPost.groupPostId + 1];
-    post[@"postText"] = self.selectedContent.detailDescription;
+    if (self.selectedContent.detailDescription != nil && self.selectedContent.detailDescription.length > 0) {
+        post[@"postText"] = self.selectedContent.detailDescription;
+    } else {
+        post[@"postText"] = self.selectedContent.shortDescription;
+    }
     post[@"contactId"] = [NSNumber numberWithInt:1];
     post[@"comments"] = [NSNumber numberWithInt:0];
     post[@"likes"] = [NSNumber numberWithInt:0];
     post[@"shares"] = [NSNumber numberWithInt:0];
+    post[@"postedOn"] = [NSDate date];
     [MRDatabaseHelper addGroupPosts:@[post]];
 }
 
@@ -220,6 +244,37 @@
         notiFicationViewController.headerTitle = self.selectedContent.title;
     }
     [self.navigationController pushViewController:notiFicationViewController animated:YES];
+}
+
+//Mark: WebView Delegat methods
+- (void)webViewDidStartLoad:(UIWebView *)wView {
+    if (self.activityIndicator == nil) {
+        CGRect screen = webView.frame;
+        self.activityIndicator = [[UIActivityIndicatorView alloc]
+                                  initWithFrame:CGRectMake(screen.size.width/2 - 50, screen.size.height/2, 100, 100)];
+        [self.activityIndicator setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
+    }
+    
+    [self.view addSubview:self.activityIndicator];
+//    [self setActivityIndicatorConstriants];
+    [self.view bringSubviewToFront:self.activityIndicator];
+    [self.activityIndicator startAnimating];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [self endIndicator];
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    [self endIndicator];
+}
+
+- (void)endIndicator {
+    if (self.activityIndicator != nil) {
+        [self.activityIndicator stopAnimating];
+        [self.activityIndicator removeFromSuperview];
+    }
+    self.activityIndicator = nil;
 }
 
 @end

@@ -19,6 +19,8 @@
 #import "MRGroupPost.h"
 #import "MrGroupChildPost.h"
 #import "AppDelegate.h"
+#import "NSDate+Utilities.h"
+
 static MRDatabaseHelper *sharedDataManager = nil;
 
 @implementation MRDatabaseHelper
@@ -91,12 +93,23 @@ static MRDatabaseHelper *sharedDataManager = nil;
 + (void)addGroupPosts:(NSArray*)posts {
     for (NSDictionary *myDict in posts) {
         MRGroupPost *post  = (MRGroupPost*)[[MRDataManger sharedManager] createObjectForEntity:kGroupPostEntity];
-        post.groupPostId = [[myDict objectForKey:@"id"] integerValue];
+        post.groupPostId = [MRDatabaseHelper convertStringToNSNumber:[myDict objectForKey:@"id"]];
         post.postPic = [myDict objectForKey:@"post_pic"];
         post.postText = [myDict objectForKey:@"postText"];
-        post.numberOfComments = [[myDict objectForKey:@"comments"] integerValue];
-        post.numberOfLikes = [[myDict objectForKey:@"likes"] integerValue];
-        post.numberOfShares = [[myDict objectForKey:@"shares"] integerValue];
+        
+        NSDate *currentDate = nil;
+        id dateValue = [myDict objectForKey:@"postedOn"];
+        
+        if ([dateValue isKindOfClass:[NSString class]]) {
+            currentDate = [NSDate convertStringToNSDate:dateValue dateFormat:kDefaultDateFormat];
+        } else {
+            currentDate = dateValue;
+        }
+        post.postedOn = currentDate;
+        
+        post.numberOfComments = [MRDatabaseHelper convertStringToNSNumber:[myDict objectForKey:@"comments"]];
+        post.numberOfLikes = [MRDatabaseHelper convertStringToNSNumber:[myDict objectForKey:@"likes"]];
+        post.numberOfShares = [MRDatabaseHelper convertStringToNSNumber:[myDict objectForKey:@"shares"]];
         NSInteger contactId = [[myDict objectForKey:@"contactId"] integerValue];
         if (contactId) {
             MRContact* contact = [MRDatabaseHelper getContactForId:contactId];
@@ -113,6 +126,16 @@ static MRDatabaseHelper *sharedDataManager = nil;
         }
     }
     [[MRDataManger sharedManager] saveContext];
+}
+
++ (NSNumber*)convertStringToNSNumber:(id)value {
+    NSNumber *convertedValue = [NSNumber numberWithLong:0];
+    if ([value isKindOfClass:[NSString class]]) {
+        NSString *tempValue = value;
+        convertedValue = [NSNumber numberWithLong:tempValue.longLongValue];
+    }
+    
+    return convertedValue;
 }
 
 + (MRContact*)getContactForId:(NSInteger)contactId {

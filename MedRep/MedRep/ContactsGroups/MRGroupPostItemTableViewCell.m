@@ -37,7 +37,7 @@
     
     NSInteger likeCount = [_likeCountLabel.text integerValue];
     likeCount = likeCount +1;
-    self.post.numberOfLikes = likeCount;
+    self.post.numberOfLikes = [NSNumber numberWithLong:likeCount];
     [self.post.managedObjectContext save:nil];
     
     _shareCountLabel.text = [NSString stringWithFormat:@"%ld",(long)likeCount];
@@ -105,15 +105,15 @@
     
     tagIndex++;
     [self.likeView setTag:tagIndex];
-    self.likeCountLabel.text = [NSString stringWithFormat:@"%lld",post.numberOfLikes];
+    self.likeCountLabel.text = [NSString stringWithFormat:@"%@",post.numberOfLikes];
     
     tagIndex++;
     [self.shareView setTag:tagIndex];
-    self.shareCountLabel.text = [NSString stringWithFormat:@"%lld",post.numberOfShares];
+    self.shareCountLabel.text = [NSString stringWithFormat:@"%@",post.numberOfShares];
     
     tagIndex++;
     [self.commentView setTag:tagIndex];
-    self.commentCountLabel.text = [NSString stringWithFormat:@"%lld",post.numberOfComments];
+    self.commentCountLabel.text = [NSString stringWithFormat:@"%@",post.numberOfComments];
 }
 
 @end

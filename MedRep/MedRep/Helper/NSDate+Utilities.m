@@ -96,6 +96,15 @@ static const unsigned componentFlags = (NSCalendarUnitYear| NSCalendarUnitMonth 
 	return newDate;		
 }
 
++ (NSDate*)convertStringToNSDate:(NSString*)dateString dateFormat:(NSString*)dateFormat {
+    NSDate* selectedDate = [NSDate date];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:dateFormat];
+    [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
+    selectedDate = [formatter dateFromString:dateString];
+    return selectedDate;
+}
+
 #pragma mark - String Properties
 - (NSString *) stringWithFormat: (NSString *) format
 {

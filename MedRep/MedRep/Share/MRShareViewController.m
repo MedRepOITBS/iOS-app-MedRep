@@ -23,9 +23,12 @@
 #import "MRConstants.h"
 #import "MRShareOptionsViewController.h"
 #import "MRShareDetailViewController.h"
+#import "MRGroupPost.h"
 
 @interface MRShareViewController () <UISearchBarDelegate, SWRevealViewControllerDelegate, MRGroupPostItemTableViewCellDelegate, MRShareOptionsSelectionDelegate,
     UITableViewDelegate, UITableViewDataSource>
+
+@property (weak, nonatomic) IBOutlet UILabel *emptyMessage;
 
 @property (weak, nonatomic) IBOutlet UITableView* postsTableView;
 
@@ -103,6 +106,19 @@
     [super viewWillAppear:animated];
     
     [MRCommon applyNavigationBarStyling:self.navigationController];
+    [self setEmptyMessage];
+}
+
+- (void)setEmptyMessage {
+    if (self.posts.count == 0) {
+        [self.emptyMessage setHidden:false];
+        [self.postsTableView setHidden:true];
+        [self.searchBar setHidden:true];
+    } else {
+        [self.emptyMessage setHidden:true];
+        [self.postsTableView setHidden:false];
+        [self.searchBar setHidden:false];
+    }
 }
 
 - (void)fetchPosts {
@@ -121,6 +137,9 @@
         self.contactsUnderGroup = [self.mainGroup.contacts allObjects];
         self.posts = [self.mainGroup.groupPosts allObjects];
     }
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"postedOn" ascending:false ];
+    self.posts = [self.posts sortedArrayUsingDescriptors:@[sortDescriptor]];
 }
 
 - (void)setContact:(MRContact*)contact {
@@ -247,6 +266,8 @@
 - (void)shareButtonTapped:(MRGroupPost*)groupPost {
     self.shareOptionsVC = [[MRShareOptionsViewController alloc] initWithNibName:@"MRShareOptionsViewController" bundle:nil];
     [self.shareOptionsVC setDelegate:self];
+    groupPost.postedOn = [NSDate date];
+    [groupPost.managedObjectContext save:nil];
     [self.shareOptionsVC setGroupPost:groupPost];
     [self.navigationController pushViewController:self.shareOptionsVC animated:YES];
 }

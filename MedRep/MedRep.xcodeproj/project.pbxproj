@@ -594,8 +594,6 @@
 		B41746D61D0CD6E1009B7E7E /* MrGroupChildPost+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B41746D21D0CD6E1009B7E7E /* MrGroupChildPost+CoreDataProperties.m */; };
 		B41746D71D0CD6E1009B7E7E /* MrGroupChildPost.m in Sources */ = {isa = PBXBuildFile; fileRef = B41746D41D0CD6E1009B7E7E /* MrGroupChildPost.m */; };
 		B41746D81D0CD6E1009B7E7E /* MrGroupChildPost.m in Sources */ = {isa = PBXBuildFile; fileRef = B41746D41D0CD6E1009B7E7E /* MrGroupChildPost.m */; };
-		B41746DD1D0CD740009B7E7E /* MRGroupPost+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B41746DA1D0CD740009B7E7E /* MRGroupPost+CoreDataProperties.m */; };
-		B41746DE1D0CD740009B7E7E /* MRGroupPost+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B41746DA1D0CD740009B7E7E /* MRGroupPost+CoreDataProperties.m */; };
 		B41746DF1D0CD740009B7E7E /* MRGroupPost.m in Sources */ = {isa = PBXBuildFile; fileRef = B41746DC1D0CD740009B7E7E /* MRGroupPost.m */; };
 		B41746E01D0CD740009B7E7E /* MRGroupPost.m in Sources */ = {isa = PBXBuildFile; fileRef = B41746DC1D0CD740009B7E7E /* MRGroupPost.m */; };
 		B41746E41D0CE628009B7E7E /* GroupPostChildTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B41746E21D0CE628009B7E7E /* GroupPostChildTableViewCell.m */; };
@@ -1260,6 +1258,8 @@
 		CC86FE4A1D29BA4F0030B23D /* MRReplies+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CC86FE461D29BA4F0030B23D /* MRReplies+CoreDataProperties.m */; };
 		CC86FE4B1D29BA4F0030B23D /* MRReplies.m in Sources */ = {isa = PBXBuildFile; fileRef = CC86FE481D29BA4F0030B23D /* MRReplies.m */; };
 		CC86FE4C1D29BA4F0030B23D /* MRReplies.m in Sources */ = {isa = PBXBuildFile; fileRef = CC86FE481D29BA4F0030B23D /* MRReplies.m */; };
+		CC9857D41D2D82CC00C74438 /* MRGroupPost+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9857D31D2D82CC00C74438 /* MRGroupPost+CoreDataProperties.m */; };
+		CC9857D51D2D82CC00C74438 /* MRGroupPost+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9857D31D2D82CC00C74438 /* MRGroupPost+CoreDataProperties.m */; };
 		CC9BCEC11D0F2A3900702EBC /* MRTransformViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9BCEBF1D0F2A3900702EBC /* MRTransformViewController.m */; };
 		CC9BCEC21D0F2A3900702EBC /* MRTransformViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9BCEBF1D0F2A3900702EBC /* MRTransformViewController.m */; };
 		CC9BCEC31D0F2A3900702EBC /* MRTransformViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC9BCEC01D0F2A3900702EBC /* MRTransformViewController.xib */; };
@@ -1911,8 +1911,6 @@
 		B41746D21D0CD6E1009B7E7E /* MrGroupChildPost+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MrGroupChildPost+CoreDataProperties.m"; sourceTree = "<group>"; };
 		B41746D31D0CD6E1009B7E7E /* MrGroupChildPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MrGroupChildPost.h; sourceTree = "<group>"; };
 		B41746D41D0CD6E1009B7E7E /* MrGroupChildPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MrGroupChildPost.m; sourceTree = "<group>"; };
-		B41746D91D0CD740009B7E7E /* MRGroupPost+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MRGroupPost+CoreDataProperties.h"; sourceTree = "<group>"; };
-		B41746DA1D0CD740009B7E7E /* MRGroupPost+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MRGroupPost+CoreDataProperties.m"; sourceTree = "<group>"; };
 		B41746DB1D0CD740009B7E7E /* MRGroupPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRGroupPost.h; sourceTree = "<group>"; };
 		B41746DC1D0CD740009B7E7E /* MRGroupPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRGroupPost.m; sourceTree = "<group>"; };
 		B41746E11D0CE628009B7E7E /* GroupPostChildTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupPostChildTableViewCell.h; sourceTree = "<group>"; };
@@ -2068,6 +2066,8 @@
 		CC86FE461D29BA4F0030B23D /* MRReplies+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MRReplies+CoreDataProperties.m"; sourceTree = "<group>"; };
 		CC86FE471D29BA4F0030B23D /* MRReplies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRReplies.h; sourceTree = "<group>"; };
 		CC86FE481D29BA4F0030B23D /* MRReplies.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRReplies.m; sourceTree = "<group>"; };
+		CC9857D21D2D82CC00C74438 /* MRGroupPost+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MRGroupPost+CoreDataProperties.h"; sourceTree = "<group>"; };
+		CC9857D31D2D82CC00C74438 /* MRGroupPost+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MRGroupPost+CoreDataProperties.m"; sourceTree = "<group>"; };
 		CC9BCEBE1D0F2A3900702EBC /* MRTransformViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRTransformViewController.h; sourceTree = "<group>"; };
 		CC9BCEBF1D0F2A3900702EBC /* MRTransformViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRTransformViewController.m; sourceTree = "<group>"; };
 		CC9BCEC01D0F2A3900702EBC /* MRTransformViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRTransformViewController.xib; sourceTree = "<group>"; };
@@ -2632,6 +2632,8 @@
 		797560381BBFE2CC0034D0AC /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CC9857D21D2D82CC00C74438 /* MRGroupPost+CoreDataProperties.h */,
+				CC9857D31D2D82CC00C74438 /* MRGroupPost+CoreDataProperties.m */,
 				CC7DB2F11D0CC4E2007DFE4C /* MRContact.h */,
 				CC7DB2F21D0CC4E2007DFE4C /* MRContact.m */,
 				CC7DB2F31D0CC4E2007DFE4C /* MRContact+CoreDataProperties.h */,
@@ -2658,8 +2660,6 @@
 				B41746D21D0CD6E1009B7E7E /* MrGroupChildPost+CoreDataProperties.m */,
 				B41746D31D0CD6E1009B7E7E /* MrGroupChildPost.h */,
 				B41746D41D0CD6E1009B7E7E /* MrGroupChildPost.m */,
-				B41746D91D0CD740009B7E7E /* MRGroupPost+CoreDataProperties.h */,
-				B41746DA1D0CD740009B7E7E /* MRGroupPost+CoreDataProperties.m */,
 				B41746DB1D0CD740009B7E7E /* MRGroupPost.h */,
 				B41746DC1D0CD740009B7E7E /* MRGroupPost.m */,
 			);
@@ -4844,6 +4844,7 @@
 				79FFD24F1BB9B83700CEE606 /* MRRegistrationRoleViewController.m in Sources */,
 				CC86FE3A1D29A7780030B23D /* MRShareDetailViewController.m in Sources */,
 				CC7DB31B1D0CC530007DFE4C /* PendingContactTableViewCell.m in Sources */,
+				CC9857D41D2D82CC00C74438 /* MRGroupPost+CoreDataProperties.m in Sources */,
 				7920D6A31C1CB236008D3386 /* MRDoctorActivityScoreDetailsViewController.m in Sources */,
 				7920D68E1C1C874C008D3386 /* MRForgotPasswordViewController.m in Sources */,
 				CC7DB3071D0CC4E2007DFE4C /* MRGroup+CoreDataProperties.m in Sources */,
@@ -4889,7 +4890,6 @@
 				79A5DC621BA1ED21001D872C /* MPCallMedrepViewController.m in Sources */,
 				CC463DEC1D27B921002AE85E /* MRGradientView.m in Sources */,
 				8AFE8CDA1D0F20BC0000382E /* NotificationUUIDViewController.m in Sources */,
-				B41746DD1D0CD740009B7E7E /* MRGroupPost+CoreDataProperties.m in Sources */,
 				8AFE8D2A1D12F6A70000382E /* MRAddMemberTableViewCell.m in Sources */,
 				8AFF27B01D21C3DE00080DF0 /* MRInviteViewController.m in Sources */,
 				CC7DB3031D0CC4E2007DFE4C /* MRContact+CoreDataProperties.m in Sources */,
@@ -5013,6 +5013,7 @@
 				CC7DB3081D0CC4E2007DFE4C /* MRGroup+CoreDataProperties.m in Sources */,
 				CC86FE3B1D29A7780030B23D /* MRShareDetailViewController.m in Sources */,
 				CC7DB03E1D0C8BEC007DFE4C /* MRMedrepMeetingsCell.m in Sources */,
+				CC9857D51D2D82CC00C74438 /* MRGroupPost+CoreDataProperties.m in Sources */,
 				CC7DB03F1D0C8BEC007DFE4C /* GraphView.m in Sources */,
 				CC7DB0401D0C8BEC007DFE4C /* MRAppControl.m in Sources */,
 				CC7DB0411D0C8BEC007DFE4C /* MPNotificatinsTableViewCell.m in Sources */,
@@ -5076,7 +5077,6 @@
 				CC7DB0681D0C8BEC007DFE4C /* MRDoctorScoreTableCell.m in Sources */,
 				CC7DB0691D0C8BEC007DFE4C /* MRConvertAppointmentViewController.m in Sources */,
 				CC7DB27C1D0C9E20007DFE4C /* MRTransformDetailViewController.m in Sources */,
-				B41746DE1D0CD740009B7E7E /* MRGroupPost+CoreDataProperties.m in Sources */,
 				CC7DB2F01D0CC433007DFE4C /* UIPopoverController+iPhone.m in Sources */,
 				CC7DB2DE1D0CC433007DFE4C /* MRGroupsListViewController.m in Sources */,
 				8AFE8D121D10587E0000382E /* MRGroupObject.m in Sources */,

@@ -35,6 +35,7 @@
         <attribute name="numberOfComments" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="numberOfLikes" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="numberOfShares" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="postedOn" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="postPic" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="postText" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="contact" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="MRContact" inverseName="groupPosts" inverseEntity="MRContact" syncable="YES"/>
@@ -102,12 +103,12 @@
         <element name="MRContact" positionX="-36" positionY="135" width="128" height="135"/>
         <element name="MRGroup" positionX="-27" positionY="144" width="128" height="120"/>
         <element name="MrGroupChildPost" positionX="-27" positionY="144" width="128" height="90"/>
-        <element name="MRGroupPost" positionX="-18" positionY="153" width="128" height="180"/>
+        <element name="MRGroupPost" positionX="-18" positionY="153" width="128" height="195"/>
         <element name="MRNotifications" positionX="-36" positionY="63" width="128" height="420"/>
         <element name="MRNotificationType" positionX="-36" positionY="9" width="128" height="90"/>
+        <element name="MRReplies" positionX="-36" positionY="135" width="128" height="120"/>
         <element name="MRRole" positionX="-63" positionY="-18" width="128" height="105"/>
         <element name="MRSuggestedContact" positionX="-9" positionY="162" width="128" height="105"/>
         <element name="MRTherapeuticArea" positionX="-54" positionY="-9" width="128" height="90"/>
-        <element name="MRReplies" positionX="-36" positionY="135" width="128" height="120"/>
     </elements>
 </model>

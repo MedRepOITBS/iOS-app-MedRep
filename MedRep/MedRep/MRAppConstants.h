@@ -38,5 +38,6 @@ FOUNDATION_EXPORT NSString* const  kTransactionDateFormat;
 FOUNDATION_EXPORT NSString* const  documentDateFormat;
 
 FOUNDATION_EXPORT NSString* const kHourAMPMFormat;
+FOUNDATION_EXPORT NSString* const kDefaultDateFormat;
 
 @end

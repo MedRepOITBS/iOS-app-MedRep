@@ -208,11 +208,11 @@
         
         NSMutableDictionary *postDict = [NSMutableDictionary new];
         postDict[@"postText"] = self.groupPost.postText;
-        postDict[@"likes"] = [NSNumber numberWithLong:self.groupPost.numberOfLikes];
-        postDict[@"comments"] = [NSNumber numberWithLong:self.groupPost.numberOfComments];
-        postDict[@"shares"] = [NSNumber numberWithLong:(self.groupPost.numberOfShares + 1)];
+        postDict[@"likes"] = [NSNumber numberWithLong:self.groupPost.numberOfLikes.longValue];
+        postDict[@"comments"] = [NSNumber numberWithLong:self.groupPost.numberOfComments.longValue];
+        postDict[@"shares"] = [NSNumber numberWithLong:(self.groupPost.numberOfShares.longValue + 1)];
         postDict[@"post_pic"] = self.groupPost.postPic;
-        postDict[@"id"] = [NSNumber numberWithLong:self.groupPost.groupPostId];
+        postDict[@"id"] = [NSNumber numberWithLong:self.groupPost.groupPostId.longValue];
         
         if (selectedContacts != nil) {
             for (NSInteger index = 0; index < selectedContacts.count; index++) {
@@ -237,8 +237,8 @@
         }
     }
     
-    self.groupPost.numberOfShares = self.groupPost.numberOfShares + 1;
-    NSLog(@"%ld", [NSNumber numberWithLong:self.groupPost.numberOfShares].integerValue);
+    self.groupPost.numberOfShares = [NSNumber numberWithLong:self.groupPost.numberOfShares.longValue + 1];
+    NSLog(@"%ld", self.groupPost.numberOfShares.longValue);
     [self.groupPost.managedObjectContext save:nil];
     
     [self.navigationController popViewControllerAnimated:true];

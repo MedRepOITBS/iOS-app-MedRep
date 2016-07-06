@@ -38,5 +38,6 @@ NSString* const  kTransactionDateFormat = @"yyyy-MM-dd'T'HH:mm:ssZ";
 NSString* const  documentDateFormat = @"yyyy-MM-dd'T'HH:mm:ss";
 
 NSString* const  kHourAMPMFormat = @"hh:mm a";
+NSString* const kDefaultDateFormat = @"yyyy-MM-dd'T'HH:mm:ss";
 
 @end
