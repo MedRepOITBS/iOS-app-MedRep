@@ -36,9 +36,9 @@
 
 - (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag
 {
-    NSLog(@"%f",self.view.frame.size.height);
+    //NSLog(@"%f",self.view.frame.size.height);
 
-    NSLog(@"%f",[UIScreen mainScreen].bounds.size.height);
+    //NSLog(@"%f",[UIScreen mainScreen].bounds.size.height);
 
     [self.delegate removeSplashViewOnAnimationEnd];
 }

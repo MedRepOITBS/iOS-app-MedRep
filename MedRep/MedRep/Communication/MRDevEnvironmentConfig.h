@@ -10,5 +10,6 @@
 #define MRDevEnvironmentConfig_h
 
 FOUNDATION_EXPORT NSString *const kBaseURL;
+FOUNDATION_EXPORT NSString *const kHostName;
 
 #endif /* MRDevEnvironmentConfig_h */

@@ -13,6 +13,8 @@
 
 @interface MRShareViewController : UIViewController
 
+@property (nonatomic, assign) BOOL isFromDetails;
+
 - (void)setContact:(MRContact*)contact;
 - (void)setGroup:(MRGroup*)group;
 

@@ -166,6 +166,52 @@ withComplitionHandler:(completionHandler)responceHandler;
 
 - (void)getMaterialwithHandler:(completionHandler)responceHandler;
 
+- (void)createGroup:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
+
+- (void)updateGroup:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
+
+- (void)addMembersToGroup:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
+
+- (void)removeGroup:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
+
+- (void)getMoreConnectionswithHandler:(completionHandler)responceHandler;
+
+- (void)getGroupListwithHandler:(completionHandler)responceHandler;
+
+- (void)getSuggestedGroupListwithHandler:(completionHandler)responceHandler;
+
+- (void)getContactListwithHandler:(completionHandler)responceHandler;
+
+- (void)getSearchContactList:(NSString *)str withHandler:(completionHandler)responceHandler;
+
+- (void)getSuggestedContactListwithHandler:(completionHandler)responceHandler;
+
+- (void)getGroupMembersStatuswithHandler:(completionHandler)responceHandler;
+
+- (void)updateGroupMembersStatus:(NSDictionary *)dict withHandler:(completionHandler)responceHandler;
+
+- (void)getGroupMembersStatusWithId:(NSString *)groupId withHandler:(completionHandler)responceHandler;
+
+- (void)removeGroupMember:(NSDictionary *)dict withHandler:(completionHandler)responceHandler;
+
+- (void)getUserPreferences:(completionHandler)responceHandler;
+
+- (void)fetchPendingConnectionsListwithHandler:(completionHandler)responceHandler;
+
+- (void)getAllContactsByCityListwithHandler:(completionHandler)responceHandler;
+
+- (void)getDoctorContactsListwithHandler:(completionHandler)responceHandler;
+
+- (void)addMembers:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
+
+- (void)fetchPendingGroupsListwithHandler:(completionHandler)responceHandler;
+
+- (void)updateConnectionStatus:(NSDictionary *)dict withHandler:(completionHandler)responceHandler;
+
+- (void)removeConnection:(NSDictionary *)dict withHandler:(completionHandler)responceHandler;
+
+- (void)fetchPendingMembersListwithHandler:(completionHandler)responceHandler;
+
 @end
 
 @interface NSDictionary (CategoryName)

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MRServeViewController">
+            <connections>
+                <outlet property="navView" destination="ZLR-Qc-aRk" id="BsS-2I-jyy"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NDcompany2-BG.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="MMm-D2-haK">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pnk-F4-8ph">
+                    <rect key="frame" x="20" y="20" width="335" height="200"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="200" id="zD1-ks-mXm"/>
+                    </constraints>
+                    <string key="text">“Serve” allows a doctor to serve the patient community digitally. This feature is going to be launched soon, and would allow doctors the ability to connect with Patients through Online &amp; Remote consultation facilities, as well as, managing their patient appointments. </string>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="MMm-D2-haK" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="IkZ-N3-sVk"/>
+                <constraint firstAttribute="trailing" secondItem="MMm-D2-haK" secondAttribute="trailing" id="PtE-53-MoQ"/>
+                <constraint firstAttribute="bottom" secondItem="MMm-D2-haK" secondAttribute="bottom" id="WEP-s4-Va4"/>
+                <constraint firstItem="MMm-D2-haK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="cXR-5L-dSA"/>
+                <constraint firstAttribute="trailing" secondItem="Pnk-F4-8ph" secondAttribute="trailing" constant="20" id="kSp-YN-AgX"/>
+                <constraint firstItem="Pnk-F4-8ph" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="xBg-JY-VgN"/>
+                <constraint firstItem="Pnk-F4-8ph" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="xGS-vM-4Ib"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <point key="canvasLocation" x="237.5" y="216.5"/>
+        </view>
+        <view contentMode="scaleToFill" id="ZLR-Qc-aRk">
+            <rect key="frame" x="0.0" y="0.0" width="40" height="33"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="Icon-40.png" translatesAutoresizingMaskIntoConstraints="NO" id="W5B-ds-IzS">
+                    <rect key="frame" x="0.0" y="0.0" width="40" height="33"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-29" y="-100.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Icon-40.png" width="40" height="40"/>
+        <image name="NDcompany2-BG.jpg" width="320" height="351"/>
+    </resources>
+</document>

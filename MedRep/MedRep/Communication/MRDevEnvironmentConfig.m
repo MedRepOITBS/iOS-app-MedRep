@@ -11,3 +11,4 @@
 //test
 NSString *const kBaseURL = @"http://183.82.106.234:8080/MedRepApplication";
 
+NSString *const kHostName = @"http://183.82.106.234:8080";

@@ -10,10 +10,14 @@
 
 @class MRContact;
 @class MRGroup;
+@class MRGroupObject;
 
 @interface MRContactDetailViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
+@property (strong, nonatomic) NSMutableArray *contactList;
+
 - (void)setContact:(MRContact*)contact;
 - (void)setGroup:(MRGroup*)group;
+- (void)setGroupData:(MRGroupObject*)group;
 
 @end

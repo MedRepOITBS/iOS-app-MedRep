@@ -10,6 +10,7 @@
                 <outlet property="contentImage" destination="IpJ-Zj-5IA" id="1zm-Eg-WiG"/>
                 <outlet property="detailLbl" destination="fGM-Y8-nCV" id="NbS-hR-2BC"/>
                 <outlet property="gotoButton" destination="xcx-z3-u0F" id="L9C-ec-W12"/>
+                <outlet property="imageHeight" destination="51k-Pt-T3h" id="TyC-63-Ci8"/>
                 <outlet property="navView" destination="jSK-Xr-DKs" id="O1n-Il-Ns4"/>
                 <outlet property="shareButton" destination="VhY-PB-Pyr" id="ZIw-zZ-o2d"/>
                 <outlet property="titleLbl" destination="ubM-8R-fTi" id="57t-c1-kcY"/>
@@ -31,29 +32,41 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IpJ-Zj-5IA">
-                    <rect key="frame" x="0.0" y="60" width="325" height="150"/>
+                    <rect key="frame" x="0.0" y="60" width="327" height="250"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="150" id="51k-Pt-T3h"/>
+                        <constraint firstAttribute="height" constant="250" id="51k-Pt-T3h"/>
                     </constraints>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VhY-PB-Pyr">
-                    <rect key="frame" x="327" y="60" width="46" height="40"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VhY-PB-Pyr">
+                    <rect key="frame" x="329" y="60" width="46" height="50"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="40" id="1Dv-cs-zkH"/>
+                        <constraint firstAttribute="height" constant="50" id="1Dv-cs-zkH"/>
                         <constraint firstAttribute="width" constant="46" id="j9M-e8-7rO"/>
                     </constraints>
-                    <state key="normal" image="discussion-forum.png" backgroundImage="dsbg.jpg"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <inset key="titleEdgeInsets" minX="-25" minY="30" maxX="0.0" maxY="0.0"/>
+                    <inset key="imageEdgeInsets" minX="10" minY="5" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="Share" image="discussion-forum.png" backgroundImage="dsbg.jpg"/>
+                    <connections>
+                        <action selector="shareAction:" destination="-1" eventType="touchUpInside" id="xuK-zM-G96"/>
+                    </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xcx-z3-u0F">
-                    <rect key="frame" x="327" y="115" width="46" height="40"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xcx-z3-u0F">
+                    <rect key="frame" x="329" y="125" width="46" height="50"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="46" id="9x1-mF-Y88"/>
-                        <constraint firstAttribute="height" constant="40" id="e7D-jk-mQx"/>
+                        <constraint firstAttribute="height" constant="50" id="e7D-jk-mQx"/>
                     </constraints>
-                    <state key="normal" image="pcright-arrow.png" backgroundImage="dsbg.jpg"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                    <inset key="titleEdgeInsets" minX="-10" minY="30" maxX="0.0" maxY="0.0"/>
+                    <inset key="imageEdgeInsets" minX="10" minY="10" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="Website" image="pcright-arrow.png" backgroundImage="dsbg.jpg"/>
+                    <connections>
+                        <action selector="gotoWebAction:" destination="-1" eventType="touchUpInside" id="T2l-Zl-B9I"/>
+                    </connections>
                 </button>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fGM-Y8-nCV">
-                    <rect key="frame" x="5" y="220" width="365" height="445"/>
+                    <rect key="frame" x="5" y="320" width="365" height="345"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -70,8 +83,8 @@
                 <constraint firstAttribute="trailing" secondItem="IpJ-Zj-5IA" secondAttribute="trailing" id="FJ2-39-wXl"/>
                 <constraint firstItem="ubM-8R-fTi" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="JdM-pJ-0SG"/>
                 <constraint firstAttribute="trailing" secondItem="ubM-8R-fTi" secondAttribute="trailing" id="Ji4-jk-vkk"/>
-                <constraint firstAttribute="trailing" secondItem="xcx-z3-u0F" secondAttribute="trailing" constant="2" id="RII-rf-iM7"/>
-                <constraint firstAttribute="trailing" secondItem="VhY-PB-Pyr" secondAttribute="trailing" constant="2" id="VBg-oO-Kzf"/>
+                <constraint firstAttribute="trailing" secondItem="xcx-z3-u0F" secondAttribute="trailing" id="RII-rf-iM7"/>
+                <constraint firstAttribute="trailing" secondItem="VhY-PB-Pyr" secondAttribute="trailing" id="VBg-oO-Kzf"/>
                 <constraint firstItem="VhY-PB-Pyr" firstAttribute="leading" secondItem="IpJ-Zj-5IA" secondAttribute="trailing" constant="2" id="Vyy-w2-dEl"/>
                 <constraint firstItem="VhY-PB-Pyr" firstAttribute="top" secondItem="ubM-8R-fTi" secondAttribute="bottom" id="YbC-sQ-iRf"/>
                 <constraint firstItem="xcx-z3-u0F" firstAttribute="top" secondItem="VhY-PB-Pyr" secondAttribute="bottom" constant="15" id="cde-Y4-DeM"/>

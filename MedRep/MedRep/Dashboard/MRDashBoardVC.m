@@ -20,6 +20,7 @@
 #import "MRDoctorActivityScoreViewController.h"
 #import "MRTransformViewController.h"
 #import "MRDrugSearchViewController.h"
+#import "AppDelegate.h"
 
 @interface MRDashBoardVC () <UITableViewDataSource, UITableViewDelegate, SWRevealViewControllerDelegate>
 
@@ -78,7 +79,19 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self getAppointmnets];
+    
+    if ([APP_DELEGATE.launchScreen isEqualToString:@"Survey"]) {
+        MRSurveyListViewController *surveyListViewController = [[MRSurveyListViewController alloc] initWithNibName:@"MRSurveyListViewController" bundle:nil];
+        surveyListViewController.isFromMenu = NO;
+        [self.navigationController pushViewController:surveyListViewController animated:NO];
+        APP_DELEGATE.launchScreen = @"";
+    }else if ([APP_DELEGATE.launchScreen isEqualToString:@"Notifications"]){
+        MRNotificationsViewController *notifications = [[MRNotificationsViewController alloc] initWithNibName:@"MRNotificationsViewController" bundle:nil];
+        [self.navigationController pushViewController:notifications animated:NO];
+        APP_DELEGATE.launchScreen = @"";
+    }else{
+      [self getAppointmnets];
+    }
 }
 - (void)enableDisableLeftButton:(BOOL)isEnable
 {

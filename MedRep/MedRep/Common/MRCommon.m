@@ -370,7 +370,7 @@
     
     [parentView addConstraint:[NSLayoutConstraint constraintWithItem:childView attribute:NSLayoutAttributeTrailing
                                                            relatedBy:NSLayoutRelationEqual
-                                                              toItem:parentView attribute:NSLayoutAttributeRight multiplier:1.0f constant:0.0f]];
+                                                              toItem:parentView attribute:NSLayoutAttributeTrailing multiplier:1.0f constant:0.0f]];
     
     [parentView addConstraint:[NSLayoutConstraint constraintWithItem:childView attribute:NSLayoutAttributeTop
                                                            relatedBy:NSLayoutRelationEqual
@@ -401,7 +401,12 @@
         
         if (nil == thedata)
         {
-            NSString *str = (NSString*)data;
+            NSString *str = @"";
+            if ([data isKindOfClass:[NSString class]]) {
+                str = (NSString*)data;
+            }else{
+                str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            }
             thedata = [NSData decodeBase64ForString:str];
         }
         

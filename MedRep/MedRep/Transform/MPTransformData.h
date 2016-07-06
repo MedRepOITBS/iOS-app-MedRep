@@ -15,5 +15,6 @@
 @property NSString *shortDescription;
 @property NSString *detailDescription;
 @property NSString *source;
+@property NSString *contentType;
 
 @end

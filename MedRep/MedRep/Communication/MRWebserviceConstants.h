@@ -80,7 +80,31 @@ typedef enum kMRWebServiceType
     kMRWebServiceTypeGetMyUpcomingAppointment,
     kMRWebServiceTypeGetMyCompletedAppointment,
     kMRWebServiceTypeGetMyMyTeamPendingAppointments,
-
+    kMRWebServiceTypeCreateGroup,
+    kMRWebServiceTypeUpdateGroup,
+    kMRWebServiceTypeAddMemberToGroup,
+    kMRWebServiceTypeAddMember,
+    kMRWebServiceTypeRemoveGroup,
+    kMRWebServiceTypeGetNews,
+    kMRWebServiceTypeGetMaterial,
+    kMRWebServiceTypeGetMoreConnections,
+    kMRWebServiceTypeGetGroupList,
+    kMRWebServiceTypeGetSuggestedGroupList,
+    kMRWebServiceTypeGetContactList,
+    kMRWebServiceTypeGetSuggestedContactList,
+    kMRWebServiceTypeGetAllContactsByCityList,
+    kMRWebServiceTypeGetDoctorContactsList,
+    kMRWebServiceTypefetchPendingConnectionsList,
+    kMRWebServiceTypefetchPendingMembersList,
+    kMRWebServiceTypefetchPendingGroupsList,
+    kMRWebServiceTypeGetGroupMemberStatus,
+    kMRWebServiceTypeGetGroupMemberWithIdStatus,
+    kMRWebServiceTypeUpdateGroupMemberStatus,
+    kMRWebServiceTypeUpdateConnectionStatus,
+    kMRWebServiceTypeRemoveGroupMember,
+    kMRWebServiceTypeRemoveConnection,
+    kMRWebServiceTypeGetUserPreferences,
+    kMRWebServiceTypeGetSearchContactList
 } kMRWebServiceType;
 
 

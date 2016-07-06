@@ -13,7 +13,7 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="80" height="30"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pRN-BV-eMd">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pRN-BV-eMd">
                         <rect key="frame" x="0.0" y="4" width="80" height="21"/>
                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                         <nil key="highlightedColor"/>
@@ -22,6 +22,12 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="pRN-BV-eMd" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="4" id="GwY-YZ-SMb"/>
+                <constraint firstItem="pRN-BV-eMd" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="U3b-jV-0k2"/>
+                <constraint firstAttribute="bottom" secondItem="pRN-BV-eMd" secondAttribute="bottom" constant="5" id="WfI-za-YNm"/>
+                <constraint firstAttribute="trailing" secondItem="pRN-BV-eMd" secondAttribute="trailing" id="tw1-PD-gd6"/>
+            </constraints>
             <connections>
                 <outlet property="title" destination="pRN-BV-eMd" id="Kdk-Sc-OvJ"/>
             </connections>

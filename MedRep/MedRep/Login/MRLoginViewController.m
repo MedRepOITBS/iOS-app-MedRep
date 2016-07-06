@@ -69,8 +69,10 @@
     
 //    self.emailTextField.text      = @"Manager@erfolg.com";
 //    self.passwordTxtField.text    = @"manager";
-
-
+    
+    self.emailTextField.text      = @"dineshreddy06@gmail.com";
+    self.passwordTxtField.text    = @"dinesh";
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 }
