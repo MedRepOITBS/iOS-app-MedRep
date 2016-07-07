@@ -38,8 +38,7 @@
 @property (strong, nonatomic) NSArray* posts;
 @property (strong, nonatomic) IBOutlet UIView *navView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-@property (strong, nonatomic) MRContact* mainContact;
-@property (strong, nonatomic) MRGroup* mainGroup;
+
 @property (strong, nonatomic) UITapGestureRecognizer* tapGesture;
 
 @property (strong, nonatomic) UIView *tabBarView;
@@ -62,10 +61,6 @@
     UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon.png"]
                                                                          style:UIBarButtonItemStylePlain target:revealController
                                                                         action:@selector(revealToggle:)];
-    if (_isFromDetails) {
-        revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonAction)];
-        _bottomHeight.constant = _isFromDetails ? 0 : 50;
-    }
     
     self.navigationItem.leftBarButtonItem = revealButtonItem;
     
@@ -122,33 +117,16 @@
 }
 
 - (void)fetchPosts {
-    NSArray *myContacts = [MRDatabaseHelper getContacts];
-    myContacts = [myContacts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K == %@", @"self.name", @"Chris Martin"]];
-    self.mainContact = myContacts.firstObject;
+    self.posts = [MRDatabaseHelper getShareArticles];
     
     // Do any additional setup after loading the view from its nib.
     [self.postsTableView registerNib:[UINib nibWithNibName:@"MRGroupPostItemTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"groupCell"];
     self.postsTableView.estimatedRowHeight = 250;
     self.postsTableView.rowHeight = UITableViewAutomaticDimension;
-    if (self.mainContact) {
-        self.groupsUnderContact = [self.mainContact.groups allObjects];
-        self.posts = [self.mainContact.groupPosts allObjects];
-    } else {
-        self.contactsUnderGroup = [self.mainGroup.contacts allObjects];
-        self.posts = [self.mainGroup.groupPosts allObjects];
-    }
-    
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"postedOn" ascending:false ];
-    self.posts = [self.posts sortedArrayUsingDescriptors:@[sortDescriptor]];
 }
 
-- (void)setContact:(MRContact*)contact {
-    self.mainContact = contact;
-}
-
-- (void)setGroup:(MRGroup*)group {
-    self.mainGroup = group;
-   
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -188,39 +166,6 @@
 - (void)backButtonAction{
     [self.navigationController popViewControllerAnimated:YES];
 }
-
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
-}
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    if (self.contactsUnderGroup.count > 0) {
-        return self.contactsUnderGroup.count;
-    } else {
-        return self.groupsUnderContact.count;
-    }
-}
-
-// The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    MRContactWithinGroupCollectionCellCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"contactWithinGroupCell" forIndexPath:indexPath];
-    if (self.contactsUnderGroup.count > 0) {
-    [cell setContact:self.contactsUnderGroup[indexPath.row]];
-    } else {
-        [cell setGroup:self.groupsUnderContact[indexPath.row]];
-    }
-    return cell;
-}
-
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(110, collectionView.bounds.size.height);
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionView *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    return 4; // This is the minimum inter item spacing, can be more
-}
-
 - (void)connectButtonTapped {
     MRContactsViewController* contactsViewCont = [[MRContactsViewController alloc] initWithNibName:@"MRContactsViewController" bundle:nil];
     MRGroupsListViewController* groupsListViewController = [[MRGroupsListViewController alloc] initWithNibName:@"MRGroupsListViewController" bundle:[NSBundle mainBundle]];
@@ -263,12 +208,10 @@
     [self fetchPosts];
 }
 
-- (void)shareButtonTapped:(MRGroupPost*)groupPost {
+- (void)shareButtonTapped:(MRSharePost*)groupPost {
     self.shareOptionsVC = [[MRShareOptionsViewController alloc] initWithNibName:@"MRShareOptionsViewController" bundle:nil];
     [self.shareOptionsVC setDelegate:self];
-    groupPost.postedOn = [NSDate date];
-    [groupPost.managedObjectContext save:nil];
-    [self.shareOptionsVC setGroupPost:groupPost];
+    [self.shareOptionsVC setParentPost:groupPost];
     [self.navigationController pushViewController:self.shareOptionsVC animated:YES];
 }
 

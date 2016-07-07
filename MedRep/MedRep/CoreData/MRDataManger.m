@@ -180,6 +180,10 @@ static MRDataManger *sharedDataManager = nil;
     [self dbSaveInContext:[self getNewPrivateManagedObjectContext]];
 }
 
+- (void)dbSaveOnPrivateContext:(NSManagedObjectContext*)context
+{
+    [self dbSaveInContext:context];
+}
 
 - (NSManagedObject *)createObjectForEntity:(NSString *)entity
 {
@@ -192,6 +196,11 @@ static MRDataManger *sharedDataManager = nil;
 }
 
 - (NSArray *)fetchObjectList:(NSString *)entity
+{
+    return [self fetchObjectList:entity inContext:self.managedObjectContext];
+}
+
+- (NSArray *)fetchObjectList:(NSString *)entity sortBy:(NSString*)column andSortOrder:(BOOL)sortOrder
 {
     return [self fetchObjectList:entity inContext:self.managedObjectContext];
 }
@@ -290,7 +299,7 @@ static MRDataManger *sharedDataManager = nil;
         [context save:&error];
         
         // Save the changes on the main context
-        [context.parentContext performBlock:^{
+        [context.parentContext performBlockAndWait:^{
             NSError *parentError = nil;
             [context.parentContext save:&parentError];
         }];
@@ -304,12 +313,27 @@ static MRDataManger *sharedDataManager = nil;
 }
 
 - (NSArray *)fetchObjectList:(NSString *)entity inContext:(NSManagedObjectContext *)context{
-    
+    return [self performFetch:entity inContext:context sortColumn:nil andSortOrder:false];
+}
+
+- (NSArray *)fetchObjectList:(NSString *)entity inContext:(NSManagedObjectContext *)context
+                  sortColumn:(NSString*)column andSortOrder:(BOOL)sortOrder {
+    return [self performFetch:entity inContext:context sortColumn:column andSortOrder:false];
+}
+
+- (NSArray*)performFetch:(NSString*)entity inContext:(NSManagedObjectContext*)context
+              sortColumn:(NSString*)column andSortOrder:(BOOL)sortOrder
+{
     [self assertConditionForContext:context];
     
     NSEntityDescription *entityDescription = [NSEntityDescription entityForName:entity inManagedObjectContext:context];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:entityDescription];
+    
+    if (column != nil && column.length > 0) {
+        NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:column ascending:sortOrder];
+        [fetchRequest setSortDescriptors:@[sort]];
+    }
     
     __block NSArray *result = nil;
     

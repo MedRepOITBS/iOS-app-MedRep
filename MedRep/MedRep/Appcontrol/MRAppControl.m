@@ -22,6 +22,7 @@
 #import "MRWelcomeViewController.h"
 #import "MROTPVerifiedViewController.h"
 #import "AppDelegate.h"
+#import "MRContact.h"
 
 @interface MRAppControl () <SWRevealViewControllerDelegate, ViewControllerDelegate,MRMenuViewControllerDelegate,MRPharmaMenuViewControllerDelegate,MRWelcomeViewControllerDelegate>
 
@@ -140,6 +141,7 @@
     [self.userRegData setObject:[details objectOrNilForKey:@"lastName"] forKey:KLastName];
     [self.userRegData setObject:[details objectOrNilForKey:@"userId"] forKey:@"userId"];
     [self.userRegData setObject:[details objectOrNilForKey:@"status"] forKey:@"status"];
+    [self.userRegData setObject:[details objectOrNilForKey:kDisplayName] forKey:kDisplayName];
     
     if (self.userType == 1 || self.userType == 2)
     {
@@ -682,6 +684,38 @@
     
     [[MRWebserviceHelper sharedWebServiceHelper] registerDeviceToken:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
     }];
+}
+
++ (NSString*)getContactName:(MRContact*)contact {
+    NSMutableString *name = [NSMutableString stringWithString:@""];
+    if (contact != nil) {
+        if (contact.firstName != nil && contact.firstName.length > 0) {
+            name = [NSMutableString stringWithString:contact.firstName];
+        }
+        
+        if (contact.lastName != nil && contact.lastName.length > 0) {
+            if (name.length > 0) {
+                [name appendString:@" "];
+            }
+            
+            [name appendString:contact.lastName];
+        }
+    }
+    return name;
+}
+
++ (UIImage*)getContactImage:(MRContact*)contact {
+    UIImage *image = [UIImage imageNamed:@"person"];;
+    
+    if (contact != nil) {
+        if (contact.profilePic != nil) {
+            image = [UIImage imageWithData:contact.profilePic];
+        } else {
+            image = [UIImage imageNamed:@"person"];
+        }
+    }
+    
+    return image;
 }
 
 @end

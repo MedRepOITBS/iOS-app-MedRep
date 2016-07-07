@@ -7,7 +7,9 @@
 //
 
 #import "MRGroupPostItemTableViewCell.h"
-#import "MRGroupPost.h"
+#import "MRConstants.h"
+#import "MRSharePost.h"
+#import "MRTransformPost.h"
 #import "MRContact.h"
 
 @interface MRGroupPostItemTableViewCell()
@@ -22,8 +24,11 @@
 @property (weak, nonatomic) IBOutlet UIView *likeView;
 @property (weak, nonatomic) IBOutlet UIView *commentView;
 @property (weak, nonatomic) IBOutlet UIView *shareView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contactLabelHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *postImageHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *profilePicWidthConstraint;
 
-@property (nonatomic) MRGroupPost *post;
+@property (nonatomic) MRSharePost *post;
 
 @end
 
@@ -37,7 +42,7 @@
     
     NSInteger likeCount = [_likeCountLabel.text integerValue];
     likeCount = likeCount +1;
-    self.post.numberOfLikes = [NSNumber numberWithLong:likeCount];
+    self.post.likesCount = [NSNumber numberWithLong:likeCount];
     [self.post.managedObjectContext save:nil];
     
     _shareCountLabel.text = [NSString stringWithFormat:@"%ld",(long)likeCount];
@@ -64,9 +69,8 @@
         [self.delegate mrGroupPostItemTableViewCell:self withCommentButtonTapped:gesture.view];
         
     }
-    
-    
 }
+
 - (void)awakeFromNib {
     // Initialization code
     UITapGestureRecognizer *likeTapGestureRecognizer =
@@ -90,30 +94,52 @@
 
 //{"name":"John Doe","postText":"Guys, these drugs look promising!","likes":10,"comments":23,"shares":3,"profile_pic":"","post_pic":""}
 
-- (void)setPostContent:(MRGroupPost *)post  tagIndex:(NSInteger)tagIndex {
+- (void)setPostContent:(MRSharePost *)post  tagIndex:(NSInteger)tagIndex {
     self.post = post;
     
-    self.contactNameLabel.text = post.contact.name;
-    self.postLabel.text = post.postText;
-    self.profilePicImageView.image = [UIImage imageNamed:post.contact.profilePic];
-    NSString* imageName = post.postPic;
-    if (imageName) {
-        self.postImageView.image = [UIImage imageNamed:imageName];
+    self.postLabel.text = post.titleDescription;
+    
+    UIImage *image = nil;
+    
+    if (self.post.contentType.integerValue == kTransformContentTypeImage) {
+        if (self.post.url != nil && self.post.url.length > 0) {
+            image = [UIImage imageNamed:self.post.url];
+        } else if (self.post.objectData != nil) {
+            image = [UIImage imageWithData:self.post.objectData];
+        }
+    }
+    
+    if (image != nil) {
+        self.postImageView.image = image;
+        self.postImageHeightConstraint.constant = 128;
     } else {
-        self.postImageView.image = nil;
+        self.postImageHeightConstraint.constant = 0;
+    }
+    
+    NSString *name = @"";
+    if (self.post.sharedByProfileName != nil) {
+        name = self.post.sharedByProfileName;
+    }
+    self.contactNameLabel.text = name;
+    
+    NSData* imageData = post.shareddByProfilePic;
+    if (imageData) {
+        self.profilePicImageView.image = [UIImage imageWithData:imageData];
+    } else {
+        self.profilePicImageView.image = [UIImage imageNamed:@"person"];
     }
     
     tagIndex++;
     [self.likeView setTag:tagIndex];
-    self.likeCountLabel.text = [NSString stringWithFormat:@"%@",post.numberOfLikes];
+    self.likeCountLabel.text = [NSString stringWithFormat:@"%ld",post.likesCount.integerValue];
     
     tagIndex++;
     [self.shareView setTag:tagIndex];
-    self.shareCountLabel.text = [NSString stringWithFormat:@"%@",post.numberOfShares];
+    self.shareCountLabel.text = [NSString stringWithFormat:@"%@",post.shareCount];
     
     tagIndex++;
     [self.commentView setTag:tagIndex];
-    self.commentCountLabel.text = [NSString stringWithFormat:@"%@",post.numberOfComments];
+    self.commentCountLabel.text = [NSString stringWithFormat:@"%@",post.commentsCount];
 }
 
 @end

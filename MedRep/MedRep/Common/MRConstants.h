@@ -27,6 +27,14 @@ typedef enum
     SORT_ORDER_DESCENDING
 } SORT_ORDER;
 
+typedef NS_ENUM(NSInteger, TransformContentType) {
+    kTransformContentTypeNone = 0,
+    kTransformContentTypeImage,
+    kTransformContentTypePDF,
+    kTransformContentTypeVideo,
+    kTransformContentTypeText,
+};
+
 
 #define APP_DELEGATE ((AppDelegate *)[UIApplication sharedApplication].delegate)
 
@@ -56,6 +64,7 @@ typedef enum
 #define KMobileNumber           @"MobileNumber"
 #define KEmail                  @"Email"
 #define KProfilePicture         @"profilePicture"
+#define kDisplayName            @"displayName"
 
 #define KRegistarionStageTwo    @"RegistarionStageTwo"
 
@@ -141,3 +150,5 @@ typedef NS_ENUM(NSInteger, DoctorPlusTabIndex) {
     DoctorPlusTabShare,
     DoctorPlusTabServe
 };
+
+typedef void (^WebServiceResponseHandler)(id result);

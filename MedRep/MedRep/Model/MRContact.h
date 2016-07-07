@@ -2,18 +2,19 @@
 //  MRContact.h
 //  MedRep
 //
-//  Created by Vivekan Arther Subaharan on 5/21/16.
+//  Created by Vamsi Katragadda on 7/7/16.
 //  Copyright © 2016 MedRep. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "MRManagedObject.h"
 
-@class MRGroup, MRGroupPost;
+@class MRManagedObject, MRGroup, MRGroupPost;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MRContact : NSManagedObject
+@interface MRContact : MRManagedObject
 
 // Insert code here to declare functionality of your managed object subclass
 

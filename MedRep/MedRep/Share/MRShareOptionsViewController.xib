@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MRShareOptionsViewController">
             <connections>
                 <outlet property="emptyMessageLabel" destination="vPx-b3-6NI" id="qng-Vf-ar7"/>
+                <outlet property="searchBar" destination="yYx-AN-0LD" id="FQE-ED-kVo"/>
                 <outlet property="tableView" destination="cUL-re-3Eg" id="B4P-2D-dyl"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -32,18 +33,24 @@
                         <outlet property="delegate" destination="-1" id="wXb-Jd-kD7"/>
                     </connections>
                 </tableView>
-                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Looks like you have an empty contact list" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vPx-b3-6NI">
-                    <rect key="frame" x="50" y="280" width="500" height="40"/>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Looks like you have an empty contact list" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vPx-b3-6NI">
+                    <rect key="frame" x="50" y="60" width="500" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="5FD-E2-1OB"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="5FD-E2-1OB"/>
+                        </mask>
+                    </variation>
                 </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="vPx-b3-6NI" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="60" id="CJX-f6-gHW"/>
                 <constraint firstAttribute="trailing" secondItem="vPx-b3-6NI" secondAttribute="trailing" constant="50" id="OGV-bc-RY0"/>
                 <constraint firstItem="yYx-AN-0LD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="PFe-3z-gbg"/>
                 <constraint firstItem="cUL-re-3Eg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="S1c-d8-gbH"/>
@@ -57,6 +64,11 @@
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="WD5-i4-ODv"/>
+                </mask>
+            </variation>
         </view>
         <view contentMode="scaleToFill" id="bQh-YJ-zar">
             <rect key="frame" x="0.0" y="0.0" width="40" height="33"/>

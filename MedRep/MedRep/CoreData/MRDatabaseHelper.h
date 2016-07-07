@@ -22,7 +22,13 @@
 #define kSuggestedContactEntity     @"MRSuggestedContact"
 #define kGroupChildPostEntity       @"MrGroupChildPost"
 
+#define kMRTransformPost     @"MRTransformPost"
+#define kMRSharePost         @"MRSharePost"
+#define kMRPostedReplies     @"MRPostedReplies"
+
 @class MRGroupPost;
+@class MRTransformPost;
+
 @interface MRDatabaseHelper : NSObject
 {
     
@@ -30,13 +36,11 @@
 
 + (MRDatabaseHelper *)sharedHelper;
 
-+ (void)addContacts:(NSArray*)contacts;
 + (void)addSuggestedContacts:(NSArray*)contacts;
 + (void)addGroups:(NSArray*)groups;
 + (void)addGroupPosts:(NSArray*)groupPosts;
 
-
-+ (NSArray*)getContacts;
++ (void)getContacts:(WebServiceResponseHandler)responseHandler;
 + (NSArray*)getSuggestedContacts;
 + (NSArray*)getGroups;
 
@@ -77,5 +81,11 @@
 
 + (void)cleanDatabaseOnLogout;
 + (void)addGroupChildPost:(MRGroupPost*)post withPostDict:(NSDictionary *)myDict;
+
++ (NSArray*)getShareArticles;
++ (void)shareAnArticle:(MRTransformPost*)transformPost;
+
++ (NSArray*)getTransformArticles;
++ (void)addTransformArticles:(NSArray*)posts;
 
 @end

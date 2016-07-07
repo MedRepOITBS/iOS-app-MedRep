@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class MRGroupPost;
+@class MRSharePost;
 
 @interface MRShareDetailViewController : UIViewController
 
-@property (nonatomic) MRGroupPost *post;
+@property (nonatomic) MRSharePost *post;
 
 @end

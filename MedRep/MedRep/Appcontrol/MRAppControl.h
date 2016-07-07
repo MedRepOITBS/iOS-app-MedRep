@@ -10,7 +10,7 @@
 @import UIKit;
 @class Reachability;
 
-@class ViewController;
+@class ViewController, MRContact;
 
 @interface MRAppControl : NSObject
 {
@@ -57,5 +57,8 @@
 - (UIImage*)getCompanyImage;
 
 -(void)registerDeviceToken;
+
++ (NSString*)getContactName:(MRContact*)contact;
++ (UIImage*)getContactImage:(MRContact*)contact;
 
 @end

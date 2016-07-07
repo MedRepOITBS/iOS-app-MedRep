@@ -28,6 +28,7 @@
 #import "MRAddMembersViewController.h"
 #import "MRJoinGroupViewController.h"
 #import "MRCustomTabBar.h"
+#import "MRDatabaseHelper.h"
 
 @interface MRContactsViewController () <UICollectionViewDataSource,UICollectionViewDelegate,UIActionSheetDelegate,UISearchBarDelegate, SWRevealViewControllerDelegate>{
     NSMutableArray *groupsArray;
@@ -135,7 +136,12 @@
     [self.searchBar resignFirstResponder];
     
     if (self.currentIndex == 0) {
-        [self getContactList];
+        [MRDatabaseHelper getContacts:^(id result) {
+            self.myContacts = result;
+            _fileredContacts = _myContacts;
+            [self refreshLabels];
+            [_myContactsCollectionView reloadData];
+        }];
     }else if (self.currentIndex == 1) {
         [self getSuggestedContactList];
     }else if (self.currentIndex == 2) {
@@ -269,7 +275,9 @@
         //NSString *currentString = self.categories[indexPath.row];
         self.currentIndex = indexPath.row;
         if (self.currentIndex == 0) {
-            [self getContactList];
+            [MRDatabaseHelper getContacts:^(id results) {
+                self.myContacts = results;
+            }];
         }else if (self.currentIndex == 1) {
             [self getSuggestedContactList];
         }else if (self.currentIndex == 2) {
@@ -551,58 +559,6 @@
                          [self refreshLabels];
                          [_myContactsCollectionView reloadData];
                      }else
-                     {
-                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
-                         if (erros.count > 0)
-                             [MRCommon showAlert:[erros lastObject] delegate:nil];
-                     }
-                 }];
-             }];
-        }
-        else
-        {
-            NSArray *erros =  [details componentsSeparatedByString:@"-"];
-            if (erros.count > 0)
-                [MRCommon showAlert:[erros lastObject] delegate:nil];
-        }
-    }];
-}
-
-- (void)getContactList{
-    [MRCommon showActivityIndicator:@"Requesting..."];
-    [[MRWebserviceHelper sharedWebServiceHelper] getContactListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-        [MRCommon stopActivityIndicator];
-        if (status)
-        {
-            _myContacts = [NSMutableArray array];
-            NSArray *responseArray = responce[@"Responce"];
-            for (NSDictionary *dic in responseArray) {
-                MRGroupUserObject *groupObj = [[MRGroupUserObject alloc] initWithDict:dic];
-                [_myContacts addObject:groupObj];
-            }
-            _fileredContacts = _myContacts;
-            [self refreshLabels];
-            [_myContactsCollectionView reloadData];
-        }
-        else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
-        {
-            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
-             {
-                 [MRCommon savetokens:responce];
-                 [[MRWebserviceHelper sharedWebServiceHelper] getContactListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-                     [MRCommon stopActivityIndicator];
-                     if (status)
-                     {
-                         _myContacts = [NSMutableArray array];
-                         NSArray *responseArray = responce[@"Responce"];
-                         for (NSDictionary *dic in responseArray) {
-                             MRGroupUserObject *groupObj = [[MRGroupUserObject alloc] initWithDict:dic];
-                             [_myContacts addObject:groupObj];
-                         }
-                         _fileredContacts = _myContacts;
-                         [self refreshLabels];
-                         [_myContactsCollectionView reloadData];
-                     } else
                      {
                          NSArray *erros =  [details componentsSeparatedByString:@"-"];
                          if (erros.count > 0)
