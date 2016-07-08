@@ -83,6 +83,7 @@
 //    [self.postsTableView registerNib:[UINib nibWithNibName:@"MRGroupPostItemTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"groupCell"];
     self.postsTableView.estimatedRowHeight = 250;
     self.postsTableView.rowHeight = UITableViewAutomaticDimension;
+    
     if (self.mainContact) {
         for (UIView *view in self.mainImageView.subviews) {
             if ([view isKindOfClass:[UILabel class]]) {

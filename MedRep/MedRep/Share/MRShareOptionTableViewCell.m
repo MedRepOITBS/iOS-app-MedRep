@@ -36,61 +36,13 @@
     
     NSString *fullName = [MRAppControl getContactName:contact];
     self.contactName.text = fullName;
-    self.contactPic.image = [MRAppControl getContactImage:contact];
-    
-    if (contact.profilePic != nil ) {
-        self.contactPic.image = [UIImage imageWithData:contact.profilePic];
-    } else {
-        self.contactPic.image = nil;
-        if (fullName.length > 0) {
-            UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:self.contactPic.bounds];
-            subscriptionTitleLabel.textAlignment = NSTextAlignmentCenter;
-            subscriptionTitleLabel.font = [UIFont systemFontOfSize:15.0];
-            subscriptionTitleLabel.textColor = [UIColor lightGrayColor];
-            subscriptionTitleLabel.layer.cornerRadius = 5.0;
-            subscriptionTitleLabel.layer.masksToBounds = YES;
-            subscriptionTitleLabel.layer.borderWidth =1.0;
-            subscriptionTitleLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
-            
-            NSString *imageString = @"";
-            if (fullName.length > 0) {
-                imageString = [imageString stringByAppendingString:[NSString stringWithFormat:@"%c",[fullName characterAtIndex:0]]];
-            }
-            subscriptionTitleLabel.text = imageString;
-            [self.contactPic addSubview:subscriptionTitleLabel];
-        }
-    }
+    [MRAppControl getContactImage:contact andImageView:self.contactPic];
 }
 
 - (void)setGroupDataInCell:(MRGroup*)group {
     
-    NSString *fullName = group.group_name;
-    self.contactName.text = fullName;
-    
-    if (group.group_img_data != nil ) {
-//        self.contactPic.image = [UIImage imageWithData:group.profilePic];
-    } else {
-        self.contactPic.image = nil;
-        if (fullName.length > 0) {
-            UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:self.contactPic.bounds];
-            subscriptionTitleLabel.textAlignment = NSTextAlignmentCenter;
-            subscriptionTitleLabel.font = [UIFont systemFontOfSize:15.0];
-            subscriptionTitleLabel.textColor = [UIColor lightGrayColor];
-            subscriptionTitleLabel.layer.cornerRadius = 5.0;
-            subscriptionTitleLabel.layer.masksToBounds = YES;
-            subscriptionTitleLabel.layer.borderWidth =1.0;
-            subscriptionTitleLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
-            
-            NSString *imageString = @"";
-            if (fullName.length > 0) {
-                imageString = [imageString stringByAppendingString:[NSString stringWithFormat:@"%c",[fullName characterAtIndex:0]]];
-            }
-            subscriptionTitleLabel.text = imageString;
-            [self.contactPic addSubview:subscriptionTitleLabel];
-        } else {
-            self.contactPic.image = [UIImage imageNamed:@"person"];
-        }
-    }
+    self.contactName.text = group.group_name;
+    [MRAppControl getGroupImage:group andImageView:self.contactPic];
 }
 
 @end

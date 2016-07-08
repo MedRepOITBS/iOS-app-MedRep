@@ -88,31 +88,8 @@
     
     NSString *fullName = [MRAppControl getContactName:contact];
     self.name.text = fullName;
-    self.picture.image = [MRAppControl getContactImage:contact];
-    
     self.detail.text = contact.therapeuticArea.length ? contact.therapeuticArea : contact.therapeuticName;
-    if (contact.profilePic != nil ) {
-        self.picture.image = [UIImage imageWithData:contact.profilePic];
-    } else {
-        self.picture.image = nil;
-        if (fullName.length > 0) {
-            UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:self.picture.bounds];
-            subscriptionTitleLabel.textAlignment = NSTextAlignmentCenter;
-            subscriptionTitleLabel.font = [UIFont systemFontOfSize:15.0];
-            subscriptionTitleLabel.textColor = [UIColor lightGrayColor];
-            subscriptionTitleLabel.layer.cornerRadius = 5.0;
-            subscriptionTitleLabel.layer.masksToBounds = YES;
-            subscriptionTitleLabel.layer.borderWidth =1.0;
-            subscriptionTitleLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
-            
-            NSString *imageString = @"";
-            if (fullName.length > 0) {
-                imageString = [imageString stringByAppendingString:[NSString stringWithFormat:@"%c",[fullName characterAtIndex:0]]];
-            }
-            subscriptionTitleLabel.text = imageString;
-            [self.picture addSubview:subscriptionTitleLabel];
-        }
-    }
+    [MRAppControl getContactImage:contact andImageView:self.picture];
 }
 
 @end

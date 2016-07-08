@@ -60,6 +60,7 @@
 
 + (NSString*)getContactName:(MRContact*)contact;
 + (UIImage*)getContactImage:(MRContact*)contact;
++ (void)getContactImage:(MRContact*)contact andImageView:(UIImageView*)parentView;
 + (UIImage*)getRepliedByProfileImage:(MRPostedReplies*)replies;
 
 + (UIImage*)getGroupImage:(MRGroup*)group;

@@ -718,6 +718,37 @@
     return image;
 }
 
++ (void)getContactImage:(MRContact*)contact andImageView:(UIImageView*)parentView {
+    if (contact.profilePic != nil) {
+        parentView.image = [UIImage imageWithData:contact.profilePic];
+    } else {
+        NSString *fullName = [MRAppControl getContactName:contact];
+        if (fullName != nil && fullName.length > 0) {
+            parentView.image = nil;
+            UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:parentView.bounds];
+            subscriptionTitleLabel.textAlignment = NSTextAlignmentCenter;
+            subscriptionTitleLabel.font = [UIFont systemFontOfSize:15.0];
+            subscriptionTitleLabel.textColor = [UIColor lightGrayColor];
+            subscriptionTitleLabel.layer.cornerRadius = 5.0;
+            subscriptionTitleLabel.layer.masksToBounds = YES;
+            subscriptionTitleLabel.layer.borderWidth =1.0;
+            subscriptionTitleLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
+            
+            NSArray *substrngs = [fullName componentsSeparatedByString:@" "];
+            NSString *imageString = @"";
+            for(NSString *str in substrngs){
+                if (str.length > 0) {
+                    imageString = [imageString stringByAppendingString:[NSString stringWithFormat:@"%c",[str characterAtIndex:0]]];
+                }
+            }
+            subscriptionTitleLabel.text = imageString.length > 2 ? [imageString substringToIndex:2] : imageString;
+            [parentView addSubview:subscriptionTitleLabel];
+        } else {
+            parentView.image = [UIImage imageNamed:@"person"];
+        }
+    }
+}
+
 + (UIImage*)getRepliedByProfileImage:(MRPostedReplies*)replies {
     UIImage *image = [UIImage imageNamed:@"person"];;
     
