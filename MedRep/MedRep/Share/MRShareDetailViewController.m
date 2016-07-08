@@ -87,8 +87,8 @@
     [self.commentsView addGestureRecognizer:commentTapGestureRecognizer];
     
     [self setupUI];
-    self.post =  [MRDatabaseHelper getGroupPostForPostID:self.post.groupPostId];
-    self.recentActivity = [NSArray arrayWithArray:self.post.replyPost.array];
+//    self.post =  [MRDatabaseHelper getGroupPostForPostID:self.post.groupPostId];
+//    self.recentActivity = [NSArray arrayWithArray:self.post.replyPost.array];
     _userdata = [MRAppControl sharedHelper].userRegData;
     
     
@@ -205,28 +205,28 @@
         NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"GroupPostChildTableViewCell" owner:self options:nil];
         cell = (GroupPostChildTableViewCell *)[arr objectAtIndex:0];
     }
-    NSArray *aara = [self.post.replyPost array];
-    
-    
-    MrGroupChildPost *childPost = (MrGroupChildPost *)[aara objectAtIndex:indexPath.row];
-    
-    if ([childPost.postPic isEqualToString:@""]) {
-        cell.heightConstraint.constant = 0;
-        cell.verticalContstraint.constant = 0;
-        [cell setNeedsUpdateConstraints];
-    }else {
-        NSString * imagePath = childPost.postPic;
-        
-        cell.commentPic.image = [UIImage imageWithData:[NSData dataWithContentsOfFile:imagePath]];
-        
-    }
-    
-    cell.layoutMargins = UIEdgeInsetsZero;
-    cell.separatorInset = UIEdgeInsetsMake(0, 10000, 0, 0);
-    cell.profileNameLabel.text              = (_userType == 2 || _userType == 1) ? [NSString stringWithFormat:@"Dr. %@ %@", [_userdata objectForKey:KFirstName],[_userdata objectForKey:KLastName]] : [NSString stringWithFormat:@"Mr. %@ %@", [_userdata objectForKey:KFirstName],[_userdata objectForKey:KLastName]];
-    cell.profilePic.image = [MRCommon getImageFromBase64Data:[_userdata objectForKey:KProfilePicture]];
-    
-    cell.postText.text = childPost.postText;
+//    NSArray *aara = [self.post.replyPost array];
+//    
+//    
+//    MrGroupChildPost *childPost = (MrGroupChildPost *)[aara objectAtIndex:indexPath.row];
+//    
+//    if ([childPost.postPic isEqualToString:@""]) {
+//        cell.heightConstraint.constant = 0;
+//        cell.verticalContstraint.constant = 0;
+//        [cell setNeedsUpdateConstraints];
+//    }else {
+//        NSString * imagePath = childPost.postPic;
+//        
+//        cell.commentPic.image = [UIImage imageWithData:[NSData dataWithContentsOfFile:imagePath]];
+//        
+//    }
+//    
+//    cell.layoutMargins = UIEdgeInsetsZero;
+//    cell.separatorInset = UIEdgeInsetsMake(0, 10000, 0, 0);
+//    cell.profileNameLabel.text              = (_userType == 2 || _userType == 1) ? [NSString stringWithFormat:@"Dr. %@ %@", [_userdata objectForKey:KFirstName],[_userdata objectForKey:KLastName]] : [NSString stringWithFormat:@"Mr. %@ %@", [_userdata objectForKey:KFirstName],[_userdata objectForKey:KLastName]];
+//    cell.profilePic.image = [MRCommon getImageFromBase64Data:[_userdata objectForKey:KProfilePicture]];
+//    
+//    cell.postText.text = childPost.postText;
     return cell;
 
 }

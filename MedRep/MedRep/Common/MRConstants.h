@@ -56,6 +56,7 @@ typedef enum
 #define KMobileNumber           @"MobileNumber"
 #define KEmail                  @"Email"
 #define KProfilePicture         @"profilePicture"
+#define kDisplayName            @"displayName"
 
 #define KRegistarionStageTwo    @"RegistarionStageTwo"
 

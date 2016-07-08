@@ -241,8 +241,8 @@
     self.commentBoxView.delegate = self;
     
     self.commentBoxView.frame =     CGRectMake(self.commentBoxView.frame.origin.x, self.commentBoxView.frame.origin.y, 300,316);
-    [self.commentBoxView setContact:self.mainContact];
-    [self.commentBoxView setGroup:self.mainGroup];
+//    [self.commentBoxView setContact:self.mainContact];
+//    [self.commentBoxView setGroup:self.mainGroup];
     _commentBoxKLCPopView = [KLCPopup popupWithContentView:self.commentBoxView];
     
     
@@ -284,8 +284,8 @@
     
     
     [MRDatabaseHelper addGroupChildPost:post withPostDict:saveData];
-    self.mainContact =  [[MRDatabaseHelper getContactListForContactID:self.mainContact.contactId]  objectAtIndex:0];
-    self.posts = [self.mainContact.groupPosts allObjects];
+//    self.mainContact =  [[MRDatabaseHelper getContactListForContactID:self.mainContact.contactId]  objectAtIndex:0];
+//    self.posts = [self.mainContact.groupPosts allObjects];
 //    [self totalPosts];
 //    [self.postsTableView reloadData];
 }
