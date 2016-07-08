@@ -27,7 +27,7 @@
 #define kMRPostedReplies     @"MRPostedReplies"
 
 @class MRGroupPost;
-@class MRTransformPost;
+@class MRTransformPost, MRSharePost;
 
 @interface MRDatabaseHelper : NSObject
 {
@@ -89,6 +89,7 @@
 
 + (NSArray*)getShareArticles;
 + (void)shareAnArticle:(MRTransformPost*)transformPost;
++ (void)addCommentToAPost:(MRSharePost*)post text:(NSString*)text andContentData:(NSData*)data;
 
 + (NSArray*)getTransformArticles;
 + (void)addTransformArticles:(NSArray*)posts;

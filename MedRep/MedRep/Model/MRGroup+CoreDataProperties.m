@@ -13,15 +13,18 @@
 
 @implementation MRGroup (CoreDataProperties)
 
+@dynamic admin_id;
 @dynamic group_id;
 @dynamic group_img_data;
-@dynamic group_name;
-@dynamic admin_id;
 @dynamic group_long_desc;
-@dynamic group_short_desc;
 @dynamic group_mime_type;
-
+@dynamic group_name;
+@dynamic group_short_desc;
 @dynamic member;
 @dynamic contacts;
+
+- (void)setMember:(NSData *)member {
+    
+}
 
 @end

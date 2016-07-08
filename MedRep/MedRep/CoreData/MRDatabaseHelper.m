@@ -646,7 +646,7 @@ static MRDatabaseHelper *sharedDataManager = nil;
 }
 
 + (void)shareAnArticle:(MRTransformPost*)transformPost {
-    NSInteger sharePostId = 1;
+    NSInteger sharePostId = [[NSDate date] timeIntervalSince1970];
     
     NSArray *articles = [[MRDataManger sharedManager] fetchObjectList:kMRSharePost attributeName:@"postedOn" sortOrder:SORT_ORDER_DESCENDING];
     
@@ -665,7 +665,7 @@ static MRDatabaseHelper *sharedDataManager = nil;
     post.postedOn = [NSDate date];
     post.likesCount = [NSNumber numberWithLong:0];
     post.commentsCount = [NSNumber numberWithLong:0];
-    post.shareCount = [NSNumber numberWithLong:0];
+    post.shareCount = [NSNumber numberWithLong:1];
     
     post.sharedByProfileId = [NSNumber numberWithLong:0];
     
@@ -706,6 +706,34 @@ static MRDatabaseHelper *sharedDataManager = nil;
     childPost.postedByProfilePic = post.shareddByProfilePic;
     
     [post addPostedRepliesObject:childPost];
+    
+    [dbManager dbSaveInContext:context];
+}
+
++ (void)addCommentToAPost:(MRSharePost*)inPost text:(NSString*)text andContentData:(NSData*)data {
+    MRDataManger *dbManager = [MRDataManger sharedManager];
+    
+    NSManagedObjectContext *context = [dbManager getNewPrivateManagedObjectContext];
+    MRPostedReplies *childPost = (MRPostedReplies*)[dbManager createObjectForEntity:kMRPostedReplies
+                                                                          inContext:context];
+    
+    childPost.parentSharePostId = [NSNumber numberWithLong:inPost.sharePostId.longValue];
+    childPost.postedReplyId = [NSNumber numberWithLong:[[NSDate date] timeIntervalSince1970]];
+    childPost.text = text;
+    childPost.image = data;
+    childPost.contentType = [NSNumber numberWithInteger:kTransformContentTypeText];
+    childPost.postedBy = inPost.sharedByProfileName;
+    childPost.postedByProfilePic = inPost.shareddByProfilePic;
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"sharePostId", inPost.sharePostId.longValue];
+    MRSharePost *post = [dbManager fetchObject:kMRSharePost predicate:predicate inContext:context];
+    [post addPostedRepliesObject:childPost];
+    
+    NSInteger commentCount = 1;
+    if (post.commentsCount != nil) {
+        commentCount = post.commentsCount.longValue + 1;
+    }
+    post.commentsCount = [NSNumber numberWithLong:commentCount];
     
     [dbManager dbSaveInContext:context];
 }

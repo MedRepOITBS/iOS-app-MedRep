@@ -277,30 +277,19 @@
 
 -(void)mrGroupPostItemTableViewCell:(MRGroupPostItemTableViewCell *)cell withCommentButtonTapped:(id)sender{
     [self setupCommentBox];
-    //    [self.commentBoxKLCPopView show];
     
     NSIndexPath *indexPath = [self.postsTableView indexPathForCell:cell];
-    
-    
-    [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutAboveCenter)];
-    
-    [_commentBoxView setData:indexPath];
+    [_commentBoxView setData:nil group:nil andSharedPost:[self.posts objectAtIndex:indexPath.row]];
 }
 
--(void)setupCommentBox{
+- (void)setupCommentBox {
     NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"commentBox" owner:self options:nil];
     
     _commentBoxView = (CommonBoxView *)[arr objectAtIndex:0];
-    
-    self.commentBoxView.delegate = self;
-    
-    self.commentBoxView.frame =     CGRectMake(self.commentBoxView.frame.origin.x, self.commentBoxView.frame.origin.y, 300,316);
-    [self.commentBoxView setContact:self.mainContact];
-    [self.commentBoxView setGroup:self.mainGroup];
     _commentBoxKLCPopView = [KLCPopup popupWithContentView:self.commentBoxView];
-    
-    
+    [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutCenter)];
 }
+
 -(void)commonBoxCameraButtonTapped{
     [self takePhoto];
     
@@ -672,7 +661,6 @@
     //    self.imageView.image = chosenImage;
     
     
-    [_commentBoxView setImageForShareImage:chosenImage];
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
     [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutAboveCenter)];

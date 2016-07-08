@@ -9,15 +9,38 @@
 #import "CommonBoxView.h"
 #import "MRContact.h"
 #import "MRGroup.h"
+#import "MRSharePost.h"
 #import "MRAppControl.h"
+#import "MRDatabaseHelper.h"
 
+@interface CommonBoxView() <UIImagePickerControllerDelegate>
 
-@interface CommonBoxView()
+@property (weak, nonatomic) IBOutlet UILabel *noPreviewMessage;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *profilePicWidthConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *profilePicPreviewConstant;
+
+@property (weak, nonatomic) IBOutlet UIImageView *personImageView;
+@property (weak, nonatomic) IBOutlet UILabel *personNameLbl;
+@property (weak, nonatomic) IBOutlet UIImageView *shareImageView;
+@property (weak, nonatomic) IBOutlet UITextView *commentTextView;
+@property (weak, nonatomic) IBOutlet UILabel *hintCameraLbl;
+
+@property (weak, nonatomic) IBOutlet UIView *commentParentView;
+@property (weak, nonatomic) IBOutlet UIView *cameraView;
+@property (weak, nonatomic) IBOutlet UIView *galleryView;
+
 @property (strong, nonatomic) MRContact* mainContact;
 @property (strong, nonatomic) MRGroup* mainGroup;
+@property (strong, nonatomic) MRSharePost* sharePost;
+
 @property (nonatomic)BOOL isPhotoDone;
 @property (strong,nonatomic) NSIndexPath *cellIndexPath;
+
+- (IBAction)okButtonTapped:(id)sender;
+- (IBAction)cancelButtonTapped:(id)sender;
+
 @end
+
 @implementation CommonBoxView
 
 /*
@@ -28,12 +51,30 @@
 }
 */
 
--(void)setCameraElementVisibilty:(BOOL)isVisible {
+- (void)awakeFromNib {
+    [super awakeFromNib];
     
-    _cameraBtn.hidden = isVisible;
-    _hintCameraLbl.hidden= isVisible;
+    self.profilePicWidthConstraint.constant = 0;
+    self.profilePicPreviewConstant.constant = 0;
     
+    [self.shareImageView.layer setCornerRadius:5.0];
+    [self.shareImageView.layer setBorderColor:[UIColor lightGrayColor].CGColor];
+    [self.shareImageView.layer setBorderWidth:1.0f];
+    [self.shareImageView setHidden:true];
+    
+    [self.commentTextView.layer setCornerRadius:2.0];
+    [self.commentTextView.layer setBorderColor:[UIColor lightGrayColor].CGColor];
+    [self.commentTextView.layer setBorderWidth:2.0f];
+    
+    UITapGestureRecognizer *cameraGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                              action:@selector(cameraBtnTapped)];
+    [self.cameraView addGestureRecognizer:cameraGestureRecognizer];
+    
+    UITapGestureRecognizer *galleryGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                              action:@selector(galleryBtnTapped)];
+    [self.galleryView addGestureRecognizer:galleryGestureRecognizer];
 }
+
 - (BOOL)textView:(UITextView *)txtView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if( [text rangeOfCharacterFromSet:[NSCharacterSet newlineCharacterSet]].location == NSNotFound ) {
         return YES;
@@ -42,20 +83,7 @@
     [txtView resignFirstResponder];
     return NO;
 }
--(void)setImageForShareImage:(UIImage *)image{
-    _shareImageView.hidden = NO;
-    _isPhotoDone = YES;
-    _shareImageView.image = image;
-    [self setCameraElementVisibilty:YES];
-}
-- (void)setContact:(MRContact*)contact {
-    self.mainContact = contact;
-}
 
-- (void)setGroup:(MRGroup*)group {
-    self.mainGroup = group;
-    
-}
 -(id)initWithFrame:(CGRect)frame {
     if(self = [super initWithFrame:frame])
     {
@@ -63,56 +91,62 @@
     }
     return self;
 }
--(void)setData:(NSIndexPath *)indexPath{
-    NSString *combinedTitle = @"";
-    _cellIndexPath = indexPath;
-    
-    if (self.mainGroup) {
-        combinedTitle = self.mainGroup.group_name;
-    }
-    if (self.mainContact) {
-        if (![combinedTitle isEqualToString:@""]) {
-            combinedTitle = [NSString stringWithFormat:@"%@ | %@",combinedTitle,
-                             [MRAppControl getContactName:self.mainContact]];
-        
-        }else{
-            
-            combinedTitle = [MRAppControl getContactName:self.mainContact];
-            self.personImageView.image = [MRAppControl getContactImage:self.mainContact];
-        }
-    }
-    
-    self.personNameLbl.text = combinedTitle;
-    
-}
-- (IBAction)cameraBtnTapped:(id)sender {
-    if ([self.delegate respondsToSelector:@selector(commonBoxCameraButtonTapped)]){
-        [self.delegate commonBoxCameraButtonTapped];
-        
-    }
 
+- (void)setData:(MRContact*)contact group:(MRGroup*)group andSharedPost:(MRSharePost*)sharePost {
+    
+    self.mainContact = contact;
+    self.mainGroup = group;
+    self.sharePost = sharePost;
+    
+    NSString *title = @"";
+    
+    if (self.mainContact != nil) {
+        title = [MRAppControl getContactName:self.mainContact];
+        self.profilePicPreviewConstant.constant = 5;
+        self.profilePicWidthConstraint.constant = 40;
+        
+        self.personImageView.image = [MRAppControl getContactImage:self.mainContact];
+    } else if (self.mainGroup != nil) {
+        title = self.mainGroup.group_name;
+        self.profilePicPreviewConstant.constant = 5;
+        self.profilePicWidthConstraint.constant = 40;
+        
+        self.personImageView.image = [MRAppControl getGroupImage:self.mainGroup];
+    } else {
+        title = @"New Post";
+    }
+    
+    self.personNameLbl.text = title;
+}
+
+- (void)galleryBtnTapped {
+}
+
+- (void)cameraBtnTapped {
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
 }
 
 - (IBAction)okButtonTapped:(id)sender {
-
-    if ([self.delegate respondsToSelector:@selector(commonBoxOkButtonPressedWithData:withIndexPath:)]){
-         NSDictionary *myDict;
-        if (!_isPhotoDone) {
-           myDict = [NSDictionary dictionaryWithObjectsAndKeys:@"",@"profile_pic",self.commentTextView.text,@"postText" ,nil];
-        }else{
-            myDict = [NSDictionary dictionaryWithObjectsAndKeys:self.shareImageView.image,@"profile_pic",self.commentTextView.text,@"postText" ,nil];
+    if (self.sharePost != nil) {
+        [MRDatabaseHelper addCommentToAPost:self.sharePost text:self.commentTextView.text
+                             andContentData:nil];
+        if (self.delegate != nil &&
+            [self.delegate respondsToSelector:@selector(commentPosted)]) {
+            [self.delegate commentPosted];
         }
-      
-        
-        [self.delegate commonBoxOkButtonPressedWithData:myDict withIndexPath:_cellIndexPath];
+    } else if (self.mainContact != nil) {
         
     }
-  
-    
 }
 
 - (IBAction)cancelButtonTapped:(id)sender {
-
-
+    if (self.delegate != nil &&
+        [self.delegate respondsToSelector:@selector(commonBoxCancelButtonPressed)]) {
+        [self.delegate commonBoxCancelButtonPressed];
+    }
 }
+
 @end

@@ -34,6 +34,7 @@
         }
     }
     
+    NSLog(@"%@", group.group_name);
     self.name.text = group.group_name;
     self.detail.text = group.group_short_desc;
     

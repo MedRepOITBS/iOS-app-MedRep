@@ -15,13 +15,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MRGroup (CoreDataProperties)
 
+@property (nullable, nonatomic, retain) NSNumber *admin_id;
 @property (nullable, nonatomic, retain) NSNumber *group_id;
 @property (nullable, nonatomic, retain) NSData *group_img_data;
-@property (nullable, nonatomic, retain) NSString *group_name;
-@property (nullable, nonatomic, retain) NSNumber *admin_id;
 @property (nullable, nonatomic, retain) NSString *group_long_desc;
-@property (nullable, nonatomic, retain) NSString *group_short_desc;
 @property (nullable, nonatomic, retain) NSString *group_mime_type;
+@property (nullable, nonatomic, retain) NSString *group_name;
+@property (nullable, nonatomic, retain) NSString *group_short_desc;
 @property (nullable, nonatomic, retain) NSData *member;
 @property (nullable, nonatomic, retain) NSSet<MRContact *> *contacts;
 
