@@ -8,12 +8,10 @@
 
 #import "MRTransformDetailViewController.h"
 #import "NotificationWebViewController.h"
-#import "MPTransformData.h"
 #import "MRShareViewController.h"
 #import "AppDelegate.h"
 #import "MRDatabaseHelper.h"
-#import "MRContact.h"
-#import "MRGroupPost.h"
+#import "MRTransformPost.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
@@ -47,16 +45,16 @@
     UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navView];
     self.navigationItem.rightBarButtonItem = rightButtonItem;
     
-    if (self.selectedContent != nil) {
-        if (self.selectedContent.title != nil && self.selectedContent.title.length > 0) {
-            _titleLbl.text = self.selectedContent.title;
+    if (self.post != nil) {
+        if (self.post.titleDescription != nil && self.post.titleDescription.length > 0) {
+            _titleLbl.text = self.post.titleDescription;
         }
         
-        if (self.selectedContent.detailDescription != nil) {
-            _detailLbl.text = self.selectedContent.detailDescription;
+        if (self.post.detailedDescription != nil) {
+            _detailLbl.text = self.post.detailedDescription;
         }
         
-        if ([self.selectedContent.contentType isEqualToString:@"Pdf"]) {
+        if (self.post.contentType.integerValue == kTransformContentTypePDF) {
             [thumbnailImage setHidden:YES];
             [separatorView setHidden:YES];
             [_detailLbl setHidden:YES];
@@ -67,7 +65,7 @@
             NSURL *targetURL = [NSURL URLWithString:@"https://dl.dropboxusercontent.com/u/104553173/sample.pdf"];
             NSURLRequest *request = [NSURLRequest requestWithURL:targetURL];
             [webView loadRequest:request];
-        } else if ([self.selectedContent.contentType isEqualToString:@"Video"]) {
+        } else if (self.post.contentType.integerValue == kTransformContentTypeVideo) {
             
             [thumbnailImage setHidden:YES];
             [separatorView setHidden:YES];
@@ -91,11 +89,11 @@
             [av didMoveToParentViewController:self];
             [av.contentOverlayView addObserver:self forKeyPath:@"bounds" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
             
-//            [self setAVPlayerConstraints:av.view];
-
+            //            [self setAVPlayerConstraints:av.view];
+            
         }else { //if ([self.selectedContent.contentType isEqualToString:@"Image"]) {
-            if (self.selectedContent.icon != nil && self.selectedContent.icon.length > 0) {
-                _contentImage.image = [UIImage imageNamed:self.selectedContent.icon];
+            if (self.post.url != nil && self.post.url.length > 0) {
+                _contentImage.image = [UIImage imageNamed:self.post.url];
             }
         }
     }
@@ -121,11 +119,11 @@
                                                                         attribute:NSLayoutAttributeTopMargin
                                                                        multiplier:1.0 constant:10];
     NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:view
-                                                                        attribute:NSLayoutAttributeTopMargin
-                                                                        relatedBy:NSLayoutRelationEqual
-                                                                           toItem:_titleLbl
-                                                                        attribute:NSLayoutAttributeBottom
-                                                                       multiplier:1.0 constant:0.0];
+                                                                     attribute:NSLayoutAttributeTopMargin
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:_titleLbl
+                                                                     attribute:NSLayoutAttributeBottom
+                                                                    multiplier:1.0 constant:0.0];
     
     [self.view addConstraints:@[leftConstraint, rightConstraint, bottomConstraint, topConstraint]];
 }
@@ -185,14 +183,14 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 - (void)backButtonAction
 {
@@ -200,49 +198,37 @@
 }
 
 - (void)postTheTopicToTheWall {
-//    NSArray *myContacts = [MRDatabaseHelper getContacts];
-//    myContacts = [myContacts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K == %@", @"self.name", @"Chris Martin"]];
-//    
-//    MRContact *contact = myContacts.firstObject;
-//    NSArray *posts = [contact.groupPosts allObjects];
-//    
-//    MRGroupPost *lastPost = posts.firstObject;
-//    NSLog(@"%ld", lastPost.groupPostId.longValue);
-//    
-//    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"groupPostId" ascending:NO];
-//    posts = [posts sortedArrayUsingDescriptors:@[sort]];
-//    lastPost = posts.firstObject;
-//    NSLog(@"%ld", lastPost.groupPostId.longValue);
+    //    NSArray *myContacts = [MRDatabaseHelper getContacts];
+    //    myContacts = [myContacts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K == %@", @"self.name", @"Chris Martin"]];
+    //
+    //    MRContact *contact = myContacts.firstObject;
+    //    NSArray *posts = [contact.groupPosts allObjects];
+    //
+    //    MRGroupPost *lastPost = posts.firstObject;
+    //    NSLog(@"%ld", lastPost.groupPostId.longValue);
+    //
+    //    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"groupPostId" ascending:NO];
+    //    posts = [posts sortedArrayUsingDescriptors:@[sort]];
+    //    lastPost = posts.firstObject;
+    //    NSLog(@"%ld", lastPost.groupPostId.longValue);
     
-    NSMutableDictionary *post = [NSMutableDictionary new];
-    if (self.selectedContent.detailDescription != nil && self.selectedContent.detailDescription.length > 0) {
-        post[@"postText"] = self.selectedContent.detailDescription;
-    } else {
-        post[@"postText"] = self.selectedContent.shortDescription;
-    }
-    
-    post[@"contactId"] = [NSNumber numberWithInt:1];
-    post[@"comments"] = [NSNumber numberWithInt:0];
-    post[@"likes"] = [NSNumber numberWithInt:0];
-    post[@"shares"] = [NSNumber numberWithInt:0];
-    post[@"postedOn"] = [NSDate date];
-    [MRDatabaseHelper addGroupPosts:@[post]];
+    [MRDatabaseHelper shareAnArticle:self.post];
 }
 
 - (IBAction)shareAction:(UIButton *)sender {
-    [self postTheTopicToTheWall];
+    //    [self postTheTopicToTheWall];
+    [MRDatabaseHelper shareAnArticle:self.post];
     
     MRShareViewController* contactsViewCont = [[MRShareViewController alloc] initWithNibName:@"MRShareViewController" bundle:nil];
-    contactsViewCont.isFromDetails = YES;
     [self.navigationController pushViewController:contactsViewCont animated:true];
 }
 
 - (IBAction)gotoWebAction:(id)sender {
     NotificationWebViewController *notiFicationViewController = [[NotificationWebViewController alloc] initWithNibName:@"NotificationWebViewController" bundle:nil];
     notiFicationViewController.isFromTransform = YES;
-    if (self.selectedContent != nil && self.selectedContent.title != nil &&
-        self.selectedContent.title.length > 0) {
-        notiFicationViewController.headerTitle = self.selectedContent.title;
+    if (self.post != nil && self.post.titleDescription != nil &&
+        self.post.titleDescription.length > 0) {
+        notiFicationViewController.headerTitle = self.post.titleDescription;
     }
     [self.navigationController pushViewController:notiFicationViewController animated:YES];
 }
@@ -257,7 +243,7 @@
     }
     
     [self.view addSubview:self.activityIndicator];
-//    [self setActivityIndicatorConstriants];
+    //    [self setActivityIndicatorConstriants];
     [self.view bringSubviewToFront:self.activityIndicator];
     [self.activityIndicator startAnimating];
 }
