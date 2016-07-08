@@ -141,3 +141,14 @@ typedef NS_ENUM(NSInteger, DoctorPlusTabIndex) {
     DoctorPlusTabShare,
     DoctorPlusTabServe
 };
+
+typedef void (^WebServiceResponseHandler)(id result);
+
+
+typedef NS_ENUM(NSInteger, kTransformContentType) {
+    kTransformContentTypeNone = 0,
+    kTransformContentTypeImage,
+    kTransformContentTypePDF,
+    kTransformContentTypeVideo,
+    kTransformContentTypeText
+};
