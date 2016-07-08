@@ -143,7 +143,7 @@
     if (post.replyPost!=NULL) {
         
     }
-    self.commentCountLabel.text = [NSString stringWithFormat:@"%d",post.replyPost.count];
+    self.commentCountLabel.text = [NSString stringWithFormat:@"%d",post.count];
 
 }
 
