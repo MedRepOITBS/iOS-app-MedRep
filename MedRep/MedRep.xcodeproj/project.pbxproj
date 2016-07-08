@@ -1264,10 +1264,6 @@
 		CC9857E71D2DAA6B00C74438 /* MRTransformPost+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9857DB1D2DAA6B00C74438 /* MRTransformPost+CoreDataProperties.m */; };
 		CC9857E81D2DAA6B00C74438 /* MRTransformPost.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9857DD1D2DAA6B00C74438 /* MRTransformPost.m */; };
 		CC9857E91D2DAA6B00C74438 /* MRTransformPost.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9857DD1D2DAA6B00C74438 /* MRTransformPost.m */; };
-		CC9857EA1D2DAA6B00C74438 /* MRSharePost+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9857DF1D2DAA6B00C74438 /* MRSharePost+CoreDataProperties.m */; };
-		CC9857EB1D2DAA6B00C74438 /* MRSharePost+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9857DF1D2DAA6B00C74438 /* MRSharePost+CoreDataProperties.m */; };
-		CC9857EC1D2DAA6B00C74438 /* MRSharePost.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9857E11D2DAA6B00C74438 /* MRSharePost.m */; };
-		CC9857ED1D2DAA6B00C74438 /* MRSharePost.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9857E11D2DAA6B00C74438 /* MRSharePost.m */; };
 		CC9857F11D2E0B4D00C74438 /* TransformPosts.json in Resources */ = {isa = PBXBuildFile; fileRef = CC9857EF1D2E0B4D00C74438 /* TransformPosts.json */; };
 		CC9857F51D2E51B300C74438 /* MRManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9857F41D2E51B300C74438 /* MRManagedObject.m */; };
 		CC9857F61D2E51B300C74438 /* MRManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9857F41D2E51B300C74438 /* MRManagedObject.m */; };
@@ -2095,10 +2091,6 @@
 		CC9857DB1D2DAA6B00C74438 /* MRTransformPost+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MRTransformPost+CoreDataProperties.m"; path = "Messages/MRTransformPost+CoreDataProperties.m"; sourceTree = "<group>"; };
 		CC9857DC1D2DAA6B00C74438 /* MRTransformPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRTransformPost.h; path = Messages/MRTransformPost.h; sourceTree = "<group>"; };
 		CC9857DD1D2DAA6B00C74438 /* MRTransformPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRTransformPost.m; path = Messages/MRTransformPost.m; sourceTree = "<group>"; };
-		CC9857DE1D2DAA6B00C74438 /* MRSharePost+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MRSharePost+CoreDataProperties.h"; path = "Messages/MRSharePost+CoreDataProperties.h"; sourceTree = "<group>"; };
-		CC9857DF1D2DAA6B00C74438 /* MRSharePost+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MRSharePost+CoreDataProperties.m"; path = "Messages/MRSharePost+CoreDataProperties.m"; sourceTree = "<group>"; };
-		CC9857E01D2DAA6B00C74438 /* MRSharePost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRSharePost.h; path = Messages/MRSharePost.h; sourceTree = "<group>"; };
-		CC9857E11D2DAA6B00C74438 /* MRSharePost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRSharePost.m; path = Messages/MRSharePost.m; sourceTree = "<group>"; };
 		CC9857EF1D2E0B4D00C74438 /* TransformPosts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = TransformPosts.json; path = JSON/TransformPosts.json; sourceTree = "<group>"; };
 		CC9857F31D2E51B300C74438 /* MRManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRManagedObject.h; sourceTree = "<group>"; };
 		CC9857F41D2E51B300C74438 /* MRManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRManagedObject.m; sourceTree = "<group>"; };
@@ -2687,10 +2679,6 @@
 				CC9857DB1D2DAA6B00C74438 /* MRTransformPost+CoreDataProperties.m */,
 				CC9857DC1D2DAA6B00C74438 /* MRTransformPost.h */,
 				CC9857DD1D2DAA6B00C74438 /* MRTransformPost.m */,
-				CC9857DE1D2DAA6B00C74438 /* MRSharePost+CoreDataProperties.h */,
-				CC9857DF1D2DAA6B00C74438 /* MRSharePost+CoreDataProperties.m */,
-				CC9857E01D2DAA6B00C74438 /* MRSharePost.h */,
-				CC9857E11D2DAA6B00C74438 /* MRSharePost.m */,
 				CC9857D21D2D82CC00C74438 /* MRGroupPost+CoreDataProperties.h */,
 				CC9857D31D2D82CC00C74438 /* MRGroupPost+CoreDataProperties.m */,
 				CC7DB2F51D0CC4E2007DFE4C /* MRGroup.h */,
@@ -4874,7 +4862,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC9857EC1D2DAA6B00C74438 /* MRSharePost.m in Sources */,
 				79169E281BEBE70500C11D13 /* MRAppointmentListViewController.m in Sources */,
 				7930A3941BB9153A003112E4 /* MRCompaignsDetailsViewController.m in Sources */,
 				CC86FE491D29BA4F0030B23D /* MRReplies+CoreDataProperties.m in Sources */,
@@ -5023,7 +5010,6 @@
 				CC9857E61D2DAA6B00C74438 /* MRTransformPost+CoreDataProperties.m in Sources */,
 				79421F4A1BB83BBB0055D9B7 /* MRPharmaMenuCell.m in Sources */,
 				CC649F5D1D0D1BA10012289C /* MRDrugDetailViewController.m in Sources */,
-				CC9857EA1D2DAA6B00C74438 /* MRSharePost+CoreDataProperties.m in Sources */,
 				79BD27E31B80A0FB007CA448 /* MROptionsViewController.m in Sources */,
 				7930A38F1BB9151C003112E4 /* MRFeedBackResultViewController.m in Sources */,
 				7975604A1BC02B3A0034D0AC /* MRCompanyDetails.m in Sources */,
@@ -5053,7 +5039,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC9857ED1D2DAA6B00C74438 /* MRSharePost.m in Sources */,
 				CC7DB0221D0C8BEC007DFE4C /* MRAppointmentListViewController.m in Sources */,
 				CC86FE4A1D29BA4F0030B23D /* MRReplies+CoreDataProperties.m in Sources */,
 				CC7DB0231D0C8BEC007DFE4C /* MRCompaignsDetailsViewController.m in Sources */,
@@ -5201,7 +5186,6 @@
 				CC9857E71D2DAA6B00C74438 /* MRTransformPost+CoreDataProperties.m in Sources */,
 				CC7DB0761D0C8BEC007DFE4C /* MRFeedBackResultViewController.m in Sources */,
 				CC7DB3061D0CC4E2007DFE4C /* MRGroup.m in Sources */,
-				CC9857EB1D2DAA6B00C74438 /* MRSharePost+CoreDataProperties.m in Sources */,
 				CC7DB31C1D0CC530007DFE4C /* PendingContactTableViewCell.m in Sources */,
 				CC7DB0771D0C8BEC007DFE4C /* MRCompanyDetails.m in Sources */,
 				CC7DB2C61D0CC433007DFE4C /* MRCollectionView.m in Sources */,
