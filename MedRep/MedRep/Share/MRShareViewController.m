@@ -29,6 +29,7 @@
 #import "MRCommentViewController.h"
 
 @interface MRShareViewController () <UISearchBarDelegate, SWRevealViewControllerDelegate, MRGroupPostItemTableViewCellDelegate, MRShareOptionsSelectionDelegate,
+    CommonBoxViewDelegate,
     UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UILabel *emptyMessage;
@@ -237,6 +238,7 @@
     NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"commentBox" owner:self options:nil];
     
     _commentBoxView = (CommonBoxView *)[arr objectAtIndex:0];
+    [_commentBoxView setDelegate:self];
     _commentBoxKLCPopView = [KLCPopup popupWithContentView:self.commentBoxView];
     [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutCenter)];
 }

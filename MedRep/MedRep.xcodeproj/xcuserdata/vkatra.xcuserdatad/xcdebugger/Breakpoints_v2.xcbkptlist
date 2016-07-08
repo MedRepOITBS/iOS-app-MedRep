@@ -89,13 +89,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MedRep/CommonBoxView.m"
-            timestampString = "489706693.047698"
+            filePath = "MedRep/CoreData/MRDatabaseHelper.m"
+            timestampString = "489707683.935422"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
-            landmarkName = "-cameraBtnTapped"
+            startingLineNumber = "728"
+            endingLineNumber = "728"
+            landmarkName = "+addCommentToAPost:text:andContentData:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -105,13 +105,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MedRep/CoreData/MRDatabaseHelper.m"
-            timestampString = "489707683.935422"
+            filePath = "MedRep/Share/MRShareDetailViewController.m"
+            timestampString = "489708100.356655"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "728"
-            endingLineNumber = "728"
-            landmarkName = "+addCommentToAPost:text:andContentData:"
+            startingLineNumber = "251"
+            endingLineNumber = "251"
+            landmarkName = "-commentButtonTapped:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
