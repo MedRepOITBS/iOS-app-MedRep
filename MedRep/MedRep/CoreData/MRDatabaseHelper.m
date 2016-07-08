@@ -77,7 +77,7 @@ static MRDatabaseHelper *sharedDataManager = nil;
     
     [[MRDataManger sharedManager] saveContext];
 }
-+(MRGroupPost *)getGroupPostForPostID:(NSNumber *)groupId{
++(MRSharePost *)getGroupPostForPostID:(NSNumber *)postId{
     
     MRGroupPost* contact = [[MRDataManger sharedManager] fetchObject:kGroupPostEntity predicate:[NSPredicate predicateWithFormat:@"groupPostId == %@",groupId]];
     return contact;

@@ -2,7 +2,7 @@
 //  MRSharePost+CoreDataProperties.m
 //  MedRep
 //
-//  Created by Vamsi Katragadda on 7/8/16.
+//  Created by Namit Nayak on 7/8/16.
 //  Copyright © 2016 MedRep. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -13,24 +13,25 @@
 
 @implementation MRSharePost (CoreDataProperties)
 
-@dynamic likesCount;
-@dynamic shareCount;
 @dynamic commentsCount;
-@dynamic sharePostId;
-@dynamic postedOn;
-@dynamic sharedByProfileId;
-@dynamic shareddByProfilePic;
-@dynamic sharedByProfileName;
-@dynamic parentSharePostId;
 @dynamic contactId;
-@dynamic groupId;
-@dynamic parentTransformPostId;
-@dynamic titleDescription;
-@dynamic shortText;
-@dynamic detailedText;
-@dynamic objectData;
-@dynamic url;
 @dynamic contentType;
+@dynamic detailedText;
+@dynamic groupId;
+@dynamic likesCount;
+@dynamic objectData;
+@dynamic parentSharePostId;
+@dynamic parentTransformPostId;
+@dynamic postedOn;
+@dynamic shareCount;
+@dynamic sharedByProfileId;
+@dynamic sharedByProfileName;
+@dynamic shareddByProfilePic;
+@dynamic sharePostId;
+@dynamic shortText;
 @dynamic source;
+@dynamic titleDescription;
+@dynamic url;
+@dynamic mrpostreplies;
 
 @end

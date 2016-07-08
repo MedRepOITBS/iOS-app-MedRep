@@ -144,6 +144,10 @@
 //        
 //    }
 //    self.commentCountLabel.text = [NSString stringWithFormat:@"%d",post.replyPost.count];
+    if (post.mrpostreplies!=NULL) {
+        
+    }
+    self.commentCountLabel.text = [NSString stringWithFormat:@"%d",post.mrpostreplies.count ];
 
 }
 
