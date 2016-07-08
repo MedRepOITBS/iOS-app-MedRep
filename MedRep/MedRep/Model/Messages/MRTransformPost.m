@@ -1,21 +1,16 @@
 //
-//  MRContact.m
+//  MRTransformPost.m
 //  MedRep
 //
 //  Created by Vamsi Katragadda on 7/7/16.
 //  Copyright © 2016 MedRep. All rights reserved.
 //
 
-#import "MRContact.h"
-#import "MRGroup.h"
-#import "MRGroupPost.h"
+#import "MRTransformPost.h"
+#import "MRSharePost.h"
 
-@implementation MRContact
+@implementation MRTransformPost
 
 // Insert code here to add functionality to your managed object subclass
-
-+ (NSString*)primaryKeyColumnName {
-    return @"contactId";
-}
 
 @end

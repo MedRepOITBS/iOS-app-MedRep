@@ -9,6 +9,8 @@
 #import "MRContactCollectionCell.h"
 #import "MRGroupUserObject.h"
 #import "MRCommon.h"
+#import "MRAppControl.h"
+#import "MRContact.h"
 
 @interface MRContactCollectionCell()
 
@@ -95,18 +97,20 @@
     }
 }*/
 
-- (void)setData:(MRGroupUserObject*)contact {
+- (void)setData:(MRContact*)contact {
     for (UIView *view in self.picture.subviews) {
         if ([view isKindOfClass:[UILabel class]]) {
             [view removeFromSuperview];
         }
     }
     
-    NSString *fullName = [NSString stringWithFormat:@"%@ %@",contact.firstName, contact.lastName];
-    self.name.text = [NSString stringWithFormat:@"Dr. %@",fullName];
+    NSString *fullName = [MRAppControl getContactName:contact];
+    self.name.text = fullName;
+    self.picture.image = [MRAppControl getContactImage:contact];
+    
     self.detail.text = contact.therapeuticArea.length ? contact.therapeuticArea : contact.therapeuticName;
-    if (contact.imgData.length) {
-        self.picture.image = [MRCommon getImageFromBase64Data:[contact.imgData dataUsingEncoding:NSUTF8StringEncoding]];
+    if (contact.profilePic != nil ) {
+        self.picture.image = [UIImage imageWithData:contact.profilePic];
     } else {
         self.picture.image = nil;
         if (fullName.length > 0) {
@@ -119,14 +123,11 @@
             subscriptionTitleLabel.layer.borderWidth =1.0;
             subscriptionTitleLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
             
-            NSArray *substrngs = [fullName componentsSeparatedByString:@" "];
             NSString *imageString = @"";
-            for(NSString *str in substrngs){
-                if (str.length > 0) {
-                    imageString = [imageString stringByAppendingString:[NSString stringWithFormat:@"%c",[str characterAtIndex:0]]];
-                }
+            if (fullName.length > 0) {
+                imageString = [imageString stringByAppendingString:[NSString stringWithFormat:@"%c",[fullName characterAtIndex:0]]];
             }
-            subscriptionTitleLabel.text = imageString.length > 2 ? [imageString substringToIndex:2] : imageString;
+            subscriptionTitleLabel.text = imageString;
             [self.picture addSubview:subscriptionTitleLabel];
         }
     }

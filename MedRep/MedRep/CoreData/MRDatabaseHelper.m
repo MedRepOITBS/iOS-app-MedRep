@@ -20,6 +20,13 @@
 #import "MrGroupChildPost.h"
 #import "AppDelegate.h"
 #import "NSDate+Utilities.h"
+#import "MRSharePost.h"
+#import "MRPostedReplies.h"
+#import "MRTransformPost.h"
+#import "MRAppControl.h"
+#import "MRWebserviceHelper.h"
+#import "MRConstants.h"
+#import "NSData+Base64Additions.h"
 
 static MRDatabaseHelper *sharedDataManager = nil;
 
@@ -34,25 +41,6 @@ static MRDatabaseHelper *sharedDataManager = nil;
     });
     return sharedInstance;
 
-}
-
-+ (void)addContacts:(NSArray*)contacts {
-    for (NSDictionary *myDict in contacts) {
-        MRContact *contact  = (MRContact*)[[MRDataManger sharedManager] createObjectForEntity:kContactEntity];
-        contact.contactId = [[myDict objectForKey:@"id"] integerValue];
-        contact.name = [myDict objectForKey:@"name"];
-        contact.profilePic  = [myDict objectForKey:@"profile_pic"];
-        contact.role      = [myDict objectForKey:@"role"];
-        NSArray* groupIds = [myDict objectForKey:@"groupId"];
-        if (groupIds.count > 0) {
-            NSArray* groups = [MRDatabaseHelper getGroupsForIds:groupIds];
-            if (groups.count > 0) {
-                contact.groups = [NSSet setWithArray:groups];
-            }
-        }
-        
-    }
-    [[MRDataManger sharedManager] saveContext];
 }
 
 + (void)addSuggestedContacts:(NSArray*)contacts {
@@ -166,6 +154,54 @@ static MRDatabaseHelper *sharedDataManager = nil;
     return convertedValue;
 }
 
++ (void)getContacts:(WebServiceResponseHandler)responseHandler {
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] getContactListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [MRCommon stopActivityIndicator];
+        if (status)
+        {
+            [MRDatabaseHelper filterContactResponse:responce andResponseHandler:responseHandler];
+        }
+        else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+        {
+            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+             {
+                 [MRCommon savetokens:responce];
+                 [[MRWebserviceHelper sharedWebServiceHelper] getContactListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                     [MRCommon stopActivityIndicator];
+                     if (status)
+                     {
+                         [MRDatabaseHelper filterContactResponse:responce andResponseHandler:responseHandler];
+                     } else
+                     {
+                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                         if (erros.count > 0)
+                         [MRCommon showAlert:[erros lastObject] delegate:nil];
+                     }
+                 }];
+             }];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+            [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }];
+}
+
++ (void)filterContactResponse:(NSDictionary*)response andResponseHandler:(WebServiceResponseHandler) responseHandler {
+    id result = [MRWebserviceHelper parseNetworkResponse:MRContact.class
+                                                 andData:[response valueForKey:@"Responce"]];
+    if (responseHandler != nil) {
+        NSArray *tempResults = result;
+        
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:true];
+        result = [tempResults sortedArrayUsingDescriptors:@[sortDescriptor]];
+        responseHandler(result);
+    }
+}
+
 + (MRContact*)getContactForId:(NSInteger)contactId {
     MRContact* contact = [[MRDataManger sharedManager] fetchObject:kContactEntity predicate:[NSPredicate predicateWithFormat:@"contactId == %@",[NSNumber numberWithInteger:contactId]]];
     return contact;
@@ -186,11 +222,6 @@ static MRDatabaseHelper *sharedDataManager = nil;
 + (MRGroup*)getGroupForId:(NSInteger)groupId {
     MRGroup* group = [[MRDataManger sharedManager] fetchObject:kGroupEntity predicate:[NSPredicate predicateWithFormat:@"groupId == %@",[NSNumber numberWithInteger:groupId]]];
     return group;
-}
-
-+ (NSArray*)getContacts {
-    NSArray *contacts = [[MRDataManger sharedManager] fetchObjectList:kContactEntity];
-    return contacts;
 }
 
 + (NSArray*)getGroups {
@@ -581,4 +612,99 @@ static MRDatabaseHelper *sharedDataManager = nil;
 {
     [[MRDataManger sharedManager] removeAllObjects:kNotificationsEntity];
 }
+
++ (NSArray*)getShareArticles {
+    NSArray *articles = [[MRDataManger sharedManager] fetchObjectList:kMRSharePost attributeName:@"postedOn" sortOrder:SORT_ORDER_DESCENDING];
+    return articles;
+}
+
++ (void)shareAnArticle:(MRTransformPost*)transformPost {
+    NSInteger sharePostId = 1;
+    
+    NSArray *articles = [[MRDataManger sharedManager] fetchObjectList:kMRSharePost attributeName:@"postedOn" sortOrder:SORT_ORDER_DESCENDING];
+    
+    if (articles != nil && articles.count > 0) {
+        MRSharePost *sharePost = articles.firstObject;
+        sharePostId = sharePost.sharePostId.integerValue;
+    }
+    
+    MRDataManger *dbManager = [MRDataManger sharedManager];
+    
+    NSManagedObjectContext *context = [dbManager getNewPrivateManagedObjectContext];
+    
+    MRSharePost *post  = (MRSharePost*)[dbManager createObjectForEntity:kMRSharePost
+                                                              inContext:context];
+    post.sharePostId = [NSNumber numberWithLong:sharePostId];
+    post.postedOn = [NSDate date];
+    post.likesCount = [NSNumber numberWithLong:0];
+    post.commentsCount = [NSNumber numberWithLong:0];
+    post.shareCount = [NSNumber numberWithLong:0];
+    
+    post.sharedByProfileId = [NSNumber numberWithLong:0];
+    
+    MRAppControl *appControl = [MRAppControl sharedHelper];
+    NSDictionary *userDetailsDict = appControl.userRegData;
+    post.sharedByProfileName = [userDetailsDict objectOrNilForKey:@"displayName"];
+    
+    id profilePicData = [userDetailsDict objectForKey:KProfilePicture];
+    if (profilePicData != nil && [profilePicData isKindOfClass:[NSDictionary class]])
+    {
+        profilePicData = [profilePicData objectForKey:@"data"];
+    }
+    
+    if (profilePicData != nil) {
+        if ([profilePicData isKindOfClass:[NSString class]]) {
+            post.shareddByProfilePic = [NSData decodeBase64ForString:profilePicData];
+        } else {
+            post.shareddByProfilePic = profilePicData;
+        }
+    }
+    
+    post.parentTransformPostId = transformPost.transformPostId;
+    post.titleDescription = transformPost.titleDescription;
+    post.shortText = transformPost.shortArticleDescription;
+    post.detailedText = transformPost.detailedDescription;
+    post.contentType = transformPost.contentType;
+    post.url = transformPost.url;
+    post.source = @"Transform";
+    
+    // Create a child post as well to show in activities section
+    MRSharePost *childPost = (MRSharePost*)[dbManager createObjectForEntity:kMRSharePost
+                                                                  inContext:context];
+    childPost.parentSharePostId = [NSNumber numberWithLong:post.sharePostId.longValue];
+    childPost.detailedText = [NSString stringWithFormat:@"Article is shared by %@ on %@", post.sharedByProfileName, [post.postedOn stringWithFormat:kYYYYMMDDFormatWithHyphen]];
+    childPost.contentType = [NSNumber numberWithInteger:kTransformContentTypeText];
+    
+    [dbManager dbSaveInContext:context];
+}
+
++ (NSArray*)getTransformArticles {
+    NSArray *articles = [[MRDataManger sharedManager] fetchObjectList:kMRTransformPost attributeName:@"postedOn" sortOrder:SORT_ORDER_DESCENDING];
+    return articles;
+}
+
++ (void)addTransformArticles:(NSArray*)posts {
+    for (NSDictionary *myDict in posts) {
+        MRTransformPost *post  = (MRTransformPost*)[[MRDataManger sharedManager] createObjectForEntity:kMRTransformPost];
+        post.transformPostId = [MRDatabaseHelper convertStringToNSNumber:[myDict objectForKey:@"transformPostId"]];
+        post.url = [myDict objectForKey:@"url"];
+        post.contentType = [myDict objectForKey:@"contextType"];
+        post.detailedDescription = [myDict objectForKey:@"detailedDescription"];
+        post.titleDescription = [myDict objectForKey:@"titleDescription"];
+        post.source = [myDict objectForKey:@"source"];
+        post.shortArticleDescription = [myDict objectForKey:@"shortArticleDescription"];
+        
+        NSDate *currentDate = nil;
+        id dateValue = [myDict objectForKey:@"postedOn"];
+        
+        if ([dateValue isKindOfClass:[NSString class]]) {
+            currentDate = [NSDate convertStringToNSDate:dateValue dateFormat:kDefaultDateFormat];
+        } else {
+            currentDate = dateValue;
+        }
+        post.postedOn = currentDate;
+    }
+    [[MRDataManger sharedManager] saveContext];
+}
+
 @end

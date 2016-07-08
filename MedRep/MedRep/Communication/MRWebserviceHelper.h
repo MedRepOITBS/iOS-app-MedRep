@@ -230,6 +230,8 @@ withComplitionHandler:(completionHandler)responceHandler;
 
 - (void)registerDeviceToken:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
 
++ (id)parseNetworkResponse:(Class)inEntityClass andData:(NSArray*)data;
+
 @end
 
 @interface NSDictionary (CategoryName)

@@ -1,5 +1,5 @@
 //
-//  MRContact.h
+//  MRSharePost.h
 //  MedRep
 //
 //  Created by Vamsi Katragadda on 7/7/16.
@@ -8,13 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import "MRManagedObject.h"
 
-@class MRManagedObject, MRGroup, MRGroupPost;
+@class MRContact, MRGroup, MRPostedReplies, MRTransformPost;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MRContact : MRManagedObject
+@interface MRSharePost : NSManagedObject
 
 // Insert code here to declare functionality of your managed object subclass
 
@@ -22,4 +21,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-#import "MRContact+CoreDataProperties.h"
+#import "MRSharePost+CoreDataProperties.h"

@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class MPTransformData;
+@class MRTransformPost;
 
 @interface MRTransformDetailViewController : UIViewController
 
-@property (nonatomic, strong) MPTransformData *selectedContent;
+@property (nonatomic, strong) MRTransformPost *post;
 @property (weak, nonatomic) IBOutlet UIImageView *contentImage;
 @property (weak, nonatomic) IBOutlet UITextView *detailLbl;
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;

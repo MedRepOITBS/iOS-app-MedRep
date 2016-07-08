@@ -9,19 +9,47 @@
 #import "MRShareDetailViewController.h"
 #import "MRShareDetailTableViewCell.h"
 #import "MRCommon.h"
+
 #import "MRGroupPost.h"
 #import "MRDatabaseHelper.h"
 #import "GroupPostChildTableViewCell.h"
 #import "MrGroupChildPost.h"
 #import "MRAppControl.h"
-@interface MRShareDetailViewController () <UITableViewDataSource, UITableViewDelegate>
+#import "MRSharePost.h"
+#import "MRTransformPost.h"
+#import "MRShareOptionsViewController.h"
+#import "MRConstants.h"
+
+#import <AVFoundation/AVFoundation.h>
+#import <AVKit/AVKit.h>
+
+@interface MRShareDetailViewController () <UITableViewDataSource, UITableViewDelegate, MRShareOptionsSelectionDelegate, UIWebViewDelegate> {
+    
+    AVPlayerViewController *av;
+}
 
 @property (strong, nonatomic) IBOutlet UIView *navView;
 @property (nonatomic) NSArray *recentActivity;
 @property (weak, nonatomic) IBOutlet UILabel *emptyMessage;
 @property (weak, nonatomic) IBOutlet UITableView *activitiesTable;
+
 @property (strong,nonatomic)NSDictionary *userdata;
 @property (nonatomic) NSInteger userType;
+@property (weak, nonatomic) IBOutlet UILabel *postedBY;
+
+@property (weak, nonatomic) IBOutlet UILabel *titleView;
+@property (weak, nonatomic) IBOutlet UILabel *likeCount;
+@property (weak, nonatomic) IBOutlet UILabel *commentsCount;
+@property (weak, nonatomic) IBOutlet UILabel *sharesCount;
+@property (weak, nonatomic) IBOutlet UIView *likesView;
+@property (weak, nonatomic) IBOutlet UIView *commentsView;
+@property (weak, nonatomic) IBOutlet UIView *sharesView;
+@property (weak, nonatomic) IBOutlet UIImageView *previewImageView;
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
+
+@property (nonatomic) UIActivityIndicatorView *activityIndicator;
+
+
 @end
 
 @implementation MRShareDetailViewController
@@ -40,12 +68,33 @@
     
     [self.activitiesTable registerNib:[UINib nibWithNibName:@"MRShareDetailTableViewCell"
                                bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"MRShareDetailTableViewCell"];
-  self.post =  [MRDatabaseHelper getGroupPostForPostID:self.post.groupPostId];
+
+  
+    
+    self.titleView.text = self.post.titleDescription;
+    
+    // Initialization code
+    UITapGestureRecognizer *likeTapGestureRecognizer =
+    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(likeButtonTapped:)];
+    [self.likesView addGestureRecognizer:likeTapGestureRecognizer];
+    
+    UITapGestureRecognizer *shareTapGestureRecognizer =
+    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shareButtonTapped:)];
+    [self.sharesView addGestureRecognizer:shareTapGestureRecognizer];
+    
+    UITapGestureRecognizer *commentTapGestureRecognizer =
+    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(commentButtonTapped:)];
+    [self.commentsView addGestureRecognizer:commentTapGestureRecognizer];
+    
+    [self setupUI];
+    self.post =  [MRDatabaseHelper getGroupPostForPostID:self.post.groupPostId];
     self.recentActivity = [NSArray arrayWithArray:self.post.replyPost.array];
     _userdata = [MRAppControl sharedHelper].userRegData;
     
     
     _userType = [MRAppControl sharedHelper].userType;
+
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -57,6 +106,57 @@
     [super viewWillAppear:animated];
     [MRCommon applyNavigationBarStyling:self.navigationController];
     [self setEmptyMessage];
+}
+
+- (void)setupUI {
+    [self setupPreview];
+    
+    self.sharesCount.text = [NSString stringWithFormat:@"%ld",self.post.shareCount.longValue];
+    self.commentsCount.text = [NSString stringWithFormat:@"%ld",self.post.commentsCount.longValue];
+    self.likeCount.text = [NSString stringWithFormat:@"%ld",self.post.likesCount.longValue];
+    
+    self.postedBY.text = [NSString stringWithFormat:@"Posted By:%@", self.post.source];
+}
+
+- (void)setupPreview {
+    if (self.post.contentType.integerValue == kTransformContentTypePDF) {
+        [self.previewImageView setHidden:YES];
+        
+        [self.webView setDelegate:self];
+        [self.webView setHidden:NO];
+        
+        NSURL *targetURL = [NSURL URLWithString:@"https://dl.dropboxusercontent.com/u/104553173/sample.pdf"];
+        NSURLRequest *request = [NSURLRequest requestWithURL:targetURL];
+        [self.webView loadRequest:request];
+    } else if (self.post.contentType.integerValue == kTransformContentTypeVideo) {
+        
+        [self.previewImageView setHidden:YES];
+        
+        av = [[AVPlayerViewController alloc] init];
+        av.view.frame = CGRectMake(self.previewImageView.frame.origin.x,
+                                   self.previewImageView.frame.origin.y,
+                                   self.previewImageView.frame.size.height,
+                                   self.previewImageView.frame.size.height);
+        
+        AVAsset *avAsset = [AVAsset assetWithURL:[NSURL URLWithString:@"https://dl.dropboxusercontent.com/u/104553173/PK%20Song.mp4"]];
+        AVPlayerItem *avPlayerItem =[[AVPlayerItem alloc]initWithAsset:avAsset];
+        AVPlayer *avPlayer = [[AVPlayer alloc]initWithPlayerItem:avPlayerItem];
+        av.player = avPlayer;
+        [avPlayer seekToTime:kCMTimeZero];
+        [avPlayer pause];
+        
+        [self addChildViewController:av];
+        [self.view addSubview:av.view];
+        [av didMoveToParentViewController:self];
+        [av.contentOverlayView addObserver:self forKeyPath:@"bounds" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+        
+        //            [self setAVPlayerConstraints:av.view];
+        
+    }else { //if ([self.selectedContent.contentType isEqualToString:@"Image"]) {
+        if (self.post.url != nil && self.post.url.length > 0) {
+            self.previewImageView.image = [UIImage imageNamed:self.post.url];
+        }
+    }
 }
 
 - (void)backButtonAction
@@ -141,5 +241,62 @@
     
 }
 
+
+- (void)likeButtonTapped:(UIGestureRecognizer*)gesture {
+    NSInteger likeCount = self.post.likesCount.longValue;
+    likeCount = likeCount + 1;
+    self.post.likesCount = [NSNumber numberWithLong:likeCount];
+    [self.post.managedObjectContext save:nil];
+    
+    self.likeCount.text = [NSString stringWithFormat:@"%ld",(long)likeCount];
+}
+
+- (void)shareButtonTapped:(UIGestureRecognizer*)gesture {
+    MRShareOptionsViewController *shareOptionsVC = [[MRShareOptionsViewController alloc] initWithNibName:@"MRShareOptionsViewController" bundle:nil];
+    [shareOptionsVC setDelegate:self];
+    [shareOptionsVC setParentPost:self.post];
+    [self.navigationController pushViewController:shareOptionsVC animated:YES];
+}
+
+- (void)commentButtonTapped:(UIGestureRecognizer*)gesture {
+    
+    
+}
+
+- (void)shareToSelected {
+    [self.activitiesTable reloadData];
+}
+
+//Mark: WebView Delegat methods
+- (void)webViewDidStartLoad:(UIWebView *)wView {
+    if (self.activityIndicator == nil) {
+        CGRect screen = self.webView.frame;
+        self.activityIndicator = [[UIActivityIndicatorView alloc]
+                                  initWithFrame:CGRectMake(screen.size.width/2 - 50,
+                                                           self.previewImageView.frame.size.height/2, 100, 100)];
+        [self.activityIndicator setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
+    }
+    
+    [self.view addSubview:self.activityIndicator];
+    //    [self setActivityIndicatorConstriants];
+    [self.view bringSubviewToFront:self.activityIndicator];
+    [self.activityIndicator startAnimating];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [self endIndicator];
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    [self endIndicator];
+}
+
+- (void)endIndicator {
+    if (self.activityIndicator != nil) {
+        [self.activityIndicator stopAnimating];
+        [self.activityIndicator removeFromSuperview];
+    }
+    self.activityIndicator = nil;
+}
 
 @end

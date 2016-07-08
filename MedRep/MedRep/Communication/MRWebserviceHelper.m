@@ -11,6 +11,8 @@
 #import "MRAppControl.h"
 #import "MRCommon.h"
 #import "NSDate+Utilities.h"
+#import "MRDataManger.h"
+#import "MRManagedObject.h"
 
 @interface MRWebserviceHelper ()
 
@@ -2170,6 +2172,49 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
     [urlRequest setHTTPBody: jsonData];
     self.serviceType = kMRWebServiceTypeGetMedicineDetails;
     [self sendServiceRequest:urlRequest withHandler:responceHandler];
+}
+
++ (id)parseNetworkResponse:(Class)inEntityClass andData:(NSArray*)data {
+    
+    NSMutableArray *arrayList = [NSMutableArray new];
+    
+    NSString *entityName = NSStringFromClass(inEntityClass);
+    Class<MRManagedObject>entityClass = inEntityClass;
+    
+    NSString *primaryColumn = [entityClass primaryKeyColumnName];
+    
+    MRDataManger *dbManager = [MRDataManger sharedManager];
+    NSEntityDescription *entityDescription = [[[dbManager managedObjectModel] entitiesByName] objectForKey:entityName];
+    
+    NSArray *currentRecords = [dbManager fetchObjectList:entityName];
+    
+    NSManagedObjectContext *context = [dbManager getNewPrivateManagedObjectContext];
+    
+    for (NSDictionary *dictionary in data) {
+        NSPredicate *predicate = nil;
+        
+        MRManagedObject *entity = nil;
+        id predicateValue = [dictionary valueForKey:primaryColumn];
+        if ([predicateValue isKindOfClass:[NSNumber class]]) {
+            predicate = [NSPredicate predicateWithFormat:@"%K == %ld",primaryColumn, ((NSNumber*)predicateValue).longValue];
+        } else {
+             predicate = [NSPredicate predicateWithFormat:@"%K == %%@",primaryColumn, predicateValue];
+        }
+        
+        NSArray *filteredRecords = [currentRecords filteredArrayUsingPredicate:predicate];
+        if (filteredRecords != nil && filteredRecords.count > 0) {
+            entity = filteredRecords.firstObject;
+        } else {
+            entity = [[MRManagedObject alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:context];
+        }
+        
+        [entity updateFromDictionary:dictionary];
+        [arrayList addObject:entity];
+    }
+    
+    [dbManager dbSaveInContext:context];
+    
+    return arrayList;
 }
 
 @end

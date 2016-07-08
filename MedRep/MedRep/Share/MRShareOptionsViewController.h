@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class MRGroupPost;
+@class MRSharePost;
 
 @protocol MRShareOptionsSelectionDelegate <NSObject>
 
@@ -18,7 +18,7 @@
 
 @interface MRShareOptionsViewController : UIViewController
 
-@property (nonatomic) MRGroupPost *groupPost;
+@property (nonatomic) MRSharePost *parentPost;
 @property (nonatomic,weak) id<MRShareOptionsSelectionDelegate> delegate;
 
 @end

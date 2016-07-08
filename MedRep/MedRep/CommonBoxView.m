@@ -9,7 +9,7 @@
 #import "CommonBoxView.h"
 #import "MRContact.h"
 #import "MRGroup.h"
-
+#import "MRAppControl.h"
 
 
 @interface CommonBoxView()
@@ -72,15 +72,14 @@
     }
     if (self.mainContact) {
         if (![combinedTitle isEqualToString:@""]) {
-            combinedTitle = [NSString stringWithFormat:@"%@ | %@",combinedTitle,self.mainContact.name];
+            combinedTitle = [NSString stringWithFormat:@"%@ | %@",combinedTitle,
+                             [MRAppControl getContactName:self.mainContact]];
         
         }else{
             
-            combinedTitle = [NSString stringWithFormat:@"%@",self.mainContact.name];
-            
-                self.personImageView.image = [UIImage imageNamed:self.mainContact.profilePic];
+            combinedTitle = [MRAppControl getContactName:self.mainContact];
+            self.personImageView.image = [MRAppControl getContactImage:self.mainContact];
         }
-        
     }
     
     self.personNameLbl.text = combinedTitle;

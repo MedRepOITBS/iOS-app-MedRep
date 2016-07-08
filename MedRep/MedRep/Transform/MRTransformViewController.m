@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MRTransformViewController.h"
 #import "MRTransformTitleCollectionViewCell.h"
-#import "MPTransformData.h"
+#import "MRTransformPost.h"
 #import "MRDatabaseHelper.h"
 #import "MRTransformDetailViewController.h"
 #import "MPTransformTableViewCell.h"
@@ -39,7 +39,7 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @property NSArray *categories;
-@property (strong, nonatomic) NSMutableArray *contentData;
+@property (strong, nonatomic) NSArray *contentData;
 @property (strong, nonatomic) NSMutableArray *filteredData;
 @property (strong, nonatomic) UITapGestureRecognizer* tapGesture;
 
@@ -88,7 +88,7 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
     [self.titleCollectionView registerNib:[UINib nibWithNibName:@"MRTransformTitleCollectionViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"transformTitleCollectionViewCell"];
     
     [self createDummyData];
-    self.filteredData = self.contentData;
+    self.filteredData = [self.contentData mutableCopy];
     
     self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
     self.tapGesture.numberOfTapsRequired = 1;
@@ -185,7 +185,7 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
     
     NSString *currentCategory = self.categories[indexPath.row];
     if (currentCategory != nil && [currentCategory caseInsensitiveCompare:@"Latest"] == NSOrderedSame) {
-        self.filteredData = self.contentData;
+        self.filteredData = [self.contentData mutableCopy];
     } else {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self.source == %@", currentCategory];
         self.filteredData = [[self.contentData filteredArrayUsingPredicate:predicate] mutableCopy];
@@ -232,24 +232,28 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
         regCell = (MPTransformTableViewCell *)[nibViews lastObject];
     }
     
-    MPTransformData *transformData = self.filteredData[indexPath.row];
+    MRTransformPost *transformData = self.filteredData[indexPath.row];
     if (transformData != nil) {
-        if (transformData.icon != nil && transformData.icon.length > 0) {
-            regCell.img.image = [UIImage imageNamed:transformData.icon];
-            
-            /*if ([transformData.contentType isEqualToString:@"Video"]) {
-                regCell.img.image = [self generateImageForVideoLink:@"https://dl.dropboxusercontent.com/u/104553173/PK%20Song.mp4"];
-            }*/
+        if (transformData.url != nil && transformData.url.length > 0) {
+            if (transformData.contentType.integerValue == kTransformContentTypeImage) {
+                regCell.img.image = [UIImage imageNamed:transformData.url];
+            } else if (transformData.contentType.integerValue == kTransformContentTypeVideo) {
+                regCell.img.image = [UIImage imageNamed:@"video"];
+            } else if (transformData.contentType.integerValue == kTransformContentTypePDF) {
+                regCell.img.image = [UIImage imageNamed:@"pdf"];
+            } else {
+                regCell.img.image = nil;
+            }
         }
         
-        if (transformData.title != nil && transformData.title.length > 0) {
-            regCell.titleLbl.text = transformData.title;
+        if (transformData.titleDescription != nil && transformData.titleDescription.length > 0) {
+            regCell.titleLbl.text = transformData.titleDescription;
             [regCell.titleLbl sizeToFit];
             [regCell.titleLbl layoutIfNeeded];
         }
         
-        if (transformData.shortDescription != nil && transformData.shortDescription.length > 0) {
-            regCell.descLbl.text = transformData.shortDescription;
+        if (transformData.shortArticleDescription != nil && transformData.shortArticleDescription.length > 0) {
+            regCell.descLbl.text = transformData.shortArticleDescription;
         }
         
         if (transformData.source != nil && transformData.source.length > 0) {
@@ -263,7 +267,7 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MRTransformDetailViewController *notiFicationViewController = [[MRTransformDetailViewController alloc] initWithNibName:@"MRTransformDetailViewController" bundle:nil];
-    notiFicationViewController.selectedContent = self.contentData[indexPath.row];
+    notiFicationViewController.post = self.contentData[indexPath.row];
     [self.navigationController pushViewController:notiFicationViewController animated:YES];
 }
 
@@ -271,221 +275,19 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
 
 - (void)createDummyData {
     // Create Dummy Data
-    self.contentData = [NSMutableArray new];
     
-    MPTransformData *transformData = [MPTransformData new];
-    [transformData setSource:@"Therapeutic Area"];
-    [transformData setIcon:@"comapny-logo.png"];
-    [transformData setContentType:@"Image"];
-    [transformData setTitle:@"Could High-Dose Vitamin D Help Fight Multiple Sclerosis"];
-    [transformData setShortDescription:@"Supplementation appears safe but experts says it's too soon for general..."];
-    [transformData setDetailDescription:@"Supplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for general"];
-    [self.contentData addObject:transformData];
+    self.contentData = [MRDatabaseHelper getTransformArticles];
     
-    transformData = [MPTransformData new];
-    [transformData setSource:@"Therapeutic Area"];
-    [transformData setIcon:@"pdf"];
-    [transformData setContentType:@"Pdf"];
-    [transformData setTitle:@"Painkillers Often Gateway to Heroin for U.S Teens: Survey"];
-    [transformData setShortDescription:@"Heroin is cheaper, easier to obtain than narcotics like OxyContin experts say..."];
-    [transformData setDetailDescription:@""];
-    [self.contentData addObject:transformData];
-    
-    transformData = [MPTransformData new];
-    [transformData setSource:@"Therapeutic Area"];
-    [transformData setIcon:@"video"];
-    [transformData setContentType:@"Video"];
-    [transformData setTitle:@"It's Not Too late"];
-    [transformData setShortDescription:@"Influenza activity usually active in Janurary or February..."];
-    [transformData setDetailDescription:@""];
-    [self.contentData addObject:transformData];
-    
-    transformData = [MPTransformData new];
-    [transformData setSource:@"Regulatory"];
-    [transformData setIcon:@"comapny-logo2.png"];
-    [transformData setContentType:@"Text"];
-    [transformData setTitle:@"Best Cancer Screening Methods"];
-    [transformData setShortDescription:@"Source:HealthDay - Related Medline Plus"];
-    [transformData setDetailDescription:@""];
-    [self.contentData addObject:transformData];
-    
-    transformData = [MPTransformData new];
-    [transformData setSource:@"Regulatory"];
-    [transformData setIcon:@"bg.png"];
-    [transformData setContentType:@"Image"];
-    [transformData setTitle:@"Could High-Dose Vitamin D Help Fight Multiple Sclerosis"];
-    [transformData setShortDescription:@"Supplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for general"];
-    [transformData setDetailDescription:@""];
-    [self.contentData addObject:transformData];
-    
-    transformData = [MPTransformData new];
-    [transformData setSource:@"Education"];
-    [transformData setIcon:@"latestNotificatins.png"];
-    [transformData setContentType:@"Image"];
-    [transformData setTitle:@"Painkillers Often Gateway to Heroin for U.S Teens: Survey"];
-    [transformData setShortDescription:@"Heroin is cheaper, easier to obtain than narcotics like OxyContin experts say..."];
-    [transformData setDetailDescription:@"Heroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts say"];
-    [self.contentData addObject:transformData];
-    
-    transformData = [MPTransformData new];
-    [transformData setSource:@"Journals"];
-    [transformData setIcon:@"comapny-logo.png"];
-    [transformData setContentType:@"Image"];
-    [transformData setTitle:@"Could High-Dose Vitamin D Help Fight Multiple Sclerosis"];
-    [transformData setShortDescription:@"Supplementation appears safe but experts says it's too soon for general..."];
-    [transformData setDetailDescription:@"Supplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for general"];
-    [self.contentData addObject:transformData];
-    
-    transformData = [MPTransformData new];
-    [transformData setSource:@"Journals"];
-    [transformData setIcon:@"pdf"];
-    [transformData setContentType:@"Pdf"];
-    [transformData setTitle:@"Painkillers Often Gateway to Heroin for U.S Teens: Survey"];
-    [transformData setShortDescription:@"Heroin is cheaper, easier to obtain than narcotics like OxyContin experts say..."];
-    [transformData setDetailDescription:@""];
-    [self.contentData addObject:transformData];
-    
-    transformData = [MPTransformData new];
-    [transformData setSource:@"Journals"];
-    [transformData setIcon:@"video"];
-    [transformData setContentType:@"Video"];
-    [transformData setTitle:@"It's Not Too late"];
-    [transformData setShortDescription:@"Influenza activity usually active in Janurary or February..."];
-    [transformData setDetailDescription:@""];
-    [self.contentData addObject:transformData];
-    
-    transformData = [MPTransformData new];
-    [transformData setSource:@"Medical Innovation"];
-    [transformData setIcon:@"comapny-logo2.png"];
-    [transformData setContentType:@"Text"];
-    [transformData setTitle:@"Best Cancer Screening Methods"];
-    [transformData setShortDescription:@"Source:HealthDay - Related Medline Plus"];
-    [transformData setDetailDescription:@""];
-    [self.contentData addObject:transformData];
-    
-    transformData = [MPTransformData new];
-    [transformData setSource:@"Medical Innovation"];
-    [transformData setIcon:@"bg.png"];
-    [transformData setContentType:@"Image"];
-    [transformData setTitle:@"Could High-Dose Vitamin D Help Fight Multiple Sclerosis"];
-    [transformData setShortDescription:@"Supplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for general"];
-    [transformData setDetailDescription:@""];
-    [self.contentData addObject:transformData];
-    
-    transformData = [MPTransformData new];
-    [transformData setSource:@"Podcasts / Webcasts"];
-    [transformData setIcon:@"latestNotificatins.png"];
-    [transformData setContentType:@"Image"];
-    [transformData setTitle:@"Painkillers Often Gateway to Heroin for U.S Teens: Survey"];
-    [transformData setShortDescription:@"Heroin is cheaper, easier to obtain than narcotics like OxyContin experts say..."];
-    [transformData setDetailDescription:@"Heroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts say"];
-    [self.contentData addObject:transformData];
-    
-    transformData = [MPTransformData new];
-    [transformData setSource:@"Best Practices"];
-    [transformData setIcon:@"comapny-logo.png"];
-    [transformData setContentType:@"Image"];
-    [transformData setTitle:@"Could High-Dose Vitamin D Help Fight Multiple Sclerosis"];
-    [transformData setShortDescription:@"Supplementation appears safe but experts says it's too soon for general..."];
-    [transformData setDetailDescription:@"Supplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for general"];
-    [self.contentData addObject:transformData];
-    
-    transformData = [MPTransformData new];
-    [transformData setSource:@"Best Practices"];
-    [transformData setIcon:@"pdf"];
-    [transformData setContentType:@"Pdf"];
-    [transformData setTitle:@"Painkillers Often Gateway to Heroin for U.S Teens: Survey"];
-    [transformData setShortDescription:@"Heroin is cheaper, easier to obtain than narcotics like OxyContin experts say..."];
-    [transformData setDetailDescription:@""];
-    [self.contentData addObject:transformData];
-    
-    transformData = [MPTransformData new];
-    [transformData setSource:@"Best Practices"];
-    [transformData setIcon:@"video"];
-    [transformData setContentType:@"Video"];
-    [transformData setTitle:@"It's Not Too late"];
-    [transformData setShortDescription:@"Influenza activity usually active in Janurary or February..."];
-    [transformData setDetailDescription:@""];
-    [self.contentData addObject:transformData];
-    
-    transformData = [MPTransformData new];
-    [transformData setSource:@"Case Studies"];
-    [transformData setIcon:@"comapny-logo2.png"];
-    [transformData setContentType:@"Text"];
-    [transformData setTitle:@"Best Cancer Screening Methods"];
-    [transformData setShortDescription:@"Source:HealthDay - Related Medline Plus"];
-    [transformData setDetailDescription:@""];
-    [self.contentData addObject:transformData];
-    
-    transformData = [MPTransformData new];
-    [transformData setSource:@"Case Studies"];
-    [transformData setIcon:@"bg.png"];
-    [transformData setContentType:@"Image"];
-    [transformData setTitle:@"Could High-Dose Vitamin D Help Fight Multiple Sclerosis"];
-    [transformData setShortDescription:@"Supplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for general"];
-    [transformData setDetailDescription:@""];
-    [self.contentData addObject:transformData];
-    
-    transformData = [MPTransformData new];
-    [transformData setSource:@"Whitepapers"];
-    [transformData setIcon:@"latestNotificatins.png"];
-    [transformData setContentType:@"Image"];
-    [transformData setTitle:@"Painkillers Often Gateway to Heroin for U.S Teens: Survey"];
-    [transformData setShortDescription:@"Heroin is cheaper, easier to obtain than narcotics like OxyContin experts say..."];
-    [transformData setDetailDescription:@"Heroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts say"];
-    [self.contentData addObject:transformData];
-    
-    transformData = [MPTransformData new];
-    [transformData setSource:@"Clinical Trials"];
-    [transformData setIcon:@"comapny-logo.png"];
-    [transformData setContentType:@"Image"];
-    [transformData setTitle:@"Could High-Dose Vitamin D Help Fight Multiple Sclerosis"];
-    [transformData setShortDescription:@"Supplementation appears safe but experts says it's too soon for general..."];
-    [transformData setDetailDescription:@"Supplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for general"];
-    [self.contentData addObject:transformData];
-    
-    transformData = [MPTransformData new];
-    [transformData setSource:@"Clinical Trials"];
-    [transformData setIcon:@"pdf"];
-    [transformData setContentType:@"Pdf"];
-    [transformData setTitle:@"Painkillers Often Gateway to Heroin for U.S Teens: Survey"];
-    [transformData setShortDescription:@"Heroin is cheaper, easier to obtain than narcotics like OxyContin experts say..."];
-    [transformData setDetailDescription:@""];
-    [self.contentData addObject:transformData];
-    
-    transformData = [MPTransformData new];
-    [transformData setSource:@"Videos"];
-    [transformData setIcon:@"video"];
-    [transformData setContentType:@"Video"];
-    [transformData setTitle:@"It's Not Too late"];
-    [transformData setShortDescription:@"Influenza activity usually active in Janurary or February..."];
-    [transformData setDetailDescription:@""];
-    [self.contentData addObject:transformData];
-    
-    if ([MRDatabaseHelper getContacts].count == 0) {
+    if (self.contentData == nil || self.contentData.count == 0) {
         
-        NSString* filePath = [[NSBundle mainBundle] pathForResource:@"groupList" ofType:@"json"];
+        NSString* filePath = [[NSBundle mainBundle] pathForResource:@"TransformPosts" ofType:@"json"];
         NSData* data = [NSData dataWithContentsOfFile:filePath];
         NSError *error;
-        NSArray* groupsArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-        [MRDatabaseHelper addGroups:groupsArray];
+        NSArray* transformArticles = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
         
-        filePath = [[NSBundle mainBundle] pathForResource:@"my_contacts" ofType:@"json"];
-        data = [NSData dataWithContentsOfFile:filePath];
-        NSArray* contactsArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-        [MRDatabaseHelper addContacts:contactsArray];
-        
-        filePath = [[NSBundle mainBundle] pathForResource:@"suggested_contacts" ofType:@"json"];
-        data = [NSData dataWithContentsOfFile:filePath];
-        contactsArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-        [MRDatabaseHelper addSuggestedContacts:contactsArray];
-        
-        filePath = [[NSBundle mainBundle] pathForResource:@"posts" ofType:@"json"];
-        data = [NSData dataWithContentsOfFile:filePath];
-        NSArray* postsArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-        [MRDatabaseHelper addGroupPosts:postsArray];
-        
-        
+        [MRDatabaseHelper addTransformArticles:transformArticles];
+    
+        self.contentData = [MRDatabaseHelper getTransformArticles];
     }
 }
 
