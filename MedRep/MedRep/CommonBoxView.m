@@ -68,7 +68,7 @@
     _cellIndexPath = indexPath;
     
     if (self.mainGroup) {
-        combinedTitle = self.mainGroup.name;
+        combinedTitle = self.mainGroup.group_name;
     }
     if (self.mainContact) {
         if (![combinedTitle isEqualToString:@""]) {

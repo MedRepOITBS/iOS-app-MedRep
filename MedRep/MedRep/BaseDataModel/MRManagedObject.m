@@ -9,6 +9,7 @@
 #import "NSDate+Utilities.h"
 #import <malloc/malloc.h>
 #import <objc/runtime.h>
+#import "NSData+Base64Additions.h"
 
 NSString* const kServerDateFormat = @"yyyy-MM-dd'T'HH:mm:ss";
 
@@ -132,6 +133,10 @@ NSString *const kLastRefreshedDateAttributeName = @"lastRefreshedDate";
             {
                 NSNumber *dateValue = value;
                 value = [[NSDate alloc]initWithTimeIntervalSince1970:(dateValue.doubleValue/1000)];
+            }
+        } else if (attributeType == NSBinaryDataAttributeType) {
+            if ([value isKindOfClass:[NSString class]]) {
+                value = [NSData decodeBase64ForString:value];
             }
         }
 

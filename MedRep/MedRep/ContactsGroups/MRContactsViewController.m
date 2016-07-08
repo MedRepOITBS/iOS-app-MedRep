@@ -22,7 +22,7 @@
 #import "MRTransformViewController.h"
 #import "SWRevealViewController.h"
 #import "MRTransformTitleCollectionViewCell.h"
-#import "MRGroupObject.h"
+#import "MRGroup.h"
 #import "MRCreateGroupViewController.h"
 #import "MRGroupUserObject.h"
 #import "MRAddMembersViewController.h"
@@ -31,9 +31,11 @@
 #import "MRDatabaseHelper.h"
 
 @interface MRContactsViewController () <UICollectionViewDataSource,UICollectionViewDelegate,UIActionSheetDelegate,UISearchBarDelegate, SWRevealViewControllerDelegate>{
-    NSMutableArray *groupsArray;
+    
+    NSArray *groupsArray;
     NSMutableArray *filteredGroupsArray;
-    NSMutableArray *suggestedGroupsArray;
+    
+    NSArray *suggestedGroupsArray;
     NSMutableArray *filteredSuggestedGroupsArray;
     int i;
     NSTimer *timer;
@@ -118,37 +120,13 @@
     [tabBarView setNavigationController:self.navigationController];
     [tabBarView setContactsViewController:self];
     [tabBarView updateActiveViewController:self andTabIndex:DoctorPlusTabConnect];
-    
-//    self.tabBarView = (UIView*)tabBarView;
-    
-//    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:self.contentTableView
-//                                                                        attribute:NSLayoutAttributeBottomMargin
-//                                                                        relatedBy:NSLayoutRelationEqual
-//                                                                           toItem:self.view
-//                                                                        attribute:NSLayoutAttributeBottom
-//                                                                       multiplier:1.0 constant:0];
-//    
-//    [self.view addConstraint:bottomConstraint];
+
+    [self fetchDataFromServer];
 }
 
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.searchBar resignFirstResponder];
-    
-    if (self.currentIndex == 0) {
-        [MRDatabaseHelper getContacts:^(id result) {
-            self.myContacts = result;
-            _fileredContacts = _myContacts;
-            [self refreshLabels];
-            [_myContactsCollectionView reloadData];
-        }];
-    }else if (self.currentIndex == 1) {
-        [self getSuggestedContactList];
-    }else if (self.currentIndex == 2) {
-        [self getGroupList];
-    }else if (self.currentIndex == 3) {
-        [self getSuggestedGroupList];
-    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -167,6 +145,18 @@
     
     i = 0;
     [timer invalidate];
+}
+
+- (void)fetchDataFromServer {
+    if (self.currentIndex == 0) {
+        [self getContactList];
+    }else if (self.currentIndex == 1) {
+        [self getSuggestedContactList];
+    }else if (self.currentIndex == 2) {
+        [self getGroupList];
+    }else if (self.currentIndex == 3) {
+        [self getSuggestedGroupList];
+    }
 }
 
 -(void)AutoScroll
@@ -273,11 +263,18 @@
     if (collectionView == self.titlesCollectionView) {
         //NSInteger prevIndex = self.currentIndex;
         //NSString *currentString = self.categories[indexPath.row];
+        
+        NSInteger previousIndex = self.currentIndex;
         self.currentIndex = indexPath.row;
+        
+        [_titlesCollectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:previousIndex inSection:0],
+                                                             [NSIndexPath indexPathForRow:self.currentIndex inSection:0]]];
+        
+        [_titlesCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:self.currentIndex
+                                                                          inSection:0]
+                                      atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:true];
         if (self.currentIndex == 0) {
-            [MRDatabaseHelper getContacts:^(id results) {
-                self.myContacts = results;
-            }];
+            [self getContactList];
         }else if (self.currentIndex == 1) {
             [self getSuggestedContactList];
         }else if (self.currentIndex == 2) {
@@ -286,30 +283,24 @@
             [self getSuggestedGroupList];
         }
         
-        [self.myContactsCollectionView reloadData];
         self.searchBar.text = @"";
-        [self.titlesCollectionView reloadData];
         return;
     }
     
+    MRContactDetailViewController* detailViewController = [[MRContactDetailViewController alloc] init];
+    
     if (self.currentIndex == 0) {
-        MRContactDetailViewController* detailViewController = [[MRContactDetailViewController alloc] init];
         [detailViewController setContact:self.fileredContacts[indexPath.row]];
-        [self.navigationController pushViewController:detailViewController animated:YES];
     }else if (self.currentIndex == 1) {
-        MRContactDetailViewController* detailViewController = [[MRContactDetailViewController alloc] init];
         [detailViewController setContact:self.fileredSuggestedContacts[indexPath.row]];
-        [self.navigationController pushViewController:detailViewController animated:YES];
     }else if (self.currentIndex == 2) {
-        MRContactDetailViewController* detailViewController = [[MRContactDetailViewController alloc] init];
-        [detailViewController setGroupData:filteredGroupsArray[indexPath.row]];
-        [self.navigationController pushViewController:detailViewController animated:YES];
+        [detailViewController setGroup:filteredGroupsArray[indexPath.row]];
     }else if (self.currentIndex == 3) {
-        MRContactDetailViewController* detailViewController = [[MRContactDetailViewController alloc] init];
-        [detailViewController setGroupData:filteredSuggestedGroupsArray[indexPath.row]];
+        [detailViewController setGroup:filteredSuggestedGroupsArray[indexPath.row]];
         detailViewController.isSuggestedGroup = YES;
-        [self.navigationController pushViewController:detailViewController animated:YES];
     }
+    
+    [self.navigationController pushViewController:detailViewController animated:YES];
 }
 
 -(void) refreshLabels{
@@ -323,7 +314,6 @@
             self.noContactErrorMsgLbl.hidden = NO;
             self.clickHereToAddBtn.hidden = NO;
         }
-        [self.myContactsCollectionView reloadData];
     } else if (self.currentIndex == 1) {
         self.fileredSuggestedContacts = self.suggestedContacts;
         if (self.suggestedContacts != nil && self.suggestedContacts.count >0) {
@@ -334,7 +324,6 @@
             self.noContactErrorMsgLbl.hidden = NO;
             self.clickHereToAddBtn.hidden = YES;
         }
-        [self.myContactsCollectionView reloadData];
     } else if (self.currentIndex == 2) {
         if (filteredGroupsArray.count > 0) {
             self.noContactErrorMsgLbl.hidden = YES;
@@ -344,7 +333,6 @@
             self.noContactErrorMsgLbl.hidden = NO;
             self.clickHereToAddBtn.hidden = NO;
         }
-        [self.myContactsCollectionView reloadData];
     } else if (self.currentIndex == 3) {
         if (filteredSuggestedGroupsArray.count > 0) {
             self.noContactErrorMsgLbl.hidden = YES;
@@ -354,8 +342,10 @@
             self.noContactErrorMsgLbl.hidden = NO;
             self.clickHereToAddBtn.hidden = YES;
         }
-        [self.myContactsCollectionView reloadData];
     }
+    
+    [_myContactsCollectionView reloadData];
+//    [_titlesCollectionView reloadData];
 }
 
 //- (void)setupPieMenu {
@@ -473,160 +463,37 @@
 }
 
 - (void)getGroupList{
-    [MRCommon showActivityIndicator:@"Requesting..."];
-    [[MRWebserviceHelper sharedWebServiceHelper] getGroupListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-        [MRCommon stopActivityIndicator];
-        if (status)
-        {
-            groupsArray = [NSMutableArray array];
-            NSArray *responseArray = responce[@"Responce"];
-            for (NSDictionary *dic in responseArray) {
-                MRGroupObject *groupObj = [[MRGroupObject alloc] initWithDict:dic];
-                [groupsArray addObject:groupObj];
-            }
-            filteredGroupsArray = groupsArray;
-            [self refreshLabels];
-            [_myContactsCollectionView reloadData];
-        }
-        else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
-        {
-            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
-             {
-                 [MRCommon savetokens:responce];
-                 [[MRWebserviceHelper sharedWebServiceHelper] getGroupListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-                     [MRCommon stopActivityIndicator];
-                     if (status)
-                     {
-                         groupsArray = [NSMutableArray array];
-                         NSArray *responseArray = responce[@"Responce"];
-                         for (NSDictionary *dic in responseArray) {
-                             MRGroupObject *groupObj = [[MRGroupObject alloc] initWithDict:dic];
-                             [groupsArray addObject:groupObj];
-                         }
-                         filteredGroupsArray = groupsArray;
-                         [self refreshLabels];
-                         [_myContactsCollectionView reloadData];
-                     }else
-                     {
-                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
-                         if (erros.count > 0)
-                             [MRCommon showAlert:[erros lastObject] delegate:nil];
-                     }
-                 }];
-             }];
-        }
-        else
-        {
-            NSArray *erros =  [details componentsSeparatedByString:@"-"];
-            if (erros.count > 0)
-                [MRCommon showAlert:[erros lastObject] delegate:nil];
-        }
+    [MRDatabaseHelper getGroups:^(id result) {
+        groupsArray = result;
+        filteredGroupsArray = [groupsArray mutableCopy];
+        [self refreshLabels];
     }];
 }
 
 - (void)getSuggestedGroupList{
-    [MRCommon showActivityIndicator:@"Requesting..."];
-    [[MRWebserviceHelper sharedWebServiceHelper] getSuggestedGroupListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-        [MRCommon stopActivityIndicator];
-        if (status)
-        {
-            suggestedGroupsArray = [NSMutableArray array];
-            NSArray *responseArray = responce[@"Responce"];
-            for (NSDictionary *dic in responseArray) {
-                MRGroupObject *groupObj = [[MRGroupObject alloc] initWithDict:dic];
-                [suggestedGroupsArray addObject:groupObj];
-            }
-            filteredSuggestedGroupsArray = suggestedGroupsArray;
-            [self refreshLabels];
-            [_myContactsCollectionView reloadData];
-        }
-        else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
-        {
-            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
-             {
-                 [MRCommon savetokens:responce];
-                 [[MRWebserviceHelper sharedWebServiceHelper] getSuggestedGroupListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-                     [MRCommon stopActivityIndicator];
-                     if (status)
-                     {
-                         suggestedGroupsArray = [NSMutableArray array];
-                         NSArray *responseArray = responce[@"Responce"];
-                         for (NSDictionary *dic in responseArray) {
-                             MRGroupObject *groupObj = [[MRGroupObject alloc] initWithDict:dic];
-                             [suggestedGroupsArray addObject:groupObj];
-                         }
-                         filteredSuggestedGroupsArray = suggestedGroupsArray;
-                         [self refreshLabels];
-                         [_myContactsCollectionView reloadData];
-                     }else
-                     {
-                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
-                         if (erros.count > 0)
-                             [MRCommon showAlert:[erros lastObject] delegate:nil];
-                     }
-                 }];
-             }];
-        }
-        else
-        {
-            NSArray *erros =  [details componentsSeparatedByString:@"-"];
-            if (erros.count > 0)
-                [MRCommon showAlert:[erros lastObject] delegate:nil];
-        }
+    [MRDatabaseHelper getSuggestedGroups:^(id result) {
+        suggestedGroupsArray = result;
+        filteredSuggestedGroupsArray = [suggestedGroupsArray mutableCopy];
+        [self refreshLabels];
     }];
 }
 
 - (void)getSuggestedContactList{
-    [MRCommon showActivityIndicator:@"Requesting..."];
-    [[MRWebserviceHelper sharedWebServiceHelper] getSuggestedContactListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-        [MRCommon stopActivityIndicator];
-        if (status)
-        {
-            _suggestedContacts = [NSMutableArray array];
-            NSArray *responseArray = responce[@"Responce"];
-            for (NSDictionary *dic in responseArray) {
-                MRGroupUserObject *groupObj = [[MRGroupUserObject alloc] initWithDict:dic];
-                [_suggestedContacts addObject:groupObj];
-            }
-            _fileredSuggestedContacts = _suggestedContacts;
-            [self refreshLabels];
-            [_myContactsCollectionView reloadData];
-        }
-        else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
-        {
-            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
-             {
-                 [MRCommon savetokens:responce];
-                 [[MRWebserviceHelper sharedWebServiceHelper] getSuggestedContactListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-                     [MRCommon stopActivityIndicator];
-                     if (status)
-                     {
-                         _suggestedContacts = [NSMutableArray array];
-                         NSArray *responseArray = responce[@"Responce"];
-                         for (NSDictionary *dic in responseArray) {
-                             MRGroupUserObject *groupObj = [[MRGroupUserObject alloc] initWithDict:dic];
-                             [_suggestedContacts addObject:groupObj];
-                         }
-                         _fileredSuggestedContacts = _suggestedContacts;
-                         [self refreshLabels];
-                         [_myContactsCollectionView reloadData];
-                     }else
-                     {
-                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
-                         if (erros.count > 0)
-                             [MRCommon showAlert:[erros lastObject] delegate:nil];
-                     }
-                 }];
-             }];
-        }
-        else
-        {
-            NSArray *erros =  [details componentsSeparatedByString:@"-"];
-            if (erros.count > 0)
-                [MRCommon showAlert:[erros lastObject] delegate:nil];
-        }
+    [MRDatabaseHelper getSuggestedContacts:^(id result) {
+        _suggestedContacts = result;
+        _fileredSuggestedContacts = [_suggestedContacts mutableCopy];
+        [self refreshLabels];
     }];
 }
+
+- (void)getContactList {
+    [MRDatabaseHelper getContacts:^(id results) {
+        self.myContacts = results;
+        _fileredContacts = [self.myContacts mutableCopy];
+        [self refreshLabels];
+    }];
+}
+
 
 /*- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
     if (item == self.myContactsButton) {

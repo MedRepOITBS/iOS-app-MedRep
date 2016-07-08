@@ -2,7 +2,7 @@
 //  MRPostedReplies+CoreDataProperties.h
 //  MedRep
 //
-//  Created by Vamsi Katragadda on 7/7/16.
+//  Created by Vamsi Katragadda on 7/8/16.
 //  Copyright © 2016 MedRep. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -15,12 +15,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MRPostedReplies (CoreDataProperties)
 
-@property (nullable, nonatomic, retain) NSNumber *postedReplyId;
-@property (nullable, nonatomic, retain) NSNumber *parentSharePostId;
-@property (nullable, nonatomic, retain) NSString *text;
 @property (nullable, nonatomic, retain) NSData *image;
-@property (nullable, nonatomic, retain) NSString *url;
+@property (nullable, nonatomic, retain) NSNumber *parentSharePostId;
 @property (nullable, nonatomic, retain) NSDate *postedOn;
+@property (nullable, nonatomic, retain) NSNumber *postedReplyId;
+@property (nullable, nonatomic, retain) NSString *text;
+@property (nullable, nonatomic, retain) NSString *url;
+@property (nullable, nonatomic, retain) NSNumber *contentType;
+@property (nullable, nonatomic, retain) NSString *postedBy;
+@property (nullable, nonatomic, retain) NSData *postedByProfilePic;
 
 @end
 

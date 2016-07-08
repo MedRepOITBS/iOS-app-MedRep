@@ -62,7 +62,6 @@
                         </constraints>
                     </imageView>
                 </subviews>
-                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstItem="SzN-ct-obK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-4" id="0Kg-Gs-PPM"/>
                     <constraint firstAttribute="trailingMargin" secondItem="fFT-jG-kpf" secondAttribute="trailing" constant="-7" id="1N7-Uh-ebh"/>

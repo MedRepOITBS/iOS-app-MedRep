@@ -40,9 +40,12 @@
 + (void)addGroups:(NSArray*)groups;
 + (void)addGroupPosts:(NSArray*)groupPosts;
 
++ (void)getGroups:(WebServiceResponseHandler)responseHandler;
++ (void)getSuggestedGroups:(WebServiceResponseHandler)responseHandler;
+
 + (void)getContacts:(WebServiceResponseHandler)responseHandler;
-+ (NSArray*)getSuggestedContacts;
-+ (NSArray*)getGroups;
++ (void)getSuggestedContacts:(WebServiceResponseHandler)responseHandler;
++ (void)getPendingContacts:(WebServiceResponseHandler)responseHandler;
 
 + (NSArray*)getObjectsForType:(NSString*)entityName andPredicate:(NSPredicate*)predicate;
 

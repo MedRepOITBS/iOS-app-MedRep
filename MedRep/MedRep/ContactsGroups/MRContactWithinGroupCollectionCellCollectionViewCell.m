@@ -31,8 +31,9 @@
 }
 
 - (void)setGroup:(MRGroup *)group {
-    self.imageView.image = [UIImage imageNamed:group.groupPicture];
-    self.label.text = group.name;
+    self.imageView.image = [MRAppControl getGroupImage:group];
+    //[UIImage imageNamed:group.groupPicture];
+    self.label.text = group.group_name;
 }
 
 @end

@@ -12,8 +12,9 @@
 #import "MRCommon.h"
 #import "MRWebserviceHelper.h"
 #import "MRGroupUserObject.h"
-#import "MRGroupObject.h"
+#import "MRGroup.h"
 #import "MRContactsViewController.h"
+#import "MRDatabaseHelper.h"
 
 @interface PendingContactsViewController () <MRPendingMemberProtocol> {
     NSMutableArray *fileredContacts;
@@ -412,54 +413,10 @@
 }
 
 -(void)getPendingGroups {
-    [MRCommon showActivityIndicator:@"Requesting..."];
-    [[MRWebserviceHelper sharedWebServiceHelper] fetchPendingGroupsListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-        [MRCommon stopActivityIndicator];
-        if (status)
-        {
-            fileredContacts = [NSMutableArray array];
-            _pendingContactListArra = [NSMutableArray array];
-            NSArray *responseArray = responce[@"Responce"];
-            for (NSDictionary *dic in responseArray) {
-                MRGroupObject *groupObj = [[MRGroupObject alloc] initWithDict:dic];
-                [_pendingContactListArra addObject:groupObj];
-            }
-            fileredContacts = _pendingContactListArra;
-            [_pendingTableView reloadData];
-        }
-        else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
-        {
-            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
-             {
-                 [MRCommon savetokens:responce];
-                 [[MRWebserviceHelper sharedWebServiceHelper] fetchPendingGroupsListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-                     [MRCommon stopActivityIndicator];
-                     if (status)
-                     {
-                         fileredContacts = [NSMutableArray array];
-                         _pendingContactListArra = [NSMutableArray array];
-                         NSArray *responseArray = responce[@"Responce"];
-                         for (NSDictionary *dic in responseArray) {
-                             MRGroupObject *groupObj = [[MRGroupObject alloc] initWithDict:dic];
-                             [_pendingContactListArra addObject:groupObj];
-                         }
-                         fileredContacts = _pendingContactListArra;
-                         [_pendingTableView reloadData];
-                     } else
-                     {
-                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
-                         if (erros.count > 0)
-                             [MRCommon showAlert:[erros lastObject] delegate:nil];
-                     }
-                 }];
-             }];
-        }
-        else
-        {
-            NSArray *erros =  [details componentsSeparatedByString:@"-"];
-            if (erros.count > 0)
-                [MRCommon showAlert:[erros lastObject] delegate:nil];
-        }
+    [MRDatabaseHelper getPendingContacts:^(id result) {
+        fileredContacts = result;
+        fileredContacts = _pendingContactListArra;
+        [_pendingTableView reloadData];
     }];
 }
 
@@ -508,48 +465,48 @@
         cell.acceptBtn.tag = indexPath.row;
         cell.rejectBtn.tag = indexPath.row;
         
-        if (_isFromGroup) {
-            MRGroupObject *contact = [fileredContacts objectAtIndex:indexPath.row];
-            for (UIView *view in cell.profilePic.subviews) {
-                if ([view isKindOfClass:[UILabel class]]) {
-                    [view removeFromSuperview];
-                }
-            }
-            
-            NSString *fullName = [NSString stringWithFormat:@"%@",contact.group_name];
-            cell.userName.text = fullName;
-            cell.phoneNo.text = contact.group_short_desc;
-            if (contact.group_img_data.length) {
-                cell.profilePic.image = [MRCommon getImageFromBase64Data:[contact.group_img_data dataUsingEncoding:NSUTF8StringEncoding]];
-            } else {
-                cell.profilePic.image = nil;
-                if (fullName.length > 0) {
-                    UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:cell.profilePic.bounds];
-                    subscriptionTitleLabel.textAlignment = NSTextAlignmentCenter;
-                    subscriptionTitleLabel.font = [UIFont systemFontOfSize:15.0];
-                    subscriptionTitleLabel.textColor = [UIColor lightGrayColor];
-                    subscriptionTitleLabel.layer.cornerRadius = 5.0;
-                    subscriptionTitleLabel.layer.masksToBounds = YES;
-                    subscriptionTitleLabel.layer.borderWidth =1.0;
-                    subscriptionTitleLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
-                    
-                    NSArray *substrngs = [fullName componentsSeparatedByString:@" "];
-                    NSString *imageString = @"";
-                    for(NSString *str in substrngs){
-                        if (str.length > 0) {
-                            imageString = [imageString stringByAppendingString:[NSString stringWithFormat:@"%c",[str characterAtIndex:0]]];
-                        }
-                    }
-                    subscriptionTitleLabel.text = imageString.length > 2 ? [imageString substringToIndex:2] : imageString;
-                    [cell.profilePic addSubview:subscriptionTitleLabel];
-                }
-            }
-            
-            cell.acceptBtn.hidden = YES;
-            cell.rejectBtn.hidden = YES;
-            
-            return cell;
-        }
+//        if (_isFromGroup) {
+//            MRGroupObject *contact = [fileredContacts objectAtIndex:indexPath.row];
+//            for (UIView *view in cell.profilePic.subviews) {
+//                if ([view isKindOfClass:[UILabel class]]) {
+//                    [view removeFromSuperview];
+//                }
+//            }
+//            
+//            NSString *fullName = [NSString stringWithFormat:@"%@",contact.group_name];
+//            cell.userName.text = fullName;
+//            cell.phoneNo.text = contact.group_short_desc;
+//            if (contact.group_img_data.length) {
+//                cell.profilePic.image = [MRCommon getImageFromBase64Data:[contact.group_img_data dataUsingEncoding:NSUTF8StringEncoding]];
+//            } else {
+//                cell.profilePic.image = nil;
+//                if (fullName.length > 0) {
+//                    UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:cell.profilePic.bounds];
+//                    subscriptionTitleLabel.textAlignment = NSTextAlignmentCenter;
+//                    subscriptionTitleLabel.font = [UIFont systemFontOfSize:15.0];
+//                    subscriptionTitleLabel.textColor = [UIColor lightGrayColor];
+//                    subscriptionTitleLabel.layer.cornerRadius = 5.0;
+//                    subscriptionTitleLabel.layer.masksToBounds = YES;
+//                    subscriptionTitleLabel.layer.borderWidth =1.0;
+//                    subscriptionTitleLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
+//                    
+//                    NSArray *substrngs = [fullName componentsSeparatedByString:@" "];
+//                    NSString *imageString = @"";
+//                    for(NSString *str in substrngs){
+//                        if (str.length > 0) {
+//                            imageString = [imageString stringByAppendingString:[NSString stringWithFormat:@"%c",[str characterAtIndex:0]]];
+//                        }
+//                    }
+//                    subscriptionTitleLabel.text = imageString.length > 2 ? [imageString substringToIndex:2] : imageString;
+//                    [cell.profilePic addSubview:subscriptionTitleLabel];
+//                }
+//            }
+//            
+//            cell.acceptBtn.hidden = YES;
+//            cell.rejectBtn.hidden = YES;
+//            
+//            return cell;
+//        }
         
         if (!_canEdit && _isFromMember) {
             cell.acceptBtn.hidden = YES;

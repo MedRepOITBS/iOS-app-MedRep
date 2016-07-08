@@ -15,7 +15,6 @@
 @property (nonatomic, strong) MRTransformPost *post;
 @property (weak, nonatomic) IBOutlet UIImageView *contentImage;
 @property (weak, nonatomic) IBOutlet UITextView *detailLbl;
-@property (weak, nonatomic) IBOutlet UIButton *shareButton;
 @property (weak, nonatomic) IBOutlet UIButton *gotoButton;
 @property (weak, nonatomic) IBOutlet UILabel *titleLbl;
 

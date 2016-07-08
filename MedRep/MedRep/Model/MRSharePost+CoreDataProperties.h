@@ -2,7 +2,7 @@
 //  MRSharePost+CoreDataProperties.h
 //  MedRep
 //
-//  Created by Namit Nayak on 7/8/16.
+//  Created by Vamsi Katragadda on 7/8/16.
 //  Copyright © 2016 MedRep. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -34,22 +34,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *source;
 @property (nullable, nonatomic, retain) NSString *titleDescription;
 @property (nullable, nonatomic, retain) NSString *url;
-@property (nullable, nonatomic, retain) NSOrderedSet<MRPostedReplies *> *mrpostreplies;
+@property (nullable, nonatomic, retain) NSSet<MRPostedReplies *> *postedReplies;
 
 @end
 
 @interface MRSharePost (CoreDataGeneratedAccessors)
 
-- (void)insertObject:(MRPostedReplies *)value inMrpostrepliesAtIndex:(NSUInteger)idx;
-- (void)removeObjectFromMrpostrepliesAtIndex:(NSUInteger)idx;
-- (void)insertMrpostreplies:(NSArray<MRPostedReplies *> *)value atIndexes:(NSIndexSet *)indexes;
-- (void)removeMrpostrepliesAtIndexes:(NSIndexSet *)indexes;
-- (void)replaceObjectInMrpostrepliesAtIndex:(NSUInteger)idx withObject:(MRPostedReplies *)value;
-- (void)replaceMrpostrepliesAtIndexes:(NSIndexSet *)indexes withMrpostreplies:(NSArray<MRPostedReplies *> *)values;
-- (void)addMrpostrepliesObject:(MRPostedReplies *)value;
-- (void)removeMrpostrepliesObject:(MRPostedReplies *)value;
-- (void)addMrpostreplies:(NSOrderedSet<MRPostedReplies *> *)values;
-- (void)removeMrpostreplies:(NSOrderedSet<MRPostedReplies *> *)values;
+- (void)addPostedRepliesObject:(MRPostedReplies *)value;
+- (void)removePostedRepliesObject:(MRPostedReplies *)value;
+- (void)addPostedReplies:(NSSet<MRPostedReplies *> *)values;
+- (void)removePostedReplies:(NSSet<MRPostedReplies *> *)values;
 
 @end
 

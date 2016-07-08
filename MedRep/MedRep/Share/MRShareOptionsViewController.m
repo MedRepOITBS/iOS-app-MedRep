@@ -276,7 +276,7 @@
                                                postedByProfileId:@""
                                                      profileName:sharedByProfileName
                                                    andprofilePic:shareddByProfilePic];
-                NSInteger groupId = ((MRGroup*)[selectedGroups objectAtIndex:index]).groupId;
+                NSInteger groupId = ((MRGroup*)[selectedGroups objectAtIndex:index]).group_id.longValue;
                 newPost.groupId = [NSNumber numberWithLong:groupId];
             }
         }
@@ -337,7 +337,7 @@
 
 - (NSInteger)getGroupId:(NSArray*)dataArray andIndex:(NSInteger)index {
     MRGroup *group = [self.groups objectAtIndex:index];
-    return group.groupId;
+    return group.group_id.longValue;
 }
 
 @end

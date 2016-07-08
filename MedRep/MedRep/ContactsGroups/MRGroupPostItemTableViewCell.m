@@ -92,8 +92,6 @@
     // Configure the view for the selected state
 }
 
-//{"name":"John Doe","postText":"Guys, these drugs look promising!","likes":10,"comments":23,"shares":3,"profile_pic":"","post_pic":""}
-
 - (void)setPostContent:(MRSharePost *)post  tagIndex:(NSInteger)tagIndex {
     self.post = post;
     
@@ -131,23 +129,22 @@
     
     tagIndex++;
     [self.likeView setTag:tagIndex];
-    self.likeCountLabel.text = [NSString stringWithFormat:@"%ld",post.likesCount.integerValue];
+    self.likeCountLabel.text = [NSString stringWithFormat:@"%ld",post.likesCount.longValue];
     
     tagIndex++;
     [self.shareView setTag:tagIndex];
-    self.shareCountLabel.text = [NSString stringWithFormat:@"%@",post.shareCount];
+    self.shareCountLabel.text = [NSString stringWithFormat:@"%ld",post.shareCount.longValue];
     
     tagIndex++;
     [self.commentView setTag:tagIndex];
-
+    self.commentCountLabel.text = [NSString stringWithFormat:@"%ld",post.commentsCount.longValue];
+    
 //    if (post.replyPost!=NULL) {
 //        
 //    }
-//    self.commentCountLabel.text = [NSString stringWithFormat:@"%d",post.replyPost.count];
-    if (post.mrpostreplies!=NULL) {
+    if (post.postedReplies != NULL) {
         
     }
-    self.commentCountLabel.text = [NSString stringWithFormat:@"%d",post.mrpostreplies.count ];
 
 }
 

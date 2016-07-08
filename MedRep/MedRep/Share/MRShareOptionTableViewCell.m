@@ -64,10 +64,10 @@
 
 - (void)setGroupDataInCell:(MRGroup*)group {
     
-    NSString *fullName = group.name;
+    NSString *fullName = group.group_name;
     self.contactName.text = fullName;
     
-    if (group.groupPicture != nil ) {
+    if (group.group_img_data != nil ) {
 //        self.contactPic.image = [UIImage imageWithData:group.profilePic];
     } else {
         self.contactPic.image = nil;

@@ -77,7 +77,7 @@
         
         __block NSString *theResponse = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         
-        NSLog(@"URL: %@\nRequest body %@\nResponse: %@", theRequest.URL, [[NSString alloc] initWithData:[theRequest HTTPBody] encoding:NSUTF8StringEncoding], theResponse);
+//        NSLog(@"URL: %@\nRequest body %@\nResponse: %@", theRequest.URL, [[NSString alloc] initWithData:[theRequest HTTPBody] encoding:NSUTF8StringEncoding], theResponse);
         
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
         if ([data length] > 0 && error == 0 && [httpResponse statusCode] == 200)

@@ -2,16 +2,17 @@
 //  MRPostedReplies.h
 //  MedRep
 //
-//  Created by Vamsi Katragadda on 7/7/16.
+//  Created by Vamsi Katragadda on 7/8/16.
 //  Copyright © 2016 MedRep. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "MRManagedObject.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MRPostedReplies : NSManagedObject
+@interface MRPostedReplies : MRManagedObject
 
 // Insert code here to declare functionality of your managed object subclass
 

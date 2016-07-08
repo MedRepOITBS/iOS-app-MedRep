@@ -19,6 +19,7 @@
 #import "MRTransformPost.h"
 #import "MRShareOptionsViewController.h"
 #import "MRConstants.h"
+#import "MRPostedReplies.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
@@ -88,7 +89,7 @@
     
     [self setupUI];
 //    self.post =  [MRDatabaseHelper getGroupPostForPostID:self.post.groupPostId];
-//    self.recentActivity = [NSArray arrayWithArray:self.post.replyPost.array];
+    self.recentActivity = [NSArray arrayWithArray:self.post.postedReplies.allObjects];
     _userdata = [MRAppControl sharedHelper].userRegData;
     
     
@@ -116,6 +117,7 @@
     self.likeCount.text = [NSString stringWithFormat:@"%ld",self.post.likesCount.longValue];
     
     self.postedBY.text = [NSString stringWithFormat:@"Posted By:%@", self.post.source];
+    self.titleView.text = self.post.titleDescription;
 }
 
 - (void)setupPreview {
@@ -155,6 +157,7 @@
     }else { //if ([self.selectedContent.contentType isEqualToString:@"Image"]) {
         if (self.post.url != nil && self.post.url.length > 0) {
             self.previewImageView.image = [UIImage imageNamed:self.post.url];
+            NSLog(@"%@",self.post.url);
         }
     }
 }
@@ -205,28 +208,12 @@
         NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"GroupPostChildTableViewCell" owner:self options:nil];
         cell = (GroupPostChildTableViewCell *)[arr objectAtIndex:0];
     }
-//    NSArray *aara = [self.post.replyPost array];
-//    
-//    
-//    MrGroupChildPost *childPost = (MrGroupChildPost *)[aara objectAtIndex:indexPath.row];
-//    
-//    if ([childPost.postPic isEqualToString:@""]) {
-//        cell.heightConstraint.constant = 0;
-//        cell.verticalContstraint.constant = 0;
-//        [cell setNeedsUpdateConstraints];
-//    }else {
-//        NSString * imagePath = childPost.postPic;
-//        
-//        cell.commentPic.image = [UIImage imageWithData:[NSData dataWithContentsOfFile:imagePath]];
-//        
-//    }
-//    
-//    cell.layoutMargins = UIEdgeInsetsZero;
-//    cell.separatorInset = UIEdgeInsetsMake(0, 10000, 0, 0);
-//    cell.profileNameLabel.text              = (_userType == 2 || _userType == 1) ? [NSString stringWithFormat:@"Dr. %@ %@", [_userdata objectForKey:KFirstName],[_userdata objectForKey:KLastName]] : [NSString stringWithFormat:@"Mr. %@ %@", [_userdata objectForKey:KFirstName],[_userdata objectForKey:KLastName]];
-//    cell.profilePic.image = [MRCommon getImageFromBase64Data:[_userdata objectForKey:KProfilePicture]];
-//    
-//    cell.postText.text = childPost.postText;
+    
+    MRPostedReplies *currentReply = [self.recentActivity objectAtIndex:indexPath.row];
+    cell.postText.text = currentReply.text;
+    cell.profileNameLabel.text = currentReply.postedBy;
+    cell.profilePic.image = [MRAppControl getRepliedByProfileImage:currentReply];
+    
     return cell;
 
 }

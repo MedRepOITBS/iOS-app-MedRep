@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MRGroupObject.h"
+
+@class MRGroup;
 
 @interface MRCreateGroupViewController : UIViewController
-@property (strong, nonatomic) MRGroupObject *group;
+
+@property (strong, nonatomic) MRGroup *group;
+
 @end

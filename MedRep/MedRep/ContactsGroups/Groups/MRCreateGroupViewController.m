@@ -13,6 +13,8 @@
 #import "MRConstants.h"
 #import <AVFoundation/AVFoundation.h>
 #import "MRContactsViewController.h"
+#import "MRGroup.h"
+#import "MRAppControl.h"
 
 @interface MRCreateGroupViewController () <UITextViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate> {
     UITextView *activeTxtView;
@@ -67,9 +69,11 @@
         self.txtName.text = self.group.group_name;
         self.txtLongDesc.text = self.group.group_long_desc;
         self.txtShortDesc.text = self.group.group_short_desc;
-        UIImage *theImage= [MRCommon getImageFromBase64Data:[self.group.group_img_data dataUsingEncoding:NSUTF8StringEncoding]];
-        groupIconData = UIImageJPEGRepresentation(theImage, 1.0);
-        self.imgView.image = theImage;
+//        UIImage *theImage= [MRCommon getImageFromBase64Data:[self.group.group_img_data dataUsingEncoding:NSUTF8StringEncoding]];
+//        groupIconData = UIImageJPEGRepresentation(theImage, 1.0);
+        
+        self.imgView.image = [MRAppControl getGroupImage:self.group];
+        
         isUpdateMode = YES;
         self.navigationItem.title = @"Update Group";
         [_createBtn setTitle:@"Update Group" forState:UIControlStateNormal];

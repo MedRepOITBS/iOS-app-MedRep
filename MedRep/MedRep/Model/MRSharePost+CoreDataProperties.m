@@ -2,7 +2,7 @@
 //  MRSharePost+CoreDataProperties.m
 //  MedRep
 //
-//  Created by Namit Nayak on 7/8/16.
+//  Created by Vamsi Katragadda on 7/8/16.
 //  Copyright © 2016 MedRep. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -32,6 +32,6 @@
 @dynamic source;
 @dynamic titleDescription;
 @dynamic url;
-@dynamic mrpostreplies;
+@dynamic postedReplies;
 
 @end

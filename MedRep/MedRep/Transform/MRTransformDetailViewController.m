@@ -75,7 +75,7 @@
             float startY = _titleLbl.frame.origin.y + _titleLbl.frame.size.height + 10;
             av.view.frame = CGRectMake(5, startY,
                                        self.view.frame.size.width - 10,
-                                       _shareButton.frame.origin.y - (startY + 10));
+                                       shareButton.frame.origin.y - (startY + 10));
             
             AVAsset *avAsset = [AVAsset assetWithURL:[NSURL URLWithString:@"https://dl.dropboxusercontent.com/u/104553173/PK%20Song.mp4"]];
             AVPlayerItem *avPlayerItem =[[AVPlayerItem alloc]initWithAsset:avAsset];
@@ -115,7 +115,7 @@
     NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:view
                                                                         attribute:NSLayoutAttributeBottom
                                                                         relatedBy:NSLayoutRelationEqual
-                                                                           toItem:_shareButton
+                                                                           toItem:shareButton
                                                                         attribute:NSLayoutAttributeTopMargin
                                                                        multiplier:1.0 constant:10];
     NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:view

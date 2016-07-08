@@ -2,7 +2,7 @@
 //  MRPostedReplies+CoreDataProperties.m
 //  MedRep
 //
-//  Created by Vamsi Katragadda on 7/7/16.
+//  Created by Vamsi Katragadda on 7/8/16.
 //  Copyright © 2016 MedRep. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -13,11 +13,14 @@
 
 @implementation MRPostedReplies (CoreDataProperties)
 
+@dynamic image;
+@dynamic parentSharePostId;
+@dynamic postedOn;
 @dynamic postedReplyId;
 @dynamic text;
-@dynamic image;
 @dynamic url;
-@dynamic postedOn;
-@dynamic parentSharePostId;
+@dynamic contentType;
+@dynamic postedBy;
+@dynamic postedByProfilePic;
 
 @end
