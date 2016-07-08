@@ -719,6 +719,7 @@ static MRDatabaseHelper *sharedDataManager = nil;
     
     childPost.parentSharePostId = [NSNumber numberWithLong:inPost.sharePostId.longValue];
     childPost.postedReplyId = [NSNumber numberWithLong:[[NSDate date] timeIntervalSince1970]];
+    childPost.postedOn = [NSDate date];
     childPost.text = text;
     childPost.image = data;
     childPost.contentType = [NSNumber numberWithInteger:kTransformContentTypeText];

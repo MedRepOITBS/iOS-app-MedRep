@@ -51,6 +51,7 @@
 
 @property (strong,nonatomic) KLCPopup *commentBoxKLCPopView;
 @property (strong,nonatomic) CommonBoxView *commentBoxView;
+
 @end
 
 @implementation MRShareViewController

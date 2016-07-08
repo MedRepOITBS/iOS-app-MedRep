@@ -20,11 +20,14 @@
 #import "MRShareOptionsViewController.h"
 #import "MRConstants.h"
 #import "MRPostedReplies.h"
+#import "KLCPopup.h"
+#import "CommonBoxView.h"
+#import "MRDataManger.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
 
-@interface MRShareDetailViewController () <UITableViewDataSource, UITableViewDelegate, MRShareOptionsSelectionDelegate, UIWebViewDelegate> {
+@interface MRShareDetailViewController () <UITableViewDataSource, UITableViewDelegate, MRShareOptionsSelectionDelegate, UIWebViewDelegate, CommonBoxViewDelegate> {
     
     AVPlayerViewController *av;
 }
@@ -50,6 +53,8 @@
 
 @property (nonatomic) UIActivityIndicatorView *activityIndicator;
 
+@property (strong,nonatomic) KLCPopup *commentBoxKLCPopView;
+@property (strong,nonatomic) CommonBoxView *commentBoxView;
 
 @end
 
@@ -88,8 +93,7 @@
     [self.commentsView addGestureRecognizer:commentTapGestureRecognizer];
     
     [self setupUI];
-//    self.post =  [MRDatabaseHelper getGroupPostForPostID:self.post.groupPostId];
-    self.recentActivity = [NSArray arrayWithArray:self.post.postedReplies.allObjects];
+    [self sortRecentActivities];
     _userdata = [MRAppControl sharedHelper].userRegData;
     
     
@@ -111,7 +115,11 @@
 
 - (void)setupUI {
     [self setupPreview];
-    
+    [self setCountInLabels];
+}
+
+- (void)setCountInLabels {
+
     self.sharesCount.text = [NSString stringWithFormat:@"%ld",self.post.shareCount.longValue];
     self.commentsCount.text = [NSString stringWithFormat:@"%ld",self.post.commentsCount.longValue];
     self.likeCount.text = [NSString stringWithFormat:@"%ld",self.post.likesCount.longValue];
@@ -246,8 +254,38 @@
 }
 
 - (void)commentButtonTapped:(UIGestureRecognizer*)gesture {
+    [self setupCommentBox];
+    [_commentBoxView setData:nil group:nil andSharedPost:self.post];
+}
+
+- (void)setupCommentBox {
+    NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"commentBox" owner:self options:nil];
     
+    _commentBoxView = (CommonBoxView *)[arr objectAtIndex:0];
+    [_commentBoxView setDelegate:self];
+    _commentBoxKLCPopView = [KLCPopup popupWithContentView:self.commentBoxView];
+    [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutCenter)];
+}
+
+- (void)commonBoxCancelButtonPressed {
+    [_commentBoxKLCPopView dismissPresentingPopup];
+}
+
+- (void)commentPosted {
+    [_commentBoxKLCPopView dismissPresentingPopup];
     
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"sharePostId", self.post.sharePostId.longValue];
+    self.post = [[MRDataManger sharedManager] fetchObject:kMRSharePost predicate:predicate];
+    
+    [self setCountInLabels];
+    [self.activitiesTable reloadData];
+}
+
+- (void)sortRecentActivities {
+    self.recentActivity = [NSArray arrayWithArray:self.post.postedReplies.allObjects];
+    
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"postedOn" ascending:false];
+    self.recentActivity = [self.recentActivity sortedArrayUsingDescriptors:@[sortDescriptor]];
 }
 
 - (void)shareToSelected {
