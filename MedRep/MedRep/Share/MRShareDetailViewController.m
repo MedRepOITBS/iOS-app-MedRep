@@ -10,14 +10,18 @@
 #import "MRShareDetailTableViewCell.h"
 #import "MRCommon.h"
 #import "MRGroupPost.h"
-
+#import "MRDatabaseHelper.h"
+#import "GroupPostChildTableViewCell.h"
+#import "MrGroupChildPost.h"
+#import "MRAppControl.h"
 @interface MRShareDetailViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *navView;
 @property (nonatomic) NSArray *recentActivity;
 @property (weak, nonatomic) IBOutlet UILabel *emptyMessage;
 @property (weak, nonatomic) IBOutlet UITableView *activitiesTable;
-
+@property (strong,nonatomic)NSDictionary *userdata;
+@property (nonatomic) NSInteger userType;
 @end
 
 @implementation MRShareDetailViewController
@@ -36,6 +40,12 @@
     
     [self.activitiesTable registerNib:[UINib nibWithNibName:@"MRShareDetailTableViewCell"
                                bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"MRShareDetailTableViewCell"];
+  self.post =  [MRDatabaseHelper getGroupPostForPostID:self.post.groupPostId];
+    self.recentActivity = [NSArray arrayWithArray:self.post.replyPost.array];
+    _userdata = [MRAppControl sharedHelper].userRegData;
+    
+    
+    _userType = [MRAppControl sharedHelper].userType;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -90,12 +100,46 @@
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MRShareDetailTableViewCell"];
+    GroupPostChildTableViewCell *cell  = [tableView dequeueReusableCellWithIdentifier:@"groupChildCell"];
+    if (cell == nil) {
+        NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"GroupPostChildTableViewCell" owner:self options:nil];
+        cell = (GroupPostChildTableViewCell *)[arr objectAtIndex:0];
+    }
+    NSArray *aara = [self.post.replyPost array];
+    
+    
+    MrGroupChildPost *childPost = (MrGroupChildPost *)[aara objectAtIndex:indexPath.row];
+    
+    if ([childPost.postPic isEqualToString:@""]) {
+        cell.heightConstraint.constant = 0;
+        cell.verticalContstraint.constant = 0;
+        [cell setNeedsUpdateConstraints];
+    }else {
+        NSString * imagePath = childPost.postPic;
+        
+        cell.commentPic.image = [UIImage imageWithData:[NSData dataWithContentsOfFile:imagePath]];
+        
+    }
+    
+    cell.layoutMargins = UIEdgeInsetsZero;
+    cell.separatorInset = UIEdgeInsetsMake(0, 10000, 0, 0);
+    cell.profileNameLabel.text              = (_userType == 2 || _userType == 1) ? [NSString stringWithFormat:@"Dr. %@ %@", [_userdata objectForKey:KFirstName],[_userdata objectForKey:KLastName]] : [NSString stringWithFormat:@"Mr. %@ %@", [_userdata objectForKey:KFirstName],[_userdata objectForKey:KLastName]];
+    cell.profilePic.image = [MRCommon getImageFromBase64Data:[_userdata objectForKey:KProfilePicture]];
+    
+    cell.postText.text = childPost.postText;
     return cell;
+
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:true];
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+   
+    
+    return 100;
+    
+}
+
 
 @end

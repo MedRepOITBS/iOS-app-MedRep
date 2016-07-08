@@ -27,7 +27,7 @@ typedef enum
     SORT_ORDER_DESCENDING
 } SORT_ORDER;
 
-
+#import "AppDelegate.h"
 #define APP_DELEGATE ((AppDelegate *)[UIApplication sharedApplication].delegate)
 
 #define kAppName                @"MedRep"

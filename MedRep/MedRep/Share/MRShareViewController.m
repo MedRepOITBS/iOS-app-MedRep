@@ -24,7 +24,8 @@
 #import "MRShareOptionsViewController.h"
 #import "MRShareDetailViewController.h"
 #import "MRGroupPost.h"
-
+#import "KLCPopup.h"
+#import "CommonBoxView.h"
 @interface MRShareViewController () <UISearchBarDelegate, SWRevealViewControllerDelegate, MRGroupPostItemTableViewCellDelegate, MRShareOptionsSelectionDelegate,
     UITableViewDelegate, UITableViewDataSource>
 
@@ -45,6 +46,9 @@
 @property (strong, nonatomic) UIView *tabBarView;
 @property (nonatomic) MRShareOptionsViewController *shareOptionsVC;
 
+
+@property (strong,nonatomic) KLCPopup *commentBoxKLCPopView;
+@property (strong,nonatomic) CommonBoxView *commentBoxView;
 @end
 
 @implementation MRShareViewController
@@ -275,5 +279,128 @@
 - (void)shareToSelected {
     [self.postsTableView reloadData];
 }
+-(void)mrGroupPostItemTableViewCell:(MRGroupPostItemTableViewCell *)cell withCommentButtonTapped:(id)sender{
+    [self setupCommentBox];
+
+    NSIndexPath *indexPath = [self.postsTableView indexPathForCell:cell];
+    
+    
+    [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutAboveCenter)];
+    
+    [_commentBoxView setData:indexPath];
+
+}
+-(void)setupCommentBox{
+    NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"commentBox" owner:self options:nil];
+    
+    _commentBoxView = (CommonBoxView *)[arr objectAtIndex:0];
+    
+    self.commentBoxView.delegate = self;
+    
+    self.commentBoxView.frame =     CGRectMake(self.commentBoxView.frame.origin.x, self.commentBoxView.frame.origin.y, 300,316);
+    [self.commentBoxView setContact:self.mainContact];
+    [self.commentBoxView setGroup:self.mainGroup];
+    _commentBoxKLCPopView = [KLCPopup popupWithContentView:self.commentBoxView];
+    
+    
+}
+
+-(void)commonBoxCameraButtonTapped{
+    [self takePhoto];
+    
+}
+
+
+-(void)commonBoxOkButtonPressedWithData:(NSDictionary *)dictData withIndexPath:(NSIndexPath *)indexPath{
+    
+    [_commentBoxKLCPopView dismiss:YES];
+    
+    MRGroupPost *post = [self.posts objectAtIndex:indexPath.row];
+    //obtaining saving path
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+   
+    NSInteger childPostCounter = [APP_DELEGATE counterForChildPost];
+    
+    NSString *postID = [NSString stringWithFormat:@"%ld_%ld",post.groupPostId.integerValue,(long)childPostCounter];
+    
+    NSString *imagePath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",postID]];
+    NSDictionary *saveData;
+    //extracting image from the picker and saving it
+    if (![[dictData objectForKey:@"profile_pic"] isKindOfClass:[NSString class]]) {
+        UIImage *editedImage = [dictData objectForKey:@"profile_pic"];
+        NSData *webData = UIImagePNGRepresentation(editedImage);
+        [webData writeToFile:imagePath atomically:YES];
+        saveData = [NSDictionary dictionaryWithObjectsAndKeys:[dictData objectForKey:@"postText"],@"postText",imagePath,@"post_pic",postID,@"postID", nil];
+        
+    }else {
+        saveData = [NSDictionary dictionaryWithObjectsAndKeys:[dictData objectForKey:@"postText"],@"postText",@"",@"post_pic",postID,@"postID", nil];
+        
+        
+    }
+    
+    
+    [MRDatabaseHelper addGroupChildPost:post withPostDict:saveData];
+    self.mainContact =  [[MRDatabaseHelper getContactListForContactID:self.mainContact.contactId]  objectAtIndex:0];
+    self.posts = [self.mainContact.groupPosts allObjects];
+//    [self totalPosts];
+//    [self.postsTableView reloadData];
+}
+
+-(void)totalPosts {
+    __block NSMutableArray *arra = [NSMutableArray array];
+    
+    [self.posts enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        MRGroupPost *postGroup = (MRGroupPost *)obj;
+        [arra addObject:postGroup];
+        if (postGroup.replyPost!=nil && postGroup.replyPost.count >0) {
+            
+            [postGroup.replyPost enumerateObjectsUsingBlock:^(MrGroupChildPost * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                [arra addObject:(MrGroupChildPost *)obj];
+                
+            }];
+        }
+        
+    }];
+    
+    self.posts = nil;
+    self.posts = [NSMutableArray arrayWithArray:arra] ;
+    
+}
+
+#pragma mark
+#pragma CAMERA IMAGE CAPTURE
+
+-(void)takePhoto {
+    [_commentBoxKLCPopView dismiss:YES];
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    
+    [self presentViewController:picker animated:YES completion:NULL];
+    
+}
+
+#pragma mark - Image Picker Controller delegate methods
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
+    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    //    self.imageView.image = chosenImage;
+    
+    
+    [_commentBoxView setImageForShareImage:chosenImage];
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutAboveCenter)];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    
+}
+
 
 @end

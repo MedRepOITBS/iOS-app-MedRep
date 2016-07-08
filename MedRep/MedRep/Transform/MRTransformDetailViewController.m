@@ -220,6 +220,7 @@
     } else {
         post[@"postText"] = self.selectedContent.shortDescription;
     }
+    
     post[@"contactId"] = [NSNumber numberWithInt:1];
     post[@"comments"] = [NSNumber numberWithInt:0];
     post[@"likes"] = [NSNumber numberWithInt:0];

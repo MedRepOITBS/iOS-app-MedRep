@@ -156,8 +156,8 @@
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="kgM-Y2-sCu"/>
-                    <exclude reference="AYE-gV-YKQ"/>
                     <exclude reference="6X6-2x-chs"/>
+                    <exclude reference="AYE-gV-YKQ"/>
                 </mask>
             </variation>
         </view>

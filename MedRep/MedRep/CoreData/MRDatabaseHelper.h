@@ -76,6 +76,7 @@
            withNotificationsList:(void (^)(NSArray *fetchList))objectsListt;
 
 + (void)cleanDatabaseOnLogout;
++(MRGroupPost *)getGroupPostForPostID:(NSNumber *)groupId;
 + (void)addGroupChildPost:(MRGroupPost*)post withPostDict:(NSDictionary *)myDict;
-
++(NSArray *)getContactListForContactID:(int64_t)contactID;
 @end

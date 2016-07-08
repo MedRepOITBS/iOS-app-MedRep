@@ -113,7 +113,10 @@
     
     tagIndex++;
     [self.commentView setTag:tagIndex];
-    self.commentCountLabel.text = [NSString stringWithFormat:@"%@",post.numberOfComments];
+    if (post.replyPost!=NULL) {
+        
+    }
+    self.commentCountLabel.text = [NSString stringWithFormat:@"%d",post.replyPost.count];
 }
 
 @end

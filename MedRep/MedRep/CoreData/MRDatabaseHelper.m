@@ -89,11 +89,39 @@ static MRDatabaseHelper *sharedDataManager = nil;
     
     [[MRDataManger sharedManager] saveContext];
 }
++(MRGroupPost *)getGroupPostForPostID:(NSNumber *)groupId{
+    
+    MRGroupPost* contact = [[MRDataManger sharedManager] fetchObject:kGroupPostEntity predicate:[NSPredicate predicateWithFormat:@"groupPostId == %@",groupId]];
+    return contact;
 
+}
++(NSNumber *)getLastgroupPostID {
+    
+    NSArray *fetchAllGroupPosts = [[MRDataManger sharedManager] fetchObjectList:kGroupPostEntity];
+    NSNumber *grpPostID = [[NSNumber alloc]initWithInt:0];
+    if (fetchAllGroupPosts.count>0) {
+        MRGroupPost *post = [fetchAllGroupPosts lastObject];
+        grpPostID  = post.groupPostId;
+        
+    }
+    return grpPostID;
+}
 + (void)addGroupPosts:(NSArray*)posts {
     for (NSDictionary *myDict in posts) {
         MRGroupPost *post  = (MRGroupPost*)[[MRDataManger sharedManager] createObjectForEntity:kGroupPostEntity];
-        post.groupPostId = [MRDatabaseHelper convertStringToNSNumber:[myDict objectForKey:@"id"]];
+        
+        
+       
+        if ([myDict objectForKey:@"id"]!=NULL) {
+            post.groupPostId = [MRDatabaseHelper convertStringToNSNumber:[myDict objectForKey:@"id"]];
+
+        }else {
+                        int currentpostID = [MRDatabaseHelper getLastgroupPostID].intValue;
+            currentpostID = currentpostID+1;;
+            post.groupPostId = [NSNumber numberWithInt: currentpostID];
+
+        }
+        
         post.postPic = [myDict objectForKey:@"post_pic"];
         post.postText = [myDict objectForKey:@"postText"];
         
@@ -186,6 +214,13 @@ static MRDatabaseHelper *sharedDataManager = nil;
     }
     
     return objects;
+}
++(NSArray *)getContactListForContactID:(int64_t)contactID {
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"contactId = %d",contactID];
+    
+    NSArray *contacts = [[MRDataManger sharedManager] fetchObjectList:kContactEntity predicate:predicate];
+    return contacts;
 }
 
 + (void)addRole:(NSArray*)roles
