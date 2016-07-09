@@ -16,7 +16,8 @@
 @property (nonatomic,weak) id<CommonBoxViewDelegate> delegate;
 
 -(void)setData:(MRContact*)contact group:(MRGroup*)group andSharedPost:(MRSharePost*)sharePost;
-
+-(MRSharePost *)getSelectedPost;
+-(void)setImageForShareImage:(UIImage *)image;
 @end
 
 @protocol CommonBoxViewDelegate <NSObject>
@@ -25,7 +26,7 @@
 -(void)commonBoxCameraButtonTapped;
 -(void)commonBoxOkButtonPressedWithData:(NSDictionary *)dictData withIndexPath:(NSIndexPath *)indexPath;
 -(void)commonBoxCancelButtonPressed;
-
+-(void)commonBoxCameraGalleryButtonTapped;
 - (void)commentPosted;
 
 @end

@@ -254,8 +254,12 @@
     [self.postsTableView reloadData];
 }
 
+-(void)commonBoxCameraGalleryButtonTapped{
+    
+    [self takePhoto:UIImagePickerControllerSourceTypePhotoLibrary];
+}
 - (void)commonBoxCameraButtonTapped {
-    [self takePhoto];
+    [self takePhoto:UIImagePickerControllerSourceTypeCamera];
 }
 
 -(void)commonBoxOkButtonPressedWithData:(NSDictionary *)dictData withIndexPath:(NSIndexPath *)indexPath{
@@ -318,12 +322,12 @@
 #pragma mark
 #pragma CAMERA IMAGE CAPTURE
 
--(void)takePhoto {
+-(void)takePhoto:(UIImagePickerControllerSourceType)type {
     [_commentBoxKLCPopView dismiss:YES];
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.allowsEditing = YES;
-    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    picker.sourceType = type;
     
     [self presentViewController:picker animated:YES completion:NULL];
     
@@ -337,7 +341,9 @@
     //    self.imageView.image = chosenImage;
     
     
-//    [_commentBoxView setImageForShareImage:chosenImage];
+    [_commentBoxView setImageForShareImage:chosenImage];
+   MRSharePost *sharePost = [_commentBoxView getSelectedPost];
+    
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
     [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutAboveCenter)];

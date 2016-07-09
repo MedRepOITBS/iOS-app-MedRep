@@ -221,6 +221,9 @@
     cell.postText.text = currentReply.text;
     cell.profileNameLabel.text = currentReply.postedBy;
     cell.profilePic.image = [MRAppControl getRepliedByProfileImage:currentReply];
+    if (currentReply.image !=nil) {
+    cell.commentPic.image = [UIImage imageWithData:currentReply.image];    
+    }
     
     return cell;
 
@@ -232,7 +235,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
    
     
-    return 100;
+    return 260;
     
 }
 
@@ -307,6 +310,13 @@
     [self.view bringSubviewToFront:self.activityIndicator];
     [self.activityIndicator startAnimating];
 }
+-(void)commonBoxCameraGalleryButtonTapped{
+    
+    [self takePhoto:UIImagePickerControllerSourceTypePhotoLibrary];
+}
+- (void)commonBoxCameraButtonTapped {
+    [self takePhoto:UIImagePickerControllerSourceTypeCamera];
+}
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     [self endIndicator];
@@ -322,6 +332,42 @@
         [self.activityIndicator removeFromSuperview];
     }
     self.activityIndicator = nil;
+}
+
+#pragma mark
+#pragma CAMERA IMAGE CAPTURE
+
+-(void)takePhoto:(UIImagePickerControllerSourceType)type {
+    [_commentBoxKLCPopView dismiss:YES];
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = type;
+    
+    [self presentViewController:picker animated:YES completion:NULL];
+    
+}
+
+#pragma mark - Image Picker Controller delegate methods
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
+    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    //    self.imageView.image = chosenImage;
+    
+    
+    [_commentBoxView setImageForShareImage:chosenImage];
+    MRSharePost *sharePost = [_commentBoxView getSelectedPost];
+    
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutAboveCenter)];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    
 }
 
 @end
