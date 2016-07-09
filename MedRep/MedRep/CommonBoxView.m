@@ -35,7 +35,7 @@
 
 @property (nonatomic)BOOL isPhotoDone;
 @property (strong,nonatomic) NSIndexPath *cellIndexPath;
-
+@property (nonatomic) BOOL isPhotoSelected;
 - (IBAction)okButtonTapped:(id)sender;
 - (IBAction)cancelButtonTapped:(id)sender;
 
@@ -91,13 +91,16 @@
     }
     return self;
 }
-
+-(MRSharePost *)getSelectedPost{
+    
+    return self.sharePost;
+}
 - (void)setData:(MRContact*)contact group:(MRGroup*)group andSharedPost:(MRSharePost*)sharePost {
     
     self.mainContact = contact;
     self.mainGroup = group;
     self.sharePost = sharePost;
-    
+    _isPhotoSelected = NO;
     NSString *title = @"";
     
     if (self.mainContact != nil) {
@@ -120,20 +123,41 @@
 }
 
 - (void)galleryBtnTapped {
+    if (self.delegate != nil  && [self.delegate respondsToSelector:@selector(commonBoxCameraGalleryButtonTapped)]) {
+        
+        [self.delegate commonBoxCameraGalleryButtonTapped];
+    }
+    
 }
 
 - (void)cameraBtnTapped {
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
-    picker.allowsEditing = YES;
-    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+//    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+//    picker.delegate = self;
+//    picker.allowsEditing = YES;
+//    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    if (self.delegate != nil  && [self.delegate respondsToSelector:@selector(commonBoxCameraButtonTapped)]) {
+        
+        [self.delegate commonBoxCameraButtonTapped];
+    }
+    
+    
+    
 }
+
 
 - (IBAction)okButtonTapped:(id)sender {
     if (self.sharePost != nil) {
-        [MRDatabaseHelper addCommentToAPost:self.sharePost text:self.commentTextView.text
-                             andContentData:nil];
-        if (self.delegate != nil &&
+        
+        if (!_isPhotoSelected) {
+            [MRDatabaseHelper addCommentToAPost:self.sharePost text:self.commentTextView.text
+                                 andContentData:nil];
+            
+        }else {
+            [MRDatabaseHelper addCommentToAPost:self.sharePost text:self.commentTextView.text
+                                 andContentData:UIImagePNGRepresentation(self.shareImageView.image)];
+            
+        }
+          if (self.delegate != nil &&
             [self.delegate respondsToSelector:@selector(commentPosted)]) {
             [self.delegate commentPosted];
         }
@@ -148,5 +172,12 @@
         [self.delegate commonBoxCancelButtonPressed];
     }
 }
-
+-(void)setImageForShareImage:(UIImage *)image{
+    if (image!=nil) {
+        _isPhotoSelected = true;
+    }
+    _noPreviewMessage.hidden = YES;
+    _shareImageView.hidden = NO;
+    self.shareImageView.image = image;
+}
 @end

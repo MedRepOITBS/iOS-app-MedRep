@@ -5236,8 +5236,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ramesh Meesala (PR3BTD2UVE)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ramesh Meesala (PR3BTD2UVE)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -5257,7 +5257,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "1c38d910-76cb-47e2-a6f4-fbc2c17092f7";
+				PROVISIONING_PROFILE = "e4a1f99e-428f-4a75-80d5-4b1a656f8bd5";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -5280,8 +5280,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Ramesh Meesala (9Y7Y82N227)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ramesh Meesala (9Y7Y82N227)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -5294,7 +5294,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "07702eb4-d4a1-44d8-af86-14dd5fb84f7d";
+				PROVISIONING_PROFILE = "e4a1f99e-428f-4a75-80d5-4b1a656f8bd5";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -5306,13 +5306,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ramesh Meesala (PR3BTD2UVE)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ramesh Meesala (PR3BTD2UVE)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: NAMIT  NAYAK (Q7JNBTW8P4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: NAMIT  NAYAK (Q7JNBTW8P4)";
 				INFOPLIST_FILE = MedRep/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "862a3112-daeb-4acc-ab17-f58ac622455f";
+				PROVISIONING_PROFILE = "e4a1f99e-428f-4a75-80d5-4b1a656f8bd5";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -5322,13 +5322,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ramesh Meesala (PR3BTD2UVE)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ramesh Meesala (PR3BTD2UVE)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: NAMIT  NAYAK (Q7JNBTW8P4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: NAMIT  NAYAK (Q7JNBTW8P4)";
 				INFOPLIST_FILE = MedRep/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "862a3112-daeb-4acc-ab17-f58ac622455f";
+				PROVISIONING_PROFILE = "e4a1f99e-428f-4a75-80d5-4b1a656f8bd5";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -5378,7 +5378,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "84d7e433-cd15-4c50-bd15-66b4f23af092";
+				PROVISIONING_PROFILE = "766c2c59-fcea-4eab-8a31-70ee452a1ed5";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -5394,7 +5394,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "84d7e433-cd15-4c50-bd15-66b4f23af092";
+				PROVISIONING_PROFILE = "766c2c59-fcea-4eab-8a31-70ee452a1ed5";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
