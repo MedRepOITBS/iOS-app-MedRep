@@ -275,6 +275,10 @@
 }
 
 - (void)commentPosted {
+    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(refetchPost:)]) {
+        [self.delegate refetchPost:self.indexPath];
+    }
+    
     [_commentBoxKLCPopView dismissPresentingPopup];
     
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"sharePostId", self.post.sharePostId.longValue];
@@ -297,6 +301,14 @@
 }
 
 - (void)shareToSelected {
+    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(refetchPost:)]) {
+        [self.delegate refetchPost:self.indexPath];
+    }
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"sharePostId", self.post.sharePostId.longValue];
+    self.post = [[MRDataManger sharedManager] fetchObject:kMRSharePost predicate:predicate];
+    [self sortRecentActivities];
+    [self setCountInLabels];
     [self.activitiesTable reloadData];
 }
 
@@ -315,10 +327,12 @@
     [self.view bringSubviewToFront:self.activityIndicator];
     [self.activityIndicator startAnimating];
 }
+
 -(void)commonBoxCameraGalleryButtonTapped{
     
     [self takePhoto:UIImagePickerControllerSourceTypePhotoLibrary];
 }
+
 - (void)commonBoxCameraButtonTapped {
     [self takePhoto:UIImagePickerControllerSourceTypeCamera];
 }

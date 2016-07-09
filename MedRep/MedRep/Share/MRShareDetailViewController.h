@@ -10,8 +10,17 @@
 
 @class MRSharePost;
 
+@protocol PostDataUpdated <NSObject>
+
+- (void)refetchPost:(NSIndexPath*)indexPath;
+
+@end
+
 @interface MRShareDetailViewController : UIViewController
 
 @property (nonatomic) MRSharePost *post;
+@property (nonatomic) NSIndexPath *indexPath;
+
+@property (nonatomic,weak) id<PostDataUpdated> delegate;
 
 @end

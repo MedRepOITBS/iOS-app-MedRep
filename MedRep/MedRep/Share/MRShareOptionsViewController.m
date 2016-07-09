@@ -262,7 +262,7 @@
             for (NSInteger index = 0; index < selectedContacts.count; index++) {
                 NSInteger contactId = ((MRContact*)[selectedContacts objectAtIndex:index]).contactId.longValue;
                 
-                [MRDatabaseHelper addCommentToAPost:self.parentPost text:@""
+                [MRDatabaseHelper addCommentToAPost:self.parentPost text:@"Shared Article"
                                         contentData:nil contactId:contactId groupId:0
                                  updateCommentCount:false andUpdateShareCount:true];
             }
@@ -274,7 +274,7 @@
             for (NSInteger index = 0; index < selectedGroups.count; index++) {
                 NSInteger groupId = ((MRGroup*)[selectedGroups objectAtIndex:index]).group_id.longValue;
                 
-                [MRDatabaseHelper addCommentToAPost:self.parentPost text:@""
+                [MRDatabaseHelper addCommentToAPost:self.parentPost text:@"Shared Article"
                                         contentData:nil contactId:0 groupId:groupId
                                  updateCommentCount:false andUpdateShareCount:true];
             }

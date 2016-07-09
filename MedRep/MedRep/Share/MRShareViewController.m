@@ -30,7 +30,10 @@
 
 @interface MRShareViewController () <UISearchBarDelegate, SWRevealViewControllerDelegate, MRGroupPostItemTableViewCellDelegate, MRShareOptionsSelectionDelegate,
     CommonBoxViewDelegate,
-    UITableViewDelegate, UITableViewDataSource>
+    UITableViewDelegate, UITableViewDataSource, PostDataUpdated>
+
+@property (nonatomic) NSIndexPath *reloadIndexPath;
+@property (nonatomic) BOOL reloadRows;
 
 @property (weak, nonatomic) IBOutlet UILabel *emptyMessage;
 
@@ -98,6 +101,11 @@
                                                                        multiplier:1.0 constant:0];
     
     [self.view addConstraint:bottomConstraint];
+    
+    // Do any additional setup after loading the view from its nib.
+    [self.postsTableView registerNib:[UINib nibWithNibName:@"MRGroupPostItemTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"groupCell"];
+    self.postsTableView.estimatedRowHeight = 250;
+    self.postsTableView.rowHeight = UITableViewAutomaticDimension;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -109,7 +117,12 @@
     [super viewWillAppear:animated];
     
     [MRCommon applyNavigationBarStyling:self.navigationController];
-    [self setEmptyMessage];
+    
+    if (self.reloadRows) {
+        [self reloadView];
+    }
+    
+    self.reloadRows = false;
 }
 
 - (void)setEmptyMessage {
@@ -126,11 +139,7 @@
 
 - (void)fetchPosts {
     self.posts = [MRDatabaseHelper getShareArticles];
-    
-    // Do any additional setup after loading the view from its nib.
-    [self.postsTableView registerNib:[UINib nibWithNibName:@"MRGroupPostItemTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"groupCell"];
-    self.postsTableView.estimatedRowHeight = 250;
-    self.postsTableView.rowHeight = UITableViewAutomaticDimension;
+    [self setEmptyMessage];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -157,6 +166,8 @@
     MRShareDetailViewController *shareDetailViewController =
                 [[MRShareDetailViewController alloc] initWithNibName:@"MRShareDetailViewController"
                                                               bundle:nil];
+    [shareDetailViewController setDelegate:self];
+    [shareDetailViewController setIndexPath:indexPath];
     [shareDetailViewController setPost:self.posts[indexPath.row]];
     [self.navigationController pushViewController:shareDetailViewController animated:true];
 }
@@ -354,5 +365,14 @@
     
 }
 
+- (void)refetchPost:(NSIndexPath *)indexPath {
+    self.reloadRows = true;
+    self.reloadIndexPath = indexPath;
+}
+
+- (void)reloadView {
+    [self fetchPosts];
+    [self.postsTableView reloadRowsAtIndexPaths:@[self.reloadIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+}
 
 @end
