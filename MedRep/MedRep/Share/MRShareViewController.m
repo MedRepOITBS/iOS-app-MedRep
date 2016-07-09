@@ -344,7 +344,6 @@
     [_commentBoxView setImageForShareImage:chosenImage];
    MRSharePost *sharePost = [_commentBoxView getSelectedPost];
     
-    
     [picker dismissViewControllerAnimated:YES completion:NULL];
     [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutAboveCenter)];
 }
