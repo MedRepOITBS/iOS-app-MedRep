@@ -280,6 +280,11 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"sharePostId", self.post.sharePostId.longValue];
     self.post = [[MRDataManger sharedManager] fetchObject:kMRSharePost predicate:predicate];
     
+    self.recentActivity = nil;
+    if (self.post.postedReplies != nil && self.post.postedReplies.count > 0) {
+        self.recentActivity = self.post.postedReplies.allObjects;
+    }
+    
     [self setCountInLabels];
     [self.activitiesTable reloadData];
 }

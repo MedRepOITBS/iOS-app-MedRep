@@ -134,7 +134,7 @@ static MRDatabaseHelper *sharedDataManager = nil;
     id result = [MRWebserviceHelper parseNetworkResponse:MRGroup.class
                                                  andData:[response valueForKey:@"Responce"]];
     if (responseHandler != nil) {
-        NSArray *tempResults = result;
+        NSArray *tempResults = [[MRDataManger sharedManager] fetchObjectList:kGroupEntity];
         
         NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"group_name" ascending:true];
         result = [tempResults sortedArrayUsingDescriptors:@[sortDescriptor]];
@@ -199,7 +199,7 @@ static MRDatabaseHelper *sharedDataManager = nil;
     id result = [MRWebserviceHelper parseNetworkResponse:MRContact.class
                                                  andData:[response valueForKey:@"Responce"]];
     if (responseHandler != nil) {
-        NSArray *tempResults = result;
+        NSArray *tempResults = [[MRDataManger sharedManager] fetchObjectList:kContactEntity];
         
         NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:true];
         result = [tempResults sortedArrayUsingDescriptors:@[sortDescriptor]];
