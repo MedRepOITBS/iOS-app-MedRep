@@ -53,7 +53,7 @@
         [self.delegate likeButtonTapped];
     }
     [self.parentTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:tagIndex inSection:0]]
-                                withRowAnimation:UITableViewRowAnimationAutomatic];
+                                withRowAnimation:UITableViewRowAnimationNone];
 }
 
 - (void)shareButtonTapped:(UIGestureRecognizer*)gesture {

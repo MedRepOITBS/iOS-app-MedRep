@@ -2198,7 +2198,7 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
         if ([predicateValue isKindOfClass:[NSNumber class]]) {
             predicate = [NSPredicate predicateWithFormat:@"%K == %ld",primaryColumn, ((NSNumber*)predicateValue).longValue];
         } else {
-             predicate = [NSPredicate predicateWithFormat:@"%K == %%@",primaryColumn, predicateValue];
+             predicate = [NSPredicate predicateWithFormat:@"%K == %@",primaryColumn, predicateValue];
         }
         
         NSArray *filteredRecords = [currentRecords filteredArrayUsingPredicate:predicate];
