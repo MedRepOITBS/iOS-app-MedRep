@@ -648,13 +648,6 @@ static MRDatabaseHelper *sharedDataManager = nil;
 + (void)shareAnArticle:(MRTransformPost*)transformPost {
     NSInteger sharePostId = [[NSDate date] timeIntervalSince1970];
     
-    NSArray *articles = [[MRDataManger sharedManager] fetchObjectList:kMRSharePost attributeName:@"postedOn" sortOrder:SORT_ORDER_DESCENDING];
-    
-    if (articles != nil && articles.count > 0) {
-        MRSharePost *sharePost = articles.firstObject;
-        sharePostId = sharePost.sharePostId.integerValue;
-    }
-    
     MRDataManger *dbManager = [MRDataManger sharedManager];
     
     NSManagedObjectContext *context = [dbManager getNewPrivateManagedObjectContext];

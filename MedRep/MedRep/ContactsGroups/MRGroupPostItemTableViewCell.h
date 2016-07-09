@@ -23,8 +23,7 @@
 @protocol MRGroupPostItemTableViewCellDelegate <NSObject>
 @optional
 
--(void)mrGroupPostItemTableViewCell:(MRGroupPostItemTableViewCell *)cell withCommentButtonTapped:(id)sender;
-
+- (void)commentButtonTapped:(MRSharePost*)post;
 - (void)likeButtonTapped;
 - (void)shareButtonTapped:(MRSharePost*)groupPost;
 

@@ -238,12 +238,9 @@
     [self.postsTableView reloadData];
 }
 
--(void)mrGroupPostItemTableViewCell:(MRGroupPostItemTableViewCell *)cell
-            withCommentButtonTapped:(id)sender{
+- (void)commentButtonTapped:(MRSharePost *)post {
     [self setupCommentBox];
-
-    NSIndexPath *indexPath = [self.postsTableView indexPathForCell:cell];
-    [_commentBoxView setData:nil group:nil andSharedPost:[self.posts objectAtIndex:indexPath.row]];
+    [_commentBoxView setData:nil group:nil andSharedPost:post];
 }
 
 - (void)setupCommentBox {

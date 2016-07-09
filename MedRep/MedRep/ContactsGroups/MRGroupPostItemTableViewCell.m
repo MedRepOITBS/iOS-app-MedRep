@@ -65,9 +65,8 @@
 
 - (void)commentButtonTapped:(UIGestureRecognizer*)gesture {
     
-    if([self.delegate respondsToSelector:@selector(mrGroupPostItemTableViewCell:withCommentButtonTapped:)]){
-        [self.delegate mrGroupPostItemTableViewCell:self withCommentButtonTapped:gesture.view];
-        
+    if([self.delegate respondsToSelector:@selector(commentButtonTapped:)]){
+        [self.delegate commentButtonTapped:self.post];
     }
 }
 
@@ -94,6 +93,8 @@
 
 - (void)setPostContent:(MRSharePost *)post  tagIndex:(NSInteger)tagIndex {
     self.post = post;
+    
+    NSLog(@"Post : %ld",post.sharePostId.longValue);
     
     self.postLabel.text = post.titleDescription;
     

@@ -96,6 +96,9 @@
     return self.sharePost;
 }
 - (void)setData:(MRContact*)contact group:(MRGroup*)group andSharedPost:(MRSharePost*)sharePost {
+    if (sharePost != nil) {
+        NSLog(@"sharePost id = %ld",sharePost.sharePostId.longValue);
+    }
     
     self.mainContact = contact;
     self.mainGroup = group;
