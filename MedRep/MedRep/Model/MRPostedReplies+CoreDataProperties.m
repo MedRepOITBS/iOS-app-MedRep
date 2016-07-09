@@ -24,5 +24,7 @@
 @dynamic url;
 @dynamic contactId;
 @dynamic groupId;
+@dynamic contactRelationship;
+@dynamic groupRelationship;
 
 @end

@@ -7,6 +7,8 @@
 //
 
 #import "MRPostedReplies.h"
+#import "MRContact.h"
+#import "MRGroup.h"
 
 @implementation MRPostedReplies
 

@@ -2,7 +2,7 @@
 //  MRGroup+CoreDataProperties.h
 //  MedRep
 //
-//  Created by Vamsi Katragadda on 7/8/16.
+//  Created by Vamsi Katragadda on 7/9/16.
 //  Copyright © 2016 MedRep. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *group_short_desc;
 @property (nullable, nonatomic, retain) NSData *member;
 @property (nullable, nonatomic, retain) NSSet<MRContact *> *contacts;
+@property (nullable, nonatomic, retain) NSSet<MRPostedReplies *> *comment;
 
 @end
 
@@ -33,6 +34,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)removeContactsObject:(MRContact *)value;
 - (void)addContacts:(NSSet<MRContact *> *)values;
 - (void)removeContacts:(NSSet<MRContact *> *)values;
+
+- (void)addCommentObject:(MRPostedReplies *)value;
+- (void)removeCommentObject:(MRPostedReplies *)value;
+- (void)addComment:(NSSet<MRPostedReplies *> *)values;
+- (void)removeComment:(NSSet<MRPostedReplies *> *)values;
 
 @end
 

@@ -24,8 +24,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSNumber *postedReplyId;
 @property (nullable, nonatomic, retain) NSString *text;
 @property (nullable, nonatomic, retain) NSString *url;
-@property (nullable, nonatomic, retain) NSString *contactId;
-@property (nullable, nonatomic, retain) NSString *groupId;
+@property (nullable, nonatomic, retain) NSNumber *contactId;
+@property (nullable, nonatomic, retain) NSNumber *groupId;
+@property (nullable, nonatomic, retain) MRContact *contactRelationship;
+@property (nullable, nonatomic, retain) MRGroup *groupRelationship;
 
 @end
 

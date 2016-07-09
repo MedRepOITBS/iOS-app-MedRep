@@ -132,7 +132,8 @@
 - (IBAction)okButtonTapped:(id)sender {
     if (self.sharePost != nil) {
         [MRDatabaseHelper addCommentToAPost:self.sharePost text:self.commentTextView.text
-                             andContentData:nil];
+                                contentData:nil contactId:0 groupId:0
+                         updateCommentCount:true andUpdateShareCount:false];
         if (self.delegate != nil &&
             [self.delegate respondsToSelector:@selector(commentPosted)]) {
             [self.delegate commentPosted];

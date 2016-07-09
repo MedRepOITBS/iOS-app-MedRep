@@ -229,7 +229,8 @@
                                                   andPredicate:predicate];
     }
     
-    NSManagedObjectContext *context = [[MRDataManger sharedManager] getNewPrivateManagedObjectContext];
+    MRDataManger *dbManager = [MRDataManger sharedManager];
+    NSManagedObjectContext *context = [dbManager getNewPrivateManagedObjectContext];
     NSInteger currentSharesCount = self.parentPost.shareCount.longValue;
     
     if (selectedContacts != nil || selectedGroups != nil) {
@@ -259,12 +260,11 @@
             currentSharesCount += selectedContacts.count;
             
             for (NSInteger index = 0; index < selectedContacts.count; index++) {
-                MRSharePost *newPost = [self createSharePostFrom:context
-                                        postedByProfileId:@""
-                                                     profileName:sharedByProfileName
-                                                   andprofilePic:shareddByProfilePic];
                 NSInteger contactId = ((MRContact*)[selectedContacts objectAtIndex:index]).contactId.longValue;
-                newPost.contactId = [NSNumber numberWithLong:contactId];
+                
+                [MRDatabaseHelper addCommentToAPost:self.parentPost text:@""
+                                        contentData:nil contactId:contactId groupId:0
+                                 updateCommentCount:false andUpdateShareCount:true];
             }
         }
         
@@ -272,19 +272,18 @@
             currentSharesCount += selectedGroups.count;
             
             for (NSInteger index = 0; index < selectedGroups.count; index++) {
-                MRSharePost *newPost = [self createSharePostFrom:context
-                                               postedByProfileId:@""
-                                                     profileName:sharedByProfileName
-                                                   andprofilePic:shareddByProfilePic];
                 NSInteger groupId = ((MRGroup*)[selectedGroups objectAtIndex:index]).group_id.longValue;
-                newPost.groupId = [NSNumber numberWithLong:groupId];
+                
+                [MRDatabaseHelper addCommentToAPost:self.parentPost text:@""
+                                        contentData:nil contactId:0 groupId:groupId
+                                 updateCommentCount:false andUpdateShareCount:true];
             }
         }
     }
     
     self.parentPost.shareCount = [NSNumber numberWithLong:currentSharesCount];
     
-    [[MRDataManger sharedManager] dbSaveInContext:context];
+    [dbManager dbSaveInContext:context];
     
     [self.navigationController popViewControllerAnimated:true];
     

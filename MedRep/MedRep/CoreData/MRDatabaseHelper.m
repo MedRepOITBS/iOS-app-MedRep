@@ -710,7 +710,13 @@ static MRDatabaseHelper *sharedDataManager = nil;
     [dbManager dbSaveInContext:context];
 }
 
-+ (void)addCommentToAPost:(MRSharePost*)inPost text:(NSString*)text andContentData:(NSData*)data {
++ (void)addCommentToAPost:(MRSharePost*)inPost
+                     text:(NSString*)text
+              contentData:(NSData*)data
+                contactId:(NSInteger)contactId
+                  groupId:(NSInteger)groupId
+       updateCommentCount:(BOOL)updateCommentCount
+      andUpdateShareCount:(BOOL)updateShareCount {
     MRDataManger *dbManager = [MRDataManger sharedManager];
     
     NSManagedObjectContext *context = [dbManager getNewPrivateManagedObjectContext];
@@ -726,15 +732,38 @@ static MRDatabaseHelper *sharedDataManager = nil;
     childPost.postedBy = inPost.sharedByProfileName;
     childPost.postedByProfilePic = inPost.shareddByProfilePic;
     
+    if (contactId > 0) {
+        childPost.contactId = [NSNumber numberWithLong:contactId];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"contactId", contactId];
+        MRContact *contact = [dbManager fetchObject:kContactEntity predicate:predicate inContext:context];
+        childPost.contactRelationship = contact;
+    }
+    if (groupId > 0) {
+        childPost.groupId = [NSNumber numberWithLong:groupId];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"group_id", groupId];
+        MRGroup *group = [dbManager fetchObject:kGroupEntity predicate:predicate inContext:context];
+        childPost.groupRelationship = group;
+    }
+    
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"sharePostId", inPost.sharePostId.longValue];
     MRSharePost *post = [dbManager fetchObject:kMRSharePost predicate:predicate inContext:context];
     [post addPostedRepliesObject:childPost];
     
-    NSInteger commentCount = 1;
-    if (post.commentsCount != nil) {
-        commentCount = post.commentsCount.longValue + 1;
+    if (updateCommentCount) {
+        NSInteger commentCount = 1;
+        if (post.commentsCount != nil) {
+            commentCount = post.commentsCount.longValue + 1;
+        }
+        post.commentsCount = [NSNumber numberWithLong:commentCount];
     }
-    post.commentsCount = [NSNumber numberWithLong:commentCount];
+    
+    if (updateShareCount) {
+        NSInteger shareCount = 1;
+        if (post.shareCount != nil) {
+            shareCount = post.shareCount.longValue + 1;
+        }
+        post.shareCount = [NSNumber numberWithLong:shareCount];
+    }
     
     [dbManager dbSaveInContext:context];
 }

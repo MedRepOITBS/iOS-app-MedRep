@@ -89,7 +89,13 @@
 
 + (NSArray*)getShareArticles;
 + (void)shareAnArticle:(MRTransformPost*)transformPost;
-+ (void)addCommentToAPost:(MRSharePost*)post text:(NSString*)text andContentData:(NSData*)data;
++ (void)addCommentToAPost:(MRSharePost*)inPost
+                     text:(NSString*)text
+              contentData:(NSData*)data
+                contactId:(NSInteger)contactId
+                  groupId:(NSInteger)groupId
+       updateCommentCount:(BOOL)updateCommentCount
+      andUpdateShareCount:(BOOL)updateShareCount;
 
 + (NSArray*)getTransformArticles;
 + (void)addTransformArticles:(NSArray*)posts;

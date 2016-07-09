@@ -29,6 +29,8 @@
 #import "MRAppControl.h"
 #import "MRCreateGroupViewController.h"
 #import "PendingContactsViewController.h"
+#import "MRPostedReplies.h"
+#import "MRSharePost.h"
 
 @interface MRContactDetailViewController () <MRGroupPostItemTableViewCellDelegate, CommonBoxViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MRUpdateMemberProtocol> {
     NSMutableArray *groupsArrayObj;
@@ -54,8 +56,7 @@
 @property (strong, nonatomic) NSArray* groupsUnderContact;
 @property (strong, nonatomic) NSArray* posts;
 
-@property (strong, nonatomic) MRGroupUserObject* mainContact;
-//@property (strong, nonatomic) MRContact* mainContact;
+@property (strong, nonatomic) MRContact* mainContact;
 @property (strong, nonatomic) MRGroup* mainGroup;
 @property (strong,nonatomic) KLCPopup *commentBoxKLCPopView;
 @property (strong,nonatomic) CommonBoxView *commentBoxView;
@@ -85,55 +86,11 @@
     self.postsTableView.rowHeight = UITableViewAutomaticDimension;
     
     if (self.mainContact) {
-        for (UIView *view in self.mainImageView.subviews) {
-            if ([view isKindOfClass:[UILabel class]]) {
-                [view removeFromSuperview];
-            }
-        }
-        
-        self.mainImageView.image = [MRCommon getImageFromBase64Data:[_mainContact.imgData dataUsingEncoding:NSUTF8StringEncoding]];
-        self.mainLabel.text = [NSString stringWithFormat:@"Dr. %@ %@",_mainContact.firstName, _mainContact.lastName];
-        self.groupsUnderContact = @[]; //[self.mainContact.groups allObjects];
-        self.posts = @[]; //[self.mainContact.groupPosts allObjects];
-        _collectionHeight.constant = 0;
-        _deleteBtnHeight.constant = 40;
-        _contactDetailView.hidden = NO;
-        _groupDetailView.hidden = YES;
-        _plusBtn.hidden = YES;
-        _therapueticArea.text = [NSString stringWithFormat:@"Therapeutic Area: %@",_mainContact.therapeuticArea.length ? _mainContact.therapeuticArea : _mainContact.therapeuticName];
-        _city.text = [NSString stringWithFormat:@"City: %@",_mainContact.city];
-        
-        if (!_mainContact.imgData.length)
-        {
-            NSString *fullName = [NSString stringWithFormat:@"%@ %@",_mainContact.firstName, _mainContact.lastName];
-            self.mainImageView.image = nil;
-            if (fullName.length > 0) {
-                UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:self.mainImageView.bounds];
-                subscriptionTitleLabel.textAlignment = NSTextAlignmentCenter;
-                subscriptionTitleLabel.font = [UIFont systemFontOfSize:15.0];
-                subscriptionTitleLabel.textColor = [UIColor lightGrayColor];
-                subscriptionTitleLabel.layer.cornerRadius = 5.0;
-                subscriptionTitleLabel.layer.masksToBounds = YES;
-                subscriptionTitleLabel.layer.borderWidth =1.0;
-                subscriptionTitleLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
-                
-                NSArray *substrngs = [fullName componentsSeparatedByString:@" "];
-                NSString *imageString = @"";
-                for(NSString *str in substrngs){
-                    if (str.length > 0) {
-                        imageString = [imageString stringByAppendingString:[NSString stringWithFormat:@"%c",[str characterAtIndex:0]]];
-                    }
-                }
-                subscriptionTitleLabel.text = imageString.length > 2 ? [imageString substringToIndex:2] : imageString;
-                [self.mainImageView addSubview:subscriptionTitleLabel];
-            }
-        }
-        
+        [self setupUIWithContactDetails];
     } else {
         [self setupUIWithGroupDetails];
     }
     
-    [self totalPosts];
     [self.postsTableView reloadData];
     self.postsTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
@@ -145,6 +102,25 @@
 
 - (void)backButtonAction{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)setupUIWithContactDetails {
+    [MRAppControl getContactImage:self.mainContact andImageView:self.mainImageView];
+    self.mainLabel.text = [MRAppControl getContactName:self.mainContact];
+    _therapueticArea.text = [NSString stringWithFormat:@"Therapeutic Area: %@",_mainContact.therapeuticArea.length ? _mainContact.therapeuticArea : _mainContact.therapeuticName];
+    _city.text = [NSString stringWithFormat:@"City: %@",_mainContact.city];
+    
+    self.groupsUnderContact = @[]; //[self.mainContact.groups allObjects];
+    if (self.mainContact.comments.count > 0) {
+        self.posts = self.mainContact.comments.allObjects;
+    }
+    [self.subHeadingLabel setHidden:YES];
+    
+    _collectionHeight.constant = 0;
+    _deleteBtnHeight.constant = 40;
+    _contactDetailView.hidden = NO;
+    _groupDetailView.hidden = YES;
+    _plusBtn.hidden = YES;
 }
 
 - (void)setupUIWithGroupDetails {
@@ -165,7 +141,7 @@
     self.mainContact = contact;
 }*/
 
-- (void)setContact:(MRGroupUserObject*)contact {
+- (void)setContact:(MRContact*)contact {
     self.mainContact = contact;
 }
 
@@ -178,101 +154,73 @@
     return [self countForTableView];
 }
 
--(void)totalPosts {
-   __block NSMutableArray *arra = [NSMutableArray array];
-    
-    [self.posts enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        MRGroupPost *postGroup = (MRGroupPost *)obj;
-        [arra addObject:postGroup];
-        if (postGroup.replyPost!=nil && postGroup.replyPost.count >0) {
-            
-            [postGroup.replyPost enumerateObjectsUsingBlock:^(MrGroupChildPost * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                [arra addObject:(MrGroupChildPost *)obj];
-                
-            }];
-        }
-        
-    }];
-    
-    self.posts = nil;
-    self.posts = [NSMutableArray arrayWithArray:arra] ;
-    
-    }
 -(NSInteger)countForTableView{
 
     
    return  self.posts.count;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    id postObject = [self.posts objectAtIndex:indexPath.row];
-    if ([postObject isKindOfClass:[MRGroupPost class]]) {
-        
-        return 260;
-    }else {
-        
-        MrGroupChildPost *childPost = (MrGroupChildPost *)postObject;
-        
-        if ([childPost.postPic isEqualToString:@""]) {
-            return 44;
-            
-        }else {
-            
-            return 182;
-        }
-       
-    }
-    
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    id postObject = [self.posts objectAtIndex:indexPath.row];
+//    if ([postObject isKindOfClass:[MRGroupPost class]]) {
+//        
+//        return 260;
+//    }else {
+//        
+//        MrGroupChildPost *childPost = (MrGroupChildPost *)postObject;
+//        
+//        if ([childPost.postPic isEqualToString:@""]) {
+//            return 44;
+//            
+//        }else {
+//            
+//            return 182;
+//        }
+//       
+//    }
+//    
+//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    MRPostedReplies *childPost = [self.posts objectAtIndex:indexPath.row];
     
-   
-    id postObject = [self.posts objectAtIndex:indexPath.row];
-    if ([postObject isKindOfClass:[MRGroupPost class]]) {
-        
-        MRGroupPostItemTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"groupCell"];
-    
-        if (cell == nil) {
-            NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"MRGroupPostItemTableViewCell" owner:self options:nil];
-            cell = (MRGroupPostItemTableViewCell *)[arr objectAtIndex:0];
-        }
-        
-        cell.delegate = self;
-        
-        NSInteger tagIndex = (indexPath.section + indexPath.row) * 100;
-        [cell setTag:tagIndex];
-        [cell setParentTableView:self.postsTableView];
-        [cell setPostContent:[self.posts objectAtIndex:indexPath.row] tagIndex:tagIndex];
-    
-        return cell;
-    }else {
-    
-        GroupPostChildTableViewCell *cell  = [tableView dequeueReusableCellWithIdentifier:@"groupChildCell"];
-        if (cell == nil) {
-            NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"GroupPostChildTableViewCell" owner:self options:nil];
-            cell = (GroupPostChildTableViewCell *)[arr objectAtIndex:0];
-        }
-        MrGroupChildPost *childPost = (MrGroupChildPost *)postObject;
-        
-        if ([childPost.postPic isEqualToString:@""]) {
-           cell.heightConstraint.constant = 0;
-            cell.verticalContstraint.constant = 0;
-            [cell setNeedsUpdateConstraints];
-        }else {
-            NSString * imagePath = childPost.postPic;
-            
-            cell.commentPic.image = [UIImage imageWithData:[NSData dataWithContentsOfFile:imagePath]];
-            
-        }
-          cell.postText.text = childPost.postText;
-        return cell;
-        
+    GroupPostChildTableViewCell *cell  = [tableView dequeueReusableCellWithIdentifier:@"groupChildCell"];
+    if (cell == nil) {
+        NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"GroupPostChildTableViewCell" owner:self options:nil];
+        cell = (GroupPostChildTableViewCell *)[arr objectAtIndex:0];
     }
     
+    MRSharePost *sharePost = nil;
+    if (childPost.parentSharePostId != nil) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"sharePostId", childPost.parentSharePostId.longValue];
+        sharePost = [[MRDataManger sharedManager] fetchObject:kMRSharePost predicate:predicate];
+    }
     
-    return nil;
+    if (childPost.image == nil) {
+        if (sharePost != nil && sharePost.objectData != nil) {
+            cell.heightConstraint.constant = 146;
+            cell.commentPic.image = [UIImage imageWithData:sharePost.objectData];
+        } else {
+            cell.heightConstraint.constant = 0;
+        }
+    } else {
+        cell.heightConstraint.constant = 146;
+        cell.commentPic.image = [UIImage imageWithData:childPost.image];
+    }
+    
+    NSString *postText = childPost.text;
+    if (postText == nil || postText.length == 0) {
+        if (sharePost != nil && sharePost.titleDescription != nil) {
+            postText = sharePost.titleDescription;
+        }
+    }
+    
+    cell.postText.text = postText;
+    cell.profileNameLabel.text = childPost.postedBy;
+    cell.profilePic.image = [MRAppControl getRepliedByProfileImage:childPost];
+
+    return cell;
 }
 
 
