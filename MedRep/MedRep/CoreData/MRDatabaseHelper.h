@@ -7,8 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MRDataManger.h"
-
 
 #define kRoleEntity                 @"MRRole"
 #define kTherapeuticAreaEntity      @"MRTherapeuticArea"
@@ -28,6 +26,8 @@
 
 @class MRGroupPost;
 @class MRTransformPost, MRSharePost;
+
+typedef void (^WebServiceResponseHandler)(id result);
 
 @interface MRDatabaseHelper : NSObject
 {
@@ -89,13 +89,18 @@
 
 + (NSArray*)getShareArticles;
 + (void)shareAnArticle:(MRTransformPost*)transformPost;
+
 + (void)addCommentToAPost:(MRSharePost*)inPost
                      text:(NSString*)text
               contentData:(NSData*)data
-                contactId:(NSInteger)contactId
-                  groupId:(NSInteger)groupId
-       updateCommentCount:(BOOL)updateCommentCount
-      andUpdateShareCount:(BOOL)updateShareCount;
+              contentType:(NSInteger)contentType;
+
++ (void)shareAPostWithContactOrGroup:(MRSharePost*)inPost
+                                text:(NSString*)text
+                         contentData:(NSData*)data
+                         contentType:(NSInteger)contentType
+                           contactId:(NSInteger)contactId
+                             groupId:(NSInteger)groupId;
 
 + (NSArray*)getTransformArticles;
 + (void)addTransformArticles:(NSArray*)posts;

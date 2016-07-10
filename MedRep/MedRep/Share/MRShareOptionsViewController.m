@@ -7,16 +7,12 @@
 //
 
 #import "MRShareOptionsViewController.h"
-#import "MRCommon.h"
-#import "MRDatabaseHelper.h"
+#import "MRConstants.h"
 #import "MRContact.h"
 #import "MRGroup.h"
 #import "MRSharePost.h"
 #import "MRAppControl.h"
 #import "MRShareOptionTableViewCell.h"
-#import "NSDictionary+CaseInsensitive.h"
-#import "MRWebserviceHelper.h"
-#import "NSData+Base64Additions.h"
 
 @interface MRShareOptionsViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -260,11 +256,17 @@
             currentSharesCount += selectedContacts.count;
             
             for (NSInteger index = 0; index < selectedContacts.count; index++) {
-                NSInteger contactId = ((MRContact*)[selectedContacts objectAtIndex:index]).contactId.longValue;
+                MRContact *contact = ((MRContact*)[selectedContacts objectAtIndex:index]);
+                NSInteger contactId = contact.contactId.longValue;
                 
-                [MRDatabaseHelper addCommentToAPost:self.parentPost text:@"Shared Article"
-                                        contentData:nil contactId:contactId groupId:0
-                                 updateCommentCount:false andUpdateShareCount:true];
+                NSString *name = [MRAppControl getContactName:contact];
+                
+                [MRDatabaseHelper shareAPostWithContactOrGroup:self.parentPost
+                                                          text:[NSString stringWithFormat:@"Shared Article with %@",name]
+                                                   contentData:nil
+                                                   contentType:kTransformContentTypeText
+                                                     contactId:contactId
+                                                       groupId:0];
             }
         }
         
@@ -272,11 +274,15 @@
             currentSharesCount += selectedGroups.count;
             
             for (NSInteger index = 0; index < selectedGroups.count; index++) {
-                NSInteger groupId = ((MRGroup*)[selectedGroups objectAtIndex:index]).group_id.longValue;
+                MRGroup *group = ((MRGroup*)[selectedGroups objectAtIndex:index]);
+                NSInteger groupId = group.group_id.longValue;
                 
-                [MRDatabaseHelper addCommentToAPost:self.parentPost text:@"Shared Article"
-                                        contentData:nil contactId:0 groupId:groupId
-                                 updateCommentCount:false andUpdateShareCount:true];
+                [MRDatabaseHelper shareAPostWithContactOrGroup:self.parentPost
+                                                          text:[NSString stringWithFormat:@"Shared Article with %@", group.group_name]
+                                                    contentData:nil
+                                                    contentType:kTransformContentTypeText
+                                                      contactId:0
+                                                        groupId:groupId];
             }
         }
     }

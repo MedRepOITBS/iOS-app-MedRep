@@ -28,6 +28,14 @@ typedef enum
 } SORT_ORDER;
 
 #import "AppDelegate.h"
+#import "MRAppConstants.h"
+#import "MRCommon.h"
+#import "MRDataManger.h"
+#import "MRDatabaseHelper.h"
+#import "MRWebserviceHelper.h"
+#import "NSDictionary+CaseInsensitive.h"
+#import "NSData+Base64Additions.h"
+
 #define APP_DELEGATE ((AppDelegate *)[UIApplication sharedApplication].delegate)
 
 #define kAppName                @"MedRep"
@@ -142,9 +150,6 @@ typedef NS_ENUM(NSInteger, DoctorPlusTabIndex) {
     DoctorPlusTabShare,
     DoctorPlusTabServe
 };
-
-typedef void (^WebServiceResponseHandler)(id result);
-
 
 typedef NS_ENUM(NSInteger, kTransformContentType) {
     kTransformContentTypeNone = 0,

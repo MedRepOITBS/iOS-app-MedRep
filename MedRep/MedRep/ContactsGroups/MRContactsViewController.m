@@ -12,11 +12,9 @@
 #import "UIPopoverController+iPhone.h"
 #import "MRPopoverControllerViewController.h"
 #import "MRContactDetailViewController.h"
-#import "MRDatabaseHelper.h"
 #import "PendingContactsViewController.h"
 #import "PieMenu.h"
-#import "MRWebserviceHelper.h"
-#import "MRCommon.h"
+#import "MRConstants.h"
 #import "MRServeViewController.h"
 #import "MRShareViewController.h"
 #import "MRTransformViewController.h"
@@ -28,7 +26,6 @@
 #import "MRAddMembersViewController.h"
 #import "MRJoinGroupViewController.h"
 #import "MRCustomTabBar.h"
-#import "MRDatabaseHelper.h"
 
 @interface MRContactsViewController () <UICollectionViewDataSource,UICollectionViewDelegate,UIActionSheetDelegate,UISearchBarDelegate, SWRevealViewControllerDelegate>{
     

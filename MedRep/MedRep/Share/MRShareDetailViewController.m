@@ -100,7 +100,8 @@
     
     _userType = [MRAppControl sharedHelper].userType;
 
-
+    self.activitiesTable.estimatedRowHeight = 283;
+    self.activitiesTable.rowHeight = UITableViewAutomaticDimension;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -191,6 +192,17 @@
     return 1;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    CGFloat rowHeight = 283;
+    MRPostedReplies *post = [self.recentActivity objectAtIndex:indexPath.row];
+    
+    if (post.image == nil) {
+        rowHeight -= 146;
+    }
+    
+    return rowHeight;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSInteger rows = 0;
     
@@ -219,29 +231,13 @@
     }
     
     MRPostedReplies *currentReply = [self.recentActivity objectAtIndex:indexPath.row];
-    cell.postText.text = currentReply.text;
-    cell.profileNameLabel.text = currentReply.postedBy;
-    cell.profilePic.image = [MRAppControl getRepliedByProfileImage:currentReply];
-    if (currentReply.image !=nil) {
-    cell.commentPic.image = [UIImage imageWithData:currentReply.image];    
-    }
-    cell.postedDate.text = [NSString stringWithFormat:@"Shared the article on %@",[currentReply.postedOn stringWithFormat:kIdletimeFormat]];
-    
-    //[NSString stringWithFormat:@"Shared the article on %@", [currentReply.postedOn stringWithFormat:kIdletimeFormat]];
-
+    [cell fillCellWithData:currentReply];
     
     return cell;
-
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:true];
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-   
-    
-    return 282;
-    
 }
 
 

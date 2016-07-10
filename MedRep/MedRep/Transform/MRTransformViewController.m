@@ -10,7 +10,6 @@
 #import "MRTransformViewController.h"
 #import "MRTransformTitleCollectionViewCell.h"
 #import "MRTransformPost.h"
-#import "MRDatabaseHelper.h"
 #import "MRTransformDetailViewController.h"
 #import "MPTransformTableViewCell.h"
 #import "SWRevealViewController.h"
@@ -20,7 +19,7 @@
 #import "MRShareViewController.h"
 #import <AVFoundation/AVFoundation.h>
 #import "MRServeViewController.h"
-#import "MRCommon.h"
+#import "MRConstants.h"
 #import "MRCustomTabBar.h"
 
 @interface MRTransformViewController () <UICollectionViewDelegate, UICollectionViewDataSource,

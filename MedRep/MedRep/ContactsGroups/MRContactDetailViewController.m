@@ -82,7 +82,7 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"MRContactWithinGroupCollectionCellCollectionViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"contactWithinGroupCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"MRContactWithinGroupCollectionViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"MRContactWithinGroupCollectionViewCell"];
 //    [self.postsTableView registerNib:[UINib nibWithNibName:@"MRGroupPostItemTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"groupCell"];
-    self.postsTableView.estimatedRowHeight = 250;
+    self.postsTableView.estimatedRowHeight = 283;
     self.postsTableView.rowHeight = UITableViewAutomaticDimension;
     
     if (self.mainContact) {
@@ -160,26 +160,16 @@
    return  self.posts.count;
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    id postObject = [self.posts objectAtIndex:indexPath.row];
-//    if ([postObject isKindOfClass:[MRGroupPost class]]) {
-//        
-//        return 260;
-//    }else {
-//        
-//        MrGroupChildPost *childPost = (MrGroupChildPost *)postObject;
-//        
-//        if ([childPost.postPic isEqualToString:@""]) {
-//            return 44;
-//            
-//        }else {
-//            
-//            return 182;
-//        }
-//       
-//    }
-//    
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    CGFloat rowHeight = 283;
+    MRPostedReplies *post = [self.posts objectAtIndex:indexPath.row];
+    
+    if (post.image == nil) {
+        rowHeight -= 146;
+    }
+    
+    return rowHeight;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -191,34 +181,7 @@
         cell = (GroupPostChildTableViewCell *)[arr objectAtIndex:0];
     }
     
-    MRSharePost *sharePost = nil;
-    if (childPost.parentSharePostId != nil) {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"sharePostId", childPost.parentSharePostId.longValue];
-        sharePost = [[MRDataManger sharedManager] fetchObject:kMRSharePost predicate:predicate];
-    }
-    
-    if (childPost.image == nil) {
-        if (sharePost != nil && sharePost.objectData != nil) {
-            cell.heightConstraint.constant = 146;
-            cell.commentPic.image = [UIImage imageWithData:sharePost.objectData];
-        } else {
-            cell.heightConstraint.constant = 0;
-        }
-    } else {
-        cell.heightConstraint.constant = 146;
-        cell.commentPic.image = [UIImage imageWithData:childPost.image];
-    }
-    
-    NSString *postText = childPost.text;
-    if (postText == nil || postText.length == 0) {
-        if (sharePost != nil && sharePost.titleDescription != nil) {
-            postText = sharePost.titleDescription;
-        }
-    }
-    
-    cell.postText.text = postText;
-    cell.profileNameLabel.text = childPost.postedBy;
-    cell.profilePic.image = [MRAppControl getRepliedByProfileImage:childPost];
+    [cell fillCellWithData:childPost];
 
     return cell;
 }

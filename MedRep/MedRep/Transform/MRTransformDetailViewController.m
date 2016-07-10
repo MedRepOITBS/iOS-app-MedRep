@@ -10,7 +10,7 @@
 #import "NotificationWebViewController.h"
 #import "MRShareViewController.h"
 #import "AppDelegate.h"
-#import "MRDatabaseHelper.h"
+#import "MRConstants.h"
 #import "MRTransformPost.h"
 
 #import <AVFoundation/AVFoundation.h>

@@ -693,13 +693,153 @@ static MRDatabaseHelper *sharedDataManager = nil;
                                                                   inContext:context];
     childPost.parentSharePostId = [NSNumber numberWithLong:post.sharePostId.longValue];
     childPost.postedReplyId = [NSNumber numberWithLong:[[NSDate date] timeIntervalSince1970]];
-    childPost.text = [NSString stringWithFormat:@"Shared the article on %@", [post.postedOn stringWithFormat:kIdletimeFormat]];
+    childPost.text = [NSString stringWithFormat:@"Shared the article"];
+    childPost.postedOn = post.postedOn;
     
     childPost.contentType = [NSNumber numberWithInteger:kTransformContentTypeText];
     childPost.postedBy = post.sharedByProfileName;
     childPost.postedByProfilePic = post.shareddByProfilePic;
     
-//    [post addPostedRepliesObject:childPost];
+    [post addPostedRepliesObject:childPost];
+    
+    [dbManager dbSaveInContext:context];
+}
+
++ (void)addCommentToAPost:(MRSharePost*)inPost
+                     text:(NSString*)text
+              contentData:(NSData*)data
+              contentType:(NSInteger)contentType {
+    
+    // Set the current user in sharedBy
+    MRAppControl *appControl = [MRAppControl sharedHelper];
+    NSDictionary *userDetailsDict = appControl.userRegData;
+    NSString *sharedByProfileName = [userDetailsDict objectOrNilForKey:@"displayName"];
+    
+    id profilePicData = [userDetailsDict objectForKey:KProfilePicture];
+    if (profilePicData != nil && [profilePicData isKindOfClass:[NSDictionary class]])
+    {
+        profilePicData = [profilePicData objectForKey:@"data"];
+    }
+    
+    NSData *shareddByProfilePic = nil;
+    
+    if (profilePicData != nil) {
+        if ([profilePicData isKindOfClass:[NSString class]]) {
+            shareddByProfilePic = [NSData decodeBase64ForString:profilePicData];
+        } else {
+            shareddByProfilePic = profilePicData;
+        }
+    }
+    
+    // Create new reply post
+    MRDataManger *dbManager = [MRDataManger sharedManager];
+    
+    NSManagedObjectContext *context = [dbManager getNewPrivateManagedObjectContext];
+    MRPostedReplies *childPost = (MRPostedReplies*)[dbManager createObjectForEntity:kMRPostedReplies
+                                                                          inContext:context];
+    
+    childPost.postedReplyId = [NSNumber numberWithLong:[[NSDate date] timeIntervalSince1970]];
+    childPost.postedOn = [NSDate date];
+    childPost.text = text;
+    childPost.postedBy = sharedByProfileName;
+    childPost.postedByProfilePic = shareddByProfilePic;
+    
+    // Set the content type
+    childPost.contentType = [NSNumber numberWithInteger:contentType];
+    if (data != nil) {
+        childPost.image = data;
+    }
+    
+    // Update the current post
+    if (inPost != nil && inPost.sharePostId != nil) {
+        childPost.parentSharePostId = [NSNumber numberWithLong:inPost.sharePostId.longValue];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"sharePostId", inPost.sharePostId.longValue];
+        MRSharePost *post = [dbManager fetchObject:kMRSharePost predicate:predicate inContext:context];
+        [post addPostedRepliesObject:childPost];
+        
+        NSInteger commentCount = 1;
+        if (post.commentsCount != nil) {
+            commentCount = post.commentsCount.longValue + 1;
+        }
+        post.commentsCount = [NSNumber numberWithLong:commentCount];
+    }
+    
+    [dbManager dbSaveInContext:context];
+}
+
++ (void)shareAPostWithContactOrGroup:(MRSharePost*)inPost
+                             text:(NSString*)text
+                      contentData:(NSData*)data
+                      contentType:(NSInteger)contentType
+                        contactId:(NSInteger)contactId
+                          groupId:(NSInteger)groupId {
+    
+    // Set the current user in sharedBy
+    MRAppControl *appControl = [MRAppControl sharedHelper];
+    NSDictionary *userDetailsDict = appControl.userRegData;
+    NSString *sharedByProfileName = [userDetailsDict objectOrNilForKey:@"displayName"];
+    
+    id profilePicData = [userDetailsDict objectForKey:KProfilePicture];
+    if (profilePicData != nil && [profilePicData isKindOfClass:[NSDictionary class]])
+    {
+        profilePicData = [profilePicData objectForKey:@"data"];
+    }
+    
+    NSData *shareddByProfilePic = nil;
+    
+    if (profilePicData != nil) {
+        if ([profilePicData isKindOfClass:[NSString class]]) {
+            shareddByProfilePic = [NSData decodeBase64ForString:profilePicData];
+        } else {
+            shareddByProfilePic = profilePicData;
+        }
+    }
+    
+    // Create new reply post
+    MRDataManger *dbManager = [MRDataManger sharedManager];
+    
+    NSManagedObjectContext *context = [dbManager getNewPrivateManagedObjectContext];
+    MRPostedReplies *childPost = (MRPostedReplies*)[dbManager createObjectForEntity:kMRPostedReplies
+                                                                          inContext:context];
+    
+    childPost.postedReplyId = [NSNumber numberWithLong:[[NSDate date] timeIntervalSince1970]];
+    childPost.postedOn = [NSDate date];
+    childPost.text = text;
+    childPost.postedBy = sharedByProfileName;
+    childPost.postedByProfilePic = shareddByProfilePic;
+    
+    // Set the content type
+    childPost.contentType = [NSNumber numberWithInteger:contentType];
+    if (data != nil) {
+        childPost.image = data;
+    }
+    
+    if (contactId > 0) {
+        childPost.contactId = [NSNumber numberWithLong:contactId];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"contactId", contactId];
+        MRContact *contact = [dbManager fetchObject:kContactEntity predicate:predicate inContext:context];
+        childPost.contactRelationship = contact;
+    }
+    if (groupId > 0) {
+        childPost.groupId = [NSNumber numberWithLong:groupId];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"group_id", groupId];
+        MRGroup *group = [dbManager fetchObject:kGroupEntity predicate:predicate inContext:context];
+        childPost.groupRelationship = group;
+    }
+    
+    // Update the current post
+    if (inPost != nil && inPost.sharePostId != nil) {
+        childPost.parentSharePostId = [NSNumber numberWithLong:inPost.sharePostId.longValue];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"sharePostId", inPost.sharePostId.longValue];
+        MRSharePost *post = [dbManager fetchObject:kMRSharePost predicate:predicate inContext:context];
+        [post addPostedRepliesObject:childPost];
+        
+        NSInteger shareCount = 1;
+        if (post.shareCount != nil) {
+            shareCount = post.shareCount.longValue + 1;
+        }
+        post.shareCount = [NSNumber numberWithLong:shareCount];
+    }
     
     [dbManager dbSaveInContext:context];
 }
@@ -709,6 +849,9 @@ static MRDatabaseHelper *sharedDataManager = nil;
               contentData:(NSData*)data
                 contactId:(NSInteger)contactId
                   groupId:(NSInteger)groupId
+              posteByContactName:(NSString*)name
+       postedByContactPic:(NSString*)pic
+        postedByContactId:(NSString*)profileId
        updateCommentCount:(BOOL)updateCommentCount
       andUpdateShareCount:(BOOL)updateShareCount {
     MRDataManger *dbManager = [MRDataManger sharedManager];
@@ -723,8 +866,8 @@ static MRDatabaseHelper *sharedDataManager = nil;
     childPost.text = text;
     childPost.image = data;
     childPost.contentType = [NSNumber numberWithInteger:kTransformContentTypeText];
-    childPost.postedBy = inPost.sharedByProfileName;
-    childPost.postedByProfilePic = inPost.shareddByProfilePic;
+    childPost.postedBy = name;
+    childPost.postedByProfilePic = pic;
     
     if (contactId > 0) {
         childPost.contactId = [NSNumber numberWithLong:contactId];

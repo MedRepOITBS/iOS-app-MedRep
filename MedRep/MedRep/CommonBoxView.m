@@ -11,7 +11,7 @@
 #import "MRGroup.h"
 #import "MRSharePost.h"
 #import "MRAppControl.h"
-#import "MRDatabaseHelper.h"
+#import "MRConstants.h"
 
 @interface CommonBoxView() <UIImagePickerControllerDelegate>
 
@@ -151,13 +151,11 @@
     if (self.sharePost != nil) {
         if (!_isPhotoSelected) {
             [MRDatabaseHelper addCommentToAPost:self.sharePost text:self.commentTextView.text
-                                    contentData:nil contactId:0 groupId:0
-                             updateCommentCount:true andUpdateShareCount:false];
+                                    contentData:nil contentType:kTransformContentTypeText];
         } else {
             [MRDatabaseHelper addCommentToAPost:self.sharePost text:self.commentTextView.text
                                     contentData:UIImagePNGRepresentation(self.shareImageView.image)
-                                      contactId:0 groupId:0
-                             updateCommentCount:true andUpdateShareCount:false];
+                                      contentType:kTransformContentTypeImage];
             
         }
         

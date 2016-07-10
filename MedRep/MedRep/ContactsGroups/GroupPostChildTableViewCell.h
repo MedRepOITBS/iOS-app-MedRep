@@ -8,12 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class MRPostedReplies;
+
 @interface GroupPostChildTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIImageView *commentPic;
-@property (weak, nonatomic) IBOutlet UITextView *postText;
-@property (weak,nonatomic) IBOutlet UILabel *profileNameLabel;
-@property (strong,nonatomic) IBOutlet NSLayoutConstraint *heightConstraint;
-@property (weak, nonatomic) IBOutlet UIImageView *profilePic;
-@property (weak, nonatomic) IBOutlet UILabel *postedDate;
-@property (strong,nonatomic) IBOutlet NSLayoutConstraint *verticalContstraint;
+
+- (void)fillCellWithData:(MRPostedReplies*)post;
+
 @end
