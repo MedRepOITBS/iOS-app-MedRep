@@ -23,6 +23,7 @@
 #import "KLCPopup.h"
 #import "CommonBoxView.h"
 #import "MRDataManger.h"
+#import "NSDate+Utilities.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
@@ -224,6 +225,10 @@
     if (currentReply.image !=nil) {
     cell.commentPic.image = [UIImage imageWithData:currentReply.image];    
     }
+    cell.postedDate.text = [NSString stringWithFormat:@"Shared the article on %@",[currentReply.postedOn stringWithFormat:kIdletimeFormat]];
+    
+    //[NSString stringWithFormat:@"Shared the article on %@", [currentReply.postedOn stringWithFormat:kIdletimeFormat]];
+
     
     return cell;
 
@@ -235,7 +240,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
    
     
-    return 260;
+    return 282;
     
 }
 

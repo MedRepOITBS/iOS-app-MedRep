@@ -694,11 +694,12 @@ static MRDatabaseHelper *sharedDataManager = nil;
     childPost.parentSharePostId = [NSNumber numberWithLong:post.sharePostId.longValue];
     childPost.postedReplyId = [NSNumber numberWithLong:[[NSDate date] timeIntervalSince1970]];
     childPost.text = [NSString stringWithFormat:@"Shared the article on %@", [post.postedOn stringWithFormat:kIdletimeFormat]];
+    
     childPost.contentType = [NSNumber numberWithInteger:kTransformContentTypeText];
     childPost.postedBy = post.sharedByProfileName;
     childPost.postedByProfilePic = post.shareddByProfilePic;
     
-    [post addPostedRepliesObject:childPost];
+//    [post addPostedRepliesObject:childPost];
     
     [dbManager dbSaveInContext:context];
 }

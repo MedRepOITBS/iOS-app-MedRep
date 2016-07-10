@@ -14,5 +14,6 @@
 @property (weak,nonatomic) IBOutlet UILabel *profileNameLabel;
 @property (strong,nonatomic) IBOutlet NSLayoutConstraint *heightConstraint;
 @property (weak, nonatomic) IBOutlet UIImageView *profilePic;
+@property (weak, nonatomic) IBOutlet UILabel *postedDate;
 @property (strong,nonatomic) IBOutlet NSLayoutConstraint *verticalContstraint;
 @end

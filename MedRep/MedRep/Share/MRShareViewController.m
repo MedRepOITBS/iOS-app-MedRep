@@ -44,7 +44,6 @@
 @property (strong, nonatomic) NSArray* groupsUnderContact;
 @property (strong, nonatomic) NSArray* posts;
 @property (strong, nonatomic) IBOutlet UIView *navView;
-@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @property (strong, nonatomic) UITapGestureRecognizer* tapGesture;
 
@@ -54,7 +53,7 @@
 
 @property (strong,nonatomic) KLCPopup *commentBoxKLCPopView;
 @property (strong,nonatomic) CommonBoxView *commentBoxView;
-
+@property (strong, nonatomic) NSMutableArray *serachResults;
 @end
 
 @implementation MRShareViewController
@@ -129,11 +128,9 @@
     if (self.posts.count == 0) {
         [self.emptyMessage setHidden:false];
         [self.postsTableView setHidden:true];
-        [self.searchBar setHidden:true];
     } else {
         [self.emptyMessage setHidden:true];
         [self.postsTableView setHidden:false];
-        [self.searchBar setHidden:false];
     }
 }
 
@@ -147,8 +144,16 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        return self.serachResults.count;
+        
+    }
+    
     return self.posts.count;
 }
+
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MRGroupPostItemTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"groupCell"];
@@ -157,7 +162,24 @@
     [cell setTag:tagIndex];
     [cell setParentTableView:self.postsTableView];
     [cell setDelegate:self];
-    [cell setPostContent:[self.posts objectAtIndex:indexPath.row] tagIndex:tagIndex];
+    
+    
+    
+    if (cell == nil)
+    {
+        NSArray *nibViews = [[NSBundle mainBundle] loadNibNamed:@"MRGroupPostItemTableViewCell" owner:nil options:nil];
+        cell = (MRGroupPostItemTableViewCell *)[nibViews lastObject];
+    }
+    
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        [cell setPostContent:[self.serachResults objectAtIndex:indexPath.row] tagIndex:tagIndex];
+
+    }else{
+        [cell setPostContent:[self.posts objectAtIndex:indexPath.row] tagIndex:tagIndex];
+
+        
+    }
+    
     return cell;
 }
 
@@ -168,7 +190,17 @@
                                                               bundle:nil];
     [shareDetailViewController setDelegate:self];
     [shareDetailViewController setIndexPath:indexPath];
-    [shareDetailViewController setPost:self.posts[indexPath.row]];
+    
+    
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        
+        [shareDetailViewController setPost:self.serachResults[indexPath.row]];
+        
+    }else{
+        [shareDetailViewController setPost:self.posts[indexPath.row]];
+        
+    }
+    
     [self.navigationController pushViewController:shareDetailViewController animated:true];
 }
 
@@ -207,20 +239,28 @@
 }
 
 - (void)viewTapped:(UITapGestureRecognizer*)tapGesture {
-    [self.searchBar resignFirstResponder];
     self.tapGesture.enabled = NO;
 }
 
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
-    [searchBar resignFirstResponder];
+
+- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
+{
+    
+    self.serachResults  =  [[self.posts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(%K contains[cd] %@)",@"titleDescription",searchText]] mutableCopy];
+    //    self.searchResults  =  [[self.filteredData filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(%K contains[cd] %@) OR (%K contains[cd] %@)",@"titleDescription",searchText,@"lastName",searchText]] mutableCopy];
+    
 }
 
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
-    [searchBar resignFirstResponder];
-}
-
-- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-    self.tapGesture.enabled = YES;
+#pragma mark - UISearchDisplayController delegate methods
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller
+shouldReloadTableForSearchString:(NSString *)searchString
+{
+    [self filterContentForSearchText:searchString
+                               scope:[[self.searchDisplayController.searchBar scopeButtonTitles]
+                                      objectAtIndex:[self.searchDisplayController.searchBar
+                                                     selectedScopeButtonIndex]]];
+    
+    return YES;
 }
 
 - (void)likeButtonTapped {

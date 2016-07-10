@@ -9,7 +9,7 @@
             <connections>
                 <outlet property="contentTableView" destination="DFd-vW-gB4" id="Wxa-1d-BXo"/>
                 <outlet property="navView" destination="yyW-D5-5hm" id="XrV-2m-31I"/>
-                <outlet property="searchBar" destination="QE3-ah-syi" id="Q7m-Jy-4jd"/>
+                <outlet property="searchDisplayController" destination="RUW-LR-cAJ" id="otK-pV-btt"/>
                 <outlet property="titleCollectionView" destination="27a-DK-TyQ" id="Dr6-2J-bSN"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -25,9 +25,6 @@
                         <constraint firstAttribute="height" constant="44" id="BYh-zr-D66"/>
                     </constraints>
                     <textInputTraits key="textInputTraits" returnKeyType="search"/>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="J71-F7-pGS"/>
-                    </connections>
                 </searchBar>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z7C-H3-umC">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="30"/>
@@ -95,6 +92,15 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="-58.5" y="-12.5"/>
         </view>
+        <searchDisplayController id="RUW-LR-cAJ">
+            <connections>
+                <outlet property="delegate" destination="-1" id="mBB-ir-4q5"/>
+                <outlet property="searchBar" destination="QE3-ah-syi" id="5gE-Iw-Roz"/>
+                <outlet property="searchContentsController" destination="-1" id="WDo-oI-juf"/>
+                <outlet property="searchResultsDataSource" destination="-1" id="Lq0-bp-UpZ"/>
+                <outlet property="searchResultsDelegate" destination="-1" id="GKn-xL-k6r"/>
+            </connections>
+        </searchDisplayController>
     </objects>
     <resources>
         <image name="Icon-40.png" width="40" height="40"/>

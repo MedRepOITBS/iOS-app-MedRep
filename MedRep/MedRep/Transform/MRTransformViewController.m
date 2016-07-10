@@ -42,6 +42,7 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
 @property (strong, nonatomic) NSArray *contentData;
 @property (strong, nonatomic) NSMutableArray *filteredData;
 @property (strong, nonatomic) UITapGestureRecognizer* tapGesture;
+@property (strong, nonatomic) NSMutableArray *searchResults;
 
 @property NSInteger currentIndex;
 
@@ -213,6 +214,11 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        return self.searchResults.count;
+        
+    }
+    
     return self.filteredData.count;
 }
 
@@ -231,9 +237,16 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
         NSArray *nibViews = [[NSBundle mainBundle] loadNibNamed:@"MPTransformTableViewCell" owner:nil options:nil];
         regCell = (MPTransformTableViewCell *)[nibViews lastObject];
     }
-    
-    MRTransformPost *transformData = self.filteredData[indexPath.row];
-    if (transformData != nil) {
+    MRTransformPost *transformData;
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+
+   transformData = self.searchResults[indexPath.row];
+    }else{
+       transformData = self.filteredData[indexPath.row];
+        
+    }
+        
+        if (transformData != nil) {
         if (transformData.url != nil && transformData.url.length > 0) {
             if (transformData.contentType.integerValue == kTransformContentTypeImage) {
                 regCell.img.image = [UIImage imageNamed:transformData.url];
@@ -267,7 +280,15 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MRTransformDetailViewController *notiFicationViewController = [[MRTransformDetailViewController alloc] initWithNibName:@"MRTransformDetailViewController" bundle:nil];
-    notiFicationViewController.post = self.contentData[indexPath.row];
+    
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+
+        notiFicationViewController.post = self.searchResults[indexPath.row];
+        
+    }else{
+        notiFicationViewController.post = self.contentData[indexPath.row];
+        
+    }
     [self.navigationController pushViewController:notiFicationViewController animated:YES];
 }
 
@@ -289,6 +310,26 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
     
         self.contentData = [MRDatabaseHelper getTransformArticles];
     }
+}
+
+- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
+{
+
+    self.searchResults  =  [[self.filteredData filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(%K contains[cd] %@)",@"titleDescription",searchText]] mutableCopy];
+//    self.searchResults  =  [[self.filteredData filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(%K contains[cd] %@) OR (%K contains[cd] %@)",@"titleDescription",searchText,@"lastName",searchText]] mutableCopy];
+
+}
+
+#pragma mark - UISearchDisplayController delegate methods
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller
+shouldReloadTableForSearchString:(NSString *)searchString
+{
+    [self filterContentForSearchText:searchString
+                               scope:[[self.searchDisplayController.searchBar scopeButtonTitles]
+                                      objectAtIndex:[self.searchDisplayController.searchBar
+                                                     selectedScopeButtonIndex]]];
+    
+    return YES;
 }
 
 -(UIImage *)generateImageForVideoLink:(NSString *)str
