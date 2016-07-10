@@ -142,7 +142,13 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
-
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        return 200;
+        
+    }
+    return UITableViewAutomaticDimension;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if (tableView == self.searchDisplayController.searchResultsTableView) {
