@@ -190,7 +190,7 @@ withComplitionHandler:(completionHandler)responceHandler;
 
 - (void)updateGroupMembersStatus:(NSDictionary *)dict withHandler:(completionHandler)responceHandler;
 
-- (void)getGroupMembersStatusWithId:(NSString *)groupId withHandler:(completionHandler)responceHandler;
+- (void)getGroupMembersStatusWithId:(NSInteger)groupId withHandler:(completionHandler)responceHandler;
 
 - (void)removeGroupMember:(NSDictionary *)dict withHandler:(completionHandler)responceHandler;
 

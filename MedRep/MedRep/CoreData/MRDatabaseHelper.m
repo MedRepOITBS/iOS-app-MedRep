@@ -233,6 +233,179 @@ static MRDatabaseHelper *sharedDataManager = nil;
                                        andResponseHandler:responseHandler];
     }];
 }
+
++ (void)getGroupMemberStatus:(WebServiceResponseHandler)responseHandler {
+//    [MRCommon showActivityIndicator:@"Requesting..."];
+//    [[MRWebserviceHelper sharedWebServiceHelper] getGroupMembersStatuswithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+//        [MRCommon stopActivityIndicator];
+//        if (status)
+//        {
+//            NSArray *responseArray = responce[@"Responce"];
+//            groupsArrayObj = [NSMutableArray array];
+//            groupMemberArray = [NSMutableArray array];
+//            
+//            for (NSDictionary *memberDict in responseArray) {
+//                MRGroup *groupObj = [[MRGroup alloc] initWithDict:memberDict];
+//                [groupsArrayObj addObject:groupObj];
+//                if ([groupObj.group_name isEqualToString:self.mainGroupObj.group_name]) {
+//                    groupMemberArray = groupObj.member;
+//                }
+//            }
+//            [self.collectionView reloadData];
+//        }
+//        else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+//        {
+//            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+//             {
+//                 [MRCommon savetokens:responce];
+//                 [[MRWebserviceHelper sharedWebServiceHelper] getGroupMembersStatuswithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+//                     [MRCommon stopActivityIndicator];
+//                     if (status)
+//                     {
+//                         NSArray *responseArray = responce[@"Responce"];
+//                         groupsArrayObj = [NSMutableArray array];
+//                         groupMemberArray = [NSMutableArray array];
+//                         
+//                         for (NSDictionary *memberDict in responseArray) {
+//                             MRGroupObject *groupObj = [[MRGroupObject alloc] initWithDict:memberDict];
+//                             [groupsArrayObj addObject:groupObj];
+//                             if ([groupObj.group_name isEqualToString:self.mainGroupObj.group_name]) {
+//                                 groupMemberArray = groupObj.member;
+//                             }
+//                         }
+//                         [self.collectionView reloadData];
+//                     }else
+//                     {
+//                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
+//                         if (erros.count > 0)
+//                             [MRCommon showAlert:[erros lastObject] delegate:nil];
+//                     }
+//                 }];
+//             }];
+//        }
+//        else
+//        {
+//            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+//            if (erros.count > 0)
+//                [MRCommon showAlert:[erros lastObject] delegate:nil];
+//        }
+//    }];
+}
+
++ (void)filterGroupDetailsResponse:(NSDictionary*)response andResponseHandler:(WebServiceResponseHandler) responseHandler {
+    id result = [MRWebserviceHelper parseNetworkResponse:MRContact.class
+                                                 andData:[response valueForKey:@"Responce"]];
+    if (responseHandler != nil) {
+        NSArray *tempResults = [[MRDataManger sharedManager] fetchObjectList:kContactEntity];
+        
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:true];
+        result = [tempResults sortedArrayUsingDescriptors:@[sortDescriptor]];
+        responseHandler(result);
+    }
+}
+
++ (void)makeServiceCallForGroupDetailsFetch:(NSInteger)groupId status:(BOOL)status details:(NSString*)details
+                               response:(NSDictionary*)response
+                     andResponseHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon stopActivityIndicator];
+    if (status)
+    {
+        [MRDatabaseHelper filterGroupDetailsResponse:response andResponseHandler:responseHandler];
+    }
+    else if ([[response objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+    {
+        [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+         {
+             [MRCommon savetokens:responce];
+             [[MRWebserviceHelper sharedWebServiceHelper] getGroupMembersStatusWithId:groupId withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                 [MRCommon stopActivityIndicator];
+                 if (status)
+                 {
+                     [MRDatabaseHelper filterGroupDetailsResponse:responce andResponseHandler:responseHandler];
+                 } else
+                 {
+                     NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                     if (erros.count > 0)
+                         [MRCommon showAlert:[erros lastObject] delegate:nil];
+                 }
+             }];
+         }];
+    }
+    else
+    {
+        NSArray *erros =  [details componentsSeparatedByString:@"-"];
+        if (erros.count > 0)
+            [MRCommon showAlert:[erros lastObject] delegate:nil];
+    }
+}
+
++ (void)getGroupMemberStatusWithId:(NSInteger)groupId
+                        andHandler:(WebServiceResponseHandler)responseHandler {
+    
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] getGroupMembersStatusWithId:groupId withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [MRDatabaseHelper makeServiceCallForGroupDetailsFetch:groupId status:status details:details
+                                                 response:responce
+                                       andResponseHandler:responseHandler];
+    }];
+
+//    [MRCommon showActivityIndicator:@"Requesting..."];
+//    [[MRWebserviceHelper sharedWebServiceHelper] getGroupMembersStatusWithId:groupId withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+//        [MRCommon stopActivityIndicator];
+//        if (status)
+//        {
+//            NSArray *responseArray = responce[@"Responce"];
+//            groupsArrayObj = [NSMutableArray array];
+//            groupMemberArray = [NSMutableArray array];
+//            
+//            for (NSDictionary *memberDict in responseArray) {
+//                MRGroupObject *groupObj = [[MRGroupObject alloc] initWithDict:memberDict];
+//                [groupsArrayObj addObject:groupObj];
+//                if ([groupObj.group_name isEqualToString:self.mainGroupObj.group_name]) {
+//                    groupMemberArray = groupObj.member;
+//                }
+//            }
+//            [self.collectionView reloadData];
+//        }
+//        else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+//        {
+//            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+//             {
+//                 [MRCommon savetokens:responce];
+//                 [[MRWebserviceHelper sharedWebServiceHelper] getGroupMembersStatusWithId:groupId withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+//                     [MRCommon stopActivityIndicator];
+//                     if (status)
+//                     {
+//                         NSArray *responseArray = responce[@"Responce"];
+//                         groupsArrayObj = [NSMutableArray array];
+//                         groupMemberArray = [NSMutableArray array];
+//                         
+//                         for (NSDictionary *memberDict in responseArray) {
+//                             MRGroupObject *groupObj = [[MRGroupObject alloc] initWithDict:memberDict];
+//                             [groupsArrayObj addObject:groupObj];
+//                             if ([groupObj.group_name isEqualToString:self.mainGroupObj.group_name]) {
+//                                 groupMemberArray = groupObj.member;
+//                             }
+//                         }
+//                         [self.collectionView reloadData];
+//                     } else
+//                     {
+//                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
+//                         if (erros.count > 0)
+//                             [MRCommon showAlert:[erros lastObject] delegate:nil];
+//                     }
+//                 }];
+//             }];
+//        }
+//        else
+//        {
+//            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+//            if (erros.count > 0)
+//                [MRCommon showAlert:[erros lastObject] delegate:nil];
+//        }
+//    }];
+}
+
      
 + (MRContact*)getContactForId:(NSInteger)contactId {
     MRContact* contact = [[MRDataManger sharedManager] fetchObject:kContactEntity predicate:[NSPredicate predicateWithFormat:@"contactId == %@",[NSNumber numberWithInteger:contactId]]];

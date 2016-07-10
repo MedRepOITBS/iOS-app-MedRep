@@ -47,6 +47,9 @@ typedef void (^WebServiceResponseHandler)(id result);
 + (void)getSuggestedContacts:(WebServiceResponseHandler)responseHandler;
 + (void)getPendingContacts:(WebServiceResponseHandler)responseHandler;
 
++ (void)getGroupMemberStatusWithId:(NSInteger)groupId
+                        andHandler:(WebServiceResponseHandler)responseHandler;
+
 + (NSArray*)getObjectsForType:(NSString*)entityName andPredicate:(NSPredicate*)predicate;
 
 + (void)addRole:(NSArray*)roles;
