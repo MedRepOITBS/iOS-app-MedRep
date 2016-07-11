@@ -35,8 +35,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *stateMedCouncil;
 @property (nullable, nonatomic, retain) NSSet<MRGroup *> *groups;
 
-@property (nonatomic) NSArray *allGroups;
-
 @end
 
 @interface MRGroupMembers (CoreDataGeneratedAccessors)

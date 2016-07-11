@@ -42,28 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MedRep/ContactsGroups/MRContactDetailViewController.m"
-            timestampString = "489964225.75829"
+            timestampString = "489966405.068131"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "609"
-            endingLineNumber = "609"
+            startingLineNumber = "621"
+            endingLineNumber = "621"
             landmarkName = "-deleteConnection"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MedRep/Model/MRGroupMembers+CoreDataProperties.m"
-            timestampString = "489964811.43354"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
-            landmarkName = "-setGroup_id:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -80,22 +64,6 @@
             startingLineNumber = "274"
             endingLineNumber = "274"
             landmarkName = "+getGroupMemberStatus:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MedRep/Appcontrol/MRAppControl.m"
-            timestampString = "489965351.076662"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "712"
-            endingLineNumber = "712"
-            landmarkName = "+getGroupMemberName:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -121,13 +89,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MedRep/ContactsGroups/MRContactDetailViewController.m"
-            timestampString = "489965897.315206"
+            filePath = "MedRep/Appcontrol/MRAppControl.m"
+            timestampString = "489968405.919955"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "283"
-            endingLineNumber = "283"
-            landmarkName = "-collectionView:cellForItemAtIndexPath:"
+            startingLineNumber = "772"
+            endingLineNumber = "772"
+            landmarkName = "+getGroupMemberImage:andImageView:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

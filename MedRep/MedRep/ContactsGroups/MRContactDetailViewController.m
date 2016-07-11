@@ -592,8 +592,20 @@
 - (void)getGroupMembersStatusWithGroupId{
     [MRDatabaseHelper getGroupMemberStatusWithId:self.mainGroup.group_id.longValue
                                       andHandler:^(id result) {
-                                          self.contactsUnderGroup = result;
-                                          [self.collectionView reloadData];
+      NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"group_id", self.mainGroup.group_id.longValue];
+        NSArray *tempResults = result;
+        tempResults = [tempResults filteredArrayUsingPredicate:predicate];
+          if (tempResults != nil && tempResults.count > 0) {
+              MRGroup *tempGroup = tempResults.firstObject;
+              if (tempGroup.members != nil && tempGroup.members.count > 0) {
+                  self.contactsUnderGroup = tempGroup.members.allObjects;
+              } else {
+                  self.contactsUnderGroup = [NSArray new];
+              }
+          } else {
+              self.contactsUnderGroup = [NSArray new];
+          }
+        [self.collectionView reloadData];
     }];
 }
 

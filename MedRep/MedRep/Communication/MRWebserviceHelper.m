@@ -2176,19 +2176,33 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
 
 + (id)parseNetworkResponse:(Class)inEntityClass andData:(NSArray*)data {
     
-    NSMutableArray *arrayList = [NSMutableArray new];
     
-    NSString *entityName = NSStringFromClass(inEntityClass);
     Class<MRManagedObject>entityClass = inEntityClass;
     
-    NSString *primaryColumn = [entityClass primaryKeyColumnName];
     
     MRDataManger *dbManager = [MRDataManger sharedManager];
-    NSEntityDescription *entityDescription = [[[dbManager managedObjectModel] entitiesByName] objectForKey:entityName];
     
+    NSString *entityName = NSStringFromClass(entityClass);
     NSArray *currentRecords = [dbManager fetchObjectList:entityName];
     
     NSManagedObjectContext *context = [dbManager getNewPrivateManagedObjectContext];
+    
+    NSArray *arrayList = [self parseRecords:inEntityClass allRecords:currentRecords context:context
+                                    andData:data];
+    
+    return arrayList;
+}
+
++ (NSArray*)parseRecords:(Class)entityClass allRecords:(NSArray*)allRecords
+                 context:(NSManagedObjectContext*)context andData:(NSArray*)data {
+    NSMutableArray *arrayList = [NSMutableArray new];
+    
+    MRDataManger *dbManager = [MRDataManger sharedManager];
+    
+    NSString *entityName = NSStringFromClass(entityClass);
+    NSString *primaryColumn = [entityClass primaryKeyColumnName];
+    
+    NSEntityDescription *entityDescription = [[[dbManager managedObjectModel] entitiesByName] objectForKey:entityName];
     
     for (NSDictionary *dictionary in data) {
         NSPredicate *predicate = nil;
@@ -2198,10 +2212,14 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
         if ([predicateValue isKindOfClass:[NSNumber class]]) {
             predicate = [NSPredicate predicateWithFormat:@"%K == %ld",primaryColumn, ((NSNumber*)predicateValue).longValue];
         } else {
-             predicate = [NSPredicate predicateWithFormat:@"%K == %@",primaryColumn, predicateValue];
+            predicate = [NSPredicate predicateWithFormat:@"%K == %@",primaryColumn, predicateValue];
         }
         
-        NSArray *filteredRecords = [currentRecords filteredArrayUsingPredicate:predicate];
+        NSArray *filteredRecords = nil;
+        if (allRecords != nil && allRecords.count > 0) {
+            filteredRecords = [allRecords filteredArrayUsingPredicate:predicate];
+        }
+        
         if (filteredRecords != nil && filteredRecords.count > 0) {
             entity = filteredRecords.firstObject;
         } else {

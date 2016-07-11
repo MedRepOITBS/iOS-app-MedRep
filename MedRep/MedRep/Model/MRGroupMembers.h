@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MRGroupMembers : MRManagedObject
 
 // Insert code here to declare functionality of your managed object subclass
+@property (nonatomic) NSArray *allGroups;
 
 @end
 

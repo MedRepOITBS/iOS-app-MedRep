@@ -33,24 +33,22 @@
 @dynamic stateMedCouncil;
 @dynamic groups;
 
-@dynamic allGroups;
-
-- (void)setGroup_id:(NSNumber *)group_id {
-    [self willChangeValueForKey:@"group_id"];
-    [self setPrimitiveValue:group_id forKey:@"group_id"];
-    [self didChangeValueForKey:@"group_id"];
-    
-    if (self.allGroups == nil || self.allGroups.count == 0) {
-        self.allGroups = [[MRDataManger sharedManager] fetchObjectList:kGroupEntity];
-    }
-    
-    if (self.allGroups != nil && self.allGroups.count > 0) {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"group_id", group_id.longValue];
-        NSArray *filteredGroup = [self.allGroups filteredArrayUsingPredicate:predicate];
-        if (filteredGroup != nil && filteredGroup.count > 0) {
-            [self addGroupsObject:filteredGroup[0]];
-        }
-    }
-}
+//- (void)setGroup_id:(NSNumber *)group_id {
+//    [self willChangeValueForKey:@"group_id"];
+//    [self setPrimitiveValue:group_id forKey:@"group_id"];
+//    [self didChangeValueForKey:@"group_id"];
+//    
+//    if (self.allGroups == nil || self.allGroups.count == 0) {
+//        self.allGroups = [[MRDataManger sharedManager] fetchObjectList:kGroupEntity];
+//    }
+//    
+//    if (self.allGroups != nil && self.allGroups.count > 0) {
+//        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"group_id", group_id.longValue];
+//        NSArray *filteredGroup = [self.allGroups filteredArrayUsingPredicate:predicate];
+//        if (filteredGroup != nil && filteredGroup.count > 0) {
+//            [self addGroupsObject:filteredGroup[0]];
+//        }
+//    }
+//}
 
 @end

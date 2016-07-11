@@ -10,6 +10,8 @@
 #import "MRWebserviceConstants.h"
 #import "MRDevEnvironmentConfig.h"
 
+@class NSManagedObjectContext;
+
 typedef void(^completionHandler)(BOOL status, NSString *details, NSDictionary *responce);
 
 @interface MRWebserviceHelper : NSObject
@@ -231,6 +233,9 @@ withComplitionHandler:(completionHandler)responceHandler;
 - (void)registerDeviceToken:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
 
 + (id)parseNetworkResponse:(Class)inEntityClass andData:(NSArray*)data;
+
++ (NSArray*)parseRecords:(Class)entityClass allRecords:(NSArray*)allRecords
+                 context:(NSManagedObjectContext*)context andData:(NSArray*)data;
 
 @end
 

@@ -10,6 +10,8 @@
 //
 
 #import "MRGroup+CoreDataProperties.h"
+#import "MRConstants.h"
+#import "MRGroupMembers.h"
 
 @implementation MRGroup (CoreDataProperties)
 
@@ -25,7 +27,17 @@
 @dynamic members;
 
 - (void)setMember:(NSData *)member {
-    
+    if ([member isKindOfClass:[NSArray class]]) {
+        if (self.allMembers == nil || self.allMembers.count == 0) {
+            self.allMembers = [[MRDataManger sharedManager] fetchObjectList:kGroupMembersEntity];
+        }
+        
+        NSArray *tempMembers = [MRWebserviceHelper parseRecords:MRGroupMembers.class
+                                                     allRecords:self.allMembers
+                                                        context:self.managedObjectContext
+                                                        andData:(NSArray*)member];
+        self.members = [NSSet setWithArray:tempMembers];
+    }
 }
 
 @end

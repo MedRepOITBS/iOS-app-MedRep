@@ -16,6 +16,7 @@
 
 #define kContactEntity              @"MRContact"
 #define kGroupEntity                @"MRGroup"
+#define kGroupMembersEntity         @"MRGroupMembers"
 #define kGroupPostEntity            @"MRGroupPost"
 #define kSuggestedContactEntity     @"MRSuggestedContact"
 #define kGroupChildPostEntity       @"MrGroupChildPost"

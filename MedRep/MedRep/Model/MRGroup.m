@@ -13,6 +13,8 @@
 
 @implementation MRGroup
 
+@synthesize allMembers;
+
 // Insert code here to add functionality to your managed object subclass
 
 + (NSString*)primaryKeyColumnName {
