@@ -41,7 +41,7 @@
     self.groupImageView.image = [MRAppControl getGroupImage:group];
     self.nameLabel.text = group.group_name;
     self.groupObject = group;
-    self.contacts = [group.contacts allObjects];
+    self.contacts = [group.members allObjects];
     
 }
 

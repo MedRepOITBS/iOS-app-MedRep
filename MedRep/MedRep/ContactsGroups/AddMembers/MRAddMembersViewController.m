@@ -8,10 +8,10 @@
 
 #import "MRAddMembersViewController.h"
 #import "MRAddMemberTableViewCell.h"
-#import "MRGroupUserObject.h"
-#import "MRCommon.h"
+#import "MRConstants.h"
 #import "MRWebserviceHelper.h"
 #import "MRContactsViewController.h"
+#import "MRContact.h"
 
 @interface MRAddMembersViewController () <MRAddMemberProtocol, UISearchBarDelegate>{
     NSMutableArray *selectedContacts;
@@ -75,53 +75,9 @@
     self.tapGesture.enabled = NO;
 }
 
-- (void)getAllContactsByCity{
-    [MRCommon showActivityIndicator:@"Requesting..."];
-    [[MRWebserviceHelper sharedWebServiceHelper] getAllContactsByCityListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-        [MRCommon stopActivityIndicator];
-        if (status)
-        {
-            _pendingContactListArray = [NSMutableArray array];
-            NSArray *responseArray = responce[@"Responce"];
-            for (NSDictionary *dic in responseArray) {
-                MRGroupUserObject *groupObj = [[MRGroupUserObject alloc] initWithDict:dic];
-                [_pendingContactListArray addObject:groupObj];
-            }
-            _fileredContacts = _pendingContactListArray;
-            [_tableViewMembers reloadData];
-        }
-        else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
-        {
-            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
-             {
-                 [MRCommon savetokens:responce];
-                 [[MRWebserviceHelper sharedWebServiceHelper] getAllContactsByCityListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-                     [MRCommon stopActivityIndicator];
-                     if (status)
-                     {
-                         _pendingContactListArray = [NSMutableArray array];
-                         NSArray *responseArray = responce[@"Responce"];
-                         for (NSDictionary *dic in responseArray) {
-                             MRGroupUserObject *groupObj = [[MRGroupUserObject alloc] initWithDict:dic];
-                             [_pendingContactListArray addObject:groupObj];
-                         }
-                         _fileredContacts = _pendingContactListArray;
-                         [_tableViewMembers reloadData];
-                     }else
-                     {
-                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
-                         if (erros.count > 0)
-                             [MRCommon showAlert:[erros lastObject] delegate:nil];
-                     }
-                 }];
-             }];
-        }
-        else
-        {
-            NSArray *erros =  [details componentsSeparatedByString:@"-"];
-            if (erros.count > 0)
-                [MRCommon showAlert:[erros lastObject] delegate:nil];
-        }
+- (void)getAllContactsByCity {
+    [MRDatabaseHelper getContacts:^(id results) {
+        _fileredContacts = results;
     }];
 }
 
@@ -256,44 +212,14 @@
         cell = (MRAddMemberTableViewCell *)[arr objectAtIndex:0];
     }
     
-    MRGroupUserObject *contact = [_fileredContacts objectAtIndex:indexPath.row];
+    MRContact *contact = [_fileredContacts objectAtIndex:indexPath.row];
     
-    for (UIView *view in cell.profilePic.subviews) {
-        if ([view isKindOfClass:[UILabel class]]) {
-            [view removeFromSuperview];
-        }
-    }
+    cell.userName.text = [MRAppControl getContactName:contact];
+    [MRAppControl getContactImage:contact andImageView:cell.profilePic];
     
-    NSString *fullName = [NSString stringWithFormat:@"%@ %@",contact.firstName, contact.lastName];
-    cell.userName.text = [NSString stringWithFormat:@"Dr. %@",fullName];
     cell.phoneNo.text = contact.therapeuticName;
     cell.checkBtn.tag = indexPath.row;
     cell.cellDelegate = self;
-    if (contact.imgData.length) {
-        cell.profilePic.image = [MRCommon getImageFromBase64Data:[contact.imgData dataUsingEncoding:NSUTF8StringEncoding]];
-    } else {
-        cell.profilePic.image = nil;
-        if (fullName.length > 0) {
-            UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:cell.profilePic.bounds];
-            subscriptionTitleLabel.textAlignment = NSTextAlignmentCenter;
-            subscriptionTitleLabel.font = [UIFont systemFontOfSize:15.0];
-            subscriptionTitleLabel.textColor = [UIColor lightGrayColor];
-            subscriptionTitleLabel.layer.cornerRadius = 5.0;
-            subscriptionTitleLabel.layer.masksToBounds = YES;
-            subscriptionTitleLabel.layer.borderWidth =1.0;
-            subscriptionTitleLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
-            
-            NSArray *substrngs = [fullName componentsSeparatedByString:@" "];
-            NSString *imageString = @"";
-            for(NSString *str in substrngs){
-                if (str.length > 0) {
-                    imageString = [imageString stringByAppendingString:[NSString stringWithFormat:@"%c",[str characterAtIndex:0]]];
-                }
-            }
-            subscriptionTitleLabel.text = imageString.length > 2 ? [imageString substringToIndex:2] : imageString;
-            [cell.profilePic addSubview:subscriptionTitleLabel];
-        }
-    }
     
     return cell;
 }
@@ -303,7 +229,7 @@
 }
 
 -(void) selectedMemberAtIndex:(NSInteger)index{
-    MRGroupUserObject *contact = [_fileredContacts objectAtIndex:index];
+    MRContact *contact = [_fileredContacts objectAtIndex:index];
     
     if (_groupID) {
         if ([selectedContacts containsObject:contact.doctorId]) {
@@ -334,52 +260,9 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     [searchBar resignFirstResponder];
     
-    [MRCommon showActivityIndicator:@"searching..."];
-    [[MRWebserviceHelper sharedWebServiceHelper] getSearchContactList:searchBar.text withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-        [MRCommon stopActivityIndicator];
-        if (status)
-        {
-            NSMutableArray *searchContacts = [NSMutableArray array];
-            NSArray *responseArray = responce[@"Responce"];
-            for (NSDictionary *dic in responseArray) {
-                MRGroupUserObject *groupObj = [[MRGroupUserObject alloc] initWithDict:dic];
-                [searchContacts addObject:groupObj];
-            }
-            _fileredContacts = searchContacts;
-            [_tableViewMembers reloadData];
-        }
-        else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
-        {
-            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
-             {
-                 [MRCommon savetokens:responce];
-                 [[MRWebserviceHelper sharedWebServiceHelper] getSearchContactList:searchBar.text withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-                     [MRCommon stopActivityIndicator];
-                     if (status)
-                     {
-                         NSMutableArray *searchContacts = [NSMutableArray array];
-                         NSArray *responseArray = responce[@"Responce"];
-                         for (NSDictionary *dic in responseArray) {
-                             MRGroupUserObject *groupObj = [[MRGroupUserObject alloc] initWithDict:dic];
-                             [searchContacts addObject:groupObj];
-                         }
-                         _fileredContacts = searchContacts;
-                         [_tableViewMembers reloadData];
-                     }else
-                     {
-                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
-                         if (erros.count > 0)
-                             [MRCommon showAlert:[erros lastObject] delegate:nil];
-                     }
-                 }];
-             }];
-        }
-        else
-        {
-            NSArray *erros =  [details componentsSeparatedByString:@"-"];
-            if (erros.count > 0)
-                [MRCommon showAlert:[erros lastObject] delegate:nil];
-        }
+    [MRDatabaseHelper getContactsBySearchString:searchBar.text andResponseHandler:^(id results) {
+        _fileredContacts = results;
+        [_tableViewMembers reloadData];
     }];
 }
 

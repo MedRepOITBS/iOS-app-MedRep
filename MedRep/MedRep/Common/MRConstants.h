@@ -35,6 +35,7 @@ typedef enum
 #import "MRWebserviceHelper.h"
 #import "NSDictionary+CaseInsensitive.h"
 #import "NSData+Base64Additions.h"
+#import "MRAppControl.h"
 
 #define APP_DELEGATE ((AppDelegate *)[UIApplication sharedApplication].delegate)
 
@@ -151,10 +152,18 @@ typedef NS_ENUM(NSInteger, DoctorPlusTabIndex) {
     DoctorPlusTabServe
 };
 
-typedef NS_ENUM(NSInteger, kTransformContentType) {
+typedef NS_ENUM(NSInteger, TransformContentType) {
     kTransformContentTypeNone = 0,
     kTransformContentTypeImage,
     kTransformContentTypePDF,
     kTransformContentTypeVideo,
     kTransformContentTypeText
+};
+
+typedef NS_ENUM(NSInteger, ContactDetailLaunchMode) {
+    kContactDetailLaunchModeNone = 0,
+    kContactDetailLaunchModeContact,
+    kContactDetailLaunchModeSuggestedContact,
+    kContactDetailLaunchModeGroup,
+    kContactDetailLaunchModeSuggestedGroup
 };

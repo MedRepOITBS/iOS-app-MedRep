@@ -10,7 +10,7 @@
 @import UIKit;
 @class Reachability;
 
-@class ViewController, MRContact, MRGroup, MRPostedReplies;
+@class ViewController, MRContact, MRGroup, MRGroupMembers, MRPostedReplies;
 
 @interface MRAppControl : NSObject
 {
@@ -59,8 +59,10 @@
 -(void)registerDeviceToken;
 
 + (NSString*)getContactName:(MRContact*)contact;
++ (NSString*)getGroupMemberName:(MRGroupMembers*)members;
 + (UIImage*)getContactImage:(MRContact*)contact;
 + (void)getContactImage:(MRContact*)contact andImageView:(UIImageView*)parentView;
++ (void)getGroupMemberImage:(MRGroupMembers*)member andImageView:(UIImageView*)parentView;
 + (UIImage*)getRepliedByProfileImage:(MRPostedReplies*)replies;
 
 + (UIImage*)getGroupImage:(MRGroup*)group;

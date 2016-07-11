@@ -15,7 +15,6 @@
 #import "MRCreateGroupViewController.h"
 #import "MRWebserviceHelper.h"
 #import "MRCommon.h"
-#import "MRGroupUserObject.h"
 #import "MRGroup.h"
 
 @interface MRGroupsListViewController () <UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UIActionSheetDelegate>{

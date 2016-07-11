@@ -145,6 +145,7 @@ static MRDatabaseHelper *sharedDataManager = nil;
 + (void)getGroups:(WebServiceResponseHandler)responseHandler {
     [MRCommon showActivityIndicator:@"Requesting..."];
     [[MRWebserviceHelper sharedWebServiceHelper] getGroupListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [[MRDataManger sharedManager] removeAllObjects:kGroupEntity withPredicate:nil];
         [MRDatabaseHelper makeServiceCallForGroupsFetch:status details:details
                                                  response:responce
                                        andResponseHandler:responseHandler];
@@ -154,7 +155,18 @@ static MRDatabaseHelper *sharedDataManager = nil;
 + (void)getSuggestedGroups:(WebServiceResponseHandler)responseHandler {
     [MRCommon showActivityIndicator:@"Requesting..."];
     [[MRWebserviceHelper sharedWebServiceHelper] getSuggestedGroupListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [[MRDataManger sharedManager] removeAllObjects:kGroupEntity withPredicate:nil];
         [MRDatabaseHelper makeServiceCallForGroupsFetch:status details:details
+                                                 response:responce
+                                       andResponseHandler:responseHandler];
+    }];
+}
+
++ (void)getPendingGroups:(WebServiceResponseHandler)responseHandler {
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] fetchPendingGroupsListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [[MRDataManger sharedManager] removeAllObjects:kGroupEntity withPredicate:nil];
+        [MRDatabaseHelper makeServiceCallForContactsFetch:status details:details
                                                  response:responce
                                        andResponseHandler:responseHandler];
     }];
@@ -210,6 +222,17 @@ static MRDatabaseHelper *sharedDataManager = nil;
 + (void)getContacts:(WebServiceResponseHandler)responseHandler {
     [MRCommon showActivityIndicator:@"Requesting..."];
     [[MRWebserviceHelper sharedWebServiceHelper] getContactListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [[MRDataManger sharedManager] removeAllObjects:kContactEntity withPredicate:nil];
+        [MRDatabaseHelper makeServiceCallForContactsFetch:status details:details
+                                                 response:responce
+                                       andResponseHandler:responseHandler];
+    }];
+}
+
++ (void)getContactsByCity:(NSString*)city responseHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] getAllContactsByCityListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [[MRDataManger sharedManager] removeAllObjects:kContactEntity withPredicate:nil];
         [MRDatabaseHelper makeServiceCallForContactsFetch:status details:details
                                                  response:responce
                                        andResponseHandler:responseHandler];
@@ -219,6 +242,7 @@ static MRDatabaseHelper *sharedDataManager = nil;
 + (void)getSuggestedContacts:(WebServiceResponseHandler)responseHandler {
     [MRCommon showActivityIndicator:@"Requesting..."];
     [[MRWebserviceHelper sharedWebServiceHelper] getSuggestedContactListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [[MRDataManger sharedManager] removeAllObjects:kContactEntity withPredicate:nil];
         [MRDatabaseHelper makeServiceCallForContactsFetch:status details:details
                                                  response:responce
                                        andResponseHandler:responseHandler];
@@ -227,7 +251,19 @@ static MRDatabaseHelper *sharedDataManager = nil;
 
 + (void)getPendingContacts:(WebServiceResponseHandler)responseHandler {
     [MRCommon showActivityIndicator:@"Requesting..."];
-    [[MRWebserviceHelper sharedWebServiceHelper] fetchPendingGroupsListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+    [[MRWebserviceHelper sharedWebServiceHelper] fetchPendingConnectionsListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [[MRDataManger sharedManager] removeAllObjects:kContactEntity withPredicate:nil];
+        [MRDatabaseHelper makeServiceCallForContactsFetch:status details:details
+                                                 response:responce
+                                       andResponseHandler:responseHandler];
+    }];
+}
+
++ (void)getContactsBySearchString:(NSString*)searchText
+               andResponseHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon showActivityIndicator:@"searching..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] getSearchContactList:searchText withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [[MRDataManger sharedManager] removeAllObjects:kContactEntity withPredicate:nil];
         [MRDatabaseHelper makeServiceCallForContactsFetch:status details:details
                                                  response:responce
                                        andResponseHandler:responseHandler];
@@ -293,12 +329,12 @@ static MRDatabaseHelper *sharedDataManager = nil;
 }
 
 + (void)filterGroupDetailsResponse:(NSDictionary*)response andResponseHandler:(WebServiceResponseHandler) responseHandler {
-    id result = [MRWebserviceHelper parseNetworkResponse:MRContact.class
+    id result = [MRWebserviceHelper parseNetworkResponse:MRGroup.class
                                                  andData:[response valueForKey:@"Responce"]];
     if (responseHandler != nil) {
-        NSArray *tempResults = [[MRDataManger sharedManager] fetchObjectList:kContactEntity];
+        NSArray *tempResults = [[MRDataManger sharedManager] fetchObjectList:kGroupEntity];
         
-        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:true];
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"group_id" ascending:true];
         result = [tempResults sortedArrayUsingDescriptors:@[sortDescriptor]];
         responseHandler(result);
     }
@@ -348,62 +384,6 @@ static MRDatabaseHelper *sharedDataManager = nil;
                                                  response:responce
                                        andResponseHandler:responseHandler];
     }];
-
-//    [MRCommon showActivityIndicator:@"Requesting..."];
-//    [[MRWebserviceHelper sharedWebServiceHelper] getGroupMembersStatusWithId:groupId withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-//        [MRCommon stopActivityIndicator];
-//        if (status)
-//        {
-//            NSArray *responseArray = responce[@"Responce"];
-//            groupsArrayObj = [NSMutableArray array];
-//            groupMemberArray = [NSMutableArray array];
-//            
-//            for (NSDictionary *memberDict in responseArray) {
-//                MRGroupObject *groupObj = [[MRGroupObject alloc] initWithDict:memberDict];
-//                [groupsArrayObj addObject:groupObj];
-//                if ([groupObj.group_name isEqualToString:self.mainGroupObj.group_name]) {
-//                    groupMemberArray = groupObj.member;
-//                }
-//            }
-//            [self.collectionView reloadData];
-//        }
-//        else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
-//        {
-//            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
-//             {
-//                 [MRCommon savetokens:responce];
-//                 [[MRWebserviceHelper sharedWebServiceHelper] getGroupMembersStatusWithId:groupId withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-//                     [MRCommon stopActivityIndicator];
-//                     if (status)
-//                     {
-//                         NSArray *responseArray = responce[@"Responce"];
-//                         groupsArrayObj = [NSMutableArray array];
-//                         groupMemberArray = [NSMutableArray array];
-//                         
-//                         for (NSDictionary *memberDict in responseArray) {
-//                             MRGroupObject *groupObj = [[MRGroupObject alloc] initWithDict:memberDict];
-//                             [groupsArrayObj addObject:groupObj];
-//                             if ([groupObj.group_name isEqualToString:self.mainGroupObj.group_name]) {
-//                                 groupMemberArray = groupObj.member;
-//                             }
-//                         }
-//                         [self.collectionView reloadData];
-//                     } else
-//                     {
-//                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
-//                         if (erros.count > 0)
-//                             [MRCommon showAlert:[erros lastObject] delegate:nil];
-//                     }
-//                 }];
-//             }];
-//        }
-//        else
-//        {
-//            NSArray *erros =  [details componentsSeparatedByString:@"-"];
-//            if (erros.count > 0)
-//                [MRCommon showAlert:[erros lastObject] delegate:nil];
-//        }
-//    }];
 }
 
      
@@ -810,7 +790,7 @@ static MRDatabaseHelper *sharedDataManager = nil;
 
 + (void)cleanDatabaseOnLogout
 {
-    [[MRDataManger sharedManager] removeAllObjects:kNotificationsEntity];
+    [[MRDataManger sharedManager] removeAllObjects:kNotificationsEntity withPredicate:nil];
 }
 
 + (NSArray*)getShareArticles {

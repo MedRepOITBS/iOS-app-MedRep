@@ -10,27 +10,21 @@
 #import "MRGroupPostItemTableViewCell.h"
 #import "MRContactWithinGroupCollectionCellCollectionViewCell.h"
 #import "KLCPopup.h"
-#import "MRContact.h"
-#import "MRGroupPost.h"
-#import "MRGroup.h"
 #import "CommonBoxView.h"
 #import "AppDelegate.h"
-#import "MRDatabaseHelper.h"
 #import "MRConstants.h"
 #import "GroupPostChildTableViewCell.h"
-#import "MrGroupChildPost.h"
-#import "MRCommon.h"
-#import "MRWebserviceHelper.h"
-#import "MRGroup.h"
-#import "MRGroupUserObject.h"
 #import "MRContactWithinGroupCollectionViewCell.h"
-#import "MRGroupUserObject.h"
 #import "MRAddMembersViewController.h"
-#import "MRAppControl.h"
 #import "MRCreateGroupViewController.h"
 #import "PendingContactsViewController.h"
 #import "MRPostedReplies.h"
 #import "MRSharePost.h"
+#import "MRGroupMembers.h"
+#import "MRContact.h"
+#import "MRGroupPost.h"
+#import "MRGroup.h"
+#import "MrGroupChildPost.h"
 
 @interface MRContactDetailViewController () <MRGroupPostItemTableViewCellDelegate, CommonBoxViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MRUpdateMemberProtocol> {
     NSMutableArray *groupsArrayObj;
@@ -110,7 +104,7 @@
     _therapueticArea.text = [NSString stringWithFormat:@"Therapeutic Area: %@",_mainContact.therapeuticArea.length ? _mainContact.therapeuticArea : _mainContact.therapeuticName];
     _city.text = [NSString stringWithFormat:@"City: %@",_mainContact.city];
     
-    self.groupsUnderContact = @[]; //[self.mainContact.groups allObjects];
+    self.groupsUnderContact = [self.mainContact.groups allObjects];
     if (self.mainContact.comments != nil && self.mainContact.comments.count > 0) {
         self.posts = self.mainContact.comments.allObjects;
     } else {
@@ -131,7 +125,11 @@
     self.mainLabel.text = self.mainGroup.group_name;
     self.subHeadingLabel.text = self.mainGroup.group_short_desc;
 
-    self.contactsUnderGroup = [self.mainGroup.contacts allObjects];
+    if (self.mainGroup.members != nil && self.mainGroup.members.count > 0) {
+        self.contactsUnderGroup = [self.mainGroup.members allObjects];
+    } else {
+        self.contactsUnderGroup = [NSArray new];
+    }
     
     if (self.mainGroup.comment != nil && self.mainGroup.comment.count > 0) {
         self.posts = [self.mainGroup.comment allObjects];
@@ -264,8 +262,9 @@
 //        return self.groupsUnderContact.count;
 //    }
     
-    if (groupMemberArray.count) {
-        return groupMemberArray.count;
+    if (self.launchMode == kContactDetailLaunchModeGroup ||
+        self.launchMode == kContactDetailLaunchModeSuggestedGroup) {
+        return self.contactsUnderGroup.count;
     } else {
         return self.groupsUnderContact.count;
     }
@@ -281,15 +280,15 @@
     }
     return cell;*/
     
-    if (groupMemberArray.count > 0) {
+    if (self.contactsUnderGroup.count > 0) {
         MRContactWithinGroupCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MRContactWithinGroupCollectionViewCell" forIndexPath:indexPath];
         cell.cellDelegate = self;
         cell.acceptBtn.tag = indexPath.row;
         cell.rejectBtn.tag = indexPath.row;
         
-        MRGroupUserObject *user = groupMemberArray[indexPath.row];
-        cell.nameTxt.text = [NSString stringWithFormat:@"Dr. %@ %@",user.firstName, user.lastName];;
-        cell.imgView.image = [MRCommon getImageFromBase64Data:[user.imgData dataUsingEncoding:NSUTF8StringEncoding]];
+        MRGroupMembers *user = self.contactsUnderGroup[indexPath.row];
+        cell.nameTxt.text = [MRAppControl getGroupMemberName:user];
+        [MRAppControl getGroupMemberImage:user andImageView:cell.imgView];
         
         if ([user.status caseInsensitiveCompare:@"Active"] == NSOrderedSame) {
             cell.acceptBtn.hidden = YES;
@@ -317,7 +316,7 @@
 }
 
 -(void) acceptAction:(NSInteger)index{
-    MRGroupUserObject *user = groupMemberArray[index];
+    MRGroupMembers *user = self.contactsUnderGroup[index];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
                           [NSNumber numberWithLong:self.mainGroup.group_id.longValue],@"group_id", [NSString stringWithFormat:@"%@",user.member_id],@"member_id",@"ACTIVE",@"status", nil];
     
@@ -357,7 +356,7 @@
 }
 
 -(void) rejectAction:(NSInteger)index{
-    MRGroupUserObject *user = groupMemberArray[index];
+    MRGroupMembers *user = self.contactsUnderGroup[index];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
                           [NSNumber numberWithLong:self.mainGroup.group_id.longValue],@"group_id",@[[NSString stringWithFormat:@"%@",user.member_id]],@"memberList", nil];
     
@@ -593,8 +592,17 @@
 - (void)getGroupMembersStatusWithGroupId{
     [MRDatabaseHelper getGroupMemberStatusWithId:self.mainGroup.group_id.longValue
                                       andHandler:^(id result) {
-                                          
-                                      }];
+                                          self.contactsUnderGroup = result;
+                                          [self.collectionView reloadData];
+    }];
+}
+
+- (void)deleteFromCoreData:(NSInteger)contactId {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"contactId", contactId];
+    
+    MRDataManger *sharedManager = [MRDataManger sharedManager];
+    [sharedManager removeAllObjects:kContactEntity inContext:sharedManager.managedObjectContext
+                       andPredicate:predicate];
 }
 
 -(void) deleteConnection{
@@ -609,6 +617,7 @@
         [MRCommon stopActivityIndicator];
         if (status)
         {
+            [self deleteFromCoreData:self.mainContact.contactId.longValue];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Connection deleted!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
             alert.tag = 11;
             [alert show];
@@ -622,6 +631,7 @@
                      [MRCommon stopActivityIndicator];
                      if (status)
                      {
+                         [self deleteFromCoreData:self.mainContact.contactId.longValue];
                          UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Connection deleted!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                          alert.tag = 11;
                          [alert show];

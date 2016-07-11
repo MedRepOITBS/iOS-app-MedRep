@@ -7,7 +7,6 @@
 //
 
 #import "MRContactCollectionCell.h"
-#import "MRGroupUserObject.h"
 #import "MRCommon.h"
 #import "MRAppControl.h"
 #import "MRContact.h"

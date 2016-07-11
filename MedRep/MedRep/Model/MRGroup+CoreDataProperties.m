@@ -2,7 +2,7 @@
 //  MRGroup+CoreDataProperties.m
 //  MedRep
 //
-//  Created by Vamsi Katragadda on 7/9/16.
+//  Created by Vamsi Katragadda on 7/12/16.
 //  Copyright © 2016 MedRep. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -21,7 +21,11 @@
 @dynamic group_name;
 @dynamic group_short_desc;
 @dynamic member;
-@dynamic contacts;
 @dynamic comment;
+@dynamic members;
+
+- (void)setMember:(NSData *)member {
+    
+}
 
 @end

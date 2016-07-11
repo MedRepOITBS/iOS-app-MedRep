@@ -15,6 +15,8 @@
 
 @property (nonatomic, assign) BOOL isSuggestedGroup;
 
+@property (nonatomic, assign) NSInteger launchMode;
+
 - (void)setContact:(MRContact*)contact;
 - (void)setGroup:(MRGroup*)group;
 

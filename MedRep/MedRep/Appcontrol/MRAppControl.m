@@ -25,6 +25,7 @@
 #import "MRContact.h"
 #import "MRGroup.h"
 #import "MRPostedReplies.h"
+#import "MRGroupMembers.h"
 
 @interface MRAppControl () <SWRevealViewControllerDelegate, ViewControllerDelegate,MRMenuViewControllerDelegate,MRPharmaMenuViewControllerDelegate,MRWelcomeViewControllerDelegate>
 
@@ -706,6 +707,24 @@
     return name;
 }
 
++ (NSString*)getGroupMemberName:(MRGroupMembers*)members {
+    NSMutableString *name = [NSMutableString stringWithString:@""];
+    if (members != nil) {
+        if (members.firstName != nil && members.firstName.length > 0) {
+            name = [NSMutableString stringWithString:members.firstName];
+        }
+        
+        if (members.lastName != nil && members.lastName.length > 0) {
+            if (name.length > 0) {
+                [name appendString:@" "];
+            }
+            
+            [name appendString:members.lastName];
+        }
+    }
+    return name;
+}
+
 + (UIImage*)getContactImage:(MRContact*)contact {
     UIImage *image = [UIImage imageNamed:@"person"];;
     
@@ -723,6 +742,37 @@
         parentView.image = [UIImage imageWithData:contact.profilePic];
     } else {
         NSString *fullName = [MRAppControl getContactName:contact];
+        if (fullName != nil && fullName.length > 0) {
+            parentView.image = nil;
+            UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:parentView.bounds];
+            subscriptionTitleLabel.textAlignment = NSTextAlignmentCenter;
+            subscriptionTitleLabel.font = [UIFont systemFontOfSize:15.0];
+            subscriptionTitleLabel.textColor = [UIColor lightGrayColor];
+            subscriptionTitleLabel.layer.cornerRadius = 5.0;
+            subscriptionTitleLabel.layer.masksToBounds = YES;
+            subscriptionTitleLabel.layer.borderWidth =1.0;
+            subscriptionTitleLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
+            
+            NSArray *substrngs = [fullName componentsSeparatedByString:@" "];
+            NSString *imageString = @"";
+            for(NSString *str in substrngs){
+                if (str.length > 0) {
+                    imageString = [imageString stringByAppendingString:[NSString stringWithFormat:@"%c",[str characterAtIndex:0]]];
+                }
+            }
+            subscriptionTitleLabel.text = imageString.length > 2 ? [imageString substringToIndex:2] : imageString;
+            [parentView addSubview:subscriptionTitleLabel];
+        } else {
+            parentView.image = [UIImage imageNamed:@"person"];
+        }
+    }
+}
+
++ (void)getGroupMemberImage:(MRGroupMembers*)member andImageView:(UIImageView*)parentView {
+    if (member.data != nil) {
+        parentView.image = [UIImage imageWithData:member.data];
+    } else {
+        NSString *fullName = [MRAppControl getGroupMemberName:member];
         if (fullName != nil && fullName.length > 0) {
             parentView.image = nil;
             UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:parentView.bounds];

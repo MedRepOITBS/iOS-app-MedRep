@@ -42,10 +42,14 @@ typedef void (^WebServiceResponseHandler)(id result);
 
 + (void)getGroups:(WebServiceResponseHandler)responseHandler;
 + (void)getSuggestedGroups:(WebServiceResponseHandler)responseHandler;
++ (void)getPendingGroups:(WebServiceResponseHandler)responseHandler;
 
 + (void)getContacts:(WebServiceResponseHandler)responseHandler;
++ (void)getContactsByCity:(NSString*)city responseHandler:(WebServiceResponseHandler)responseHandler;
 + (void)getSuggestedContacts:(WebServiceResponseHandler)responseHandler;
 + (void)getPendingContacts:(WebServiceResponseHandler)responseHandler;
++ (void)getContactsBySearchString:(NSString*)searchText
+               andResponseHandler:(WebServiceResponseHandler)responseHandler;
 
 + (void)getGroupMemberStatusWithId:(NSInteger)groupId
                         andHandler:(WebServiceResponseHandler)responseHandler;

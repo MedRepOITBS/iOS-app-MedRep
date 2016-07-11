@@ -9,12 +9,10 @@
 #import "PendingContactsViewController.h"
 #import "PendingContactCustomFilterTableViewCell.h"
 #import "PendingContactTableViewCell.h"
-#import "MRCommon.h"
-#import "MRWebserviceHelper.h"
-#import "MRGroupUserObject.h"
+#import "MRConstants.h"
+#import "MRContact.h"
 #import "MRGroup.h"
 #import "MRContactsViewController.h"
-#import "MRDatabaseHelper.h"
 
 @interface PendingContactsViewController () <MRPendingMemberProtocol> {
     NSMutableArray *fileredContacts;
@@ -46,8 +44,8 @@
 
 -(void) acceptAction:(NSInteger)index{
     if (_gid > 0) {
-        MRGroupUserObject *user = _pendingContactListArra[index];
-        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:_gid,@"group_id", [NSString stringWithFormat:@"%@",user.member_id],@"member_id",@"ACTIVE",@"status", nil];
+        MRContact *user = _pendingContactListArra[index];
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:_gid,@"group_id", [NSString stringWithFormat:@"%ld",user.contactId.longValue],@"member_id",@"ACTIVE",@"status", nil];
         
         [MRCommon showActivityIndicator:@"Requesting..."];
         [[MRWebserviceHelper sharedWebServiceHelper] updateGroupMembersStatus:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
@@ -91,8 +89,8 @@
             }
         }];
     }else{
-        MRGroupUserObject *user = _pendingContactListArra[index];
-        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@[[NSString stringWithFormat:@"%@",user.contactId]],@"connList",@"ACTIVE",@"status", nil];
+        MRContact *user = _pendingContactListArra[index];
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@[[NSString stringWithFormat:@"%ld",user.contactId.longValue]],@"connList",@"ACTIVE",@"status", nil];
         
         [MRCommon showActivityIndicator:@"Requesting..."];
         [[MRWebserviceHelper sharedWebServiceHelper] updateConnectionStatus:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
@@ -140,8 +138,8 @@
 
 -(void) rejectAction:(NSInteger)index{
     if (_gid > 0) {
-        MRGroupUserObject *user = _pendingContactListArra[index];
-        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:_gid,@"group_id",@[[NSString stringWithFormat:@"%@",user.member_id]],@"memberList", nil];
+        MRContact *user = _pendingContactListArra[index];
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:_gid,@"group_id",@[[NSString stringWithFormat:@"%@",user.contactId.longValue]],@"memberList", nil];
         
         [MRCommon showActivityIndicator:@"Requesting..."];
         [[MRWebserviceHelper sharedWebServiceHelper] removeGroupMember:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
@@ -185,8 +183,8 @@
             }
         }];
     }else{
-        MRGroupUserObject *user = _pendingContactListArra[index];
-        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@[[NSString stringWithFormat:@"%@",user.contactId]],@"connList",@"REJECT",@"status", nil];
+        MRContact *user = _pendingContactListArra[index];
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@[[NSString stringWithFormat:@"%ld",user.contactId.longValue]],@"connList",@"REJECT",@"status", nil];
         
         [MRCommon showActivityIndicator:@"Requesting..."];
         [[MRWebserviceHelper sharedWebServiceHelper] removeConnection:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
@@ -309,107 +307,62 @@
 }
 
 -(void)getPendingConnections {
-    [MRCommon showActivityIndicator:@"Requesting..."];
-    [[MRWebserviceHelper sharedWebServiceHelper] fetchPendingConnectionsListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-        [MRCommon stopActivityIndicator];
-        if (status)
-        {
-            fileredContacts = [NSMutableArray array];
-            _pendingContactListArra = [NSMutableArray array];
-            NSArray *responseArray = responce[@"Responce"];
-            for (NSDictionary *dic in responseArray) {
-                MRGroupUserObject *groupObj = [[MRGroupUserObject alloc] initWithDict:dic];
-                [_pendingContactListArra addObject:groupObj];
-            }
-            fileredContacts = _pendingContactListArra;
-            [_pendingTableView reloadData];
-        }
-        else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
-        {
-            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
-             {
-                 [MRCommon savetokens:responce];
-                 [[MRWebserviceHelper sharedWebServiceHelper] fetchPendingConnectionsListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-                     [MRCommon stopActivityIndicator];
-                     if (status)
-                     {
-                         fileredContacts = [NSMutableArray array];
-                         _pendingContactListArra = [NSMutableArray array];
-                         NSArray *responseArray = responce[@"Responce"];
-                         for (NSDictionary *dic in responseArray) {
-                             MRGroupUserObject *groupObj = [[MRGroupUserObject alloc] initWithDict:dic];
-                             [_pendingContactListArra addObject:groupObj];
-                         }
-                         fileredContacts = _pendingContactListArra;
-                         [_pendingTableView reloadData];
-                     }else
-                     {
-                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
-                         if (erros.count > 0)
-                             [MRCommon showAlert:[erros lastObject] delegate:nil];
-                     }
-                 }];
-             }];
-        }
-        else
-        {
-            NSArray *erros =  [details componentsSeparatedByString:@"-"];
-            if (erros.count > 0)
-                [MRCommon showAlert:[erros lastObject] delegate:nil];
-        }
+    [MRDatabaseHelper getPendingContacts:^(id result) {
+        fileredContacts = _pendingContactListArra;
+        [_pendingTableView reloadData];
     }];
 }
 
 -(void)getPendingMembers {
-    [MRCommon showActivityIndicator:@"Requesting..."];
-    [[MRWebserviceHelper sharedWebServiceHelper] fetchPendingMembersList:_gid withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-        [MRCommon stopActivityIndicator];
-        if (status)
-        {
-            fileredContacts = [NSMutableArray array];
-            _pendingContactListArra = [NSMutableArray array];
-            NSArray *responseArray = responce[@"Responce"];
-            for (NSDictionary *dic in responseArray) {
-                MRGroupUserObject *groupObj = [[MRGroupUserObject alloc] initWithDict:dic];
-                [_pendingContactListArra addObject:groupObj];
-            }
-            fileredContacts = _pendingContactListArra;
-            [_pendingTableView reloadData];
-        }
-        else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
-        {
-            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
-             {
-                 [MRCommon savetokens:responce];
-                 [[MRWebserviceHelper sharedWebServiceHelper] fetchPendingMembersList:_gid withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-                     [MRCommon stopActivityIndicator];
-                     if (status)
-                     {
-                         fileredContacts = [NSMutableArray array];
-                         _pendingContactListArra = [NSMutableArray array];
-                         NSArray *responseArray = responce[@"Responce"];
-                         for (NSDictionary *dic in responseArray) {
-                             MRGroupUserObject *groupObj = [[MRGroupUserObject alloc] initWithDict:dic];
-                             [_pendingContactListArra addObject:groupObj];
-                         }
-                         fileredContacts = _pendingContactListArra;
-                         [_pendingTableView reloadData];
-                     }else
-                     {
-                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
-                         if (erros.count > 0)
-                             [MRCommon showAlert:[erros lastObject] delegate:nil];
-                     }
-                 }];
-             }];
-        }
-        else
-        {
-            NSArray *erros =  [details componentsSeparatedByString:@"-"];
-            if (erros.count > 0)
-                [MRCommon showAlert:[erros lastObject] delegate:nil];
-        }
-    }];
+//    [MRCommon showActivityIndicator:@"Requesting..."];
+//    [[MRWebserviceHelper sharedWebServiceHelper] fetchPendingMembersList:_gid withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+//        [MRCommon stopActivityIndicator];
+//        if (status)
+//        {
+//            fileredContacts = [NSMutableArray array];
+//            _pendingContactListArra = [NSMutableArray array];
+//            NSArray *responseArray = responce[@"Responce"];
+//            for (NSDictionary *dic in responseArray) {
+//                MRGroupUserObject *groupObj = [[MRGroupUserObject alloc] initWithDict:dic];
+//                [_pendingContactListArra addObject:groupObj];
+//            }
+//            fileredContacts = _pendingContactListArra;
+//            [_pendingTableView reloadData];
+//        }
+//        else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+//        {
+//            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+//             {
+//                 [MRCommon savetokens:responce];
+//                 [[MRWebserviceHelper sharedWebServiceHelper] fetchPendingMembersList:_gid withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+//                     [MRCommon stopActivityIndicator];
+//                     if (status)
+//                     {
+//                         fileredContacts = [NSMutableArray array];
+//                         _pendingContactListArra = [NSMutableArray array];
+//                         NSArray *responseArray = responce[@"Responce"];
+//                         for (NSDictionary *dic in responseArray) {
+//                             MRGroupUserObject *groupObj = [[MRGroupUserObject alloc] initWithDict:dic];
+//                             [_pendingContactListArra addObject:groupObj];
+//                         }
+//                         fileredContacts = _pendingContactListArra;
+//                         [_pendingTableView reloadData];
+//                     }else
+//                     {
+//                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
+//                         if (erros.count > 0)
+//                             [MRCommon showAlert:[erros lastObject] delegate:nil];
+//                     }
+//                 }];
+//             }];
+//        }
+//        else
+//        {
+//            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+//            if (erros.count > 0)
+//                [MRCommon showAlert:[erros lastObject] delegate:nil];
+//        }
+//    }];
 }
 
 -(void)getPendingGroups {
@@ -513,41 +466,41 @@
             cell.rejectBtn.hidden = YES;
         }
         
-        MRGroupUserObject *contact = [fileredContacts objectAtIndex:indexPath.row];
-        for (UIView *view in cell.profilePic.subviews) {
-            if ([view isKindOfClass:[UILabel class]]) {
-                [view removeFromSuperview];
-            }
-        }
-        
-        NSString *fullName = [NSString stringWithFormat:@"%@ %@",contact.firstName, contact.lastName];
-        cell.userName.text = [NSString stringWithFormat:@"Dr. %@",fullName];
-        cell.phoneNo.text = contact.therapeuticArea;
-        if (contact.imgData.length) {
-            cell.profilePic.image = [MRCommon getImageFromBase64Data:[contact.imgData dataUsingEncoding:NSUTF8StringEncoding]];
-        } else {
-            cell.profilePic.image = nil;
-            if (fullName.length > 0) {
-                UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:cell.profilePic.bounds];
-                subscriptionTitleLabel.textAlignment = NSTextAlignmentCenter;
-                subscriptionTitleLabel.font = [UIFont systemFontOfSize:15.0];
-                subscriptionTitleLabel.textColor = [UIColor lightGrayColor];
-                subscriptionTitleLabel.layer.cornerRadius = 5.0;
-                subscriptionTitleLabel.layer.masksToBounds = YES;
-                subscriptionTitleLabel.layer.borderWidth =1.0;
-                subscriptionTitleLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
-                
-                NSArray *substrngs = [fullName componentsSeparatedByString:@" "];
-                NSString *imageString = @"";
-                for(NSString *str in substrngs){
-                    if (str.length > 0) {
-                        imageString = [imageString stringByAppendingString:[NSString stringWithFormat:@"%c",[str characterAtIndex:0]]];
-                    }
-                }
-                subscriptionTitleLabel.text = imageString.length > 2 ? [imageString substringToIndex:2] : imageString;
-                [cell.profilePic addSubview:subscriptionTitleLabel];
-            }
-        }
+//        MRGroupUserObject *contact = [fileredContacts objectAtIndex:indexPath.row];
+//        for (UIView *view in cell.profilePic.subviews) {
+//            if ([view isKindOfClass:[UILabel class]]) {
+//                [view removeFromSuperview];
+//            }
+//        }
+//        
+//        NSString *fullName = [NSString stringWithFormat:@"%@ %@",contact.firstName, contact.lastName];
+//        cell.userName.text = [NSString stringWithFormat:@"Dr. %@",fullName];
+//        cell.phoneNo.text = contact.therapeuticArea;
+//        if (contact.imgData.length) {
+//            cell.profilePic.image = [MRCommon getImageFromBase64Data:[contact.imgData dataUsingEncoding:NSUTF8StringEncoding]];
+//        } else {
+//            cell.profilePic.image = nil;
+//            if (fullName.length > 0) {
+//                UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:cell.profilePic.bounds];
+//                subscriptionTitleLabel.textAlignment = NSTextAlignmentCenter;
+//                subscriptionTitleLabel.font = [UIFont systemFontOfSize:15.0];
+//                subscriptionTitleLabel.textColor = [UIColor lightGrayColor];
+//                subscriptionTitleLabel.layer.cornerRadius = 5.0;
+//                subscriptionTitleLabel.layer.masksToBounds = YES;
+//                subscriptionTitleLabel.layer.borderWidth =1.0;
+//                subscriptionTitleLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
+//                
+//                NSArray *substrngs = [fullName componentsSeparatedByString:@" "];
+//                NSString *imageString = @"";
+//                for(NSString *str in substrngs){
+//                    if (str.length > 0) {
+//                        imageString = [imageString stringByAppendingString:[NSString stringWithFormat:@"%c",[str characterAtIndex:0]]];
+//                    }
+//                }
+//                subscriptionTitleLabel.text = imageString.length > 2 ? [imageString substringToIndex:2] : imageString;
+//                [cell.profilePic addSubview:subscriptionTitleLabel];
+//            }
+//        }
         
         return cell;
     }

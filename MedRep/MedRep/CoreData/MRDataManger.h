@@ -39,7 +39,7 @@
 - (NSArray *)fetchObjectList:(NSString *)entity attributeName:(NSString *)attributName sortOrder:(SORT_ORDER)sortOrder;
 - (NSArray *)fetchObjectList:(NSString *)entity attributeName:(NSString *)attributName predicate:(NSPredicate *)aPredicate sortOrder:(SORT_ORDER)sortOrder;
 - (void)removeObject:(NSManagedObject *)managedObject;
-- (void)removeAllObjects:(NSString *)entity;
+- (void)removeAllObjects:(NSString *)entity withPredicate:(NSPredicate*)predicate;
 - (NSInteger)countOfObjects:(NSString *)entity;
 - (NSInteger)countOfObjects:(NSString *)entity attributeName:(NSString *)attributeName attributeValue:(id)attributeValue;
 - (NSInteger)countOfObjects:(NSString *)entity predicate:(NSPredicate *)predicate;
@@ -58,7 +58,8 @@
 - (NSArray *)fetchObjectList:(NSString *)entity attributeName:(NSString *)attributName sortOrder:(SORT_ORDER)sortOrder inContext:(NSManagedObjectContext *)context;
 - (NSArray *)fetchObjectList:(NSString *)entity attributeName:(NSString *)attributName predicate:(NSPredicate *)aPredicate sortOrder:(SORT_ORDER)sortOrder inContext:(NSManagedObjectContext *)context;
 - (void)removeObject:(NSManagedObject *)managedObject inContext:(NSManagedObjectContext *)context;
-- (void)removeAllObjects:(NSString *)entity inContext:(NSManagedObjectContext *)context;
+- (void)removeAllObjects:(NSString *)entity inContext:(NSManagedObjectContext *)context
+            andPredicate:(NSPredicate*)predicate;
 - (NSInteger)countOfObjects:(NSString *)entity inContext:(NSManagedObjectContext *)context;
 - (NSInteger)countOfObjects:(NSString *)entity attributeName:(NSString *)attributeName attributeValue:(id)attributeValue inContext:(NSManagedObjectContext *)context;
 - (NSInteger)countOfObjects:(NSString *)entity predicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context;

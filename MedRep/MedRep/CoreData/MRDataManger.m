@@ -250,9 +250,9 @@ static MRDataManger *sharedDataManager = nil;
     [self removeObject:managedObject inContext:self.managedObjectContext];
 }
 
-- (void)removeAllObjects:(NSString *)entity
+- (void)removeAllObjects:(NSString *)entity withPredicate:(NSPredicate*)predicate
 {
-    [self removeAllObjects:entity inContext:self.managedObjectContext];
+    [self removeAllObjects:entity inContext:self.managedObjectContext andPredicate:predicate];
 }
 
 - (NSInteger)countOfObjects:(NSString *)entity
@@ -533,7 +533,8 @@ static MRDataManger *sharedDataManager = nil;
     }];
 }
 
-- (void)removeAllObjects:(NSString *)entity inContext:(NSManagedObjectContext *)context{
+- (void)removeAllObjects:(NSString *)entity inContext:(NSManagedObjectContext *)context
+            andPredicate:(NSPredicate*)predicate {
     
     [self assertConditionForContext:context];
     
@@ -542,6 +543,10 @@ static MRDataManger *sharedDataManager = nil;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:entityDescription];
     [fetchRequest setIncludesPropertyValues:NO];
+    
+    if (predicate != nil) {
+        [fetchRequest setPredicate:predicate];
+    }
     
     __block NSArray *result = nil;
     

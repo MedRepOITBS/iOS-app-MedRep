@@ -22,7 +22,6 @@
 #import "MRTransformTitleCollectionViewCell.h"
 #import "MRGroup.h"
 #import "MRCreateGroupViewController.h"
-#import "MRGroupUserObject.h"
 #import "MRAddMembersViewController.h"
 #import "MRJoinGroupViewController.h"
 #import "MRCustomTabBar.h"
@@ -284,19 +283,25 @@
         return;
     }
     
+    ContactDetailLaunchMode launchMode = kContactDetailLaunchModeNone;
     MRContactDetailViewController* detailViewController = [[MRContactDetailViewController alloc] init];
     
     if (self.currentIndex == 0) {
+        launchMode = kContactDetailLaunchModeContact;
         [detailViewController setContact:self.fileredContacts[indexPath.row]];
     }else if (self.currentIndex == 1) {
+        launchMode = kContactDetailLaunchModeSuggestedContact;
         [detailViewController setContact:self.fileredSuggestedContacts[indexPath.row]];
     }else if (self.currentIndex == 2) {
+        launchMode = kContactDetailLaunchModeGroup;
         [detailViewController setGroup:filteredGroupsArray[indexPath.row]];
     }else if (self.currentIndex == 3) {
+        launchMode = kContactDetailLaunchModeSuggestedGroup;
         [detailViewController setGroup:filteredSuggestedGroupsArray[indexPath.row]];
         detailViewController.isSuggestedGroup = YES;
     }
     
+    [detailViewController setLaunchMode:launchMode];
     [self.navigationController pushViewController:detailViewController animated:YES];
 }
 

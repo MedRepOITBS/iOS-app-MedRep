@@ -29,4 +29,8 @@
 @dynamic groups;
 @dynamic comments;
 
+- (void)setProfilePic:(NSData *)profilePic {
+    
+}
+
 @end

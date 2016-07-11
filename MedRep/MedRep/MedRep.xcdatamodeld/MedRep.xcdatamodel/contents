@@ -25,7 +25,7 @@
         <attribute name="userId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="comments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MRPostedReplies" inverseName="contactRelationship" inverseEntity="MRPostedReplies" syncable="YES"/>
         <relationship name="groupPosts" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="MRGroupPost" inverseName="contact" inverseEntity="MRGroupPost" syncable="YES"/>
-        <relationship name="groups" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="MRGroup" inverseName="contacts" inverseEntity="MRGroup" syncable="YES"/>
+        <relationship name="groups" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="MRGroup" syncable="YES"/>
     </entity>
     <entity name="MRGroup" representedClassName="MRGroup" syncable="YES">
         <attribute name="admin_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -37,12 +37,32 @@
         <attribute name="group_short_desc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="member" optional="YES" transient="YES" attributeType="Binary" syncable="YES"/>
         <relationship name="comment" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MRPostedReplies" inverseName="groupRelationship" inverseEntity="MRPostedReplies" syncable="YES"/>
-        <relationship name="contacts" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="MRContact" inverseName="groups" inverseEntity="MRContact" syncable="YES"/>
+        <relationship name="members" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MRGroupMembers" inverseName="groups" inverseEntity="MRGroupMembers" syncable="YES"/>
     </entity>
     <entity name="MrGroupChildPost" representedClassName="MrGroupChildPost" syncable="YES">
         <attribute name="postId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="postPic" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="postText" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="MRGroupMembers" representedClassName="MRGroupMembers" syncable="YES">
+        <attribute name="alias" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="data" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="doctor" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="group_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="groupList" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="is_admin" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="member_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="memberList" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="mimeType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="roleId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="roleName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="stateMedCouncil" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="therapeuticDesc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="therapeuticName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="groups" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MRGroup" inverseName="members" inverseEntity="MRGroup" syncable="YES"/>
     </entity>
     <entity name="MRGroupPost" representedClassName="MRGroupPost" syncable="YES">
         <attribute name="groupPostId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -175,5 +195,6 @@
         <element name="MRSuggestedContact" positionX="-9" positionY="162" width="128" height="105"/>
         <element name="MRTherapeuticArea" positionX="-54" positionY="-9" width="128" height="90"/>
         <element name="MRTransformPost" positionX="-36" positionY="135" width="128" height="180"/>
+        <element name="MRGroupMembers" positionX="-36" positionY="135" width="128" height="315"/>
     </elements>
 </model>
