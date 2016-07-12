@@ -295,7 +295,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
     _commentBoxView = (CommonBoxView *)[arr objectAtIndex:0];
     [_commentBoxView setDelegate:self];
     _commentBoxKLCPopView = [KLCPopup popupWithContentView:self.commentBoxView];
-    [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutCenter)];
+    [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutTop)];
 }
 
 - (void)commonBoxCancelButtonPressed {
@@ -399,7 +399,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
    MRSharePost *sharePost = [_commentBoxView getSelectedPost];
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
-    [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutAboveCenter)];
+    [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutTop)];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {

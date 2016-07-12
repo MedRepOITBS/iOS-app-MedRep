@@ -966,17 +966,18 @@ static MRDatabaseHelper *sharedDataManager = nil;
     if (data != nil) {
         childPost.image = data;
     }
-    
+    MRContact *contact;
+    MRGroup *group;
     if (contactId > 0) {
         childPost.contactId = [NSNumber numberWithLong:contactId];
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"contactId", contactId];
-        MRContact *contact = [dbManager fetchObject:kContactEntity predicate:predicate inContext:context];
+        contact = [dbManager fetchObject:kContactEntity predicate:predicate inContext:context];
         childPost.contactRelationship = contact;
     }
     if (groupId > 0) {
         childPost.groupId = [NSNumber numberWithLong:groupId];
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"group_id", groupId];
-        MRGroup *group = [dbManager fetchObject:kGroupEntity predicate:predicate inContext:context];
+        group = [dbManager fetchObject:kGroupEntity predicate:predicate inContext:context];
         childPost.groupRelationship = group;
     }
     
@@ -987,6 +988,9 @@ static MRDatabaseHelper *sharedDataManager = nil;
         MRSharePost *post = [dbManager fetchObject:kMRSharePost predicate:predicate inContext:context];
         [post addPostedRepliesObject:childPost];
         
+        if (contact != nil) {
+            [contact addCommentsObject:childPost];
+        }
         NSInteger shareCount = 1;
         if (post.shareCount != nil) {
             shareCount = post.shareCount.longValue + 1;
