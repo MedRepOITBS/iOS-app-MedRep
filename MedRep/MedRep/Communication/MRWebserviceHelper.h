@@ -232,6 +232,12 @@ withComplitionHandler:(completionHandler)responceHandler;
 
 - (void)registerDeviceToken:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
 
+-(void)getShareByDate:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler;
+
+-(void)getNewsAndUpdates:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler;
+
+-(void)getContactsAndGroups:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler;
+
 + (id)parseNetworkResponse:(Class)inEntityClass andData:(NSArray*)data;
 
 + (NSArray*)parseRecords:(Class)entityClass allRecords:(NSArray*)allRecords

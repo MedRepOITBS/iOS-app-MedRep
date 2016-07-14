@@ -166,6 +166,9 @@
         
     }else { //if ([self.selectedContent.contentType isEqualToString:@"Image"]) {
         if (self.post.url != nil && self.post.url.length > 0) {
+            self.webView.hidden = YES;
+            self.previewImageView.hidden = NO;
+            
             self.previewImageView.image = [UIImage imageNamed:self.post.url];
             NSLog(@"%@",self.post.url);
         }

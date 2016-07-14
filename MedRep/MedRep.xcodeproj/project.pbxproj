@@ -2503,6 +2503,7 @@
 		79539E961B9093E7001516C3 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				79AC94261B9DFA9200B81452 /* Notifications */,
 				79539E971B90941D001516C3 /* MRMenuViewController.h */,
 				79539E981B90941D001516C3 /* MRMenuViewController.m */,
 				79539E991B90941D001516C3 /* MRMenuViewController.xib */,
@@ -2827,7 +2828,8 @@
 				79314AD01BD2773E00EB3A48 /* MRNotificationInsiderViewController.m */,
 				79314AD11BD2773E00EB3A48 /* MRNotificationInsiderViewController.xib */,
 			);
-			path = Notifications;
+			name = Notifications;
+			path = ../Notifications;
 			sourceTree = "<group>";
 		};
 		79AC94311B9DFC7000B81452 /* NotificationImages */ = {
@@ -3372,7 +3374,6 @@
 				79A5DC5E1BA1ECB3001D872C /* CallMedrep */,
 				79A5DC381BA1EA4A001D872C /* Thirdparty */,
 				79F416761B9F59180089729B /* Appointment */,
-				79AC94261B9DFA9200B81452 /* Notifications */,
 				7950AF1B1BBF8A8200A93106 /* Surveys */,
 				83B781E01B7913780070645C /* Communication */,
 				79539E961B9093E7001516C3 /* Menu */,
