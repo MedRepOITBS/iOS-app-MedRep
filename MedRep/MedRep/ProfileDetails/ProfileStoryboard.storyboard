@@ -10,16 +10,16 @@
         <scene sceneID="zmV-iI-LeE">
             <objects>
                 <tableViewController restorationIdentifier="MRProfileDetailsViewController" storyboardIdentifier="MRProfileDetailsViewController" title="MRProfileDetailsViewController" nibName="MRProfileDetailsViewController" id="ejh-Kg-xic" customClass="MRProfileDetailsViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" sectionIndexMinimumDisplayRowCount="15" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="wrW-2v-UKe">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" sectionIndexMinimumDisplayRowCount="15" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="wrW-2v-UKe">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="0.14605787579999999" blue="0.15585499450000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ProfileBasicTableViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProfileBasicTableViewCell" rowHeight="152" id="Pc9-JN-HbD" customClass="ProfileBasicTableViewCell">
-                                <rect key="frame" x="0.0" y="28" width="600" height="152"/>
+                                <rect key="frame" x="0.0" y="49.5" width="600" height="152"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Pc9-JN-HbD" id="96Z-HW-1JL">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="151.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="152"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j0G-ON-st2">
@@ -113,10 +113,10 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ProfileAboutTableViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProfileAboutTableViewCell" rowHeight="151" id="MAF-az-Mht" customClass="ProfileAboutTableViewCell">
-                                <rect key="frame" x="0.0" y="180" width="600" height="151"/>
+                                <rect key="frame" x="0.0" y="201.5" width="600" height="151"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MAF-az-Mht" id="Hpp-zB-VjM">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="150.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="151"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ABOUT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hHl-pI-WsW">
@@ -190,7 +190,7 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="fwC-bf-btA" firstAttribute="leading" secondItem="Hpp-zB-VjM" secondAttribute="leadingMargin" constant="46" id="6ch-MK-Dzp"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="gaU-yp-8rM" secondAttribute="bottom" constant="-4" id="MKf-eN-3pD"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="gaU-yp-8rM" secondAttribute="bottom" constant="-3" id="MKf-eN-3pD"/>
                                         <constraint firstItem="3Dn-Ne-z59" firstAttribute="top" secondItem="Hpp-zB-VjM" secondAttribute="topMargin" constant="38" id="NLF-bB-Sae"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="gaU-yp-8rM" secondAttribute="trailing" constant="23" id="XMN-Jx-Bbj"/>
                                         <constraint firstItem="hHl-pI-WsW" firstAttribute="centerX" secondItem="Hpp-zB-VjM" secondAttribute="centerX" id="aKG-Kc-ZPd"/>
@@ -203,10 +203,10 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="CommonProfileSectionTableViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommonProfileSectionTableViewCell" rowHeight="85" id="n84-q9-rPi" customClass="CommonProfileSectionTableViewCell">
-                                <rect key="frame" x="0.0" y="331" width="600" height="85"/>
+                                <rect key="frame" x="0.0" y="352.5" width="600" height="85"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="n84-q9-rPi" id="YXL-Ka-sQi">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="84.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="85"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Work Experience" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D0G-MW-Q1C">
@@ -237,10 +237,21 @@
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lx1-i9-E7T">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="4"/>
+                                            <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="600" id="Kd4-kc-tU3"/>
+                                                <constraint firstAttribute="height" constant="4" id="m1C-YL-4gh"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="Lx1-i9-E7T" firstAttribute="leading" secondItem="YXL-Ka-sQi" secondAttribute="leadingMargin" constant="-8" id="6BT-n8-10k"/>
                                         <constraint firstItem="qJS-Sc-Dzr" firstAttribute="centerX" secondItem="YXL-Ka-sQi" secondAttribute="centerX" id="6LF-1Y-Sqf"/>
                                         <constraint firstItem="D0G-MW-Q1C" firstAttribute="leading" secondItem="YXL-Ka-sQi" secondAttribute="leadingMargin" constant="25" id="6nB-G4-0dI"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Lx1-i9-E7T" secondAttribute="trailing" constant="-8" id="A7y-YX-YEc"/>
+                                        <constraint firstItem="Lx1-i9-E7T" firstAttribute="top" secondItem="YXL-Ka-sQi" secondAttribute="topMargin" constant="-8" id="ErY-2B-aHC"/>
                                         <constraint firstItem="qJS-Sc-Dzr" firstAttribute="top" secondItem="YXL-Ka-sQi" secondAttribute="topMargin" constant="21" id="LwA-P3-0XE"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="fwJ-fM-Zqb" secondAttribute="trailing" id="Res-cx-zzQ"/>
                                         <constraint firstItem="fwJ-fM-Zqb" firstAttribute="leading" secondItem="D0G-MW-Q1C" secondAttribute="trailing" constant="1" id="WAm-TD-s5F"/>
@@ -267,7 +278,7 @@
         <!--Add Experience Table View Controller-->
         <scene sceneID="dY6-IG-QRl">
             <objects>
-                <tableViewController id="pc1-Or-0zF" customClass="AddExperienceTableViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="AddExperienceTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pc1-Or-0zF" customClass="AddExperienceTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="rm9-ah-wDa">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

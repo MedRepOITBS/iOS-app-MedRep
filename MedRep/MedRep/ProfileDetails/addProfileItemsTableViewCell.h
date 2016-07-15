@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@protocol addProfileItemsTableViewCellDelegate;
 @interface addProfileItemsTableViewCell : UITableViewCell
 @property (nonatomic,weak) IBOutlet UIButton *addPlaceHolderButton;
+@property (nonatomic,weak) id<addProfileItemsTableViewCellDelegate> delegate;
+
+@end
+
+
+@protocol addProfileItemsTableViewCellDelegate <NSObject>
+@optional
+
+-(void)addProfileItemsTableViewCellDelegateForButtonPressed:(addProfileItemsTableViewCell *)cell;
+
 @end

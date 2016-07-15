@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MRProfileDetailsViewController : UITableViewController
+@interface MRProfileDetailsViewController : UITableViewController 
 
 @property (assign, nonatomic) BOOL isFromSinUp;
 

@@ -17,10 +17,12 @@
 #import "ProfileAboutTableViewCell.h"
 #import "ProfileBasicTableViewCell.h"
 #import "CommonProfileSectionTableViewCell.h"
-@interface MRProfileDetailsViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate>
+#import "AddExperienceTableViewController.h"
+@interface MRProfileDetailsViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate,addProfileItemsTableViewCellDelegate>
 
 
 @property (assign, nonatomic) BOOL isImageUploaded;
+@property (nonatomic,strong) NSMutableArray *commonSectionArray;
 
 @end
 
@@ -89,6 +91,17 @@
 
 - (void)setupProfileData
 {
+    
+    _commonSectionArray = [NSMutableArray array];
+    
+    [_commonSectionArray addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"Work Experience",@"title",@"+ Add Experience",@"Button",@"Add Details of your Work Experience and make it easier for colleagues to find you.",@"detail", nil]];
+        [_commonSectionArray addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"Interest Areas",@"title",@"+ Add Interest Area",@"Button",@"Add your Interest Area",@"detail", nil]];
+        [_commonSectionArray addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"Educational Qualifications",@"title",@"+ Add Qualification",@"Button",@"Add your Qualification",@"detail", nil]];
+    [_commonSectionArray addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"Publications",@"title",@"+ Add Publication",@"Button",@"Add a Publication and be recognised for your research",@"detail", nil]];
+        [_commonSectionArray addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"Awards",@"title",@"+ Add Award",@"Button",@"Add an Award",@"detail", nil]];
+    [_commonSectionArray addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"Memberships & Positions",@"title",@"+ Add Membership",@"Button",@"Add a Membership or Position",@"detail", nil]];
+    
+    
    /*  self.profileNameLabel.text              = @"";
 
     self.mobileNumberLabel.text             = @"";
@@ -312,8 +325,16 @@
          case 2 : case 4: case 6: case 8: case 10: case 12:
          {
              CommonProfileSectionTableViewCell  *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"CommonProfileSectionTableViewCell"] forIndexPath:indexPath];
+            
+             NSInteger indexCount = indexPath.row -2;
+             if (indexCount !=0) {
+                 indexCount = indexCount/2;
+             }
+             NSDictionary *dictObj = [_commonSectionArray objectAtIndex:indexCount];
+             cell.sectionTitleName.text = [dictObj objectForKey:@"title"];
+             cell.sectionDescName.text = [dictObj objectForKey:@"detail"];
              return cell;
-             
+
              
          }break;
              
@@ -324,8 +345,17 @@
              if (cell == nil) {
                  NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"addProfileItemsTableViewCell" owner:self options:nil];
                  cell = (addProfileItemsTableViewCell *)[arr objectAtIndex:0];
-                 
+
              }
+             cell.delegate = self;
+             NSInteger indexCount = indexPath.row -3;
+             if (indexCount !=0) {
+                 indexCount = indexCount/2;
+             }
+             
+                 NSDictionary *dictObj = [_commonSectionArray objectAtIndex:indexCount];
+             [cell.addPlaceHolderButton setTitle:[dictObj objectForKey:@"Button"] forState:UIControlStateNormal];
+             
              return cell;
              
              
@@ -339,8 +369,33 @@
  return nil;
  }
 
+-(void)addProfileItemsTableViewCellDelegateForButtonPressed:(addProfileItemsTableViewCell *)cell{
+    
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    
+    switch (indexPath.row) {
+        case 3:
+        {
+            UIStoryboard *sb = [UIStoryboard storyboardWithName:@"ProfileStoryboard" bundle:nil];
+            AddExperienceTableViewController *profViewController = [sb instantiateViewControllerWithIdentifier:@"AddExperienceTableViewController"];
+            
+            //                MRProfileDetailsViewController *profViewController = [[MRProfileDetailsViewController alloc] initWithNibName:@"AddExperienceTableViewController" bundle:nil];
+            
+       
+            [self.navigationController pushViewController:profViewController  animated:YES];
 
-/*
+            
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
+}
+
+/*-(void)addProfileItemsTableViewCellDelegateForButtonPressed:(addProfileItemsTableViewCell *)cell;
+
  // Override to support conditional editing of the table view.
  - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
  // Return NO if you do not want the specified item to be editable.
