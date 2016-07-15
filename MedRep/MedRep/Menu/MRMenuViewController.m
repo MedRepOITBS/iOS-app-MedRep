@@ -148,7 +148,11 @@
             {
 //                MRRegistationViewController *regViewController = [[MRRegistationViewController alloc] initWithNibName:@"MRRegistationViewController" bundle:nil];
 //                regViewController.isFromSinUp = NO;
-                MRProfileDetailsViewController *profViewController = [[MRProfileDetailsViewController alloc] initWithNibName:@"MRProfileDetailsViewController" bundle:nil];
+                
+                UIStoryboard *sb = [UIStoryboard storyboardWithName:@"ProfileStoryboard" bundle:nil];
+                MRProfileDetailsViewController *profViewController = [sb instantiateInitialViewController];
+                
+//                MRProfileDetailsViewController *profViewController = [[MRProfileDetailsViewController alloc] initWithNibName:@"AddExperienceTableViewController" bundle:nil];
                 profViewController.isFromSinUp = NO;
                 UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:profViewController];
                 navigationController.navigationBarHidden = YES;

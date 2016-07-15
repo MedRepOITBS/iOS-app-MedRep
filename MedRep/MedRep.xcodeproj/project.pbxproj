@@ -50,7 +50,6 @@
 		7920D6931C1C87C9008D3386 /* MRForgotPasswordTwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7920D6911C1C87C9008D3386 /* MRForgotPasswordTwoViewController.m */; };
 		7920D6941C1C87C9008D3386 /* MRForgotPasswordTwoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7920D6921C1C87C9008D3386 /* MRForgotPasswordTwoViewController.xib */; };
 		7920D6991C1C9B69008D3386 /* MRProfileDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7920D6971C1C9B69008D3386 /* MRProfileDetailsViewController.m */; };
-		7920D69A1C1C9B69008D3386 /* MRProfileDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7920D6981C1C9B69008D3386 /* MRProfileDetailsViewController.xib */; };
 		7920D6A31C1CB236008D3386 /* MRDoctorActivityScoreDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7920D6A11C1CB236008D3386 /* MRDoctorActivityScoreDetailsViewController.m */; };
 		7920D6A41C1CB236008D3386 /* MRDoctorActivityScoreDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7920D6A21C1CB236008D3386 /* MRDoctorActivityScoreDetailsViewController.xib */; };
 		792230E41BF271F800084891 /* MRViewRepAppointmnetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 792230E21BF271F800084891 /* MRViewRepAppointmnetViewController.m */; };
@@ -598,6 +597,21 @@
 		B41746E71D0CE628009B7E7E /* GroupPostChildTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B41746E31D0CE628009B7E7E /* GroupPostChildTableViewCell.xib */; };
 		B47E338D1D2F65540051724C /* MRSharePost+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B47E338A1D2F65540051724C /* MRSharePost+CoreDataProperties.m */; };
 		B47E338E1D2F65540051724C /* MRSharePost.m in Sources */ = {isa = PBXBuildFile; fileRef = B47E338C1D2F65540051724C /* MRSharePost.m */; };
+		B4B4F0E81D382E7300EFCC0E /* AddExperienceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F0E61D382E7300EFCC0E /* AddExperienceTableViewController.m */; };
+		B4B4F0ED1D3842C500EFCC0E /* AddEducationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F0EB1D3842C500EFCC0E /* AddEducationTableViewController.m */; };
+		B4B4F0F21D38957000EFCC0E /* AddExperienceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F0E61D382E7300EFCC0E /* AddExperienceTableViewController.m */; };
+		B4B4F0F51D38963F00EFCC0E /* ProfileStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4B4F0F41D38963F00EFCC0E /* ProfileStoryboard.storyboard */; };
+		B4B4F0F61D38993C00EFCC0E /* ProfileStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4B4F0F41D38963F00EFCC0E /* ProfileStoryboard.storyboard */; };
+		B4B4F0FB1D38AEDF00EFCC0E /* addProfileItemsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F0F91D38AEDF00EFCC0E /* addProfileItemsTableViewCell.m */; };
+		B4B4F0FC1D38AEDF00EFCC0E /* addProfileItemsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F0F91D38AEDF00EFCC0E /* addProfileItemsTableViewCell.m */; };
+		B4B4F0FD1D38AEDF00EFCC0E /* addProfileItemsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4B4F0FA1D38AEDF00EFCC0E /* addProfileItemsTableViewCell.xib */; };
+		B4B4F0FE1D38AEDF00EFCC0E /* addProfileItemsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4B4F0FA1D38AEDF00EFCC0E /* addProfileItemsTableViewCell.xib */; };
+		B4B4F1011D38B4DF00EFCC0E /* ProfileBasicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1001D38B4DF00EFCC0E /* ProfileBasicTableViewCell.m */; };
+		B4B4F1021D38B4DF00EFCC0E /* ProfileBasicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1001D38B4DF00EFCC0E /* ProfileBasicTableViewCell.m */; };
+		B4B4F1051D38B52B00EFCC0E /* ProfileAboutTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1041D38B52B00EFCC0E /* ProfileAboutTableViewCell.m */; };
+		B4B4F1061D38B52B00EFCC0E /* ProfileAboutTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1041D38B52B00EFCC0E /* ProfileAboutTableViewCell.m */; };
+		B4B4F1091D38B5FD00EFCC0E /* CommonProfileSectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1081D38B5FD00EFCC0E /* CommonProfileSectionTableViewCell.m */; };
+		B4B4F10A1D38B5FD00EFCC0E /* CommonProfileSectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1081D38B5FD00EFCC0E /* CommonProfileSectionTableViewCell.m */; };
 		CC0123C11D25A66B001134F3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0123C01D25A66B001134F3 /* CoreGraphics.framework */; };
 		CC0123C21D25A677001134F3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0123C01D25A66B001134F3 /* CoreGraphics.framework */; };
 		CC01BA731D302ACF007E2AEB /* MRCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC01BA711D302ACF007E2AEB /* MRCommentViewController.m */; };
@@ -1097,7 +1111,6 @@
 		CC7DB2021D0C8BEC007DFE4C /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 79BD279B1B80980F007CA448 /* iTunesArtwork */; };
 		CC7DB2031D0C8BEC007DFE4C /* PHlocations@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79708A981BB73C67007CE81D /* PHlocations@2x.png */; };
 		CC7DB2041D0C8BEC007DFE4C /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27991B80980F007CA448 /* Icon.png */; };
-		CC7DB2051D0C8BEC007DFE4C /* MRProfileDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7920D6981C1C9B69008D3386 /* MRProfileDetailsViewController.xib */; };
 		CC7DB2061D0C8BEC007DFE4C /* MRPHDashBoardViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79421F2B1BB83ABE0055D9B7 /* MRPHDashBoardViewController_iPad.xib */; };
 		CC7DB2071D0C8BEC007DFE4C /* MRForgotPasswordTwoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7920D6921C1C87C9008D3386 /* MRForgotPasswordTwoViewController.xib */; };
 		CC7DB2081D0C8BEC007DFE4C /* MRRegistrationRoleCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79FFD2531BB9BA7D00CEE606 /* MRRegistrationRoleCellTableViewCell.xib */; };
@@ -1355,7 +1368,6 @@
 		7920D6921C1C87C9008D3386 /* MRForgotPasswordTwoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRForgotPasswordTwoViewController.xib; sourceTree = "<group>"; };
 		7920D6961C1C9B69008D3386 /* MRProfileDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRProfileDetailsViewController.h; sourceTree = "<group>"; };
 		7920D6971C1C9B69008D3386 /* MRProfileDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRProfileDetailsViewController.m; sourceTree = "<group>"; };
-		7920D6981C1C9B69008D3386 /* MRProfileDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRProfileDetailsViewController.xib; sourceTree = "<group>"; };
 		7920D6A01C1CB236008D3386 /* MRDoctorActivityScoreDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRDoctorActivityScoreDetailsViewController.h; path = "Doctor Activity Score Details/MRDoctorActivityScoreDetailsViewController.h"; sourceTree = "<group>"; };
 		7920D6A11C1CB236008D3386 /* MRDoctorActivityScoreDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRDoctorActivityScoreDetailsViewController.m; path = "Doctor Activity Score Details/MRDoctorActivityScoreDetailsViewController.m"; sourceTree = "<group>"; };
 		7920D6A21C1CB236008D3386 /* MRDoctorActivityScoreDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MRDoctorActivityScoreDetailsViewController.xib; path = "Doctor Activity Score Details/MRDoctorActivityScoreDetailsViewController.xib"; sourceTree = "<group>"; };
@@ -1937,6 +1949,20 @@
 		B47E338A1D2F65540051724C /* MRSharePost+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MRSharePost+CoreDataProperties.m"; sourceTree = "<group>"; };
 		B47E338B1D2F65540051724C /* MRSharePost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRSharePost.h; sourceTree = "<group>"; };
 		B47E338C1D2F65540051724C /* MRSharePost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRSharePost.m; sourceTree = "<group>"; };
+		B4B4F0E51D382E7300EFCC0E /* AddExperienceTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddExperienceTableViewController.h; sourceTree = "<group>"; };
+		B4B4F0E61D382E7300EFCC0E /* AddExperienceTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddExperienceTableViewController.m; sourceTree = "<group>"; };
+		B4B4F0EA1D3842C500EFCC0E /* AddEducationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEducationTableViewController.h; sourceTree = "<group>"; };
+		B4B4F0EB1D3842C500EFCC0E /* AddEducationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEducationTableViewController.m; sourceTree = "<group>"; };
+		B4B4F0F41D38963F00EFCC0E /* ProfileStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ProfileStoryboard.storyboard; sourceTree = "<group>"; };
+		B4B4F0F81D38AEDF00EFCC0E /* addProfileItemsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addProfileItemsTableViewCell.h; sourceTree = "<group>"; };
+		B4B4F0F91D38AEDF00EFCC0E /* addProfileItemsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = addProfileItemsTableViewCell.m; sourceTree = "<group>"; };
+		B4B4F0FA1D38AEDF00EFCC0E /* addProfileItemsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = addProfileItemsTableViewCell.xib; sourceTree = "<group>"; };
+		B4B4F0FF1D38B4DF00EFCC0E /* ProfileBasicTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileBasicTableViewCell.h; sourceTree = "<group>"; };
+		B4B4F1001D38B4DF00EFCC0E /* ProfileBasicTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileBasicTableViewCell.m; sourceTree = "<group>"; };
+		B4B4F1031D38B52B00EFCC0E /* ProfileAboutTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileAboutTableViewCell.h; sourceTree = "<group>"; };
+		B4B4F1041D38B52B00EFCC0E /* ProfileAboutTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileAboutTableViewCell.m; sourceTree = "<group>"; };
+		B4B4F1071D38B5FD00EFCC0E /* CommonProfileSectionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonProfileSectionTableViewCell.h; sourceTree = "<group>"; };
+		B4B4F1081D38B5FD00EFCC0E /* CommonProfileSectionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonProfileSectionTableViewCell.m; sourceTree = "<group>"; };
 		CC0123C01D25A66B001134F3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		CC01BA701D302ACF007E2AEB /* MRCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRCommentViewController.h; path = CommentBox/MRCommentViewController.h; sourceTree = "<group>"; };
 		CC01BA711D302ACF007E2AEB /* MRCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRCommentViewController.m; path = CommentBox/MRCommentViewController.m; sourceTree = "<group>"; };
@@ -2195,9 +2221,14 @@
 		7920D6951C1C9A61008D3386 /* ProfileDetails */ = {
 			isa = PBXGroup;
 			children = (
+				B4B4F0F71D38AEAB00EFCC0E /* ChildTableViewCell */,
 				7920D6961C1C9B69008D3386 /* MRProfileDetailsViewController.h */,
 				7920D6971C1C9B69008D3386 /* MRProfileDetailsViewController.m */,
-				7920D6981C1C9B69008D3386 /* MRProfileDetailsViewController.xib */,
+				B4B4F0E51D382E7300EFCC0E /* AddExperienceTableViewController.h */,
+				B4B4F0E61D382E7300EFCC0E /* AddExperienceTableViewController.m */,
+				B4B4F0EA1D3842C500EFCC0E /* AddEducationTableViewController.h */,
+				B4B4F0EB1D3842C500EFCC0E /* AddEducationTableViewController.m */,
+				B4B4F0F41D38963F00EFCC0E /* ProfileStoryboard.storyboard */,
 			);
 			path = ProfileDetails;
 			sourceTree = "<group>";
@@ -3529,6 +3560,22 @@
 			name = CommentBox;
 			sourceTree = "<group>";
 		};
+		B4B4F0F71D38AEAB00EFCC0E /* ChildTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				B4B4F0F81D38AEDF00EFCC0E /* addProfileItemsTableViewCell.h */,
+				B4B4F0F91D38AEDF00EFCC0E /* addProfileItemsTableViewCell.m */,
+				B4B4F0FA1D38AEDF00EFCC0E /* addProfileItemsTableViewCell.xib */,
+				B4B4F0FF1D38B4DF00EFCC0E /* ProfileBasicTableViewCell.h */,
+				B4B4F1001D38B4DF00EFCC0E /* ProfileBasicTableViewCell.m */,
+				B4B4F1031D38B52B00EFCC0E /* ProfileAboutTableViewCell.h */,
+				B4B4F1041D38B52B00EFCC0E /* ProfileAboutTableViewCell.m */,
+				B4B4F1071D38B5FD00EFCC0E /* CommonProfileSectionTableViewCell.h */,
+				B4B4F1081D38B5FD00EFCC0E /* CommonProfileSectionTableViewCell.m */,
+			);
+			name = ChildTableViewCell;
+			sourceTree = "<group>";
+		};
 		CC0123B41D259161001134F3 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -4074,6 +4121,7 @@
 				79BD27AA1B80980F007CA448 /* Icon-Small@2x.png in Resources */,
 				CC7DB2D71D0CC433007DFE4C /* MRContactWithinGroupCollectionCellCollectionViewCell.xib in Resources */,
 				79AC94421B9DFDB800B81452 /* transperent-bg@2x.png in Resources */,
+				B4B4F0F51D38963F00EFCC0E /* ProfileStoryboard.storyboard in Resources */,
 				79173C5B1BB48EE100842E4C /* PHactivity@3x.png in Resources */,
 				795366061BA09EBF0021CE4D /* full-screen@2x.png in Resources */,
 				79708AA71BB73C67007CE81D /* PHmail@2x.png in Resources */,
@@ -4083,6 +4131,7 @@
 				79421EF51BB7EF950055D9B7 /* PHprescription@3x.png in Resources */,
 				791432AD1C32EF9D0031FB91 /* wallet@3x.png in Resources */,
 				8AFE8CF11D0F21BF0000382E /* post_image10.jpeg in Resources */,
+				B4B4F0FD1D38AEDF00EFCC0E /* addProfileItemsTableViewCell.xib in Resources */,
 				79BD280D1B80B991007CA448 /* radioUnSelection@3x.png in Resources */,
 				83B781EC1B7915C10070645C /* Default-568h@2x.png in Resources */,
 				7950AF201BBF8B1600A93106 /* MRSurveyListViewController.xib in Resources */,
@@ -4357,7 +4406,6 @@
 				79708AA51BB73C67007CE81D /* PHlocations@2x.png in Resources */,
 				79BD27AC1B80980F007CA448 /* Icon.png in Resources */,
 				8AFE8CEE1D0F21BF0000382E /* group_pic4.jpeg in Resources */,
-				7920D69A1C1C9B69008D3386 /* MRProfileDetailsViewController.xib in Resources */,
 				79421F331BB83ABE0055D9B7 /* MRPHDashBoardViewController_iPad.xib in Resources */,
 				7920D6941C1C87C9008D3386 /* MRForgotPasswordTwoViewController.xib in Resources */,
 				79FFD2551BB9BA7D00CEE606 /* MRRegistrationRoleCellTableViewCell.xib in Resources */,
@@ -4587,6 +4635,7 @@
 				CC7DB3721D0CC8A6007DFE4C /* profile_pic12.jpeg in Resources */,
 				8AFF27AB1D21BE7B00080DF0 /* MRJoinGroupViewController.xib in Resources */,
 				CC7DB3861D0CC8A6007DFE4C /* profile_pic8.jpeg in Resources */,
+				B4B4F0FE1D38AEDF00EFCC0E /* addProfileItemsTableViewCell.xib in Resources */,
 				CC7DB12C1D0C8BEC007DFE4C /* news@2x.png in Resources */,
 				CC7DB12D1D0C8BEC007DFE4C /* starunselected@2x.png in Resources */,
 				CC7DB2CC1D0CC433007DFE4C /* MRContactCollectionCell.xib in Resources */,
@@ -4814,6 +4863,7 @@
 				CC7DB1EA1D0C8BEC007DFE4C /* NDcompany4@3x.jpg in Resources */,
 				CC7DB1EB1D0C8BEC007DFE4C /* PHnotifications@2x.png in Resources */,
 				CC7DB1EC1D0C8BEC007DFE4C /* minus.png in Resources */,
+				B4B4F0F61D38993C00EFCC0E /* ProfileStoryboard.storyboard in Resources */,
 				CC7DB3761D0CC8A6007DFE4C /* profile_pic14.jpeg in Resources */,
 				CC7DB1ED1D0C8BEC007DFE4C /* pcright-arrow@3x.png in Resources */,
 				CC7DB1EE1D0C8BEC007DFE4C /* notification@2x.png in Resources */,
@@ -4848,7 +4898,6 @@
 				CC7DB2021D0C8BEC007DFE4C /* iTunesArtwork in Resources */,
 				CC7DB2031D0C8BEC007DFE4C /* PHlocations@2x.png in Resources */,
 				CC7DB2041D0C8BEC007DFE4C /* Icon.png in Resources */,
-				CC7DB2051D0C8BEC007DFE4C /* MRProfileDetailsViewController.xib in Resources */,
 				CC7DB2061D0C8BEC007DFE4C /* MRPHDashBoardViewController_iPad.xib in Resources */,
 				CC649F671D0D1BAA0012289C /* MRDrugDetailViewController.xib in Resources */,
 				CC7DB2071D0C8BEC007DFE4C /* MRForgotPasswordTwoViewController.xib in Resources */,
@@ -4888,6 +4937,7 @@
 				79421F401BB83BAE0055D9B7 /* MRDoctorDetailsTableViewCell.m in Sources */,
 				7930A3991BB91629003112E4 /* MRFeedBackResultCell.m in Sources */,
 				79F4167A1B9F596B0089729B /* MPAppointmentViewController.m in Sources */,
+				B4B4F1051D38B52B00EFCC0E /* ProfileAboutTableViewCell.m in Sources */,
 				79DC37181BE7DEA90027F7DB /* MRMedRepListTableCell.m in Sources */,
 				7920D6991C1C9B69008D3386 /* MRProfileDetailsViewController.m in Sources */,
 				CC7DB2C91D0CC433007DFE4C /* MRContactCollectionCell.m in Sources */,
@@ -4917,6 +4967,7 @@
 				79F5C9F61BB061BE00435B6C /* MRMedrepMeetingsCell.m in Sources */,
 				B41746DF1D0CD740009B7E7E /* MRGroupPost.m in Sources */,
 				79A4F8AD1BC186B200E58DC7 /* GraphView.m in Sources */,
+				B4B4F0ED1D3842C500EFCC0E /* AddEducationTableViewController.m in Sources */,
 				CC7DB30F1D0CC4E2007DFE4C /* MRSuggestedContact+CoreDataProperties.m in Sources */,
 				83B781F31B7916670070645C /* MRAppControl.m in Sources */,
 				79AC94491B9E011D00B81452 /* MPNotificatinsTableViewCell.m in Sources */,
@@ -4924,8 +4975,10 @@
 				79F84B141BE92CB70081613A /* MRMedRepDetailsViewController.m in Sources */,
 				8A7169D11D27B07D00533A6D /* MRDrugDetailModel.m in Sources */,
 				CC9857F51D2E51B300C74438 /* MRManagedObject.m in Sources */,
+				B4B4F1011D38B4DF00EFCC0E /* ProfileBasicTableViewCell.m in Sources */,
 				8AFE8D231D12EB310000382E /* MRAddMembersViewController.m in Sources */,
 				CC7DB2C51D0CC433007DFE4C /* MRCollectionView.m in Sources */,
+				B4B4F0FB1D38AEDF00EFCC0E /* addProfileItemsTableViewCell.m in Sources */,
 				B41746E41D0CE628009B7E7E /* GroupPostChildTableViewCell.m in Sources */,
 				79BD27DC1B809FD1007CA448 /* MRLoginViewController.m in Sources */,
 				CC649F5F1D0D1BA10012289C /* MRDrugSearchViewController.m in Sources */,
@@ -4962,6 +5015,7 @@
 				79421F4C1BB83BBB0055D9B7 /* MRPharmaMenuViewController.m in Sources */,
 				CC7DB2DD1D0CC433007DFE4C /* MRGroupsListViewController.m in Sources */,
 				8AFE8CD31D0EFFD30000382E /* MRCreateGroupViewController.m in Sources */,
+				B4B4F1091D38B5FD00EFCC0E /* CommonProfileSectionTableViewCell.m in Sources */,
 				79421F391BB83ABE0055D9B7 /* MRPHDashBoardViewController.m in Sources */,
 				7950AF1F1BBF8B1600A93106 /* MRSurveyListViewController.m in Sources */,
 				79421F421BB83BAE0055D9B7 /* MRDoctorDetailsViewController.m in Sources */,
@@ -5020,6 +5074,7 @@
 				79A4F8AE1BC186B200E58DC7 /* GraphPoint.m in Sources */,
 				8AFE8CDB1D0F20DC0000382E /* MRDevEnvironmentConfig.m in Sources */,
 				83C127F91B77C88B00D2F08E /* MedRep.xcdatamodeld in Sources */,
+				B4B4F0E81D382E7300EFCC0E /* AddExperienceTableViewController.m in Sources */,
 				CC9857E61D2DAA6B00C74438 /* MRTransformPost+CoreDataProperties.m in Sources */,
 				79421F4A1BB83BBB0055D9B7 /* MRPharmaMenuCell.m in Sources */,
 				CC649F5D1D0D1BA10012289C /* MRDrugDetailViewController.m in Sources */,
@@ -5065,6 +5120,7 @@
 				CC7DB0261D0C8BEC007DFE4C /* AppDelegate.m in Sources */,
 				CC7DB0271D0C8BEC007DFE4C /* WYPopoverController.m in Sources */,
 				CC7DB0281D0C8BEC007DFE4C /* MRViewRepAppointmnetViewController.m in Sources */,
+				B4B4F1021D38B4DF00EFCC0E /* ProfileBasicTableViewCell.m in Sources */,
 				CC7DB0291D0C8BEC007DFE4C /* MRForgotPasswordTwoViewController.m in Sources */,
 				8AFE8CD41D0EFFD30000382E /* MRCreateGroupViewController.m in Sources */,
 				CC7DB02A1D0C8BEC007DFE4C /* MRDoctorDetailsTableViewCell.m in Sources */,
@@ -5110,6 +5166,7 @@
 				CC86FE3B1D29A7780030B23D /* MRShareDetailViewController.m in Sources */,
 				CC7DB03E1D0C8BEC007DFE4C /* MRMedrepMeetingsCell.m in Sources */,
 				CC9857D51D2D82CC00C74438 /* MRGroupPost+CoreDataProperties.m in Sources */,
+				B4B4F1061D38B52B00EFCC0E /* ProfileAboutTableViewCell.m in Sources */,
 				CC7DB03F1D0C8BEC007DFE4C /* GraphView.m in Sources */,
 				CC7DB0401D0C8BEC007DFE4C /* MRAppControl.m in Sources */,
 				CC7DB0411D0C8BEC007DFE4C /* MPNotificatinsTableViewCell.m in Sources */,
@@ -5159,6 +5216,7 @@
 				8AFE8D2B1D12F6A70000382E /* MRAddMemberTableViewCell.m in Sources */,
 				8AFF27B11D21C3DE00080DF0 /* MRInviteViewController.m in Sources */,
 				CC7DB05E1D0C8BEC007DFE4C /* MRFavoriteFilterViewController.m in Sources */,
+				B4B4F0FC1D38AEDF00EFCC0E /* addProfileItemsTableViewCell.m in Sources */,
 				CC7DB05F1D0C8BEC007DFE4C /* MPCallMedrepViewController.m in Sources */,
 				CC9858071D2E726300C74438 /* MRShareOptionTableViewCell.m in Sources */,
 				CC7DB0601D0C8BEC007DFE4C /* MRNewProductCompaignsViewController.m in Sources */,
@@ -5202,6 +5260,7 @@
 				CC7DB3061D0CC4E2007DFE4C /* MRGroup.m in Sources */,
 				CC7DB31C1D0CC530007DFE4C /* PendingContactTableViewCell.m in Sources */,
 				CC7DB0771D0C8BEC007DFE4C /* MRCompanyDetails.m in Sources */,
+				B4B4F0F21D38957000EFCC0E /* AddExperienceTableViewController.m in Sources */,
 				CC7DB2C61D0CC433007DFE4C /* MRCollectionView.m in Sources */,
 				CC7DB0781D0C8BEC007DFE4C /* MRMedRepViewController.m in Sources */,
 				CC7DB0791D0C8BEC007DFE4C /* MROTPVerifiedViewController.m in Sources */,
@@ -5209,6 +5268,7 @@
 				CC649F661D0D1BAA0012289C /* MRDrugDetailViewController.m in Sources */,
 				CC7DB07B1D0C8BEC007DFE4C /* MRDataManger.m in Sources */,
 				CC7DB07C1D0C8BEC007DFE4C /* MRNewProductCell.m in Sources */,
+				B4B4F10A1D38B5FD00EFCC0E /* CommonProfileSectionTableViewCell.m in Sources */,
 				CC7DB07D1D0C8BEC007DFE4C /* MRProductBrocherViewController.m in Sources */,
 				CCA383F21D342D3500BCF5A9 /* MRGroupMembers+CoreDataProperties.m in Sources */,
 				CC7DB07E1D0C8BEC007DFE4C /* MRRegTableViewCell.m in Sources */,
