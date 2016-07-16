@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15F34" minimumToolsVersion="Automatic">
+    <entity name="EducationalQualifications" representedClassName="EducationalQualifications" syncable="YES">
+        <attribute name="aggregate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="collegeName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="course" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="yearOfPassout" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="MRCompanyDetails" representedClassName="MRCompanyDetails" syncable="YES">
         <attribute name="companyDesc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="companyId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -76,6 +82,9 @@
         <relationship name="group" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="MRGroup" syncable="YES"/>
         <relationship name="replyPost" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="MrGroupChildPost" syncable="YES"/>
     </entity>
+    <entity name="MRInterestArea" representedClassName="MRInterestArea" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="MRNotifications" representedClassName="MRNotifications" syncable="YES">
         <attribute name="companyId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="companyName" optional="YES" attributeType="String" syncable="YES"/>
@@ -122,6 +131,18 @@
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="contactRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MRContact" inverseName="comments" inverseEntity="MRContact" syncable="YES"/>
         <relationship name="groupRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MRGroup" inverseName="comment" inverseEntity="MRGroup" syncable="YES"/>
+    </entity>
+    <entity name="MRProfile" representedClassName="MRProfile" syncable="YES">
+        <attribute name="designation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="educationlQualification" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="EducationalQualifications" syncable="YES"/>
+        <relationship name="interestArea" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="MRInterestArea" syncable="YES"/>
+        <relationship name="publications" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="MRPublications" syncable="YES"/>
+        <relationship name="workExperience" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="MRWorkExperience" syncable="YES"/>
+    </entity>
+    <entity name="MRPublications" representedClassName="MRPublications" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="MRReplies" representedClassName="MRReplies" syncable="YES">
         <attribute name="contactPic" optional="YES" attributeType="Binary" syncable="YES"/>
@@ -180,11 +201,19 @@
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="childSharePosts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MRSharePost" syncable="YES"/>
     </entity>
+    <entity name="MRWorkExperience" representedClassName="MRWorkExperience" syncable="YES">
+        <attribute name="designation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fromDate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hospital" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="toDate" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
         <element name="MRCompanyDetails" positionX="-18" positionY="27" width="128" height="165"/>
         <element name="MRContact" positionX="-36" positionY="135" width="128" height="270"/>
         <element name="MRGroup" positionX="-27" positionY="144" width="128" height="195"/>
         <element name="MrGroupChildPost" positionX="-27" positionY="144" width="128" height="90"/>
+        <element name="MRGroupMembers" positionX="-36" positionY="135" width="128" height="315"/>
         <element name="MRGroupPost" positionX="-18" positionY="153" width="128" height="195"/>
         <element name="MRNotifications" positionX="-36" positionY="63" width="128" height="420"/>
         <element name="MRNotificationType" positionX="-36" positionY="9" width="128" height="90"/>
@@ -195,6 +224,10 @@
         <element name="MRSuggestedContact" positionX="-9" positionY="162" width="128" height="105"/>
         <element name="MRTherapeuticArea" positionX="-54" positionY="-9" width="128" height="90"/>
         <element name="MRTransformPost" positionX="-36" positionY="135" width="128" height="180"/>
-        <element name="MRGroupMembers" positionX="-36" positionY="135" width="128" height="315"/>
+        <element name="MRProfile" positionX="-36" positionY="135" width="128" height="150"/>
+        <element name="MRWorkExperience" positionX="-27" positionY="144" width="128" height="120"/>
+        <element name="MRInterestArea" positionX="-18" positionY="153" width="128" height="60"/>
+        <element name="EducationalQualifications" positionX="-9" positionY="162" width="128" height="105"/>
+        <element name="MRPublications" positionX="0" positionY="171" width="128" height="60"/>
     </elements>
 </model>

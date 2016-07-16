@@ -55,9 +55,9 @@
     self.userPreferenceData = [[NSMutableDictionary alloc] init];
     
     [self resetUserData];
-//    [self.userRegData setObject:@"" forKey:KFirstName];
-//    [self.userRegData setObject:@"" forKey:KLastName];
-//    [self.userRegData setObject:@"" forKey:KDoctorRegID];
+    [self.userRegData setObject:@"" forKey:KFirstName];
+    [self.userRegData setObject:@"" forKey:KLastName];
+    [self.userRegData setObject:@"" forKey:KDoctorRegID];
 //    [self.userRegData setObject:@"" forKey:KPassword];
 //    
 //    [self.userRegData setObject:@"" forKey:kManagerMobileNumber];

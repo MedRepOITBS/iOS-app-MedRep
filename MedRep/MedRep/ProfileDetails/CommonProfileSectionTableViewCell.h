@@ -13,5 +13,6 @@
 @property (nonatomic,weak) IBOutlet UILabel *sectionTitleName;
 @property (nonatomic,weak) IBOutlet  UILabel *sectionDescName;
 
+-(void)setCommonProfileDataForType:(NSString *)type;
 
 @end

@@ -27,7 +27,11 @@
 #import "MRWebserviceHelper.h"
 #import "MRConstants.h"
 #import "NSData+Base64Additions.h"
-
+#import "MRProfile.h"
+#import "MRWorkExperience.h"
+#import "MRInterestArea.h"
+#import "EducationalQualifications.h"
+#import "MRPublications.h"
 static MRDatabaseHelper *sharedDataManager = nil;
 
 @implementation MRDatabaseHelper
@@ -1067,6 +1071,80 @@ static MRDatabaseHelper *sharedDataManager = nil;
     return articles;
 }
 
++(NSArray *)getProfileData{
+    NSArray *profileAra = [[MRDataManger sharedManager] fetchObjectList:@"MRProfile"];
+    return profileAra;
+    
+}
++(void)addProfileData:(NSDictionary *)dictonary {
+    
+    MRProfile * profile = (MRProfile *)[[MRDataManger sharedManager] createObjectForEntity:@"MRProfile"];
+    NSDictionary *aboutDict = [dictonary objectForKey:@"about"];
+    
+    profile.name = [aboutDict objectForKey:@"name"];
+    profile.location = [aboutDict objectForKey:@"location"];
+    profile.designation = [aboutDict objectForKey:@"designation"];
+    NSArray * workExpArra = [dictonary objectForKey:@"workExperience"];
+    
+    [workExpArra enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSDictionary *workExpDict  = (NSDictionary *)obj;
+        MRWorkExperience * workExp = (MRWorkExperience *)[[MRDataManger sharedManager] createObjectForEntity:@"MRWorkExperience"];
+
+        workExp.designation = [workExpDict objectForKey:@"designation"];
+        workExp.fromDate = [workExpDict objectForKey:@"fromDate"];
+        workExp.toDate = [workExpDict objectForKey:@"toDate"];
+        workExp.hospital = [workExpDict objectForKey:@"hospital"];
+        workExp.location = [workExpDict objectForKey:@"location"];
+        
+        
+        [profile addWorkExperienceObject:workExp];
+        
+    }];
+    
+    
+    NSArray *interestArra = [dictonary objectForKey:@"InterestAreas"];
+    [interestArra enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+       
+        NSDictionary *interestAraDict = (NSDictionary *)obj;
+        MRInterestArea * interestArea = (MRInterestArea *)[[MRDataManger sharedManager] createObjectForEntity:@"MRInterestArea"];
+        interestArea.name = [interestAraDict objectForKey:@"name"];
+        [profile addInterestAreaObject:interestArea];
+ 
+        
+    }];
+    
+    NSArray * educationalQualificationsArra = [dictonary objectForKey:@"EducationalQualifications"];
+    [educationalQualificationsArra enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSDictionary *educationalQualificationsDict = (NSDictionary *)obj;
+        EducationalQualifications* eduQuaArea = (EducationalQualifications *)[[MRDataManger sharedManager] createObjectForEntity:@"EducationalQualifications"];
+        eduQuaArea.collegeName = [educationalQualificationsDict objectForKey:@"collegeName"];
+        eduQuaArea.course = [educationalQualificationsDict objectForKey:@"course"];
+        eduQuaArea.aggregate = [educationalQualificationsDict objectForKey:@"aggregate"];
+        
+        eduQuaArea.yearOfPassout = [educationalQualificationsDict objectForKey:@"yearOfPassout"];
+        
+        [profile addEducationlQualificationObject:eduQuaArea];
+        
+
+        
+        
+    }];
+    
+    NSArray *publicationsArra = [dictonary objectForKey:@"publications"];
+    [publicationsArra enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        NSDictionary *publicationAraDict = (NSDictionary *)obj;
+        MRPublications * interestArea = (MRPublications *)[[MRDataManger sharedManager] createObjectForEntity:@"MRPublications"];
+        interestArea.name = [publicationAraDict objectForKey:@"name"];
+        [profile addPublicationsObject:interestArea];
+        
+        
+    }];
+
+    [[MRDataManger sharedManager] saveContext];
+    
+    
+}
 + (void)addTransformArticles:(NSArray*)posts {
     for (NSDictionary *myDict in posts) {
         MRTransformPost *post  = (MRTransformPost*)[[MRDataManger sharedManager] createObjectForEntity:kMRTransformPost];

@@ -8,10 +8,24 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MRProfileDetailsViewController : UITableViewController 
+typedef enum
+{
+    PROFILE_BASIC = 0,
+    ABOUT,
+    WORK_EXP,
+    WORK_EXP_DETAIL,
+    ADD_BUTTON,
+    INTEREST_AREA,
+    INTEREST_AREA_DETAIL,
+    EDUCATION_QUAL,
+    EDUCATION_QUAL_DETAIL,
+    PUBLICATION,
+    PUBLICATION_DETAIL
+} MRProfileTypeCell;
+
+@interface MRProfileDetailsViewController : UITableViewController
 
 @property (assign, nonatomic) BOOL isFromSinUp;
-
 - (IBAction)changeButtonAction:(id)sender;
 - (IBAction)profileEditButtonAction:(id)sender;
 - (IBAction)addressEditButtonAction:(id)sender;

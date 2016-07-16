@@ -20,5 +20,31 @@
 
     // Configure the view for the selected state
 }
+-(void)setCommonProfileDataForType:(NSString *)type{
+    
+    
+    if ([type isEqualToString:@"WORK_EXP"]) {
+       
+        _sectionTitleName.text = @"Work Experience";
+        _sectionDescName.text = @"Add Details of your Work Experience and make it easier for colleagues to find you.";
 
+        
+    }else if([type isEqualToString:@"INTEREST_AREA"]) {
+        _sectionTitleName.text = @"Interest Areas";
+        _sectionDescName.text = @"Add your Interest Area";
+
+        
+    }else if([type isEqualToString:@"EDUCATION_QUAL"]){
+        _sectionTitleName.text = @"Educational Qualifications";
+        _sectionDescName.text = @"Add your Qualification";
+        
+        
+    }else if ([type isEqualToString:@"PUBLICATION"]) {
+        
+        _sectionTitleName.text = @"Publications";
+        _sectionDescName.text = @"Add a Publication and be recognised for your research";
+        
+    }
+    
+}
 @end

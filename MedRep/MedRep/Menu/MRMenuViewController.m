@@ -155,7 +155,6 @@
 //                MRProfileDetailsViewController *profViewController = [[MRProfileDetailsViewController alloc] initWithNibName:@"AddExperienceTableViewController" bundle:nil];
                 profViewController.isFromSinUp = NO;
                 UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:profViewController];
-                navigationController.navigationBarHidden = YES;
                 [revealController pushFrontViewController:navigationController animated:YES];
             }
             else

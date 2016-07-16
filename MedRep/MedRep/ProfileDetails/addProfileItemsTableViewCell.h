@@ -11,7 +11,7 @@
 @interface addProfileItemsTableViewCell : UITableViewCell
 @property (nonatomic,weak) IBOutlet UIButton *addPlaceHolderButton;
 @property (nonatomic,weak) id<addProfileItemsTableViewCellDelegate> delegate;
-
+-(void)setButtonTitleForType:(NSString *)type;
 @end
 
 

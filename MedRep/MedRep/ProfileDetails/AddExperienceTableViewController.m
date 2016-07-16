@@ -7,7 +7,9 @@
 //
 
 #import "AddExperienceTableViewController.h"
-
+#import "CommonTableViewCell.h"
+#import "ExperienceSummaryTableViewCell.h"
+#import "ExperienceDateTimeTableViewCell.h"
 @interface AddExperienceTableViewController ()
 
 @end
@@ -30,26 +32,63 @@
 }
 
 #pragma mark - Table view data source
-
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (indexPath.row ==0 || indexPath.row == 1) {
+        return 72;
+    }else if(indexPath.row == 2 ){
+        return 146;
+    }
+    return 124;
+}
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 #warning Incomplete implementation, return the number of sections
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete implementation, return the number of rows
-    return 0;
+    return 4;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
+   
+    switch (indexPath.row) {
+        case 0: case 1:{
+            CommonTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommonTableViewCell" forIndexPath:indexPath];
+            if (indexPath.row == 0) {
+                cell.title.text = @"DESIGNATION";
+                cell.inputTextField.placeholder = @"Designation";
+            }else{
+                cell.title.text = @"ORGANISATION";
+                cell.inputTextField.placeholder = @"Organisation";
+                
+            }
+            
+            return cell;
+            
+
+        }
+                        break;
+        case 2:{
+            ExperienceDateTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ExperienceDateTimeTableViewCell" forIndexPath:indexPath];
+            return cell;
+        }
+            break;
+        case 3:{
+            ExperienceSummaryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ExperienceSummaryTableViewCell" forIndexPath:indexPath];
+            // Configure the cell...
+            
+            return cell;
+        }
+            break;
+        default:
+            break;
+    }
+    return nil;
 }
-*/
+
 
 /*
 // Override to support conditional editing of the table view.

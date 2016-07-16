@@ -18,12 +18,19 @@
 #import "ProfileBasicTableViewCell.h"
 #import "CommonProfileSectionTableViewCell.h"
 #import "AddExperienceTableViewController.h"
+#import "MRProfile.h"
+#import "MRWorkExperience.h"
+#import "EducationalQualifications.h"
+#import "MRPublications.h"
+#import "MRInterestArea.h"
+#import "ExpericeFillUpTableViewCell.h"
+#import "basicInfoTableViewCell.h"
 @interface MRProfileDetailsViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate,addProfileItemsTableViewCellDelegate>
 
 
 @property (assign, nonatomic) BOOL isImageUploaded;
 @property (nonatomic,strong) NSMutableArray *commonSectionArray;
-
+@property (nonatomic,strong) MRProfile *profileObj;
 @end
 
 @implementation MRProfileDetailsViewController
@@ -100,6 +107,30 @@
     [_commonSectionArray addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"Publications",@"title",@"+ Add Publication",@"Button",@"Add a Publication and be recognised for your research",@"detail", nil]];
         [_commonSectionArray addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"Awards",@"title",@"+ Add Award",@"Button",@"Add an Award",@"detail", nil]];
     [_commonSectionArray addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"Memberships & Positions",@"title",@"+ Add Membership",@"Button",@"Add a Membership or Position",@"detail", nil]];
+    
+    
+    
+    
+    
+   
+        // Create Dummy Data
+        
+    
+            
+            NSString* filePath = [[NSBundle mainBundle] pathForResource:@"Profile" ofType:@"json"];
+            NSData* data = [NSData dataWithContentsOfFile:filePath];
+            NSError *error;
+            NSDictionary* transformArticles = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+            
+            [MRDatabaseHelper addProfileData:transformArticles];
+    
+    _profileObj  = [[MRDatabaseHelper getProfileData] objectAtIndex:0];
+    
+    [self.tableView reloadData];
+    
+
+    
+    
     
     
    /*  self.profileNameLabel.text              = @"";
@@ -289,80 +320,181 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete implementation, return the number of rows
-    return 14;
+    return [self setStructureForTableView].count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSDictionary *valNDict = [[self setStructureForTableView] objectAtIndex:indexPath.row];
+    NSString *valN = [valNDict objectForKey:@"type"];
     
-     if (indexPath.row ==0 || indexPath.row == 1) {
+    if ([valN isEqualToString:@"PROFILE_BASIC"] || [valN isEqualToString:@"ABOUT"]) {
         return 152;
-    }else if((indexPath.row % 2) == 0 ){
-        return 85;
     }
+    
+    else if([valN isEqualToString:@"WORK_EXP"]|| [valN isEqualToString:@"INTEREST_AREA"] || [valN isEqualToString:@"EDUCATION_QUAL"] || [valN isEqualToString:@"PUBLICATION"]) {
+        return  85;
+    }
+    else if([valN isEqualToString:@"ADD_BUTTON"]) {
+        return 40;
+    } else if ([valN isEqualToString:@"WORK_EXP_DETAIL"] || [valN isEqualToString:@"EDUCATION_QUAL_DETAIL"] ){
+        return 95;
+    }else if ([valN isEqualToString:@"PUBLICATION_DETAIL"] || [valN isEqualToString:@"INTEREST_AREA_DETAIL"] )
+    {
+        return 40;
+    }
+    
     return 40;
 }
 
+-(NSArray*)setStructureForTableView{
+    
+    NSMutableArray *temp = [NSMutableArray array];
+  
+    
+    [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"PROFILE_BASIC",@"type", nil]];
+       [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"ABOUT",@"type", nil]];
+    [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"WORK_EXP",@"type", nil]];
+    
+//    NSArray *workEXP = _profileObj.workExperience.array;
+    [_profileObj.workExperience.array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        MRWorkExperience * workexp = (MRWorkExperience *)obj;
+        [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"WORK_EXP_DETAIL",@"type",workexp,@"object" ,nil]];
 
+       
+        
+    }];
+    [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"ADD_BUTTON",@"type", nil]];
+    [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"INTEREST_AREA",@"type", nil]];
+
+    
+    [_profileObj.interestArea.array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        MRInterestArea * workexp = (MRInterestArea *)obj;
+        [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"INTEREST_AREA_DETAIL",@"type",workexp,@"object" ,nil]];
+
+        
+    }];
+    
+    [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"ADD_BUTTON",@"type", nil]];
+
+    [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"EDUCATION_QUAL",@"type", nil]];
+
+    
+    
+    [_profileObj.educationlQualification.array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        EducationalQualifications * workexp = (EducationalQualifications *)obj;
+        [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"EDUCATION_QUAL_DETAIL",@"type",workexp,@"object" ,nil]];
+
+        
+    }];
+    [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"ADD_BUTTON",@"type", nil]];
+    [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"PUBLICATION",@"type", nil]];
+
+
+    [_profileObj.publications.array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        MRPublications * workexp = (MRPublications *)obj;
+        [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"PUBLICATION_DETAIL",@"type",workexp,@"object" ,nil]];
+
+        
+    }];
+    [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"ADD_BUTTON",@"type", nil]];
+
+ 
+    
+    
+    
+    return temp;
+}
  - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-     switch (indexPath.row) {
-         case 0:
-         {
-            ProfileBasicTableViewCell  *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"ProfileBasicTableViewCell"] forIndexPath:indexPath];
-             return cell;
+     
+     NSDictionary *valNDict = [[self setStructureForTableView] objectAtIndex:indexPath.row];
+     NSString *valN = [valNDict objectForKey:@"type"];
+     if ([valN isEqualToString:@"PROFILE_BASIC"]) {
+         ProfileBasicTableViewCell  *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"ProfileBasicTableViewCell"] forIndexPath:indexPath];
+         NSDictionary *userdata = [MRAppControl sharedHelper].userRegData;
+         
+         NSInteger userType = [MRAppControl sharedHelper].userType;
+         
+         cell.userNameLbl.text         = (userType == 2 || userType == 1) ? [NSString stringWithFormat:@"Dr. %@ %@", [userdata objectForKey:KFirstName],[userdata objectForKey:KLastName]] : [NSString stringWithFormat:@"Mr. %@ %@", [userdata objectForKey:KFirstName],[userdata objectForKey:KLastName]];
+         cell.userLocation.text = _profileObj.location;
+         cell.profileimageView.image =[MRCommon getImageFromBase64Data:[userdata objectForKey:KProfilePicture]];
+         
+         
+         return cell;
+     } else if([valN isEqualToString:@"ABOUT"]) {
+         ProfileAboutTableViewCell  *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"ProfileAboutTableViewCell"] forIndexPath:indexPath];
+         cell.specialityLbl.text = _profileObj.designation;
+         
+         return cell;
 
+     }
+     
+     else if([valN isEqualToString:@"WORK_EXP"]|| [valN isEqualToString:@"INTEREST_AREA"] || [valN isEqualToString:@"EDUCATION_QUAL"] || [valN isEqualToString:@"PUBLICATION"]) {
+         CommonProfileSectionTableViewCell  *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"CommonProfileSectionTableViewCell"] forIndexPath:indexPath];
+         
+        [cell setCommonProfileDataForType:valN];
+         return cell;
+         
+     }
+     else if([valN isEqualToString:@"ADD_BUTTON"]) {
+         addProfileItemsTableViewCell  *cell = (addProfileItemsTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"addProfileButton"];
+         if (cell == nil) {
+             NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"addProfileItemsTableViewCell" owner:self options:nil];
+             cell = (addProfileItemsTableViewCell *)[arr objectAtIndex:0];
              
          }
-             break;
-         case 1:
-         {
-             ProfileAboutTableViewCell  *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"ProfileAboutTableViewCell"] forIndexPath:indexPath];
-             return cell;
-             
-             
-         }break;
-        
+         cell.delegate = self;
          
-         case 2 : case 4: case 6: case 8: case 10: case 12:
-         {
-             CommonProfileSectionTableViewCell  *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"CommonProfileSectionTableViewCell"] forIndexPath:indexPath];
-            
-             NSInteger indexCount = indexPath.row -2;
-             if (indexCount !=0) {
-                 indexCount = indexCount/2;
-             }
-             NSDictionary *dictObj = [_commonSectionArray objectAtIndex:indexCount];
-             cell.sectionTitleName.text = [dictObj objectForKey:@"title"];
-             cell.sectionDescName.text = [dictObj objectForKey:@"detail"];
-             return cell;
-
+         NSDictionary *valNDict1 = [[self setStructureForTableView] objectAtIndex:indexPath.row-1];
+         NSString *val = [valNDict1 objectForKey:@"type"];
+         
+         [cell setButtonTitleForType:val];
+         
+         
+         
+         return cell;
+         
+     } else if ([valN isEqualToString:@"WORK_EXP_DETAIL"] || [valN isEqualToString:@"EDUCATION_QUAL_DETAIL"] ){
+         ExpericeFillUpTableViewCell * cell  =(ExpericeFillUpTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"ExpericeFillUpTableViewCell"];
+         if ([valN isEqualToString:@"WORK_EXP_DETAIL"]) {
+             MRWorkExperience * obj  = [valNDict objectForKey:@"object"];
              
-         }break;
-             
-         case 3: case 5: case 7: case 9: case 11 : case 13:
-             
-         {
-             addProfileItemsTableViewCell  *cell = (addProfileItemsTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"addProfileButton"];
-             if (cell == nil) {
-                 NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"addProfileItemsTableViewCell" owner:self options:nil];
-                 cell = (addProfileItemsTableViewCell *)[arr objectAtIndex:0];
-
-             }
-             cell.delegate = self;
-             NSInteger indexCount = indexPath.row -3;
-             if (indexCount !=0) {
-                 indexCount = indexCount/2;
-             }
-             
-                 NSDictionary *dictObj = [_commonSectionArray objectAtIndex:indexCount];
-             [cell.addPlaceHolderButton setTitle:[dictObj objectForKey:@"Button"] forState:UIControlStateNormal];
-             
-             return cell;
+             cell.title.text = obj.designation;
+             cell.dateDesc.text = [NSString stringWithFormat:@"%@ - %@",obj.fromDate,obj.toDate];
+             cell.otherDesc.text = [NSString stringWithFormat:@"%@, %@",obj.hospital,obj.location];
              
              
-         }break;
-         default:
-             break;
+         }else if([valN isEqualToString:@"EDUCATION_QUAL_DETAIL"]) {
+             EducationalQualifications * obj  = [valNDict objectForKey:@"object"];
+             
+             cell.title.text = obj.course;
+             cell.dateDesc.text = [NSString stringWithFormat:@"%@",obj.yearOfPassout    ];
+             cell.otherDesc.text = [NSString stringWithFormat:@"From %@ with Aggregate %% %@",obj.collegeName,obj.aggregate];
+             
+             
+         }
+         return cell;
+         
+     }else if ([valN isEqualToString:@"PUBLICATION_DETAIL"] || [valN isEqualToString:@"INTEREST_AREA_DETAIL"] )
+     {
+         
+         basicInfoTableViewCell *cell =(basicInfoTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"basicInfoTableViewCell"];
+         if ([valN isEqualToString:@"PUBLICATION_DETAIL"] ) {
+             MRPublications * obj  = [valNDict objectForKey:@"object"];
+             
+             cell.titleOther.text = obj.name;
+         }else {
+             MRInterestArea * obj  = [valNDict objectForKey:@"object"];
+             
+             cell.titleOther.text = obj.name;
+         }
+         
+         return cell;
+         
      }
+     
+     
+     
      
      // Configure the cell...
  

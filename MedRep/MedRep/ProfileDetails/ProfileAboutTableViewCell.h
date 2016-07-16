@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ProfileAboutTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *specialityLbl;
 
 @end

@@ -112,6 +112,6 @@ typedef void (^WebServiceResponseHandler)(id result);
 
 + (NSArray*)getTransformArticles;
 + (void)addTransformArticles:(NSArray*)posts;
-
-
++(void)addProfileData:(NSDictionary *)dictonary ;
++(NSArray *)getProfileData;
 @end

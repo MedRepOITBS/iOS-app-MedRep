@@ -612,6 +612,46 @@
 		B4B4F1061D38B52B00EFCC0E /* ProfileAboutTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1041D38B52B00EFCC0E /* ProfileAboutTableViewCell.m */; };
 		B4B4F1091D38B5FD00EFCC0E /* CommonProfileSectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1081D38B5FD00EFCC0E /* CommonProfileSectionTableViewCell.m */; };
 		B4B4F10A1D38B5FD00EFCC0E /* CommonProfileSectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1081D38B5FD00EFCC0E /* CommonProfileSectionTableViewCell.m */; };
+		B4B4F10F1D394F4100EFCC0E /* unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = B4B4F10B1D394F4100EFCC0E /* unselected.png */; };
+		B4B4F1101D394F4100EFCC0E /* unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = B4B4F10B1D394F4100EFCC0E /* unselected.png */; };
+		B4B4F1111D394F4100EFCC0E /* unselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4B4F10C1D394F4100EFCC0E /* unselected@2x.png */; };
+		B4B4F1121D394F4100EFCC0E /* unselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4B4F10C1D394F4100EFCC0E /* unselected@2x.png */; };
+		B4B4F1131D394F4100EFCC0E /* selected.png in Resources */ = {isa = PBXBuildFile; fileRef = B4B4F10D1D394F4100EFCC0E /* selected.png */; };
+		B4B4F1141D394F4100EFCC0E /* selected.png in Resources */ = {isa = PBXBuildFile; fileRef = B4B4F10D1D394F4100EFCC0E /* selected.png */; };
+		B4B4F1151D394F4100EFCC0E /* selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4B4F10E1D394F4100EFCC0E /* selected@2x.png */; };
+		B4B4F1161D394F4100EFCC0E /* selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4B4F10E1D394F4100EFCC0E /* selected@2x.png */; };
+		B4B4F11A1D395C7B00EFCC0E /* CommonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1191D395C7B00EFCC0E /* CommonTableViewCell.m */; };
+		B4B4F11B1D395C7B00EFCC0E /* CommonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1191D395C7B00EFCC0E /* CommonTableViewCell.m */; };
+		B4B4F11E1D395D9600EFCC0E /* ExperienceDateTimeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F11D1D395D9600EFCC0E /* ExperienceDateTimeTableViewCell.m */; };
+		B4B4F11F1D395D9600EFCC0E /* ExperienceDateTimeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F11D1D395D9600EFCC0E /* ExperienceDateTimeTableViewCell.m */; };
+		B4B4F1221D395DF300EFCC0E /* ExperienceSummaryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1211D395DF300EFCC0E /* ExperienceSummaryTableViewCell.m */; };
+		B4B4F1231D395DF300EFCC0E /* ExperienceSummaryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1211D395DF300EFCC0E /* ExperienceSummaryTableViewCell.m */; };
+		B4B4F1251D3983D300EFCC0E /* Profile.json in Resources */ = {isa = PBXBuildFile; fileRef = B4B4F1241D3983D300EFCC0E /* Profile.json */; };
+		B4B4F1261D3983D300EFCC0E /* Profile.json in Resources */ = {isa = PBXBuildFile; fileRef = B4B4F1241D3983D300EFCC0E /* Profile.json */; };
+		B4B4F13B1D39857E00EFCC0E /* MRProfile+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1281D39857E00EFCC0E /* MRProfile+CoreDataProperties.m */; };
+		B4B4F13C1D39857E00EFCC0E /* MRProfile+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1281D39857E00EFCC0E /* MRProfile+CoreDataProperties.m */; };
+		B4B4F13D1D39857E00EFCC0E /* MRProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F12A1D39857E00EFCC0E /* MRProfile.m */; };
+		B4B4F13E1D39857E00EFCC0E /* MRProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F12A1D39857E00EFCC0E /* MRProfile.m */; };
+		B4B4F13F1D39857E00EFCC0E /* MRWorkExperience+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F12C1D39857E00EFCC0E /* MRWorkExperience+CoreDataProperties.m */; };
+		B4B4F1401D39857E00EFCC0E /* MRWorkExperience+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F12C1D39857E00EFCC0E /* MRWorkExperience+CoreDataProperties.m */; };
+		B4B4F1411D39857E00EFCC0E /* MRWorkExperience.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F12E1D39857E00EFCC0E /* MRWorkExperience.m */; };
+		B4B4F1421D39857E00EFCC0E /* MRWorkExperience.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F12E1D39857E00EFCC0E /* MRWorkExperience.m */; };
+		B4B4F1431D39857E00EFCC0E /* MRInterestArea+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1301D39857E00EFCC0E /* MRInterestArea+CoreDataProperties.m */; };
+		B4B4F1441D39857E00EFCC0E /* MRInterestArea+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1301D39857E00EFCC0E /* MRInterestArea+CoreDataProperties.m */; };
+		B4B4F1451D39857E00EFCC0E /* MRInterestArea.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1321D39857E00EFCC0E /* MRInterestArea.m */; };
+		B4B4F1461D39857E00EFCC0E /* MRInterestArea.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1321D39857E00EFCC0E /* MRInterestArea.m */; };
+		B4B4F1471D39857E00EFCC0E /* EducationalQualifications+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1341D39857E00EFCC0E /* EducationalQualifications+CoreDataProperties.m */; };
+		B4B4F1481D39857E00EFCC0E /* EducationalQualifications+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1341D39857E00EFCC0E /* EducationalQualifications+CoreDataProperties.m */; };
+		B4B4F1491D39857E00EFCC0E /* EducationalQualifications.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1361D39857E00EFCC0E /* EducationalQualifications.m */; };
+		B4B4F14A1D39857E00EFCC0E /* EducationalQualifications.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1361D39857E00EFCC0E /* EducationalQualifications.m */; };
+		B4B4F14B1D39857E00EFCC0E /* MRPublications+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1381D39857E00EFCC0E /* MRPublications+CoreDataProperties.m */; };
+		B4B4F14C1D39857E00EFCC0E /* MRPublications+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1381D39857E00EFCC0E /* MRPublications+CoreDataProperties.m */; };
+		B4B4F14D1D39857E00EFCC0E /* MRPublications.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F13A1D39857E00EFCC0E /* MRPublications.m */; };
+		B4B4F14E1D39857E00EFCC0E /* MRPublications.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F13A1D39857E00EFCC0E /* MRPublications.m */; };
+		B4B4F1511D39A80C00EFCC0E /* ExpericeFillUpTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1501D39A80C00EFCC0E /* ExpericeFillUpTableViewCell.m */; };
+		B4B4F1521D39A80C00EFCC0E /* ExpericeFillUpTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1501D39A80C00EFCC0E /* ExpericeFillUpTableViewCell.m */; };
+		B4B4F1551D39A8D600EFCC0E /* basicInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1541D39A8D600EFCC0E /* basicInfoTableViewCell.m */; };
+		B4B4F1561D39A8D600EFCC0E /* basicInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1541D39A8D600EFCC0E /* basicInfoTableViewCell.m */; };
 		CC0123C11D25A66B001134F3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0123C01D25A66B001134F3 /* CoreGraphics.framework */; };
 		CC0123C21D25A677001134F3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0123C01D25A66B001134F3 /* CoreGraphics.framework */; };
 		CC01BA731D302ACF007E2AEB /* MRCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC01BA711D302ACF007E2AEB /* MRCommentViewController.m */; };
@@ -1963,6 +2003,41 @@
 		B4B4F1041D38B52B00EFCC0E /* ProfileAboutTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileAboutTableViewCell.m; sourceTree = "<group>"; };
 		B4B4F1071D38B5FD00EFCC0E /* CommonProfileSectionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonProfileSectionTableViewCell.h; sourceTree = "<group>"; };
 		B4B4F1081D38B5FD00EFCC0E /* CommonProfileSectionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonProfileSectionTableViewCell.m; sourceTree = "<group>"; };
+		B4B4F10B1D394F4100EFCC0E /* unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unselected.png; sourceTree = "<group>"; };
+		B4B4F10C1D394F4100EFCC0E /* unselected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unselected@2x.png"; sourceTree = "<group>"; };
+		B4B4F10D1D394F4100EFCC0E /* selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selected.png; sourceTree = "<group>"; };
+		B4B4F10E1D394F4100EFCC0E /* selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "selected@2x.png"; sourceTree = "<group>"; };
+		B4B4F1181D395C7B00EFCC0E /* CommonTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonTableViewCell.h; sourceTree = "<group>"; };
+		B4B4F1191D395C7B00EFCC0E /* CommonTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonTableViewCell.m; sourceTree = "<group>"; };
+		B4B4F11C1D395D9600EFCC0E /* ExperienceDateTimeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExperienceDateTimeTableViewCell.h; sourceTree = "<group>"; };
+		B4B4F11D1D395D9600EFCC0E /* ExperienceDateTimeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExperienceDateTimeTableViewCell.m; sourceTree = "<group>"; };
+		B4B4F1201D395DF300EFCC0E /* ExperienceSummaryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExperienceSummaryTableViewCell.h; sourceTree = "<group>"; };
+		B4B4F1211D395DF300EFCC0E /* ExperienceSummaryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExperienceSummaryTableViewCell.m; sourceTree = "<group>"; };
+		B4B4F1241D3983D300EFCC0E /* Profile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Profile.json; sourceTree = "<group>"; };
+		B4B4F1271D39857E00EFCC0E /* MRProfile+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MRProfile+CoreDataProperties.h"; sourceTree = "<group>"; };
+		B4B4F1281D39857E00EFCC0E /* MRProfile+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MRProfile+CoreDataProperties.m"; sourceTree = "<group>"; };
+		B4B4F1291D39857E00EFCC0E /* MRProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRProfile.h; sourceTree = "<group>"; };
+		B4B4F12A1D39857E00EFCC0E /* MRProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRProfile.m; sourceTree = "<group>"; };
+		B4B4F12B1D39857E00EFCC0E /* MRWorkExperience+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MRWorkExperience+CoreDataProperties.h"; sourceTree = "<group>"; };
+		B4B4F12C1D39857E00EFCC0E /* MRWorkExperience+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MRWorkExperience+CoreDataProperties.m"; sourceTree = "<group>"; };
+		B4B4F12D1D39857E00EFCC0E /* MRWorkExperience.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRWorkExperience.h; sourceTree = "<group>"; };
+		B4B4F12E1D39857E00EFCC0E /* MRWorkExperience.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRWorkExperience.m; sourceTree = "<group>"; };
+		B4B4F12F1D39857E00EFCC0E /* MRInterestArea+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MRInterestArea+CoreDataProperties.h"; sourceTree = "<group>"; };
+		B4B4F1301D39857E00EFCC0E /* MRInterestArea+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MRInterestArea+CoreDataProperties.m"; sourceTree = "<group>"; };
+		B4B4F1311D39857E00EFCC0E /* MRInterestArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRInterestArea.h; sourceTree = "<group>"; };
+		B4B4F1321D39857E00EFCC0E /* MRInterestArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRInterestArea.m; sourceTree = "<group>"; };
+		B4B4F1331D39857E00EFCC0E /* EducationalQualifications+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EducationalQualifications+CoreDataProperties.h"; sourceTree = "<group>"; };
+		B4B4F1341D39857E00EFCC0E /* EducationalQualifications+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EducationalQualifications+CoreDataProperties.m"; sourceTree = "<group>"; };
+		B4B4F1351D39857E00EFCC0E /* EducationalQualifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EducationalQualifications.h; sourceTree = "<group>"; };
+		B4B4F1361D39857E00EFCC0E /* EducationalQualifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EducationalQualifications.m; sourceTree = "<group>"; };
+		B4B4F1371D39857E00EFCC0E /* MRPublications+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MRPublications+CoreDataProperties.h"; sourceTree = "<group>"; };
+		B4B4F1381D39857E00EFCC0E /* MRPublications+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MRPublications+CoreDataProperties.m"; sourceTree = "<group>"; };
+		B4B4F1391D39857E00EFCC0E /* MRPublications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRPublications.h; sourceTree = "<group>"; };
+		B4B4F13A1D39857E00EFCC0E /* MRPublications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRPublications.m; sourceTree = "<group>"; };
+		B4B4F14F1D39A80C00EFCC0E /* ExpericeFillUpTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpericeFillUpTableViewCell.h; sourceTree = "<group>"; };
+		B4B4F1501D39A80C00EFCC0E /* ExpericeFillUpTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpericeFillUpTableViewCell.m; sourceTree = "<group>"; };
+		B4B4F1531D39A8D600EFCC0E /* basicInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = basicInfoTableViewCell.h; sourceTree = "<group>"; };
+		B4B4F1541D39A8D600EFCC0E /* basicInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = basicInfoTableViewCell.m; sourceTree = "<group>"; };
 		CC0123C01D25A66B001134F3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		CC01BA701D302ACF007E2AEB /* MRCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRCommentViewController.h; path = CommentBox/MRCommentViewController.h; sourceTree = "<group>"; };
 		CC01BA711D302ACF007E2AEB /* MRCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRCommentViewController.m; path = CommentBox/MRCommentViewController.m; sourceTree = "<group>"; };
@@ -2221,6 +2296,7 @@
 		7920D6951C1C9A61008D3386 /* ProfileDetails */ = {
 			isa = PBXGroup;
 			children = (
+				B4B4F1171D395C2700EFCC0E /* AddExperience */,
 				B4B4F0F71D38AEAB00EFCC0E /* ChildTableViewCell */,
 				7920D6961C1C9B69008D3386 /* MRProfileDetailsViewController.h */,
 				7920D6971C1C9B69008D3386 /* MRProfileDetailsViewController.m */,
@@ -2752,6 +2828,26 @@
 				B47E338A1D2F65540051724C /* MRSharePost+CoreDataProperties.m */,
 				B47E338B1D2F65540051724C /* MRSharePost.h */,
 				B47E338C1D2F65540051724C /* MRSharePost.m */,
+				B4B4F1271D39857E00EFCC0E /* MRProfile+CoreDataProperties.h */,
+				B4B4F1281D39857E00EFCC0E /* MRProfile+CoreDataProperties.m */,
+				B4B4F1291D39857E00EFCC0E /* MRProfile.h */,
+				B4B4F12A1D39857E00EFCC0E /* MRProfile.m */,
+				B4B4F12B1D39857E00EFCC0E /* MRWorkExperience+CoreDataProperties.h */,
+				B4B4F12C1D39857E00EFCC0E /* MRWorkExperience+CoreDataProperties.m */,
+				B4B4F12D1D39857E00EFCC0E /* MRWorkExperience.h */,
+				B4B4F12E1D39857E00EFCC0E /* MRWorkExperience.m */,
+				B4B4F12F1D39857E00EFCC0E /* MRInterestArea+CoreDataProperties.h */,
+				B4B4F1301D39857E00EFCC0E /* MRInterestArea+CoreDataProperties.m */,
+				B4B4F1311D39857E00EFCC0E /* MRInterestArea.h */,
+				B4B4F1321D39857E00EFCC0E /* MRInterestArea.m */,
+				B4B4F1331D39857E00EFCC0E /* EducationalQualifications+CoreDataProperties.h */,
+				B4B4F1341D39857E00EFCC0E /* EducationalQualifications+CoreDataProperties.m */,
+				B4B4F1351D39857E00EFCC0E /* EducationalQualifications.h */,
+				B4B4F1361D39857E00EFCC0E /* EducationalQualifications.m */,
+				B4B4F1371D39857E00EFCC0E /* MRPublications+CoreDataProperties.h */,
+				B4B4F1381D39857E00EFCC0E /* MRPublications+CoreDataProperties.m */,
+				B4B4F1391D39857E00EFCC0E /* MRPublications.h */,
+				B4B4F13A1D39857E00EFCC0E /* MRPublications.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3266,6 +3362,10 @@
 		83B781E41B7915C10070645C /* RESOURCES */ = {
 			isa = PBXGroup;
 			children = (
+				B4B4F10B1D394F4100EFCC0E /* unselected.png */,
+				B4B4F10C1D394F4100EFCC0E /* unselected@2x.png */,
+				B4B4F10D1D394F4100EFCC0E /* selected.png */,
+				B4B4F10E1D394F4100EFCC0E /* selected@2x.png */,
 				CC7DB32B1D0CC8A6007DFE4C /* stubImages */,
 				79173C3C1BB48AE900842E4C /* PharmaImages */,
 				79A5DC641BA20918001D872C /* CallmerepImages */,
@@ -3572,8 +3672,25 @@
 				B4B4F1041D38B52B00EFCC0E /* ProfileAboutTableViewCell.m */,
 				B4B4F1071D38B5FD00EFCC0E /* CommonProfileSectionTableViewCell.h */,
 				B4B4F1081D38B5FD00EFCC0E /* CommonProfileSectionTableViewCell.m */,
+				B4B4F14F1D39A80C00EFCC0E /* ExpericeFillUpTableViewCell.h */,
+				B4B4F1501D39A80C00EFCC0E /* ExpericeFillUpTableViewCell.m */,
+				B4B4F1531D39A8D600EFCC0E /* basicInfoTableViewCell.h */,
+				B4B4F1541D39A8D600EFCC0E /* basicInfoTableViewCell.m */,
 			);
 			name = ChildTableViewCell;
+			sourceTree = "<group>";
+		};
+		B4B4F1171D395C2700EFCC0E /* AddExperience */ = {
+			isa = PBXGroup;
+			children = (
+				B4B4F1181D395C7B00EFCC0E /* CommonTableViewCell.h */,
+				B4B4F1191D395C7B00EFCC0E /* CommonTableViewCell.m */,
+				B4B4F11C1D395D9600EFCC0E /* ExperienceDateTimeTableViewCell.h */,
+				B4B4F11D1D395D9600EFCC0E /* ExperienceDateTimeTableViewCell.m */,
+				B4B4F1201D395DF300EFCC0E /* ExperienceSummaryTableViewCell.h */,
+				B4B4F1211D395DF300EFCC0E /* ExperienceSummaryTableViewCell.m */,
+			);
+			name = AddExperience;
 			sourceTree = "<group>";
 		};
 		CC0123B41D259161001134F3 /* TabBar */ = {
@@ -3817,6 +3934,7 @@
 			isa = PBXGroup;
 			children = (
 				CC9857EF1D2E0B4D00C74438 /* TransformPosts.json */,
+				B4B4F1241D3983D300EFCC0E /* Profile.json */,
 			);
 			name = JSON;
 			sourceTree = "<group>";
@@ -3958,6 +4076,7 @@
 				79BD28011B80B37F007CA448 /* categoryBG-568h@2x.jpg in Resources */,
 				79BD27CE1B809A80007CA448 /* pageviewdots@2x~iPad.png in Resources */,
 				79841DD91B989B5B00535916 /* MROTPVerifiedViewController.xib in Resources */,
+				B4B4F1251D3983D300EFCC0E /* Profile.json in Resources */,
 				79C709E51BE7D7F200223562 /* MRMedRepViewController.xib in Resources */,
 				79169E1D1BEBDD6800C11D13 /* pcminus@2x.png in Resources */,
 				79BD27D01B809A80007CA448 /* pageviewdots~iPad.png in Resources */,
@@ -4041,6 +4160,7 @@
 				79BD27F21B80A8C3007CA448 /* email@2x.png in Resources */,
 				79DE1BE61B826245005289D6 /* input@2x~iPad.png in Resources */,
 				CC649F601D0D1BA10012289C /* MRDrugSearchViewController.xib in Resources */,
+				B4B4F1131D394F4100EFCC0E /* selected.png in Resources */,
 				CC7DB3AF1D0CCA96007DFE4C /* MRGroupTableViewCell.xib in Resources */,
 				CCE29B271D26E870006DED8E /* MRCustomTabBar.xib in Resources */,
 				8AFE8CE41D0F21BF0000382E /* Contacts.png in Resources */,
@@ -4249,6 +4369,7 @@
 				7929E3E51B9CC98D001F1373 /* notification_dash@3x.png in Resources */,
 				79FFD2621BB9DC3100CEE606 /* fbSelectedRadio@2x.png in Resources */,
 				7977C4801C63ED8F00A7C49A /* profileIcon@2x.png in Resources */,
+				B4B4F1111D394F4100EFCC0E /* unselected@2x.png in Resources */,
 				79BD27A61B80980F007CA448 /* Icon-76@2x.png in Resources */,
 				CC7DB2D31D0CC433007DFE4C /* MRContactsViewController.xib in Resources */,
 				79AC94601B9E0DA000B81452 /* NDcompany2-BG@3x.jpg in Resources */,
@@ -4278,6 +4399,7 @@
 				CC7DB2E31D0CC433007DFE4C /* MRGroupsViewController.xib in Resources */,
 				79AC94401B9DFDB800B81452 /* notificationbody-bg@2x.jpg in Resources */,
 				79AC94631B9E0DA000B81452 /* NDcompany4@2x.jpg in Resources */,
+				B4B4F1151D394F4100EFCC0E /* selected@2x.png in Resources */,
 				7929E37B1B9C78B5001F1373 /* marketing@3x.png in Resources */,
 				79AC946B1B9E116000B81452 /* ndInput@2x.png in Resources */,
 				7929E3841B9C78B5001F1373 /* setting@2x.png in Resources */,
@@ -4415,6 +4537,7 @@
 				7930A3A61BB91ECF003112E4 /* frpie-bg@3x.jpg in Resources */,
 				7929E3D81B9CC674001F1373 /* mrkt-cmpn@2x.png in Resources */,
 				79F84B1B1BE9354B0081613A /* MRProductBrocherViewController.xib in Resources */,
+				B4B4F10F1D394F4100EFCC0E /* unselected.png in Resources */,
 				796E939F1BB880C20031EA34 /* ddbg@2x.jpg in Resources */,
 				79BD27A01B80980F007CA448 /* Icon-60.png in Resources */,
 				796E93A91BB8816D0031EA34 /* ddbg@3x.jpg in Resources */,
@@ -4455,6 +4578,7 @@
 				CC7DB0911D0C8BEC007DFE4C /* categoryBG-568h@2x.jpg in Resources */,
 				CC7DB0921D0C8BEC007DFE4C /* pageviewdots@2x~iPad.png in Resources */,
 				CC7DB0931D0C8BEC007DFE4C /* MROTPVerifiedViewController.xib in Resources */,
+				B4B4F1161D394F4100EFCC0E /* selected@2x.png in Resources */,
 				CC7DB0941D0C8BEC007DFE4C /* MRMedRepViewController.xib in Resources */,
 				CC7DB0951D0C8BEC007DFE4C /* pcminus@2x.png in Resources */,
 				CC7DB0961D0C8BEC007DFE4C /* pageviewdots~iPad.png in Resources */,
@@ -4495,6 +4619,7 @@
 				CC7DB0B51D0C8BEC007DFE4C /* search@3x.png in Resources */,
 				CC7DB0B61D0C8BEC007DFE4C /* Signup_plain@2x.png in Resources */,
 				CC7DB0B71D0C8BEC007DFE4C /* addicon@3x.png in Resources */,
+				B4B4F1121D394F4100EFCC0E /* unselected@2x.png in Resources */,
 				CCE29B281D26E870006DED8E /* MRCustomTabBar.xib in Resources */,
 				CC7DB0B81D0C8BEC007DFE4C /* ndcompany3@3x.jpg in Resources */,
 				CC7DB0B91D0C8BEC007DFE4C /* dashboard-bg@3x.png in Resources */,
@@ -4504,6 +4629,7 @@
 				CC7DB0BD1D0C8BEC007DFE4C /* MPCallMedrepViewController_iPhone.xib in Resources */,
 				CC7DB0BE1D0C8BEC007DFE4C /* crgreyup-arrow@3x.png in Resources */,
 				CC7DB0BF1D0C8BEC007DFE4C /* PHdoctor@3x.png in Resources */,
+				B4B4F1101D394F4100EFCC0E /* unselected.png in Resources */,
 				CC7DB0C01D0C8BEC007DFE4C /* password@2x.png in Resources */,
 				CC7DB0C11D0C8BEC007DFE4C /* NDcompany1@2x.jpg in Resources */,
 				CC7DB0C21D0C8BEC007DFE4C /* reveal-icon.png in Resources */,
@@ -4609,6 +4735,7 @@
 				CC7DB1151D0C8BEC007DFE4C /* Signup_plain~iPad.png in Resources */,
 				CC7DB1161D0C8BEC007DFE4C /* radioSelection@3x.png in Resources */,
 				CC7DB1171D0C8BEC007DFE4C /* Images.xcassets in Resources */,
+				B4B4F1261D3983D300EFCC0E /* Profile.json in Resources */,
 				CC7DB1181D0C8BEC007DFE4C /* Icon-Small@2x.png in Resources */,
 				CC7DB2D81D0CC433007DFE4C /* MRContactWithinGroupCollectionCellCollectionViewCell.xib in Resources */,
 				CC7DB1191D0C8BEC007DFE4C /* transperent-bg@2x.png in Resources */,
@@ -4623,6 +4750,7 @@
 				CC7DB1211D0C8BEC007DFE4C /* radioUnSelection@3x.png in Resources */,
 				CC7DB1231D0C8BEC007DFE4C /* Default-568h@2x.png in Resources */,
 				CC7DB2BE1D0CC433007DFE4C /* groupList.json in Resources */,
+				B4B4F1141D394F4100EFCC0E /* selected.png in Resources */,
 				CC7DB1241D0C8BEC007DFE4C /* MRSurveyListViewController.xib in Resources */,
 				CC7DB1251D0C8BEC007DFE4C /* notificationback@3x.png in Resources */,
 				CC7DB1261D0C8BEC007DFE4C /* fbSelectedRadio@3x.png in Resources */,
@@ -4926,6 +5054,7 @@
 			files = (
 				79169E281BEBE70500C11D13 /* MRAppointmentListViewController.m in Sources */,
 				7930A3941BB9153A003112E4 /* MRCompaignsDetailsViewController.m in Sources */,
+				B4B4F1511D39A80C00EFCC0E /* ExpericeFillUpTableViewCell.m in Sources */,
 				CC86FE491D29BA4F0030B23D /* MRReplies+CoreDataProperties.m in Sources */,
 				CC01BA731D302ACF007E2AEB /* MRCommentViewController.m in Sources */,
 				83B782121B7919EA0070645C /* Reachability.m in Sources */,
@@ -4936,6 +5065,7 @@
 				7920D6931C1C87C9008D3386 /* MRForgotPasswordTwoViewController.m in Sources */,
 				79421F401BB83BAE0055D9B7 /* MRDoctorDetailsTableViewCell.m in Sources */,
 				7930A3991BB91629003112E4 /* MRFeedBackResultCell.m in Sources */,
+				B4B4F14B1D39857E00EFCC0E /* MRPublications+CoreDataProperties.m in Sources */,
 				79F4167A1B9F596B0089729B /* MPAppointmentViewController.m in Sources */,
 				B4B4F1051D38B52B00EFCC0E /* ProfileAboutTableViewCell.m in Sources */,
 				79DC37181BE7DEA90027F7DB /* MRMedRepListTableCell.m in Sources */,
@@ -4946,6 +5076,7 @@
 				797560411BBFE3AA0034D0AC /* MRNotificationType.m in Sources */,
 				79708A701BB71D68007CE81D /* Base64Transcoder.m in Sources */,
 				B41746D51D0CD6E1009B7E7E /* MrGroupChildPost+CoreDataProperties.m in Sources */,
+				B4B4F11A1D395C7B00EFCC0E /* CommonTableViewCell.m in Sources */,
 				83B781F91B7916900070645C /* MRCommon.m in Sources */,
 				CC7DB3A91D0CC994007DFE4C /* MRGroupTableViewCell.m in Sources */,
 				79314AD81BD2776A00EB3A48 /* MRPharmaNotificationDetailsViewController.m in Sources */,
@@ -4961,9 +5092,11 @@
 				7929E3B41B9C8E5F001F1373 /* MRAppointmentCollectionViewCell.m in Sources */,
 				79F84B201BE938310081613A /* MRViewAppointmnetViewController.m in Sources */,
 				797560441BBFE3AA0034D0AC /* MRTherapeuticArea.m in Sources */,
+				B4B4F13D1D39857E00EFCC0E /* MRProfile.m in Sources */,
 				CC7DB2741D0C9E15007DFE4C /* MPTransformTableViewCell.m in Sources */,
 				7969CFCE1BAF2E38004C2009 /* MRListViewController.m in Sources */,
 				79D5EAA01C1E00D50037CE23 /* MRDRActivityTableViewCell.m in Sources */,
+				B4B4F1551D39A8D600EFCC0E /* basicInfoTableViewCell.m in Sources */,
 				79F5C9F61BB061BE00435B6C /* MRMedrepMeetingsCell.m in Sources */,
 				B41746DF1D0CD740009B7E7E /* MRGroupPost.m in Sources */,
 				79A4F8AD1BC186B200E58DC7 /* GraphView.m in Sources */,
@@ -4977,14 +5110,18 @@
 				CC9857F51D2E51B300C74438 /* MRManagedObject.m in Sources */,
 				B4B4F1011D38B4DF00EFCC0E /* ProfileBasicTableViewCell.m in Sources */,
 				8AFE8D231D12EB310000382E /* MRAddMembersViewController.m in Sources */,
+				B4B4F1411D39857E00EFCC0E /* MRWorkExperience.m in Sources */,
 				CC7DB2C51D0CC433007DFE4C /* MRCollectionView.m in Sources */,
 				B4B4F0FB1D38AEDF00EFCC0E /* addProfileItemsTableViewCell.m in Sources */,
 				B41746E41D0CE628009B7E7E /* GroupPostChildTableViewCell.m in Sources */,
+				B4B4F13B1D39857E00EFCC0E /* MRProfile+CoreDataProperties.m in Sources */,
 				79BD27DC1B809FD1007CA448 /* MRLoginViewController.m in Sources */,
+				B4B4F13F1D39857E00EFCC0E /* MRWorkExperience+CoreDataProperties.m in Sources */,
 				CC649F5F1D0D1BA10012289C /* MRDrugSearchViewController.m in Sources */,
 				79F29A701BE6330300063DC2 /* MRDoctorActivityScoreViewController.m in Sources */,
 				79FFD24F1BB9B83700CEE606 /* MRRegistrationRoleViewController.m in Sources */,
 				CC86FE3A1D29A7780030B23D /* MRShareDetailViewController.m in Sources */,
+				B4B4F1431D39857E00EFCC0E /* MRInterestArea+CoreDataProperties.m in Sources */,
 				CC7DB31B1D0CC530007DFE4C /* PendingContactTableViewCell.m in Sources */,
 				CC9857D41D2D82CC00C74438 /* MRGroupPost+CoreDataProperties.m in Sources */,
 				7920D6A31C1CB236008D3386 /* MRDoctorActivityScoreDetailsViewController.m in Sources */,
@@ -5037,11 +5174,14 @@
 				8AFE8CDA1D0F20BC0000382E /* NotificationUUIDViewController.m in Sources */,
 				8AFE8D2A1D12F6A70000382E /* MRAddMemberTableViewCell.m in Sources */,
 				8AFF27B01D21C3DE00080DF0 /* MRInviteViewController.m in Sources */,
+				B4B4F11E1D395D9600EFCC0E /* ExperienceDateTimeTableViewCell.m in Sources */,
 				CC7DB2EF1D0CC433007DFE4C /* UIPopoverController+iPhone.m in Sources */,
 				CC9858061D2E726300C74438 /* MRShareOptionTableViewCell.m in Sources */,
 				CC7DB2CD1D0CC433007DFE4C /* MRContactDetailViewController.m in Sources */,
+				B4B4F1451D39857E00EFCC0E /* MRInterestArea.m in Sources */,
 				796E93711BB861E10031EA34 /* MRNewProductCompaignsViewController.m in Sources */,
 				CC9857F91D2E523E00C74438 /* NSDictionary+CaseInsensitive.m in Sources */,
+				B4B4F1221D395DF300EFCC0E /* ExperienceSummaryTableViewCell.m in Sources */,
 				79115CEB1BCD872900151806 /* MRNotifications.m in Sources */,
 				CC9857E81D2DAA6B00C74438 /* MRTransformPost.m in Sources */,
 				83C127F31B77C88B00D2F08E /* main.m in Sources */,
@@ -5082,9 +5222,12 @@
 				7930A38F1BB9151C003112E4 /* MRFeedBackResultViewController.m in Sources */,
 				7975604A1BC02B3A0034D0AC /* MRCompanyDetails.m in Sources */,
 				79C709E41BE7D7F200223562 /* MRMedRepViewController.m in Sources */,
+				B4B4F1471D39857E00EFCC0E /* EducationalQualifications+CoreDataProperties.m in Sources */,
+				B4B4F14D1D39857E00EFCC0E /* MRPublications.m in Sources */,
 				CC9BCEC11D0F2A3900702EBC /* MRTransformViewController.m in Sources */,
 				79841DD81B989B5B00535916 /* MROTPVerifiedViewController.m in Sources */,
 				B47E338E1D2F65540051724C /* MRSharePost.m in Sources */,
+				B4B4F1491D39857E00EFCC0E /* EducationalQualifications.m in Sources */,
 				79708A6F1BB71D68007CE81D /* NSData+Base64Additions.m in Sources */,
 				83B782051B7917010070645C /* MRDataManger.m in Sources */,
 				796E93761BB862530031EA34 /* MRNewProductCell.m in Sources */,
@@ -5111,7 +5254,9 @@
 				CC7DB0221D0C8BEC007DFE4C /* MRAppointmentListViewController.m in Sources */,
 				CC86FE4A1D29BA4F0030B23D /* MRReplies+CoreDataProperties.m in Sources */,
 				CC7DB0231D0C8BEC007DFE4C /* MRCompaignsDetailsViewController.m in Sources */,
+				B4B4F11B1D395C7B00EFCC0E /* CommonTableViewCell.m in Sources */,
 				CC7DB0241D0C8BEC007DFE4C /* Reachability.m in Sources */,
+				B4B4F1231D395DF300EFCC0E /* ExperienceSummaryTableViewCell.m in Sources */,
 				CC7DB2861D0C9E7B007DFE4C /* NotificationWebViewController.m in Sources */,
 				CC01BA741D302ACF007E2AEB /* MRCommentViewController.m in Sources */,
 				CC7DB0251D0C8BEC007DFE4C /* MRNotificationsDetailsViewController.m in Sources */,
@@ -5138,6 +5283,8 @@
 				CC7DB0301D0C8BEC007DFE4C /* MRNotificationType.m in Sources */,
 				CC7DB21A1D0C8CF2007DFE4C /* MRDevEnvironmentConfig.m in Sources */,
 				8A7169D81D27E23D00533A6D /* MRDrugTableViewCell.m in Sources */,
+				B4B4F1521D39A80C00EFCC0E /* ExpericeFillUpTableViewCell.m in Sources */,
+				B4B4F13E1D39857E00EFCC0E /* MRProfile.m in Sources */,
 				CC7DB0311D0C8BEC007DFE4C /* Base64Transcoder.m in Sources */,
 				CC7DB0321D0C8BEC007DFE4C /* MRCommon.m in Sources */,
 				CC7DB0331D0C8BEC007DFE4C /* MRPharmaNotificationDetailsViewController.m in Sources */,
@@ -5154,6 +5301,7 @@
 				CCA383F41D342D3500BCF5A9 /* MRGroupMembers.m in Sources */,
 				B41746CB1D0CD455009B7E7E /* CommonBoxView.m in Sources */,
 				B41746D61D0CD6E1009B7E7E /* MrGroupChildPost+CoreDataProperties.m in Sources */,
+				B4B4F1461D39857E00EFCC0E /* MRInterestArea.m in Sources */,
 				8A7169D21D27B07D00533A6D /* MRDrugDetailModel.m in Sources */,
 				8AFE8D241D12EB310000382E /* MRAddMembersViewController.m in Sources */,
 				CC9857F61D2E51B300C74438 /* MRManagedObject.m in Sources */,
@@ -5166,6 +5314,7 @@
 				CC86FE3B1D29A7780030B23D /* MRShareDetailViewController.m in Sources */,
 				CC7DB03E1D0C8BEC007DFE4C /* MRMedrepMeetingsCell.m in Sources */,
 				CC9857D51D2D82CC00C74438 /* MRGroupPost+CoreDataProperties.m in Sources */,
+				B4B4F14E1D39857E00EFCC0E /* MRPublications.m in Sources */,
 				B4B4F1061D38B52B00EFCC0E /* ProfileAboutTableViewCell.m in Sources */,
 				CC7DB03F1D0C8BEC007DFE4C /* GraphView.m in Sources */,
 				CC7DB0401D0C8BEC007DFE4C /* MRAppControl.m in Sources */,
@@ -5174,12 +5323,17 @@
 				CC7DB0431D0C8BEC007DFE4C /* MRMedRepDetailsViewController.m in Sources */,
 				CC7DB0441D0C8BEC007DFE4C /* MRLoginViewController.m in Sources */,
 				CC7DB0451D0C8BEC007DFE4C /* MRDoctorActivityScoreViewController.m in Sources */,
+				B4B4F1441D39857E00EFCC0E /* MRInterestArea+CoreDataProperties.m in Sources */,
 				CC7DB0461D0C8BEC007DFE4C /* MRRegistrationRoleViewController.m in Sources */,
 				CC7DB0471D0C8BEC007DFE4C /* MRDoctorActivityScoreDetailsViewController.m in Sources */,
+				B4B4F1481D39857E00EFCC0E /* EducationalQualifications+CoreDataProperties.m in Sources */,
+				B4B4F1421D39857E00EFCC0E /* MRWorkExperience.m in Sources */,
 				CC7DB0481D0C8BEC007DFE4C /* MRForgotPasswordViewController.m in Sources */,
 				CC7DB0491D0C8BEC007DFE4C /* MRParserHelper.m in Sources */,
 				CC86FE4C1D29BA4F0030B23D /* MRReplies.m in Sources */,
 				8AC93CE31D183CCF00C2A864 /* MRServeViewController.m in Sources */,
+				B4B4F1561D39A8D600EFCC0E /* basicInfoTableViewCell.m in Sources */,
+				B4B4F14C1D39857E00EFCC0E /* MRPublications+CoreDataProperties.m in Sources */,
 				CC7DB04A1D0C8BEC007DFE4C /* MRConvertAppointmentCell.m in Sources */,
 				CCE29B251D26E6C4006DED8E /* MRCustomTabBar.m in Sources */,
 				CC463DE81D27B37B002AE85E /* MRAppConstants.m in Sources */,
@@ -5226,6 +5380,7 @@
 				CC7DB0621D0C8BEC007DFE4C /* main.m in Sources */,
 				CC7DB0631D0C8BEC007DFE4C /* MRMenuTableViewCell.m in Sources */,
 				CC7DB0641D0C8BEC007DFE4C /* ViewController.m in Sources */,
+				B4B4F13C1D39857E00EFCC0E /* MRProfile+CoreDataProperties.m in Sources */,
 				CC7DB0651D0C8BEC007DFE4C /* MRWebserviceHelper.m in Sources */,
 				CC7DB0661D0C8BEC007DFE4C /* MRDatabaseHelper.m in Sources */,
 				CC7DB0671D0C8BEC007DFE4C /* MRReadNotificationsViewController.m in Sources */,
@@ -5249,6 +5404,7 @@
 				CC9BCEC21D0F2A3900702EBC /* MRTransformViewController.m in Sources */,
 				CC7DB0711D0C8BEC007DFE4C /* MRHomeViewContoller.m in Sources */,
 				CC7DB2C01D0CC433007DFE4C /* PieMenu.m in Sources */,
+				B4B4F1401D39857E00EFCC0E /* MRWorkExperience+CoreDataProperties.m in Sources */,
 				CC9858021D2E53EA00C74438 /* MRContact.m in Sources */,
 				B41746E01D0CD740009B7E7E /* MRGroupPost.m in Sources */,
 				CC7DB0721D0C8BEC007DFE4C /* GraphPoint.m in Sources */,
@@ -5263,12 +5419,14 @@
 				B4B4F0F21D38957000EFCC0E /* AddExperienceTableViewController.m in Sources */,
 				CC7DB2C61D0CC433007DFE4C /* MRCollectionView.m in Sources */,
 				CC7DB0781D0C8BEC007DFE4C /* MRMedRepViewController.m in Sources */,
+				B4B4F11F1D395D9600EFCC0E /* ExperienceDateTimeTableViewCell.m in Sources */,
 				CC7DB0791D0C8BEC007DFE4C /* MROTPVerifiedViewController.m in Sources */,
 				CC7DB07A1D0C8BEC007DFE4C /* NSData+Base64Additions.m in Sources */,
 				CC649F661D0D1BAA0012289C /* MRDrugDetailViewController.m in Sources */,
 				CC7DB07B1D0C8BEC007DFE4C /* MRDataManger.m in Sources */,
 				CC7DB07C1D0C8BEC007DFE4C /* MRNewProductCell.m in Sources */,
 				B4B4F10A1D38B5FD00EFCC0E /* CommonProfileSectionTableViewCell.m in Sources */,
+				B4B4F14A1D39857E00EFCC0E /* EducationalQualifications.m in Sources */,
 				CC7DB07D1D0C8BEC007DFE4C /* MRProductBrocherViewController.m in Sources */,
 				CCA383F21D342D3500BCF5A9 /* MRGroupMembers+CoreDataProperties.m in Sources */,
 				CC7DB07E1D0C8BEC007DFE4C /* MRRegTableViewCell.m in Sources */,

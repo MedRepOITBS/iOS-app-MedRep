@@ -1,0 +1,41 @@
+{
+    "about": {
+        "name": "ABC",
+        "location": "",
+        "designation": "Consultant"
+    },
+    "workExperience": [
+                       {
+                       "designation": "Doc",
+                       "fromDate": "March 2014",
+                       "toDate": "Present",
+                       "hospital": "Appolo",
+                       "location": "Hyderabad"
+                       },
+                       {
+                       "designation": "Doc",
+                       "fromDate": "June 2008",
+                       "toDate": "Feb 2014",
+                       "hospital": "Care",
+                       "location": "Hyderabad"
+                       }
+                       ],
+    "InterestAreas": [
+                      {
+                      "name": "eye"
+                      }
+                      ],
+    "EducationalQualifications": [
+                                  {
+                                  "collegeName": "SDBCT COLLEGE CHENNAI",
+                                  "course": "MBBS",
+                                  "aggregate": "7.5",
+                                  "yearOfPassout": "2005-2010"
+                                  }
+                                  ],
+    "publications": [
+                     {
+                     "name": "How to learn Heart"
+                     }
+                     ]
+}
