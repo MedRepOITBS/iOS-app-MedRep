@@ -25,6 +25,8 @@
 #import "MRInterestArea.h"
 #import "ExpericeFillUpTableViewCell.h"
 #import "basicInfoTableViewCell.h"
+#import "SWRevealViewController.h"
+
 @interface MRProfileDetailsViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate,addProfileItemsTableViewCellDelegate>
 
 
@@ -38,6 +40,41 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    NSDictionary *userdata = [MRAppControl sharedHelper].userRegData;
+    
+    NSInteger userType = [MRAppControl sharedHelper].userType;
+    
+   self.navigationItem.title         = (userType == 2 || userType == 1) ? [NSString stringWithFormat:@"Dr. %@ %@", [userdata objectForKey:KFirstName],[userdata objectForKey:KLastName]] : [NSString stringWithFormat:@"Mr. %@ %@", [userdata objectForKey:KFirstName],[userdata objectForKey:KLastName]];
+    
+    
+    [[UINavigationBar appearance] setTitleTextAttributes:@{
+                                                           NSForegroundColorAttributeName:[UIColor whiteColor],
+                                                           NSFontAttributeName: [UIFont boldSystemFontOfSize:16.0]
+                                                           }];
+    
+    
+    // shadowImage removes under navigation line
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.barTintColor = [MRCommon colorFromHexString:kStatusBarColor];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.translucent = false;
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName]];
+    
+    
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    SWRevealViewController *revealController = [self revealViewController];
+    revealController.delegate = self;
+    [revealController panGestureRecognizer];
+    [revealController tapGestureRecognizer];
+    
+    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon.png"]
+                                                                         style:UIBarButtonItemStylePlain target:revealController
+                                                                        action:@selector(revealToggle:)];
+    self.navigationItem.leftBarButtonItem = revealButtonItem;
+    
+
     [self setupProfileData];
     // Do any additional setup after loading the view from its nib.
 }
@@ -415,7 +452,7 @@
          
          NSInteger userType = [MRAppControl sharedHelper].userType;
          
-         cell.userNameLbl.text         = (userType == 2 || userType == 1) ? [NSString stringWithFormat:@"Dr. %@ %@", [userdata objectForKey:KFirstName],[userdata objectForKey:KLastName]] : [NSString stringWithFormat:@"Mr. %@ %@", [userdata objectForKey:KFirstName],[userdata objectForKey:KLastName]];
+         cell.userNameLbl.text         = _profileObj.designation;
          cell.userLocation.text = _profileObj.location;
          cell.profileimageView.image =[MRCommon getImageFromBase64Data:[userdata objectForKey:KProfilePicture]];
          
@@ -504,24 +541,18 @@
 -(void)addProfileItemsTableViewCellDelegateForButtonPressed:(addProfileItemsTableViewCell *)cell{
     
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    
-    switch (indexPath.row) {
-        case 3:
-        {
-            UIStoryboard *sb = [UIStoryboard storyboardWithName:@"ProfileStoryboard" bundle:nil];
-            AddExperienceTableViewController *profViewController = [sb instantiateViewControllerWithIdentifier:@"AddExperienceTableViewController"];
-            
-            //                MRProfileDetailsViewController *profViewController = [[MRProfileDetailsViewController alloc] initWithNibName:@"AddExperienceTableViewController" bundle:nil];
-            
-       
-            [self.navigationController pushViewController:profViewController  animated:YES];
+    NSDictionary *valNDict1 = [[self setStructureForTableView] objectAtIndex:indexPath.row-1];
+    NSString *val = [valNDict1 objectForKey:@"type"];
+    if ([val isEqualToString:@"WORK_EXP_DETAIL"]) {
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"ProfileStoryboard" bundle:nil];
+        AddExperienceTableViewController *profViewController = [sb instantiateViewControllerWithIdentifier:@"AddExperienceTableViewController"];
+        
+        //                MRProfileDetailsViewController *profViewController = [[MRProfileDetailsViewController alloc] initWithNibName:@"AddExperienceTableViewController" bundle:nil];
+        
+        
+        [self.navigationController pushViewController:profViewController  animated:YES];
+        
 
-            
-        }
-            break;
-            
-        default:
-            break;
     }
     
 }
