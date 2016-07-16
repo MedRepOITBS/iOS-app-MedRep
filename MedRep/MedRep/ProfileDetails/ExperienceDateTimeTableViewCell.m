@@ -8,6 +8,7 @@
 
 #import "ExperienceDateTimeTableViewCell.h"
 
+
 @implementation ExperienceDateTimeTableViewCell
 
 - (void)awakeFromNib {
@@ -23,5 +24,24 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     return NO;
+}
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    
+    if ([self.delegate respondsToSelector:@selector(ExperienceDateTimeTableViewCellDelegateForTextFieldClicked:withTextField:)]) {
+        [self.delegate ExperienceDateTimeTableViewCellDelegateForTextFieldClicked:self withTextField:textField];
+    }
+    
+}
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    
+    if ([self.delegate respondsToSelector:@selector(ExperienceDateTimeTableViewCellDelegateForTextFieldClicked:withTextField:)]) {
+        [self.delegate ExperienceDateTimeTableViewCellDelegateForTextFieldClicked:self withTextField:textField];
+    }
+    return NO;
+}
+
+/// return NO to disallow editing.
+
+- (IBAction)currentBtnPressed:(id)sender {
 }
 @end

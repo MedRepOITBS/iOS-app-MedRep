@@ -7,7 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol ExperienceDateTimeTableViewCellDelegate;
 
-@interface ExperienceDateTimeTableViewCell : UITableViewCell
+@interface ExperienceDateTimeTableViewCell : UITableViewCell <UITextFieldDelegate>
+- (IBAction)currentBtnPressed:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *checkCurrentBtn;
+@property (weak, nonatomic) IBOutlet UITextField *fromTextField;
+@property (weak, nonatomic) IBOutlet UITextField *yearTextField;
+@property (weak, nonatomic) IBOutlet UIView *toView;
+@property (weak, nonatomic) IBOutlet UITextField *toMMTextField;
+@property (weak, nonatomic) IBOutlet UITextField *toYYYTextField;
+@property (nonatomic,weak) id<ExperienceDateTimeTableViewCellDelegate> delegate;
+
+@end
+
+@protocol ExperienceDateTimeTableViewCellDelegate <NSObject>
+@optional
+
+-(void)ExperienceDateTimeTableViewCellDelegateForTextFieldClicked:(ExperienceDateTimeTableViewCell *)cell withTextField:(UITextField *)textField;
 
 @end

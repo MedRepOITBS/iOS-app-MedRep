@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ExperienceSummaryTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UITextField *summaryTextField;
 
 @end

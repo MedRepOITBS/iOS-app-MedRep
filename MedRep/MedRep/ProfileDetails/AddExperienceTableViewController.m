@@ -10,8 +10,16 @@
 #import "CommonTableViewCell.h"
 #import "ExperienceSummaryTableViewCell.h"
 #import "ExperienceDateTimeTableViewCell.h"
-@interface AddExperienceTableViewController ()
+#import "UICustomDatePicker.h"
+#import "NSString+Date.h"
 
+
+@interface AddExperienceTableViewController () <ExperienceDateTimeTableViewCellDelegate>
+@property (nonatomic, weak) IBOutlet UICustomDatePicker *customDatePicker;
+@property (nonatomic, weak) IBOutlet UICustomDatePicker *customYearPicker;
+
+@property (nonatomic,weak) IBOutlet UITableView *tableView;
+@property (nonatomic,strong) UITextField *currentSelectedTextField;
 @end
 
 @implementation AddExperienceTableViewController
@@ -23,8 +31,11 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"DONE" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonTapped:)];
     self.navigationItem.rightBarButtonItem = revealButtonItem;
-    
-    
+    self.customDatePicker.hidden = YES;
+    self.customYearPicker.hidden = YES;
+
+      [self initCustomDatePicker:self.customDatePicker withOption:NSCustomDatePickerOptionMediumMonth andOrder:NSCustomDatePickerOrderMonthDayAndYear];
+  [self initCustomDatePicker:self.customYearPicker withOption:NSCustomDatePickerOptionYear andOrder:NSCustomDatePickerOrderMonthDayAndYear];
     UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"]  style:UIBarButtonItemStyleDone target:self action:@selector(backButtonTapped:)];
     self.navigationItem.leftBarButtonItem = leftButtonItem;
     
@@ -84,6 +95,7 @@
                         break;
         case 2:{
             ExperienceDateTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ExperienceDateTimeTableViewCell" forIndexPath:indexPath];
+            cell.delegate = self;
             return cell;
         }
             break;
@@ -100,6 +112,22 @@
     return nil;
 }
 
+-(void)ExperienceDateTimeTableViewCellDelegateForTextFieldClicked:(ExperienceDateTimeTableViewCell *)cell withTextField:(UITextField *)textField{
+
+    _currentSelectedTextField = textField;
+    if ([textField.placeholder isEqualToString:@"MMM"]) {
+        self.customDatePicker.hidden = NO;
+        self.customYearPicker.hidden = YES;
+        
+
+        
+    }else {
+        self.customDatePicker.hidden = YES;
+        self.customYearPicker.hidden = NO;
+        
+
+    }
+}
 
 /*
 // Override to support conditional editing of the table view.
@@ -161,4 +189,25 @@
 }
 */
 
+- (void) initCustomDatePicker:(UICustomDatePicker *) picker withOption:(NSUInteger) option andOrder:(NSUInteger) order {
+    picker.minDate = [[NSString stringWithFormat:@"06/Jan/1900"] dateValueForFormatString:@"dd/MMM/yyyy"];
+    picker.maxDate = [[NSString stringWithFormat:@"06/Dec/2300"] dateValueForFormatString:@"dd/MMM/yyyy"];
+    picker.currentDate = [NSDate date];
+    picker.order = order;
+    picker.option = option;
+}
+
+
+- (IBAction)didCustomDatePickerValueChanged:(id)sender {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    if (((UICustomDatePicker *)sender).tag == 120) {
+        [formatter setDateFormat:@"yyyy"];
+    }else {
+        
+        [formatter setDateFormat:@"MMM"];
+    }
+    NSString *stringFromDate = [formatter stringFromDate:[(UICustomDatePicker *)sender currentDate]];
+    NSLog(@"%@",stringFromDate);
+    _currentSelectedTextField.text = stringFromDate;
+}
 @end

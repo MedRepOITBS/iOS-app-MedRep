@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AddExperienceTableViewController : UITableViewController
+@interface AddExperienceTableViewController : UIViewController
 
 @end
