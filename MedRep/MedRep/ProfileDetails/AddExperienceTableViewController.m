@@ -12,11 +12,19 @@
 #import "ExperienceDateTimeTableViewCell.h"
 #import "UICustomDatePicker.h"
 #import "NSString+Date.h"
+#import "MRDatabaseHelper.h"
 
-
-@interface AddExperienceTableViewController () <ExperienceDateTimeTableViewCellDelegate>
+@interface AddExperienceTableViewController () <ExperienceDateTimeTableViewCellDelegate,CommonTableViewCellDelegate>
 @property (nonatomic, weak) IBOutlet UICustomDatePicker *customDatePicker;
 @property (nonatomic, weak) IBOutlet UICustomDatePicker *customYearPicker;
+@property (nonatomic,strong) NSString * designation;
+@property (nonatomic,strong) NSString *organisation;
+@property (nonatomic,strong) NSString *fromMM;
+@property (nonatomic,strong) NSString *toMM;
+@property (nonatomic,strong) NSString *fromYYYY;
+@property (nonatomic,strong) NSString *toYYYY;
+@property (nonatomic) BOOL isCurrentChecked;
+@property (nonatomic,strong) NSString *summaryText;
 
 @property (nonatomic,weak) IBOutlet UITableView *tableView;
 @property (nonatomic,strong) UITextField *currentSelectedTextField;
@@ -43,8 +51,91 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 -(void)doneButtonTapped:(id)sender{
+    if (![self isValidationSuccess]) {
+        return;
+    }
     
+    if (_isCurrentChecked) {
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        NSString *stringFromDate;
+        [formatter setDateFormat:@"yyyy"];
+        _toYYYY = [formatter stringFromDate:[NSDate date]];
+        
+        [formatter  setDateFormat:@"MMM"];
+        _toMM = [formatter stringFromDate:[NSDate date]];
+        
+        
+    }
+    NSDictionary * workExpDict = [[NSDictionary alloc] initWithObjectsAndKeys:_designation,@"designation",_organisation,@"hospital",[NSString stringWithFormat:@"%@ %@",_fromMM,_fromYYYY],@"fromDate",[NSString stringWithFormat:@"%@ %@",_toMM,_toYYYY],@"toDate", nil];
+    
+  BOOL ys =  [MRDatabaseHelper  addWorkExperience:workExpDict];
+    if (ys) {
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    }
 }
+-(BOOL)isValidationSuccess{
+    NSString *errorMsg;
+    BOOL isValidationPassed = YES;
+    if ([_designation isEqualToString:@""] || _designation == nil) {
+        isValidationPassed = NO;
+        errorMsg = @"Please enter the designation";
+
+        
+        
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorMsg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alertView show];
+            
+        return isValidationPassed;
+    }else if([_organisation isEqualToString:@""] || _organisation == nil){
+
+        isValidationPassed = NO;
+            errorMsg = @"Please enter the organisation";
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorMsg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+        
+        return isValidationPassed;
+    }else if([_fromYYYY isEqualToString:@""] || _fromYYYY == nil){
+                errorMsg = @"Please enter the starting year";
+        isValidationPassed = NO;
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorMsg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+        
+        return isValidationPassed;
+    }else if([_fromMM isEqualToString:@""] || _fromMM == nil){
+        errorMsg = @"Please enter the starting month";
+        isValidationPassed = NO;
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorMsg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+        
+        return isValidationPassed;
+        
+    
+    }
+    else if(!_isCurrentChecked)
+    {
+        if([_toMM isEqualToString:@""] || _toMM == nil){
+                    errorMsg = @"Please enter the end month";
+            isValidationPassed = NO;
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorMsg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alertView show];
+            
+            return isValidationPassed;
+            
+        }else if([_toYYYY isEqualToString:@""] || _toYYYY == nil){
+                    errorMsg = @"Please enter the end year";
+            isValidationPassed = NO;
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorMsg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alertView show];
+            
+            return isValidationPassed;
+            
+        }
+    }
+    return isValidationPassed;
+}
+
 -(void)backButtonTapped:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -70,39 +161,44 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete implementation, return the number of rows
-    return 4;
+    return 5;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
    
     switch (indexPath.row) {
-        case 0: case 1:{
+        case 0: case 1: case 2:{
             CommonTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommonTableViewCell" forIndexPath:indexPath];
             if (indexPath.row == 0) {
                 cell.title.text = @"DESIGNATION";
                 cell.inputTextField.placeholder = @"Designation";
-            }else{
+                cell.inputTextField.tag = 101;
+            }else if(indexPath.row == 1){
                 cell.title.text = @"ORGANISATION";
                 cell.inputTextField.placeholder = @"Organisation";
-                
+                cell.inputTextField.tag = 102;
+            }else{
+                cell.title.text = @"Location";
+                cell.inputTextField.placeholder = @"City Name";
+                cell.inputTextField.tag = 110;
             }
-            
+            cell.delegate = self;
             return cell;
             
 
         }
                         break;
-        case 2:{
+        case 3:{
             ExperienceDateTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ExperienceDateTimeTableViewCell" forIndexPath:indexPath];
             cell.delegate = self;
             return cell;
         }
             break;
-        case 3:{
+        case 4:{
             ExperienceSummaryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ExperienceSummaryTableViewCell" forIndexPath:indexPath];
             // Configure the cell...
-            
+            cell.delegate = self;
             return cell;
         }
             break;
@@ -110,6 +206,25 @@
             break;
     }
     return nil;
+}
+
+-(void)ExperienceSummaryTableViewCellDelegateForTextFieldDidEndEditing:(ExperienceSummaryTableViewCell *)cell withTextField:(UITextField *)textField{
+    NSString *trimmedString = [textField.text stringByTrimmingCharactersInSet:
+                               [NSCharacterSet whitespaceCharacterSet]];
+    
+    _summaryText = textField.text;
+    
+}
+-(void)CommonTableViewCellDelegateForTextFieldDidEndEditing:(CommonTableViewCell *)cell withTextField:(UITextField *)textField{
+    NSString *trimmedString = [textField.text stringByTrimmingCharactersInSet:
+                               [NSCharacterSet whitespaceCharacterSet]];
+    if (textField.tag == 101) {
+    
+        _designation = trimmedString;
+    }else if(textField.tag == 102){
+        _organisation = trimmedString;
+    }
+    
 }
 
 -(void)ExperienceDateTimeTableViewCellDelegateForTextFieldClicked:(ExperienceDateTimeTableViewCell *)cell withTextField:(UITextField *)textField{
@@ -163,22 +278,20 @@
 }
 */
 
-/*
+
+-(void)getCurrentCheckButtonVal:(BOOL)isCurrentCheck{
+    _isCurrentChecked = isCurrentCheck;
+}
 #pragma mark - Table view delegate
 
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Navigation logic may go here, for example:
     // Create the next view controller.
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:<#@"Nib name"#> bundle:nil];
-    
-    // Pass the selected object to the new view controller.
-    
-    // Push the view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
-}
-*/
+    self.customYearPicker.hidden = YES;
+    self.customDatePicker.hidden = YES;
 
+}
 /*
 #pragma mark - Navigation
 
@@ -200,13 +313,32 @@
 
 - (IBAction)didCustomDatePickerValueChanged:(id)sender {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    NSString *stringFromDate;
+   
     if (((UICustomDatePicker *)sender).tag == 120) {
         [formatter setDateFormat:@"yyyy"];
+        stringFromDate = [formatter stringFromDate:[(UICustomDatePicker *)sender currentDate]];
+    if(_currentSelectedTextField.tag == 501)
+        {
+            _fromYYYY = stringFromDate;
+        }else if(_currentSelectedTextField.tag == 503)
+        {
+            _toYYYY = stringFromDate;
+        }
     }else {
         
         [formatter setDateFormat:@"MMM"];
+        stringFromDate = [formatter stringFromDate:[(UICustomDatePicker *)sender currentDate]];
+        if (_currentSelectedTextField.tag == 500) {
+            _fromMM = stringFromDate;
+        }
+        else if(_currentSelectedTextField.tag == 502) {
+            _toMM = stringFromDate;
+            
+        }
     }
-    NSString *stringFromDate = [formatter stringFromDate:[(UICustomDatePicker *)sender currentDate]];
+    
+    
     NSLog(@"%@",stringFromDate);
     _currentSelectedTextField.text = stringFromDate;
 }

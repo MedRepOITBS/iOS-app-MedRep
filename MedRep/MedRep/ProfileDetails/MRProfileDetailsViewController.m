@@ -152,14 +152,17 @@
    
         // Create Dummy Data
         
-    
-            
-            NSString* filePath = [[NSBundle mainBundle] pathForResource:@"Profile" ofType:@"json"];
-            NSData* data = [NSData dataWithContentsOfFile:filePath];
-            NSError *error;
-            NSDictionary* transformArticles = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-            
-            [MRDatabaseHelper addProfileData:transformArticles];
+    NSArray * profileArr = [MRDatabaseHelper getProfileData];
+    if (profileArr.count == 0 || profileArr == nil) {
+        
+        NSString* filePath = [[NSBundle mainBundle] pathForResource:@"Profile" ofType:@"json"];
+        NSData* data = [NSData dataWithContentsOfFile:filePath];
+        NSError *error;
+        NSDictionary* transformArticles = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+        
+        [MRDatabaseHelper addProfileData:transformArticles];
+    }
+
     
     _profileObj  = [[MRDatabaseHelper getProfileData] objectAtIndex:0];
     

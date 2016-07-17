@@ -7,12 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol CommonTableViewCellDelegate;
 
 @interface CommonTableViewCell : UITableViewCell
 
 @property(nonatomic,weak) IBOutlet UILabel *title;
 @property(nonatomic,weak) IBOutlet UITextField *inputTextField;
+@property (nonatomic,weak) id<CommonTableViewCellDelegate> delegate;
 
 
+@end
+
+@protocol CommonTableViewCellDelegate <NSObject>
+@optional
+
+-(void)CommonTableViewCellDelegateForTextFieldDidEndEditing:(CommonTableViewCell *)cell withTextField:(UITextField *)textField;
 
 @end

@@ -114,4 +114,5 @@ typedef void (^WebServiceResponseHandler)(id result);
 + (void)addTransformArticles:(NSArray*)posts;
 +(void)addProfileData:(NSDictionary *)dictonary ;
 +(NSArray *)getProfileData;
++(BOOL)addWorkExperience :(NSDictionary *)dictionary;
 @end

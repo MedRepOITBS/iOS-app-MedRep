@@ -23,5 +23,11 @@
 
     // Configure the view for the selected state
 }
-
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    
+    NSLog(@"textfield %@",textField.text);
+    if ([self.delegate respondsToSelector:@selector(CommonTableViewCellDelegateForTextFieldDidEndEditing:withTextField:)]) {
+        [self.delegate CommonTableViewCellDelegateForTextFieldDidEndEditing:self withTextField:textField];
+    }
+}
 @end

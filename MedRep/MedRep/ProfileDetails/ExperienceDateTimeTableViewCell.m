@@ -13,6 +13,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    _isChecked = NO;
     // Initialization code
 }
 
@@ -32,6 +33,7 @@
     }
     
 }
+
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     
     if ([self.delegate respondsToSelector:@selector(ExperienceDateTimeTableViewCellDelegateForTextFieldClicked:withTextField:)]) {
@@ -43,5 +45,20 @@
 /// return NO to disallow editing.
 
 - (IBAction)currentBtnPressed:(id)sender {
+    if (!_isChecked) {
+        [self.checkCurrentBtn setImage:[UIImage imageNamed:@"selected.png"] forState:UIControlStateNormal];
+        _isChecked = YES;
+        _toView.hidden = YES;
+    }else{
+        _isChecked = NO;
+        _toView.hidden = NO;
+        [self.checkCurrentBtn setImage:[UIImage imageNamed:@"unselected.png"] forState:UIControlStateNormal];
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(getCurrentCheckButtonVal:)]) {
+        [self.delegate getCurrentCheckButtonVal:_isChecked];
+    }
+    
 }
+
 @end

@@ -25,5 +25,8 @@
     [textField resignFirstResponder];
     return NO;
 }
-
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    
+    NSLog(@"textfield %@",textField.text);
+}
 @end

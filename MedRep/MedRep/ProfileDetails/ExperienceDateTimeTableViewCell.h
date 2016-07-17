@@ -18,12 +18,12 @@
 @property (weak, nonatomic) IBOutlet UITextField *toMMTextField;
 @property (weak, nonatomic) IBOutlet UITextField *toYYYTextField;
 @property (nonatomic,weak) id<ExperienceDateTimeTableViewCellDelegate> delegate;
-
+@property (nonatomic) BOOL isChecked;
 @end
 
 @protocol ExperienceDateTimeTableViewCellDelegate <NSObject>
 @optional
 
 -(void)ExperienceDateTimeTableViewCellDelegateForTextFieldClicked:(ExperienceDateTimeTableViewCell *)cell withTextField:(UITextField *)textField;
-
+-(void)getCurrentCheckButtonVal:(BOOL)isCurrentCheck;
 @end

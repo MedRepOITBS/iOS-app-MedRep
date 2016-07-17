@@ -1076,9 +1076,34 @@ static MRDatabaseHelper *sharedDataManager = nil;
     return profileAra;
     
 }
++(BOOL)addWorkExperience :(NSDictionary *)dictionary{
+   
+    NSArray *profileAra = [[MRDataManger sharedManager] fetchObjectList:@"MRProfile"];
+    MRProfile * profile = [profileAra lastObject];
+    if (profile!=nil) {
+        
+        NSDictionary *workExpDict  = (NSDictionary *)dictionary;
+        MRWorkExperience * workExp = (MRWorkExperience *)[[MRDataManger sharedManager] createObjectForEntity:@"MRWorkExperience"];
+        
+        workExp.designation = [workExpDict objectForKey:@"designation"];
+        workExp.fromDate = [workExpDict objectForKey:@"fromDate"];
+        workExp.toDate = [workExpDict objectForKey:@"toDate"];
+        workExp.hospital = [workExpDict objectForKey:@"hospital"];
+//        workExp.location = [workExpDict objectForKey:@"location"];
+        
+        
+        [profile addWorkExperienceObject:workExp];
+        [[MRDataManger sharedManager] saveContext];
+        return true;
+    }
+    return false;
+    
+}
 +(void)addProfileData:(NSDictionary *)dictonary {
     
+    
     MRProfile * profile = (MRProfile *)[[MRDataManger sharedManager] createObjectForEntity:@"MRProfile"];
+    
     NSDictionary *aboutDict = [dictonary objectForKey:@"about"];
     
     profile.name = [aboutDict objectForKey:@"name"];
