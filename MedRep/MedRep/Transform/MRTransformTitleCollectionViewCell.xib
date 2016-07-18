@@ -15,13 +15,15 @@
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pRN-BV-eMd">
                         <rect key="frame" x="0.0" y="4" width="80" height="21"/>
+                        <color key="backgroundColor" red="0.25419816715151722" green="0.67232317352991577" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.17968751429999999" green="0.55715435069999997" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="pRN-BV-eMd" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="4" id="GwY-YZ-SMb"/>
                 <constraint firstItem="pRN-BV-eMd" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="U3b-jV-0k2"/>

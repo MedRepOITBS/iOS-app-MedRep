@@ -1089,7 +1089,7 @@ static MRDatabaseHelper *sharedDataManager = nil;
         workExp.fromDate = [workExpDict objectForKey:@"fromDate"];
         workExp.toDate = [workExpDict objectForKey:@"toDate"];
         workExp.hospital = [workExpDict objectForKey:@"hospital"];
-//        workExp.location = [workExpDict objectForKey:@"location"];
+        workExp.location = [workExpDict objectForKey:@"location"];
         
         
         [profile addWorkExperienceObject:workExp];

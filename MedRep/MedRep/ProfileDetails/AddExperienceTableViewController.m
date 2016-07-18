@@ -19,6 +19,7 @@
 @property (nonatomic, weak) IBOutlet UICustomDatePicker *customYearPicker;
 @property (nonatomic,strong) NSString * designation;
 @property (nonatomic,strong) NSString *organisation;
+@property (nonatomic,strong) NSString *location;
 @property (nonatomic,strong) NSString *fromMM;
 @property (nonatomic,strong) NSString *toMM;
 @property (nonatomic,strong) NSString *fromYYYY;
@@ -67,7 +68,7 @@
         
         
     }
-    NSDictionary * workExpDict = [[NSDictionary alloc] initWithObjectsAndKeys:_designation,@"designation",_organisation,@"hospital",[NSString stringWithFormat:@"%@ %@",_fromMM,_fromYYYY],@"fromDate",[NSString stringWithFormat:@"%@ %@",_toMM,_toYYYY],@"toDate", nil];
+    NSDictionary * workExpDict = [[NSDictionary alloc] initWithObjectsAndKeys:_designation,@"designation",_organisation,@"hospital",[NSString stringWithFormat:@"%@ %@",_fromMM,_fromYYYY],@"fromDate",[NSString stringWithFormat:@"%@ %@",_toMM,_toYYYY],@"toDate",_location,@"location", nil];
     
   BOOL ys =  [MRDatabaseHelper  addWorkExperience:workExpDict];
     if (ys) {
@@ -87,6 +88,14 @@
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorMsg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alertView show];
             
+        return isValidationPassed;
+    }else if([_location isEqualToString:@""] || _location == nil){
+        
+        isValidationPassed = NO;
+        errorMsg = @"Please enter the location , city name.";
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorMsg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+        
         return isValidationPassed;
     }else if([_organisation isEqualToString:@""] || _organisation == nil){
 
@@ -224,7 +233,9 @@
     }else if(textField.tag == 102){
         _organisation = trimmedString;
     }
-    
+    else if(textField.tag == 110){
+        _location = trimmedString;
+    }
 }
 
 -(void)ExperienceDateTimeTableViewCellDelegateForTextFieldClicked:(ExperienceDateTimeTableViewCell *)cell withTextField:(UITextField *)textField{

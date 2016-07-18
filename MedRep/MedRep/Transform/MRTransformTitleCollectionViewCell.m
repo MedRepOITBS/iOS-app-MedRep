@@ -32,7 +32,7 @@
 }
 
 - (void)clearCorners {
-    [self.title setBackgroundColor:[UIColor whiteColor]];
+    [self.title setBackgroundColor:[UIColor blueColor]];
     [self.title.layer setCornerRadius:0];
 }
 

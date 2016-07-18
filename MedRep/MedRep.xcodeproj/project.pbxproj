@@ -676,6 +676,10 @@
 		B4B4F1891D39E53E00EFCC0E /* NSShortMonthComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1791D39E53E00EFCC0E /* NSShortMonthComponent.m */; };
 		B4B4F18A1D39E53E00EFCC0E /* NSYearComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F17B1D39E53E00EFCC0E /* NSYearComponent.m */; };
 		B4B4F18B1D39E53E00EFCC0E /* NSYearComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F17B1D39E53E00EFCC0E /* NSYearComponent.m */; };
+		B4B4F18F1D3BF7CE00EFCC0E /* CommonEducationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F18E1D3BF7CE00EFCC0E /* CommonEducationTableViewCell.m */; };
+		B4B4F1901D3BF7CE00EFCC0E /* CommonEducationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F18E1D3BF7CE00EFCC0E /* CommonEducationTableViewCell.m */; };
+		B4B4F1931D3BFA6200EFCC0E /* EducationDateTimeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1921D3BFA6200EFCC0E /* EducationDateTimeTableViewCell.m */; };
+		B4B4F1941D3BFA6200EFCC0E /* EducationDateTimeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1921D3BFA6200EFCC0E /* EducationDateTimeTableViewCell.m */; };
 		CC0123C11D25A66B001134F3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0123C01D25A66B001134F3 /* CoreGraphics.framework */; };
 		CC0123C21D25A677001134F3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0123C01D25A66B001134F3 /* CoreGraphics.framework */; };
 		CC01BA731D302ACF007E2AEB /* MRCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC01BA711D302ACF007E2AEB /* MRCommentViewController.m */; };
@@ -2085,6 +2089,10 @@
 		B4B4F1791D39E53E00EFCC0E /* NSShortMonthComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSShortMonthComponent.m; path = UICustomDatePicker/CustomComponents/NSShortMonthComponent.m; sourceTree = "<group>"; };
 		B4B4F17A1D39E53E00EFCC0E /* NSYearComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSYearComponent.h; path = UICustomDatePicker/CustomComponents/NSYearComponent.h; sourceTree = "<group>"; };
 		B4B4F17B1D39E53E00EFCC0E /* NSYearComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSYearComponent.m; path = UICustomDatePicker/CustomComponents/NSYearComponent.m; sourceTree = "<group>"; };
+		B4B4F18D1D3BF7CD00EFCC0E /* CommonEducationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonEducationTableViewCell.h; sourceTree = "<group>"; };
+		B4B4F18E1D3BF7CE00EFCC0E /* CommonEducationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonEducationTableViewCell.m; sourceTree = "<group>"; };
+		B4B4F1911D3BFA6200EFCC0E /* EducationDateTimeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EducationDateTimeTableViewCell.h; sourceTree = "<group>"; };
+		B4B4F1921D3BFA6200EFCC0E /* EducationDateTimeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EducationDateTimeTableViewCell.m; sourceTree = "<group>"; };
 		CC0123C01D25A66B001134F3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		CC01BA701D302ACF007E2AEB /* MRCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRCommentViewController.h; path = CommentBox/MRCommentViewController.h; sourceTree = "<group>"; };
 		CC01BA711D302ACF007E2AEB /* MRCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRCommentViewController.m; path = CommentBox/MRCommentViewController.m; sourceTree = "<group>"; };
@@ -2343,6 +2351,7 @@
 		7920D6951C1C9A61008D3386 /* ProfileDetails */ = {
 			isa = PBXGroup;
 			children = (
+				B4B4F18C1D3BF7B300EFCC0E /* AddEducation */,
 				B4B4F1171D395C2700EFCC0E /* AddExperience */,
 				B4B4F0F71D38AEAB00EFCC0E /* ChildTableViewCell */,
 				7920D6961C1C9B69008D3386 /* MRProfileDetailsViewController.h */,
@@ -3787,6 +3796,17 @@
 			name = CustomComponents;
 			sourceTree = "<group>";
 		};
+		B4B4F18C1D3BF7B300EFCC0E /* AddEducation */ = {
+			isa = PBXGroup;
+			children = (
+				B4B4F1911D3BFA6200EFCC0E /* EducationDateTimeTableViewCell.h */,
+				B4B4F1921D3BFA6200EFCC0E /* EducationDateTimeTableViewCell.m */,
+				B4B4F18D1D3BF7CD00EFCC0E /* CommonEducationTableViewCell.h */,
+				B4B4F18E1D3BF7CE00EFCC0E /* CommonEducationTableViewCell.m */,
+			);
+			name = AddEducation;
+			sourceTree = "<group>";
+		};
 		CC0123B41D259161001134F3 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -5185,6 +5205,7 @@
 				79314AD31BD2773E00EB3A48 /* MRNotificationInsiderViewController.m in Sources */,
 				7975603E1BBFE3AA0034D0AC /* MRRole.m in Sources */,
 				CC7DB3171D0CC530007DFE4C /* PendingContactsViewController.m in Sources */,
+				B4B4F18F1D3BF7CE00EFCC0E /* CommonEducationTableViewCell.m in Sources */,
 				8A7169D71D27E23D00533A6D /* MRDrugTableViewCell.m in Sources */,
 				796E93931BB8784D0031EA34 /* MRCompetitorAnalasysViewController.m in Sources */,
 				7929E3B41B9C8E5F001F1373 /* MRAppointmentCollectionViewCell.m in Sources */,
@@ -5221,6 +5242,7 @@
 				B4B4F13F1D39857E00EFCC0E /* MRWorkExperience+CoreDataProperties.m in Sources */,
 				CC649F5F1D0D1BA10012289C /* MRDrugSearchViewController.m in Sources */,
 				79F29A701BE6330300063DC2 /* MRDoctorActivityScoreViewController.m in Sources */,
+				B4B4F1931D3BFA6200EFCC0E /* EducationDateTimeTableViewCell.m in Sources */,
 				79FFD24F1BB9B83700CEE606 /* MRRegistrationRoleViewController.m in Sources */,
 				CC86FE3A1D29A7780030B23D /* MRShareDetailViewController.m in Sources */,
 				B4B4F1431D39857E00EFCC0E /* MRInterestArea+CoreDataProperties.m in Sources */,
@@ -5508,6 +5530,7 @@
 				CC7DB27C1D0C9E20007DFE4C /* MRTransformDetailViewController.m in Sources */,
 				CC7DB2F01D0CC433007DFE4C /* UIPopoverController+iPhone.m in Sources */,
 				CC7DB2DE1D0CC433007DFE4C /* MRGroupsListViewController.m in Sources */,
+				B4B4F1941D3BFA6200EFCC0E /* EducationDateTimeTableViewCell.m in Sources */,
 				CC7DB2CE1D0CC433007DFE4C /* MRContactDetailViewController.m in Sources */,
 				CC98580F1D2FE43400C74438 /* MRPostedReplies+CoreDataProperties.m in Sources */,
 				CC7DB06A1D0C8BEC007DFE4C /* MRNotificationsViewController.m in Sources */,
@@ -5521,6 +5544,7 @@
 				CC7DB0701D0C8BEC007DFE4C /* MRDocotrActivityScoreViewController.m in Sources */,
 				CC9BCEC21D0F2A3900702EBC /* MRTransformViewController.m in Sources */,
 				CC7DB0711D0C8BEC007DFE4C /* MRHomeViewContoller.m in Sources */,
+				B4B4F1901D3BF7CE00EFCC0E /* CommonEducationTableViewCell.m in Sources */,
 				CC7DB2C01D0CC433007DFE4C /* PieMenu.m in Sources */,
 				B4B4F1401D39857E00EFCC0E /* MRWorkExperience+CoreDataProperties.m in Sources */,
 				CC9858021D2E53EA00C74438 /* MRContact.m in Sources */,
