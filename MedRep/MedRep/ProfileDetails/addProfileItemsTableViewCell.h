@@ -18,6 +18,6 @@
 @protocol addProfileItemsTableViewCellDelegate <NSObject>
 @optional
 
--(void)addProfileItemsTableViewCellDelegateForButtonPressed:(addProfileItemsTableViewCell *)cell;
+-(void)addProfileItemsTableViewCellDelegateForButtonPressed:(addProfileItemsTableViewCell *)cell withButtonType:(NSString *)buttonType;
 
 @end

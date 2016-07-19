@@ -7,7 +7,8 @@
 //
 
 #import "AddEducationTableViewController.h"
-
+#import "CommonEducationTableViewCell.h"
+#import "EducationDateTimeTableViewCell.h"
 @interface AddEducationTableViewController ()
 
 @end
@@ -31,25 +32,77 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
-}
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete implementation, return the number of rows
-    return 0;
+    return 5;
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
+   
+    switch (indexPath.row) {
+        case 5:
+        {
+            
+            EducationDateTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EducationDateTimeTableViewCell" forIndexPath:indexPath];
+            
+            
+            return cell;
+        }
+            break;
+
+        
+        default:
+        {
+            CommonEducationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommonEducationTableViewCell" forIndexPath:indexPath];
+            
+            switch (indexPath.row) {
+                case case 0:
+                {
+                    cell.titleEducationLbl.text = @"TYPE";
+                    cell.inputTextField.placeholder = @"type";
+                    cell.hintLabel.hidden = YES;
+                    
+                }
+                    break;
+                case case 1:
+                {
+                    cell.titleEducationLbl.text = @"DEGREE";
+                    cell.inputTextField.placeholder = @"Degree";
+                    cell.hintLabel.hidden = NO;
+                    
+                }
+                    break;
+                case case 0:
+                {
+                    cell.titleEducationLbl.text = @"SPECIALITY";
+                    cell.inputTextField.placeholder = @"speciality";
+                    cell.hintLabel.hidden = YES;
+                    
+                }
+                    break;
+                case case 0:
+                {
+                    cell.titleEducationLbl.text = @"INSTITUTE";
+                    cell.inputTextField.placeholder = @"institute";
+                    cell.hintLabel.hidden = YES;
+                    
+                }
+                    break;
+                    
+                default:
+                    break;
+            }
+            
+            return cell;
+            
+        }
+            break;
+    }
+    return nil;
 }
-*/
+
 
 /*
 // Override to support conditional editing of the table view.

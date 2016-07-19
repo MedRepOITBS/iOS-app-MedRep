@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AddEducationTableViewController : UITableViewController
+@interface AddEducationTableViewController : UIViewController
 
 @end

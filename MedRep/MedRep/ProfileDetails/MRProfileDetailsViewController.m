@@ -26,7 +26,7 @@
 #import "ExpericeFillUpTableViewCell.h"
 #import "basicInfoTableViewCell.h"
 #import "SWRevealViewController.h"
-
+#import "AddEducationTableViewController.h"
 @interface MRProfileDetailsViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate,addProfileItemsTableViewCellDelegate>
 
 
@@ -359,7 +359,6 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
     return [self setStructureForTableView].count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -541,13 +540,11 @@
  return nil;
  }
 
--(void)addProfileItemsTableViewCellDelegateForButtonPressed:(addProfileItemsTableViewCell *)cell{
+-(void)addProfileItemsTableViewCellDelegateForButtonPressed:(addProfileItemsTableViewCell *)cell withButtonType:(NSString *)buttonType{
     
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    NSDictionary *valNDict1 = [[self setStructureForTableView] objectAtIndex:indexPath.row-1];
-    NSString *val = [valNDict1 objectForKey:@"type"];
-    if ([val isEqualToString:@"WORK_EXP_DETAIL"]) {
-        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"ProfileStoryboard" bundle:nil];
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"ProfileStoryboard" bundle:nil];
+    
+    if ([buttonType isEqualToString:@"WORK_EXP"]) {
         AddExperienceTableViewController *profViewController = [sb instantiateViewControllerWithIdentifier:@"AddExperienceTableViewController"];
         
         //                MRProfileDetailsViewController *profViewController = [[MRProfileDetailsViewController alloc] initWithNibName:@"AddExperienceTableViewController" bundle:nil];
@@ -556,6 +553,29 @@
         [self.navigationController pushViewController:profViewController  animated:YES];
         
 
+    } else if ([buttonType isEqualToString:@"INTEREST_AREA"]){
+//
+        AddExperienceTableViewController *profViewController = [sb instantiateViewControllerWithIdentifier:@"AddExperienceTableViewController"];
+        
+         
+        
+        [self.navigationController pushViewController:profViewController  animated:YES];
+        
+    } else if ([buttonType isEqualToString:@"EDUCATION_QUAL"]){
+        
+        AddEducationTableViewController *profViewController = [sb instantiateViewControllerWithIdentifier:@"AddEducationTableViewController"];
+        
+        
+        
+        [self.navigationController pushViewController:profViewController  animated:YES];
+        
+    }else if([buttonType isEqualToString:@"PUBLICATION"]){
+        
+        AddExperienceTableViewController *profViewController = [sb instantiateViewControllerWithIdentifier:@"AddEducationTableViewController"];
+        
+        
+        [self.navigationController pushViewController:profViewController  animated:YES];
+        
     }
     
 }
