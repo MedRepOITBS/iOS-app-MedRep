@@ -896,6 +896,9 @@ easier for colleagues to find you.</string>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="XVE-Vb-qGe" id="39R-TR-y5e"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" red="0.9689360119" green="0.9689360119" blue="0.9689360119" alpha="1" colorSpace="calibratedRGB"/>
@@ -914,6 +917,9 @@ easier for colleagues to find you.</string>
                             <constraint firstItem="biu-wB-bcc" firstAttribute="leading" secondItem="tLg-K5-8I1" secondAttribute="leadingMargin" constant="-20" id="Of5-ou-o1k"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="interestAreaTextField" destination="LD9-Og-oKc" id="iF2-Eu-DQU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8nU-RS-nT7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

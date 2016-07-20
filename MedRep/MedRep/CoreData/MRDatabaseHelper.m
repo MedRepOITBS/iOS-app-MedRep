@@ -1086,7 +1086,7 @@ static MRDatabaseHelper *sharedDataManager = nil;
             MRInterestArea *interestArea = (MRInterestArea *)[[MRDataManger sharedManager] createObjectForEntity:@"MRInterestArea"];
             interestArea.name  = interestAreaStr;
             
-            [profile addPublicationsObject:interestArea];
+            [profile addInterestAreaObject:interestArea];
         }];
         
         
