@@ -1076,7 +1076,46 @@ static MRDatabaseHelper *sharedDataManager = nil;
     return profileAra;
     
 }
++(BOOL)addInterestArea:(NSArray *)array
+{
+    NSArray *profileAra = [[MRDataManger sharedManager] fetchObjectList:@"MRProfile"];
+    MRProfile * profile = [profileAra lastObject];
+    if (profile!=nil) {
+        [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSString *interestAreaStr = (NSString *)obj;
+            MRInterestArea *interestArea = (MRInterestArea *)[[MRDataManger sharedManager] createObjectForEntity:@"MRInterestArea"];
+            interestArea.name  = interestAreaStr;
+            
+            [profile addPublicationsObject:interestArea];
+        }];
+        
+        
+        [[MRDataManger sharedManager] saveContext];
+        return true;
+        
+    }
 
+    return false;
+}
++(BOOL)addPublications:(NSDictionary *)dictonary {
+    NSArray *profileAra = [[MRDataManger sharedManager] fetchObjectList:@"MRProfile"];
+    MRProfile * profile = [profileAra lastObject];
+    if (profile!=nil) {
+        
+        MRPublications * publications = (MRPublications *)[[MRDataManger sharedManager] createObjectForEntity:@"MRPublications"];
+        
+        publications.articleName = [dictonary objectForKey:@"articleName"];
+        publications.publication = [dictonary objectForKey:@"publication"];
+        publications.year = [dictonary objectForKey:@"year"];
+       
+        
+        [profile addPublicationsObject:publications];
+        [[MRDataManger sharedManager] saveContext];
+        return true;
+
+    }
+    return false;
+}
 +(BOOL)addEducationQualification:(NSDictionary *)dictonary {
     NSArray *profileAra = [[MRDataManger sharedManager] fetchObjectList:@"MRProfile"];
     MRProfile * profile = [profileAra lastObject];
@@ -1172,7 +1211,7 @@ static MRDatabaseHelper *sharedDataManager = nil;
         eduQuaArea.collegeName = [educationalQualificationsDict objectForKey:@"collegeName"];
         eduQuaArea.course = [educationalQualificationsDict objectForKey:@"course"];
         eduQuaArea.aggregate = [educationalQualificationsDict objectForKey:@"aggregate"];
-        
+        eduQuaArea.degree = [educationalQualificationsDict objectForKey:@"degree"];
         eduQuaArea.yearOfPassout = [educationalQualificationsDict objectForKey:@"yearOfPassout"];
         
         [profile addEducationlQualificationObject:eduQuaArea];
@@ -1187,7 +1226,9 @@ static MRDatabaseHelper *sharedDataManager = nil;
         
         NSDictionary *publicationAraDict = (NSDictionary *)obj;
         MRPublications * interestArea = (MRPublications *)[[MRDataManger sharedManager] createObjectForEntity:@"MRPublications"];
-        interestArea.name = [publicationAraDict objectForKey:@"name"];
+        interestArea.publication = [publicationAraDict objectForKey:@"publication"];
+        interestArea.articleName = [publicationAraDict objectForKey:@"articleName"];
+        interestArea.year = [publicationAraDict objectForKey:@"year"];
         [profile addPublicationsObject:interestArea];
         
         

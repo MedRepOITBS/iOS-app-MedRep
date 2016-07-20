@@ -28,14 +28,19 @@
     "EducationalQualifications": [
                                   {
                                   "collegeName": "SDBCT COLLEGE CHENNAI",
-                                  "course": "MBBS",
+                                  "course": "Bones",
                                   "aggregate": "7.5",
-                                  "yearOfPassout": "2005-2010"
+                                  "yearOfPassout": "2005-2010",
+                                  "degree":"MBBS"
                                   }
                                   ],
     "publications": [
                      {
-                     "name": "How to learn Heart"
+                     "articleName": "How to learn Heart",
+                     "publications":"INDIA PUBLICATION",
+                     "year":"2008"
+                     
+
                      }
                      ]
 }

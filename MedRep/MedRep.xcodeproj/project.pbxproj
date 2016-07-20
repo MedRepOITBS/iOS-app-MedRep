@@ -589,6 +589,10 @@
 		B40E139F1D3F1268005830DA /* InterestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B40E139D1D3F1268005830DA /* InterestViewController.m */; };
 		B40E13A21D3F137E005830DA /* PublicationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B40E13A11D3F137E005830DA /* PublicationsViewController.m */; };
 		B40E13A31D3F137E005830DA /* PublicationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B40E13A11D3F137E005830DA /* PublicationsViewController.m */; };
+		B40E13A81D3F251C005830DA /* MRPublications+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B40E13A51D3F251C005830DA /* MRPublications+CoreDataProperties.m */; };
+		B40E13A91D3F251C005830DA /* MRPublications+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B40E13A51D3F251C005830DA /* MRPublications+CoreDataProperties.m */; };
+		B40E13AA1D3F251C005830DA /* MRPublications.m in Sources */ = {isa = PBXBuildFile; fileRef = B40E13A71D3F251C005830DA /* MRPublications.m */; };
+		B40E13AB1D3F251C005830DA /* MRPublications.m in Sources */ = {isa = PBXBuildFile; fileRef = B40E13A71D3F251C005830DA /* MRPublications.m */; };
 		B41746C71D0CD434009B7E7E /* commentBox.xib in Resources */ = {isa = PBXBuildFile; fileRef = B41746C61D0CD434009B7E7E /* commentBox.xib */; };
 		B41746CA1D0CD455009B7E7E /* CommonBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = B41746C91D0CD455009B7E7E /* CommonBoxView.m */; };
 		B41746CB1D0CD455009B7E7E /* CommonBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = B41746C91D0CD455009B7E7E /* CommonBoxView.m */; };
@@ -649,10 +653,6 @@
 		B4B4F1441D39857E00EFCC0E /* MRInterestArea+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1301D39857E00EFCC0E /* MRInterestArea+CoreDataProperties.m */; };
 		B4B4F1451D39857E00EFCC0E /* MRInterestArea.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1321D39857E00EFCC0E /* MRInterestArea.m */; };
 		B4B4F1461D39857E00EFCC0E /* MRInterestArea.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1321D39857E00EFCC0E /* MRInterestArea.m */; };
-		B4B4F14B1D39857E00EFCC0E /* MRPublications+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1381D39857E00EFCC0E /* MRPublications+CoreDataProperties.m */; };
-		B4B4F14C1D39857E00EFCC0E /* MRPublications+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1381D39857E00EFCC0E /* MRPublications+CoreDataProperties.m */; };
-		B4B4F14D1D39857E00EFCC0E /* MRPublications.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F13A1D39857E00EFCC0E /* MRPublications.m */; };
-		B4B4F14E1D39857E00EFCC0E /* MRPublications.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F13A1D39857E00EFCC0E /* MRPublications.m */; };
 		B4B4F1511D39A80C00EFCC0E /* ExpericeFillUpTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1501D39A80C00EFCC0E /* ExpericeFillUpTableViewCell.m */; };
 		B4B4F1521D39A80C00EFCC0E /* ExpericeFillUpTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1501D39A80C00EFCC0E /* ExpericeFillUpTableViewCell.m */; };
 		B4B4F1551D39A8D600EFCC0E /* basicInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1541D39A8D600EFCC0E /* basicInfoTableViewCell.m */; };
@@ -2012,6 +2012,10 @@
 		B40E139D1D3F1268005830DA /* InterestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterestViewController.m; sourceTree = "<group>"; };
 		B40E13A01D3F137E005830DA /* PublicationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicationsViewController.h; sourceTree = "<group>"; };
 		B40E13A11D3F137E005830DA /* PublicationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicationsViewController.m; sourceTree = "<group>"; };
+		B40E13A41D3F251C005830DA /* MRPublications+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MRPublications+CoreDataProperties.h"; sourceTree = "<group>"; };
+		B40E13A51D3F251C005830DA /* MRPublications+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MRPublications+CoreDataProperties.m"; sourceTree = "<group>"; };
+		B40E13A61D3F251C005830DA /* MRPublications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRPublications.h; sourceTree = "<group>"; };
+		B40E13A71D3F251C005830DA /* MRPublications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRPublications.m; sourceTree = "<group>"; };
 		B41746C61D0CD434009B7E7E /* commentBox.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = commentBox.xib; sourceTree = "<group>"; };
 		B41746C81D0CD455009B7E7E /* CommonBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonBoxView.h; sourceTree = "<group>"; };
 		B41746C91D0CD455009B7E7E /* CommonBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonBoxView.m; sourceTree = "<group>"; };
@@ -2067,10 +2071,6 @@
 		B4B4F1301D39857E00EFCC0E /* MRInterestArea+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MRInterestArea+CoreDataProperties.m"; sourceTree = "<group>"; };
 		B4B4F1311D39857E00EFCC0E /* MRInterestArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRInterestArea.h; sourceTree = "<group>"; };
 		B4B4F1321D39857E00EFCC0E /* MRInterestArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRInterestArea.m; sourceTree = "<group>"; };
-		B4B4F1371D39857E00EFCC0E /* MRPublications+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MRPublications+CoreDataProperties.h"; sourceTree = "<group>"; };
-		B4B4F1381D39857E00EFCC0E /* MRPublications+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MRPublications+CoreDataProperties.m"; sourceTree = "<group>"; };
-		B4B4F1391D39857E00EFCC0E /* MRPublications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRPublications.h; sourceTree = "<group>"; };
-		B4B4F13A1D39857E00EFCC0E /* MRPublications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRPublications.m; sourceTree = "<group>"; };
 		B4B4F14F1D39A80C00EFCC0E /* ExpericeFillUpTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpericeFillUpTableViewCell.h; sourceTree = "<group>"; };
 		B4B4F1501D39A80C00EFCC0E /* ExpericeFillUpTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpericeFillUpTableViewCell.m; sourceTree = "<group>"; };
 		B4B4F1531D39A8D600EFCC0E /* basicInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = basicInfoTableViewCell.h; sourceTree = "<group>"; };
@@ -2909,14 +2909,14 @@
 				B4B4F1301D39857E00EFCC0E /* MRInterestArea+CoreDataProperties.m */,
 				B4B4F1311D39857E00EFCC0E /* MRInterestArea.h */,
 				B4B4F1321D39857E00EFCC0E /* MRInterestArea.m */,
-				B4B4F1371D39857E00EFCC0E /* MRPublications+CoreDataProperties.h */,
-				B4B4F1381D39857E00EFCC0E /* MRPublications+CoreDataProperties.m */,
-				B4B4F1391D39857E00EFCC0E /* MRPublications.h */,
-				B4B4F13A1D39857E00EFCC0E /* MRPublications.m */,
 				B40E13941D3F059C005830DA /* EducationalQualifications+CoreDataProperties.h */,
 				B40E13951D3F059C005830DA /* EducationalQualifications+CoreDataProperties.m */,
 				B40E13961D3F059C005830DA /* EducationalQualifications.h */,
 				B40E13971D3F059C005830DA /* EducationalQualifications.m */,
+				B40E13A41D3F251C005830DA /* MRPublications+CoreDataProperties.h */,
+				B40E13A51D3F251C005830DA /* MRPublications+CoreDataProperties.m */,
+				B40E13A61D3F251C005830DA /* MRPublications.h */,
+				B40E13A71D3F251C005830DA /* MRPublications.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -5195,7 +5195,6 @@
 				7920D6931C1C87C9008D3386 /* MRForgotPasswordTwoViewController.m in Sources */,
 				79421F401BB83BAE0055D9B7 /* MRDoctorDetailsTableViewCell.m in Sources */,
 				7930A3991BB91629003112E4 /* MRFeedBackResultCell.m in Sources */,
-				B4B4F14B1D39857E00EFCC0E /* MRPublications+CoreDataProperties.m in Sources */,
 				79F4167A1B9F596B0089729B /* MPAppointmentViewController.m in Sources */,
 				B4B4F1051D38B52B00EFCC0E /* ProfileAboutTableViewCell.m in Sources */,
 				79DC37181BE7DEA90027F7DB /* MRMedRepListTableCell.m in Sources */,
@@ -5227,6 +5226,7 @@
 				79F84B201BE938310081613A /* MRViewAppointmnetViewController.m in Sources */,
 				797560441BBFE3AA0034D0AC /* MRTherapeuticArea.m in Sources */,
 				B4B4F13D1D39857E00EFCC0E /* MRProfile.m in Sources */,
+				B40E13A81D3F251C005830DA /* MRPublications+CoreDataProperties.m in Sources */,
 				CC7DB2741D0C9E15007DFE4C /* MPTransformTableViewCell.m in Sources */,
 				7969CFCE1BAF2E38004C2009 /* MRListViewController.m in Sources */,
 				B4B4F1881D39E53E00EFCC0E /* NSShortMonthComponent.m in Sources */,
@@ -5290,6 +5290,7 @@
 				7953661B1BA0B7E40021CE4D /* MRFavoritesNotificationsViewController.m in Sources */,
 				B41746CF1D0CD5CE009B7E7E /* KLCPopup.m in Sources */,
 				79D8CD8B1B83A59B0089F770 /* MRAddressView.m in Sources */,
+				B40E13AA1D3F251C005830DA /* MRPublications.m in Sources */,
 				83B782181B7920BB0070645C /* SWRevealViewController.m in Sources */,
 				79421F4C1BB83BBB0055D9B7 /* MRPharmaMenuViewController.m in Sources */,
 				CC7DB2DD1D0CC433007DFE4C /* MRGroupsListViewController.m in Sources */,
@@ -5368,7 +5369,6 @@
 				7930A38F1BB9151C003112E4 /* MRFeedBackResultViewController.m in Sources */,
 				7975604A1BC02B3A0034D0AC /* MRCompanyDetails.m in Sources */,
 				79C709E41BE7D7F200223562 /* MRMedRepViewController.m in Sources */,
-				B4B4F14D1D39857E00EFCC0E /* MRPublications.m in Sources */,
 				CC9BCEC11D0F2A3900702EBC /* MRTransformViewController.m in Sources */,
 				79841DD81B989B5B00535916 /* MROTPVerifiedViewController.m in Sources */,
 				B47E338E1D2F65540051724C /* MRSharePost.m in Sources */,
@@ -5461,7 +5461,6 @@
 				CC86FE3B1D29A7780030B23D /* MRShareDetailViewController.m in Sources */,
 				CC7DB03E1D0C8BEC007DFE4C /* MRMedrepMeetingsCell.m in Sources */,
 				CC9857D51D2D82CC00C74438 /* MRGroupPost+CoreDataProperties.m in Sources */,
-				B4B4F14E1D39857E00EFCC0E /* MRPublications.m in Sources */,
 				B4B4F1061D38B52B00EFCC0E /* ProfileAboutTableViewCell.m in Sources */,
 				CC7DB03F1D0C8BEC007DFE4C /* GraphView.m in Sources */,
 				CC7DB0401D0C8BEC007DFE4C /* MRAppControl.m in Sources */,
@@ -5480,7 +5479,6 @@
 				CC86FE4C1D29BA4F0030B23D /* MRReplies.m in Sources */,
 				8AC93CE31D183CCF00C2A864 /* MRServeViewController.m in Sources */,
 				B4B4F1561D39A8D600EFCC0E /* basicInfoTableViewCell.m in Sources */,
-				B4B4F14C1D39857E00EFCC0E /* MRPublications+CoreDataProperties.m in Sources */,
 				CC7DB04A1D0C8BEC007DFE4C /* MRConvertAppointmentCell.m in Sources */,
 				CCE29B251D26E6C4006DED8E /* MRCustomTabBar.m in Sources */,
 				CC463DE81D27B37B002AE85E /* MRAppConstants.m in Sources */,
@@ -5498,6 +5496,8 @@
 				CC7DB2D61D0CC433007DFE4C /* MRContactWithinGroupCollectionCellCollectionViewCell.m in Sources */,
 				CC7DB0511D0C8BEC007DFE4C /* SVProgressHUD.m in Sources */,
 				CC7DB27A1D0C9E20007DFE4C /* MPTransformTableViewCell.m in Sources */,
+				B40E13AB1D3F251C005830DA /* MRPublications.m in Sources */,
+				B40E13A91D3F251C005830DA /* MRPublications+CoreDataProperties.m in Sources */,
 				CC7DB0521D0C8BEC007DFE4C /* MPNotificationAlertViewController.m in Sources */,
 				CC7DB0531D0C8BEC007DFE4C /* MRFavoritesNotificationsViewController.m in Sources */,
 				CC7DB0541D0C8BEC007DFE4C /* MRAddressView.m in Sources */,

@@ -143,7 +143,9 @@
         <relationship name="workExperience" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="MRWorkExperience" syncable="YES"/>
     </entity>
     <entity name="MRPublications" representedClassName="MRPublications" syncable="YES">
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="articleName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="publication" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="year" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="MRReplies" representedClassName="MRReplies" syncable="YES">
         <attribute name="contactPic" optional="YES" attributeType="Binary" syncable="YES"/>
@@ -222,7 +224,7 @@
         <element name="MRNotificationType" positionX="-36" positionY="9" width="128" height="90"/>
         <element name="MRPostedReplies" positionX="-18" positionY="153" width="128" height="240"/>
         <element name="MRProfile" positionX="-36" positionY="135" width="128" height="150"/>
-        <element name="MRPublications" positionX="0" positionY="171" width="128" height="60"/>
+        <element name="MRPublications" positionX="0" positionY="171" width="128" height="90"/>
         <element name="MRReplies" positionX="-36" positionY="135" width="128" height="120"/>
         <element name="MRRole" positionX="-63" positionY="-18" width="128" height="105"/>
         <element name="MRSharePost" positionX="-27" positionY="144" width="128" height="345"/>

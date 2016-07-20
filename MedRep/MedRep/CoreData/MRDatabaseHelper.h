@@ -116,4 +116,6 @@ typedef void (^WebServiceResponseHandler)(id result);
 +(NSArray *)getProfileData;
 +(BOOL)addWorkExperience :(NSDictionary *)dictionary;
 +(BOOL)addEducationQualification:(NSDictionary *)dictonary ;
++(BOOL)addPublications:(NSDictionary *)dictonary;
++(BOOL)addInterestArea:(NSArray *)array;
 @end
