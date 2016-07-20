@@ -115,4 +115,5 @@ typedef void (^WebServiceResponseHandler)(id result);
 +(void)addProfileData:(NSDictionary *)dictonary ;
 +(NSArray *)getProfileData;
 +(BOOL)addWorkExperience :(NSDictionary *)dictionary;
++(BOOL)addEducationQualification:(NSDictionary *)dictonary ;
 @end

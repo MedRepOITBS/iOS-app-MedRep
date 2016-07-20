@@ -1076,6 +1076,33 @@ static MRDatabaseHelper *sharedDataManager = nil;
     return profileAra;
     
 }
+
++(BOOL)addEducationQualification:(NSDictionary *)dictonary {
+    NSArray *profileAra = [[MRDataManger sharedManager] fetchObjectList:@"MRProfile"];
+    MRProfile * profile = [profileAra lastObject];
+
+    if (profile!=nil) {
+        /*
+          NSDictionary * workExpDict = [[NSDictionary alloc] initWithObjectsAndKeys:_degree,@"degree",_institute,@"collegeName",[NSString stringWithFormat:@"%@ %@",_fromYYYY,_toYYYY],@"yearOfPassout",_speciality,@"course",_type,@"aggregate", nil];
+         */
+        EducationalQualifications * educationQualification = (EducationalQualifications *)[[MRDataManger sharedManager] createObjectForEntity:@"EducationalQualifications"];
+        
+        educationQualification.degree = [dictonary objectForKey:@"degree"];
+        educationQualification.yearOfPassout = [dictonary objectForKey:@"yearOfPassout"];
+        educationQualification.collegeName = [dictonary objectForKey:@"collegeName"];
+        educationQualification.course = [dictonary objectForKey:@"course"];
+        educationQualification.aggregate = [dictonary objectForKey:@"aggregate"];
+        
+        
+        [profile addEducationlQualificationObject:educationQualification];
+        [[MRDataManger sharedManager] saveContext];
+        return true;
+    }
+
+    
+    
+    return false;
+}
 +(BOOL)addWorkExperience :(NSDictionary *)dictionary{
    
     NSArray *profileAra = [[MRDataManger sharedManager] fetchObjectList:@"MRProfile"];

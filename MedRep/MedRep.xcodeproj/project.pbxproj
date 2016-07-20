@@ -579,6 +579,16 @@
 		8AFF27B11D21C3DE00080DF0 /* MRInviteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF27AE1D21C3DE00080DF0 /* MRInviteViewController.m */; };
 		8AFF27B21D21C3DE00080DF0 /* MRInviteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AFF27AF1D21C3DE00080DF0 /* MRInviteViewController.xib */; };
 		8AFF27B31D21C3DE00080DF0 /* MRInviteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AFF27AF1D21C3DE00080DF0 /* MRInviteViewController.xib */; };
+		B40E13921D3ECEA3005830DA /* ProfileStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4B4F0F41D38963F00EFCC0E /* ProfileStoryboard.storyboard */; };
+		B40E13931D3ED64B005830DA /* AddEducationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F0EB1D3842C500EFCC0E /* AddEducationViewController.m */; };
+		B40E13981D3F059C005830DA /* EducationalQualifications+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B40E13951D3F059C005830DA /* EducationalQualifications+CoreDataProperties.m */; };
+		B40E13991D3F059C005830DA /* EducationalQualifications+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B40E13951D3F059C005830DA /* EducationalQualifications+CoreDataProperties.m */; };
+		B40E139A1D3F059C005830DA /* EducationalQualifications.m in Sources */ = {isa = PBXBuildFile; fileRef = B40E13971D3F059C005830DA /* EducationalQualifications.m */; };
+		B40E139B1D3F059C005830DA /* EducationalQualifications.m in Sources */ = {isa = PBXBuildFile; fileRef = B40E13971D3F059C005830DA /* EducationalQualifications.m */; };
+		B40E139E1D3F1268005830DA /* InterestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B40E139D1D3F1268005830DA /* InterestViewController.m */; };
+		B40E139F1D3F1268005830DA /* InterestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B40E139D1D3F1268005830DA /* InterestViewController.m */; };
+		B40E13A21D3F137E005830DA /* PublicationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B40E13A11D3F137E005830DA /* PublicationsViewController.m */; };
+		B40E13A31D3F137E005830DA /* PublicationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B40E13A11D3F137E005830DA /* PublicationsViewController.m */; };
 		B41746C71D0CD434009B7E7E /* commentBox.xib in Resources */ = {isa = PBXBuildFile; fileRef = B41746C61D0CD434009B7E7E /* commentBox.xib */; };
 		B41746CA1D0CD455009B7E7E /* CommonBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = B41746C91D0CD455009B7E7E /* CommonBoxView.m */; };
 		B41746CB1D0CD455009B7E7E /* CommonBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = B41746C91D0CD455009B7E7E /* CommonBoxView.m */; };
@@ -598,10 +608,9 @@
 		B47E338D1D2F65540051724C /* MRSharePost+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B47E338A1D2F65540051724C /* MRSharePost+CoreDataProperties.m */; };
 		B47E338E1D2F65540051724C /* MRSharePost.m in Sources */ = {isa = PBXBuildFile; fileRef = B47E338C1D2F65540051724C /* MRSharePost.m */; };
 		B4B4F0E81D382E7300EFCC0E /* AddExperienceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F0E61D382E7300EFCC0E /* AddExperienceTableViewController.m */; };
-		B4B4F0ED1D3842C500EFCC0E /* AddEducationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F0EB1D3842C500EFCC0E /* AddEducationTableViewController.m */; };
+		B4B4F0ED1D3842C500EFCC0E /* AddEducationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F0EB1D3842C500EFCC0E /* AddEducationViewController.m */; };
 		B4B4F0F21D38957000EFCC0E /* AddExperienceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F0E61D382E7300EFCC0E /* AddExperienceTableViewController.m */; };
 		B4B4F0F51D38963F00EFCC0E /* ProfileStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4B4F0F41D38963F00EFCC0E /* ProfileStoryboard.storyboard */; };
-		B4B4F0F61D38993C00EFCC0E /* ProfileStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4B4F0F41D38963F00EFCC0E /* ProfileStoryboard.storyboard */; };
 		B4B4F0FB1D38AEDF00EFCC0E /* addProfileItemsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F0F91D38AEDF00EFCC0E /* addProfileItemsTableViewCell.m */; };
 		B4B4F0FC1D38AEDF00EFCC0E /* addProfileItemsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F0F91D38AEDF00EFCC0E /* addProfileItemsTableViewCell.m */; };
 		B4B4F0FD1D38AEDF00EFCC0E /* addProfileItemsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4B4F0FA1D38AEDF00EFCC0E /* addProfileItemsTableViewCell.xib */; };
@@ -640,10 +649,6 @@
 		B4B4F1441D39857E00EFCC0E /* MRInterestArea+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1301D39857E00EFCC0E /* MRInterestArea+CoreDataProperties.m */; };
 		B4B4F1451D39857E00EFCC0E /* MRInterestArea.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1321D39857E00EFCC0E /* MRInterestArea.m */; };
 		B4B4F1461D39857E00EFCC0E /* MRInterestArea.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1321D39857E00EFCC0E /* MRInterestArea.m */; };
-		B4B4F1471D39857E00EFCC0E /* EducationalQualifications+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1341D39857E00EFCC0E /* EducationalQualifications+CoreDataProperties.m */; };
-		B4B4F1481D39857E00EFCC0E /* EducationalQualifications+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1341D39857E00EFCC0E /* EducationalQualifications+CoreDataProperties.m */; };
-		B4B4F1491D39857E00EFCC0E /* EducationalQualifications.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1361D39857E00EFCC0E /* EducationalQualifications.m */; };
-		B4B4F14A1D39857E00EFCC0E /* EducationalQualifications.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1361D39857E00EFCC0E /* EducationalQualifications.m */; };
 		B4B4F14B1D39857E00EFCC0E /* MRPublications+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1381D39857E00EFCC0E /* MRPublications+CoreDataProperties.m */; };
 		B4B4F14C1D39857E00EFCC0E /* MRPublications+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1381D39857E00EFCC0E /* MRPublications+CoreDataProperties.m */; };
 		B4B4F14D1D39857E00EFCC0E /* MRPublications.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F13A1D39857E00EFCC0E /* MRPublications.m */; };
@@ -1999,6 +2004,14 @@
 		8AFF27AD1D21C3DE00080DF0 /* MRInviteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRInviteViewController.h; sourceTree = "<group>"; };
 		8AFF27AE1D21C3DE00080DF0 /* MRInviteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRInviteViewController.m; sourceTree = "<group>"; };
 		8AFF27AF1D21C3DE00080DF0 /* MRInviteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRInviteViewController.xib; sourceTree = "<group>"; };
+		B40E13941D3F059C005830DA /* EducationalQualifications+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EducationalQualifications+CoreDataProperties.h"; sourceTree = "<group>"; };
+		B40E13951D3F059C005830DA /* EducationalQualifications+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EducationalQualifications+CoreDataProperties.m"; sourceTree = "<group>"; };
+		B40E13961D3F059C005830DA /* EducationalQualifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EducationalQualifications.h; sourceTree = "<group>"; };
+		B40E13971D3F059C005830DA /* EducationalQualifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EducationalQualifications.m; sourceTree = "<group>"; };
+		B40E139C1D3F1268005830DA /* InterestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterestViewController.h; sourceTree = "<group>"; };
+		B40E139D1D3F1268005830DA /* InterestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterestViewController.m; sourceTree = "<group>"; };
+		B40E13A01D3F137E005830DA /* PublicationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicationsViewController.h; sourceTree = "<group>"; };
+		B40E13A11D3F137E005830DA /* PublicationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicationsViewController.m; sourceTree = "<group>"; };
 		B41746C61D0CD434009B7E7E /* commentBox.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = commentBox.xib; sourceTree = "<group>"; };
 		B41746C81D0CD455009B7E7E /* CommonBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonBoxView.h; sourceTree = "<group>"; };
 		B41746C91D0CD455009B7E7E /* CommonBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonBoxView.m; sourceTree = "<group>"; };
@@ -2019,8 +2032,8 @@
 		B47E338C1D2F65540051724C /* MRSharePost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRSharePost.m; sourceTree = "<group>"; };
 		B4B4F0E51D382E7300EFCC0E /* AddExperienceTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddExperienceTableViewController.h; sourceTree = "<group>"; };
 		B4B4F0E61D382E7300EFCC0E /* AddExperienceTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddExperienceTableViewController.m; sourceTree = "<group>"; };
-		B4B4F0EA1D3842C500EFCC0E /* AddEducationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEducationTableViewController.h; sourceTree = "<group>"; };
-		B4B4F0EB1D3842C500EFCC0E /* AddEducationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEducationTableViewController.m; sourceTree = "<group>"; };
+		B4B4F0EA1D3842C500EFCC0E /* AddEducationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEducationViewController.h; sourceTree = "<group>"; };
+		B4B4F0EB1D3842C500EFCC0E /* AddEducationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEducationViewController.m; sourceTree = "<group>"; };
 		B4B4F0F41D38963F00EFCC0E /* ProfileStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ProfileStoryboard.storyboard; sourceTree = "<group>"; };
 		B4B4F0F81D38AEDF00EFCC0E /* addProfileItemsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addProfileItemsTableViewCell.h; sourceTree = "<group>"; };
 		B4B4F0F91D38AEDF00EFCC0E /* addProfileItemsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = addProfileItemsTableViewCell.m; sourceTree = "<group>"; };
@@ -2054,10 +2067,6 @@
 		B4B4F1301D39857E00EFCC0E /* MRInterestArea+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MRInterestArea+CoreDataProperties.m"; sourceTree = "<group>"; };
 		B4B4F1311D39857E00EFCC0E /* MRInterestArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRInterestArea.h; sourceTree = "<group>"; };
 		B4B4F1321D39857E00EFCC0E /* MRInterestArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRInterestArea.m; sourceTree = "<group>"; };
-		B4B4F1331D39857E00EFCC0E /* EducationalQualifications+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EducationalQualifications+CoreDataProperties.h"; sourceTree = "<group>"; };
-		B4B4F1341D39857E00EFCC0E /* EducationalQualifications+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EducationalQualifications+CoreDataProperties.m"; sourceTree = "<group>"; };
-		B4B4F1351D39857E00EFCC0E /* EducationalQualifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EducationalQualifications.h; sourceTree = "<group>"; };
-		B4B4F1361D39857E00EFCC0E /* EducationalQualifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EducationalQualifications.m; sourceTree = "<group>"; };
 		B4B4F1371D39857E00EFCC0E /* MRPublications+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MRPublications+CoreDataProperties.h"; sourceTree = "<group>"; };
 		B4B4F1381D39857E00EFCC0E /* MRPublications+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MRPublications+CoreDataProperties.m"; sourceTree = "<group>"; };
 		B4B4F1391D39857E00EFCC0E /* MRPublications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRPublications.h; sourceTree = "<group>"; };
@@ -2358,9 +2367,13 @@
 				7920D6971C1C9B69008D3386 /* MRProfileDetailsViewController.m */,
 				B4B4F0E51D382E7300EFCC0E /* AddExperienceTableViewController.h */,
 				B4B4F0E61D382E7300EFCC0E /* AddExperienceTableViewController.m */,
-				B4B4F0EA1D3842C500EFCC0E /* AddEducationTableViewController.h */,
-				B4B4F0EB1D3842C500EFCC0E /* AddEducationTableViewController.m */,
+				B4B4F0EA1D3842C500EFCC0E /* AddEducationViewController.h */,
+				B4B4F0EB1D3842C500EFCC0E /* AddEducationViewController.m */,
 				B4B4F0F41D38963F00EFCC0E /* ProfileStoryboard.storyboard */,
+				B40E139C1D3F1268005830DA /* InterestViewController.h */,
+				B40E139D1D3F1268005830DA /* InterestViewController.m */,
+				B40E13A01D3F137E005830DA /* PublicationsViewController.h */,
+				B40E13A11D3F137E005830DA /* PublicationsViewController.m */,
 			);
 			path = ProfileDetails;
 			sourceTree = "<group>";
@@ -2896,14 +2909,14 @@
 				B4B4F1301D39857E00EFCC0E /* MRInterestArea+CoreDataProperties.m */,
 				B4B4F1311D39857E00EFCC0E /* MRInterestArea.h */,
 				B4B4F1321D39857E00EFCC0E /* MRInterestArea.m */,
-				B4B4F1331D39857E00EFCC0E /* EducationalQualifications+CoreDataProperties.h */,
-				B4B4F1341D39857E00EFCC0E /* EducationalQualifications+CoreDataProperties.m */,
-				B4B4F1351D39857E00EFCC0E /* EducationalQualifications.h */,
-				B4B4F1361D39857E00EFCC0E /* EducationalQualifications.m */,
 				B4B4F1371D39857E00EFCC0E /* MRPublications+CoreDataProperties.h */,
 				B4B4F1381D39857E00EFCC0E /* MRPublications+CoreDataProperties.m */,
 				B4B4F1391D39857E00EFCC0E /* MRPublications.h */,
 				B4B4F13A1D39857E00EFCC0E /* MRPublications.m */,
+				B40E13941D3F059C005830DA /* EducationalQualifications+CoreDataProperties.h */,
+				B40E13951D3F059C005830DA /* EducationalQualifications+CoreDataProperties.m */,
+				B40E13961D3F059C005830DA /* EducationalQualifications.h */,
+				B40E13971D3F059C005830DA /* EducationalQualifications.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -5011,6 +5024,7 @@
 				CC7DB1981D0C8BEC007DFE4C /* notificationbody-bg@2x.jpg in Resources */,
 				CC7DB1991D0C8BEC007DFE4C /* NDcompany4@2x.jpg in Resources */,
 				CC7DB19A1D0C8BEC007DFE4C /* marketing@3x.png in Resources */,
+				B40E13921D3ECEA3005830DA /* ProfileStoryboard.storyboard in Resources */,
 				CC7DB19B1D0C8BEC007DFE4C /* ndInput@2x.png in Resources */,
 				CC7DB19C1D0C8BEC007DFE4C /* setting@2x.png in Resources */,
 				CC7DB19D1D0C8BEC007DFE4C /* dashboard-bg@2x.png in Resources */,
@@ -5107,7 +5121,6 @@
 				CC7DB1EA1D0C8BEC007DFE4C /* NDcompany4@3x.jpg in Resources */,
 				CC7DB1EB1D0C8BEC007DFE4C /* PHnotifications@2x.png in Resources */,
 				CC7DB1EC1D0C8BEC007DFE4C /* minus.png in Resources */,
-				B4B4F0F61D38993C00EFCC0E /* ProfileStoryboard.storyboard in Resources */,
 				CC7DB3761D0CC8A6007DFE4C /* profile_pic14.jpeg in Resources */,
 				CC7DB1ED1D0C8BEC007DFE4C /* pcright-arrow@3x.png in Resources */,
 				CC7DB1EE1D0C8BEC007DFE4C /* notification@2x.png in Resources */,
@@ -5187,6 +5200,7 @@
 				B4B4F1051D38B52B00EFCC0E /* ProfileAboutTableViewCell.m in Sources */,
 				79DC37181BE7DEA90027F7DB /* MRMedRepListTableCell.m in Sources */,
 				7920D6991C1C9B69008D3386 /* MRProfileDetailsViewController.m in Sources */,
+				B40E13A21D3F137E005830DA /* PublicationsViewController.m in Sources */,
 				CC7DB2C91D0CC433007DFE4C /* MRContactCollectionCell.m in Sources */,
 				CCA383F11D342D3500BCF5A9 /* MRGroupMembers+CoreDataProperties.m in Sources */,
 				79F5C9F11BB0586100435B6C /* MRMedRepMeetingsViewController.m in Sources */,
@@ -5221,7 +5235,7 @@
 				79F5C9F61BB061BE00435B6C /* MRMedrepMeetingsCell.m in Sources */,
 				B41746DF1D0CD740009B7E7E /* MRGroupPost.m in Sources */,
 				79A4F8AD1BC186B200E58DC7 /* GraphView.m in Sources */,
-				B4B4F0ED1D3842C500EFCC0E /* AddEducationTableViewController.m in Sources */,
+				B4B4F0ED1D3842C500EFCC0E /* AddEducationViewController.m in Sources */,
 				CC7DB30F1D0CC4E2007DFE4C /* MRSuggestedContact+CoreDataProperties.m in Sources */,
 				83B781F31B7916670070645C /* MRAppControl.m in Sources */,
 				79AC94491B9E011D00B81452 /* MPNotificatinsTableViewCell.m in Sources */,
@@ -5309,6 +5323,7 @@
 				B4B4F18A1D39E53E00EFCC0E /* NSYearComponent.m in Sources */,
 				B4B4F1451D39857E00EFCC0E /* MRInterestArea.m in Sources */,
 				796E93711BB861E10031EA34 /* MRNewProductCompaignsViewController.m in Sources */,
+				B40E13981D3F059C005830DA /* EducationalQualifications+CoreDataProperties.m in Sources */,
 				CC9857F91D2E523E00C74438 /* NSDictionary+CaseInsensitive.m in Sources */,
 				B4B4F1221D395DF300EFCC0E /* ExperienceSummaryTableViewCell.m in Sources */,
 				79115CEB1BCD872900151806 /* MRNotifications.m in Sources */,
@@ -5321,6 +5336,7 @@
 				797560471BBFE4940034D0AC /* MRDatabaseHelper.m in Sources */,
 				795366161BA0B7A90021CE4D /* MRReadNotificationsViewController.m in Sources */,
 				79421F1D1BB83A4B0055D9B7 /* MRDoctorScoreTableCell.m in Sources */,
+				B40E139A1D3F059C005830DA /* EducationalQualifications.m in Sources */,
 				CC7DB2C11D0CC433007DFE4C /* PieMenuItem.m in Sources */,
 				796E937C1BB867FF0031EA34 /* MRConvertAppointmentViewController.m in Sources */,
 				CC7DB2BF1D0CC433007DFE4C /* PieMenu.m in Sources */,
@@ -5341,6 +5357,7 @@
 				CC7DB2E11D0CC433007DFE4C /* MRGroupsViewController.m in Sources */,
 				79BD27B31B809982007CA448 /* MRHomeViewContoller.m in Sources */,
 				79A4F8AE1BC186B200E58DC7 /* GraphPoint.m in Sources */,
+				B40E139E1D3F1268005830DA /* InterestViewController.m in Sources */,
 				8AFE8CDB1D0F20DC0000382E /* MRDevEnvironmentConfig.m in Sources */,
 				83C127F91B77C88B00D2F08E /* MedRep.xcdatamodeld in Sources */,
 				B4B4F0E81D382E7300EFCC0E /* AddExperienceTableViewController.m in Sources */,
@@ -5351,12 +5368,10 @@
 				7930A38F1BB9151C003112E4 /* MRFeedBackResultViewController.m in Sources */,
 				7975604A1BC02B3A0034D0AC /* MRCompanyDetails.m in Sources */,
 				79C709E41BE7D7F200223562 /* MRMedRepViewController.m in Sources */,
-				B4B4F1471D39857E00EFCC0E /* EducationalQualifications+CoreDataProperties.m in Sources */,
 				B4B4F14D1D39857E00EFCC0E /* MRPublications.m in Sources */,
 				CC9BCEC11D0F2A3900702EBC /* MRTransformViewController.m in Sources */,
 				79841DD81B989B5B00535916 /* MROTPVerifiedViewController.m in Sources */,
 				B47E338E1D2F65540051724C /* MRSharePost.m in Sources */,
-				B4B4F1491D39857E00EFCC0E /* EducationalQualifications.m in Sources */,
 				79708A6F1BB71D68007CE81D /* NSData+Base64Additions.m in Sources */,
 				83B782051B7917010070645C /* MRDataManger.m in Sources */,
 				796E93761BB862530031EA34 /* MRNewProductCell.m in Sources */,
@@ -5386,15 +5401,18 @@
 				B4B4F11B1D395C7B00EFCC0E /* CommonTableViewCell.m in Sources */,
 				CC7DB0241D0C8BEC007DFE4C /* Reachability.m in Sources */,
 				B4B4F1231D395DF300EFCC0E /* ExperienceSummaryTableViewCell.m in Sources */,
+				B40E139B1D3F059C005830DA /* EducationalQualifications.m in Sources */,
 				CC7DB2861D0C9E7B007DFE4C /* NotificationWebViewController.m in Sources */,
 				CC01BA741D302ACF007E2AEB /* MRCommentViewController.m in Sources */,
 				CC7DB0251D0C8BEC007DFE4C /* MRNotificationsDetailsViewController.m in Sources */,
 				CC7DB2DA1D0CC433007DFE4C /* MRGroupPostItemTableViewCell.m in Sources */,
 				CC7DB3101D0CC4E2007DFE4C /* MRSuggestedContact+CoreDataProperties.m in Sources */,
 				CC7DB0261D0C8BEC007DFE4C /* AppDelegate.m in Sources */,
+				B40E139F1D3F1268005830DA /* InterestViewController.m in Sources */,
 				CC7DB0271D0C8BEC007DFE4C /* WYPopoverController.m in Sources */,
 				CC7DB0281D0C8BEC007DFE4C /* MRViewRepAppointmnetViewController.m in Sources */,
 				B4B4F1021D38B4DF00EFCC0E /* ProfileBasicTableViewCell.m in Sources */,
+				B40E13A31D3F137E005830DA /* PublicationsViewController.m in Sources */,
 				CC7DB0291D0C8BEC007DFE4C /* MRForgotPasswordTwoViewController.m in Sources */,
 				8AFE8CD41D0EFFD30000382E /* MRCreateGroupViewController.m in Sources */,
 				CC7DB02A1D0C8BEC007DFE4C /* MRDoctorDetailsTableViewCell.m in Sources */,
@@ -5455,7 +5473,6 @@
 				B4B4F1441D39857E00EFCC0E /* MRInterestArea+CoreDataProperties.m in Sources */,
 				CC7DB0461D0C8BEC007DFE4C /* MRRegistrationRoleViewController.m in Sources */,
 				CC7DB0471D0C8BEC007DFE4C /* MRDoctorActivityScoreDetailsViewController.m in Sources */,
-				B4B4F1481D39857E00EFCC0E /* EducationalQualifications+CoreDataProperties.m in Sources */,
 				B4B4F1851D39E53E00EFCC0E /* NSLongMonthComponent.m in Sources */,
 				B4B4F1421D39857E00EFCC0E /* MRWorkExperience.m in Sources */,
 				CC7DB0481D0C8BEC007DFE4C /* MRForgotPasswordViewController.m in Sources */,
@@ -5545,8 +5562,10 @@
 				CC9BCEC21D0F2A3900702EBC /* MRTransformViewController.m in Sources */,
 				CC7DB0711D0C8BEC007DFE4C /* MRHomeViewContoller.m in Sources */,
 				B4B4F1901D3BF7CE00EFCC0E /* CommonEducationTableViewCell.m in Sources */,
+				B40E13931D3ED64B005830DA /* AddEducationViewController.m in Sources */,
 				CC7DB2C01D0CC433007DFE4C /* PieMenu.m in Sources */,
 				B4B4F1401D39857E00EFCC0E /* MRWorkExperience+CoreDataProperties.m in Sources */,
+				B40E13991D3F059C005830DA /* EducationalQualifications+CoreDataProperties.m in Sources */,
 				CC9858021D2E53EA00C74438 /* MRContact.m in Sources */,
 				B41746E01D0CD740009B7E7E /* MRGroupPost.m in Sources */,
 				CC7DB0721D0C8BEC007DFE4C /* GraphPoint.m in Sources */,
@@ -5568,7 +5587,6 @@
 				CC7DB07B1D0C8BEC007DFE4C /* MRDataManger.m in Sources */,
 				CC7DB07C1D0C8BEC007DFE4C /* MRNewProductCell.m in Sources */,
 				B4B4F10A1D38B5FD00EFCC0E /* CommonProfileSectionTableViewCell.m in Sources */,
-				B4B4F14A1D39857E00EFCC0E /* EducationalQualifications.m in Sources */,
 				CC7DB07D1D0C8BEC007DFE4C /* MRProductBrocherViewController.m in Sources */,
 				CCA383F21D342D3500BCF5A9 /* MRGroupMembers+CoreDataProperties.m in Sources */,
 				CC7DB07E1D0C8BEC007DFE4C /* MRRegTableViewCell.m in Sources */,

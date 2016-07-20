@@ -20,5 +20,13 @@
 
     // Configure the view for the selected state
 }
-
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    
+    NSLog(@"textfield %@",textField.text);
+    if ([self.delegate respondsToSelector:@selector(CommonEducationTableViewCellDelegateForTextFieldDidEndEditing:withTextField:)]) {
+        [self.delegate CommonEducationTableViewCellDelegateForTextFieldDidEndEditing:self withTextField:textField];
+    }
+    
+//    -(void)CommonEducationTableViewCellDelegateForTextFieldDidEndEditing:(CommonEducationTableViewCell *)cell withTextField:(UITextField *)textField;
+}
 @end

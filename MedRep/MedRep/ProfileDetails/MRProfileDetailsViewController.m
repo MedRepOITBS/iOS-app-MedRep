@@ -26,7 +26,7 @@
 #import "ExpericeFillUpTableViewCell.h"
 #import "basicInfoTableViewCell.h"
 #import "SWRevealViewController.h"
-#import "AddEducationTableViewController.h"
+#import "AddEducationViewController.h"
 @interface MRProfileDetailsViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate,addProfileItemsTableViewCellDelegate>
 
 
@@ -563,11 +563,11 @@
         
     } else if ([buttonType isEqualToString:@"EDUCATION_QUAL"]){
         
-        AddEducationTableViewController *profViewController = [sb instantiateViewControllerWithIdentifier:@"AddEducationTableViewController"];
+        AddEducationViewController *educationViewController = (AddEducationViewController *)[sb instantiateViewControllerWithIdentifier:@"AddEducationViewController"];
         
         
         
-        [self.navigationController pushViewController:profViewController  animated:YES];
+        [self.navigationController pushViewController:educationViewController  animated:YES];
         
     }else if([buttonType isEqualToString:@"PUBLICATION"]){
         

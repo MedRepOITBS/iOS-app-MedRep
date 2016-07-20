@@ -20,5 +20,19 @@
 
     // Configure the view for the selected state
 }
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return NO;
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+   
+    if ([self.delegate respondsToSelector:@selector(EducationDateTimeTableViewCellDelegateForTextFieldClicked:withTextField:)]) {
+        [self.delegate EducationDateTimeTableViewCellDelegateForTextFieldClicked:self withTextField:textField];
+    }
+    //EducationDateTimeTableViewCellDelegateForTextFieldClicked:(EducationDateTimeTableViewCell *)cell withTextField:(UITextField *)textField;
+    
+    return NO;
+}
 
 @end
