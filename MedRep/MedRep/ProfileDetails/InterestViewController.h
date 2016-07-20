@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface InterestViewController : UIViewController
-
+@property (nonatomic,weak) IBOutlet UITextField *interestAreaTextField;
 @end

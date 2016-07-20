@@ -27,6 +27,8 @@
 #import "basicInfoTableViewCell.h"
 #import "SWRevealViewController.h"
 #import "AddEducationViewController.h"
+#import "InterestViewController.h"
+#import "PublicationsViewController.h"
 @interface MRProfileDetailsViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate,addProfileItemsTableViewCellDelegate>
 
 
@@ -521,7 +523,7 @@
          if ([valN isEqualToString:@"PUBLICATION_DETAIL"] ) {
              MRPublications * obj  = [valNDict objectForKey:@"object"];
              
-             cell.titleOther.text = obj.name;
+             cell.titleOther.text = obj.articleName;
          }else {
              MRInterestArea * obj  = [valNDict objectForKey:@"object"];
              
@@ -555,7 +557,7 @@
 
     } else if ([buttonType isEqualToString:@"INTEREST_AREA"]){
 //
-        AddExperienceTableViewController *profViewController = [sb instantiateViewControllerWithIdentifier:@"AddExperienceTableViewController"];
+        InterestViewController *profViewController = [sb instantiateViewControllerWithIdentifier:@"InterestViewController"];
         
          
         
@@ -571,7 +573,7 @@
         
     }else if([buttonType isEqualToString:@"PUBLICATION"]){
         
-        AddExperienceTableViewController *profViewController = [sb instantiateViewControllerWithIdentifier:@"AddEducationTableViewController"];
+        PublicationsViewController *profViewController = [sb instantiateViewControllerWithIdentifier:@"PublicationsViewController"];
         
         
         [self.navigationController pushViewController:profViewController  animated:YES];

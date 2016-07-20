@@ -875,7 +875,7 @@ easier for colleagues to find you.</string>
         <!--Interest View Controller-->
         <scene sceneID="miP-iZ-7wD">
             <objects>
-                <viewController storyboardIdentifier="InterestPublicationViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="XVE-Vb-qGe" customClass="InterestViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InterestViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="XVE-Vb-qGe" customClass="InterestViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aN7-PS-fLG"/>
                         <viewControllerLayoutGuide type="bottom" id="CTa-gR-gu5"/>
@@ -885,14 +885,14 @@ easier for colleagues to find you.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="biu-wB-bcc">
-                                <rect key="frame" x="0.0" y="5" width="480" height="36"/>
+                                <rect key="frame" x="0.0" y="20" width="480" height="51"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Start typing to get suggestion" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LD9-Og-oKc">
-                                        <rect key="frame" x="2" y="1" width="267" height="30"/>
+                                        <rect key="frame" x="2" y="1" width="421" height="50"/>
                                         <color key="backgroundColor" red="0.96893601190476186" green="0.96893601190476186" blue="0.96893601190476186" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="267" id="Txk-F6-Uwn"/>
-                                            <constraint firstAttribute="height" constant="30" id="aCr-uz-tOF"/>
+                                            <constraint firstAttribute="width" constant="421" id="Txk-F6-Uwn"/>
+                                            <constraint firstAttribute="height" constant="50" id="aCr-uz-tOF"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -900,7 +900,7 @@ easier for colleagues to find you.</string>
                                 </subviews>
                                 <color key="backgroundColor" red="0.9689360119" green="0.9689360119" blue="0.9689360119" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="36" id="E44-tL-ImF"/>
+                                    <constraint firstAttribute="height" constant="51" id="E44-tL-ImF"/>
                                     <constraint firstItem="LD9-Og-oKc" firstAttribute="top" secondItem="biu-wB-bcc" secondAttribute="top" constant="1" id="Um6-Ap-ky1"/>
                                     <constraint firstItem="LD9-Og-oKc" firstAttribute="leading" secondItem="biu-wB-bcc" secondAttribute="leading" constant="2" id="g0R-Gp-IYY"/>
                                     <constraint firstAttribute="width" constant="480" id="xZ7-cQ-AuP"/>
@@ -910,7 +910,7 @@ easier for colleagues to find you.</string>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="biu-wB-bcc" secondAttribute="trailing" constant="100" id="4d9-PL-UgX"/>
-                            <constraint firstItem="biu-wB-bcc" firstAttribute="top" secondItem="aN7-PS-fLG" secondAttribute="bottom" constant="-15" id="LiM-fA-kVJ"/>
+                            <constraint firstItem="biu-wB-bcc" firstAttribute="top" secondItem="aN7-PS-fLG" secondAttribute="bottom" id="LiM-fA-kVJ"/>
                             <constraint firstItem="biu-wB-bcc" firstAttribute="leading" secondItem="tLg-K5-8I1" secondAttribute="leadingMargin" constant="-20" id="Of5-ou-o1k"/>
                         </constraints>
                     </view>
@@ -931,7 +931,7 @@ easier for colleagues to find you.</string>
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ARTICLE TITLE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dlg-We-SnK">
+                            <label opaque="NO" userInteractionEnabled="NO" tag="200" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ARTICLE TITLE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dlg-We-SnK">
                                 <rect key="frame" x="20" y="20" width="93" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="93" id="D08-gK-hba"/>
@@ -941,7 +941,7 @@ easier for colleagues to find you.</string>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Article Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XK1-Ke-Chh">
+                            <textField opaque="NO" clipsSubviews="YES" tag="200" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Article Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XK1-Ke-Chh">
                                 <rect key="frame" x="20" y="40" width="267" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="C3d-9j-uB3"/>
@@ -963,7 +963,7 @@ easier for colleagues to find you.</string>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Publications" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y6f-cn-8ed">
+                            <textField opaque="NO" clipsSubviews="YES" tag="201" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Publications" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y6f-cn-8ed">
                                 <rect key="frame" x="20" y="112" width="267" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="267" id="Mkc-J9-aii"/>
@@ -1015,7 +1015,7 @@ easier for colleagues to find you.</string>
                                 <color key="textColor" red="1" green="0.14605787579999999" blue="0.15585499450000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="YYYY" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zwj-cw-Xgo">
+                            <textField opaque="NO" clipsSubviews="YES" tag="202" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="YYYY" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zwj-cw-Xgo">
                                 <rect key="frame" x="20" y="174" width="153" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="8QR-cc-xcw"/>
@@ -1027,15 +1027,33 @@ easier for colleagues to find you.</string>
                                     <outlet property="delegate" destination="54U-O7-CQf" id="x63-vA-7en"/>
                                 </connections>
                             </textField>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Emi-CK-sOp" customClass="UICustomDatePicker">
+                                <rect key="frame" x="0.0" y="472" width="595" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="XJr-rn-Zgl"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
+                                        <real key="value" value="24"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="didCustomDatePickerValueChanged:" destination="54U-O7-CQf" eventType="valueChanged" id="0pu-fC-9QQ"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Emi-CK-sOp" firstAttribute="leading" secondItem="ggC-ft-vhp" secondAttribute="leadingMargin" constant="-20" id="A33-Ve-dbF"/>
                             <constraint firstItem="gID-et-jCI" firstAttribute="leading" secondItem="T66-rG-2bX" secondAttribute="trailing" id="AU8-Vv-aAB"/>
+                            <constraint firstItem="b19-Uu-yaI" firstAttribute="top" secondItem="Emi-CK-sOp" secondAttribute="bottom" id="BFQ-0O-gB0"/>
                             <constraint firstAttribute="leadingMargin" secondItem="Nkx-5F-wcV" secondAttribute="leading" id="CRy-kh-1Fx"/>
                             <constraint firstItem="FlR-Fh-fLS" firstAttribute="leading" secondItem="Dlg-We-SnK" secondAttribute="trailing" constant="-5" id="FpM-V3-Mxc"/>
                             <constraint firstAttribute="leadingMargin" secondItem="Dlg-We-SnK" secondAttribute="leading" id="I1J-6q-SzD"/>
                             <constraint firstItem="XK1-Ke-Chh" firstAttribute="top" secondItem="Dlg-We-SnK" secondAttribute="bottom" constant="-1" id="LRU-De-bJ2"/>
                             <constraint firstItem="Zwj-cw-Xgo" firstAttribute="top" secondItem="T66-rG-2bX" secondAttribute="bottom" id="RtY-Ih-6Qg"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Emi-CK-sOp" secondAttribute="trailing" constant="-15" id="Wvd-cB-wne"/>
                             <constraint firstItem="FlR-Fh-fLS" firstAttribute="top" secondItem="1TH-Of-Sru" secondAttribute="bottom" constant="-1" id="WyO-Q2-qNj"/>
                             <constraint firstAttribute="leadingMargin" secondItem="Zwj-cw-Xgo" secondAttribute="leading" id="d1H-mQ-qo3"/>
                             <constraint firstItem="gID-et-jCI" firstAttribute="top" secondItem="y6f-cn-8ed" secondAttribute="bottom" constant="11" id="dmZ-yZ-I4u"/>
@@ -1051,6 +1069,7 @@ easier for colleagues to find you.</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="customYearPicker" destination="Emi-CK-sOp" id="oz1-XM-ZRA"/>
                         <outlet property="publicationArticleTextField" destination="XK1-Ke-Chh" id="np7-sS-yVS"/>
                         <outlet property="pulbicationsTextField" destination="y6f-cn-8ed" id="VSi-pR-eAZ"/>
                         <outlet property="yearTextField" destination="Zwj-cw-Xgo" id="ocG-BU-FFK"/>

@@ -35,7 +35,8 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"DONE" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonTapped:)];
     self.navigationItem.rightBarButtonItem = revealButtonItem;
-    
+    self.navigationItem.title  = @"Add Education Details";
+
     self.customYearPicker.hidden = YES;
     [self initCustomDatePicker:self.customYearPicker withOption:NSCustomDatePickerOptionYear andOrder:NSCustomDatePickerOrderMonthDayAndYear];
 //    [self initCustomDatePicker:self.customYearPicker withOption:NSCustomDatePickerOptionYear andOrder:NSCustomDatePickerOrderMonthDayAndYear];

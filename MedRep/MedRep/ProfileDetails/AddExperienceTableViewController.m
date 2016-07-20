@@ -42,7 +42,7 @@
     self.navigationItem.rightBarButtonItem = revealButtonItem;
     self.customDatePicker.hidden = YES;
     self.customYearPicker.hidden = YES;
-
+self.navigationItem.title  = @"Add Experience";
       [self initCustomDatePicker:self.customDatePicker withOption:NSCustomDatePickerOptionMediumMonth andOrder:NSCustomDatePickerOrderMonthDayAndYear];
   [self initCustomDatePicker:self.customYearPicker withOption:NSCustomDatePickerOptionYear andOrder:NSCustomDatePickerOrderMonthDayAndYear];
     UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"]  style:UIBarButtonItemStyleDone target:self action:@selector(backButtonTapped:)];

@@ -7,9 +7,11 @@
 //
 
 #import "PublicationsViewController.h"
-
+#import "UICustomDatePicker.h"
+#import "NSString+Date.h"
+#import "MRDatabaseHelper.h"
 @interface PublicationsViewController ()
-
+@property (nonatomic, weak) IBOutlet UICustomDatePicker *customYearPicker;
 @end
 
 @implementation PublicationsViewController
@@ -17,7 +19,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    self.navigationItem.title  = @"Add Publications Details";
+    self.customYearPicker.hidden = YES;
+[self initCustomDatePicker:self.customYearPicker withOption:NSCustomDatePickerOptionYear andOrder:NSCustomDatePickerOrderMonthDayAndYear];
     UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"DONE" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonTapped:)];
     self.navigationItem.rightBarButtonItem = revealButtonItem;
     
@@ -46,9 +50,57 @@
         [alertView show];
         return;
     }
+  
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:publicationArticleText,@"articleName",publicationsText,@"publication",yearText,@"year", nil];
+    BOOL YS = [MRDatabaseHelper addPublications:dict];
+    if (YS) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
     
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return NO;
+}
+- (void)textFieldDidEndEditing:(UITextField *)textField{
     
+    NSLog(@"textfield %@",textField.text);
     
+}
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    
+    if (textField.tag == 202) {
+        self.customYearPicker.hidden = NO;
+        return NO;
+    }
+    return YES;
+}
+
+- (void) initCustomDatePicker:(UICustomDatePicker *) picker withOption:(NSUInteger) option andOrder:(NSUInteger) order {
+    picker.minDate = [[NSString stringWithFormat:@"06/Jan/1986"] dateValueForFormatString:@"dd/MMM/yyyy"];
+    picker.maxDate = [[NSString stringWithFormat:@"06/Dec/2027"] dateValueForFormatString:@"dd/MMM/yyyy"];
+    picker.currentDate = [NSDate date];
+    picker.order = order;
+    picker.option = option;
+}
+- (IBAction)didCustomDatePickerValueChanged:(id)sender {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    NSString *stringFromDate;
+    [formatter setDateFormat:@"yyyy"];
+    stringFromDate = [formatter stringFromDate:[(UICustomDatePicker *)sender currentDate]];
+    
+//    if(_currentSelectedTextField.tag == 1200)
+//    {
+//        _fromYYYY = stringFromDate;
+//    }else if(_currentSelectedTextField.tag == 1201)
+//    {
+//        _toYYYY = stringFromDate;
+//    }
+//    
+//    
+//    
+    NSLog(@"%@",stringFromDate);
+    _yearTextField.text = stringFromDate;
 }
 /*
 #pragma mark - Navigation

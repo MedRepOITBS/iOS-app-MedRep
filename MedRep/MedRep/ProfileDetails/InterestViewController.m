@@ -7,7 +7,7 @@
 //
 
 #import "InterestViewController.h"
-
+#import "MRDatabaseHelper.h"
 @interface InterestViewController ()
 
 @end
@@ -17,7 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    self.navigationItem.title  = @"Add Interest Area";
+
     
     UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"DONE" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonTapped:)];
     self.navigationItem.rightBarButtonItem = revealButtonItem;
@@ -27,15 +28,30 @@
 
 }
 
--(void)doneButtonTapped:(id)sender{
 
-}
 -(void)backButtonTapped:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+-(void)doneButtonTapped:(id)sender{
+    NSString *interestArticle = [self.interestAreaTextField.text stringByTrimmingCharactersInSet:
+                                        [NSCharacterSet whitespaceCharacterSet]];
+    
+    
+    if (interestArticle!=nil && [interestArticle isEqualToString:@""]) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please enter the all mandatory fields." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+        return;
+    }
+    
+    BOOL YS = [MRDatabaseHelper addInterestArea:[NSArray arrayWithObjects:interestArticle, nil]];
+    if (YS) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    
 }
 
 /*
