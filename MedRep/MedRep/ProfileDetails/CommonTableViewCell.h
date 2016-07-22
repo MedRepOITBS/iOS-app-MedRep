@@ -14,7 +14,7 @@
 @property(nonatomic,weak) IBOutlet UILabel *title;
 @property(nonatomic,weak) IBOutlet UITextField *inputTextField;
 @property (nonatomic,weak) id<CommonTableViewCellDelegate> delegate;
-
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleWidthConstraint;
 
 @end
 

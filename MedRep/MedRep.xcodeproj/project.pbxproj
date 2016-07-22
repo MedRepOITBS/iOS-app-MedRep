@@ -685,6 +685,25 @@
 		B4B4F1901D3BF7CE00EFCC0E /* CommonEducationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F18E1D3BF7CE00EFCC0E /* CommonEducationTableViewCell.m */; };
 		B4B4F1931D3BFA6200EFCC0E /* EducationDateTimeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1921D3BFA6200EFCC0E /* EducationDateTimeTableViewCell.m */; };
 		B4B4F1941D3BFA6200EFCC0E /* EducationDateTimeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1921D3BFA6200EFCC0E /* EducationDateTimeTableViewCell.m */; };
+		B4BB249C1D40738A00A3DD73 /* searchScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB249B1D40738A00A3DD73 /* searchScreen.png */; };
+		B4BB24A51D41653700A3DD73 /* crossPlusButton.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24A41D41653700A3DD73 /* crossPlusButton.png */; };
+		B4BB24A61D41653700A3DD73 /* crossPlusButton.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24A41D41653700A3DD73 /* crossPlusButton.png */; };
+		B4BB24A81D4167AD00A3DD73 /* Layer_1.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24A71D4167AD00A3DD73 /* Layer_1.png */; };
+		B4BB24A91D4167AD00A3DD73 /* Layer_1.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24A71D4167AD00A3DD73 /* Layer_1.png */; };
+		B4BB24AB1D416AF900A3DD73 /* profileBG.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24AA1D416AF900A3DD73 /* profileBG.png */; };
+		B4BB24AC1D416AF900A3DD73 /* profileBG.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24AA1D416AF900A3DD73 /* profileBG.png */; };
+		B4BB24B11D416CA000A3DD73 /* profileBG1.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24B01D416CA000A3DD73 /* profileBG1.png */; };
+		B4BB24B21D416CA000A3DD73 /* profileBG1.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24B01D416CA000A3DD73 /* profileBG1.png */; };
+		B4BB24BA1D416DF000A3DD73 /* userProfilePic.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24B91D416DF000A3DD73 /* userProfilePic.png */; };
+		B4BB24BB1D416DF000A3DD73 /* userProfilePic.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24B91D416DF000A3DD73 /* userProfilePic.png */; };
+		B4BB24BD1D417E8000A3DD73 /* userLocal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24BC1D417E8000A3DD73 /* userLocal.png */; };
+		B4BB24BE1D417E8000A3DD73 /* userLocal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24BC1D417E8000A3DD73 /* userLocal.png */; };
+		B4BB24C01D418D6B00A3DD73 /* userProfilePic1.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24BF1D418D6B00A3DD73 /* userProfilePic1.png */; };
+		B4BB24C11D418D6B00A3DD73 /* userProfilePic1.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24BF1D418D6B00A3DD73 /* userProfilePic1.png */; };
+		B4BB24C31D4192AD00A3DD73 /* settings1.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24C21D4192AD00A3DD73 /* settings1.png */; };
+		B4BB24C41D4192AD00A3DD73 /* settings1.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24C21D4192AD00A3DD73 /* settings1.png */; };
+		B4BB24C91D41BDF600A3DD73 /* NTMonthYearPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = B4BB24C81D41BDF600A3DD73 /* NTMonthYearPicker.m */; };
+		B4BB24CA1D41BDF600A3DD73 /* NTMonthYearPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = B4BB24C81D41BDF600A3DD73 /* NTMonthYearPicker.m */; };
 		CC0123C11D25A66B001134F3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0123C01D25A66B001134F3 /* CoreGraphics.framework */; };
 		CC0123C21D25A677001134F3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0123C01D25A66B001134F3 /* CoreGraphics.framework */; };
 		CC01BA731D302ACF007E2AEB /* MRCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC01BA711D302ACF007E2AEB /* MRCommentViewController.m */; };
@@ -2102,6 +2121,18 @@
 		B4B4F18E1D3BF7CE00EFCC0E /* CommonEducationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonEducationTableViewCell.m; sourceTree = "<group>"; };
 		B4B4F1911D3BFA6200EFCC0E /* EducationDateTimeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EducationDateTimeTableViewCell.h; sourceTree = "<group>"; };
 		B4B4F1921D3BFA6200EFCC0E /* EducationDateTimeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EducationDateTimeTableViewCell.m; sourceTree = "<group>"; };
+		B4BB249B1D40738A00A3DD73 /* searchScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchScreen.png; sourceTree = "<group>"; };
+		B4BB24A41D41653700A3DD73 /* crossPlusButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crossPlusButton.png; sourceTree = "<group>"; };
+		B4BB24A71D4167AD00A3DD73 /* Layer_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Layer_1.png; sourceTree = "<group>"; };
+		B4BB24AA1D416AF900A3DD73 /* profileBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profileBG.png; sourceTree = "<group>"; };
+		B4BB24B01D416CA000A3DD73 /* profileBG1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profileBG1.png; sourceTree = "<group>"; };
+		B4BB24B91D416DF000A3DD73 /* userProfilePic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userProfilePic.png; sourceTree = "<group>"; };
+		B4BB24BC1D417E8000A3DD73 /* userLocal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userLocal.png; sourceTree = "<group>"; };
+		B4BB24BF1D418D6B00A3DD73 /* userProfilePic1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userProfilePic1.png; sourceTree = "<group>"; };
+		B4BB24C21D4192AD00A3DD73 /* settings1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings1.png; sourceTree = "<group>"; };
+		B4BB24C61D41BDEB00A3DD73 /* NTMonthYearPicker-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NTMonthYearPicker-Prefix.pch"; path = "NTMonthYearPicker/NTMonthYearPicker-Prefix.pch"; sourceTree = "<group>"; };
+		B4BB24C71D41BDF600A3DD73 /* NTMonthYearPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NTMonthYearPicker.h; path = NTMonthYearPicker/NTMonthYearPicker.h; sourceTree = "<group>"; };
+		B4BB24C81D41BDF600A3DD73 /* NTMonthYearPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NTMonthYearPicker.m; path = NTMonthYearPicker/NTMonthYearPicker.m; sourceTree = "<group>"; };
 		CC0123C01D25A66B001134F3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		CC01BA701D302ACF007E2AEB /* MRCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRCommentViewController.h; path = CommentBox/MRCommentViewController.h; sourceTree = "<group>"; };
 		CC01BA711D302ACF007E2AEB /* MRCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRCommentViewController.m; path = CommentBox/MRCommentViewController.m; sourceTree = "<group>"; };
@@ -2368,8 +2399,16 @@
 				B4B4F0E51D382E7300EFCC0E /* AddExperienceTableViewController.h */,
 				B4B4F0E61D382E7300EFCC0E /* AddExperienceTableViewController.m */,
 				B4B4F0EA1D3842C500EFCC0E /* AddEducationViewController.h */,
+				B4BB24C21D4192AD00A3DD73 /* settings1.png */,
 				B4B4F0EB1D3842C500EFCC0E /* AddEducationViewController.m */,
+				B4BB24BF1D418D6B00A3DD73 /* userProfilePic1.png */,
 				B4B4F0F41D38963F00EFCC0E /* ProfileStoryboard.storyboard */,
+				B4BB24B01D416CA000A3DD73 /* profileBG1.png */,
+				B4BB24B91D416DF000A3DD73 /* userProfilePic.png */,
+				B4BB24AA1D416AF900A3DD73 /* profileBG.png */,
+				B4BB24A71D4167AD00A3DD73 /* Layer_1.png */,
+				B4BB24A41D41653700A3DD73 /* crossPlusButton.png */,
+				B4BB24BC1D417E8000A3DD73 /* userLocal.png */,
 				B40E139C1D3F1268005830DA /* InterestViewController.h */,
 				B40E139D1D3F1268005830DA /* InterestViewController.m */,
 				B40E13A01D3F137E005830DA /* PublicationsViewController.h */,
@@ -3371,6 +3410,7 @@
 		83B781DF1B7913780070645C /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				B4BB24C51D41BDD400A3DD73 /* NTDateTimePicker */,
 				B4B4F15A1D39E4BD00EFCC0E /* CustomPicker */,
 				B41746CD1D0CD5CE009B7E7E /* KLCPopup.h */,
 				B41746CE1D0CD5CE009B7E7E /* KLCPopup.m */,
@@ -3820,6 +3860,16 @@
 			name = AddEducation;
 			sourceTree = "<group>";
 		};
+		B4BB24C51D41BDD400A3DD73 /* NTDateTimePicker */ = {
+			isa = PBXGroup;
+			children = (
+				B4BB24C71D41BDF600A3DD73 /* NTMonthYearPicker.h */,
+				B4BB24C81D41BDF600A3DD73 /* NTMonthYearPicker.m */,
+				B4BB24C61D41BDEB00A3DD73 /* NTMonthYearPicker-Prefix.pch */,
+			);
+			name = NTDateTimePicker;
+			sourceTree = "<group>";
+		};
 		CC0123B41D259161001134F3 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -3859,6 +3909,7 @@
 				CC649F521D0D1BA10012289C /* MRDrugDetailViewController.m */,
 				CC649F531D0D1BA10012289C /* MRDrugDetailViewController.xib */,
 				CC649F541D0D1BA10012289C /* MRDrugSearchViewController.h */,
+				B4BB249B1D40738A00A3DD73 /* searchScreen.png */,
 				CC649F551D0D1BA10012289C /* MRDrugSearchViewController.m */,
 				CC649F561D0D1BA10012289C /* MRDrugSearchViewController.xib */,
 			);
@@ -4199,6 +4250,7 @@
 				79BD27B51B80999E007CA448 /* MRHomeViewContoller.xib in Resources */,
 				79841DDD1B98A02A00535916 /* otptic@3x.png in Resources */,
 				795365FF1BA09EBF0021CE4D /* call-medrep@3x.png in Resources */,
+				B4BB24A81D4167AD00A3DD73 /* Layer_1.png in Resources */,
 				79BD28041B80B37F007CA448 /* categoryBG@2x.jpg in Resources */,
 				79BD28011B80B37F007CA448 /* categoryBG-568h@2x.jpg in Resources */,
 				79BD27CE1B809A80007CA448 /* pageviewdots@2x~iPad.png in Resources */,
@@ -4212,10 +4264,12 @@
 				79841DDC1B98A02A00535916 /* otptic@2x.png in Resources */,
 				79BD27F61B80A8C3007CA448 /* password@3x.png in Resources */,
 				79DC37141BE7DDCF0027F7DB /* MRMedRepListViewController.xib in Resources */,
+				B4BB24BA1D416DF000A3DD73 /* userProfilePic.png in Resources */,
 				8AFE8D1D1D11A4290000382E /* MRContactWithinGroupCollectionViewCell.xib in Resources */,
 				79173C5C1BB48EE100842E4C /* PHdashboard-banner@2x.png in Resources */,
 				796E93691BB8528B0031EA34 /* pcright-arrow@2x.png in Resources */,
 				79DC370E1BE7DC5F0027F7DB /* MRMedRepTableCell.xib in Resources */,
+				B4BB24B11D416CA000A3DD73 /* profileBG1.png in Resources */,
 				7961A96B1B8F25DA0035D63A /* privateHospital_selection@2x.png in Resources */,
 				7991FAC21B810AB100516DDF /* otpTiccMark@2x~iPad.png in Resources */,
 				79AC94611B9E0DA000B81452 /* ndcompany3@2x.jpg in Resources */,
@@ -4346,6 +4400,7 @@
 				79FFD2661BB9DC3100CEE606 /* star@2x.png in Resources */,
 				79A5DC711BA2092E001D872C /* crdown-arrow@2x.png in Resources */,
 				7991FAC31B810AB100516DDF /* otpTiccMark@3x.png in Resources */,
+				B4BB24C01D418D6B00A3DD73 /* userProfilePic1.png in Resources */,
 				79F066931B94E13C00D113F0 /* MRMenuTableViewCell.xib in Resources */,
 				795366071BA09EBF0021CE4D /* full-screen@3x.png in Resources */,
 				79BD279F1B80980F007CA448 /* Icon-40@3x.png in Resources */,
@@ -4435,6 +4490,7 @@
 				79F416A61B9F6E560089729B /* cnsort@2x.png in Resources */,
 				79BD279D1B80980F007CA448 /* Icon-40.png in Resources */,
 				7961A97A1B8F4E520035D63A /* MRWelcomeViewController.xib in Resources */,
+				B4BB24AB1D416AF900A3DD73 /* profileBG.png in Resources */,
 				791C37DF1C4FF96400914728 /* minus@3x.png in Resources */,
 				79F4168A1B9F5CDB0089729B /* calender-icon@3x.png in Resources */,
 				791C37EC1C50256E00914728 /* team@2x.png in Resources */,
@@ -4512,6 +4568,7 @@
 				79AC94661B9E0DA000B81452 /* White-right-arrow@3x.png in Resources */,
 				79AC945E1B9E0DA000B81452 /* NDcompany1@3x.jpg in Resources */,
 				79BD27A51B80980F007CA448 /* Icon-76.png in Resources */,
+				B4BB24A51D41653700A3DD73 /* crossPlusButton.png in Resources */,
 				79173C661BB48EE100842E4C /* PHsurveys@2x.png in Resources */,
 				7930A3AA1BB91ECF003112E4 /* frsnoozed@3x.png in Resources */,
 				79708AAA1BB73C67007CE81D /* PHphone@3x.png in Resources */,
@@ -4544,6 +4601,7 @@
 				7930A3A41BB91ECF003112E4 /* froverdue@3x.png in Resources */,
 				79173C5E1BB48EE100842E4C /* PHdashboard-bg@2x.png in Resources */,
 				79BD27D11B809A80007CA448 /* Signup_plain@2x~iPad.png in Resources */,
+				B4BB24C31D4192AD00A3DD73 /* settings1.png in Resources */,
 				79BD27E91B80A11D007CA448 /* MRRegistationViewController.xib in Resources */,
 				79708AA01BB73C67007CE81D /* PHdoctor@2x.png in Resources */,
 				7929E3DA1B9CC674001F1373 /* news_dash@2x.png in Resources */,
@@ -4641,10 +4699,12 @@
 				8AFE8CDE1D0F21400000382E /* my_contacts.json in Resources */,
 				791C37EA1C50256E00914728 /* pending_icon@2x.png in Resources */,
 				CC7DB2751D0C9E15007DFE4C /* MPTransformTableViewCell.xib in Resources */,
+				B4BB249C1D40738A00A3DD73 /* searchScreen.png in Resources */,
 				79BD27DD1B809FD1007CA448 /* MRLoginViewController.xib in Resources */,
 				79A5DC751BA2092E001D872C /* crgreydown-arrow@2x.png in Resources */,
 				79DE1BE81B826245005289D6 /* upArrow@2x~iPad.png in Resources */,
 				79F4168B1B9F5CDB0089729B /* drug-icon@2x.png in Resources */,
+				B4BB24BD1D417E8000A3DD73 /* userLocal.png in Resources */,
 				791C37EE1C50256E00914728 /* upcoming_icon@2x.png in Resources */,
 				79F4168D1B9F5CDB0089729B /* navigation-icon@2x.png in Resources */,
 				7929E3AB1B9C8979001F1373 /* right-arrow@2x.png in Resources */,
@@ -4699,6 +4759,7 @@
 				CC7DB08C1D0C8BEC007DFE4C /* reminderSelected@3x.png in Resources */,
 				CC7DB37C1D0CC8A6007DFE4C /* profile_pic3.jpeg in Resources */,
 				CC7DB08D1D0C8BEC007DFE4C /* MRHomeViewContoller.xib in Resources */,
+				B4BB24A91D4167AD00A3DD73 /* Layer_1.png in Resources */,
 				CC7DB08E1D0C8BEC007DFE4C /* otptic@3x.png in Resources */,
 				CC7DB08F1D0C8BEC007DFE4C /* call-medrep@3x.png in Resources */,
 				8AFE8D1E1D11A4290000382E /* MRContactWithinGroupCollectionViewCell.xib in Resources */,
@@ -4712,10 +4773,12 @@
 				CC7DB0961D0C8BEC007DFE4C /* pageviewdots~iPad.png in Resources */,
 				CC7DB3221D0CC5F8007DFE4C /* PendingContactCustomCell.xib in Resources */,
 				CC7DB3961D0CC8C8007DFE4C /* compose.png in Resources */,
+				B4BB24BB1D416DF000A3DD73 /* userProfilePic.png in Resources */,
 				CC7DB0971D0C8BEC007DFE4C /* navLogo.png in Resources */,
 				CC7DB0981D0C8BEC007DFE4C /* pcselect@3x.png in Resources */,
 				CC7DB0991D0C8BEC007DFE4C /* otptic@2x.png in Resources */,
 				CC7DB09A1D0C8BEC007DFE4C /* password@3x.png in Resources */,
+				B4BB24B21D416CA000A3DD73 /* profileBG1.png in Resources */,
 				CC7DB09B1D0C8BEC007DFE4C /* MRMedRepListViewController.xib in Resources */,
 				CC7DB09C1D0C8BEC007DFE4C /* PHdashboard-banner@2x.png in Resources */,
 				CC7DB09D1D0C8BEC007DFE4C /* pcright-arrow@2x.png in Resources */,
@@ -4846,6 +4909,7 @@
 				CC7DB1051D0C8BEC007DFE4C /* crdown-arrow@2x.png in Resources */,
 				CC7DB1061D0C8BEC007DFE4C /* otpTiccMark@3x.png in Resources */,
 				CC7DB1071D0C8BEC007DFE4C /* MRMenuTableViewCell.xib in Resources */,
+				B4BB24C11D418D6B00A3DD73 /* userProfilePic1.png in Resources */,
 				CC7DB1081D0C8BEC007DFE4C /* full-screen@3x.png in Resources */,
 				CC7DB35A1D0CC8A6007DFE4C /* post_image11.jpeg in Resources */,
 				CC7DB1091D0C8BEC007DFE4C /* Icon-40@3x.png in Resources */,
@@ -4935,6 +4999,7 @@
 				CC7DB14B1D0C8BEC007DFE4C /* MRWelcomeViewController.xib in Resources */,
 				CC7DB14C1D0C8BEC007DFE4C /* minus@3x.png in Resources */,
 				CC7DB14D1D0C8BEC007DFE4C /* calender-icon@3x.png in Resources */,
+				B4BB24AC1D416AF900A3DD73 /* profileBG.png in Resources */,
 				CC7DB14E1D0C8BEC007DFE4C /* team@2x.png in Resources */,
 				CC7DB14F1D0C8BEC007DFE4C /* MRAppointmentCell.xib in Resources */,
 				CC7DB3A01D0CC8C8007DFE4C /* like.png in Resources */,
@@ -5012,6 +5077,7 @@
 				CC7DB18E1D0C8BEC007DFE4C /* MRFeedBackResultCell.xib in Resources */,
 				CC7DB18F1D0C8BEC007DFE4C /* activity-score@3x.png in Resources */,
 				CC7DB35E1D0CC8A6007DFE4C /* post_image3.jpeg in Resources */,
+				B4BB24A61D41653700A3DD73 /* crossPlusButton.png in Resources */,
 				CC7DB1901D0C8BEC007DFE4C /* right-arrow@3x.png in Resources */,
 				CC7DB1911D0C8BEC007DFE4C /* PHmarketing@3x.png in Resources */,
 				CC7DB3541D0CC8A6007DFE4C /* group_pic5.png in Resources */,
@@ -5044,6 +5110,7 @@
 				CC7DB1AA1D0C8BEC007DFE4C /* news_dash@2x.png in Resources */,
 				CC7DB1AB1D0C8BEC007DFE4C /* favoriteSelected@2x.png in Resources */,
 				CC7DB1AC1D0C8BEC007DFE4C /* cncompany3@3x.jpg in Resources */,
+				B4BB24C41D4192AD00A3DD73 /* settings1.png in Resources */,
 				CC7DB27D1D0C9E20007DFE4C /* MRTransformDetailViewController.xib in Resources */,
 				CC7DB3501D0CC8A6007DFE4C /* group_pic3.png in Resources */,
 				CC7DB1AD1D0C8BEC007DFE4C /* MRMenuViewController.xib in Resources */,
@@ -5146,6 +5213,7 @@
 				CC7DB1FA1D0C8BEC007DFE4C /* upArrow@2x~iPad.png in Resources */,
 				CC7DB1FB1D0C8BEC007DFE4C /* drug-icon@2x.png in Resources */,
 				CC7DB1FC1D0C8BEC007DFE4C /* upcoming_icon@2x.png in Resources */,
+				B4BB24BE1D417E8000A3DD73 /* userLocal.png in Resources */,
 				CC7DB3841D0CC8A6007DFE4C /* profile_pic7.jpeg in Resources */,
 				CC7DB1FD1D0C8BEC007DFE4C /* navigation-icon@2x.png in Resources */,
 				CC7DB1FE1D0C8BEC007DFE4C /* right-arrow@2x.png in Resources */,
@@ -5258,6 +5326,7 @@
 				79F29A701BE6330300063DC2 /* MRDoctorActivityScoreViewController.m in Sources */,
 				B4B4F1931D3BFA6200EFCC0E /* EducationDateTimeTableViewCell.m in Sources */,
 				79FFD24F1BB9B83700CEE606 /* MRRegistrationRoleViewController.m in Sources */,
+				B4BB24C91D41BDF600A3DD73 /* NTMonthYearPicker.m in Sources */,
 				CC86FE3A1D29A7780030B23D /* MRShareDetailViewController.m in Sources */,
 				B4B4F1431D39857E00EFCC0E /* MRInterestArea+CoreDataProperties.m in Sources */,
 				CC7DB31B1D0CC530007DFE4C /* PendingContactTableViewCell.m in Sources */,
@@ -5408,6 +5477,7 @@
 				CC7DB2DA1D0CC433007DFE4C /* MRGroupPostItemTableViewCell.m in Sources */,
 				CC7DB3101D0CC4E2007DFE4C /* MRSuggestedContact+CoreDataProperties.m in Sources */,
 				CC7DB0261D0C8BEC007DFE4C /* AppDelegate.m in Sources */,
+				B4BB24CA1D41BDF600A3DD73 /* NTMonthYearPicker.m in Sources */,
 				B40E139F1D3F1268005830DA /* InterestViewController.m in Sources */,
 				CC7DB0271D0C8BEC007DFE4C /* WYPopoverController.m in Sources */,
 				CC7DB0281D0C8BEC007DFE4C /* MRViewRepAppointmnetViewController.m in Sources */,

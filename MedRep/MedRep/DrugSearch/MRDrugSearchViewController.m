@@ -133,7 +133,14 @@
     notiFicationViewController.selectedDict = selectedDrug;
     [self.navigationController pushViewController:notiFicationViewController animated:YES];
 }
-
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if (string.length>3) {
+        searchString = [textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        [self getMedicineSuggestions];
+    }
+    
+    return YES;
+}
 -(BOOL) textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
     if (textField.text.length) {

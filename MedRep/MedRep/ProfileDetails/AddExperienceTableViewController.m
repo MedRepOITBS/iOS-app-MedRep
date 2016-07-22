@@ -13,10 +13,9 @@
 #import "UICustomDatePicker.h"
 #import "NSString+Date.h"
 #import "MRDatabaseHelper.h"
-
+#import "NTMonthYearPicker.h"
 @interface AddExperienceTableViewController () <ExperienceDateTimeTableViewCellDelegate,CommonTableViewCellDelegate>
-@property (nonatomic, weak) IBOutlet UICustomDatePicker *customDatePicker;
-@property (nonatomic, weak) IBOutlet UICustomDatePicker *customYearPicker;
+//@property (nonatomic, weak) IBOutlet UICustomDatePicker *customDatePicker;
 @property (nonatomic,strong) NSString * designation;
 @property (nonatomic,strong) NSString *organisation;
 @property (nonatomic,strong) NSString *location;
@@ -29,10 +28,45 @@
 
 @property (nonatomic,weak) IBOutlet UITableView *tableView;
 @property (nonatomic,strong) UITextField *currentSelectedTextField;
+@property (nonatomic,weak) IBOutlet UIView *pickerView;
+@property (nonatomic,strong) NTMonthYearPicker *picker;
 @end
 
 @implementation AddExperienceTableViewController
-
+-(void)setupPicker{
+    _picker = [[NTMonthYearPicker alloc] init];
+    
+    [_picker addTarget:self action:@selector(onDatePicked:) forControlEvents:UIControlEventValueChanged];
+    
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    
+    // Set mode to month + year
+    // This is optional; default is month + year
+    _picker.datePickerMode = NTMonthYearPickerModeMonthAndYear;
+    
+    // Set minimum date to January 2000
+    // This is optional; default is no min date
+    [comps setDay:1];
+    [comps setMonth:1];
+    [comps setYear:1990];
+    _picker.minimumDate = [cal dateFromComponents:comps];
+    
+    // Set maximum date to next month
+    // This is optional; default is no max date
+    [comps setDay:0];
+    [comps setMonth:1];
+    [comps setYear:0];
+    _picker.maximumDate = [cal dateByAddingComponents:comps toDate:[NSDate date] options:0];
+    
+    // Set initial date to last month
+    // This is optional; default is current month/year
+    [comps setDay:0];
+    [comps setMonth:-1];
+    [comps setYear:0];
+    _picker.date = [cal dateByAddingComponents:comps toDate:[NSDate date] options:0];
+    _picker.hidden = YES;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -40,16 +74,60 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"DONE" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonTapped:)];
     self.navigationItem.rightBarButtonItem = revealButtonItem;
-    self.customDatePicker.hidden = YES;
-    self.customYearPicker.hidden = YES;
+//    self.customDatePicker.hidden = YES;
 self.navigationItem.title  = @"Add Experience";
-      [self initCustomDatePicker:self.customDatePicker withOption:NSCustomDatePickerOptionMediumMonth andOrder:NSCustomDatePickerOrderMonthDayAndYear];
-  [self initCustomDatePicker:self.customYearPicker withOption:NSCustomDatePickerOptionYear andOrder:NSCustomDatePickerOrderMonthDayAndYear];
+    
     UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"]  style:UIBarButtonItemStyleDone target:self action:@selector(backButtonTapped:)];
     self.navigationItem.leftBarButtonItem = leftButtonItem;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+[self setupPicker];
+    [self updateLabel];
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    
+    [super viewDidAppear:animated];
+    
+    CGSize pickerSize = [_picker sizeThatFits:CGSizeZero];
+   
+        _picker.frame = CGRectMake( 0, [[UIScreen mainScreen] bounds].size.height - pickerSize.height, pickerSize.width, pickerSize.height );
+       [self.view addSubview:_picker];
+
+}
+
+
+- (void)updateModeSelector {
+    
+}
+
+- (void)updateLabel {
+    
+    
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    NSString *stringFromDate;
+    
+    
+    [formatter setDateFormat:@"MMM YYYY"];
+    stringFromDate = [formatter stringFromDate:_picker.date];
+    if (_currentSelectedTextField.tag == 500) {
+        _fromMM = stringFromDate;
+    }
+    else if(_currentSelectedTextField.tag == 502) {
+        _toMM = stringFromDate;
+        
+    }
+    
+    
+    
+    NSLog(@"%@",stringFromDate);
+    _currentSelectedTextField.text = stringFromDate;
+}
+
+- (void)onDatePicked:(UITapGestureRecognizer *)gestureRecognizer {
+    [self updateLabel];
 }
 -(void)doneButtonTapped:(id)sender{
     if (![self isValidationSuccess]) {
@@ -68,7 +146,7 @@ self.navigationItem.title  = @"Add Experience";
         
         
     }
-    NSDictionary * workExpDict = [[NSDictionary alloc] initWithObjectsAndKeys:_designation,@"designation",_organisation,@"hospital",[NSString stringWithFormat:@"%@ %@",_fromMM,_fromYYYY],@"fromDate",[NSString stringWithFormat:@"%@ %@",_toMM,_toYYYY],@"toDate",_location,@"location", nil];
+    NSDictionary * workExpDict = [[NSDictionary alloc] initWithObjectsAndKeys:_designation,@"designation",_organisation,@"hospital",[NSString stringWithFormat:@"%@",_fromMM],@"fromDate",[NSString stringWithFormat:@"%@",_toMM],@"toDate",_location,@"location", nil];
     
   BOOL ys =  [MRDatabaseHelper  addWorkExperience:workExpDict];
     if (ys) {
@@ -105,13 +183,6 @@ self.navigationItem.title  = @"Add Experience";
         [alertView show];
         
         return isValidationPassed;
-    }else if([_fromYYYY isEqualToString:@""] || _fromYYYY == nil){
-                errorMsg = @"Please enter the starting year";
-        isValidationPassed = NO;
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorMsg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [alertView show];
-        
-        return isValidationPassed;
     }else if([_fromMM isEqualToString:@""] || _fromMM == nil){
         errorMsg = @"Please enter the starting month";
         isValidationPassed = NO;
@@ -126,14 +197,6 @@ self.navigationItem.title  = @"Add Experience";
     {
         if([_toMM isEqualToString:@""] || _toMM == nil){
                     errorMsg = @"Please enter the end month";
-            isValidationPassed = NO;
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorMsg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alertView show];
-            
-            return isValidationPassed;
-            
-        }else if([_toYYYY isEqualToString:@""] || _toYYYY == nil){
-                    errorMsg = @"Please enter the end year";
             isValidationPassed = NO;
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorMsg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alertView show];
@@ -173,7 +236,10 @@ self.navigationItem.title  = @"Add Experience";
     return 5;
 }
 
-
+-(CGFloat)widthOfString:(NSString *)string withFont:(NSFont *)font {
+    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, nil];
+    return [[[NSAttributedString alloc] initWithString:string attributes:attributes] size].width;
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
    
     switch (indexPath.row) {
@@ -184,11 +250,21 @@ self.navigationItem.title  = @"Add Experience";
                 cell.inputTextField.placeholder = @"Designation";
                 cell.inputTextField.tag = 101;
             }else if(indexPath.row == 1){
-                cell.title.text = @"ORGANISATION";
+                
+                NSString *buttonTitle =@"ORGANISATION";
+                CGSize stringSize = [buttonTitle sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:17.0f]}];
+//                CGFloat width  = [self widthOfString:@"ORGANISATION" withFont:<#(NSFont *)#>]
+                cell.title.text = buttonTitle;
+                cell.titleWidthConstraint.constant =  ceil(stringSize.width);
                 cell.inputTextField.placeholder = @"Organisation";
                 cell.inputTextField.tag = 102;
             }else{
-                cell.title.text = @"Location";
+                
+                NSString *buttonTitle =@"Location";
+                CGSize stringSize = [buttonTitle sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:17.0f]}];
+                cell.title.text = buttonTitle;
+                cell.titleWidthConstraint.constant =  ceil(stringSize.width);
+
                 cell.inputTextField.placeholder = @"City Name";
                 cell.inputTextField.tag = 110;
             }
@@ -241,18 +317,15 @@ self.navigationItem.title  = @"Add Experience";
 -(void)ExperienceDateTimeTableViewCellDelegateForTextFieldClicked:(ExperienceDateTimeTableViewCell *)cell withTextField:(UITextField *)textField{
 
     _currentSelectedTextField = textField;
-    if ([textField.placeholder isEqualToString:@"MMM"]) {
-        self.customDatePicker.hidden = NO;
-        self.customYearPicker.hidden = YES;
-        
+//        self.customDatePicker.hidden = NO;
+    _picker.hidden = NO;
+
+    
 
         
-    }else {
-        self.customDatePicker.hidden = YES;
-        self.customYearPicker.hidden = NO;
         
 
-    }
+   
 }
 
 /*
@@ -299,8 +372,8 @@ self.navigationItem.title  = @"Add Experience";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Navigation logic may go here, for example:
     // Create the next view controller.
-    self.customYearPicker.hidden = YES;
-    self.customDatePicker.hidden = YES;
+//    self.customDatePicker.hidden = YES;
+    _picker.hidden = YES;
 
 }
 /*
@@ -313,32 +386,14 @@ self.navigationItem.title  = @"Add Experience";
 }
 */
 
-- (void) initCustomDatePicker:(UICustomDatePicker *) picker withOption:(NSUInteger) option andOrder:(NSUInteger) order {
-    picker.minDate = [[NSString stringWithFormat:@"06/Jan/1900"] dateValueForFormatString:@"dd/MMM/yyyy"];
-    picker.maxDate = [[NSString stringWithFormat:@"06/Dec/2300"] dateValueForFormatString:@"dd/MMM/yyyy"];
-    picker.currentDate = [NSDate date];
-    picker.order = order;
-    picker.option = option;
-}
 
 
 - (IBAction)didCustomDatePickerValueChanged:(id)sender {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     NSString *stringFromDate;
    
-    if (((UICustomDatePicker *)sender).tag == 120) {
-        [formatter setDateFormat:@"yyyy"];
-        stringFromDate = [formatter stringFromDate:[(UICustomDatePicker *)sender currentDate]];
-    if(_currentSelectedTextField.tag == 501)
-        {
-            _fromYYYY = stringFromDate;
-        }else if(_currentSelectedTextField.tag == 503)
-        {
-            _toYYYY = stringFromDate;
-        }
-    }else {
-        
-        [formatter setDateFormat:@"MMM"];
+    
+        [formatter setDateFormat:@"MMM YYYY"];
         stringFromDate = [formatter stringFromDate:[(UICustomDatePicker *)sender currentDate]];
         if (_currentSelectedTextField.tag == 500) {
             _fromMM = stringFromDate;
@@ -347,7 +402,7 @@ self.navigationItem.title  = @"Add Experience";
             _toMM = stringFromDate;
             
         }
-    }
+    
     
     
     NSLog(@"%@",stringFromDate);

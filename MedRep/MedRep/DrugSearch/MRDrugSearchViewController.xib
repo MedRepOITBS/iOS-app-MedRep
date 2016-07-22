@@ -73,7 +73,7 @@
                         <constraint firstAttribute="height" constant="145" id="sGS-CT-VVt"/>
                     </constraints>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="searchMed.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="lId-zk-MlA">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="searchScreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="lId-zk-MlA">
                     <rect key="frame" x="0.0" y="145" width="375" height="522"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o5n-NT-IVK">
@@ -288,6 +288,6 @@
         <image name="Icon-40.png" width="40" height="40"/>
         <image name="left-arrow.png" width="10" height="17"/>
         <image name="right-arrow.png" width="10" height="17"/>
-        <image name="searchMed.jpg" width="1299" height="1300"/>
+        <image name="searchScreen.png" width="646" height="1100"/>
     </resources>
 </document>

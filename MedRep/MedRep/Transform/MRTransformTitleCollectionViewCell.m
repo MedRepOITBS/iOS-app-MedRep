@@ -7,7 +7,7 @@
 //
 
 #import "MRTransformTitleCollectionViewCell.h"
-
+#import "MRCommon.h"
 @interface MRTransformTitleCollectionViewCell ()
 
 @property (weak, nonatomic) IBOutlet UILabel *title;
@@ -26,13 +26,14 @@
 }
 
 - (void)setCorners {
-    [self.title setBackgroundColor:[UIColor lightGrayColor]];
+   
+    [self.title setBackgroundColor:[MRCommon colorFromHexString:@"#2BF6C0"]];
     [self.title.layer setCornerRadius:5.0];
     [self.title setClipsToBounds:true];
 }
 
 - (void)clearCorners {
-    [self.title setBackgroundColor:[UIColor blueColor]];
+    [self.title setBackgroundColor:[MRCommon colorFromHexString:@"#20B18A"]];
     [self.title.layer setCornerRadius:0];
 }
 
