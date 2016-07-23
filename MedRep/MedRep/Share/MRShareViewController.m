@@ -30,7 +30,7 @@
 
 @interface MRShareViewController () <UISearchBarDelegate, SWRevealViewControllerDelegate, MRGroupPostItemTableViewCellDelegate, MRShareOptionsSelectionDelegate,
     CommonBoxViewDelegate,
-    UITableViewDelegate, UITableViewDataSource, PostDataUpdated>
+    UITableViewDelegate, UITableViewDataSource,UISearchBarDelegate, PostDataUpdated>
 
 @property (nonatomic) NSIndexPath *reloadIndexPath;
 @property (nonatomic) BOOL reloadRows;
@@ -38,7 +38,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *emptyMessage;
 
 @property (weak, nonatomic) IBOutlet UITableView* postsTableView;
-
+@property (weak,nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) NSArray* contactsUnderGroup;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomHeight;
 @property (strong, nonatomic) NSArray* groupsUnderContact;
@@ -136,6 +136,7 @@
 
 - (void)fetchPosts {
     self.posts = [MRDatabaseHelper getShareArticles];
+    self.serachResults = [self.posts mutableCopy];
     [self setEmptyMessage];
 }
 
@@ -151,14 +152,14 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if (tableView == self.searchDisplayController.searchResultsTableView) {
-        return self.serachResults.count;
-        
-    }
     
-    return self.posts.count;
+    
+    return self.serachResults.count;
 }
-
+- (void)viewTapped:(UITapGestureRecognizer*)tapGesture {
+    [self.searchBar resignFirstResponder];
+    self.tapGesture.enabled = NO;
+}
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -177,14 +178,10 @@
         cell = (MRGroupPostItemTableViewCell *)[nibViews lastObject];
     }
     
-    if (tableView == self.searchDisplayController.searchResultsTableView) {
+    
         [cell setPostContent:[self.serachResults objectAtIndex:indexPath.row] tagIndex:tagIndex];
 
-    }else{
-        [cell setPostContent:[self.posts objectAtIndex:indexPath.row] tagIndex:tagIndex];
-
-        
-    }
+   
     
     return cell;
 }
@@ -198,14 +195,10 @@
     [shareDetailViewController setIndexPath:indexPath];
     
     
-    if (tableView == self.searchDisplayController.searchResultsTableView) {
-        
+    
         [shareDetailViewController setPost:self.serachResults[indexPath.row]];
         
-    }else{
-        [shareDetailViewController setPost:self.posts[indexPath.row]];
-        
-    }
+   
     
     [self.navigationController pushViewController:shareDetailViewController animated:true];
 }
@@ -244,30 +237,9 @@
     [self.navigationController pushViewController:notiFicationViewController animated:NO];
 }
 
-- (void)viewTapped:(UITapGestureRecognizer*)tapGesture {
-    self.tapGesture.enabled = NO;
-}
 
 
-- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
-{
-    
-    self.serachResults  =  [[self.posts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(%K contains[cd] %@)",@"titleDescription",searchText]] mutableCopy];
-    //    self.searchResults  =  [[self.filteredData filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(%K contains[cd] %@) OR (%K contains[cd] %@)",@"titleDescription",searchText,@"lastName",searchText]] mutableCopy];
-    
-}
 
-#pragma mark - UISearchDisplayController delegate methods
--(BOOL)searchDisplayController:(UISearchDisplayController *)controller
-shouldReloadTableForSearchString:(NSString *)searchString
-{
-    [self filterContentForSearchText:searchString
-                               scope:[[self.searchDisplayController.searchBar scopeButtonTitles]
-                                      objectAtIndex:[self.searchDisplayController.searchBar
-                                                     selectedScopeButtonIndex]]];
-    
-    return YES;
-}
 
 - (void)likeButtonTapped {
     [self fetchPosts];
@@ -320,7 +292,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
     
     [_commentBoxKLCPopView dismiss:YES];
     
-    MRGroupPost *post = [self.posts objectAtIndex:indexPath.row];
+    MRGroupPost *post = [self.serachResults objectAtIndex:indexPath.row];
     //obtaining saving path
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -352,26 +324,26 @@ shouldReloadTableForSearchString:(NSString *)searchString
 //    [self.postsTableView reloadData];
 }
 
--(void)totalPosts {
-    __block NSMutableArray *arra = [NSMutableArray array];
-    
-    [self.posts enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        MRGroupPost *postGroup = (MRGroupPost *)obj;
-        [arra addObject:postGroup];
-        if (postGroup.replyPost!=nil && postGroup.replyPost.count >0) {
-            
-            [postGroup.replyPost enumerateObjectsUsingBlock:^(MrGroupChildPost * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                [arra addObject:(MrGroupChildPost *)obj];
-                
-            }];
-        }
-        
-    }];
-    
-    self.posts = nil;
-    self.posts = [NSMutableArray arrayWithArray:arra] ;
-    
-}
+//-(void)totalPosts {
+//    __block NSMutableArray *arra = [NSMutableArray array];
+//    
+//    [self.posts enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        MRGroupPost *postGroup = (MRGroupPost *)obj;
+//        [arra addObject:postGroup];
+//        if (postGroup.replyPost!=nil && postGroup.replyPost.count >0) {
+//            
+//            [postGroup.replyPost enumerateObjectsUsingBlock:^(MrGroupChildPost * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//                [arra addObject:(MrGroupChildPost *)obj];
+//                
+//            }];
+//        }
+//        
+//    }];
+//    
+//    self.posts = nil;
+//    self.posts = [NSMutableArray arrayWithArray:arra] ;
+//    
+//}
 
 #pragma mark
 #pragma CAMERA IMAGE CAPTURE
@@ -417,5 +389,44 @@ shouldReloadTableForSearchString:(NSString *)searchString
     [self fetchPosts];
     [self.postsTableView reloadRowsAtIndexPaths:@[self.reloadIndexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
+#pragma mark - SearchBar Delegate Methods
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    
+    
+    if ([searchText isEqualToString:@""]) {
+        self.serachResults = [self.posts  mutableCopy];
+        //        [self.contentTableView reloadData];
+        
+    }else{
+        
+        self.serachResults  =  [[self.posts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(%K contains[cd] %@)",@"titleDescription",searchText]] mutableCopy];
+        
+           }
+  [self. postsTableView reloadData];
+    
+    
+}
+
+
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+    [searchBar resignFirstResponder];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
+    
+    searchBar.text=@"";
+    
+    [searchBar setShowsCancelButton:NO animated:YES];
+    [searchBar resignFirstResponder];
+    self.postsTableView.allowsSelection = YES;
+    self.postsTableView.scrollEnabled = YES;
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    self.tapGesture.enabled = YES;
+}
+
 
 @end

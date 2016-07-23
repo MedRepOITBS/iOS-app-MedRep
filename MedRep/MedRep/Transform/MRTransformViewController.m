@@ -201,32 +201,7 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
 #pragma mark - SearchBar Delegate Methods
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-//    if (self.currentIndex == 0) {
-//        if (searchText.length == 0) {
-//            self.fileredContacts = self.myContacts;
-//        } else {
-//            self.fileredContacts = [[self.myContacts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(%K contains[cd] %@) OR (%K contains[cd] %@)",@"firstName",searchText,@"lastName",searchText]] mutableCopy];
-//        }
-//    } else if(self.currentIndex == 1){
-//        if (searchText.length == 0) {
-//            self.fileredSuggestedContacts = self.suggestedContacts;
-//        } else {
-//            self.fileredSuggestedContacts = [[self.suggestedContacts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(%K contains[cd] %@) OR (%K contains[cd] %@)",@"firstName",searchText,@"lastName",searchText]] mutableCopy];
-//        }
-//    }else if (self.currentIndex == 2){
-//        if (searchText.length == 0) {
-//            filteredGroupsArray = groupsArray;
-//        } else {
-//            filteredGroupsArray = [[groupsArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K contains[cd] %@",@"group_name",searchText]] mutableCopy];
-//        }
-//    }else if (self.currentIndex == 3){
-//        if (searchText.length == 0) {
-//            filteredSuggestedGroupsArray = suggestedGroupsArray;
-//        } else {
-//            filteredSuggestedGroupsArray = [[suggestedGroupsArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K contains[cd] %@",@"group_name",searchText]] mutableCopy];
-//        }
-//    }
-//    [self.myContactsCollectionView reloadData];
+
     
     if ([searchText isEqualToString:@""]) {
         self.filteredData = [self.contentData mutableCopy];

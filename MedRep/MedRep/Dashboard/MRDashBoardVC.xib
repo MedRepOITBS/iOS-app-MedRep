@@ -71,7 +71,7 @@
                     <rect key="frame" x="0.0" y="39" width="375" height="334"/>
                     <subviews>
                         <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="latestNotificatins.png" translatesAutoresizingMaskIntoConstraints="NO" id="OAg-07-jMR">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="334"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="131"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q0r-C1-6x1">
@@ -83,17 +83,26 @@
                                 <action selector="latestnotificationsButtonAction:" destination="-1" eventType="touchUpInside" id="cN3-Pg-LHR"/>
                             </connections>
                         </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pexels-photo.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="lOt-c3-JKt">
+                            <rect key="frame" x="0.0" y="131" width="375" height="203"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="375" id="KPe-Yt-NjM"/>
+                                <constraint firstAttribute="height" constant="203" id="gBZ-7t-JdV"/>
+                            </constraints>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="lOt-c3-JKt" firstAttribute="leading" secondItem="OGe-Q2-yfm" secondAttribute="leading" id="1no-M3-FJB"/>
                         <constraint firstItem="OAg-07-jMR" firstAttribute="top" secondItem="OGe-Q2-yfm" secondAttribute="top" id="3sK-2n-clz"/>
                         <constraint firstItem="OAg-07-jMR" firstAttribute="leading" secondItem="OGe-Q2-yfm" secondAttribute="leading" id="J5A-Q4-xQa"/>
                         <constraint firstAttribute="trailing" secondItem="Q0r-C1-6x1" secondAttribute="trailing" id="Pwz-Cr-cI4"/>
                         <constraint firstItem="Q0r-C1-6x1" firstAttribute="top" secondItem="OGe-Q2-yfm" secondAttribute="top" id="RJS-m3-fqR"/>
                         <constraint firstAttribute="bottom" secondItem="Q0r-C1-6x1" secondAttribute="bottom" id="XuP-OZ-QnL"/>
                         <constraint firstItem="Q0r-C1-6x1" firstAttribute="leading" secondItem="OGe-Q2-yfm" secondAttribute="leading" id="bKJ-JX-BuQ"/>
+                        <constraint firstItem="lOt-c3-JKt" firstAttribute="top" secondItem="OAg-07-jMR" secondAttribute="bottom" id="kPc-ge-t1k"/>
                         <constraint firstAttribute="trailing" secondItem="OAg-07-jMR" secondAttribute="trailing" id="vCo-Wj-wsz"/>
-                        <constraint firstAttribute="bottom" secondItem="OAg-07-jMR" secondAttribute="bottom" id="yKr-Z9-zqo"/>
+                        <constraint firstAttribute="bottom" secondItem="OAg-07-jMR" secondAttribute="bottom" constant="203" id="yKr-Z9-zqo"/>
                     </constraints>
                 </view>
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N0n-eD-GVd" userLabel="Options View">
@@ -486,6 +495,7 @@
         <image name="navLogo.png" width="123" height="33"/>
         <image name="news_dash.png" width="53" height="84"/>
         <image name="notification_dash.png" width="68" height="76"/>
+        <image name="pexels-photo.jpg" width="3867" height="2578"/>
         <image name="right-arrow.png" width="10" height="17"/>
         <image name="search.png" width="90" height="84"/>
         <image name="surveys_dashboard.png" width="53" height="78"/>

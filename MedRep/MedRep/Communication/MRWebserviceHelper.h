@@ -238,6 +238,13 @@ withComplitionHandler:(completionHandler)responceHandler;
 
 -(void)getContactsAndGroups:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler;
 
+
+-(void)updateLikeCounts:(NSDictionary *)reqDict withHandler:(completionHandler) responseHandler;
+
+-(void)updateComment:(NSDictionary *)reqDict withHandler:(completionHandler) responseHandler;
+-(void)updateShareCount:(NSDictionary *)reqDict withHandler:(completionHandler) responseHandler;
+
+
 + (id)parseNetworkResponse:(Class)inEntityClass andData:(NSArray*)data;
 
 + (NSArray*)parseRecords:(Class)entityClass allRecords:(NSArray*)allRecords

@@ -314,6 +314,7 @@
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+   self.tapGesture.enabled = NO;
     [searchBar resignFirstResponder];
 }
 

@@ -705,6 +705,8 @@
 		B4BB24C91D41BDF600A3DD73 /* NTMonthYearPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = B4BB24C81D41BDF600A3DD73 /* NTMonthYearPicker.m */; };
 		B4BB24CA1D41BDF600A3DD73 /* NTMonthYearPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = B4BB24C81D41BDF600A3DD73 /* NTMonthYearPicker.m */; };
 		B4BB24CB1D42C6AE00A3DD73 /* searchScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB249B1D40738A00A3DD73 /* searchScreen.png */; };
+		B4BB24CD1D4319EB00A3DD73 /* pexels-photo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24CC1D4319EB00A3DD73 /* pexels-photo.jpg */; };
+		B4BB24CE1D4319EB00A3DD73 /* pexels-photo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24CC1D4319EB00A3DD73 /* pexels-photo.jpg */; };
 		CC0123C11D25A66B001134F3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0123C01D25A66B001134F3 /* CoreGraphics.framework */; };
 		CC0123C21D25A677001134F3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0123C01D25A66B001134F3 /* CoreGraphics.framework */; };
 		CC01BA731D302ACF007E2AEB /* MRCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC01BA711D302ACF007E2AEB /* MRCommentViewController.m */; };
@@ -2134,6 +2136,7 @@
 		B4BB24C61D41BDEB00A3DD73 /* NTMonthYearPicker-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NTMonthYearPicker-Prefix.pch"; path = "NTMonthYearPicker/NTMonthYearPicker-Prefix.pch"; sourceTree = "<group>"; };
 		B4BB24C71D41BDF600A3DD73 /* NTMonthYearPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NTMonthYearPicker.h; path = NTMonthYearPicker/NTMonthYearPicker.h; sourceTree = "<group>"; };
 		B4BB24C81D41BDF600A3DD73 /* NTMonthYearPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NTMonthYearPicker.m; path = NTMonthYearPicker/NTMonthYearPicker.m; sourceTree = "<group>"; };
+		B4BB24CC1D4319EB00A3DD73 /* pexels-photo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "pexels-photo.jpg"; sourceTree = "<group>"; };
 		CC0123C01D25A66B001134F3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		CC01BA701D302ACF007E2AEB /* MRCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRCommentViewController.h; path = CommentBox/MRCommentViewController.h; sourceTree = "<group>"; };
 		CC01BA711D302ACF007E2AEB /* MRCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRCommentViewController.m; path = CommentBox/MRCommentViewController.m; sourceTree = "<group>"; };
@@ -2710,6 +2713,7 @@
 			children = (
 				79BF5F671B9C4EB500EDAC89 /* upcoming appointments cell */,
 				799820921BA4D01C0069128A /* MRDashBoardVC.h */,
+				B4BB24CC1D4319EB00A3DD73 /* pexels-photo.jpg */,
 				799820931BA4D01C0069128A /* MRDashBoardVC.m */,
 				CC463DE21D27A47E002AE85E /* MRDashBoardVC.xib */,
 			);
@@ -4723,6 +4727,7 @@
 				79BD28051B80B37F007CA448 /* categoryBG@3x.jpg in Resources */,
 				7953662F1BA0C0300021CE4D /* MRFavoriteFilterViewController.xib in Resources */,
 				79F4167B1B9F596B0089729B /* MPAppointmentViewController.xib in Resources */,
+				B4BB24CD1D4319EB00A3DD73 /* pexels-photo.jpg in Resources */,
 				7930A3A61BB91ECF003112E4 /* frpie-bg@3x.jpg in Resources */,
 				7929E3D81B9CC674001F1373 /* mrkt-cmpn@2x.png in Resources */,
 				79F84B1B1BE9354B0081613A /* MRProductBrocherViewController.xib in Resources */,
@@ -5014,6 +5019,7 @@
 				CC7DB1571D0C8BEC007DFE4C /* hospital_selection@2x.png in Resources */,
 				CC7DB1581D0C8BEC007DFE4C /* dashboard_menu@3x.png in Resources */,
 				CC7DB1591D0C8BEC007DFE4C /* catrnsparent@3x.jpg in Resources */,
+				B4BB24CE1D4319EB00A3DD73 /* pexels-photo.jpg in Resources */,
 				CC7DB15A1D0C8BEC007DFE4C /* categoryBG.jpg in Resources */,
 				CC7DB15B1D0C8BEC007DFE4C /* surveys@2x.png in Resources */,
 				CC7DB15C1D0C8BEC007DFE4C /* frpie@2x.png in Resources */,

@@ -11,7 +11,7 @@
                 <outlet property="emptyMessage" destination="dpb-O7-ImQ" id="Dtl-e1-oeU"/>
                 <outlet property="navView" destination="YeC-pW-rN6" id="h4M-nH-KG0"/>
                 <outlet property="postsTableView" destination="FjW-Hl-Vrd" id="kNs-2m-JxQ"/>
-                <outlet property="searchDisplayController" destination="yUX-Fz-Zyp" id="QnU-ZZ-Z1y"/>
+                <outlet property="searchBar" destination="toD-2Y-nCn" id="PQy-lV-Gv8"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -26,6 +26,9 @@
                         <constraint firstAttribute="height" constant="44" id="hvy-Q0-dDd"/>
                     </constraints>
                     <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="x6c-cp-x9G"/>
+                    </connections>
                 </searchBar>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FjW-Hl-Vrd">
                     <rect key="frame" x="8" y="44" width="359" height="509"/>
@@ -79,15 +82,6 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="-29" y="-100.5"/>
         </view>
-        <searchDisplayController id="yUX-Fz-Zyp">
-            <connections>
-                <outlet property="delegate" destination="-1" id="9rM-JY-bep"/>
-                <outlet property="searchBar" destination="toD-2Y-nCn" id="5tO-6r-mLZ"/>
-                <outlet property="searchContentsController" destination="-1" id="ueR-Sz-qIl"/>
-                <outlet property="searchResultsDataSource" destination="-1" id="AJo-kv-v2E"/>
-                <outlet property="searchResultsDelegate" destination="-1" id="nVy-u0-vgv"/>
-            </connections>
-        </searchDisplayController>
     </objects>
     <resources>
         <image name="Icon-40.png" width="40" height="40"/>

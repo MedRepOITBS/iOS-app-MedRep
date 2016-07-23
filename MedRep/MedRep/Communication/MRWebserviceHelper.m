@@ -1353,6 +1353,32 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
     [self sendServiceRequest:urlRequest withHandler:responceHandler];
 }
 
+-(void)updateLikeCounts:(NSDictionary *)reqDict withHandler:(completionHandler) responseHandler{
+    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/updateTopicDetails?token=%@",kHostName,[MRDefaults objectForKey:kAuthenticationToken]];
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:reqDict
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:nil];
+    NSURL *url = [NSURL URLWithString:stringFormOfUrl];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [urlRequest setTimeoutInterval:120];
+    [urlRequest setHTTPMethod:@"POST"];
+    [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [urlRequest setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[jsonData length]] forHTTPHeaderField:@"Content-Length"];
+    [urlRequest setHTTPBody: jsonData];
+    self.serviceType = kMRWebServiceTypeUpdateGroupMemberStatus;
+
+    
+    
+}
+
+-(void)updateComment:(NSDictionary *)reqDict withHandler:(completionHandler) responseHandler{
+    
+}
+-(void)updateShareCount:(NSDictionary *)reqDict withHandler:(completionHandler) responseHandler{
+    
+}
 - (void)updateGroupMembersStatus:(NSDictionary *)dict withHandler:(completionHandler)responceHandler{
     NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/updateMemberStatus?token=%@",kHostName,[MRDefaults objectForKey:kAuthenticationToken]];
     
@@ -1424,6 +1450,10 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
     self.serviceType = kMRWebServiceTypeRemoveConnection;
     [self sendServiceRequest:urlRequest withHandler:responceHandler];
 }
+
+
+
+
 
 #pragma mark ------------------------------
 #pragma mark -  Pharma Rep Services
