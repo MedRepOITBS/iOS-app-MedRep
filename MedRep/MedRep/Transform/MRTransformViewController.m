@@ -197,12 +197,64 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
     [self.contentTableView reloadData];
 }
 
+
+#pragma mark - SearchBar Delegate Methods
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+//    if (self.currentIndex == 0) {
+//        if (searchText.length == 0) {
+//            self.fileredContacts = self.myContacts;
+//        } else {
+//            self.fileredContacts = [[self.myContacts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(%K contains[cd] %@) OR (%K contains[cd] %@)",@"firstName",searchText,@"lastName",searchText]] mutableCopy];
+//        }
+//    } else if(self.currentIndex == 1){
+//        if (searchText.length == 0) {
+//            self.fileredSuggestedContacts = self.suggestedContacts;
+//        } else {
+//            self.fileredSuggestedContacts = [[self.suggestedContacts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(%K contains[cd] %@) OR (%K contains[cd] %@)",@"firstName",searchText,@"lastName",searchText]] mutableCopy];
+//        }
+//    }else if (self.currentIndex == 2){
+//        if (searchText.length == 0) {
+//            filteredGroupsArray = groupsArray;
+//        } else {
+//            filteredGroupsArray = [[groupsArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K contains[cd] %@",@"group_name",searchText]] mutableCopy];
+//        }
+//    }else if (self.currentIndex == 3){
+//        if (searchText.length == 0) {
+//            filteredSuggestedGroupsArray = suggestedGroupsArray;
+//        } else {
+//            filteredSuggestedGroupsArray = [[suggestedGroupsArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K contains[cd] %@",@"group_name",searchText]] mutableCopy];
+//        }
+//    }
+//    [self.myContactsCollectionView reloadData];
+    
+    if ([searchText isEqualToString:@""]) {
+        self.filteredData = [self.contentData mutableCopy];
+//        [self.contentTableView reloadData];
+        
+    }else{
+        self.filteredData  =  [[self.contentData filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(%K contains[cd] %@)",@"titleDescription",searchText]] mutableCopy];
+//        [
+    }
+     [self.contentTableView reloadData];
+    
+    
+}
+
+
+
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     [searchBar resignFirstResponder];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
+    
+    searchBar.text=@"";
+    
+    [searchBar setShowsCancelButton:NO animated:YES];
     [searchBar resignFirstResponder];
+    self.contentTableView.allowsSelection = YES;
+    self.contentTableView.scrollEnabled = YES;
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
@@ -213,11 +265,11 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (tableView == self.searchDisplayController.searchResultsTableView) {
-        return self.searchResults.count;
-        
-    }
-    
+//    if (tableView == self.searchDisplayController.searchResultsTableView) {
+//        return self.searchResults.count;
+//        
+//    }
+//    
     return self.filteredData.count;
 }
 
@@ -237,14 +289,14 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
         regCell = (MPTransformTableViewCell *)[nibViews lastObject];
     }
     MRTransformPost *transformData;
-    if (tableView == self.searchDisplayController.searchResultsTableView) {
-
-   transformData = self.searchResults[indexPath.row];
-    }else{
+//    if (tableView == self.searchDisplayController.searchResultsTableView) {
+//
+//   transformData = self.searchResults[indexPath.row];
+//    }else{
        transformData = self.filteredData[indexPath.row];
         
-    }
-        
+//    }
+    
         if (transformData != nil) {
         if (transformData.url != nil && transformData.url.length > 0) {
             if (transformData.contentType.integerValue == kTransformContentTypeImage) {
@@ -280,14 +332,14 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
 {
     MRTransformDetailViewController *notiFicationViewController = [[MRTransformDetailViewController alloc] initWithNibName:@"MRTransformDetailViewController" bundle:nil];
     
-    if (tableView == self.searchDisplayController.searchResultsTableView) {
-
-        notiFicationViewController.post = self.searchResults[indexPath.row];
+//    if (tableView == self.searchDisplayController.searchResultsTableView) {
+//
+//        notiFicationViewController.post = self.searchResults[indexPath.row];
+//        
+//    }else{
+        notiFicationViewController.post = self.filteredData[indexPath.row];
         
-    }else{
-        notiFicationViewController.post = self.contentData[indexPath.row];
-        
-    }
+//    }
     [self.navigationController pushViewController:notiFicationViewController animated:YES];
 }
 

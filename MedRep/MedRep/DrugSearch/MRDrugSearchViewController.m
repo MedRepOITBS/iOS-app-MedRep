@@ -134,21 +134,21 @@
     [self.navigationController pushViewController:notiFicationViewController animated:YES];
 }
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if (string.length>3) {
+    if (textField.text.length>2) {
         searchString = [textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         [self getMedicineSuggestions];
     }
     
     return YES;
 }
--(BOOL) textFieldShouldReturn:(UITextField *)textField{
-    [textField resignFirstResponder];
-    if (textField.text.length) {
-        searchString = [textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        [self getMedicineSuggestions];
-    }
-    return YES;
-}
+//-(BOOL) textFieldShouldReturn:(UITextField *)textField{
+//    [textField resignFirstResponder];
+//    if (textField.text.length) {
+//        searchString = [textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+//        [self getMedicineSuggestions];
+//    }
+//    return YES;
+//}
 
 -(void)imgTapped:(UITapGestureRecognizer *)img{
     [self mapData:[resultarray objectAtIndex:img.view.tag]];

@@ -76,7 +76,7 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="searchScreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="lId-zk-MlA">
                     <rect key="frame" x="0.0" y="145" width="375" height="522"/>
                 </imageView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o5n-NT-IVK">
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o5n-NT-IVK">
                     <rect key="frame" x="0.0" y="170" width="375" height="150"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="246" text="TRYCIN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0RK-eb-Svd">
@@ -166,7 +166,7 @@
                         <constraint firstItem="SfF-IT-J21" firstAttribute="leading" secondItem="0RK-eb-Svd" secondAttribute="trailing" constant="8" id="t6e-r0-XAt"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lQg-IS-Lpj">
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lQg-IS-Lpj">
                     <rect key="frame" x="0.0" y="345" width="375" height="322"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alternate Medicines" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IHK-Ge-ghr">

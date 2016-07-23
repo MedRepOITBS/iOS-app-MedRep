@@ -704,6 +704,7 @@
 		B4BB24C41D4192AD00A3DD73 /* settings1.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24C21D4192AD00A3DD73 /* settings1.png */; };
 		B4BB24C91D41BDF600A3DD73 /* NTMonthYearPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = B4BB24C81D41BDF600A3DD73 /* NTMonthYearPicker.m */; };
 		B4BB24CA1D41BDF600A3DD73 /* NTMonthYearPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = B4BB24C81D41BDF600A3DD73 /* NTMonthYearPicker.m */; };
+		B4BB24CB1D42C6AE00A3DD73 /* searchScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB249B1D40738A00A3DD73 /* searchScreen.png */; };
 		CC0123C11D25A66B001134F3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0123C01D25A66B001134F3 /* CoreGraphics.framework */; };
 		CC0123C21D25A677001134F3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0123C01D25A66B001134F3 /* CoreGraphics.framework */; };
 		CC01BA731D302ACF007E2AEB /* MRCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC01BA711D302ACF007E2AEB /* MRCommentViewController.m */; };
@@ -5137,6 +5138,7 @@
 				CC7DB1BF1D0C8BEC007DFE4C /* transperent-bg@3x.png in Resources */,
 				CC7DB1C01D0C8BEC007DFE4C /* stepThree@2x.png in Resources */,
 				CC7DB1C11D0C8BEC007DFE4C /* MRCompaignsDetailsViewController.xib in Resources */,
+				B4BB24CB1D42C6AE00A3DD73 /* searchScreen.png in Resources */,
 				CC7DB1C21D0C8BEC007DFE4C /* latestNotificatins@2x.png in Resources */,
 				CC7DB1C31D0C8BEC007DFE4C /* MRMedrepMeetingsCell.xib in Resources */,
 				CC7DB1C41D0C8BEC007DFE4C /* favFilter-wrong@3x.png in Resources */,
