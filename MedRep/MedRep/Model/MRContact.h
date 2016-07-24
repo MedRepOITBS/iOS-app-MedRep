@@ -10,7 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "MRManagedObject.h"
 
-@class MRManagedObject, MRGroup, MRGroupPost, MRPostedReplies;
+@class MRGroup, MRGroupPost, MRPostedReplies;
 
 NS_ASSUME_NONNULL_BEGIN
 

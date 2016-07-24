@@ -250,6 +250,8 @@ withComplitionHandler:(completionHandler)responceHandler;
 + (NSArray*)parseRecords:(Class)entityClass allRecords:(NSArray*)allRecords
                  context:(NSManagedObjectContext*)context andData:(NSArray*)data;
 
+- (void)fetchNewsAndUpdatesListwithHandler:(completionHandler)responceHandler;
+
 @end
 
 @interface NSDictionary (CategoryName)

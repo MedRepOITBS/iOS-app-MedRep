@@ -1277,4 +1277,64 @@ static MRDatabaseHelper *sharedDataManager = nil;
     [[MRDataManger sharedManager] saveContext];
 }
 
++ (void)fetchNewsAndUpdates:(WebServiceResponseHandler)responseHandler {
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] fetchNewsAndUpdatesListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [[MRDataManger sharedManager] removeAllObjects:kMRTransformPost withPredicate:nil];
+        [MRDatabaseHelper makeServiceCallForNewsAndUpdatesFetch:status details:details
+                                                 response:responce
+                                       andResponseHandler:responseHandler];
+    }];
+}
+
++ (void)makeServiceCallForNewsAndUpdatesFetch:(BOOL)status
+                                      details:(NSString*)details
+                                     response:(NSDictionary*)response
+                           andResponseHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon stopActivityIndicator];
+    if (status)
+    {
+        [MRDatabaseHelper parseNewsAndUpdatesResponse:response andResponseHandler:responseHandler];
+    }
+    else if ([[response objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+    {
+        [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+         {
+             [MRCommon savetokens:responce];
+             [[MRWebserviceHelper sharedWebServiceHelper] fetchNewsAndUpdatesListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                 [MRCommon stopActivityIndicator];
+                 if (status)
+                 {
+                     [MRDatabaseHelper parseNewsAndUpdatesResponse:responce
+                                                andResponseHandler:responseHandler];
+                 } else
+                 {
+                     NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                     if (erros.count > 0)
+                         [MRCommon showAlert:[erros lastObject] delegate:nil];
+                 }
+             }];
+         }];
+    }
+    else
+    {
+        NSArray *erros =  [details componentsSeparatedByString:@"-"];
+        if (erros.count > 0)
+            [MRCommon showAlert:[erros lastObject] delegate:nil];
+    }
+}
+
++ (void)parseNewsAndUpdatesResponse:(NSDictionary*)response
+                 andResponseHandler:(WebServiceResponseHandler) responseHandler {
+    id result = [MRWebserviceHelper parseNetworkResponse:NSClassFromString(kMRTransformPost)
+                                                 andData:[response valueForKey:@"Responce"]];
+    if (responseHandler != nil) {
+        NSArray *tempResults = [[MRDataManger sharedManager] fetchObjectList:kMRTransformPost];
+        
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"postedOn" ascending:false];
+        result = [tempResults sortedArrayUsingDescriptors:@[sortDescriptor]];
+        responseHandler(result);
+    }
+}
+
 @end

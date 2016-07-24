@@ -195,13 +195,30 @@
     </entity>
     <entity name="MRTransformPost" representedClassName="MRTransformPost" syncable="YES">
         <attribute name="contentType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="coverImgFile" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
+        <attribute name="coverImgUrl" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdOn" optional="YES" transient="YES" attributeType="Date" syncable="YES"/>
         <attribute name="detailedDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="innerImgFile" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
+        <attribute name="innerImgUrl" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
+        <attribute name="newsDesc" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
+        <attribute name="newsId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="postedOn" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="postUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="shortArticleDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="source" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sourceId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="sourceName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tagDesc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="therapeuticId" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
+        <attribute name="therapeuticName" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
         <attribute name="titleDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="transformPostId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userId" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
+        <attribute name="videoFile" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
+        <attribute name="videoUrl" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="childSharePosts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MRSharePost" syncable="YES"/>
     </entity>
     <entity name="MRWorkExperience" representedClassName="MRWorkExperience" syncable="YES">
@@ -230,7 +247,7 @@
         <element name="MRSharePost" positionX="-27" positionY="144" width="128" height="345"/>
         <element name="MRSuggestedContact" positionX="-9" positionY="162" width="128" height="105"/>
         <element name="MRTherapeuticArea" positionX="-54" positionY="-9" width="128" height="90"/>
-        <element name="MRTransformPost" positionX="-36" positionY="135" width="128" height="180"/>
+        <element name="MRTransformPost" positionX="-36" positionY="135" width="128" height="435"/>
         <element name="MRWorkExperience" positionX="-27" positionY="144" width="128" height="120"/>
     </elements>
 </model>

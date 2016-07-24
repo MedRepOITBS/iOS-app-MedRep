@@ -87,9 +87,6 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
     
     [self.titleCollectionView registerNib:[UINib nibWithNibName:@"MRTransformTitleCollectionViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"transformTitleCollectionViewCell"];
     
-    [self createDummyData];
-    self.filteredData = [self.contentData mutableCopy];
-    
     self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
     self.tapGesture.numberOfTapsRequired = 1;
     self.tapGesture.cancelsTouchesInView = YES;
@@ -116,6 +113,12 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self fetchNewsAndUpdates];
 }
 
 -(void) viewDidAppear:(BOOL)animated{
@@ -316,6 +319,16 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
         
 //    }
     [self.navigationController pushViewController:notiFicationViewController animated:YES];
+}
+
+#pragma mark - Fetch News & Updates
+- (void)fetchNewsAndUpdates {
+    [MRDatabaseHelper fetchNewsAndUpdates:^(id result) {
+        self.contentData = result;
+        self.filteredData = [self.contentData mutableCopy];
+        
+        [self.contentTableView reloadData];
+    }];
 }
 
 #pragma mark - Dummy Data

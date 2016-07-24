@@ -119,4 +119,8 @@ typedef void (^WebServiceResponseHandler)(id result);
 +(BOOL)addEducationQualification:(NSDictionary *)dictonary ;
 +(BOOL)addPublications:(NSDictionary *)dictonary;
 +(BOOL)addInterestArea:(NSArray *)array;
+
+
++ (void)fetchNewsAndUpdates:(WebServiceResponseHandler)responseHandler;
+
 @end
