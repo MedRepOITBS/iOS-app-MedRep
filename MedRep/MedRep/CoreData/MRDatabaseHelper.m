@@ -263,6 +263,21 @@ static MRDatabaseHelper *sharedDataManager = nil;
     }];
 }
 
++ (void)getPendingGroupMembers:(NSNumber*)gid
+            andResponseHandler:(WebServiceResponseHandler)responseHandler {
+    NSString *groupId = @"";
+    if (gid != nil) {
+        groupId = gid.stringValue;
+    }
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] fetchPendingMembersList:groupId withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [[MRDataManger sharedManager] removeAllObjects:kContactEntity withPredicate:nil];
+        [MRDatabaseHelper makeServiceCallForContactsFetch:status details:details
+                                                 response:responce
+                                       andResponseHandler:responseHandler];
+    }];
+}
+
 + (void)getContactsBySearchString:(NSString*)searchText
                andResponseHandler:(WebServiceResponseHandler)responseHandler {
     [MRCommon showActivityIndicator:@"searching..."];

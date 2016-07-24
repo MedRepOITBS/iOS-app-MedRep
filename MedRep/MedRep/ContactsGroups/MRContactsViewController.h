@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class MRGroupsListViewController,PendingContactsViewController;
+@class MRGroupsListViewController;
 
 @interface MRContactsViewController : UIViewController
 
 @property (strong, nonatomic) MRGroupsListViewController* groupsListViewController;
-@property (strong,nonatomic) PendingContactsViewController *pendingContactsViewController;
+
 @end

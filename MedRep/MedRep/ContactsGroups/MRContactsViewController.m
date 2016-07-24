@@ -427,9 +427,11 @@
                               duration:0.75
                                options:UIViewAnimationOptionTransitionCurlUp
                             animations:^{
-                                _pendingContactsViewController.isFromGroup = NO;
-                                _pendingContactsViewController.gid = 0;
-                                [self.navigationController pushViewController:self.pendingContactsViewController animated:NO];
+                                PendingContactsViewController *pendingViewController =[[PendingContactsViewController alloc] initWithNibName:@"PendingContactsViewController" bundle:[NSBundle mainBundle]];
+                                
+                                pendingViewController.isFromGroup = NO;
+                                pendingViewController.gid = 0;
+                                [self.navigationController pushViewController:pendingViewController animated:NO];
                             }
                             completion:nil];
         }else if (buttonIndex == 1){
@@ -443,9 +445,11 @@
                               duration:0.75
                                options:UIViewAnimationOptionTransitionCurlUp
                             animations:^{
-                                _pendingContactsViewController.isFromGroup = YES;
-                                _pendingContactsViewController.gid = 0;
-                                [self.navigationController pushViewController:self.pendingContactsViewController animated:NO];
+                                PendingContactsViewController *pendingViewController =[[PendingContactsViewController alloc] initWithNibName:@"PendingContactsViewController" bundle:[NSBundle mainBundle]];
+                                
+                                pendingViewController.isFromGroup = YES;
+                                pendingViewController.gid = 0;
+                                [self.navigationController pushViewController:pendingViewController animated:NO];
                             }
                             completion:nil];
         }else if (buttonIndex == 1) {

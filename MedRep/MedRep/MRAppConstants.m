@@ -23,6 +23,10 @@ NSString* const kDone = @"Done";
 
 NSString* const kRecentActivity = @"Recent Activity";
 
+NSString* const kNoPendingGroups = @"No Pending Groups are there !!!";
+NSString* const kNoPendingContacts = @"No Pending Contacts are there !!!";
+NSString* const kNoPendingGroupMembers = @"No Pending Members are there in the group !!!";
+
 NSString* const  kYYYYMMDDFormat = @"yyyy/MM/dd";
 NSString* const  kYYYYMMDDFormatWithHyphen = @"yyyy-MM-dd";
 NSString* const  kMMYYFormat = @"MM/yy";

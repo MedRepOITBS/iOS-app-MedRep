@@ -44,6 +44,7 @@ typedef void (^WebServiceResponseHandler)(id result);
 + (void)getGroups:(WebServiceResponseHandler)responseHandler;
 + (void)getSuggestedGroups:(WebServiceResponseHandler)responseHandler;
 + (void)getPendingGroups:(WebServiceResponseHandler)responseHandler;
++ (void)getPendingGroupMembers:(NSNumber*)gid andResponseHandler:(WebServiceResponseHandler)responseHandler;
 
 + (void)getContacts:(WebServiceResponseHandler)responseHandler;
 + (void)getContactsByCity:(NSString*)city responseHandler:(WebServiceResponseHandler)responseHandler;

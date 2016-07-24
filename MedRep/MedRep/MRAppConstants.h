@@ -23,6 +23,10 @@ FOUNDATION_EXPORT NSString* const kDone;
 
 FOUNDATION_EXPORT NSString* const kRecentActivity;
 
+FOUNDATION_EXPORT NSString* const kNoPendingGroups;
+FOUNDATION_EXPORT NSString* const kNoPendingContacts;
+FOUNDATION_EXPORT NSString* const kNoPendingGroupMembers;
+
 FOUNDATION_EXPORT NSString* const  kYYYYMMDDFormat;
 FOUNDATION_EXPORT NSString* const  kYYYYMMDDFormatWithHyphen;
 FOUNDATION_EXPORT NSString* const  kMMYYFormat;

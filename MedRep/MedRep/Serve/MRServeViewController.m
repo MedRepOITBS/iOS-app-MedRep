@@ -90,9 +90,6 @@
     MRGroupsListViewController* groupsListViewController = [[MRGroupsListViewController alloc] initWithNibName:@"MRGroupsListViewController" bundle:[NSBundle mainBundle]];
     contactsViewCont.groupsListViewController = groupsListViewController;
     
-    PendingContactsViewController *pendingViewController =[[PendingContactsViewController alloc] initWithNibName:@"PendingContactsViewController" bundle:[NSBundle mainBundle]];
-    
-    contactsViewCont.pendingContactsViewController = pendingViewController;
     [self.navigationController pushViewController:contactsViewCont animated:NO];
 }
 

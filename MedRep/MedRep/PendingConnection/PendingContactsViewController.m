@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *pendingTableView;
 @property (nonatomic,strong) NSMutableArray *pendingContactListArra;
 @property (strong, nonatomic) IBOutlet UIView *navView;
+@property (weak, nonatomic) IBOutlet UILabel *emptyMessageLabel;
 
 @end
 
@@ -289,6 +290,8 @@
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [self refreshLabels];
+    
     if (_isFromGroup) {
         [self getPendingGroups];
         self.navigationItem.title = @"Pending Groups";
@@ -306,70 +309,49 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)refreshLabels {
+    
+    if (fileredContacts == nil || fileredContacts.count == 0) {
+        [self.emptyMessageLabel setHidden:false];
+        [self.pendingTableView setHidden:true];
+        
+        NSString *key = kNoPendingContacts;
+        
+        if (_isFromGroup) {
+            key = kNoPendingGroups;
+        } else if (_isFromMember) {
+            key = kNoPendingGroupMembers;
+        }
+        
+        [self.emptyMessageLabel setText:NSLocalizedString(key, "")];
+    } else {
+        [self.emptyMessageLabel setHidden:true];
+        [self.pendingTableView setHidden:false];
+        
+        [self.pendingTableView reloadData];
+    }
+}
+
 -(void)getPendingConnections {
     [MRDatabaseHelper getPendingContacts:^(id result) {
         fileredContacts = _pendingContactListArra;
-        [_pendingTableView reloadData];
+        [self refreshLabels];
     }];
 }
 
 -(void)getPendingMembers {
-//    [MRCommon showActivityIndicator:@"Requesting..."];
-//    [[MRWebserviceHelper sharedWebServiceHelper] fetchPendingMembersList:_gid withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-//        [MRCommon stopActivityIndicator];
-//        if (status)
-//        {
-//            fileredContacts = [NSMutableArray array];
-//            _pendingContactListArra = [NSMutableArray array];
-//            NSArray *responseArray = responce[@"Responce"];
-//            for (NSDictionary *dic in responseArray) {
-//                MRGroupUserObject *groupObj = [[MRGroupUserObject alloc] initWithDict:dic];
-//                [_pendingContactListArra addObject:groupObj];
-//            }
-//            fileredContacts = _pendingContactListArra;
-//            [_pendingTableView reloadData];
-//        }
-//        else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
-//        {
-//            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
-//             {
-//                 [MRCommon savetokens:responce];
-//                 [[MRWebserviceHelper sharedWebServiceHelper] fetchPendingMembersList:_gid withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-//                     [MRCommon stopActivityIndicator];
-//                     if (status)
-//                     {
-//                         fileredContacts = [NSMutableArray array];
-//                         _pendingContactListArra = [NSMutableArray array];
-//                         NSArray *responseArray = responce[@"Responce"];
-//                         for (NSDictionary *dic in responseArray) {
-//                             MRGroupUserObject *groupObj = [[MRGroupUserObject alloc] initWithDict:dic];
-//                             [_pendingContactListArra addObject:groupObj];
-//                         }
-//                         fileredContacts = _pendingContactListArra;
-//                         [_pendingTableView reloadData];
-//                     }else
-//                     {
-//                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
-//                         if (erros.count > 0)
-//                             [MRCommon showAlert:[erros lastObject] delegate:nil];
-//                     }
-//                 }];
-//             }];
-//        }
-//        else
-//        {
-//            NSArray *erros =  [details componentsSeparatedByString:@"-"];
-//            if (erros.count > 0)
-//                [MRCommon showAlert:[erros lastObject] delegate:nil];
-//        }
-//    }];
+    [MRDatabaseHelper getPendingGroupMembers:_gid andResponseHandler:^(id result) {
+        fileredContacts = result;
+        fileredContacts = _pendingContactListArra;
+        [self refreshLabels];
+    }];
 }
 
 -(void)getPendingGroups {
     [MRDatabaseHelper getPendingContacts:^(id result) {
         fileredContacts = result;
         fileredContacts = _pendingContactListArra;
-        [_pendingTableView reloadData];
+        [self refreshLabels];
     }];
 }
 
