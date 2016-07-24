@@ -16,6 +16,7 @@
 #import "MRListViewController.h"
 #import "MRConstants.h"
 #import "MRDrugTableViewCell.h"
+#import "SWRevealViewController.h"
 
 @interface MRDrugSearchViewController () <UIScrollViewDelegate, UITextFieldDelegate, MRListViewControllerDelegate, WYPopoverControllerDelegate> {
     NSMutableArray *resultarray;
@@ -29,6 +30,8 @@
     
     MRDrugDetailModel *drugDetail;
 }
+
+@property (weak, nonatomic) IBOutlet UIView *titleView;
 
 @property (strong, nonatomic) IBOutlet UIView *navView;
 @property (weak, nonatomic) IBOutlet UILabel *productType;
@@ -53,11 +56,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    SWRevealViewController *revealController = [self revealViewController];
+    revealController.delegate = self;
+    [revealController panGestureRecognizer];
+    [revealController tapGestureRecognizer];
     
     self.navigationItem.title = @"Search for Drugs";
-    //[self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
     
-    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonAction)];
+    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon.png"]
+                                                                         style:UIBarButtonItemStylePlain target:revealController
+                                                                        action:@selector(revealToggle:)];
+    
     self.navigationItem.leftBarButtonItem = revealButtonItem;
     
     UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navView];
@@ -98,11 +107,18 @@
     
     _searchTxt.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 30)];
     _searchTxt.leftViewMode = UITextFieldViewModeAlways;
+    
+    [self.titleView setBackgroundColor:[MRCommon colorFromHexString:kStatusBarColor]];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void) viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [MRCommon applyNavigationBarStyling:self.navigationController];
 }
 
 /*

@@ -33,7 +33,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="600" height="30"/>
                     <subviews>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="27a-DK-TyQ">
-                            <rect key="frame" x="30" y="0.0" width="540" height="30"/>
+                            <rect key="frame" x="10" y="0.0" width="580" height="30"/>
                             <color key="backgroundColor" red="0.12549019607843137" green="0.69411764705882351" blue="0.54117647058823526" alpha="1" colorSpace="calibratedRGB"/>
                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="m8I-xg-x9j">
                                 <size key="itemSize" width="80" height="30"/>
@@ -43,10 +43,10 @@
                             </collectionViewFlowLayout>
                         </collectionView>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.12549019610000001" green="0.69411764710000001" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="27a-DK-TyQ" secondAttribute="trailing" constant="30" id="JXX-bZ-1p8"/>
-                        <constraint firstItem="27a-DK-TyQ" firstAttribute="leading" secondItem="z7C-H3-umC" secondAttribute="leading" constant="30" id="NQA-EY-uce"/>
+                        <constraint firstAttribute="trailing" secondItem="27a-DK-TyQ" secondAttribute="trailing" constant="10" id="JXX-bZ-1p8"/>
+                        <constraint firstItem="27a-DK-TyQ" firstAttribute="leading" secondItem="z7C-H3-umC" secondAttribute="leading" constant="10" id="NQA-EY-uce"/>
                         <constraint firstItem="27a-DK-TyQ" firstAttribute="top" secondItem="z7C-H3-umC" secondAttribute="top" id="dNT-VJ-x2J"/>
                         <constraint firstAttribute="bottom" secondItem="27a-DK-TyQ" secondAttribute="bottom" id="qSJ-Ww-Mpy"/>
                         <constraint firstAttribute="height" constant="30" id="yek-Y7-0ta"/>

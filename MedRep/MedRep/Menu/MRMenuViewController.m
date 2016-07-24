@@ -21,6 +21,8 @@
 #import "MRProfileDetailsViewController.h"
 #import "MRDoctorActivityScoreViewController.h"
 #import "MRInviteViewController.h"
+#import "MRTransformViewController.h"
+#import "MRDrugSearchViewController.h"
 
 #define kMenuList [NSArray arrayWithObjects:@"My Profile", @"Dashboard", @"Notifications", @"Surveys", @"Activity Score", @"Marketing Campaigns", @"MedRep Meeting", @"Discussion Forum", @"Search For Drugs", @"News & Updates", @"Invite Contacts",  @"Settings", @"Logout", nil]
 
@@ -110,7 +112,13 @@
     {
         if ([self.userData objectForKey:KProfilePicture])
         {
-            regCell.cellIcon.image = (indexPath.row > 0) ? [UIImage imageNamed:[kMenuListImages objectAtIndex:indexPath.row -1]] : [MRCommon getImageFromBase64Data:[self.userData objectForKey:KProfilePicture]];
+            UIImage *image = (indexPath.row > 0) ? [UIImage imageNamed:[kMenuListImages objectAtIndex:indexPath.row -1]] : [MRCommon getImageFromBase64Data:[self.userData objectForKey:KProfilePicture]];
+            
+            if (image == nil) {
+                image = [UIImage imageNamed:@"profileIcon.png"];
+            }
+            
+            regCell.cellIcon.image = image;
         }
         else
         {
@@ -124,7 +132,7 @@
     
     regCell.menuTitle.text = [kMenuList objectAtIndex:indexPath.row];
     
-    if (indexPath.row == 5 || indexPath.row ==7 || indexPath.row ==8 || indexPath.row ==9 || indexPath.row ==11) {
+    if (indexPath.row == 5 || indexPath.row ==7 || indexPath.row ==11) {
         regCell.menuTitle.alpha = 0.5f;
     }
     else {
@@ -251,12 +259,36 @@
             break;
         case 8:
         {
-            //[MRCommon showAlert:kComingsoonMSG delegate:nil];
+            // Search For Drugs
+            if ( ![frontNavigationController.topViewController isKindOfClass:[MRDrugSearchViewController class]] )
+            {
+                MRDrugSearchViewController *drugSearchViewController =
+                [[MRDrugSearchViewController alloc] initWithNibName:@"MRDrugSearchViewController" bundle:nil];
+                
+                UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:drugSearchViewController];
+                [revealController pushFrontViewController:navigationController animated:YES];
+            }
+            else
+            {
+                [revealController revealToggle:self];
+            }
         }
             break;
         case 9:
         {
-            //[MRCommon showAlert:kComingsoonMSG delegate:nil];
+            // Transform Page -> News & Updates
+            if ( ![frontNavigationController.topViewController isKindOfClass:[MRTransformViewController class]] )
+            {
+                MRTransformViewController *transformViewController =
+                                [[MRTransformViewController alloc] initWithNibName:@"MRTransformViewController" bundle:nil];
+                
+                UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:transformViewController];
+                [revealController pushFrontViewController:navigationController animated:YES];
+            }
+            else
+            {
+                [revealController revealToggle:self];
+            }
         }
             break;
         case 10:
