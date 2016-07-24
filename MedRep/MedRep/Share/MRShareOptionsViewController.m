@@ -58,7 +58,7 @@
 }
 
 - (void)fetchContactsAndGroups {
-    [MRDatabaseHelper getContacts:^(id result){
+    [MRDatabaseHelper getGroups:^(id result){
         self.contacts = [[MRDataManger sharedManager] fetchObjectList:kContactEntity];
         [self updateUI];
         [self.tableView reloadData];
