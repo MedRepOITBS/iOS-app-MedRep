@@ -60,7 +60,7 @@
     [self.shareImageView.layer setCornerRadius:5.0];
     [self.shareImageView.layer setBorderColor:[UIColor lightGrayColor].CGColor];
     [self.shareImageView.layer setBorderWidth:1.0f];
-    [self.shareImageView setHidden:true];
+    [self.shareImageView setHidden:false];
     
     [self.commentTextView.layer setCornerRadius:2.0];
     [self.commentTextView.layer setBorderColor:[UIColor lightGrayColor].CGColor];

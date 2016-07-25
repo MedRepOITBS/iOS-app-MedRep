@@ -711,6 +711,8 @@
 		B4BB24D41D45CD4C00A3DD73 /* CameraClick.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24D21D45CD4C00A3DD73 /* CameraClick.png */; };
 		B4BB24D61D45CDF400A3DD73 /* gallery_pic.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24D51D45CDF400A3DD73 /* gallery_pic.png */; };
 		B4BB24D71D45CDF400A3DD73 /* gallery_pic.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24D51D45CDF400A3DD73 /* gallery_pic.png */; };
+		B4BB24DF1D45E03A00A3DD73 /* previewImage.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24DE1D45E03A00A3DD73 /* previewImage.png */; };
+		B4BB24E01D45E03A00A3DD73 /* previewImage.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24DE1D45E03A00A3DD73 /* previewImage.png */; };
 		CC0123C11D25A66B001134F3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0123C01D25A66B001134F3 /* CoreGraphics.framework */; };
 		CC0123C21D25A677001134F3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0123C01D25A66B001134F3 /* CoreGraphics.framework */; };
 		CC01BA731D302ACF007E2AEB /* MRCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC01BA711D302ACF007E2AEB /* MRCommentViewController.m */; };
@@ -2143,6 +2145,7 @@
 		B4BB24CC1D4319EB00A3DD73 /* pexels-photo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "pexels-photo.jpg"; sourceTree = "<group>"; };
 		B4BB24D21D45CD4C00A3DD73 /* CameraClick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CameraClick.png; sourceTree = "<group>"; };
 		B4BB24D51D45CDF400A3DD73 /* gallery_pic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gallery_pic.png; sourceTree = "<group>"; };
+		B4BB24DE1D45E03A00A3DD73 /* previewImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = previewImage.png; sourceTree = "<group>"; };
 		CC0123C01D25A66B001134F3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		CC01BA701D302ACF007E2AEB /* MRCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRCommentViewController.h; path = CommentBox/MRCommentViewController.h; sourceTree = "<group>"; };
 		CC01BA711D302ACF007E2AEB /* MRCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRCommentViewController.m; path = CommentBox/MRCommentViewController.m; sourceTree = "<group>"; };
@@ -3771,6 +3774,7 @@
 		B41746C51D0CD428009B7E7E /* CommentBox */ = {
 			isa = PBXGroup;
 			children = (
+				B4BB24DE1D45E03A00A3DD73 /* previewImage.png */,
 				B41746C81D0CD455009B7E7E /* CommonBoxView.h */,
 				B4BB24D21D45CD4C00A3DD73 /* CameraClick.png */,
 				B4BB24D51D45CDF400A3DD73 /* gallery_pic.png */,
@@ -4350,6 +4354,7 @@
 				79A5DC7A1BA2092E001D872C /* crthera@3x.png in Resources */,
 				7929E3E11B9CC674001F1373 /* surveys_dashboard@3x.png in Resources */,
 				79421EEF1BB7EF950055D9B7 /* PHdrugsales@3x.png in Resources */,
+				B4BB24DF1D45E03A00A3DD73 /* previewImage.png in Resources */,
 				79F416A71B9F6E560089729B /* cnsort@3x.png in Resources */,
 				79BD27F21B80A8C3007CA448 /* email@2x.png in Resources */,
 				79DE1BE61B826245005289D6 /* input@2x~iPad.png in Resources */,
@@ -4928,6 +4933,7 @@
 				B4BB24C11D418D6B00A3DD73 /* userProfilePic1.png in Resources */,
 				CC7DB1081D0C8BEC007DFE4C /* full-screen@3x.png in Resources */,
 				CC7DB35A1D0CC8A6007DFE4C /* post_image11.jpeg in Resources */,
+				B4BB24E01D45E03A00A3DD73 /* previewImage.png in Resources */,
 				CC7DB1091D0C8BEC007DFE4C /* Icon-40@3x.png in Resources */,
 				CC7DB10A1D0C8BEC007DFE4C /* completed_icon@3x.png in Resources */,
 				CC7DB10B1D0C8BEC007DFE4C /* dddoctor-analysis-hover@3x.png in Resources */,
