@@ -12,6 +12,7 @@
 @class MRContact, MRGroup, MRSharePost;
 
 @interface CommonBoxView : UIView <UITextViewDelegate>
+@property (weak, nonatomic) IBOutlet UITextView *commentTextView;
 
 @property (nonatomic,weak) id<CommonBoxViewDelegate> delegate;
 

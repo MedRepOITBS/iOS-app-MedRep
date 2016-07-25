@@ -22,7 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *personImageView;
 @property (weak, nonatomic) IBOutlet UILabel *personNameLbl;
 @property (weak, nonatomic) IBOutlet UIImageView *shareImageView;
-@property (weak, nonatomic) IBOutlet UITextView *commentTextView;
+//@property (weak, nonatomic) IBOutlet UITextView *commentTextView;
 @property (weak, nonatomic) IBOutlet UILabel *hintCameraLbl;
 
 @property (weak, nonatomic) IBOutlet UIView *commentParentView;

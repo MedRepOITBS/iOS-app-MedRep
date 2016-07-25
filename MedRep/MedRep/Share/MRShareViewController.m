@@ -264,7 +264,8 @@
     _commentBoxView = (CommonBoxView *)[arr objectAtIndex:0];
     [_commentBoxView setDelegate:self];
     _commentBoxKLCPopView = [KLCPopup popupWithContentView:self.commentBoxView];
-    [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutTop)];
+    [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutAboveCenter)];
+    [_commentBoxView.commentTextView becomeFirstResponder];
 }
 
 - (void)commonBoxCancelButtonPressed {
@@ -368,7 +369,7 @@
    MRSharePost *sharePost = [_commentBoxView getSelectedPost];
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
-    [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutTop)];
+    [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutAboveCenter)];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
