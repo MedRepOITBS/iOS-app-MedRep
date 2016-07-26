@@ -9,6 +9,8 @@
             <connections>
                 <outlet property="clickHereToAddBtn" destination="X37-23-QvG" id="jii-eq-fM4"/>
                 <outlet property="moreOptions" destination="sXl-N5-R3U" id="mdb-qz-j6l"/>
+                <outlet property="moreOptionsTrailingConstraint" destination="XMQ-fI-fFY" id="sJh-wV-gCh"/>
+                <outlet property="moreOptionsWidthConstraint" destination="49C-LV-J5J" id="jVi-YV-roR"/>
                 <outlet property="myContactsCollectionView" destination="D3L-qD-CdE" id="NQX-d7-OAz"/>
                 <outlet property="navView" destination="CQB-W1-IAr" id="9ev-CA-va6"/>
                 <outlet property="noContactErrorMsgLbl" destination="X5o-Dm-SYC" id="vYZ-1f-2fr"/>

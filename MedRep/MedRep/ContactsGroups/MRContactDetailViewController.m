@@ -32,6 +32,8 @@
     BOOL canEditGroup;
 }
 
+@property (weak, nonatomic) IBOutlet UIButton *deleteConnectionButton;
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionHeight;
 @property (weak, nonatomic) IBOutlet UIImageView* mainImageView;
 @property (weak, nonatomic) IBOutlet UILabel* mainLabel;
@@ -87,6 +89,26 @@
     
     [self.postsTableView reloadData];
     self.postsTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if (self.launchMode == kContactDetailLaunchModeSuggestedContact) {
+        [self.deleteConnectionButton setTitle:NSLocalizedString(kAddConnection, "")
+                               forState:UIControlStateNormal];
+        [self.deleteConnectionButton addTarget:self
+                                  action:@selector(addConnection:)
+                        forControlEvents:UIControlEventTouchUpInside];
+        [self.deleteConnectionButton setBackgroundColor:[MRCommon colorFromHexString:@"#20B18A"]];
+    } else {
+        [self.deleteConnectionButton setTitle:NSLocalizedString(kDeleteConnection, "")
+                               forState:UIControlStateNormal];
+        [self.deleteConnectionButton addTarget:self
+                                  action:@selector(deleteConnection:)
+                        forControlEvents:UIControlEventTouchUpInside];
+        [self.deleteConnectionButton setBackgroundColor:[MRCommon colorFromHexString:@"#FF0000"]];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -694,6 +716,20 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Are you sure you want to delete connection?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
     alert.tag = 12;
     [alert show];
+}
+
+- (IBAction)addConnection:(id)sender {
+    [MRDatabaseHelper addConnections:@[[NSNumber numberWithLong:self.mainContact.doctorId.longValue]]
+                  andResponseHandler:^(id result) {
+                      [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
+                                                                          object:nil];
+                      
+                      for (UIViewController *vc in self.parentViewController.childViewControllers) {
+                          if ([vc isKindOfClass:[MRContactDetailViewController class]]) {
+                              [self.navigationController popToViewController:vc animated:YES];
+                          }
+                      }
+                  }];
 }
 
 @end

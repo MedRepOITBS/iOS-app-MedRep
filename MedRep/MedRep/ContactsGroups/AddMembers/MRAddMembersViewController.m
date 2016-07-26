@@ -155,55 +155,17 @@
             }
         }];
     }else{
-        NSMutableDictionary *dictReq = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                        selectedContacts, @"connIdList",
-                                        nil];
-        
-        [MRCommon showActivityIndicator:@"Adding..."];
-        [[MRWebserviceHelper sharedWebServiceHelper] addMembers:dictReq withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-            [MRCommon stopActivityIndicator];
-            if (status) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
-                                                                    object:nil];
-                
-                for (UIViewController *vc in self.parentViewController.childViewControllers) {
-                    if ([vc isKindOfClass:[MRContactsViewController class]]) {
-                        [self.navigationController popToViewController:vc animated:YES];
-                    }
-                }
-            }
-            else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
-            {
-                [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
-                 {
-                     [MRCommon savetokens:responce];
-                     [[MRWebserviceHelper sharedWebServiceHelper] addMembers:dictReq withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-                         [MRCommon stopActivityIndicator];
-                         if (status) {
-                             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
-                                                                                 object:nil];
-                             
-                             for (UIViewController *vc in self.parentViewController.childViewControllers) {
-                                 if ([vc isKindOfClass:[MRContactsViewController class]]) {
-                                     [self.navigationController popToViewController:vc animated:YES];
-                                 }
-                             }
-                         }else
-                         {
-                             NSArray *erros =  [details componentsSeparatedByString:@"-"];
-                             if (erros.count > 0)
-                                 [MRCommon showAlert:[erros lastObject] delegate:nil];
-                         }
-                     }];
-                 }];
-            }
-            else
-            {
-                NSArray *erros =  [details componentsSeparatedByString:@"-"];
-                if (erros.count > 0)
-                    [MRCommon showAlert:[erros lastObject] delegate:nil];
-            }
-        }];
+        [MRDatabaseHelper addConnections:selectedContacts
+                      andResponseHandler:^(id result) {
+                          [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
+                                                                              object:nil];
+                          
+                          for (UIViewController *vc in self.parentViewController.childViewControllers) {
+                              if ([vc isKindOfClass:[MRContactsViewController class]]) {
+                                  [self.navigationController popToViewController:vc animated:YES];
+                              }
+                          }
+                      }];
     }
 }
 

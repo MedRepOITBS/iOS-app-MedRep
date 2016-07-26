@@ -123,4 +123,7 @@ typedef void (^WebServiceResponseHandler)(id result);
 
 + (void)fetchNewsAndUpdates:(WebServiceResponseHandler)responseHandler;
 
++ (void)addConnections:(NSArray*)selectedContacts
+     andResponseHandler:(WebServiceResponseHandler)handler;
+
 @end

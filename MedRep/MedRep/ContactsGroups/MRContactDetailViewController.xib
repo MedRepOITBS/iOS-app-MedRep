@@ -12,6 +12,7 @@
                 <outlet property="collectionView" destination="Lro-Ao-ngq" id="gZ1-0Z-hFh"/>
                 <outlet property="contactDetailView" destination="zt8-yx-sdT" id="DoS-ly-nB8"/>
                 <outlet property="deleteBtnHeight" destination="VnH-U8-Br2" id="AWI-eO-oGw"/>
+                <outlet property="deleteConnectionButton" destination="9kR-sQ-lYy" id="S6z-wR-w1G"/>
                 <outlet property="groupDesc" destination="eOy-jv-Fxs" id="tA7-pq-j3O"/>
                 <outlet property="groupDetailView" destination="CHq-e0-kZx" id="uiX-Rm-Igr"/>
                 <outlet property="mainImageView" destination="nck-Fx-AtI" id="TCP-z5-Tga"/>
@@ -131,9 +132,6 @@
                     </constraints>
                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                     <state key="normal" title="Delete Connection"/>
-                    <connections>
-                        <action selector="deleteConnection:" destination="-1" eventType="touchUpInside" id="PmW-Jl-TIz"/>
-                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Main Heading" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5E6-ZK-RBQ">
                     <rect key="frame" x="85" y="8" width="241" height="21"/>
