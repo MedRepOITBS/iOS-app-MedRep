@@ -146,6 +146,15 @@
     [self.userRegData setObject:[details objectOrNilForKey:@"status"] forKey:@"status"];
     [self.userRegData setObject:[details objectOrNilForKey:kDisplayName] forKey:kDisplayName];
     
+    id locations = [details objectOrNilForKey:@"locations"];
+    if ([locations isKindOfClass:[NSArray class]]) {
+        id firstObject = ((NSArray*)locations).firstObject;
+        if ([firstObject isKindOfClass:[NSDictionary class]]) {
+            NSString *city = [firstObject objectForKey:KCity];
+            [self.userRegData setObject:city forKey:KCity];
+        }
+    }
+    
     if (self.userType == 1 || self.userType == 2)
     {
         if ([details objectOrNilForKey:@"registrationNumber"])

@@ -36,6 +36,8 @@
     int i;
     NSTimer *timer;
 }
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *moreOptionsWidthConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *moreOptionsTrailingConstraint;
 
 @property (weak, nonatomic) IBOutlet UICollectionView* myContactsCollectionView;
 //@property (weak, nonatomic) IBOutlet UICollectionView* suggestedContactsCollectionView;
@@ -126,6 +128,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(refreshData)
                                                  name:kNotificationRefreshContactList                                               object:nil];
+    
+    [self updatePlusButton];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -144,6 +148,18 @@
     
     i = 0;
     [timer invalidate];
+}
+
+- (void)updatePlusButton {
+    if (self.currentIndex == 1 || self.currentIndex == 3) {
+        [self.moreOptions setHidden:true];
+        self.moreOptionsWidthConstraint.constant = 0;
+        self.moreOptionsTrailingConstraint.constant = 0;
+    } else {
+        [self.moreOptions setHidden:false];
+        self.moreOptionsWidthConstraint.constant = 30;
+        self.moreOptionsTrailingConstraint.constant = 20;
+    }
 }
 
 - (void)refreshData {
@@ -271,6 +287,7 @@
         
         NSInteger previousIndex = self.currentIndex;
         self.currentIndex = indexPath.row;
+        [self updatePlusButton];
         
         [_titlesCollectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:previousIndex inSection:0],
                                                              [NSIndexPath indexPathForRow:self.currentIndex inSection:0]]];
@@ -409,6 +426,12 @@
                         [self.navigationController pushViewController:self.groupsListViewController animated:NO];
                     }
                     completion:nil];*/
+}
+
+- (IBAction)addButtonClicked:(id)sender {
+    MRAddMembersViewController* detailViewController = [[MRAddMembersViewController alloc] init];
+    detailViewController.groupID = 0;
+    [self.navigationController pushViewController:detailViewController animated:NO];
 }
 
 - (IBAction)popOverTapped:(id)sender {

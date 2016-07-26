@@ -79,6 +79,7 @@
         [_createBtn setTitle:@"Update Group" forState:UIControlStateNormal];
     }else{
         isUpdateMode = NO;
+        groupIconData = UIImageJPEGRepresentation([UIImage imageNamed:@"Group"], 1.0);
     }
 }
 
@@ -114,11 +115,6 @@
     
     if (!_txtName.text.length || !_txtShortDesc.text.length || !_txtLongDesc.text.length) {
         [[[UIAlertView alloc] initWithTitle:@"" message:@"Please fill all the fields!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
-        return;
-    }
-    
-    if (!groupIconData) {
-        [[[UIAlertView alloc] initWithTitle:@"" message:@"Please select group icon!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
         return;
     }
     

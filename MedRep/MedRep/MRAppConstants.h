@@ -44,6 +44,11 @@ FOUNDATION_EXPORT NSString* const  documentDateFormat;
 FOUNDATION_EXPORT NSString* const kHourAMPMFormat;
 FOUNDATION_EXPORT NSString* const kDefaultDateFormat;
 
+FOUNDATION_EXPORT NSString* const kAddConnection;
+FOUNDATION_EXPORT NSString* const kDeleteConnection;
+
+FOUNDATION_EXPORT NSString* const kConnectionAdded;
+
 FOUNDATION_EXPORT NSString* const kNotificationRefreshContactList;
 
 @end

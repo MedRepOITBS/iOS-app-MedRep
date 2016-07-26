@@ -44,6 +44,11 @@ NSString* const  documentDateFormat = @"yyyy-MM-dd'T'HH:mm:ss";
 NSString* const  kHourAMPMFormat = @"hh:mm a";
 NSString* const kDefaultDateFormat = @"yyyy-MM-dd'T'HH:mm:ss";
 
+NSString* const kAddConnection = @"Add Connection";
+NSString* const kDeleteConnection = @"Delete Connection";
+
+NSString* const kConnectionAdded = @"Connection Added Successfully !!!";
+
 NSString* const kNotificationRefreshContactList = @"RefreshContactList";
 
 @end

@@ -32,6 +32,7 @@
 #import "MRInterestArea.h"
 #import "EducationalQualifications.h"
 #import "MRPublications.h"
+
 static MRDatabaseHelper *sharedDataManager = nil;
 
 @implementation MRDatabaseHelper
@@ -1332,6 +1333,51 @@ static MRDatabaseHelper *sharedDataManager = nil;
         result = [tempResults sortedArrayUsingDescriptors:@[sortDescriptor]];
         responseHandler(result);
     }
+}
+
++ (void)addConnections:(NSArray*)selectedContacts
+    andResponseHandler:(WebServiceResponseHandler)handler {
+    NSMutableDictionary *dictReq = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                    selectedContacts, @"connIdList",
+                                    nil];
+    
+    [MRCommon showActivityIndicator:@"Adding..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] addMembers:dictReq withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [MRCommon stopActivityIndicator];
+        if (status) {
+            if (handler != nil) {
+                [MRCommon showAlert:NSLocalizedString(kConnectionAdded, "") delegate:nil];
+                handler([NSNumber numberWithBool:status]);
+            }
+        }
+        else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+        {
+            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+             {
+                 [MRCommon savetokens:responce];
+                 [[MRWebserviceHelper sharedWebServiceHelper] addMembers:dictReq withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                     [MRCommon stopActivityIndicator];
+                     if (status) {
+                         if (handler != nil) {
+                             [MRCommon showAlert:NSLocalizedString(kConnectionAdded, "") delegate:nil];
+                             handler([NSNumber numberWithBool:status]);
+                         }
+                     }else
+                     {
+                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                         if (erros.count > 0)
+                             [MRCommon showAlert:[erros lastObject] delegate:nil];
+                     }
+                 }];
+             }];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }];
 }
 
 @end
