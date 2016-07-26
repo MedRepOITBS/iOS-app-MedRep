@@ -16,4 +16,4 @@ NSString *const kHostName = @"http://183.82.106.234:8080";
 
 NSString *const kDrugSearchAPIKey = @"77b06e379a6f984a1f1ec091ce70f4";
 
-NSString *const kDrugSearchBaseURL = @"http://www.truemd.in/api";
+NSString *const kDrugSearchBaseURL =@"http://oaayush-aayush.rhcloud.com/api";// @"http://www.truemd.in/api";
