@@ -681,7 +681,6 @@
 -(void)registerDeviceToken{
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
                           APP_DELEGATE.token, @"regDeviceToken",
-                          [MRAppControl sharedHelper].userRegData[@"doctorId"], @"docID",
                           @"IOS", @"platform",
                           nil];
     
