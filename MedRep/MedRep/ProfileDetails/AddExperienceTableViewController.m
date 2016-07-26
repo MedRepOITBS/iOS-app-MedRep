@@ -93,7 +93,9 @@ self.navigationItem.title  = @"Add Experience";
     CGSize pickerSize = [_picker sizeThatFits:CGSizeZero];
    
         _picker.frame = CGRectMake( 0, [[UIScreen mainScreen] bounds].size.height - pickerSize.height, pickerSize.width, pickerSize.height );
-       [self.view addSubview:_picker];
+    
+    _picker.backgroundColor = [UIColor greenColor];
+    [self.view addSubview:_picker];
 
 }
 
@@ -219,9 +221,9 @@ self.navigationItem.title  = @"Add Experience";
 #pragma mark - Table view data source
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (indexPath.row ==0 || indexPath.row == 1) {
+    if (indexPath.row ==0 || indexPath.row == 1|| indexPath.row == 2) {
         return 72;
-    }else if(indexPath.row == 2 ){
+    }else if(indexPath.row == 3 ){
         return 146;
     }
     return 124;

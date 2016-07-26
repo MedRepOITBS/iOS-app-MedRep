@@ -110,7 +110,7 @@
     [super viewDidAppear:animated];
     
     contactList = [NSMutableArray array];
-    [self requestForContacts];
+//    [self requestForContacts];
     [MRCommon applyNavigationBarStyling:self.navigationController];
 }
 
@@ -205,12 +205,35 @@
 }
 
 - (IBAction)addMembers:(id)sender {
-    if (!selectedContacts.count){
-        [[[UIAlertView alloc] initWithTitle:@"" message:@"Please select at least one contact to invite" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
-        return;
-    }
+//    if (!selectedContacts.count){
+//        [[[UIAlertView alloc] initWithTitle:@"" message:@"Please select at least one contact to invite" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+//        return;
+//    }
+//    
+//    [self addMember];
+
+
+    NSString *textToShare = [NSString stringWithFormat:@"Dr. %@ %@ has invited you to join 'MedRep', a digital collboration platform for doctors. Please Download from iTunes and Google Playstore. iTunes link https://itunes.apple.com/in/app/medrep/id1087940083?mt=8 ", [MRAppControl sharedHelper].userRegData[@"FirstName"],[MRAppControl sharedHelper].userRegData[@"LastName"]];
+    NSURL *myWebsite = [NSURL URLWithString:@"http://www.erfolglifesciences.com/"];
     
-    [self addMember];
+    NSArray *objectsToShare = @[textToShare, myWebsite];
+    
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
+    
+//    NSArray *excludeActivities = @[UIActivityTypeAirDrop,
+//                                   UIActivityTypePrint,
+//                                   UIActivityTypeAssignToContact,
+//                                   UIActivityTypeSaveToCameraRoll,
+//                                   UIActivityTypeAddToReadingList,
+//                                   UIActivityTypePostToFlickr,
+//                                   UIActivityTypePostToVimeo];
+//    
+//    activityVC.excludedActivityTypes = excludeActivities;
+    
+    [self presentViewController:activityVC animated:YES completion:nil];
+
+
+
 }
 
 -(void) addMember{

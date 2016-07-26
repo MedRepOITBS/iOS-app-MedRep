@@ -713,6 +713,12 @@
 		B4BB24D71D45CDF400A3DD73 /* gallery_pic.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24D51D45CDF400A3DD73 /* gallery_pic.png */; };
 		B4BB24DF1D45E03A00A3DD73 /* previewImage.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24DE1D45E03A00A3DD73 /* previewImage.png */; };
 		B4BB24E01D45E03A00A3DD73 /* previewImage.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24DE1D45E03A00A3DD73 /* previewImage.png */; };
+		B4E02C581D4706E7003A1859 /* logo_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E02C551D4706E7003A1859 /* logo_icon@3x.png */; };
+		B4E02C591D4706E7003A1859 /* logo_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E02C551D4706E7003A1859 /* logo_icon@3x.png */; };
+		B4E02C5A1D4706E7003A1859 /* logo_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E02C561D4706E7003A1859 /* logo_icon.png */; };
+		B4E02C5B1D4706E7003A1859 /* logo_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E02C561D4706E7003A1859 /* logo_icon.png */; };
+		B4E02C5C1D4706E7003A1859 /* logo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E02C571D4706E7003A1859 /* logo_icon@2x.png */; };
+		B4E02C5D1D4706E7003A1859 /* logo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E02C571D4706E7003A1859 /* logo_icon@2x.png */; };
 		CC0123C11D25A66B001134F3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0123C01D25A66B001134F3 /* CoreGraphics.framework */; };
 		CC0123C21D25A677001134F3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0123C01D25A66B001134F3 /* CoreGraphics.framework */; };
 		CC01BA731D302ACF007E2AEB /* MRCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC01BA711D302ACF007E2AEB /* MRCommentViewController.m */; };
@@ -2146,6 +2152,9 @@
 		B4BB24D21D45CD4C00A3DD73 /* CameraClick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CameraClick.png; sourceTree = "<group>"; };
 		B4BB24D51D45CDF400A3DD73 /* gallery_pic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gallery_pic.png; sourceTree = "<group>"; };
 		B4BB24DE1D45E03A00A3DD73 /* previewImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = previewImage.png; sourceTree = "<group>"; };
+		B4E02C551D4706E7003A1859 /* logo_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo_icon@3x.png"; sourceTree = "<group>"; };
+		B4E02C561D4706E7003A1859 /* logo_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_icon.png; sourceTree = "<group>"; };
+		B4E02C571D4706E7003A1859 /* logo_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo_icon@2x.png"; sourceTree = "<group>"; };
 		CC0123C01D25A66B001134F3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		CC01BA701D302ACF007E2AEB /* MRCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRCommentViewController.h; path = CommentBox/MRCommentViewController.h; sourceTree = "<group>"; };
 		CC01BA711D302ACF007E2AEB /* MRCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRCommentViewController.m; path = CommentBox/MRCommentViewController.m; sourceTree = "<group>"; };
@@ -3144,6 +3153,9 @@
 				79BD27C31B809A80007CA448 /* HomeLogo@3x.png */,
 				79BD27C41B809A80007CA448 /* pageviewdots@2x.png */,
 				79BD27C51B809A80007CA448 /* Signup_plain@2x.png */,
+				B4E02C551D4706E7003A1859 /* logo_icon@3x.png */,
+				B4E02C561D4706E7003A1859 /* logo_icon.png */,
+				B4E02C571D4706E7003A1859 /* logo_icon@2x.png */,
 				79BD27C61B809A80007CA448 /* Signup_plain@3x.png */,
 				79BD27C71B809A80007CA448 /* bg@2x.jpg */,
 			);
@@ -4263,6 +4275,7 @@
 				79BD27F31B80A8C3007CA448 /* email@3x.png in Resources */,
 				79F416891B9F5CDB0089729B /* calender-icon@2x.png in Resources */,
 				79173C671BB48EE100842E4C /* PHsurveys@3x.png in Resources */,
+				B4E02C5A1D4706E7003A1859 /* logo_icon.png in Resources */,
 				791C37F31C502D6D00914728 /* reminderSelected@3x.png in Resources */,
 				79BD27B51B80999E007CA448 /* MRHomeViewContoller.xib in Resources */,
 				79841DDD1B98A02A00535916 /* otptic@3x.png in Resources */,
@@ -4363,6 +4376,7 @@
 				CC7DB3AF1D0CCA96007DFE4C /* MRGroupTableViewCell.xib in Resources */,
 				CCE29B271D26E870006DED8E /* MRCustomTabBar.xib in Resources */,
 				8AFE8CE41D0F21BF0000382E /* Contacts.png in Resources */,
+				B4E02C581D4706E7003A1859 /* logo_icon@3x.png in Resources */,
 				791C37DE1C4FF96400914728 /* minus@2x.png in Resources */,
 				8AFE8CE11D0F21BF0000382E /* comment.png in Resources */,
 				791432A81C32EB7D0031FB91 /* dashboard_menu@2x.png in Resources */,
@@ -4464,6 +4478,7 @@
 				8AFE8D011D0F21BF0000382E /* profile_pic15.jpeg in Resources */,
 				79421EF71BB7EF950055D9B7 /* PHproductcampaigns@2x.png in Resources */,
 				8AFE8D091D0F21BF0000382E /* profile_pic9.jpeg in Resources */,
+				B4E02C5C1D4706E7003A1859 /* logo_icon@2x.png in Resources */,
 				79FFD2671BB9DC3100CEE606 /* star@3x.png in Resources */,
 				796E936B1BB8528B0031EA34 /* pcselect@2x.png in Resources */,
 				CC463DE01D279DE7002AE85E /* MRShareOptionsViewController.xib in Resources */,
@@ -4797,6 +4812,7 @@
 				B4BB24BB1D416DF000A3DD73 /* userProfilePic.png in Resources */,
 				CC7DB0971D0C8BEC007DFE4C /* navLogo.png in Resources */,
 				CC7DB0981D0C8BEC007DFE4C /* pcselect@3x.png in Resources */,
+				B4E02C591D4706E7003A1859 /* logo_icon@3x.png in Resources */,
 				CC7DB0991D0C8BEC007DFE4C /* otptic@2x.png in Resources */,
 				CC7DB09A1D0C8BEC007DFE4C /* password@3x.png in Resources */,
 				B4BB24B21D416CA000A3DD73 /* profileBG1.png in Resources */,
@@ -4977,6 +4993,7 @@
 				CC7DB3721D0CC8A6007DFE4C /* profile_pic12.jpeg in Resources */,
 				8AFF27AB1D21BE7B00080DF0 /* MRJoinGroupViewController.xib in Resources */,
 				CC7DB3861D0CC8A6007DFE4C /* profile_pic8.jpeg in Resources */,
+				B4E02C5D1D4706E7003A1859 /* logo_icon@2x.png in Resources */,
 				B4B4F0FE1D38AEDF00EFCC0E /* addProfileItemsTableViewCell.xib in Resources */,
 				CC7DB12C1D0C8BEC007DFE4C /* news@2x.png in Resources */,
 				CC7DB12D1D0C8BEC007DFE4C /* starunselected@2x.png in Resources */,
@@ -5245,6 +5262,7 @@
 				CC7DB1FE1D0C8BEC007DFE4C /* right-arrow@2x.png in Resources */,
 				CC7DB1FF1D0C8BEC007DFE4C /* bg@2x~iPad.png in Resources */,
 				CC7DB2001D0C8BEC007DFE4C /* mrkt-cmpn@3x.png in Resources */,
+				B4E02C5B1D4706E7003A1859 /* logo_icon.png in Resources */,
 				CC7DB2011D0C8BEC007DFE4C /* pageviewdots@2x~iPad copy.png in Resources */,
 				CC7DB2021D0C8BEC007DFE4C /* iTunesArtwork in Resources */,
 				CC7DB2031D0C8BEC007DFE4C /* PHlocations@2x.png in Resources */,

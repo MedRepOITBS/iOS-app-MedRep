@@ -45,7 +45,7 @@
                                                         <constraint firstAttribute="width" constant="590" id="imu-My-WsD"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-BoldItalic" family="Helvetica Neue" pointSize="19"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                                    <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hyderbad, India" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RAu-br-9wf">
@@ -141,7 +141,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
+                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstItem="3Dn-Ne-z59" firstAttribute="top" secondItem="Hpp-zB-VjM" secondAttribute="topMargin" constant="38" id="NLF-bB-Sae"/>
                                         <constraint firstItem="hHl-pI-WsW" firstAttribute="leading" secondItem="Hpp-zB-VjM" secondAttribute="leadingMargin" constant="25" id="R2w-3b-quC"/>
@@ -151,7 +151,7 @@
                                         <constraint firstItem="3Dn-Ne-z59" firstAttribute="leading" secondItem="Hpp-zB-VjM" secondAttribute="leadingMargin" constant="25" id="h6e-FM-3CB"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="specialityLbl" destination="i8h-e6-HEa" id="Rc4-GD-JOx"/>
                                 </connections>
@@ -212,7 +212,7 @@ easier for colleagues to find you.</string>
                                             </connections>
                                         </button>
                                     </subviews>
-                                    <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
+                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="trailingMargin" secondItem="ta5-gc-aUF" secondAttribute="trailing" constant="6" id="3Eq-1C-pWg"/>
                                         <constraint firstItem="Lx1-i9-E7T" firstAttribute="leading" secondItem="YXL-Ka-sQi" secondAttribute="leadingMargin" constant="-8" id="6BT-n8-10k"/>
@@ -281,7 +281,7 @@ easier for colleagues to find you.</string>
                                             </constraints>
                                         </view>
                                     </subviews>
-                                    <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
+                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstItem="sDK-1T-TOS" firstAttribute="top" secondItem="Ya1-qS-Hk7" secondAttribute="topMargin" constant="17" id="2R5-aQ-oEe"/>
                                         <constraint firstItem="HEc-sM-GkT" firstAttribute="leading" secondItem="Ya1-qS-Hk7" secondAttribute="leadingMargin" constant="24" id="QEu-Tg-zgA"/>
@@ -319,7 +319,7 @@ easier for colleagues to find you.</string>
                                                 <constraint firstAttribute="height" constant="40" id="GU8-6h-8Ak"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                            <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W2D-4M-tes">
@@ -338,7 +338,7 @@ easier for colleagues to find you.</string>
                                             </constraints>
                                         </imageView>
                                     </subviews>
-                                    <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
+                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="topMargin" secondItem="GZ7-s9-peM" secondAttribute="top" constant="6" id="1ch-d8-gBB"/>
                                         <constraint firstItem="W2D-4M-tes" firstAttribute="leading" secondItem="x5B-nz-n78" secondAttribute="leadingMargin" constant="55" id="Sho-9Q-L5i"/>
@@ -378,7 +378,7 @@ easier for colleagues to find you.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iPd-6W-Gg9">
-                                <rect key="frame" x="0.0" y="40" width="600" height="376"/>
+                                <rect key="frame" x="0.0" y="40" width="600" height="560"/>
                                 <color key="backgroundColor" red="0.7725490196" green="0.94509803920000002" blue="0.90588235289999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CommonTableViewCell" rowHeight="72" id="URS-6n-fgc" customClass="CommonTableViewCell">
@@ -517,9 +517,15 @@ easier for colleagues to find you.</string>
                                                                 <outlet property="delegate" destination="5wZ-Ah-GI2" id="VOd-MM-evW"/>
                                                             </connections>
                                                         </textField>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dropDownButton.png" translatesAutoresizingMaskIntoConstraints="NO" id="2jo-Fz-Prb">
+                                                            <rect key="frame" x="205" y="8" width="38" height="30"/>
+                                                        </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dropDownButton.png" translatesAutoresizingMaskIntoConstraints="NO" id="2vf-su-sdu">
+                                                    <rect key="frame" x="226" y="44" width="38" height="30"/>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="TWE-8S-BhD" firstAttribute="top" secondItem="4G8-zq-SB2" secondAttribute="topMargin" constant="35" id="0Qh-fK-l5J"/>
@@ -557,12 +563,9 @@ easier for colleagues to find you.</string>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Summary" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h3b-L0-Kc5">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Summary" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h3b-L0-Kc5">
                                                     <rect key="frame" x="20" y="47" width="371.5" height="62"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="62" id="9UZ-Lh-sAL"/>
-                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
@@ -573,10 +576,6 @@ easier for colleagues to find you.</string>
                                             <constraints>
                                                 <constraint firstItem="wx8-3G-mhJ" firstAttribute="top" secondItem="zB9-p2-5oR" secondAttribute="topMargin" constant="11" id="2VK-Vw-K21"/>
                                                 <constraint firstItem="wx8-3G-mhJ" firstAttribute="leading" secondItem="zB9-p2-5oR" secondAttribute="leadingMargin" constant="12" id="3Ya-uC-P3h"/>
-                                                <constraint firstItem="h3b-L0-Kc5" firstAttribute="leading" secondItem="zB9-p2-5oR" secondAttribute="leadingMargin" constant="12" id="3d1-Sa-d7I"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="h3b-L0-Kc5" secondAttribute="trailing" constant="200.5" id="IWx-YU-nx8"/>
-                                                <constraint firstItem="h3b-L0-Kc5" firstAttribute="top" secondItem="zB9-p2-5oR" secondAttribute="topMargin" constant="39" id="mM8-PP-ysW"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="h3b-L0-Kc5" secondAttribute="bottom" constant="7" id="pOt-Yl-Fw3"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.7725490196" green="0.94509803920000002" blue="0.90588235289999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -596,7 +595,7 @@ easier for colleagues to find you.</string>
                             <constraint firstAttribute="trailingMargin" secondItem="iPd-6W-Gg9" secondAttribute="trailing" constant="-20" id="3lS-ui-VUI"/>
                             <constraint firstItem="B1Y-om-X07" firstAttribute="top" secondItem="iPd-6W-Gg9" secondAttribute="bottom" constant="200" id="IG5-FW-Gng"/>
                             <constraint firstItem="iPd-6W-Gg9" firstAttribute="leading" secondItem="YYZ-ek-zj8" secondAttribute="leadingMargin" constant="-20" id="J45-GM-S9F"/>
-                            <constraint firstItem="B1Y-om-X07" firstAttribute="top" secondItem="iPd-6W-Gg9" secondAttribute="bottom" constant="184" id="RMb-5W-7ic"/>
+                            <constraint firstItem="B1Y-om-X07" firstAttribute="top" secondItem="iPd-6W-Gg9" secondAttribute="bottom" id="RMb-5W-7ic"/>
                             <constraint firstAttribute="trailingMargin" secondItem="iPd-6W-Gg9" secondAttribute="trailing" constant="-20" id="cmu-UV-XDG"/>
                             <constraint firstItem="iPd-6W-Gg9" firstAttribute="top" secondItem="5oS-Ag-OAR" secondAttribute="bottom" constant="20" id="j1X-Re-2tG"/>
                             <constraint firstItem="iPd-6W-Gg9" firstAttribute="top" secondItem="5oS-Ag-OAR" secondAttribute="bottom" constant="-20" id="pyA-2p-A02"/>
@@ -1040,6 +1039,7 @@ easier for colleagues to find you.</string>
     <resources>
         <image name="Layer_1.png" width="64" height="64"/>
         <image name="crossPlusButton.png" width="104" height="105"/>
+        <image name="dropDownButton.png" width="38" height="47"/>
         <image name="settings1.png" width="64" height="64"/>
         <image name="unselected.png" width="20" height="20"/>
         <image name="userProfilePic.png" width="128" height="128"/>

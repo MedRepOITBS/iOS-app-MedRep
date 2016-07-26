@@ -208,7 +208,7 @@
             <rect key="frame" x="0.0" y="0.0" width="40" height="33"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="Icon-40.png" translatesAutoresizingMaskIntoConstraints="NO" id="rAU-Ts-y1O">
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="logo_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="rAU-Ts-y1O">
                     <rect key="frame" x="0.0" y="0.0" width="40" height="33"/>
                 </imageView>
             </subviews>
@@ -222,7 +222,7 @@
     <resources>
         <image name="Contact.png" width="50" height="50"/>
         <image name="Group.png" width="50" height="50"/>
-        <image name="Icon-40.png" width="40" height="40"/>
+        <image name="logo_icon.png" width="35" height="33"/>
         <image name="plus.png" width="512" height="512"/>
     </resources>
 </document>

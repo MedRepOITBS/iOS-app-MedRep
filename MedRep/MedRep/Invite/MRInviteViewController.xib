@@ -24,12 +24,12 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="IeV-Pt-oBR"/>
                     </constraints>
-                    <state key="normal" title="Send Invitation"/>
+                    <state key="normal" title="Share Invitation"/>
                     <connections>
                         <action selector="addMembers:" destination="-1" eventType="touchUpInside" id="3rW-a2-Sv2"/>
                     </connections>
                 </button>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dU4-kp-kZm">
+                <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dU4-kp-kZm">
                     <rect key="frame" x="0.0" y="44" width="600" height="506"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
@@ -37,7 +37,7 @@
                         <outlet property="delegate" destination="-1" id="vVe-lQ-YfJ"/>
                     </connections>
                 </tableView>
-                <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="Rnp-Y4-8Ku">
+                <searchBar hidden="YES" contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="Rnp-Y4-8Ku">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="Hts-lP-N0q"/>
@@ -68,7 +68,7 @@
             <rect key="frame" x="0.0" y="0.0" width="40" height="33"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="Icon-40.png" translatesAutoresizingMaskIntoConstraints="NO" id="rGG-xX-Tca">
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="logo_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="rGG-xX-Tca">
                     <rect key="frame" x="0.0" y="0.0" width="40" height="33"/>
                 </imageView>
             </subviews>
@@ -80,6 +80,6 @@
         </view>
     </objects>
     <resources>
-        <image name="Icon-40.png" width="40" height="40"/>
+        <image name="logo_icon.png" width="35" height="33"/>
     </resources>
 </document>
