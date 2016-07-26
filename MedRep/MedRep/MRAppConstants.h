@@ -44,4 +44,6 @@ FOUNDATION_EXPORT NSString* const  documentDateFormat;
 FOUNDATION_EXPORT NSString* const kHourAMPMFormat;
 FOUNDATION_EXPORT NSString* const kDefaultDateFormat;
 
+FOUNDATION_EXPORT NSString* const kNotificationRefreshContactList;
+
 @end

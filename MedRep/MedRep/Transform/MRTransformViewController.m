@@ -284,10 +284,10 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
             } else if (transformData.contentType.integerValue == kTransformContentTypePDF) {
                 regCell.img.image = [UIImage imageNamed:@"pdf"];
             } else {
-                regCell.img.image = [UIImage imageNamed:@"feedbackSelected"];
+                regCell.img.image = [UIImage imageNamed:@"Default"];
             }
         } else {
-            regCell.img.image = [UIImage imageNamed:@"feedbackSelected"];
+            regCell.img.image = [UIImage imageNamed:@"Default"];
         }
         
         if (transformData.titleDescription != nil && transformData.titleDescription.length > 0) {

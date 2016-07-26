@@ -159,7 +159,6 @@ static MRDatabaseHelper *sharedDataManager = nil;
 + (void)getSuggestedGroups:(WebServiceResponseHandler)responseHandler {
     [MRCommon showActivityIndicator:@"Requesting..."];
     [[MRWebserviceHelper sharedWebServiceHelper] getSuggestedGroupListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-        [[MRDataManger sharedManager] removeAllObjects:kGroupEntity withPredicate:nil];
         [MRDatabaseHelper makeServiceCallForGroupsFetch:status details:details
                                                  response:responce
                                        andResponseHandler:responseHandler];
@@ -169,7 +168,6 @@ static MRDatabaseHelper *sharedDataManager = nil;
 + (void)getPendingGroups:(WebServiceResponseHandler)responseHandler {
     [MRCommon showActivityIndicator:@"Requesting..."];
     [[MRWebserviceHelper sharedWebServiceHelper] fetchPendingGroupsListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-        [[MRDataManger sharedManager] removeAllObjects:kGroupEntity withPredicate:nil];
         [MRDatabaseHelper makeServiceCallForContactsFetch:status details:details
                                                  response:responce
                                        andResponseHandler:responseHandler];
@@ -256,7 +254,6 @@ static MRDatabaseHelper *sharedDataManager = nil;
 + (void)getPendingContacts:(WebServiceResponseHandler)responseHandler {
     [MRCommon showActivityIndicator:@"Requesting..."];
     [[MRWebserviceHelper sharedWebServiceHelper] fetchPendingConnectionsListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-        [[MRDataManger sharedManager] removeAllObjects:kContactEntity withPredicate:nil];
         [MRDatabaseHelper makeServiceCallForContactsFetch:status details:details
                                                  response:responce
                                        andResponseHandler:responseHandler];

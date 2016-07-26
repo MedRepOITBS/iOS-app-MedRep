@@ -123,6 +123,9 @@
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.searchBar resignFirstResponder];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refreshData)
+                                                 name:kNotificationRefreshContactList                                               object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -141,6 +144,12 @@
     
     i = 0;
     [timer invalidate];
+}
+
+- (void)refreshData {
+    [self fetchDataFromServer];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:kNotificationRefreshContactList object:nil];
 }
 
 - (void)fetchDataFromServer {

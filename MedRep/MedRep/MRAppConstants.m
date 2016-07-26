@@ -44,4 +44,6 @@ NSString* const  documentDateFormat = @"yyyy-MM-dd'T'HH:mm:ss";
 NSString* const  kHourAMPMFormat = @"hh:mm a";
 NSString* const kDefaultDateFormat = @"yyyy-MM-dd'T'HH:mm:ss";
 
+NSString* const kNotificationRefreshContactList = @"RefreshContactList";
+
 @end

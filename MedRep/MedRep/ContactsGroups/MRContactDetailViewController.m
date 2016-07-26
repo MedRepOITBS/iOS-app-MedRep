@@ -101,8 +101,22 @@
 - (void)setupUIWithContactDetails {
     [MRAppControl getContactImage:self.mainContact andImageView:self.mainImageView];
     self.mainLabel.text = [MRAppControl getContactName:self.mainContact];
-    _therapueticArea.text = [NSString stringWithFormat:@"Therapeutic Area: %@",_mainContact.therapeuticArea.length ? _mainContact.therapeuticArea : _mainContact.therapeuticName];
-    _city.text = [NSString stringWithFormat:@"City: %@",_mainContact.city];
+    
+    NSString *therapauticArea = @"";
+    if (_mainContact.therapeuticArea != nil && _mainContact.therapeuticArea.length > 0) {
+        therapauticArea = _mainContact.therapeuticArea;
+    } else if (_mainContact.therapeuticName != nil && _mainContact.therapeuticName.length > 0) {
+        therapauticArea = _mainContact.therapeuticName;
+    }
+    
+    _therapueticArea.text = [NSString stringWithFormat:@"Therapeutic Area: %@", therapauticArea];
+    
+    NSString *city = @"";
+    if (_mainContact.city != nil && _mainContact.city.length > 0) {
+        city = _mainContact.city;
+    }
+    
+    _city.text = [NSString stringWithFormat:@"City: %@",city];
     
     self.groupsUnderContact = [self.mainContact.groups allObjects];
     if (self.mainContact.comments != nil && self.mainContact.comments.count > 0) {
@@ -617,12 +631,19 @@
                        andPredicate:predicate];
 }
 
--(void) deleteConnection{
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                           [NSNumber numberWithLong:self.mainContact.contactId.longValue], @"connID",
-                           [MRAppControl sharedHelper].userRegData[@"doctorId"], @"docID",
-                           @"EXIT", @"status",
-                           nil];
+-(void) deleteConnection {
+    NSDictionary *dict;
+    
+    if (self.mainContact != nil) {
+        dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                               [NSNumber numberWithLong:self.mainContact.doctorId.longValue], @"connID",
+                               [MRAppControl sharedHelper].userRegData[@"doctorId"], @"docID",
+                               @"EXIT", @"status",
+                               nil];
+    } else {
+        [self removeGroup];
+        return;
+    }
     
     [MRCommon showActivityIndicator:@"Deleting..."];
     [[MRWebserviceHelper sharedWebServiceHelper] deleteConnection:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
@@ -633,6 +654,8 @@
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Connection deleted!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
             alert.tag = 11;
             [alert show];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
+                                                                object:nil];
         }
         else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
         {
@@ -647,6 +670,8 @@
                          UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Connection deleted!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                          alert.tag = 11;
                          [alert show];
+                         [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
+                                                                             object:nil];
                      }else
                      {
                          NSArray *erros =  [details componentsSeparatedByString:@"-"];

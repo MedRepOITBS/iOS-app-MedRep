@@ -334,7 +334,9 @@
 
 -(void)getPendingConnections {
     [MRDatabaseHelper getPendingContacts:^(id result) {
-        fileredContacts = _pendingContactListArra;
+//        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"status like [cd]%@", @"Pending"];
+//        fileredContacts = [[MRDataManger sharedManager] fetchObjectList:kContactEntity predicate:predicate];
+        fileredContacts = result;
         [self refreshLabels];
     }];
 }
@@ -342,15 +344,13 @@
 -(void)getPendingMembers {
     [MRDatabaseHelper getPendingGroupMembers:_gid andResponseHandler:^(id result) {
         fileredContacts = result;
-        fileredContacts = _pendingContactListArra;
         [self refreshLabels];
     }];
 }
 
 -(void)getPendingGroups {
-    [MRDatabaseHelper getPendingContacts:^(id result) {
+    [MRDatabaseHelper getPendingGroups:^(id result) {
         fileredContacts = result;
-        fileredContacts = _pendingContactListArra;
         [self refreshLabels];
     }];
 }
@@ -400,89 +400,31 @@
         cell.acceptBtn.tag = indexPath.row;
         cell.rejectBtn.tag = indexPath.row;
         
-//        if (_isFromGroup) {
-//            MRGroupObject *contact = [fileredContacts objectAtIndex:indexPath.row];
-//            for (UIView *view in cell.profilePic.subviews) {
-//                if ([view isKindOfClass:[UILabel class]]) {
-//                    [view removeFromSuperview];
-//                }
-//            }
-//            
-//            NSString *fullName = [NSString stringWithFormat:@"%@",contact.group_name];
-//            cell.userName.text = fullName;
-//            cell.phoneNo.text = contact.group_short_desc;
-//            if (contact.group_img_data.length) {
-//                cell.profilePic.image = [MRCommon getImageFromBase64Data:[contact.group_img_data dataUsingEncoding:NSUTF8StringEncoding]];
-//            } else {
-//                cell.profilePic.image = nil;
-//                if (fullName.length > 0) {
-//                    UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:cell.profilePic.bounds];
-//                    subscriptionTitleLabel.textAlignment = NSTextAlignmentCenter;
-//                    subscriptionTitleLabel.font = [UIFont systemFontOfSize:15.0];
-//                    subscriptionTitleLabel.textColor = [UIColor lightGrayColor];
-//                    subscriptionTitleLabel.layer.cornerRadius = 5.0;
-//                    subscriptionTitleLabel.layer.masksToBounds = YES;
-//                    subscriptionTitleLabel.layer.borderWidth =1.0;
-//                    subscriptionTitleLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
-//                    
-//                    NSArray *substrngs = [fullName componentsSeparatedByString:@" "];
-//                    NSString *imageString = @"";
-//                    for(NSString *str in substrngs){
-//                        if (str.length > 0) {
-//                            imageString = [imageString stringByAppendingString:[NSString stringWithFormat:@"%c",[str characterAtIndex:0]]];
-//                        }
-//                    }
-//                    subscriptionTitleLabel.text = imageString.length > 2 ? [imageString substringToIndex:2] : imageString;
-//                    [cell.profilePic addSubview:subscriptionTitleLabel];
-//                }
-//            }
-//            
-//            cell.acceptBtn.hidden = YES;
-//            cell.rejectBtn.hidden = YES;
-//            
-//            return cell;
-//        }
+        if (_isFromGroup) {
+            MRGroup *group = [fileredContacts objectAtIndex:indexPath.row];
+            NSString *groupName = @"";
+            if (group.group_name != nil) {
+                groupName = group.group_name;
+            }
+            cell.userName.text = groupName;
+            
+            cell.phoneNo.text = @"";
+            cell.profilePic.image = [MRAppControl getGroupImage:group];
+            cell.acceptBtn.hidden = YES;
+            cell.rejectBtn.hidden = YES;
+            
+            return cell;
+        }
         
         if (!_canEdit && _isFromMember) {
             cell.acceptBtn.hidden = YES;
             cell.rejectBtn.hidden = YES;
         }
         
-//        MRGroupUserObject *contact = [fileredContacts objectAtIndex:indexPath.row];
-//        for (UIView *view in cell.profilePic.subviews) {
-//            if ([view isKindOfClass:[UILabel class]]) {
-//                [view removeFromSuperview];
-//            }
-//        }
-//        
-//        NSString *fullName = [NSString stringWithFormat:@"%@ %@",contact.firstName, contact.lastName];
-//        cell.userName.text = [NSString stringWithFormat:@"Dr. %@",fullName];
-//        cell.phoneNo.text = contact.therapeuticArea;
-//        if (contact.imgData.length) {
-//            cell.profilePic.image = [MRCommon getImageFromBase64Data:[contact.imgData dataUsingEncoding:NSUTF8StringEncoding]];
-//        } else {
-//            cell.profilePic.image = nil;
-//            if (fullName.length > 0) {
-//                UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:cell.profilePic.bounds];
-//                subscriptionTitleLabel.textAlignment = NSTextAlignmentCenter;
-//                subscriptionTitleLabel.font = [UIFont systemFontOfSize:15.0];
-//                subscriptionTitleLabel.textColor = [UIColor lightGrayColor];
-//                subscriptionTitleLabel.layer.cornerRadius = 5.0;
-//                subscriptionTitleLabel.layer.masksToBounds = YES;
-//                subscriptionTitleLabel.layer.borderWidth =1.0;
-//                subscriptionTitleLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
-//                
-//                NSArray *substrngs = [fullName componentsSeparatedByString:@" "];
-//                NSString *imageString = @"";
-//                for(NSString *str in substrngs){
-//                    if (str.length > 0) {
-//                        imageString = [imageString stringByAppendingString:[NSString stringWithFormat:@"%c",[str characterAtIndex:0]]];
-//                    }
-//                }
-//                subscriptionTitleLabel.text = imageString.length > 2 ? [imageString substringToIndex:2] : imageString;
-//                [cell.profilePic addSubview:subscriptionTitleLabel];
-//            }
-//        }
+        MRContact *contact = [fileredContacts objectAtIndex:indexPath.row];
+        cell.userName.text = [MRAppControl getContactName:contact];
+        cell.phoneNo.text = contact.therapeuticArea;
+        cell.profilePic.image = [MRAppControl getContactImage:contact];
         
         return cell;
     }
