@@ -11,6 +11,8 @@
 
 #import "MRTransformPost+CoreDataProperties.h"
 
+NSString* const kNewsAndUpdates = @"News & Updates";
+
 @implementation MRTransformPost (CoreDataProperties)
 
 @dynamic contentType;
@@ -57,7 +59,11 @@
 }
 
 - (void)setSourceName:(NSString *)sourceName {
-    self.source = self.sourceName;
+    if (self.sourceName == nil || self.sourceName.length == 0) {
+        self.source = kNewsAndUpdates;
+    } else {
+        self.source = self.sourceName;
+    }
 }
 
 @end

@@ -26,7 +26,7 @@
 
 #define kMenuList [NSArray arrayWithObjects:@"My Profile", @"Dashboard", @"Notifications", @"Surveys", @"Activity Score", @"Marketing Campaigns", @"MedRep Meeting", @"Discussion Forum", @"Search For Drugs", @"News & Updates", @"Invite Contacts",  @"Settings", @"Logout", nil]
 
-#define kMenuListImages [NSArray arrayWithObjects:@"dashboard_menu@2x.png", @"notification@2x.png", @"surveys@2x.png", @"activity-score@2x.png", @"marketing@2x.png", @"meetings@2x.png", @"discussion-forum@2x.png", @"searc--for-drugs@2x.png", @"news@2x.png", @"discussion-forum@2x.png", @"setting@2x.png", @"logout@2x.png", nil]
+#define kMenuListImages [NSArray arrayWithObjects:@"dashboard_menu@2x.png", @"notification@2x.png", @"surveys@2x.png", @"activity-score@2x.png", @"marketing@2x.png", @"meetings@2x.png", @"discussion-forum@2x.png", @"searc--for-drugs@2x.png", @"news@2x.png", @"person.png", @"setting@2x.png", @"logout@2x.png", nil]
 
 
 @interface MRMenuViewController ()<UITableViewDataSource, UITableViewDelegate>
