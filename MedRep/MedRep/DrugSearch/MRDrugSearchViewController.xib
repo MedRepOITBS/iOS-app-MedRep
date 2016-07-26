@@ -267,7 +267,7 @@
             <rect key="frame" x="0.0" y="0.0" width="40" height="33"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="Icon-40.png" translatesAutoresizingMaskIntoConstraints="NO" id="Mby-5n-P8n">
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="logo_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="Mby-5n-P8n">
                     <rect key="frame" x="0.0" y="0.0" width="40" height="33"/>
                 </imageView>
             </subviews>
@@ -279,8 +279,8 @@
         </view>
     </objects>
     <resources>
-        <image name="Icon-40.png" width="40" height="40"/>
         <image name="left-arrow.png" width="10" height="17"/>
+        <image name="logo_icon.png" width="35" height="33"/>
         <image name="right-arrow.png" width="10" height="17"/>
         <image name="searchScreen.png" width="646" height="1100"/>
     </resources>
