@@ -198,6 +198,14 @@
 
 - (void)showPopoverInView:(UITextField*)button
 {
+    if (self.popoverPresentationController) {
+        UIView *overlayView = [self.view viewWithTag:2000];
+        [overlayView removeFromSuperview];
+        
+        self.myPopoverController.delegate = nil;
+        self.myPopoverController = nil;
+    }
+    
     UIView *overlayView = [[UIView alloc] initWithFrame:self.view.bounds];
     overlayView.tag = 2000;
     overlayView.backgroundColor = kRGBCOLORALPHA(0, 0, 0, 0.5);
