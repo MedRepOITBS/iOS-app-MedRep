@@ -411,6 +411,12 @@
                     completion:nil];*/
 }
 
+- (IBAction)addButtonClicked:(id)sender {
+    MRAddMembersViewController* detailViewController = [[MRAddMembersViewController alloc] init];
+    detailViewController.groupID = 0;
+    [self.navigationController pushViewController:detailViewController animated:NO];
+}
+
 - (IBAction)popOverTapped:(id)sender {
     if (self.currentIndex == 0 || self.currentIndex == 1) {
         self.menu = [[UIActionSheet alloc] initWithTitle:@"More Options"

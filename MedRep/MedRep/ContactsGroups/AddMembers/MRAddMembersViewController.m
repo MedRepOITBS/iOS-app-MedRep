@@ -76,8 +76,10 @@
 }
 
 - (void)getAllContactsByCity {
-    [MRDatabaseHelper getContacts:^(id results) {
+    [MRDatabaseHelper getContactsByCity:[MRAppControl sharedHelper].userRegData[KCity]
+                        responseHandler:^(id results) {
         _fileredContacts = results;
+        [self.tableViewMembers reloadData];
     }];
 }
 
@@ -161,6 +163,9 @@
         [[MRWebserviceHelper sharedWebServiceHelper] addMembers:dictReq withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
             [MRCommon stopActivityIndicator];
             if (status) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
+                                                                    object:nil];
+                
                 for (UIViewController *vc in self.parentViewController.childViewControllers) {
                     if ([vc isKindOfClass:[MRContactsViewController class]]) {
                         [self.navigationController popToViewController:vc animated:YES];
@@ -175,6 +180,9 @@
                      [[MRWebserviceHelper sharedWebServiceHelper] addMembers:dictReq withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
                          [MRCommon stopActivityIndicator];
                          if (status) {
+                             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
+                                                                                 object:nil];
+                             
                              for (UIViewController *vc in self.parentViewController.childViewControllers) {
                                  if ([vc isKindOfClass:[MRContactsViewController class]]) {
                                      [self.navigationController popToViewController:vc animated:YES];
@@ -238,10 +246,10 @@
             [selectedContacts addObject:contact.doctorId];
         }
     }else{
-        if ([selectedContacts containsObject:contact.userId]) {
-            [selectedContacts removeObject:contact.userId];
+        if ([selectedContacts containsObject:contact.doctorId]) {
+            [selectedContacts removeObject:contact.doctorId];
         }else{
-            [selectedContacts addObject:contact.userId];
+            [selectedContacts addObject:contact.doctorId];
         }
     }
 }

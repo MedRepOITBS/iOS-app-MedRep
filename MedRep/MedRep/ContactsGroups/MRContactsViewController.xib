@@ -160,7 +160,7 @@
                         </attributedString>
                     </state>
                     <connections>
-                        <action selector="popOverTapped:" destination="-1" eventType="touchUpInside" id="EDd-lM-HQj"/>
+                        <action selector="addButtonClicked:" destination="-1" eventType="touchUpInside" id="u5o-bG-gIa"/>
                     </connections>
                 </button>
             </subviews>
