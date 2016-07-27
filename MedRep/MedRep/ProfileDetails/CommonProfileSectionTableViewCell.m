@@ -74,8 +74,8 @@
         _addButton.tag = 401;
         
     }else if([type isEqualToString:@"INTEREST_AREA"]) {
-        _sectionTitleName.text = @"Interest Areas";
-        _sectionDescName.text = @"Add your Interest Area";
+        _sectionTitleName.text = @"Therapeutic Areas";
+        _sectionDescName.text = @"Add your Therapeutic Area";
         
         if ([profile.interestArea.array count]>0) {
             _sectionDescName.hidden = YES;

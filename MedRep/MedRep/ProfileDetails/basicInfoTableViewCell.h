@@ -10,5 +10,5 @@
 
 @interface basicInfoTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *titleOther;
-
+@property (weak,nonatomic) IBOutlet UIView *viewLabel;
 @end

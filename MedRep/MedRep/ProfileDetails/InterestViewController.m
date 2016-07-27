@@ -8,8 +8,14 @@
 
 #import "InterestViewController.h"
 #import "MRDatabaseHelper.h"
-@interface InterestViewController ()
+#import "MRAppControl.h"
+#import "MRCommon.h"
+#import "MRConstants.h"
+#import "WYPopoverController.h"
+#import "MRListViewController.h"
 
+@interface InterestViewController ()
+@property (strong, nonatomic) WYPopoverController *myPopoverController;
 @end
 
 @implementation InterestViewController
@@ -37,7 +43,7 @@
     // Dispose of any resources that can be recreated.
 }
 -(void)doneButtonTapped:(id)sender{
-    NSString *interestArticle = [self.interestAreaTextField.text stringByTrimmingCharactersInSet:
+    NSString *interestArticle = [self.theurpaticBtn.titleLabel.text stringByTrimmingCharactersInSet:
                                         [NSCharacterSet whitespaceCharacterSet]];
     
     
@@ -53,6 +59,91 @@
     }
     
 }
+
+
+
+
+-(IBAction)theurpaticBtnTapped:(id)sender{
+    
+        UIView *overlayView = [[UIView alloc] initWithFrame:self.view.bounds];
+        overlayView.tag = 2000;
+        overlayView.backgroundColor = kRGBCOLORALPHA(0, 0, 0, 0.5);
+        [self.view addSubview:overlayView];
+        [MRCommon addUpdateConstarintsTo:self.view withChildView:overlayView];
+        
+        WYPopoverTheme *popOverTheme = [WYPopoverController defaultTheme];
+        popOverTheme.outerStrokeColor = [UIColor lightGrayColor];
+        [WYPopoverController setDefaultTheme:popOverTheme];
+        
+        MRListViewController *moreViewController = [[MRListViewController alloc] initWithNibName:@"MRListViewController" bundle:nil];
+        
+            moreViewController.modalInPopover = NO;
+            moreViewController.delegate = self;
+            moreViewController.listType = MRListVIewTypeTherapetic;
+            moreViewController.listItems = [MRAppControl sharedHelper].therapeuticAreaDetails;
+    
+        
+        CGFloat width = [UIScreen mainScreen].bounds.size.width;
+        moreViewController.preferredContentSize = CGSizeMake(width, 200);
+        
+        UINavigationController *contentViewController = [[UINavigationController alloc] initWithRootViewController:moreViewController] ;
+        contentViewController.navigationBar.hidden = YES;
+        
+        self.myPopoverController = [[WYPopoverController alloc] initWithContentViewController:contentViewController];
+        self.myPopoverController.delegate = self;
+        self.myPopoverController.popoverLayoutMargins = UIEdgeInsetsMake(0,2, 0, 2);
+        self.myPopoverController.wantsDefaultContentAppearance = YES;
+        [self.myPopoverController presentPopoverFromRect:_theurpaticBtn.bounds
+                                                  inView:_theurpaticBtn
+                                permittedArrowDirections:WYPopoverArrowDirectionUp
+                                                animated:YES
+                                                 options:WYPopoverAnimationOptionFadeWithScale];
+        
+    
+
+}
+
+#pragma mark - WYPopoverControllerDelegate
+
+- (void)popoverControllerDidPresentPopover:(WYPopoverController *)controller
+{
+}
+
+- (BOOL)popoverControllerShouldDismissPopover:(WYPopoverController *)controller
+{
+    return YES;
+}
+
+- (void)popoverControllerDidDismissPopover:(WYPopoverController *)controller
+{
+    UIView *overlayView = [self.view viewWithTag:2000];
+    [overlayView removeFromSuperview];
+    
+    self.myPopoverController.delegate = nil;
+    self.myPopoverController = nil;
+}
+
+- (void)dismissPopoverController
+{
+    [self.myPopoverController dismissPopoverAnimated:YES completion:^{
+        [self popoverControllerDidDismissPopover:self.myPopoverController];
+    }];
+}
+
+- (void)selectedListItem:(id)listItem
+{
+    NSDictionary *item = (NSDictionary*)listItem;
+    
+    if ([item objectForKey:@"therapeuticId"]) {
+        [_theurpaticBtn setTitle:[item objectForKey:@"therapeuticName"] forState:UIControlStateNormal];
+        [[MRAppControl sharedHelper].userRegData setObject:[item objectForKey:@"therapeuticId"] forKey:@"therapeuticId"];
+        //[myTherapeuticDict objectForKey:@"therapeuticId"];
+    }
+    
+   
+}
+
+
 
 /*
 #pragma mark - Navigation

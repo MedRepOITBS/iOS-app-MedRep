@@ -1232,7 +1232,7 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
 -(void)getShareByDate:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler{
    /*
     .
-    http://183.82.106.234:8080/medrep-web/getShareByDate/2016-07-11?token=
+    http://183.82.106.234:8080/medrep-web/getShare/2016-07-11?token=
     
     
     2. http://183.82.106.234:8080/medrep-web/getNewsAndUpdates?token=
@@ -1245,6 +1245,32 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
     NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/getShareByDate/%@?token=%@",kHostName,@"2016-07-11",[MRDefaults objectForKey:kAuthenticationToken]];
 
   
+    NSURL *url = [NSURL URLWithString:stringFormOfUrl];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [urlRequest setTimeoutInterval:120];
+    [urlRequest setHTTPMethod:@"GET"];
+    [urlRequest setValue:@"text/plain" forHTTPHeaderField:@"Content-Type"];
+    self.serviceType = kMRWebServiceTypeGetDoctorContactsList;
+    [self sendServiceRequest:urlRequest withHandler:responseHandler];
+}
+
+-(void)getShare:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler{
+    /*
+     .
+     http://183.82.106.234:8080/medrep-web/getShare/2016-07-11?token=
+     
+     
+     2. http://183.82.106.234:8080/medrep-web/getNewsAndUpdates?token=
+     
+     
+     
+     3. http://183.82.106.234:8080/medrep-web/getContactsAndGroups?token=
+     
+     */
+    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/getShare?token=%@",kHostName,[MRDefaults objectForKey:kAuthenticationToken]];
+    
+    
     NSURL *url = [NSURL URLWithString:stringFormOfUrl];
     NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
     [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];

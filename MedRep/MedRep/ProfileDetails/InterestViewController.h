@@ -10,4 +10,7 @@
 
 @interface InterestViewController : UIViewController
 @property (nonatomic,weak) IBOutlet UITextField *interestAreaTextField;
+
+@property (nonatomic,weak) IBOutlet UIButton *theurpaticBtn;
+-(IBAction)theurpaticBtnTapped:(id)sender;
 @end

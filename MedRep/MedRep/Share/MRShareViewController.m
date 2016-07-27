@@ -27,6 +27,7 @@
 #import "KLCPopup.h"
 #import "CommonBoxView.h"
 #import "MRCommentViewController.h"
+#import "MRWebserviceHelper.h"
 
 @interface MRShareViewController () <UISearchBarDelegate, SWRevealViewControllerDelegate, MRGroupPostItemTableViewCellDelegate, MRShareOptionsSelectionDelegate,
     CommonBoxViewDelegate,
@@ -121,6 +122,12 @@
         [self reloadView];
     }
     
+    
+    
+    [[MRWebserviceHelper sharedWebServiceHelper] getShare:nil
+                                              withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                  
+                                              }];
     self.reloadRows = false;
 }
 

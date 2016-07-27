@@ -150,9 +150,17 @@
     [self.navigationController pushViewController:notiFicationViewController animated:YES];
 }
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if (textField.text.length>2) {
+    if (textField.text.length>3) {
         searchString = [textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         [self getMedicineSuggestions];
+    }else{
+        if (self.myPopoverController) {
+            UIView *overlayView = [self.view viewWithTag:2000];
+            [overlayView removeFromSuperview];
+            
+            self.myPopoverController.delegate = nil;
+            self.myPopoverController = nil;
+        }
     }
     
     return YES;
@@ -198,7 +206,7 @@
 
 - (void)showPopoverInView:(UITextField*)button
 {
-    if (self.popoverPresentationController) {
+    if (self.myPopoverController) {
         UIView *overlayView = [self.view viewWithTag:2000];
         [overlayView removeFromSuperview];
         
@@ -213,7 +221,7 @@
     [MRCommon addUpdateConstarintsTo:self.view withChildView:overlayView];
     
     WYPopoverTheme *popOverTheme = [WYPopoverController defaultTheme];
-    popOverTheme.outerStrokeColor = [UIColor lightGrayColor];
+    popOverTheme.outerStrokeColor = [UIColor clearColor];
     [WYPopoverController setDefaultTheme:popOverTheme];
     
     MRListViewController *moreViewController = [[MRListViewController alloc] initWithNibName:@"MRListViewController" bundle:nil];
