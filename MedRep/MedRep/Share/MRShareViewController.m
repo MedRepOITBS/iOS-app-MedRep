@@ -84,7 +84,7 @@
     self.tapGesture.enabled = NO;
     [self.view addGestureRecognizer:self.tapGesture];
         
-    [self fetchPosts];
+//    [self fetchPosts];
     
     MRCustomTabBar *tabBarView = (MRCustomTabBar*)[MRCommon createTabBarView:self.view];
     [tabBarView setNavigationController:self.navigationController];
@@ -123,11 +123,12 @@
     }
     
     
-    
-    [[MRWebserviceHelper sharedWebServiceHelper] getShare:nil
-                                              withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-                                                  
-                                              }];
+    [MRDatabaseHelper fetchShare:^(id result) {
+        [MRCommon stopActivityIndicator];
+
+        [self fetchPosts];
+        [self.postsTableView reloadData];
+    }];
     self.reloadRows = false;
 }
 

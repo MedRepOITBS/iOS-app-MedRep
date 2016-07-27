@@ -1274,7 +1274,24 @@ static MRDatabaseHelper *sharedDataManager = nil;
     }
     [[MRDataManger sharedManager] saveContext];
 }
++(void)fetchShare:(WebServiceResponseHandler)responseHandler{
+    [MRCommon showActivityIndicator:@"Requesting..."];
 
+    
+    
+    [[MRWebserviceHelper sharedWebServiceHelper] getShare:nil
+                                              withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                  [[MRDataManger sharedManager] removeAllObjects:kMRSharePost withPredicate:nil];
+                              
+                                                  id result = [MRWebserviceHelper parseNetworkResponse:NSClassFromString(kMRSharePost)
+                                                               
+                                                                                        andData:[responce valueForKey:@"Responce"]];
+                                                  responseHandler(result);
+                                                  
+                                              }];
+    
+    
+}
 + (void)fetchNewsAndUpdates:(WebServiceResponseHandler)responseHandler {
     [MRCommon showActivityIndicator:@"Requesting..."];
     [[MRWebserviceHelper sharedWebServiceHelper] fetchNewsAndUpdatesListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {

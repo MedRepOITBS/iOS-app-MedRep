@@ -265,6 +265,7 @@
     UIView *overlayView = [self.view viewWithTag:2000];
     [overlayView removeFromSuperview];
     
+    [self.searchTxt resignFirstResponder];
     self.myPopoverController.delegate = nil;
     self.myPopoverController = nil;
 }

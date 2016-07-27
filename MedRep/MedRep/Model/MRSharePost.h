@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-
+#import "MRManagedObject.h"
 @class MRPostedReplies;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MRSharePost : NSManagedObject
+@interface MRSharePost : MRManagedObject
 
 // Insert code here to declare functionality of your managed object subclass
 
