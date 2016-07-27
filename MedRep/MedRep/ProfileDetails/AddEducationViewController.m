@@ -170,7 +170,12 @@
             switch (indexPath.row) {
                 case 0:
                 {
-                    cell.titleEducationLbl.text = @"AGGREGATE";
+                 
+                    NSString *buttonTitle =@"AGGREGATE";
+                    CGSize stringSize = [buttonTitle sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:17.0f]}];
+                   
+                    cell.titleWidthConstraint.constant =  ceil(stringSize.width);
+                    cell.titleEducationLbl.text = buttonTitle;
                     cell.inputTextField.placeholder = @"Aggregate Percentage ";
                     cell.inputTextField.tag = 800;
                     cell.inputTextField.keyboardType = UIKeyboardTypeNumberPad;
@@ -180,7 +185,12 @@
                     break;
                 case  1:
                 {
-                    cell.titleEducationLbl.text = @"DEGREE";
+                    NSString *buttonTitle =@"DEGREE";
+                    CGSize stringSize = [buttonTitle sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:17.0f]}];
+                    
+                    cell.titleWidthConstraint.constant =  ceil(stringSize.width);
+                    
+                    cell.titleEducationLbl.text = buttonTitle;
                     cell.inputTextField.placeholder = @"Degree";
                     cell.hintLabel.hidden = NO;
                     cell.inputTextField.tag = 801;
@@ -189,7 +199,12 @@
                     break;
                 case  2:
                 {
-                    cell.titleEducationLbl.text = @"SPECIALITY";
+                    NSString *buttonTitle =@"SPECIALITY";
+                    CGSize stringSize = [buttonTitle sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:17.0f]}];
+                    
+                    cell.titleWidthConstraint.constant =  ceil(stringSize.width);
+                    
+                    cell.titleEducationLbl.text = buttonTitle;
                     cell.inputTextField.placeholder = @"speciality";
                     cell.hintLabel.hidden = YES;
                     cell.inputTextField.tag = 802;
@@ -198,7 +213,13 @@
                     break;
                 case  3:
                 {
-                    cell.titleEducationLbl.text = @"INSTITUTE";
+                    
+                    NSString *buttonTitle =@"INSTITUTE";
+                    CGSize stringSize = [buttonTitle sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:17.0f]}];
+                    
+                    cell.titleWidthConstraint.constant =  ceil(stringSize.width);
+                    
+                    cell.titleEducationLbl.text = buttonTitle;
                     cell.inputTextField.placeholder = @"institute";
                     cell.hintLabel.hidden = YES;
                     cell.inputTextField.tag = 803;

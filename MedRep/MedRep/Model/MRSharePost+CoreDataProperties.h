@@ -38,6 +38,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+[{"message_id":1,"member_id":16,"group_id":0,"message":"Content Share, Content Transform","message_type":"Text Type","post_date":"1469595440000","receiver_id":0,"topic_id":0,"share_date":null}]
+
+
+//
+//Sir i checked.. Its little bit complicated for my insulin pump to come under insurance in UK .. and here i have some docs appointment lined up … i talked to Shashi too .. so wiling to stay here in US ..
+
 @interface MRSharePost (CoreDataGeneratedAccessors)
 
 - (void)addPostedRepliesObject:(MRPostedReplies *)value;
