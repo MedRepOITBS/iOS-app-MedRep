@@ -12,5 +12,7 @@
 @implementation MRSharePost
 
 // Insert code here to add functionality to your managed object subclass
-
++ (NSString*)primaryKeyColumnName {
+    return @"group_id";
+}
 @end

@@ -9,7 +9,8 @@
 #import "MRAppConstants.h"
 
 @implementation MRAppConstants
-
+NSString* const  kUserName = @"Username";
+NSString* const  kPassword = @"Password";
 NSString* const kStandardTimeZone = @"GMT";
 
 NSString* const kStatusBarColor = @"#1A85D5";

@@ -15,7 +15,7 @@
 #import "MROTPVerifiedViewController.h"
 #import "MRForgotPasswordViewController.h"
 #import "AppDelegate.h"
-
+#import "MRAppConstants.h"
 @interface MRLoginViewController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIView *loginInputView;
 @property (weak, nonatomic) IBOutlet UIButton *signinButton;
@@ -71,8 +71,9 @@
 //    self.emailTextField.text      = @"Manager@erfolg.com";
 //    self.passwordTxtField.text    = @"manager";
     
-    self.emailTextField.text      = @"dineshreddy06@gmail.com";
-    self.passwordTxtField.text    = @"dinesh";
+    
+    self.emailTextField.text      = (NSString *)[[NSUserDefaults standardUserDefaults] objectForKey:kUserName];
+    self.passwordTxtField.text    = (NSString *) [[NSUserDefaults standardUserDefaults] objectForKey:KPassword];
     
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -108,12 +109,15 @@
             
             if (status)
             {
+                [[NSUserDefaults standardUserDefaults] setObject:self.emailTextField.text forKey:kUserName];
+                [[NSUserDefaults standardUserDefaults] setObject:self.passwordTxtField.text forKey:KPassword];
                 [MRCommon setLoginEmail:self.emailTextField.text];
                 [MRCommon savetokens:responce];
                 [[MRWebserviceHelper sharedWebServiceHelper] getMyRole:^(BOOL status, NSString *details, NSDictionary *responce) {
                     
                     if (status)
                     {
+                        
                         [MRCommon stopActivityIndicator];
 
                         [MRAppControl sharedHelper].userType = [[responce objectForKey:@"roleId"] integerValue];

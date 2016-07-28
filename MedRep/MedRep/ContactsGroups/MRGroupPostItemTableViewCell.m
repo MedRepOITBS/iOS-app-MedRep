@@ -91,6 +91,12 @@
     // Configure the view for the selected state
 }
 
+/*
+ 
+ [{"message_id":1,"member_id":16,"group_id":0,"message":"Content Share, Content Transform","message_type":"Text Type","post_date":"1469595440000","receiver_id":0,"topic_id":0,"share_date":null}]
+ 
+ */
+
 - (void)setPostContent:(MRSharePost *)post  tagIndex:(NSInteger)tagIndex {
     self.post = post;
     

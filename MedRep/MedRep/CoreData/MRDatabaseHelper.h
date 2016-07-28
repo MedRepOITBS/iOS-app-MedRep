@@ -120,7 +120,7 @@ typedef void (^WebServiceResponseHandler)(id result);
 +(BOOL)addPublications:(NSDictionary *)dictonary;
 +(BOOL)addInterestArea:(NSArray *)array;
 
-
++(void)fetchShare:(WebServiceResponseHandler)responseHandler;
 + (void)fetchNewsAndUpdates:(WebServiceResponseHandler)responseHandler;
 
 + (void)addConnections:(NSArray*)selectedContacts

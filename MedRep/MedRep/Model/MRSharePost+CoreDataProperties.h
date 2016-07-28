@@ -2,7 +2,7 @@
 //  MRSharePost+CoreDataProperties.h
 //  MedRep
 //
-//  Created by Vamsi Katragadda on 7/8/16.
+//  Created by Namit Nayak on 7/27/16.
 //  Copyright © 2016 MedRep. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -34,6 +34,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *source;
 @property (nullable, nonatomic, retain) NSString *titleDescription;
 @property (nullable, nonatomic, retain) NSString *url;
+@property (nullable, nonatomic, retain) NSNumber *member_id;
+@property (nullable, nonatomic, retain) NSNumber *message_id;
+@property (nullable, nonatomic, retain) NSNumber *group_id;
+@property (nullable, nonatomic, retain) NSString *message;
+@property (nullable, nonatomic, retain) NSString *message_type;
+@property (nullable, nonatomic, retain) NSDate *post_date;
+@property (nullable, nonatomic, retain) NSNumber *receiver_id;
+@property (nullable, nonatomic, retain) NSNumber *topic_id;
+@property (nullable, nonatomic, retain) NSDate *share_date;
 @property (nullable, nonatomic, retain) NSSet<MRPostedReplies *> *postedReplies;
 
 @end
