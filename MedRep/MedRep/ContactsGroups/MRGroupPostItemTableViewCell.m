@@ -122,7 +122,7 @@
     self.contactNameLabel.text = name;
     
     NSData* imageData = post.shareddByProfilePic;
-    if (imageData) {
+    if (imageData && imageData.length > 0) {
         self.profilePicImageView.image = [UIImage imageWithData:imageData];
     } else {
         self.profilePicImageView.image = [UIImage imageNamed:@"person"];

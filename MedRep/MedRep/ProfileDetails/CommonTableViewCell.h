@@ -16,6 +16,8 @@
 @property (nonatomic,weak) id<CommonTableViewCellDelegate> delegate;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleWidthConstraint;
 
+- (void)setTextData:(NSString*)text;
+
 @end
 
 @protocol CommonTableViewCellDelegate <NSObject>

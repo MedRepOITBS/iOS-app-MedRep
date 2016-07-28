@@ -10,14 +10,19 @@
 @protocol ExperienceSummaryTableViewCellDelegate;
 
 @interface ExperienceSummaryTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UITextField *summaryTextField;
+
+@property (weak, nonatomic) IBOutlet UITextView *summaryTextField;
 @property (nonatomic,weak) id<ExperienceSummaryTableViewCellDelegate> delegate;
+
+- (void)setSummaryTextData:(NSString*)summaryText andParentView:(UIView*)parentView;
 
 @end
 
 @protocol ExperienceSummaryTableViewCellDelegate <NSObject>
+
 @optional
 
--(void)ExperienceSummaryTableViewCellDelegateForTextFieldDidEndEditing:(ExperienceSummaryTableViewCell *)cell withTextField:(UITextField *)textField;
+-(void)ExperienceSummaryTableViewCellDelegateForTextViewDidEndEditing:(ExperienceSummaryTableViewCell *)cell
+                                                         withTextView:(UITextView *)textView;
 
 @end

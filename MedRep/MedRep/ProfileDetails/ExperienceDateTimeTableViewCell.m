@@ -8,6 +8,12 @@
 
 #import "ExperienceDateTimeTableViewCell.h"
 
+@interface ExperienceDateTimeTableViewCell ()
+
+@property (weak, nonatomic) IBOutlet UIImageView *fromDateFieldDropDown;
+
+@end
+
 
 @implementation ExperienceDateTimeTableViewCell
 
@@ -15,6 +21,7 @@
     [super awakeFromNib];
     _isChecked = NO;
     // Initialization code
+    [self bringSubviewToFront:self.fromDateFieldDropDown];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

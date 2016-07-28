@@ -14,7 +14,8 @@
 #import "NSString+Date.h"
 #import "MRDatabaseHelper.h"
 #import "NTMonthYearPicker.h"
-@interface AddExperienceTableViewController () <ExperienceDateTimeTableViewCellDelegate,CommonTableViewCellDelegate>
+@interface AddExperienceTableViewController () <ExperienceDateTimeTableViewCellDelegate,CommonTableViewCellDelegate, ExperienceSummaryTableViewCellDelegate>
+
 //@property (nonatomic, weak) IBOutlet UICustomDatePicker *customDatePicker;
 @property (nonatomic,strong) NSString * designation;
 @property (nonatomic,strong) NSString *organisation;
@@ -33,6 +34,7 @@
 @end
 
 @implementation AddExperienceTableViewController
+
 -(void)setupPicker{
     _picker = [[NTMonthYearPicker alloc] init];
     
@@ -221,12 +223,18 @@ self.navigationItem.title  = @"Add Experience";
 #pragma mark - Table view data source
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    CGFloat height = 0;
+    
     if (indexPath.row ==0 || indexPath.row == 1|| indexPath.row == 2) {
-        return 72;
-    }else if(indexPath.row == 3 ){
-        return 146;
+        height = 72;
+    } else if(indexPath.row == 3 ){
+        height = 146;
+    } else {
+        CGRect applicatonFrame = [[UIScreen mainScreen] applicationFrame];
+        height = applicatonFrame.size.height - ((72 * 3) + 146 + 44);
+        //124;
     }
-    return 124;
+    return height;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 #warning Incomplete implementation, return the number of sections
@@ -250,21 +258,25 @@ self.navigationItem.title  = @"Add Experience";
             if (indexPath.row == 0) {
                 cell.title.text = @"DESIGNATION";
                 cell.inputTextField.placeholder = @"Designation";
+                [cell setTextData:_designation];
+                
                 cell.inputTextField.tag = 101;
-            }else if(indexPath.row == 1){
+            } else if(indexPath.row == 1){
                 
                 NSString *buttonTitle =@"ORGANISATION";
                 CGSize stringSize = [buttonTitle sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:17.0f]}];
 //                CGFloat width  = [self widthOfString:@"ORGANISATION" withFont:<#(NSFont *)#>]
                 cell.title.text = buttonTitle;
+                [cell setTextData:_organisation];
                 cell.titleWidthConstraint.constant =  ceil(stringSize.width);
                 cell.inputTextField.placeholder = @"Organisation";
                 cell.inputTextField.tag = 102;
-            }else{
+            } else{
                 
                 NSString *buttonTitle =@"Location";
                 CGSize stringSize = [buttonTitle sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:17.0f]}];
                 cell.title.text = buttonTitle;
+                [cell setTextData:_location];
                 cell.titleWidthConstraint.constant =  ceil(stringSize.width);
 
                 cell.inputTextField.placeholder = @"City Name";
@@ -285,6 +297,7 @@ self.navigationItem.title  = @"Add Experience";
         case 4:{
             ExperienceSummaryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ExperienceSummaryTableViewCell" forIndexPath:indexPath];
             // Configure the cell...
+            [cell setSummaryTextData:self.summaryText andParentView:tableView];
             cell.delegate = self;
             return cell;
         }
@@ -295,11 +308,12 @@ self.navigationItem.title  = @"Add Experience";
     return nil;
 }
 
--(void)ExperienceSummaryTableViewCellDelegateForTextFieldDidEndEditing:(ExperienceSummaryTableViewCell *)cell withTextField:(UITextField *)textField{
-    NSString *trimmedString = [textField.text stringByTrimmingCharactersInSet:
+-(void)ExperienceSummaryTableViewCellDelegateForTextViewDidEndEditing:(ExperienceSummaryTableViewCell *)cell
+                                                         withTextView:(UITextView *)textView {
+    NSString *trimmedString = [textView.text stringByTrimmingCharactersInSet:
                                [NSCharacterSet whitespaceCharacterSet]];
     
-    _summaryText = textField.text;
+    _summaryText = trimmedString;
     
 }
 -(void)CommonTableViewCellDelegateForTextFieldDidEndEditing:(CommonTableViewCell *)cell withTextField:(UITextField *)textField{
@@ -321,13 +335,6 @@ self.navigationItem.title  = @"Add Experience";
     _currentSelectedTextField = textField;
 //        self.customDatePicker.hidden = NO;
     _picker.hidden = NO;
-
-    
-
-        
-        
-
-   
 }
 
 /*
@@ -394,20 +401,18 @@ self.navigationItem.title  = @"Add Experience";
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     NSString *stringFromDate;
    
-    
-        [formatter setDateFormat:@"MMM YYYY"];
-        stringFromDate = [formatter stringFromDate:[(UICustomDatePicker *)sender currentDate]];
-        if (_currentSelectedTextField.tag == 500) {
-            _fromMM = stringFromDate;
-        }
-        else if(_currentSelectedTextField.tag == 502) {
-            _toMM = stringFromDate;
-            
-        }
-    
-    
+    [formatter setDateFormat:@"MMM YYYY"];
+    stringFromDate = [formatter stringFromDate:[(UICustomDatePicker *)sender currentDate]];
+    if (_currentSelectedTextField.tag == 500) {
+        _fromMM = stringFromDate;
+    }
+    else if(_currentSelectedTextField.tag == 502) {
+        _toMM = stringFromDate;
+        
+    }
     
     NSLog(@"%@",stringFromDate);
     _currentSelectedTextField.text = stringFromDate;
 }
+
 @end

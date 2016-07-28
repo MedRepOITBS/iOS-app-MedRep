@@ -59,9 +59,12 @@
 
 - (void)fetchContactsAndGroups {
     [MRDatabaseHelper getGroups:^(id result){
-        self.contacts = [[MRDataManger sharedManager] fetchObjectList:kContactEntity];
-        [self updateUI];
-        [self.tableView reloadData];
+        [MRDatabaseHelper getContacts:^(id result) {
+            self.contacts = [[MRDataManger sharedManager] fetchObjectList:kContactEntity];
+            self.groups = [[MRDataManger sharedManager] fetchObjectList:kGroupEntity];
+            [self updateUI];
+            [self.tableView reloadData];
+        }];
     }];
 }
 
