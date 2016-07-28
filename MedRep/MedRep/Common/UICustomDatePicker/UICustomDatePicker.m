@@ -18,8 +18,6 @@
 
 @interface UICustomDatePicker()<UIPickerViewDelegate, UIPickerViewDataSource>
 @property (nonatomic, weak) IBOutlet UIPickerView *pickerView;
-@property (nonatomic, strong) UIView *containerView;
-@property (nonatomic, strong) NSMutableArray *customConstraints;
 
 @property (nonatomic, strong) NSArray *componentOrderArray;
 @property (nonatomic, strong) NSArray *componentsWidth;

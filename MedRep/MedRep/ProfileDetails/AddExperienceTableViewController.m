@@ -14,7 +14,9 @@
 #import "NSString+Date.h"
 #import "MRDatabaseHelper.h"
 #import "NTMonthYearPicker.h"
-@interface AddExperienceTableViewController () <ExperienceDateTimeTableViewCellDelegate,CommonTableViewCellDelegate, ExperienceSummaryTableViewCellDelegate>
+#import "MRConstants.h"
+
+@interface AddExperienceTableViewController () <ExperienceDateTimeTableViewCellDelegate,CommonTableViewCellDelegate, ExperienceSummaryTableViewCellDelegate, NTMonthYearPickerViewDelegate>
 
 //@property (nonatomic, weak) IBOutlet UICustomDatePicker *customDatePicker;
 @property (nonatomic,strong) NSString * designation;
@@ -29,16 +31,17 @@
 
 @property (nonatomic,weak) IBOutlet UITableView *tableView;
 @property (nonatomic,strong) UITextField *currentSelectedTextField;
-@property (nonatomic,weak) IBOutlet UIView *pickerView;
 @property (nonatomic,strong) NTMonthYearPicker *picker;
+
 @end
 
 @implementation AddExperienceTableViewController
 
 -(void)setupPicker{
-    _picker = [[NTMonthYearPicker alloc] init];
-    
-    [_picker addTarget:self action:@selector(onDatePicked:) forControlEvents:UIControlEventValueChanged];
+    CGRect pickerFrame = [UIScreen mainScreen].applicationFrame;
+    pickerFrame.origin.y = pickerFrame.size.height - 350;
+    _picker = [[NTMonthYearPicker alloc] initWithFrame:pickerFrame];
+    [_picker setPickerDelegate:self];
     
     NSDateComponents *comps = [[NSDateComponents alloc] init];
     NSCalendar *cal = [NSCalendar currentCalendar];
@@ -92,13 +95,14 @@ self.navigationItem.title  = @"Add Experience";
     
     [super viewDidAppear:animated];
     
-    CGSize pickerSize = [_picker sizeThatFits:CGSizeZero];
-   
-        _picker.frame = CGRectMake( 0, [[UIScreen mainScreen] bounds].size.height - pickerSize.height, pickerSize.width, pickerSize.height );
+//    CGSize pickerSize = _picker.frame.size;
+//    CGFloat temp = [UIScreen mainScreen].applicationFrame.size.width;
+//    
+//    CGRect pickerFrame = CGRectMake( 0, [[UIScreen mainScreen] bounds].size.height - (pickerSize.height+50), temp, pickerSize.height );
+//    [_picker updateFrame:pickerFrame];
     
     _picker.backgroundColor = [UIColor greenColor];
     [self.view addSubview:_picker];
-
 }
 
 
@@ -130,9 +134,15 @@ self.navigationItem.title  = @"Add Experience";
     _currentSelectedTextField.text = stringFromDate;
 }
 
-- (void)onDatePicked:(UITapGestureRecognizer *)gestureRecognizer {
+- (void)didSelectDate {
+    [_picker setHidden:YES];
     [self updateLabel];
 }
+
+- (void)cancelDateSelection {
+    [_picker setHidden:YES];
+}
+
 -(void)doneButtonTapped:(id)sender{
     if (![self isValidationSuccess]) {
         return;
@@ -383,7 +393,6 @@ self.navigationItem.title  = @"Add Experience";
     // Create the next view controller.
 //    self.customDatePicker.hidden = YES;
     _picker.hidden = YES;
-
 }
 /*
 #pragma mark - Navigation

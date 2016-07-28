@@ -15,7 +15,19 @@ typedef enum {
     NTMonthYearPickerModeYear           // Display just the year
 } NTMonthYearPickerMode;
 
+//
+// NTMonthYearPickerViewDelegate
+//
+@protocol NTMonthYearPickerViewDelegate <NSObject>
+
+- (void)didSelectDate;
+- (void)cancelDateSelection;
+
+@end
+
 @interface NTMonthYearPicker : UIControl <NSCoding>
+
+@property (nonatomic,assign) id<NTMonthYearPickerViewDelegate> pickerDelegate;
 
 // The mode of the date picker - see the NTMonthYearPickerMode enum
 // Default is NTMonthYearPickerModeMonthAndYear
@@ -41,8 +53,11 @@ typedef enum {
 // Default is nil (Dec 31, 10000 in the UI)
 @property (nonatomic, retain) NSDate *maximumDate;
 
+
 // Sets the date to display in the date picker
 // If animated is YES, animate the wheels to display the new date
 - (void)setDate:(NSDate *)date animated:(BOOL)animated;
+
+- (void)updateFrame:(CGRect)frame;
 
 @end

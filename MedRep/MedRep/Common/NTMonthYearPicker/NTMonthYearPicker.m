@@ -11,14 +11,6 @@
 #import "NTMonthYearPicker.h"
 
 //
-// NTMonthYearPickerViewDelegate
-//
-
-@protocol NTMonthYearPickerViewDelegate
-- (void)didSelectDate;
-@end
-
-//
 // NTMonthYearPickerView
 //
 
@@ -30,7 +22,6 @@
 @property (nonatomic, retain) NSDate *date;
 @property (nonatomic, retain) NSDate *minimumDate;
 @property (nonatomic, retain) NSDate *maximumDate;
-@property (nonatomic,assign) id<NTMonthYearPickerViewDelegate> pickerDelegate;
 
 - (void)setDate:(NSDate *)date animated:(BOOL)animated;
 
@@ -44,7 +35,6 @@
 @synthesize date = _date;
 @synthesize minimumDate;
 @synthesize maximumDate;
-@synthesize pickerDelegate;
 
 // Picker data (list of months and years)
 NSArray *_months;
@@ -68,6 +58,9 @@ const NSInteger kMaxYear = 10000;
     self = [super initWithFrame:frame];
     if (self) {
         [self initCommon];
+        frame.size.height = self.frame.size.height;
+        frame.origin.y = 50;
+        self.frame = frame;
     }
     return self;
 }
@@ -84,6 +77,7 @@ const NSInteger kMaxYear = 10000;
     self.dataSource = self;
     self.delegate = self;
     self.showsSelectionIndicator = YES;
+    [self sizeToFit];
 
     // Initialize picker data
     [self initPickerData];
@@ -324,9 +318,6 @@ numberOfRowsInComponent:(NSInteger)component {
     if( isYearComponent ) {
         [self reloadComponent:0];
     }
-
-    // Notify delegate
-    [pickerDelegate didSelectDate];
 }
 
 - (NSComparisonResult)compareMonthYear:(NSDate *)date1 with:(NSDate *)date2 {
@@ -364,8 +355,12 @@ NTMonthYearPickerView *_pickerView;
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        frame.origin.y = 0;
         _pickerView = [[NTMonthYearPickerView alloc] initWithFrame:frame];
         [self initCommon];
+        frame.origin.y =  frame.size.height - (_pickerView.frame.size.height+50);
+        frame.size.height = _pickerView.frame.size.height + 50;
+        self.frame = frame;
     }
     return self;
 }
@@ -384,14 +379,35 @@ NTMonthYearPickerView *_pickerView;
 }
 
 - (void)initCommon {
-    self.frame = _pickerView.frame;
-    _pickerView.pickerDelegate = self;
+    [self setToolBarForPicker];
     [self addSubview:_pickerView];
 }
 
 - (CGSize)sizeThatFits:(CGSize)size {
     return [_pickerView sizeThatFits:size];
 }
+
+- (void)updateFrame:(CGRect)frame {
+    self.frame = frame;
+    CGRect pickerViewFrame = frame;
+    pickerViewFrame.origin.y = 50;
+    pickerViewFrame.size.height = pickerViewFrame.size.height - 50;
+    _pickerView.frame = pickerViewFrame;
+    [self layoutSubviews];
+}
+
+- (void)setToolBarForPicker {
+    UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, 50)];
+    numberToolbar.barStyle = UIBarStyleDefault;
+    numberToolbar.items = [NSArray arrayWithObjects:
+                           [[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(closeOnKeyboardPressed:)],
+                           [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil],
+                           [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneOnKeyboardPressed:)],
+                           nil];
+    [numberToolbar sizeToFit];
+    [self addSubview:numberToolbar];
+}
+
 
 - (void)didSelectDate {
     [self sendActionsForControlEvents:UIControlEventValueChanged];
@@ -449,6 +465,22 @@ NTMonthYearPickerView *_pickerView;
 
 - (void)setMaximumDate:(NSDate *)maxDate {
     _pickerView.maximumDate = maxDate;
+}
+
+- (void)closeOnKeyboardPressed:(id)sender {
+    [_pickerView resignFirstResponder];
+    // Notify delegate
+    if (self.pickerDelegate != nil && [self.pickerDelegate respondsToSelector:@selector(cancelDateSelection)]) {
+        [self.pickerDelegate cancelDateSelection];
+    }
+}
+
+- (void)doneOnKeyboardPressed:(id)sender {
+    [_pickerView resignFirstResponder];
+    // Notify delegate
+    if (self.pickerDelegate != nil && [self.pickerDelegate respondsToSelector:@selector(didSelectDate)]) {
+        [self.pickerDelegate didSelectDate];
+    }
 }
 
 @end
