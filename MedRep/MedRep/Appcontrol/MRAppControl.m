@@ -190,11 +190,20 @@
     NSDictionary *temp = [details objectForKey:@"profilePicture"];
     [self.userRegData setObject:[details objectOrNilForKey:KTitle] forKey:KTitle];
 
-    if ([temp isKindOfClass:[NSDictionary class]])
-    {
-        [self.userRegData setObject:[temp objectForKey:@"data"] forKey:KProfilePicture];
-    }
-
+//    if ([temp isKindOfClass:[NSDictionary class]])
+//    {
+//        
+//        id profileDat = [temp objectForKey:@"data"];
+//        
+//        
+//        if (profileDat == [NSNull null] || profileDat == nil || [profileDat isEqualToString:@"<nil>"]) {
+//            
+//        }else{
+//        [self.userRegData setObject:[temp objectForKey:@"data"] forKey:KProfilePicture];    
+//        }
+//        
+//    }
+    [self.userRegData setObject:[temp objectForKey:@"imageUrl"] forKey:KProfilePicture];
     [self.userRegData setObject:[NSMutableArray arrayWithObjects:[details objectOrNilForKey:@"mobileNo"],[details objectOrNilForKey:@"phoneNo"], nil] forKey:KMobileNumber];
     [self.userRegData setObject:[NSMutableArray arrayWithObjects:[details objectOrNilForKey:@"emailId"],[details objectOrNilForKey:@"alternateEmailId"], nil] forKey:KEmail];
     

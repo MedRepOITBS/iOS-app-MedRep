@@ -109,7 +109,13 @@
     {
         if ([self.userData objectForKey:KProfilePicture])
         {
-            regCell.cellIcon.image = (indexPath.row > 0) ? [UIImage imageNamed:[kMenuListImages objectAtIndex:indexPath.row -1]] : [MRCommon getImageFromBase64Data:[self.userData objectForKey:KProfilePicture]];
+            
+            
+            
+            NSURL * imageURL = [NSURL URLWithString:[self.userData objectForKey:KProfilePicture]];
+            
+            NSData * imageData = [NSData dataWithContentsOfURL:imageURL];
+            regCell.cellIcon.image = (indexPath.row > 0) ? [UIImage imageNamed:[kMenuListImages objectAtIndex:indexPath.row -1]] : [UIImage imageWithData:imageData];
         }
         else
         {

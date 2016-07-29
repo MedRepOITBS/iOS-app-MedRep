@@ -67,7 +67,7 @@
                         </mask>
                     </variation>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="searchScreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="lId-zk-MlA">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Drug_Search.jpg" highlightedImage=" " translatesAutoresizingMaskIntoConstraints="NO" id="lId-zk-MlA">
                     <rect key="frame" x="0.0" y="60" width="375" height="607"/>
                 </imageView>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o5n-NT-IVK">
@@ -279,9 +279,10 @@
         </view>
     </objects>
     <resources>
+        <image name=" " width="646" height="1100"/>
+        <image name="Drug_Search.jpg" width="2480" height="3508"/>
         <image name="left-arrow.png" width="10" height="17"/>
         <image name="logo_icon.png" width="35" height="33"/>
         <image name="right-arrow.png" width="10" height="17"/>
-        <image name="searchScreen.png" width="646" height="1100"/>
     </resources>
 </document>

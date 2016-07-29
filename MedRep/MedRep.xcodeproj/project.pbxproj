@@ -721,6 +721,12 @@
 		B4E02C601D491760003A1859 /* MRSharePost+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E02C5F1D491760003A1859 /* MRSharePost+CoreDataProperties.m */; };
 		B4E02C611D491760003A1859 /* MRSharePost+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E02C5F1D491760003A1859 /* MRSharePost+CoreDataProperties.m */; };
 		B4E02C621D4921C0003A1859 /* MRSharePost.m in Sources */ = {isa = PBXBuildFile; fileRef = B47E338C1D2F65540051724C /* MRSharePost.m */; };
+		B4E02C661D4B0BB0003A1859 /* Dashboard.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B4E02C631D4B0BB0003A1859 /* Dashboard.jpg */; };
+		B4E02C671D4B0BB0003A1859 /* Dashboard.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B4E02C631D4B0BB0003A1859 /* Dashboard.jpg */; };
+		B4E02C681D4B0BB0003A1859 /* Doctor_Profile_Page.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B4E02C641D4B0BB0003A1859 /* Doctor_Profile_Page.jpg */; };
+		B4E02C691D4B0BB0003A1859 /* Doctor_Profile_Page.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B4E02C641D4B0BB0003A1859 /* Doctor_Profile_Page.jpg */; };
+		B4E02C6A1D4B0BB0003A1859 /* Drug_Search.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B4E02C651D4B0BB0003A1859 /* Drug_Search.jpg */; };
+		B4E02C6B1D4B0BB0003A1859 /* Drug_Search.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B4E02C651D4B0BB0003A1859 /* Drug_Search.jpg */; };
 		CC0123C11D25A66B001134F3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0123C01D25A66B001134F3 /* CoreGraphics.framework */; };
 		CC0123C21D25A677001134F3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0123C01D25A66B001134F3 /* CoreGraphics.framework */; };
 		CC01BA731D302ACF007E2AEB /* MRCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC01BA711D302ACF007E2AEB /* MRCommentViewController.m */; };
@@ -2157,6 +2163,9 @@
 		B4E02C571D4706E7003A1859 /* logo_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo_icon@2x.png"; sourceTree = "<group>"; };
 		B4E02C5E1D491760003A1859 /* MRSharePost+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MRSharePost+CoreDataProperties.h"; sourceTree = "<group>"; };
 		B4E02C5F1D491760003A1859 /* MRSharePost+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MRSharePost+CoreDataProperties.m"; sourceTree = "<group>"; };
+		B4E02C631D4B0BB0003A1859 /* Dashboard.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Dashboard.jpg; sourceTree = "<group>"; };
+		B4E02C641D4B0BB0003A1859 /* Doctor_Profile_Page.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Doctor_Profile_Page.jpg; sourceTree = "<group>"; };
+		B4E02C651D4B0BB0003A1859 /* Drug_Search.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Drug_Search.jpg; sourceTree = "<group>"; };
 		CC0123C01D25A66B001134F3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		CC01BA701D302ACF007E2AEB /* MRCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRCommentViewController.h; path = CommentBox/MRCommentViewController.h; sourceTree = "<group>"; };
 		CC01BA711D302ACF007E2AEB /* MRCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRCommentViewController.m; path = CommentBox/MRCommentViewController.m; sourceTree = "<group>"; };
@@ -2423,8 +2432,8 @@
 				B4B4F0E51D382E7300EFCC0E /* AddExperienceTableViewController.h */,
 				B4B4F0E61D382E7300EFCC0E /* AddExperienceTableViewController.m */,
 				B4B4F0EA1D3842C500EFCC0E /* AddEducationViewController.h */,
-				B4BB24C21D4192AD00A3DD73 /* settings1.png */,
 				B4B4F0EB1D3842C500EFCC0E /* AddEducationViewController.m */,
+				B4BB24C21D4192AD00A3DD73 /* settings1.png */,
 				B4BB24BF1D418D6B00A3DD73 /* userProfilePic1.png */,
 				B4B4F0F41D38963F00EFCC0E /* ProfileStoryboard.storyboard */,
 				B4BB24B01D416CA000A3DD73 /* profileBG1.png */,
@@ -3500,6 +3509,9 @@
 		83B781E41B7915C10070645C /* RESOURCES */ = {
 			isa = PBXGroup;
 			children = (
+				B4E02C631D4B0BB0003A1859 /* Dashboard.jpg */,
+				B4E02C641D4B0BB0003A1859 /* Doctor_Profile_Page.jpg */,
+				B4E02C651D4B0BB0003A1859 /* Drug_Search.jpg */,
 				B4B4F10B1D394F4100EFCC0E /* unselected.png */,
 				B4B4F10C1D394F4100EFCC0E /* unselected@2x.png */,
 				B4B4F10D1D394F4100EFCC0E /* selected.png */,
@@ -4269,7 +4281,9 @@
 				7929E3791B9C78B5001F1373 /* logout@3x.png in Resources */,
 				79421F4B1BB83BBB0055D9B7 /* MRPharmaMenuCell.xib in Resources */,
 				7929E37F1B9C78B5001F1373 /* news@3x.png in Resources */,
+				B4E02C661D4B0BB0003A1859 /* Dashboard.jpg in Resources */,
 				796E93B11BB881E90031EA34 /* dsbg@3x.jpg in Resources */,
+				B4E02C6A1D4B0BB0003A1859 /* Drug_Search.jpg in Resources */,
 				795366051BA09EBF0021CE4D /* feedback@3x.png in Resources */,
 				79BD27A21B80980F007CA448 /* Icon-60@3x.png in Resources */,
 				8AFE8D051D0F21BF0000382E /* profile_pic5.jpeg in Resources */,
@@ -4516,6 +4530,7 @@
 				83B781EE1B7915C20070645C /* Default.png in Resources */,
 				7953661C1BA0B7E40021CE4D /* MRFavoritesNotificationsViewController.xib in Resources */,
 				79F416A21B9F6E560089729B /* cncompany2@2x.jpg in Resources */,
+				B4E02C681D4B0BB0003A1859 /* Doctor_Profile_Page.jpg in Resources */,
 				7930A3A51BB91ECF003112E4 /* frpie-bg@2x.jpg in Resources */,
 				7969CFCF1BAF2E38004C2009 /* MRListViewController.xib in Resources */,
 				795366041BA09EBF0021CE4D /* feedback@2x.png in Resources */,
@@ -4810,6 +4825,7 @@
 				CC7DB0951D0C8BEC007DFE4C /* pcminus@2x.png in Resources */,
 				CC7DB0961D0C8BEC007DFE4C /* pageviewdots~iPad.png in Resources */,
 				CC7DB3221D0CC5F8007DFE4C /* PendingContactCustomCell.xib in Resources */,
+				B4E02C6B1D4B0BB0003A1859 /* Drug_Search.jpg in Resources */,
 				CC7DB3961D0CC8C8007DFE4C /* compose.png in Resources */,
 				B4BB24BB1D416DF000A3DD73 /* userProfilePic.png in Resources */,
 				CC7DB0971D0C8BEC007DFE4C /* navLogo.png in Resources */,
@@ -4888,6 +4904,7 @@
 				CC7DB3881D0CC8A6007DFE4C /* profile_pic9.jpeg in Resources */,
 				CC7DB0D41D0C8BEC007DFE4C /* PHdrugsales@3x.png in Resources */,
 				CC7DB0D51D0C8BEC007DFE4C /* cnsort@3x.png in Resources */,
+				B4E02C691D4B0BB0003A1859 /* Doctor_Profile_Page.jpg in Resources */,
 				CC7DB0D61D0C8BEC007DFE4C /* email@2x.png in Resources */,
 				CC7DB0D71D0C8BEC007DFE4C /* input@2x~iPad.png in Resources */,
 				CC7DB0D81D0C8BEC007DFE4C /* minus@2x.png in Resources */,
@@ -4970,6 +4987,7 @@
 				B4B4F1261D3983D300EFCC0E /* Profile.json in Resources */,
 				CC7DB1181D0C8BEC007DFE4C /* Icon-Small@2x.png in Resources */,
 				CC7DB2D81D0CC433007DFE4C /* MRContactWithinGroupCollectionCellCollectionViewCell.xib in Resources */,
+				B4E02C671D4B0BB0003A1859 /* Dashboard.jpg in Resources */,
 				CC7DB1191D0C8BEC007DFE4C /* transperent-bg@2x.png in Resources */,
 				CC7DB11A1D0C8BEC007DFE4C /* PHactivity@3x.png in Resources */,
 				CC7DB11B1D0C8BEC007DFE4C /* full-screen@2x.png in Resources */,
@@ -5741,8 +5759,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ramesh Meesala (PR3BTD2UVE)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ramesh Meesala (PR3BTD2UVE)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -5762,7 +5780,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "e4a1f99e-428f-4a75-80d5-4b1a656f8bd5";
+				PROVISIONING_PROFILE = "766c2c59-fcea-4eab-8a31-70ee452a1ed5";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -5785,8 +5803,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ramesh Meesala (PR3BTD2UVE)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ramesh Meesala (PR3BTD2UVE)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -5799,7 +5817,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "e4a1f99e-428f-4a75-80d5-4b1a656f8bd5";
+				PROVISIONING_PROFILE = "766c2c59-fcea-4eab-8a31-70ee452a1ed5";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -5883,7 +5901,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c4d46433-dea4-407d-8f95-f9f1a3d92b26";
+				PROVISIONING_PROFILE = "766c2c59-fcea-4eab-8a31-70ee452a1ed5";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -5899,7 +5917,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c4d46433-dea4-407d-8f95-f9f1a3d92b26";
+				PROVISIONING_PROFILE = "766c2c59-fcea-4eab-8a31-70ee452a1ed5";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

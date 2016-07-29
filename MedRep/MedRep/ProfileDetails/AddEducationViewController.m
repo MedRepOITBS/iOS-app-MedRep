@@ -9,11 +9,13 @@
 #import "AddEducationViewController.h"
 #import "CommonEducationTableViewCell.h"
 #import "EducationDateTimeTableViewCell.h"
-#import "UICustomDatePicker.h"
 #import "NSString+Date.h"
 #import "MRDatabaseHelper.h"
-@interface AddEducationViewController () <EducationDateTimeTableViewCellDelegate, CommonEducationTableViewCellDelegate>
-@property (nonatomic, weak) IBOutlet UICustomDatePicker *customYearPicker;
+#import "NTMonthYearPicker.h"
+#import "MRConstants.h"
+
+
+@interface AddEducationViewController () <EducationDateTimeTableViewCellDelegate, CommonEducationTableViewCellDelegate,NTMonthYearPickerViewDelegate>
 @property (nonatomic,strong) UITextField *currentSelectedTextField;
 @property (nonatomic,strong) NSString *fromYYYY;
 @property (nonatomic,strong) NSString *toYYYY;
@@ -21,12 +23,51 @@
 @property (nonatomic,strong) NSString *type;
 @property (nonatomic,strong) NSString *speciality;
 @property (nonatomic,strong) NSString *institute;
+@property (nonatomic,strong) NTMonthYearPicker *picker;
 
 
 
 @end
 
 @implementation AddEducationViewController
+
+
+-(void)setupPicker{
+    CGRect pickerFrame = [UIScreen mainScreen].applicationFrame;
+    pickerFrame.origin.y = pickerFrame.size.height - 350;
+    _picker = [[NTMonthYearPicker alloc] initWithFrame:pickerFrame];
+    [_picker setPickerDelegate:self];
+    
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    
+    // Set mode to month + year
+    // This is optional; default is month + year
+    _picker.datePickerMode = NTMonthYearPickerModeMonthAndYear;
+    
+    // Set minimum date to January 2000
+    // This is optional; default is no min date
+    [comps setDay:1];
+    [comps setMonth:1];
+    [comps setYear:1990];
+    _picker.minimumDate = [cal dateFromComponents:comps];
+    
+    // Set maximum date to next month
+    // This is optional; default is no max date
+    [comps setDay:0];
+    [comps setMonth:1];
+    [comps setYear:0];
+    _picker.maximumDate = [cal dateByAddingComponents:comps toDate:[NSDate date] options:0];
+    
+    // Set initial date to last month
+    // This is optional; default is current month/year
+    [comps setDay:0];
+    [comps setMonth:-1];
+    [comps setYear:0];
+    _picker.date = [cal dateByAddingComponents:comps toDate:[NSDate date] options:0];
+    _picker.hidden = YES;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,17 +78,60 @@
     self.navigationItem.rightBarButtonItem = revealButtonItem;
     self.navigationItem.title  = @"Add Education Details";
 
-    self.customYearPicker.hidden = YES;
-    [self initCustomDatePicker:self.customYearPicker withOption:NSCustomDatePickerOptionYear andOrder:NSCustomDatePickerOrderMonthDayAndYear];
 //    [self initCustomDatePicker:self.customYearPicker withOption:NSCustomDatePickerOptionYear andOrder:NSCustomDatePickerOrderMonthDayAndYear];
     UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"]  style:UIBarButtonItemStyleDone target:self action:@selector(backButtonTapped:)];
     self.navigationItem.leftBarButtonItem = leftButtonItem;
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self setupPicker];
+    [self updateLabel];
 }
 
+- (void)updateLabel {
+    
+    
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    NSString *stringFromDate;
+    
+    
+    [formatter setDateFormat:@"YYYY"];
+    stringFromDate = [formatter stringFromDate:_picker.date];
+    if (_currentSelectedTextField.tag == 500) {
+        _fromYYYY = stringFromDate;
+    }
+    else if(_currentSelectedTextField.tag == 502) {
+        _toYYYY = stringFromDate;
+        
+    }
+    
+    
+    
+    NSLog(@"%@",stringFromDate);
+    _currentSelectedTextField.text = stringFromDate;
+}
+- (void)didSelectDate {
+    [_picker setHidden:YES];
+    [self updateLabel];
+}
 
+- (void)cancelDateSelection {
+    [_picker setHidden:YES];
+}
 
+-(void)viewDidAppear:(BOOL)animated{
+    
+    [super viewDidAppear:animated];
+    
+    //    CGSize pickerSize = _picker.frame.size;
+    //    CGFloat temp = [UIScreen mainScreen].applicationFrame.size.width;
+    //
+    //    CGRect pickerFrame = CGRectMake( 0, [[UIScreen mainScreen] bounds].size.height - (pickerSize.height+50), temp, pickerSize.height );
+    //    [_picker updateFrame:pickerFrame];
+    
+    _picker.backgroundColor = [UIColor greenColor];
+    [self.view addSubview:_picker];
+}
 -(void)doneButtonTapped:(id)sender{
     if (![self isValidationSuccess]) {
         return;
@@ -281,7 +365,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Navigation logic may go here, for example:
     // Create the next view controller.
-    self.customYearPicker.hidden = YES;
+    self.picker.hidden = YES;
 }
 
 
@@ -294,16 +378,10 @@
     // Pass the selected object to the new view controller.
 }
 */
-- (void) initCustomDatePicker:(UICustomDatePicker *) picker withOption:(NSUInteger) option andOrder:(NSUInteger) order {
-    picker.minDate = [[NSString stringWithFormat:@"06/Jan/1986"] dateValueForFormatString:@"dd/MMM/yyyy"];
-    picker.maxDate = [[NSString stringWithFormat:@"06/Dec/2027"] dateValueForFormatString:@"dd/MMM/yyyy"];
-    picker.currentDate = [NSDate date];
-    picker.order = order;
-    picker.option = option;
-}
+
 -(void)EducationDateTimeTableViewCellDelegateForTextFieldClicked:(EducationDateTimeTableViewCell *)cell withTextField:(UITextField *)textField{
     _currentSelectedTextField = textField;
-    self.customYearPicker.hidden = NO;
+    self.picker.hidden = NO;
     
 }
 -(void)CommonEducationTableViewCellDelegateForTextFieldDidEndEditing:(CommonEducationTableViewCell *)cell withTextField:(UITextField *)textField{
@@ -323,23 +401,5 @@
 
 }
 
-- (IBAction)didCustomDatePickerValueChanged:(id)sender {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    NSString *stringFromDate;
-    [formatter setDateFormat:@"yyyy"];
-    stringFromDate = [formatter stringFromDate:[(UICustomDatePicker *)sender currentDate]];
 
-           if(_currentSelectedTextField.tag == 1200)
-        {
-            _fromYYYY = stringFromDate;
-        }else if(_currentSelectedTextField.tag == 1201)
-        {
-            _toYYYY = stringFromDate;
-        }
-    
-    
-    
-    NSLog(@"%@",stringFromDate);
-    _currentSelectedTextField.text = stringFromDate;
-}
 @end

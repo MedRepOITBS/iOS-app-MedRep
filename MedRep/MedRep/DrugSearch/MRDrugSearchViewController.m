@@ -165,14 +165,14 @@
     
     return YES;
 }
-//-(BOOL) textFieldShouldReturn:(UITextField *)textField{
-//    [textField resignFirstResponder];
+-(BOOL) textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
 //    if (textField.text.length) {
 //        searchString = [textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 //        [self getMedicineSuggestions];
 //    }
-//    return YES;
-//}
+    return YES;
+}
 
 -(void)imgTapped:(UITapGestureRecognizer *)img{
     [self mapData:[resultarray objectAtIndex:img.view.tag]];
@@ -340,6 +340,13 @@
                         [self showPopoverInView:_searchTxt];
                     }else{
                         [[[UIAlertView alloc] initWithTitle:@"" message:@"No drugs found!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+                        if (self.myPopoverController) {
+                            UIView *overlayView = [self.view viewWithTag:2000];
+                            [overlayView removeFromSuperview];
+                            
+                            self.myPopoverController.delegate = nil;
+                            self.myPopoverController = nil;
+                        }
                     }
                 }
             }

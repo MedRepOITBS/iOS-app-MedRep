@@ -34,8 +34,17 @@
             self.profileName.text = [NSString stringWithFormat:@"Meeting With Dr %@ %@",[responce objectForKey:@"firstName"],[responce objectForKey:@"lastName"]];
             if ([[responce objectForKey:KProfilePicture] isKindOfClass:[NSDictionary class]])
             {
+                
+                NSDictionary *temp = [responce objectForKey:@"profilePicture"];
 
-            self.profileImage.image = [MRCommon getImageFromBase64Data:[[responce objectForKey:KProfilePicture] objectForKey:@"data"]];
+                
+                NSURL * imageURL = [NSURL URLWithString:[temp objectForKey:KProfilePicture]];
+                
+                NSData * imageData = [NSData dataWithContentsOfURL:imageURL];
+                self.profileImage.image = [UIImage imageWithData:imageData];
+                
+
+       
             }
         }
         else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
@@ -51,8 +60,14 @@
                           self.profileName.text = [NSString stringWithFormat:@"Meeting With DR %@ %@",[responce objectForKey:@"firstName"],[responce objectForKey:@"lastName"]];
                           if ([[responce objectForKey:KProfilePicture] isKindOfClass:[NSDictionary class]])
                           {
-
-                          self.profileImage.image = [MRCommon getImageFromBase64Data:[[responce objectForKey:KProfilePicture] objectForKey:@"data"]];
+                              NSDictionary *temp = [responce objectForKey:@"profilePicture"];
+                              
+                              
+                              NSURL * imageURL = [NSURL URLWithString:[temp objectForKey:KProfilePicture]];
+                              
+                              NSData * imageData = [NSData dataWithContentsOfURL:imageURL];
+                              self.profileImage.image = [UIImage imageWithData:imageData];
+                        
                           }
                       }
                   }];
