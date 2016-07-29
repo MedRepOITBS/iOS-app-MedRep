@@ -25,7 +25,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j0G-ON-st2">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="150"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userProfilePic1.png" translatesAutoresizingMaskIntoConstraints="NO" id="N7P-G2-RDu">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Doctor_Profile_Page.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="N7P-G2-RDu">
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="150"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="150" id="0r7-9t-tkb"/>
@@ -1004,12 +1004,12 @@ easier for colleagues to find you.</string>
         </scene>
     </scenes>
     <resources>
+        <image name="Doctor_Profile_Page.jpg" width="2000" height="1171"/>
         <image name="Layer_1.png" width="64" height="64"/>
         <image name="crossPlusButton.png" width="104" height="105"/>
         <image name="dropDownButton.png" width="38" height="47"/>
         <image name="settings1.png" width="64" height="64"/>
         <image name="unselected.png" width="20" height="20"/>
         <image name="userProfilePic.png" width="128" height="128"/>
-        <image name="userProfilePic1.png" width="646" height="300"/>
     </resources>
 </document>
