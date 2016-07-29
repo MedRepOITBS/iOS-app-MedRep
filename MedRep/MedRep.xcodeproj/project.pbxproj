@@ -727,6 +727,8 @@
 		B4E02C691D4B0BB0003A1859 /* Doctor_Profile_Page.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B4E02C641D4B0BB0003A1859 /* Doctor_Profile_Page.jpg */; };
 		B4E02C6A1D4B0BB0003A1859 /* Drug_Search.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B4E02C651D4B0BB0003A1859 /* Drug_Search.jpg */; };
 		B4E02C6B1D4B0BB0003A1859 /* Drug_Search.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B4E02C651D4B0BB0003A1859 /* Drug_Search.jpg */; };
+		B4E02C6E1D4B2992003A1859 /* UIImage+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E02C6D1D4B2992003A1859 /* UIImage+Helpers.m */; };
+		B4E02C6F1D4B2992003A1859 /* UIImage+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E02C6D1D4B2992003A1859 /* UIImage+Helpers.m */; };
 		CC0123C11D25A66B001134F3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0123C01D25A66B001134F3 /* CoreGraphics.framework */; };
 		CC0123C21D25A677001134F3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0123C01D25A66B001134F3 /* CoreGraphics.framework */; };
 		CC01BA731D302ACF007E2AEB /* MRCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC01BA711D302ACF007E2AEB /* MRCommentViewController.m */; };
@@ -2166,6 +2168,8 @@
 		B4E02C631D4B0BB0003A1859 /* Dashboard.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Dashboard.jpg; sourceTree = "<group>"; };
 		B4E02C641D4B0BB0003A1859 /* Doctor_Profile_Page.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Doctor_Profile_Page.jpg; sourceTree = "<group>"; };
 		B4E02C651D4B0BB0003A1859 /* Drug_Search.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Drug_Search.jpg; sourceTree = "<group>"; };
+		B4E02C6C1D4B2992003A1859 /* UIImage+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Helpers.h"; sourceTree = "<group>"; };
+		B4E02C6D1D4B2992003A1859 /* UIImage+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Helpers.m"; sourceTree = "<group>"; };
 		CC0123C01D25A66B001134F3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		CC01BA701D302ACF007E2AEB /* MRCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRCommentViewController.h; path = CommentBox/MRCommentViewController.h; sourceTree = "<group>"; };
 		CC01BA711D302ACF007E2AEB /* MRCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRCommentViewController.m; path = CommentBox/MRCommentViewController.m; sourceTree = "<group>"; };
@@ -3460,6 +3464,8 @@
 				83B781F41B7916810070645C /* MRConstants.h */,
 				83B781F71B7916900070645C /* MRCommon.h */,
 				83B781F81B7916900070645C /* MRCommon.m */,
+				B4E02C6C1D4B2992003A1859 /* UIImage+Helpers.h */,
+				B4E02C6D1D4B2992003A1859 /* UIImage+Helpers.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -5476,6 +5482,7 @@
 				CC7DB2BF1D0CC433007DFE4C /* PieMenu.m in Sources */,
 				CC7DB3051D0CC4E2007DFE4C /* MRGroup.m in Sources */,
 				CC7DB2D51D0CC433007DFE4C /* MRContactWithinGroupCollectionCellCollectionViewCell.m in Sources */,
+				B4E02C6E1D4B2992003A1859 /* UIImage+Helpers.m in Sources */,
 				CC9BCEC81D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.m in Sources */,
 				79AC942A1B9DFAF000B81452 /* MRNotificationsViewController.m in Sources */,
 				7961A9731B8F26160035D63A /* MRRegistationTwoViewController.m in Sources */,
@@ -5691,6 +5698,7 @@
 				CC7DB2CA1D0CC433007DFE4C /* MRContactCollectionCell.m in Sources */,
 				CC7DB06C1D0C8BEC007DFE4C /* UILabel+WhiteUIDatePickerLabels.m in Sources */,
 				CC7DB3181D0CC530007DFE4C /* PendingContactsViewController.m in Sources */,
+				B4E02C6F1D4B2992003A1859 /* UIImage+Helpers.m in Sources */,
 				CC7DB06D1D0C8BEC007DFE4C /* MRRegistationViewController.m in Sources */,
 				CC7DB06E1D0C8BEC007DFE4C /* MROTPViewController.m in Sources */,
 				CC7DB06F1D0C8BEC007DFE4C /* MRAppointmentListCell.m in Sources */,
