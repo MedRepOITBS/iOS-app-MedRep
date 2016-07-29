@@ -794,7 +794,7 @@
             parentView.image = nil;
             UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:parentView.bounds];
             subscriptionTitleLabel.textAlignment = NSTextAlignmentCenter;
-            subscriptionTitleLabel.font = [UIFont systemFontOfSize:15.0];
+            subscriptionTitleLabel.font = [UIFont systemFontOfSize:12.0];
             subscriptionTitleLabel.textColor = [UIColor lightGrayColor];
             subscriptionTitleLabel.layer.cornerRadius = 5.0;
             subscriptionTitleLabel.layer.masksToBounds = YES;
@@ -810,6 +810,34 @@
             }
             subscriptionTitleLabel.text = imageString.length > 2 ? [imageString substringToIndex:2] : imageString;
             [parentView addSubview:subscriptionTitleLabel];
+            
+            NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:subscriptionTitleLabel
+                                                                              attribute:NSLayoutAttributeLeading
+                                                                              relatedBy:NSLayoutRelationEqual
+                                                                                 toItem:parentView
+                                                                              attribute:NSLayoutAttributeLeading
+                                                                             multiplier:1.0 constant:0];
+            NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:subscriptionTitleLabel
+                                                                               attribute:NSLayoutAttributeTrailing
+                                                                               relatedBy:NSLayoutRelationEqual
+                                                                                  toItem:parentView
+                                                                               attribute:NSLayoutAttributeTrailing
+                                                                              multiplier:1.0 constant:0];
+            NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:subscriptionTitleLabel
+                                                                                attribute:NSLayoutAttributeBottom
+                                                                                relatedBy:NSLayoutRelationEqual
+                                                                                   toItem:parentView
+                                                                                attribute:NSLayoutAttributeBottom
+                                                                               multiplier:1.0 constant:0];
+            NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:subscriptionTitleLabel
+                                                                             attribute:NSLayoutAttributeTop
+                                                                             relatedBy:NSLayoutRelationEqual
+                                                                                toItem:parentView
+                                                                             attribute:NSLayoutAttributeTop
+                                                                            multiplier:1.0 constant:0];
+            
+            [parentView.superview addConstraints:@[leftConstraint, rightConstraint, bottomConstraint, topConstraint]];
+            
         } else {
             parentView.image = [UIImage imageNamed:@"person"];
         }
@@ -842,7 +870,6 @@
 
 + (void)getGroupImage:(MRGroup*)group andImageView:(UIImageView*)parentView {
     if (group.group_img_data != nil && group.group_img_data.length > 0) {
-        id data = group.group_img_data;
         parentView.image = [UIImage imageWithData:group.group_img_data];
     } else if (group.group_name != nil && group.group_name.length > 0) {
         UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:parentView.bounds];

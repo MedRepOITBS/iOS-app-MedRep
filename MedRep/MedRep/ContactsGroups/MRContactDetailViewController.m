@@ -31,6 +31,8 @@
     NSMutableArray *groupMemberArray;
     BOOL canEditGroup;
 }
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contactDetailHeightConstraint;
+@property (weak, nonatomic) IBOutlet UIView *dividerView;
 
 @property (weak, nonatomic) IBOutlet UIButton *deleteConnectionButton;
 
@@ -135,6 +137,14 @@
 }
 
 - (void)setupUIWithContactDetails {
+    self.contactDetailHeightConstraint.constant = 70.0;
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.dividerView
+                                                          attribute:NSLayoutAttributeBottom
+                                                           relatedBy:NSLayoutRelationEqual
+                                                              toItem:self.contactDetailView attribute:NSLayoutAttributeTop
+                                                          multiplier:1.0f constant:10.0f]];
+    
     [MRAppControl getContactImage:self.mainContact andImageView:self.mainImageView];
     self.mainLabel.text = [MRAppControl getContactName:self.mainContact];
     
@@ -175,6 +185,12 @@
     self.mainLabel.text = self.mainGroup.group_name;
     self.subHeadingLabel.text = self.mainGroup.group_short_desc;
     self.groupDesc.text = self.mainGroup.group_long_desc;
+    
+    self.contactDetailHeightConstraint.constant = 0.0;
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.dividerView attribute:NSLayoutAttributeTop
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.groupDetailView attribute:NSLayoutAttributeBottom
+                                                         multiplier:1.0f constant:10.0f]];
 
     if (self.mainGroup.members != nil && self.mainGroup.members.count > 0) {
         self.contactsUnderGroup = [self.mainGroup.members allObjects];
