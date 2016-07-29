@@ -252,6 +252,8 @@ withComplitionHandler:(completionHandler)responceHandler;
 
 - (void)fetchNewsAndUpdatesListwithHandler:(completionHandler)responceHandler;
 
+- (void)postNewTopic:(NSDictionary*)reqDict withHandler:(completionHandler)responceHandler;
+
 @end
 
 @interface NSDictionary (CategoryName)

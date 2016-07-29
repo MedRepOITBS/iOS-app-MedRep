@@ -19,6 +19,7 @@
 -(void)setData:(MRContact*)contact group:(MRGroup*)group andSharedPost:(MRSharePost*)sharePost;
 -(MRSharePost *)getSelectedPost;
 -(void)setImageForShareImage:(UIImage *)image;
+
 @end
 
 @protocol CommonBoxViewDelegate <NSObject>
@@ -29,5 +30,5 @@
 -(void)commonBoxCancelButtonPressed;
 -(void)commonBoxCameraGalleryButtonTapped;
 - (void)commentPosted;
-
+- (void)commentPostedWithData:(NSString*)message andImageData:(NSData*)imageData;
 @end

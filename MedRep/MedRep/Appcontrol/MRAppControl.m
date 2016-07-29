@@ -755,8 +755,9 @@
 }
 
 + (void)getContactImage:(MRContact*)contact andImageView:(UIImageView*)parentView {
-    if (contact.profilePic != nil) {
-        parentView.image = [UIImage imageWithData:contact.profilePic];
+    if (contact.dPicture != nil) {
+        parentView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:
+                            [NSURL URLWithString:contact.dPicture]]];
     } else {
         NSString *fullName = [MRAppControl getContactName:contact];
         if (fullName != nil && fullName.length > 0) {

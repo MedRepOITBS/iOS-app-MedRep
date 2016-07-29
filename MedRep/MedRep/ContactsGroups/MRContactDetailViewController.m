@@ -36,8 +36,6 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *groupMembersHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *groupDescHeightConstraint;
 
-@property (weak, nonatomic) IBOutlet UIButton *postTopicButton;
-
 @property (weak, nonatomic) IBOutlet UIButton *deleteConnectionButton;
 
 @property (weak, nonatomic) IBOutlet UIImageView* mainImageView;
@@ -145,7 +143,6 @@
     
     _deleteBtnHeight.constant = 40;
     _city.hidden = NO;
-    _plusBtn.hidden = YES;
     
     [MRAppControl getContactImage:self.mainContact andImageView:self.mainImageView];
     self.mainLabel.text = [MRAppControl getContactName:self.mainContact];
@@ -265,43 +262,6 @@
     _commentBoxView = (CommonBoxView *)[arr objectAtIndex:0];
     _commentBoxKLCPopView = [KLCPopup popupWithContentView:self.commentBoxView];
     [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutCenter)];
-}
-
--(void)commonBoxCameraButtonTapped{
-    [self takePhoto];
-    
-}
--(void)commonBoxOkButtonPressedWithData:(NSDictionary *)dictData withIndexPath:(NSIndexPath *)indexPath{
-    
-    [_commentBoxKLCPopView dismiss:YES];
-    
-    MRGroupPost *post = [self.posts objectAtIndex:indexPath.row];
-    //obtaining saving path
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSInteger childPostCounter =[APP_DELEGATE counterForChildPost];
-    
-    NSString *postID = [NSString stringWithFormat:@"%ld_%ld",post.groupPostId.longValue,(long)childPostCounter];
-    
-    NSString *imagePath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",postID]];
-    NSDictionary *saveData;
-    //extracting image from the picker and saving it
-    if (![[dictData objectForKey:@"profile_pic"] isKindOfClass:[NSString class]]) {
-        UIImage *editedImage = [dictData objectForKey:@"profile_pic"];
-        NSData *webData = UIImagePNGRepresentation(editedImage);
-        [webData writeToFile:imagePath atomically:YES];
-       saveData = [NSDictionary dictionaryWithObjectsAndKeys:[dictData objectForKey:@"postText"],@"postText",imagePath,@"post_pic",postID,@"postID", nil];
-
-    }else {
-        saveData = [NSDictionary dictionaryWithObjectsAndKeys:[dictData objectForKey:@"postText"],@"postText",@"",@"post_pic",postID,@"postID", nil];
-        
-
-    }
-    
-
-    [MRDatabaseHelper addGroupChildPost:post withPostDict:saveData];
-    
-    
 }
 
 /*
@@ -619,14 +579,12 @@
 }
 
 #pragma mark
-#pragma CAMERA IMAGE CAPTURE
-
--(void)takePhoto {
+-(void)takePhoto:(UIImagePickerControllerSourceType)type {
     [_commentBoxKLCPopView dismiss:YES];
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.allowsEditing = YES;
-    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    picker.sourceType = type;
     
     [self presentViewController:picker animated:YES completion:NULL];
     
@@ -760,7 +718,111 @@
 }
 
 - (IBAction)postTopicButtonTapped:(id)sender {
+    NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"commentBox" owner:self options:nil];
+    
+    _commentBoxView = (CommonBoxView *)[arr objectAtIndex:0];
+    [_commentBoxView setDelegate:self];
+    _commentBoxKLCPopView = [KLCPopup popupWithContentView:self.commentBoxView];
+    [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutAboveCenter)];
 }
 
+#pragma mark - CommonBoxView Delegate methods
+- (void)commonBoxCancelButtonPressed {
+    [_commentBoxKLCPopView dismissPresentingPopup];
+}
+
+- (void)commentPosted {
+    [_commentBoxKLCPopView dismissPresentingPopup];
+    
+    [MRDatabaseHelper postANewTopic:nil withHandler:^(id result) {
+        
+    }];
+    
+//    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(refetchPost:)]) {
+//        [self.delegate refetchPost:self.indexPath];
+//    }
+//    
+//    [_commentBoxKLCPopView dismissPresentingPopup];
+//    
+//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"sharePostId", self.post.sharePostId.longValue];
+//    self.post = [[MRDataManger sharedManager] fetchObject:kMRSharePost predicate:predicate];
+//    
+//    self.recentActivity = nil;
+//    if (self.post.postedReplies != nil && self.post.postedReplies.count > 0) {
+//        self.recentActivity = self.post.postedReplies.allObjects;
+//    }
+//    
+//    [self setCountInLabels];
+//    [self.activitiesTable reloadData];
+}
+
+- (void)commentPostedWithData:(NSString *)message andImageData:(NSData *)imageData {
+    [_commentBoxKLCPopView dismissPresentingPopup];
+    
+    NSString *messageType = @"Text";
+    
+    if (imageData != nil) {
+        
+    }
+    
+    NSInteger receiverId = 0;
+    if (self.mainContact != nil) {
+        receiverId = self.mainContact.contactId.longValue;
+    } else {
+        receiverId = self.mainGroup.group_id.longValue;
+    }
+    
+    NSDictionary *dataDict = @{@"message" : message,
+                               @"message_type" : messageType,
+                               @"receiver_id" : [NSNumber numberWithLong:receiverId],
+                               @"message_id" : [NSNumber numberWithLong:[NSDate date].timeIntervalSinceReferenceDate]};
+    NSMutableDictionary *postedTopicDict = dataDict.mutableCopy;
+    if (self.mainGroup != nil) {
+        [postedTopicDict setValue:[NSNumber numberWithLong:receiverId]
+                           forKey:@"group_id"];
+    }
+    
+    [MRDatabaseHelper postANewTopic:postedTopicDict withHandler:^(id result) {
+        
+    }];
+}
+
+-(void)commonBoxCameraGalleryButtonTapped{
+    [self takePhoto:UIImagePickerControllerSourceTypePhotoLibrary];
+}
+
+- (void)commonBoxCameraButtonTapped {
+    [self takePhoto:UIImagePickerControllerSourceTypeCamera];
+}
+
+-(void)commonBoxOkButtonPressedWithData:(NSDictionary *)dictData withIndexPath:(NSIndexPath *)indexPath{
+    
+    [_commentBoxKLCPopView dismiss:YES];
+    
+    MRGroupPost *post = [self.posts objectAtIndex:indexPath.row];
+    //obtaining saving path
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSInteger childPostCounter =[APP_DELEGATE counterForChildPost];
+    
+    NSString *postID = [NSString stringWithFormat:@"%ld_%ld",post.groupPostId.longValue,(long)childPostCounter];
+    
+    NSString *imagePath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",postID]];
+    NSDictionary *saveData;
+    //extracting image from the picker and saving it
+    if (![[dictData objectForKey:@"profile_pic"] isKindOfClass:[NSString class]]) {
+        UIImage *editedImage = [dictData objectForKey:@"profile_pic"];
+        NSData *webData = UIImagePNGRepresentation(editedImage);
+        [webData writeToFile:imagePath atomically:YES];
+        saveData = [NSDictionary dictionaryWithObjectsAndKeys:[dictData objectForKey:@"postText"],@"postText",imagePath,@"post_pic",postID,@"postID", nil];
+        
+    }else {
+        saveData = [NSDictionary dictionaryWithObjectsAndKeys:[dictData objectForKey:@"postText"],@"postText",@"",@"post_pic",postID,@"postID", nil];
+        
+        
+    }
+    
+    [MRDatabaseHelper addGroupChildPost:post withPostDict:saveData];
+}
 
 @end

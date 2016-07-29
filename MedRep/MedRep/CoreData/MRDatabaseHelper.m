@@ -1431,4 +1431,14 @@ static MRDatabaseHelper *sharedDataManager = nil;
     }];
 }
 
++ (void)postANewTopic:(NSDictionary*)reqDict withHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] postNewTopic:reqDict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [[MRDataManger sharedManager] removeAllObjects:kGroupEntity withPredicate:nil];
+        [MRDatabaseHelper makeServiceCallForGroupsFetch:status details:details
+                                               response:responce
+                                     andResponseHandler:responseHandler];
+    }];
+}
+
 @end

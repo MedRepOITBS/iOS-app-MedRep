@@ -126,4 +126,6 @@ typedef void (^WebServiceResponseHandler)(id result);
 + (void)addConnections:(NSArray*)selectedContacts
      andResponseHandler:(WebServiceResponseHandler)handler;
 
++ (void)postANewTopic:(NSDictionary*)reqDict withHandler:(WebServiceResponseHandler)responseHandler;
+
 @end
