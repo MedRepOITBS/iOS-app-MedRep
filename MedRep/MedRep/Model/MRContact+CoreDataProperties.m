@@ -17,6 +17,7 @@
 @dynamic contactId;
 @dynamic doctorDetails;
 @dynamic doctorId;
+@dynamic dPicture;
 @dynamic firstName;
 @dynamic lastName;
 @dynamic profilePic;

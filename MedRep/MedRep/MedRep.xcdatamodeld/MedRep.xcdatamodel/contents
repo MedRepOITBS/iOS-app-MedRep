@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15F34" minimumToolsVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15G31" minimumToolsVersion="Automatic">
     <entity name="EducationalQualifications" representedClassName="EducationalQualifications" syncable="YES">
         <attribute name="aggregate" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="collegeName" optional="YES" attributeType="String" syncable="YES"/>
@@ -22,6 +22,7 @@
         <attribute name="contactId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="doctorDetails" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="doctorId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="dPicture" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="profilePic" optional="YES" attributeType="Binary" syncable="YES"/>
@@ -240,7 +241,7 @@
     <elements>
         <element name="EducationalQualifications" positionX="-9" positionY="162" width="128" height="120"/>
         <element name="MRCompanyDetails" positionX="-18" positionY="27" width="128" height="165"/>
-        <element name="MRContact" positionX="-36" positionY="135" width="128" height="270"/>
+        <element name="MRContact" positionX="-36" positionY="135" width="128" height="285"/>
         <element name="MRGroup" positionX="-27" positionY="144" width="128" height="195"/>
         <element name="MrGroupChildPost" positionX="-27" positionY="144" width="128" height="90"/>
         <element name="MRGroupMembers" positionX="-36" positionY="135" width="128" height="315"/>

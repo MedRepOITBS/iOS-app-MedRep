@@ -13,7 +13,7 @@
 #import "MRAppControl.h"
 #import "MRConstants.h"
 
-@interface CommonBoxView() <UIImagePickerControllerDelegate>
+@interface CommonBoxView() <UIImagePickerControllerDelegate,UITextViewDelegate >
 
 @property (weak, nonatomic) IBOutlet UILabel *noPreviewMessage;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *profilePicWidthConstraint;
@@ -25,7 +25,6 @@
 //@property (weak, nonatomic) IBOutlet UITextView *commentTextView;
 @property (weak, nonatomic) IBOutlet UILabel *hintCameraLbl;
 
-@property (weak, nonatomic) IBOutlet UIView *commentParentView;
 @property (weak, nonatomic) IBOutlet UIView *cameraView;
 @property (weak, nonatomic) IBOutlet UIView *galleryView;
 
@@ -36,6 +35,7 @@
 @property (nonatomic)BOOL isPhotoDone;
 @property (strong,nonatomic) NSIndexPath *cellIndexPath;
 @property (nonatomic) BOOL isPhotoSelected;
+
 - (IBAction)okButtonTapped:(id)sender;
 - (IBAction)cancelButtonTapped:(id)sender;
 
@@ -73,6 +73,8 @@
     UITapGestureRecognizer *galleryGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                               action:@selector(galleryBtnTapped)];
     [self.galleryView addGestureRecognizer:galleryGestureRecognizer];
+    
+    [self.commentTextView becomeFirstResponder];
 }
 
 - (BOOL)textView:(UITextView *)txtView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
@@ -165,6 +167,15 @@
         }
     } else if (self.mainContact != nil) {
         
+    } else {
+        if (self.delegate != nil &&
+            [self.delegate respondsToSelector:@selector(commentPostedWithData:andImageData:)]) {
+            NSData *imageData = nil;
+            if (self.isPhotoDone || self.isPhotoSelected) {
+                imageData = UIImagePNGRepresentation(self.shareImageView.image);
+            }
+            [self.delegate commentPostedWithData:self.commentTextView.text andImageData:imageData];
+        }
     }
 }
 
@@ -182,4 +193,5 @@
     _shareImageView.hidden = NO;
     self.shareImageView.image = image;
 }
+
 @end

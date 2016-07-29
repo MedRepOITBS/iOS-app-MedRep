@@ -2449,4 +2449,22 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
     [self sendServiceRequest:urlRequest withHandler:responceHandler];
 }
 
+- (void)postNewTopic:(NSDictionary*)reqDict withHandler:(completionHandler)responceHandler {
+    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/postMessages?token=%@",kHostName,[MRDefaults objectForKey:kAuthenticationToken]];
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:reqDict
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:nil];
+    NSURL *url = [NSURL URLWithString:stringFormOfUrl];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [urlRequest setTimeoutInterval:120];
+    [urlRequest setHTTPMethod:@"POST"];
+    [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [urlRequest setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[jsonData length]] forHTTPHeaderField:@"Content-Length"];
+    [urlRequest setHTTPBody: jsonData];
+    self.serviceType = kMRWebServiceTypeCreateGroup;
+    [self sendServiceRequest:urlRequest withHandler:responceHandler];
+}
+
 @end

@@ -3808,10 +3808,10 @@
 			children = (
 				B4BB24DE1D45E03A00A3DD73 /* previewImage.png */,
 				B41746C81D0CD455009B7E7E /* CommonBoxView.h */,
-				B4BB24D21D45CD4C00A3DD73 /* CameraClick.png */,
-				B4BB24D51D45CDF400A3DD73 /* gallery_pic.png */,
 				B41746C91D0CD455009B7E7E /* CommonBoxView.m */,
 				B41746C61D0CD434009B7E7E /* commentBox.xib */,
+				B4BB24D21D45CD4C00A3DD73 /* CameraClick.png */,
+				B4BB24D51D45CDF400A3DD73 /* gallery_pic.png */,
 				CC01BA701D302ACF007E2AEB /* MRCommentViewController.h */,
 				CC01BA711D302ACF007E2AEB /* MRCommentViewController.m */,
 				CC01BA721D302ACF007E2AEB /* MRCommentViewController.xib */,
