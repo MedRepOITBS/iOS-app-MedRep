@@ -40,10 +40,16 @@
                 
                 NSURL * imageURL = [NSURL URLWithString:[temp objectForKey:KProfilePicture]];
                 
-                NSData * imageData = [NSData dataWithContentsOfURL:imageURL];
-                self.profileImage.image = [UIImage imageWithData:imageData];
                 
-
+                dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+                dispatch_async(queue, ^{
+                    NSData *data = [NSData dataWithContentsOfURL:imageURL];
+                    UIImage *image = [UIImage imageWithData:data];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        self.profileImage.image = image;
+                    });  
+                });
+                
        
             }
         }
@@ -65,8 +71,17 @@
                               
                               NSURL * imageURL = [NSURL URLWithString:[temp objectForKey:KProfilePicture]];
                               
-                              NSData * imageData = [NSData dataWithContentsOfURL:imageURL];
-                              self.profileImage.image = [UIImage imageWithData:imageData];
+                              
+                              dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+                              dispatch_async(queue, ^{
+                                  NSData *data = [NSData dataWithContentsOfURL:imageURL];
+                                  UIImage *image = [UIImage imageWithData:data];
+                                  dispatch_async(dispatch_get_main_queue(), ^{
+                                      self.profileImage.image = image;
+                                  });  
+                              });
+                              
+                             
                         
                           }
                       }

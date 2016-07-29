@@ -28,7 +28,7 @@
 #import "SWRevealViewController.h"
 #import "AddEducationViewController.h"
 #import "InterestViewController.h"
-
+#import "UIImage+Helpers.h"
 
 #import "PublicationsViewController.h"
 @interface MRProfileDetailsViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate,CommonProfileSectionTableViewCellDelegate>
@@ -497,11 +497,18 @@
          cell.userLocation.text = _profileObj.location;
          
          
-         
          NSURL * imageURL = [NSURL URLWithString:[userdata objectForKey:KProfilePicture]];
+
          
-         NSData * imageData = [NSData dataWithContentsOfURL:imageURL];
-         cell.profileimageView.image = [UIImage imageWithData:imageData];
+         dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+         dispatch_async(queue, ^{
+             NSData *data = [NSData dataWithContentsOfURL:imageURL];
+             UIImage *image = [UIImage imageWithData:data];
+             dispatch_async(dispatch_get_main_queue(), ^{
+                cell.profileimageView.image = image;
+             });  
+         });
+        
          
          return cell;
      } else if([valN isEqualToString:@"ABOUT"]) {

@@ -119,17 +119,42 @@
             
             NSURL * imageURL = [NSURL URLWithString:[self.userData objectForKey:KProfilePicture]];
             
-            NSData * imageData = [NSData dataWithContentsOfURL:imageURL];
 
+            UIImage *image;
+            if (indexPath.row>0) {
+                image = [UIImage imageNamed:[kMenuListImages objectAtIndex:indexPath.row -1]];
+                if (image == nil) {
+                    image = [UIImage imageNamed:@"profileIcon.png"];
+                }else{
+                    
+                    regCell.cellIcon.image = image;
+                    
+                }
+ 
             
-            
-            UIImage *image = (indexPath.row > 0) ? [UIImage imageNamed:[kMenuListImages objectAtIndex:indexPath.row -1]] : [UIImage imageWithData:imageData];
-            
-            if (image == nil) {
-                image = [UIImage imageNamed:@"profileIcon.png"];
+            }else {
+                dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+                dispatch_async(queue, ^{
+                    NSData *data = [NSData dataWithContentsOfURL:imageURL];
+                    UIImage *image = [UIImage imageWithData:data];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if (image!=nil) {
+                            regCell.cellIcon.image = image;
+                        }else{
+                            regCell.cellIcon.image = [UIImage imageNamed:@"profileIcon.png"];
+                        }
+                        
+             
+                    });
+                });
             }
             
-            regCell.cellIcon.image = image;
+            
+            
+            
+            
+            
+            
         }
         else
         {

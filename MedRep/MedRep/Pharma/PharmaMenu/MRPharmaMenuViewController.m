@@ -114,8 +114,22 @@
             
             NSURL * imageURL = [NSURL URLWithString:[self.userData objectForKey:KProfilePicture]];
             
-            NSData * imageData = [NSData dataWithContentsOfURL:imageURL];
-            regCell.cellIcon.image = (indexPath.row > 0) ? [UIImage imageNamed:[kMenuListImages objectAtIndex:indexPath.row -1]] : [UIImage imageWithData:imageData];
+            
+            
+            if (indexPath.row>0) {
+                regCell.cellIcon.image = [UIImage imageNamed:[kMenuListImages objectAtIndex:indexPath.row -1]];
+            }else {
+                dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+                dispatch_async(queue, ^{
+                    NSData *data = [NSData dataWithContentsOfURL:imageURL];
+                    UIImage *image = [UIImage imageWithData:data];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        regCell.cellIcon.image = image;
+                    });
+                });
+            }
+            
+        
         }
         else
         {

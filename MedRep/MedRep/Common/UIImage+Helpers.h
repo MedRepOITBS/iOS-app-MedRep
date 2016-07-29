@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIImage_Helpers : UIImage
+@interface UIImage (Helpers)
+
++ (void) loadFromURL: (NSURL*) url callback:(void (^)(UIImage *image))callback;
 
 @end
