@@ -46,7 +46,7 @@
 -(void) acceptAction:(NSInteger)index{
     if (_gid > 0) {
         MRContact *user = _pendingContactListArra[index];
-        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:_gid,@"group_id", [NSString stringWithFormat:@"%ld",user.contactId.longValue],@"member_id",@"ACTIVE",@"status", nil];
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:_gid,@"group_id", [NSString stringWithFormat:@"%ld",user.doctorId.longValue],@"member_id",@"ACTIVE",@"status", nil];
         
         [MRCommon showActivityIndicator:@"Requesting..."];
         [[MRWebserviceHelper sharedWebServiceHelper] updateGroupMembersStatus:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
@@ -91,7 +91,7 @@
         }];
     }else{
         MRContact *user = _pendingContactListArra[index];
-        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@[[NSString stringWithFormat:@"%ld",user.contactId.longValue]],@"connList",@"ACTIVE",@"status", nil];
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@[[NSString stringWithFormat:@"%ld",user.doctorId.longValue]],@"connList",@"ACTIVE",@"status", nil];
         
         [MRCommon showActivityIndicator:@"Requesting..."];
         [[MRWebserviceHelper sharedWebServiceHelper] updateConnectionStatus:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
@@ -140,7 +140,7 @@
 -(void) rejectAction:(NSInteger)index{
     if (_gid > 0) {
         MRContact *user = _pendingContactListArra[index];
-        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:_gid,@"group_id",@[[NSString stringWithFormat:@"%@",user.contactId.longValue]],@"memberList", nil];
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:_gid,@"group_id",@[[NSString stringWithFormat:@"%ld",user.doctorId.longValue]],@"memberList", nil];
         
         [MRCommon showActivityIndicator:@"Requesting..."];
         [[MRWebserviceHelper sharedWebServiceHelper] removeGroupMember:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
@@ -185,7 +185,7 @@
         }];
     }else{
         MRContact *user = _pendingContactListArra[index];
-        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@[[NSString stringWithFormat:@"%ld",user.contactId.longValue]],@"connList",@"REJECT",@"status", nil];
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@[[NSString stringWithFormat:@"%ld",user.doctorId.longValue]],@"connList",@"REJECT",@"status", nil];
         
         [MRCommon showActivityIndicator:@"Requesting..."];
         [[MRWebserviceHelper sharedWebServiceHelper] removeConnection:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {

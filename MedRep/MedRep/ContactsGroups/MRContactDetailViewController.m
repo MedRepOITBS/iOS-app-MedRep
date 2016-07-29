@@ -160,6 +160,7 @@
     [MRAppControl getGroupImage:self.mainGroup andImageView:self.mainImageView];
     self.mainLabel.text = self.mainGroup.group_name;
     self.subHeadingLabel.text = self.mainGroup.group_short_desc;
+    self.groupDesc.text = self.mainGroup.group_long_desc;
 
     if (self.mainGroup.members != nil && self.mainGroup.members.count > 0) {
         self.contactsUnderGroup = [self.mainGroup.members allObjects];
