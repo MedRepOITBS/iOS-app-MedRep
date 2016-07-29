@@ -48,6 +48,24 @@ static MRDatabaseHelper *sharedDataManager = nil;
 
 }
 
++ (NSString*)getOAuthErrorCode:(NSDictionary*)response {
+    NSString *errorCode = [response objectForKey:@"oauth2ErrorCode"];
+    if (errorCode == nil || errorCode.length == 0) {
+        id tempErrorCode = [response objectForKey:@"Responce"];
+        if (tempErrorCode != nil) {
+            if ([tempErrorCode isKindOfClass:[NSArray class]]) {
+                NSArray *tempArray = (NSArray*)tempErrorCode;
+                NSDictionary *tempObject = tempArray.firstObject;
+                errorCode = [tempObject objectForKey:@"oauth2ErrorCode"];
+            } else if ([tempErrorCode isKindOfClass:[NSDictionary class]]) {
+                NSDictionary *tempObject = tempErrorCode;
+                errorCode = [tempObject objectForKey:@"oauth2ErrorCode"];;
+            }
+        }
+    }
+    return errorCode;
+}
+
 + (void)addSuggestedContacts:(NSArray*)contacts {
     for (NSDictionary *myDict in contacts) {
         MRSuggestedContact *contact  = (MRSuggestedContact*)[[MRDataManger sharedManager] createObjectForEntity:kSuggestedContactEntity];
@@ -108,30 +126,33 @@ static MRDatabaseHelper *sharedDataManager = nil;
     {
         [MRDatabaseHelper filterGroupResponse:response andResponseHandler:responseHandler];
     }
-    else if ([[response objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
-    {
-        [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
-         {
-             [MRCommon savetokens:responce];
-             [[MRWebserviceHelper sharedWebServiceHelper] getGroupListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-                 [MRCommon stopActivityIndicator];
-                 if (status)
-                 {
-                     [MRDatabaseHelper filterGroupResponse:responce andResponseHandler:responseHandler];
-                 } else
-                 {
-                     NSArray *erros =  [details componentsSeparatedByString:@"-"];
-                     if (erros.count > 0)
-                     [MRCommon showAlert:[erros lastObject] delegate:nil];
-                 }
+    else {
+        NSString *errorCode = [MRDatabaseHelper getOAuthErrorCode:response];
+        if ([errorCode isEqualToString:@"invalid_token"])
+        {
+            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+             {
+                 [MRCommon savetokens:responce];
+                 [[MRWebserviceHelper sharedWebServiceHelper] getGroupListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                     [MRCommon stopActivityIndicator];
+                     if (status)
+                     {
+                         [MRDatabaseHelper filterGroupResponse:responce andResponseHandler:responseHandler];
+                     } else
+                     {
+                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                         if (erros.count > 0)
+                         [MRCommon showAlert:[erros lastObject] delegate:nil];
+                     }
+                 }];
              }];
-         }];
-    }
-    else
-    {
-        NSArray *erros =  [details componentsSeparatedByString:@"-"];
-        if (erros.count > 0)
-        [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+            [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
     }
 }
 
@@ -183,30 +204,34 @@ static MRDatabaseHelper *sharedDataManager = nil;
     {
         [MRDatabaseHelper filterContactResponse:response andResponseHandler:responseHandler];
     }
-    else if ([[response objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
-    {
-        [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
-         {
-             [MRCommon savetokens:responce];
-             [[MRWebserviceHelper sharedWebServiceHelper] getContactListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-                 [MRCommon stopActivityIndicator];
-                 if (status)
-                 {
-                     [MRDatabaseHelper filterContactResponse:responce andResponseHandler:responseHandler];
-                 } else
-                 {
-                     NSArray *erros =  [details componentsSeparatedByString:@"-"];
-                     if (erros.count > 0)
-                     [MRCommon showAlert:[erros lastObject] delegate:nil];
-                 }
+    else {
+        NSString *errorCode = [MRDatabaseHelper getOAuthErrorCode:response];
+        
+        if ([errorCode isEqualToString:@"invalid_token"])
+        {
+            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+             {
+                 [MRCommon savetokens:responce];
+                 [[MRWebserviceHelper sharedWebServiceHelper] getContactListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                     [MRCommon stopActivityIndicator];
+                     if (status)
+                     {
+                         [MRDatabaseHelper filterContactResponse:responce andResponseHandler:responseHandler];
+                     } else
+                     {
+                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                         if (erros.count > 0)
+                         [MRCommon showAlert:[erros lastObject] delegate:nil];
+                     }
+                 }];
              }];
-         }];
-    }
-    else
-    {
-        NSArray *erros =  [details componentsSeparatedByString:@"-"];
-        if (erros.count > 0)
-        [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+            [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
     }
 }
 
@@ -365,30 +390,33 @@ static MRDatabaseHelper *sharedDataManager = nil;
     {
         [MRDatabaseHelper filterGroupDetailsResponse:response andResponseHandler:responseHandler];
     }
-    else if ([[response objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
-    {
-        [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
-         {
-             [MRCommon savetokens:responce];
-             [[MRWebserviceHelper sharedWebServiceHelper] getGroupMembersStatusWithId:groupId withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-                 [MRCommon stopActivityIndicator];
-                 if (status)
-                 {
-                     [MRDatabaseHelper filterGroupDetailsResponse:responce andResponseHandler:responseHandler];
-                 } else
-                 {
-                     NSArray *erros =  [details componentsSeparatedByString:@"-"];
-                     if (erros.count > 0)
-                         [MRCommon showAlert:[erros lastObject] delegate:nil];
-                 }
+    else {
+        NSString *errorCode = [MRDatabaseHelper getOAuthErrorCode:response];
+        if ([errorCode isEqualToString:@"invalid_token"])
+        {
+            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+             {
+                 [MRCommon savetokens:responce];
+                 [[MRWebserviceHelper sharedWebServiceHelper] getGroupMembersStatusWithId:groupId withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                     [MRCommon stopActivityIndicator];
+                     if (status)
+                     {
+                         [MRDatabaseHelper filterGroupDetailsResponse:responce andResponseHandler:responseHandler];
+                     } else
+                     {
+                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                         if (erros.count > 0)
+                             [MRCommon showAlert:[erros lastObject] delegate:nil];
+                     }
+                 }];
              }];
-         }];
-    }
-    else
-    {
-        NSArray *erros =  [details componentsSeparatedByString:@"-"];
-        if (erros.count > 0)
-            [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
     }
 }
 
@@ -1311,31 +1339,34 @@ static MRDatabaseHelper *sharedDataManager = nil;
     {
         [MRDatabaseHelper parseNewsAndUpdatesResponse:response andResponseHandler:responseHandler];
     }
-    else if ([[response objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
-    {
-        [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
-         {
-             [MRCommon savetokens:responce];
-             [[MRWebserviceHelper sharedWebServiceHelper] fetchNewsAndUpdatesListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-                 [MRCommon stopActivityIndicator];
-                 if (status)
-                 {
-                     [MRDatabaseHelper parseNewsAndUpdatesResponse:responce
-                                                andResponseHandler:responseHandler];
-                 } else
-                 {
-                     NSArray *erros =  [details componentsSeparatedByString:@"-"];
-                     if (erros.count > 0)
-                         [MRCommon showAlert:[erros lastObject] delegate:nil];
-                 }
+    else {
+        NSString *errorCode = [MRDatabaseHelper getOAuthErrorCode:response];
+        if ([errorCode isEqualToString:@"invalid_token"])
+        {
+            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+             {
+                 [MRCommon savetokens:responce];
+                 [[MRWebserviceHelper sharedWebServiceHelper] fetchNewsAndUpdatesListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                     [MRCommon stopActivityIndicator];
+                     if (status)
+                     {
+                         [MRDatabaseHelper parseNewsAndUpdatesResponse:responce
+                                                    andResponseHandler:responseHandler];
+                     } else
+                     {
+                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                         if (erros.count > 0)
+                             [MRCommon showAlert:[erros lastObject] delegate:nil];
+                     }
+                 }];
              }];
-         }];
-    }
-    else
-    {
-        NSArray *erros =  [details componentsSeparatedByString:@"-"];
-        if (erros.count > 0)
-            [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
     }
 }
 
@@ -1367,32 +1398,35 @@ static MRDatabaseHelper *sharedDataManager = nil;
                 handler([NSNumber numberWithBool:status]);
             }
         }
-        else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
-        {
-            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
-             {
-                 [MRCommon savetokens:responce];
-                 [[MRWebserviceHelper sharedWebServiceHelper] addMembers:dictReq withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-                     [MRCommon stopActivityIndicator];
-                     if (status) {
-                         if (handler != nil) {
-                             [MRCommon showAlert:NSLocalizedString(kConnectionAdded, "") delegate:nil];
-                             handler([NSNumber numberWithBool:status]);
+        else {
+            NSString *errorCode = [MRDatabaseHelper getOAuthErrorCode:responce];
+            if ([errorCode isEqualToString:@"invalid_token"])
+            {
+                [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+                 {
+                     [MRCommon savetokens:responce];
+                     [[MRWebserviceHelper sharedWebServiceHelper] addMembers:dictReq withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                         [MRCommon stopActivityIndicator];
+                         if (status) {
+                             if (handler != nil) {
+                                 [MRCommon showAlert:NSLocalizedString(kConnectionAdded, "") delegate:nil];
+                                 handler([NSNumber numberWithBool:status]);
+                             }
+                         }else
+                         {
+                             NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                             if (erros.count > 0)
+                                 [MRCommon showAlert:[erros lastObject] delegate:nil];
                          }
-                     }else
-                     {
-                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
-                         if (erros.count > 0)
-                             [MRCommon showAlert:[erros lastObject] delegate:nil];
-                     }
+                     }];
                  }];
-             }];
-        }
-        else
-        {
-            NSArray *erros =  [details componentsSeparatedByString:@"-"];
-            if (erros.count > 0)
-                [MRCommon showAlert:[erros lastObject] delegate:nil];
+            }
+            else
+            {
+                NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                if (erros.count > 0)
+                    [MRCommon showAlert:[erros lastObject] delegate:nil];
+            }
         }
     }];
 }

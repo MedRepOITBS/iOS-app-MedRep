@@ -26,6 +26,18 @@
 @dynamic comment;
 @dynamic members;
 
+- (void)setAdmin_id:(NSNumber *)admin_id {
+    
+    NSInteger adminId = 0;
+    if (admin_id != nil) {
+        adminId = admin_id.longValue;
+    }
+    
+    [self willChangeValueForKey:@"admin_id"];
+    [self setPrimitiveValue:[NSNumber numberWithLong:adminId] forKey:@"admin_id"];
+    [self didChangeValueForKey:@"admin_id"];
+}
+
 - (void)setMember:(NSData *)member {
     if ([member isKindOfClass:[NSArray class]]) {
         if (self.allMembers == nil || self.allMembers.count == 0) {

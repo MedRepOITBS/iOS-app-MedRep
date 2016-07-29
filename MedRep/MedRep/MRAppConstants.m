@@ -47,6 +47,8 @@ NSString* const kDefaultDateFormat = @"yyyy-MM-dd'T'HH:mm:ss";
 
 NSString* const kAddConnection = @"Add Connection";
 NSString* const kDeleteConnection = @"Delete Connection";
+NSString* const kJoinGroup = @"Join Group";
+NSString* const kLeaveGroup = @"Leave Group";
 
 NSString* const kConnectionAdded = @"Connection Added Successfully !!!";
 

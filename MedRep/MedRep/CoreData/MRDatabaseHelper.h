@@ -39,7 +39,7 @@ typedef void (^WebServiceResponseHandler)(id result);
 
 + (void)addSuggestedContacts:(NSArray*)contacts;
 + (void)addGroups:(NSArray*)groups;
-+ (void)addGroupPosts:(NSArray*)groupPosts;
+//+ (void)addGroupPosts:(NSArray*)groupPosts;
 
 + (void)getGroups:(WebServiceResponseHandler)responseHandler;
 + (void)getSuggestedGroups:(WebServiceResponseHandler)responseHandler;

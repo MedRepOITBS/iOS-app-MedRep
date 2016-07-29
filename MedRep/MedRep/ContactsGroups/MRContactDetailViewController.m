@@ -101,6 +101,20 @@
                                   action:@selector(addConnection:)
                         forControlEvents:UIControlEventTouchUpInside];
         [self.deleteConnectionButton setBackgroundColor:[MRCommon colorFromHexString:@"#20B18A"]];
+    } else if (self.launchMode == kContactDetailLaunchModeGroup) {
+        [self.deleteConnectionButton setTitle:NSLocalizedString(kLeaveGroup, "")
+                                     forState:UIControlStateNormal];
+        [self.deleteConnectionButton addTarget:self
+                                        action:@selector(leaveGroup)
+                              forControlEvents:UIControlEventTouchUpInside];
+        [self.deleteConnectionButton setBackgroundColor:[MRCommon colorFromHexString:@"#FF0000"]];
+    } else if (self.launchMode == kContactDetailLaunchModeSuggestedGroup) {
+        [self.deleteConnectionButton setTitle:NSLocalizedString(kJoinGroup, "")
+                                     forState:UIControlStateNormal];
+        [self.deleteConnectionButton addTarget:self
+                                        action:@selector(removeGroup)
+                              forControlEvents:UIControlEventTouchUpInside];
+        [self.deleteConnectionButton setBackgroundColor:[MRCommon colorFromHexString:@"#20B18A"]];
     } else {
         [self.deleteConnectionButton setTitle:NSLocalizedString(kDeleteConnection, "")
                                forState:UIControlStateNormal];
@@ -441,14 +455,20 @@
                                               otherButtonTitles:@"Pending Connections", @"Add Connections", nil];
     }
     
-    canEditGroup = self.mainGroup && (self.mainGroup.admin_id == [MRAppControl sharedHelper].userRegData[@"doctorId"]);
+    if (self.mainGroup != nil && self.mainGroup.admin_id != nil) {
+        NSInteger adminId = self.mainGroup.admin_id.longValue;
+        NSNumber *loggedInDoctorId = [MRAppControl sharedHelper].userRegData[@"doctorId"];
+        if (loggedInDoctorId != nil && loggedInDoctorId.longValue == adminId) {
+            canEditGroup = true;
+        }
+    }
     
     if (self.mainGroup) {
         self.moreOptions = [[UIActionSheet alloc] initWithTitle:@"More Options"
                                                        delegate:self
                                               cancelButtonTitle:@"Cancel"
                                          destructiveButtonTitle:nil
-                                              otherButtonTitles:@"Pending Members", @"Leave Group", nil];
+                                              otherButtonTitles:@"Pending Members", nil];
         if (canEditGroup) {
             self.moreOptions = [[UIActionSheet alloc] initWithTitle:@"More Options"
                                                            delegate:self
@@ -467,14 +487,6 @@
             MRAddMembersViewController* detailViewController = [[MRAddMembersViewController alloc] init];
             detailViewController.groupID = 0;
             [self.navigationController pushViewController:detailViewController animated:NO];
-        }else{
-            if (canEditGroup) {
-                MRAddMembersViewController* detailViewController = [[MRAddMembersViewController alloc] init];
-                detailViewController.groupID = [self.mainGroup.group_id longValue];
-                [self.navigationController pushViewController:detailViewController animated:NO];
-            }else{
-                [self leaveGroup];
-            }
         }
     }else if (buttonIndex == 0) {
         PendingContactsViewController* pendingContactsViewController = [[PendingContactsViewController alloc] init];
@@ -634,6 +646,7 @@
         tempResults = [tempResults filteredArrayUsingPredicate:predicate];
           if (tempResults != nil && tempResults.count > 0) {
               MRGroup *tempGroup = tempResults.firstObject;
+              self.mainGroup = tempGroup;
               if (tempGroup.members != nil && tempGroup.members.count > 0) {
                   self.contactsUnderGroup = tempGroup.members.allObjects;
               } else {

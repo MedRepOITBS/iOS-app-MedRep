@@ -786,7 +786,7 @@
 }
 
 + (void)getGroupMemberImage:(MRGroupMembers*)member andImageView:(UIImageView*)parentView {
-    if (member.data != nil) {
+    if (member.data != nil && member.data.length > 0) {
         parentView.image = [UIImage imageWithData:member.data];
     } else {
         NSString *fullName = [MRAppControl getGroupMemberName:member];
@@ -841,7 +841,8 @@
 }
 
 + (void)getGroupImage:(MRGroup*)group andImageView:(UIImageView*)parentView {
-    if (group.group_img_data != nil) {
+    if (group.group_img_data != nil && group.group_img_data.length > 0) {
+        id data = group.group_img_data;
         parentView.image = [UIImage imageWithData:group.group_img_data];
     } else if (group.group_name != nil && group.group_name.length > 0) {
         UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:parentView.bounds];
@@ -862,6 +863,8 @@
         }
         subscriptionTitleLabel.text = imageString.length > 2 ? [imageString substringToIndex:2] : imageString;
         [parentView addSubview:subscriptionTitleLabel];
+        
+        [parentView setImage:nil];
     } else {
         parentView.image = [UIImage imageNamed:@"Group"];
     }

@@ -46,6 +46,8 @@ FOUNDATION_EXPORT NSString* const kDefaultDateFormat;
 
 FOUNDATION_EXPORT NSString* const kAddConnection;
 FOUNDATION_EXPORT NSString* const kDeleteConnection;
+FOUNDATION_EXPORT NSString* const kJoinGroup;
+FOUNDATION_EXPORT NSString* const kLeaveGroup;
 
 FOUNDATION_EXPORT NSString* const kConnectionAdded;
 
