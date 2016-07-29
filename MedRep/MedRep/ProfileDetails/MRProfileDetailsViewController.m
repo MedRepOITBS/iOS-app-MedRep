@@ -439,9 +439,15 @@
     
     [_profileObj.interestArea.array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         MRInterestArea * workexp = (MRInterestArea *)obj;
-        [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"INTEREST_AREA_DETAIL",@"type",workexp,@"object" ,nil]];
-
-        
+        if (_profileObj.interestArea.array.count -1 == idx) {
+            [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"INTEREST_AREA_DETAIL",@"type",workexp,@"object",@"YES",@"lastObj" ,nil]];
+            
+        }else{
+            
+            [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"INTEREST_AREA_DETAIL",@"type",workexp,@"object",@"NO",@"lastObj" ,nil]];
+            
+            
+        }
     }];
     
     //[temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"ADD_BUTTON",@"type", nil]];
@@ -539,12 +545,16 @@
          
          basicInfoTableViewCell *cell =(basicInfoTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"basicInfoTableViewCell"];
          if ([valN isEqualToString:@"PUBLICATION_DETAIL"] ) {
+             
              MRPublications * obj  = [valNDict objectForKey:@"object"];
              
              cell.titleOther.text = obj.articleName;
          }else {
-             MRInterestArea * obj  = [valNDict objectForKey:@"object"];
              
+             MRInterestArea * obj  = [valNDict objectForKey:@"object"];
+             if ([[valNDict objectForKey:@"lastObj"] isEqualToString:@"YES"]) {
+                 cell.viewLabel.hidden = YES;
+             }
              cell.titleOther.text = obj.name;
          }
          
@@ -584,8 +594,6 @@
     } else if ([buttonType isEqualToString:@"EDUCATION_QUAL"]){
         
         AddEducationViewController *educationViewController = (AddEducationViewController *)[sb instantiateViewControllerWithIdentifier:@"AddEducationViewController"];
-        
-        
         
         [self.navigationController pushViewController:educationViewController  animated:YES];
         

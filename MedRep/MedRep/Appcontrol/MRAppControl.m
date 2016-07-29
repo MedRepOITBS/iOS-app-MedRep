@@ -192,7 +192,16 @@
 
     if ([temp isKindOfClass:[NSDictionary class]])
     {
-        [self.userRegData setObject:[temp objectForKey:@"data"] forKey:KProfilePicture];
+        
+        id profileDat = [temp objectForKey:@"data"];
+        
+        
+        if (profileDat == [NSNull null] || profileDat == nil || [profileDat isEqualToString:@"<nil>"]) {
+            
+        }else{
+        [self.userRegData setObject:[temp objectForKey:@"data"] forKey:KProfilePicture];    
+        }
+        
     }
 
     [self.userRegData setObject:[NSMutableArray arrayWithObjects:[details objectOrNilForKey:@"mobileNo"],[details objectOrNilForKey:@"phoneNo"], nil] forKey:KMobileNumber];
