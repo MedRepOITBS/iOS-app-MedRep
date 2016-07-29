@@ -755,7 +755,7 @@
 }
 
 + (void)getContactImage:(MRContact*)contact andImageView:(UIImageView*)parentView {
-    if (contact.dPicture != nil) {
+    if (contact.dPicture != nil && contact.dPicture.length > 0) {
         parentView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:
                             [NSURL URLWithString:contact.dPicture]]];
     } else {

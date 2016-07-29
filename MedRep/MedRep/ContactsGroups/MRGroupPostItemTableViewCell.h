@@ -24,7 +24,7 @@
 @optional
 
 - (void)commentButtonTapped:(MRSharePost*)post;
-- (void)likeButtonTapped;
+- (void)likeButtonTapped:(NSInteger)index;
 - (void)shareButtonTapped:(MRSharePost*)groupPost;
 
 @end

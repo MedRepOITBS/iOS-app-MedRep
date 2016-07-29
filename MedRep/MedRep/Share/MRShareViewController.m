@@ -28,6 +28,7 @@
 #import "CommonBoxView.h"
 #import "MRCommentViewController.h"
 #import "MRWebserviceHelper.h"
+#import "MRSharePost.h"
 
 @interface MRShareViewController () <UISearchBarDelegate, SWRevealViewControllerDelegate, MRGroupPostItemTableViewCellDelegate, MRShareOptionsSelectionDelegate,
     CommonBoxViewDelegate,
@@ -246,8 +247,19 @@
 
 
 
-- (void)likeButtonTapped {
-    [self fetchPosts];
+- (void)likeButtonTapped:(NSInteger)index {
+    MRSharePost *currentPost;
+    if (self.posts != nil && self.posts.count > 0) {
+        currentPost = [self.posts objectAtIndex:index];
+    }
+    
+    [[MRWebserviceHelper sharedWebServiceHelper] updateLikes:currentPost.likesCount.longValue
+                                                commentCount:currentPost.commentsCount.longValue
+                                                  shareCount:currentPost.shareCount.longValue
+                                                   messageId:currentPost.sharePostId.longValue
+                                                 withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                     [self fetchPosts];
+                                                 }];
 }
 
 - (void)shareButtonTapped:(MRSharePost*)groupPost {

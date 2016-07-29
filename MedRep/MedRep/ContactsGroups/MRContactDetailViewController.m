@@ -25,6 +25,7 @@
 #import "MRGroupPost.h"
 #import "MRGroup.h"
 #import "MrGroupChildPost.h"
+#import "MRContactsViewController.h"
 
 @interface MRContactDetailViewController () <MRGroupPostItemTableViewCellDelegate, CommonBoxViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MRUpdateMemberProtocol> {
     NSMutableArray *groupsArrayObj;
@@ -332,7 +333,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     //return CGSizeMake(110, collectionView.bounds.size.height);
-    return CGSizeMake(collectionView.bounds.size.width, 60);
+    return CGSizeMake(200, 60);
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionView *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
@@ -436,6 +437,8 @@
         }
     }
     
+     canEditGroup = true;
+    
     if (self.mainGroup) {
         self.moreOptions = [[UIActionSheet alloc] initWithTitle:@"More Options"
                                                        delegate:self
@@ -447,7 +450,7 @@
                                                            delegate:self
                                                   cancelButtonTitle:@"Cancel"
                                              destructiveButtonTitle:nil
-                                                  otherButtonTitles:@"Pending Members", @"Invite Members", @"Update Group", @"Delete Group", @"Leave Group", nil];
+                                                  otherButtonTitles:@"Pending Members", @"Invite Members", @"Update Group", @"Leave Group", nil];
         }
     }
     
@@ -456,9 +459,9 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
-        if (!_mainGroup) {
+        if (self.mainGroup != nil && canEditGroup) {
             MRAddMembersViewController* detailViewController = [[MRAddMembersViewController alloc] init];
-            detailViewController.groupID = 0;
+            detailViewController.groupID = self.mainGroup.group_id.longValue;
             [self.navigationController pushViewController:detailViewController animated:NO];
         }
     }else if (buttonIndex == 0) {
@@ -568,11 +571,17 @@
 
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (alertView.tag == 11) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
+                                                            object:nil];
+        
         [self.navigationController popViewControllerAnimated:YES];
     }
     
     if (alertView.tag == 12) {
         if (buttonIndex) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
+                                                                object:nil];
+            
             [self deleteConnection];
         }
     }
@@ -710,7 +719,7 @@
                                                                           object:nil];
                       
                       for (UIViewController *vc in self.parentViewController.childViewControllers) {
-                          if ([vc isKindOfClass:[MRContactDetailViewController class]]) {
+                          if ([vc isKindOfClass:[MRContactsViewController class]]) {
                               [self.navigationController popToViewController:vc animated:YES];
                           }
                       }

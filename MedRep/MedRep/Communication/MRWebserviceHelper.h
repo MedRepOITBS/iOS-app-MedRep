@@ -239,7 +239,6 @@ withComplitionHandler:(completionHandler)responceHandler;
 -(void)getContactsAndGroups:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler;
 
 -(void)getShare:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler;
--(void)updateLikeCounts:(NSDictionary *)reqDict withHandler:(completionHandler) responseHandler;
 
 -(void)updateComment:(NSDictionary *)reqDict withHandler:(completionHandler) responseHandler;
 -(void)updateShareCount:(NSDictionary *)reqDict withHandler:(completionHandler) responseHandler;
@@ -253,6 +252,10 @@ withComplitionHandler:(completionHandler)responceHandler;
 - (void)fetchNewsAndUpdatesListwithHandler:(completionHandler)responceHandler;
 
 - (void)postNewTopic:(NSDictionary*)reqDict withHandler:(completionHandler)responceHandler;
+
+- (void)updateLikes:(NSInteger)likeCount commentCount:(NSInteger)commentCount
+         shareCount:(NSInteger)shareCount  messageId:(NSInteger)messageId
+        withHandler:(completionHandler)responceHandler;
 
 @end
 

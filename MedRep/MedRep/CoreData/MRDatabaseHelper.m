@@ -1393,9 +1393,9 @@ static MRDatabaseHelper *sharedDataManager = nil;
     [[MRWebserviceHelper sharedWebServiceHelper] addMembers:dictReq withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
         [MRCommon stopActivityIndicator];
         if (status) {
-            if (handler != nil) {
-                [MRCommon showAlert:NSLocalizedString(kConnectionAdded, "") delegate:nil];
+            if (handler != nil) {\
                 handler([NSNumber numberWithBool:status]);
+                [MRCommon showAlert:NSLocalizedString(kConnectionAdded, "") delegate:nil];
             }
         }
         else {
@@ -1409,8 +1409,8 @@ static MRDatabaseHelper *sharedDataManager = nil;
                          [MRCommon stopActivityIndicator];
                          if (status) {
                              if (handler != nil) {
-                                 [MRCommon showAlert:NSLocalizedString(kConnectionAdded, "") delegate:nil];
                                  handler([NSNumber numberWithBool:status]);
+                                 [MRCommon showAlert:NSLocalizedString(kConnectionAdded, "") delegate:nil];
                              }
                          }else
                          {

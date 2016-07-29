@@ -58,6 +58,8 @@
                         [self.navigationController popToViewController:vc animated:YES];
                     }
                 }
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
+                                                                    object:nil];
             }
             else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
             {
@@ -73,6 +75,9 @@
                                      [self.navigationController popToViewController:vc animated:YES];
                                  }
                              }
+                             
+                             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
+                                                                                 object:nil];
                          }else
                          {
                              NSArray *erros =  [details componentsSeparatedByString:@"-"];
@@ -103,6 +108,9 @@
                         [self.navigationController popToViewController:vc animated:YES];
                     }
                 }
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
+                                                                    object:nil];
             }
             else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
             {
@@ -118,6 +126,9 @@
                                      [self.navigationController popToViewController:vc animated:YES];
                                  }
                              }
+                             
+                             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
+                                                                                 object:nil];
                          }else
                          {
                              NSArray *erros =  [details componentsSeparatedByString:@"-"];
@@ -152,6 +163,9 @@
                         [self.navigationController popToViewController:vc animated:YES];
                     }
                 }
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
+                                                                    object:nil];
             }
             else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
             {
@@ -167,6 +181,9 @@
                                      [self.navigationController popToViewController:vc animated:YES];
                                  }
                              }
+                             
+                             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
+                                                                                 object:nil];
                          }else
                          {
                              NSArray *erros =  [details componentsSeparatedByString:@"-"];
@@ -197,6 +214,9 @@
                         [self.navigationController popToViewController:vc animated:YES];
                     }
                 }
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
+                                                                    object:nil];
             }
             else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
             {
@@ -212,6 +232,9 @@
                                      [self.navigationController popToViewController:vc animated:YES];
                                  }
                              }
+                             
+                             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
+                                                                                 object:nil];
                          }else
                          {
                              NSArray *erros =  [details componentsSeparatedByString:@"-"];
@@ -337,6 +360,7 @@
 //        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"status like [cd]%@", @"Pending"];
 //        fileredContacts = [[MRDataManger sharedManager] fetchObjectList:kContactEntity predicate:predicate];
         fileredContacts = result;
+        _pendingContactListArra = result;
         [self refreshLabels];
     }];
 }
@@ -344,6 +368,7 @@
 -(void)getPendingMembers {
     [MRDatabaseHelper getPendingGroupMembers:_gid andResponseHandler:^(id result) {
         fileredContacts = result;
+        _pendingContactListArra = result;
         [self refreshLabels];
     }];
 }
@@ -351,6 +376,7 @@
 -(void)getPendingGroups {
     [MRDatabaseHelper getPendingGroups:^(id result) {
         fileredContacts = result;
+        _pendingContactListArra = result;
         [self refreshLabels];
     }];
 }

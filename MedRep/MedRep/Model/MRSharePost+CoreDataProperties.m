@@ -57,7 +57,9 @@
 }
 
 -(void)setMessage_id:(NSString *)message_id{
-    self.parentSharePostId  = message_id;
+    if (message_id != nil) {
+        self.sharePostId  = [NSNumber numberWithLongLong:message_id.longLongValue];
+    }
 }
 -(void)setGroup_id:(NSNumber *)group_id{
     

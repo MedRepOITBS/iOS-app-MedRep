@@ -20,6 +20,7 @@
 @dynamic dPicture;
 @dynamic firstName;
 @dynamic lastName;
+@dynamic member_id;
 @dynamic profilePic;
 @dynamic roleId;
 @dynamic status;
@@ -32,6 +33,14 @@
 
 - (void)setProfilePic:(NSData *)profilePic {
     
+}
+
+- (void)setMember_id:(NSNumber *)member_id {
+    NSInteger memberId = 0;
+    if (member_id != nil) {
+        memberId = member_id.longValue;
+    }
+    self.doctorId = [NSNumber numberWithLong:memberId];
 }
 
 @end

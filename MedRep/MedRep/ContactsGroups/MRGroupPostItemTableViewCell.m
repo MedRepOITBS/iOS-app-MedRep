@@ -49,8 +49,8 @@
     
     tagIndex = tagIndex / 100;
     
-    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(likeButtonTapped)]) {
-        [self.delegate likeButtonTapped];
+    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(likeButtonTapped:)]) {
+        [self.delegate likeButtonTapped:tagIndex];
     }
     [self.parentTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:tagIndex inSection:0]]
                                 withRowAnimation:UITableViewRowAnimationNone];
