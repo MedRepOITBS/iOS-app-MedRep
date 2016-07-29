@@ -490,17 +490,18 @@
          ProfileBasicTableViewCell  *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"ProfileBasicTableViewCell"] forIndexPath:indexPath];
          NSDictionary *userdata = [MRAppControl sharedHelper].userRegData;
          
+         
          NSInteger userType = [MRAppControl sharedHelper].userType;
          
          cell.userNameLbl.text         = _profileObj.designation;
          cell.userLocation.text = _profileObj.location;
-         if ([MRCommon getImageFromBase64Data:[userdata objectForKey:KProfilePicture]] != nil) {
-             cell.profileimageView.image = [MRCommon getImageFromBase64Data:[userdata objectForKey:KProfilePicture]];
-         }
          
          
-        
          
+         NSURL * imageURL = [NSURL URLWithString:[userdata objectForKey:KProfilePicture]];
+         
+         NSData * imageData = [NSData dataWithContentsOfURL:imageURL];
+         cell.profileimageView.image = [UIImage imageWithData:imageData];
          
          return cell;
      } else if([valN isEqualToString:@"ABOUT"]) {
