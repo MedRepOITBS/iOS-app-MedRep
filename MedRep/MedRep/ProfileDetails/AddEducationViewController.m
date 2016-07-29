@@ -145,7 +145,7 @@
     
     BOOL ys =  [MRDatabaseHelper  addEducationQualification:workExpDict];
     if (ys) {
-        [self.navigationController popViewControllerAnimated:YES];
+//        [self.navigationController popViewControllerAnimated:YES];
         
     }
 }

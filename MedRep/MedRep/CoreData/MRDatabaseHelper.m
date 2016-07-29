@@ -1132,6 +1132,17 @@ static MRDatabaseHelper *sharedDataManager = nil;
         
         
         [[MRDataManger sharedManager] saveContext];
+        
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[array lastObject],@"name",nil];
+        NSArray *arr =
+        
+        [[MRWebserviceHelper sharedWebServiceHelper] addInterestArea:[array lastObject] withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+            
+            
+            NSLog(@"%@",responce);
+            
+        }];
+        
         return true;
         
     }
@@ -1178,7 +1189,11 @@ static MRDatabaseHelper *sharedDataManager = nil;
         [[MRDataManger sharedManager] saveContext];
         return true;
     }
-
+//    -(void)addWorkExperience:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
+//    -(void)addInterestArea:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandle
+    
+    
+ 
     
     
     return false;
@@ -1201,7 +1216,27 @@ static MRDatabaseHelper *sharedDataManager = nil;
         
         [profile addWorkExperienceObject:workExp];
         [[MRDataManger sharedManager] saveContext];
+        
+        /*
+         [{
+         "hospital":"Apollo Hospital",
+         "fromDate":"02-06-1987",
+         "toDate":"02-06-1988",
+         "location":"Nellore",
+         "designation":"ENT"
+         }]
+         */
+        
+        
+        [[MRWebserviceHelper sharedWebServiceHelper] addWorkExperience:workExpDict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+            
+            
+            
+            
+        }];
+        
         return true;
+        
     }
     return false;
     

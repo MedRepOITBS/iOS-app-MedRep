@@ -164,7 +164,7 @@ self.navigationItem.title  = @"Add Experience";
     
   BOOL ys =  [MRDatabaseHelper  addWorkExperience:workExpDict];
     if (ys) {
-        [self.navigationController popViewControllerAnimated:YES];
+//        [self.navigationController popViewControllerAnimated:YES];
         
     }
 }
