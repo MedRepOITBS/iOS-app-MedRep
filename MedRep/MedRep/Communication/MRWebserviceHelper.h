@@ -242,7 +242,10 @@ withComplitionHandler:(completionHandler)responceHandler;
 
 -(void)updateComment:(NSDictionary *)reqDict withHandler:(completionHandler) responseHandler;
 -(void)updateShareCount:(NSDictionary *)reqDict withHandler:(completionHandler) responseHandler;
-
+-(void)addWorkExperience:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
+-(void)addInterestArea:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
+-(void)addPulblishArticle:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
+-(void)addProfileAbout:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
 
 + (id)parseNetworkResponse:(Class)inEntityClass andData:(NSArray*)data;
 
