@@ -31,12 +31,15 @@
     NSMutableArray *groupMemberArray;
     BOOL canEditGroup;
 }
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contactDetailHeightConstraint;
-@property (weak, nonatomic) IBOutlet UIView *dividerView;
+@property (weak, nonatomic) IBOutlet UIView *groupMembersView;
+@property (weak, nonatomic) IBOutlet UILabel *emptyPostsLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *groupMembersHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *groupDescHeightConstraint;
+
+@property (weak, nonatomic) IBOutlet UIButton *postTopicButton;
 
 @property (weak, nonatomic) IBOutlet UIButton *deleteConnectionButton;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionHeight;
 @property (weak, nonatomic) IBOutlet UIImageView* mainImageView;
 @property (weak, nonatomic) IBOutlet UILabel* mainLabel;
 @property (weak, nonatomic) IBOutlet UILabel *subHeadingLabel;
@@ -45,9 +48,6 @@
 @property (weak, nonatomic) IBOutlet UIButton* plusBtn;
 @property (weak, nonatomic) IBOutlet UILabel *city;
 @property (strong, nonatomic) UIActionSheet* moreOptions;
-@property (weak, nonatomic) IBOutlet UILabel *therapueticArea;
-@property (weak, nonatomic) IBOutlet UIView *contactDetailView;
-@property (weak, nonatomic) IBOutlet UIView *groupDetailView;
 @property (weak, nonatomic) IBOutlet UILabel *groupDesc;
 
 @property (strong, nonatomic) NSArray* contactsUnderGroup;
@@ -137,13 +137,15 @@
 }
 
 - (void)setupUIWithContactDetails {
-    self.contactDetailHeightConstraint.constant = 70.0;
     
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.dividerView
-                                                          attribute:NSLayoutAttributeBottom
-                                                           relatedBy:NSLayoutRelationEqual
-                                                              toItem:self.contactDetailView attribute:NSLayoutAttributeTop
-                                                          multiplier:1.0f constant:10.0f]];
+    [self.groupDesc setHidden:YES];
+    [self.groupMembersView setHidden:true];
+    self.groupMembersHeightConstraint.constant = 0;
+    self.groupDescHeightConstraint.constant = 0;
+    
+    _deleteBtnHeight.constant = 40;
+    _city.hidden = NO;
+    _plusBtn.hidden = YES;
     
     [MRAppControl getContactImage:self.mainContact andImageView:self.mainImageView];
     self.mainLabel.text = [MRAppControl getContactName:self.mainContact];
@@ -155,7 +157,7 @@
         therapauticArea = _mainContact.therapeuticName;
     }
     
-    _therapueticArea.text = [NSString stringWithFormat:@"Therapeutic Area: %@", therapauticArea];
+    [self.subHeadingLabel setText:[NSString stringWithFormat:@"Therapeutic Area: %@", therapauticArea]];
     
     NSString *city = @"";
     if (_mainContact.city != nil && _mainContact.city.length > 0) {
@@ -167,31 +169,24 @@
     self.groupsUnderContact = [self.mainContact.groups allObjects];
     if (self.mainContact.comments != nil && self.mainContact.comments.count > 0) {
         self.posts = self.mainContact.comments.allObjects;
+        [self.emptyPostsLabel setHidden:YES];
     } else {
         self.posts = [[NSArray alloc] init];
+        [self.emptyPostsLabel setHidden:NO];
     }
-    [self.subHeadingLabel setHidden:YES];
-    
-    _collectionHeight.constant = 0;
-    _deleteBtnHeight.constant = 40;
-    _contactDetailView.hidden = NO;
-    _groupDetailView.hidden = YES;
-    _plusBtn.hidden = YES;
 }
 
 - (void)setupUIWithGroupDetails {
     self.navigationItem.title = @"Group Details";
+    
+    [self.groupMembersView setHidden:false];
+    [_city setHidden:YES];
+    
     [MRAppControl getGroupImage:self.mainGroup andImageView:self.mainImageView];
     self.mainLabel.text = self.mainGroup.group_name;
     self.subHeadingLabel.text = self.mainGroup.group_short_desc;
     self.groupDesc.text = self.mainGroup.group_long_desc;
     
-    self.contactDetailHeightConstraint.constant = 0.0;
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.dividerView attribute:NSLayoutAttributeTop
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.groupDetailView attribute:NSLayoutAttributeBottom
-                                                         multiplier:1.0f constant:10.0f]];
-
     if (self.mainGroup.members != nil && self.mainGroup.members.count > 0) {
         self.contactsUnderGroup = [self.mainGroup.members allObjects];
     } else {
@@ -200,8 +195,10 @@
     
     if (self.mainGroup.comment != nil && self.mainGroup.comment.count > 0) {
         self.posts = [self.mainGroup.comment allObjects];
+        [self.emptyPostsLabel setHidden:YES];
     } else {
         self.posts = [[NSArray alloc] init];
+        [self.emptyPostsLabel setHidden:NO];
     }
 
     [self getGroupMembersStatusWithGroupId];
@@ -761,5 +758,9 @@
                       }
                   }];
 }
+
+- (IBAction)postTopicButtonTapped:(id)sender {
+}
+
 
 @end
