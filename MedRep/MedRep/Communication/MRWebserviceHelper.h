@@ -240,12 +240,17 @@ withComplitionHandler:(completionHandler)responceHandler;
 
 -(void)getShare:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler;
 
--(void)updateComment:(NSDictionary *)reqDict withHandler:(completionHandler) responseHandler;
--(void)updateShareCount:(NSDictionary *)reqDict withHandler:(completionHandler) responseHandler;
--(void)addWorkExperience:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
--(void)addInterestArea:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
--(void)addPulblishArticle:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
--(void)addProfileAbout:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
+-(void)updateComment:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler;
+
+-(void)updateShareCount:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler;
+
+-(void)addWorkExperience:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler;
+
+-(void)addInterestArea:(NSArray *)reqDict withHandler:(completionHandler)responseHandler;
+
+-(void)addPulblishArticle:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler;
+
+-(void)addProfileAbout:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler;
 
 + (id)parseNetworkResponse:(Class)inEntityClass andData:(NSArray*)data;
 
@@ -255,6 +260,9 @@ withComplitionHandler:(completionHandler)responceHandler;
 - (void)fetchNewsAndUpdatesListwithHandler:(completionHandler)responceHandler;
 
 - (void)postNewTopic:(NSDictionary*)reqDict withHandler:(completionHandler)responceHandler;
+
+
+-(void)addEducationArea:(NSArray *)reqDict withHandler: (completionHandler)responseHandler;
 
 - (void)updateLikes:(NSInteger)likeCount commentCount:(NSInteger)commentCount
          shareCount:(NSInteger)shareCount  messageId:(NSInteger)messageId

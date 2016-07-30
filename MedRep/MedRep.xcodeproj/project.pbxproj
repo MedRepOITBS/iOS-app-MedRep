@@ -729,6 +729,7 @@
 		B4E02C6B1D4B0BB0003A1859 /* Drug_Search.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B4E02C651D4B0BB0003A1859 /* Drug_Search.jpg */; };
 		B4E02C6E1D4B2992003A1859 /* UIImage+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E02C6D1D4B2992003A1859 /* UIImage+Helpers.m */; };
 		B4E02C6F1D4B2992003A1859 /* UIImage+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E02C6D1D4B2992003A1859 /* UIImage+Helpers.m */; };
+		B4E02C701D4C391D003A1859 /* MRDatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 797560461BBFE4940034D0AC /* MRDatabaseHelper.m */; };
 		CC0123C11D25A66B001134F3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0123C01D25A66B001134F3 /* CoreGraphics.framework */; };
 		CC0123C21D25A677001134F3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0123C01D25A66B001134F3 /* CoreGraphics.framework */; };
 		CC01BA731D302ACF007E2AEB /* MRCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC01BA711D302ACF007E2AEB /* MRCommentViewController.m */; };
@@ -823,7 +824,6 @@
 		CC7DB0631D0C8BEC007DFE4C /* MRMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F066901B94E13C00D113F0 /* MRMenuTableViewCell.m */; };
 		CC7DB0641D0C8BEC007DFE4C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C127FB1B77C88B00D2F08E /* ViewController.m */; };
 		CC7DB0651D0C8BEC007DFE4C /* MRWebserviceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B781FB1B7916B40070645C /* MRWebserviceHelper.m */; };
-		CC7DB0661D0C8BEC007DFE4C /* MRDatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 797560461BBFE4940034D0AC /* MRDatabaseHelper.m */; };
 		CC7DB0671D0C8BEC007DFE4C /* MRReadNotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 795366141BA0B7A90021CE4D /* MRReadNotificationsViewController.m */; };
 		CC7DB0681D0C8BEC007DFE4C /* MRDoctorScoreTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79421F181BB83A4B0055D9B7 /* MRDoctorScoreTableCell.m */; };
 		CC7DB0691D0C8BEC007DFE4C /* MRConvertAppointmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 796E937A1BB867FF0031EA34 /* MRConvertAppointmentViewController.m */; };
@@ -5676,7 +5676,6 @@
 				CC7DB0641D0C8BEC007DFE4C /* ViewController.m in Sources */,
 				B4B4F13C1D39857E00EFCC0E /* MRProfile+CoreDataProperties.m in Sources */,
 				CC7DB0651D0C8BEC007DFE4C /* MRWebserviceHelper.m in Sources */,
-				CC7DB0661D0C8BEC007DFE4C /* MRDatabaseHelper.m in Sources */,
 				B4B4F1891D39E53E00EFCC0E /* NSShortMonthComponent.m in Sources */,
 				B4B4F1681D39E52600EFCC0E /* NSObject+Array.m in Sources */,
 				B4B4F1831D39E53E00EFCC0E /* NSDayComponent.m in Sources */,
@@ -5705,6 +5704,7 @@
 				CC7DB0701D0C8BEC007DFE4C /* MRDocotrActivityScoreViewController.m in Sources */,
 				CC9BCEC21D0F2A3900702EBC /* MRTransformViewController.m in Sources */,
 				CC7DB0711D0C8BEC007DFE4C /* MRHomeViewContoller.m in Sources */,
+				B4E02C701D4C391D003A1859 /* MRDatabaseHelper.m in Sources */,
 				B4B4F1901D3BF7CE00EFCC0E /* CommonEducationTableViewCell.m in Sources */,
 				B40E13931D3ED64B005830DA /* AddEducationViewController.m in Sources */,
 				CC7DB2C01D0CC433007DFE4C /* PieMenu.m in Sources */,
@@ -5901,6 +5901,7 @@
 		CC7DB2141D0C8BEC007DFE4C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Ramesh Meesala (PR3BTD2UVE)";
@@ -5917,6 +5918,7 @@
 		CC7DB2151D0C8BEC007DFE4C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Ramesh Meesala (PR3BTD2UVE)";
