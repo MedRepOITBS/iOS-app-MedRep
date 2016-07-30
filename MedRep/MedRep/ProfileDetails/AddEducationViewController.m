@@ -97,10 +97,10 @@
     
     [formatter setDateFormat:@"YYYY"];
     stringFromDate = [formatter stringFromDate:_picker.date];
-    if (_currentSelectedTextField.tag == 500) {
+    if (_currentSelectedTextField.tag == 1200) {
         _fromYYYY = stringFromDate;
     }
-    else if(_currentSelectedTextField.tag == 502) {
+    else if(_currentSelectedTextField.tag == 1201) {
         _toYYYY = stringFromDate;
         
     }

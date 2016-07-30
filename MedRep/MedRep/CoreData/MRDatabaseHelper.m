@@ -1135,7 +1135,10 @@ static MRDatabaseHelper *sharedDataManager = nil;
         
         NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[array lastObject],@"name",nil];
         
-        [[MRWebserviceHelper sharedWebServiceHelper] addInterestArea:[array lastObject] withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        
+        NSMutableArray *array = [[NSMutableArray alloc] init];
+        [array addObject: dict];
+        [[MRWebserviceHelper sharedWebServiceHelper] addInterestArea:array withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
             
             
             NSLog(@"%@",responce);
@@ -1186,6 +1189,33 @@ static MRDatabaseHelper *sharedDataManager = nil;
         
         [profile addEducationlQualificationObject:educationQualification];
         [[MRDataManger sharedManager] saveContext];
+        
+//        NSDictionary * workExpDict = [[NSDictionary alloc] initWithObjectsAndKeys:_degree,@"degree",_institute,@"collegeName",[NSString stringWithFormat:@"%@ %@",_fromYYYY,_toYYYY],@"yearOfPassout",_speciality,@"course",_type,@"aggregate", nil];
+
+//  addEducationArea:(NSArray *)reqDict withHandler: (completionHandler)responseHandler
+        
+        /*
+         [
+         {"collegeName":"VRSEC",
+         "course":"BTECH",
+         "aggregate":77.76,
+         "yearOfPassout":2000
+         }
+         ]
+         */
+    
+        NSMutableArray *arrayObj = [[NSMutableArray alloc] init];
+        
+        [arrayObj addObject:dictonary];
+        
+        [[MRWebserviceHelper sharedWebServiceHelper] addEducationArea:arrayObj withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+            
+            
+            NSLog(@"%@",responce);
+            
+        }];
+
+        
         return true;
     }
 //    -(void)addWorkExperience:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;

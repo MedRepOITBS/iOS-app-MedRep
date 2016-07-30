@@ -213,7 +213,10 @@
     self.serviceType = kMRWebServiceTypeAddMemberToGroup;
     [self sendServiceRequest:urlRequest withHandler:responceHandler];
 }
--(void)addWorkExperience:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler{
+
+
+
+-(void)addWorkExperience:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler{
     
     NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/api/doctor/info/workexperience/add?access_token=%@",kBaseURL,[MRDefaults objectForKey:kAuthenticationToken]];
     
@@ -229,10 +232,29 @@
     [urlRequest setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[jsonData length]] forHTTPHeaderField:@"Content-Length"];
     [urlRequest setHTTPBody: jsonData];
     self.serviceType = kMRWebServiceTypeAddMember;
-    [self sendServiceRequest:urlRequest withHandler:responceHandler];
+    [self sendServiceRequest:urlRequest withHandler:responseHandler];
 }
-
--(void)addInterestArea:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler{
+-(void)addEducationArea:(NSArray *)reqDict withHandler: (completionHandler)responseHandler{
+    
+    
+    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/api/doctor/info/education/add?access_token=%@",kBaseURL,[MRDefaults objectForKey:kAuthenticationToken]];
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:reqDict
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:nil];
+    NSURL *url = [NSURL URLWithString:stringFormOfUrl];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [urlRequest setTimeoutInterval:120];
+    [urlRequest setHTTPMethod:@"POST"];
+    [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [urlRequest setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[jsonData length]] forHTTPHeaderField:@"Content-Length"];
+    [urlRequest setHTTPBody: jsonData];
+    self.serviceType = kMRWebServiceTypeAddMember;
+    [self sendServiceRequest:urlRequest withHandler:responseHandler];
+}
+-(void)addInterestArea:(NSArray *)reqDict withHandler:(completionHandler)responseHandler
+{
     
     NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/api/doctor/info/interests/add?access_token=%@",kBaseURL,[MRDefaults objectForKey:kAuthenticationToken]];
     
@@ -248,11 +270,11 @@
     [urlRequest setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[jsonData length]] forHTTPHeaderField:@"Content-Length"];
     [urlRequest setHTTPBody: jsonData];
     self.serviceType = kMRWebServiceTypeAddMember;
-    [self sendServiceRequest:urlRequest withHandler:responceHandler];
+    [self sendServiceRequest:urlRequest withHandler:responseHandler];
 }
 
 
--(void)addPulblishArticle:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler{
+-(void)addPulblishArticle:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler{
     
     NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/api/doctor/info/publications/add?access_token=%@",kBaseURL,[MRDefaults objectForKey:kAuthenticationToken]];
     
@@ -268,13 +290,13 @@
     [urlRequest setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[jsonData length]] forHTTPHeaderField:@"Content-Length"];
     [urlRequest setHTTPBody: jsonData];
     self.serviceType = kMRWebServiceTypeAddMember;
-    [self sendServiceRequest:urlRequest withHandler:responceHandler];
+    [self sendServiceRequest:urlRequest withHandler:responseHandler];
 }
 
 
 
 
--(void)addProfileAbout:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler{
+-(void)addProfileAbout:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler{
     
     NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/api/doctor/info/about/add?access_token=%@",kBaseURL,[MRDefaults objectForKey:kAuthenticationToken]];
     
@@ -290,7 +312,7 @@
     [urlRequest setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[jsonData length]] forHTTPHeaderField:@"Content-Length"];
     [urlRequest setHTTPBody: jsonData];
     self.serviceType = kMRWebServiceTypeAddMember;
-    [self sendServiceRequest:urlRequest withHandler:responceHandler];
+    [self sendServiceRequest:urlRequest withHandler:responseHandler];
 }
 
 
