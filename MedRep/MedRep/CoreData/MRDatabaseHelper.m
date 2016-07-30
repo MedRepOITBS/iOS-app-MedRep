@@ -1134,7 +1134,6 @@ static MRDatabaseHelper *sharedDataManager = nil;
         [[MRDataManger sharedManager] saveContext];
         
         NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[array lastObject],@"name",nil];
-        NSArray *arr =
         
         [[MRWebserviceHelper sharedWebServiceHelper] addInterestArea:[array lastObject] withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
             

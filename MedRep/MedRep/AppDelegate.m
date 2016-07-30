@@ -235,4 +235,13 @@
     }
 }
 
+#pragma mark - Push Notification handling
+-(BOOL)application:(UIApplication *)application
+           openURL:(NSURL *)url
+ sourceApplication:(NSString *)sourceApplication
+        annotation:(id)annotation {
+    NSLog(@"received message, host : %@, path : %@", [url host], [url path]);
+    return true;
+}
+
 @end
