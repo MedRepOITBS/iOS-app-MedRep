@@ -44,6 +44,7 @@
         <attribute name="group_mime_type" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="group_name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="group_short_desc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imageUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="member" optional="YES" transient="YES" attributeType="Binary" syncable="YES"/>
         <relationship name="comment" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MRPostedReplies" inverseName="groupRelationship" inverseEntity="MRPostedReplies" syncable="YES"/>
         <relationship name="members" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MRGroupMembers" inverseName="groups" inverseEntity="MRGroupMembers" syncable="YES"/>
@@ -122,18 +123,28 @@
     </entity>
     <entity name="MRPostedReplies" representedClassName="MRPostedReplies" syncable="YES">
         <attribute name="contactId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="contentType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="contentType" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="group_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="groupId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="member_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="message" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="message_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="message_type" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="parentSharePostId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="post_date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="postedBy" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="postedByProfilePic" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="postedOn" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="postedReplyId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="receiver_Id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="share_date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="topic_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="contactRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MRContact" inverseName="comments" inverseEntity="MRContact" syncable="YES"/>
         <relationship name="groupRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MRGroup" inverseName="comment" inverseEntity="MRGroup" syncable="YES"/>
+        <relationship name="sharePostRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MRSharePost" inverseName="postedReplies" inverseEntity="MRSharePost" syncable="YES"/>
     </entity>
     <entity name="MRProfile" representedClassName="MRProfile" syncable="YES">
         <attribute name="designation" optional="YES" attributeType="String" syncable="YES"/>
@@ -163,35 +174,44 @@
         <attribute name="roleId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="MRSharePost" representedClassName="MRSharePost" syncable="YES">
+        <attribute name="comment_count" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="commentsCount" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="contactId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="contentType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="content_type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contentType" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="detail_desc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="detailedText" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="doctor_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="group_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="groupId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="likes_count" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="likesCount" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="member_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="message" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="message_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="message_type" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="objectData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="parent_share_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="parentSharePostId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="parentTransformPostId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="post_date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="posted_on" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="postedOn" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="receiver_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="share_count" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="share_date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="shareCount" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="sharedByProfileId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="sharedByProfileName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="shareddByProfilePic" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="sharePostId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="short_desc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="shortText" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="source" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title_desc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="titleDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="topic_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="postedReplies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MRPostedReplies" syncable="YES"/>
+        <relationship name="postedReplies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MRPostedReplies" inverseName="sharePostRelationship" inverseEntity="MRPostedReplies" syncable="YES"/>
     </entity>
     <entity name="MRSuggestedContact" representedClassName="MRContact" syncable="YES">
         <attribute name="contactId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -243,19 +263,19 @@
         <element name="EducationalQualifications" positionX="-9" positionY="162" width="128" height="120"/>
         <element name="MRCompanyDetails" positionX="-18" positionY="27" width="128" height="165"/>
         <element name="MRContact" positionX="-36" positionY="135" width="128" height="300"/>
-        <element name="MRGroup" positionX="-27" positionY="144" width="128" height="195"/>
+        <element name="MRGroup" positionX="-27" positionY="144" width="128" height="210"/>
         <element name="MrGroupChildPost" positionX="-27" positionY="144" width="128" height="90"/>
         <element name="MRGroupMembers" positionX="-36" positionY="135" width="128" height="315"/>
         <element name="MRGroupPost" positionX="-18" positionY="153" width="128" height="195"/>
         <element name="MRInterestArea" positionX="-18" positionY="153" width="128" height="60"/>
         <element name="MRNotifications" positionX="-36" positionY="63" width="128" height="420"/>
         <element name="MRNotificationType" positionX="-36" positionY="9" width="128" height="90"/>
-        <element name="MRPostedReplies" positionX="-18" positionY="153" width="128" height="240"/>
+        <element name="MRPostedReplies" positionX="-18" positionY="153" width="128" height="390"/>
         <element name="MRProfile" positionX="-36" positionY="135" width="128" height="150"/>
         <element name="MRPublications" positionX="0" positionY="171" width="128" height="90"/>
         <element name="MRReplies" positionX="-36" positionY="135" width="128" height="120"/>
         <element name="MRRole" positionX="-63" positionY="-18" width="128" height="105"/>
-        <element name="MRSharePost" positionX="-27" positionY="144" width="128" height="480"/>
+        <element name="MRSharePost" positionX="-27" positionY="144" width="128" height="615"/>
         <element name="MRSuggestedContact" positionX="-9" positionY="162" width="128" height="105"/>
         <element name="MRTherapeuticArea" positionX="-54" positionY="-9" width="128" height="90"/>
         <element name="MRTransformPost" positionX="-36" positionY="135" width="128" height="435"/>

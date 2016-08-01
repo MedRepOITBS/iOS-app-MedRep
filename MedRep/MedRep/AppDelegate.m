@@ -60,15 +60,6 @@
     BOOL appRegisteredForAPNS = [[UIApplication sharedApplication] isRegisteredForRemoteNotifications];
     if (appRegisteredForAPNS == false) {
         
-        // Dummy Code
-        
-        // Launched from push notification
-        self.notificationViewController = [[NotificationUUIDViewController alloc] initWithNibName:@"NotificationUUIDViewController" bundle:nil];
-        self.notificationViewController.appWindow = self.window;
-        
-        self.window.rootViewController = self.notificationViewController;
-        
-    
         if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)])
         {
             UIUserNotificationType types = UIUserNotificationTypeSound | UIUserNotificationTypeBadge | UIUserNotificationTypeAlert;
@@ -84,10 +75,9 @@
         {
             //[[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
         }
-    } else {
-        MRAppControl *appController = [MRAppControl sharedHelper];
-        [appController launchWithApplicationMainWindow:self.window];
     }
+    MRAppControl *appController = [MRAppControl sharedHelper];
+    [appController launchWithApplicationMainWindow:self.window];
 }
 
 - (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {

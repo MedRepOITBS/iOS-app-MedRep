@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -105,9 +105,7 @@
                     <constraint firstItem="rNP-m8-iBC" firstAttribute="leading" secondItem="jhR-Qo-e9G" secondAttribute="leading" id="3WW-i2-Jus"/>
                     <constraint firstItem="a73-kz-f15" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="3vv-sp-PSq"/>
                     <constraint firstItem="jhR-Qo-e9G" firstAttribute="leading" secondItem="a73-kz-f15" secondAttribute="trailing" constant="11" id="EE5-DM-gYK"/>
-                    <constraint firstItem="vje-fL-WVv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="49" id="G8W-wT-cc8"/>
                     <constraint firstItem="ej0-hE-p3i" firstAttribute="leading" secondItem="jhR-Qo-e9G" secondAttribute="leading" id="H2q-fa-iMA"/>
-                    <constraint firstItem="ej0-hE-p3i" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="49" id="NEc-X1-b5e"/>
                     <constraint firstAttribute="trailing" secondItem="vje-fL-WVv" secondAttribute="trailing" constant="8" id="Ncz-LU-m6H"/>
                     <constraint firstItem="jhR-Qo-e9G" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="d0b-Ot-Kj5"/>
                     <constraint firstAttribute="trailing" secondItem="ej0-hE-p3i" secondAttribute="trailing" constant="8" id="eUb-dy-BC7"/>
@@ -116,19 +114,9 @@
                     <constraint firstAttribute="trailing" secondItem="rNP-m8-iBC" secondAttribute="trailing" constant="8" id="mhP-H0-JU7"/>
                     <constraint firstItem="rNP-m8-iBC" firstAttribute="top" secondItem="jhR-Qo-e9G" secondAttribute="bottom" constant="2" id="qWb-RV-jiX"/>
                     <constraint firstAttribute="bottom" secondItem="ej0-hE-p3i" secondAttribute="bottom" constant="12" id="qug-0X-pf6"/>
-                    <constraint firstItem="rNP-m8-iBC" firstAttribute="leading" secondItem="a73-kz-f15" secondAttribute="trailing" constant="11" id="rS8-Tk-NRo"/>
                     <constraint firstItem="ej0-hE-p3i" firstAttribute="top" secondItem="vje-fL-WVv" secondAttribute="bottom" constant="8" id="sLn-Of-26H"/>
-                    <constraint firstItem="ej0-hE-p3i" firstAttribute="baseline" secondItem="jhR-Qo-e9G" secondAttribute="baseline" id="se5-k3-0ba"/>
                     <constraint firstAttribute="trailing" secondItem="jhR-Qo-e9G" secondAttribute="trailing" constant="8" id="w66-X1-22F"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="rS8-Tk-NRo"/>
-                        <exclude reference="G8W-wT-cc8"/>
-                        <exclude reference="NEc-X1-b5e"/>
-                        <exclude reference="se5-k3-0ba"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="commentCountLabel" destination="9P6-RJ-8Rw" id="Tqh-GH-h2S"/>
@@ -139,6 +127,7 @@
                 <outlet property="likeView" destination="ryj-ok-xYs" id="QsH-kA-tQ2"/>
                 <outlet property="postImageHeightConstraint" destination="Xjp-iu-BvE" id="KRa-uq-Daz"/>
                 <outlet property="postImageView" destination="vje-fL-WVv" id="zaW-DG-Fnl"/>
+                <outlet property="postImageViewTopConstraint" destination="2yR-Zr-8to" id="rAb-yS-7nw"/>
                 <outlet property="postLabel" destination="rNP-m8-iBC" id="p8p-Jh-kWf"/>
                 <outlet property="profilePicImageView" destination="a73-kz-f15" id="OAD-qC-l88"/>
                 <outlet property="profilePicWidthConstraint" destination="FDH-4E-Gnc" id="eMk-3y-n8f"/>

@@ -22,6 +22,7 @@
 @dynamic group_mime_type;
 @dynamic group_name;
 @dynamic group_short_desc;
+@dynamic imageUrl;
 @dynamic member;
 @dynamic comment;
 @dynamic members;

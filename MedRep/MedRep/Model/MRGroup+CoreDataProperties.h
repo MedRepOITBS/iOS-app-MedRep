@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *group_mime_type;
 @property (nullable, nonatomic, retain) NSString *group_name;
 @property (nullable, nonatomic, retain) NSString *group_short_desc;
+@property (nullable, nonatomic, retain) NSString *imageUrl;
 @property (nullable, nonatomic, retain) NSData *member;
 @property (nullable, nonatomic, retain) NSSet<MRPostedReplies *> *comment;
 @property (nullable, nonatomic, retain) NSSet<MRGroupMembers *> *members;

@@ -59,11 +59,7 @@ NSString* const kNewsAndUpdates = @"News & Updates";
 }
 
 - (void)setSourceName:(NSString *)sourceName {
-    if (self.sourceName == nil || self.sourceName.length == 0) {
-        self.source = kNewsAndUpdates;
-    } else {
-        self.source = self.sourceName;
-    }
+    self.source = sourceName;
 }
 
 @end

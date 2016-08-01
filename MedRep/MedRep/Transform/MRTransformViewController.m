@@ -118,7 +118,7 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self fetchNewsAndUpdates];
+    [self fetchNewsAndUpdates:[self.categories objectAtIndex:self.currentIndex]];
 }
 
 -(void) viewDidAppear:(BOOL)animated{
@@ -186,18 +186,13 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
     NSInteger prevIndex = self.currentIndex;
     self.currentIndex = indexPath.row;
     
+    
     NSString *currentCategory = self.categories[indexPath.row];
-    if (currentCategory != nil && [currentCategory caseInsensitiveCompare:@"Latest"] == NSOrderedSame) {
-        self.filteredData = [self.contentData mutableCopy];
-    } else {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self.source == %@", currentCategory];
-        self.filteredData = [[self.contentData filteredArrayUsingPredicate:predicate] mutableCopy];
-    }
+    [self fetchNewsAndUpdates:currentCategory];
     
     [self.titleCollectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:prevIndex
                                                                            inSection:0],
                                                         indexPath]];
-    [self.contentTableView reloadData];
 }
 
 
@@ -300,9 +295,12 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
             regCell.descLbl.text = transformData.shortArticleDescription;
         }
         
+            NSString *source = @"";
         if (transformData.source != nil && transformData.source.length > 0) {
-            regCell.sourceLabel.text = [NSString stringWithFormat:@"SOURCE : %@", transformData.source];
+            source = transformData.source;
         }
+            
+        regCell.sourceLabel.text = [NSString stringWithFormat:@"SOURCE : %@", source];
     }
     
     return regCell;
@@ -324,11 +322,22 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
 }
 
 #pragma mark - Fetch News & Updates
-- (void)fetchNewsAndUpdates {
-    [MRDatabaseHelper fetchNewsAndUpdates:^(id result) {
+- (void)fetchNewsAndUpdates:(NSString*)category {
+    NSString *methodName = kNewsAndTransformAPIMethodName;
+    if (self.currentIndex == 0) {
+        methodName = kNewsAndUpdatesAPIMethodName;
+        category = nil;
+    }
+    
+    [MRDatabaseHelper fetchNewsAndUpdates:category methodName:methodName
+                              withHandler:^(id result) {
         self.contentData = result;
-        self.filteredData = [self.contentData mutableCopy];
         
+//        NSString *currentCategory = self.categories[self.currentIndex];
+//        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self.source == %@", currentCategory];
+//        self.filteredData = [[self.contentData filteredArrayUsingPredicate:predicate] mutableCopy];
+
+        self.filteredData = self.contentData;
         [self.contentTableView reloadData];
     }];
 }

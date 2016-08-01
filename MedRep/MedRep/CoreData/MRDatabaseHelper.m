@@ -37,6 +37,9 @@ static MRDatabaseHelper *sharedDataManager = nil;
 
 @implementation MRDatabaseHelper
 
+NSString* const kNewsAndUpdatesAPIMethodName = @"getNewsAndUpdates";
+NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
+
 + (MRDatabaseHelper *)sharedHelper
 {
     static dispatch_once_t once;
@@ -1384,17 +1387,27 @@ static MRDatabaseHelper *sharedDataManager = nil;
     
     
 }
-+ (void)fetchNewsAndUpdates:(WebServiceResponseHandler)responseHandler {
+
++ (void)fetchNewsAndUpdates:(NSString*)category
+                 methodName:(NSString*)methodName
+                withHandler:(WebServiceResponseHandler)responseHandler {
     [MRCommon showActivityIndicator:@"Requesting..."];
-    [[MRWebserviceHelper sharedWebServiceHelper] fetchNewsAndUpdatesListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+    [[MRWebserviceHelper sharedWebServiceHelper] getNewsAndUpdates:category
+                                                        methodName:methodName
+                                                       withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
         [[MRDataManger sharedManager] removeAllObjects:kMRTransformPost withPredicate:nil];
-        [MRDatabaseHelper makeServiceCallForNewsAndUpdatesFetch:status details:details
+        [MRDatabaseHelper makeServiceCallForNewsAndUpdatesFetch:category
+                                                     methodName:methodName
+                                                         status:status
+                                                        details:details
                                                  response:responce
                                        andResponseHandler:responseHandler];
     }];
 }
 
-+ (void)makeServiceCallForNewsAndUpdatesFetch:(BOOL)status
++ (void)makeServiceCallForNewsAndUpdatesFetch:(NSString*)category
+                                   methodName:(NSString*)methodName
+                                       status:(BOOL)status
                                       details:(NSString*)details
                                      response:(NSDictionary*)response
                            andResponseHandler:(WebServiceResponseHandler)responseHandler {
@@ -1410,7 +1423,9 @@ static MRDatabaseHelper *sharedDataManager = nil;
             [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
              {
                  [MRCommon savetokens:responce];
-                 [[MRWebserviceHelper sharedWebServiceHelper] fetchNewsAndUpdatesListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                 [[MRWebserviceHelper sharedWebServiceHelper] getNewsAndUpdates:category
+                                                                     methodName:methodName
+                                                                    withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
                      [MRCommon stopActivityIndicator];
                      if (status)
                      {
@@ -1428,8 +1443,13 @@ static MRDatabaseHelper *sharedDataManager = nil;
         else
         {
             NSArray *erros =  [details componentsSeparatedByString:@"-"];
-            if (erros.count > 0)
+            if (erros.count > 0) {
                 [MRCommon showAlert:[erros lastObject] delegate:nil];
+            }
+            
+            if (responseHandler != nil) {
+                responseHandler(nil);
+            }
         }
     }
 }
@@ -1498,11 +1518,120 @@ static MRDatabaseHelper *sharedDataManager = nil;
 + (void)postANewTopic:(NSDictionary*)reqDict withHandler:(WebServiceResponseHandler)responseHandler {
     [MRCommon showActivityIndicator:@"Requesting..."];
     [[MRWebserviceHelper sharedWebServiceHelper] postNewTopic:reqDict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-        [[MRDataManger sharedManager] removeAllObjects:kGroupEntity withPredicate:nil];
-        [MRDatabaseHelper makeServiceCallForGroupsFetch:status details:details
+        [MRDatabaseHelper makeServiceCallForPostANewTopic:reqDict
+                                                    status:status
+                                                  details:details
                                                response:responce
                                      andResponseHandler:responseHandler];
     }];
+}
+
++ (void)makeServiceCallForPostANewTopic:reqDict
+                                 status:(BOOL)status
+                                details:(NSString*)details
+                             response:(NSDictionary*)response
+                   andResponseHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon stopActivityIndicator];
+    if (status)
+    {
+        [MRDatabaseHelper filterGroupResponse:response andResponseHandler:responseHandler];
+    }
+    else {
+        NSString *errorCode = [MRDatabaseHelper getOAuthErrorCode:response];
+        if ([errorCode isEqualToString:@"invalid_token"])
+        {
+            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce) {
+                 [MRCommon savetokens:responce];
+                 [[MRWebserviceHelper sharedWebServiceHelper] postNewTopic:reqDict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                     [MRCommon stopActivityIndicator];
+                     if (status)
+                     {
+                         responseHandler([NSNumber numberWithBool:status]);
+                     } else
+                     {
+                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                         if (erros.count > 0)
+                             [MRCommon showAlert:[erros lastObject] delegate:nil];
+                     }
+                 }];
+             }];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }
+}
+
++ (void)fetchShareDetailsById:(NSInteger)topicId
+                withHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] getShareDetailsById:topicId
+                                                       withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                           [MRDatabaseHelper makeServiceCallForGetShareDetailsById:topicId
+                                                                                                            status:status
+                                                                                                           details:details
+                                                                                                          response:responce
+                                                                                                andResponseHandler:responseHandler];
+                                                       }];
+}
+
++ (void)makeServiceCallForGetShareDetailsById:(NSInteger)topicId
+                                       status:(BOOL)status
+                                      details:(NSString*)details
+                                     response:(NSDictionary*)response
+                           andResponseHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon stopActivityIndicator];
+    if (status)
+    {
+        [MRDatabaseHelper parseGetShareDetailsByIdResponse:response andResponseHandler:responseHandler];
+    }
+    else {
+        NSString *errorCode = [MRDatabaseHelper getOAuthErrorCode:response];
+        if ([errorCode isEqualToString:@"invalid_token"])
+        {
+            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+             {
+                 [MRCommon savetokens:responce];
+                 [[MRWebserviceHelper sharedWebServiceHelper] getShareDetailsById:topicId
+                                                                    withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                                        [MRCommon stopActivityIndicator];
+                                                                        if (status)
+                                                                        {
+                                                                            [MRDatabaseHelper parseGetShareDetailsByIdResponse:responce
+                                                                                                       andResponseHandler:responseHandler];
+                                                                        } else
+                                                                        {
+                                                                            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                                                                            if (erros.count > 0)
+                                                                                [MRCommon showAlert:[erros lastObject] delegate:nil];
+                                                                        }
+                                                                    }];
+             }];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0) {
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+            }
+            
+            if (responseHandler != nil) {
+                responseHandler(nil);
+            }
+        }
+    }
+}
+
++ (void)parseGetShareDetailsByIdResponse:(NSDictionary*)response
+                 andResponseHandler:(WebServiceResponseHandler) responseHandler {
+    id result = [MRWebserviceHelper parseNetworkResponse:NSClassFromString(kMRPostedReplies)
+                                                 andData:[response valueForKey:@"Responce"]];
+    if (responseHandler != nil) {
+        responseHandler(result);
+    }
 }
 
 @end

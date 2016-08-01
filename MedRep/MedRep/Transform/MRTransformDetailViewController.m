@@ -94,6 +94,8 @@
         }else { //if ([self.selectedContent.contentType isEqualToString:@"Image"]) {
             if (self.post.url != nil && self.post.url.length > 0) {
                 _contentImage.image = [UIImage imageNamed:self.post.url];
+            } else {
+                _contentImage.image = [UIImage imageNamed:@"Default"];
             }
         }
     }

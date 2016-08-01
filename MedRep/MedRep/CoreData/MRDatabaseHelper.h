@@ -35,10 +35,12 @@ typedef void (^WebServiceResponseHandler)(id result);
     
 }
 
+FOUNDATION_EXPORT NSString* const kNewsAndUpdatesAPIMethodName;
+FOUNDATION_EXPORT NSString* const kNewsAndTransformAPIMethodName;
+
 + (MRDatabaseHelper *)sharedHelper;
 
 + (void)addSuggestedContacts:(NSArray*)contacts;
-+ (void)addGroups:(NSArray*)groups;
 //+ (void)addGroupPosts:(NSArray*)groupPosts;
 
 + (void)getGroups:(WebServiceResponseHandler)responseHandler;
@@ -121,11 +123,16 @@ typedef void (^WebServiceResponseHandler)(id result);
 +(BOOL)addInterestArea:(NSArray *)array;
 
 +(void)fetchShare:(WebServiceResponseHandler)responseHandler;
-+ (void)fetchNewsAndUpdates:(WebServiceResponseHandler)responseHandler;
++ (void)fetchNewsAndUpdates:(NSString*)category
+                 methodName:(NSString*)methodName
+                withHandler:(WebServiceResponseHandler)responseHandler;
 
 + (void)addConnections:(NSArray*)selectedContacts
      andResponseHandler:(WebServiceResponseHandler)handler;
 
 + (void)postANewTopic:(NSDictionary*)reqDict withHandler:(WebServiceResponseHandler)responseHandler;
+
++ (void)fetchShareDetailsById:(NSInteger)topicId
+                  withHandler:(WebServiceResponseHandler)responseHandler;
 
 @end

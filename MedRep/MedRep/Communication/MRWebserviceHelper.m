@@ -1188,20 +1188,6 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
 
 }
 
-- (void)getNewswithHandler:(completionHandler)responceHandler
-{
-    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/api/doctor/getMyNotifications?access_token=%@",kBaseURL,[MRDefaults objectForKey:kAuthenticationToken]];
-    
-    NSURL *url = [NSURL URLWithString:stringFormOfUrl];
-    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
-    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
-    [urlRequest setTimeoutInterval:120];
-    [urlRequest setHTTPMethod:@"GET"];
-    [urlRequest setValue:@"text/plain" forHTTPHeaderField:@"Content-Type"];
-    self.serviceType = kMRWebServiceTypeGetNews;
-    [self sendServiceRequest:urlRequest withHandler:responceHandler];
-}
-
 - (void)getMaterialwithHandler:(completionHandler)responceHandler
 {
     NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/api/doctor/getMyNotifications?access_token=%@",kBaseURL,[MRDefaults objectForKey:kAuthenticationToken]];
@@ -1387,8 +1373,13 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
     [self sendServiceRequest:urlRequest withHandler:responseHandler];
 }
 
--(void)getNewsAndUpdates:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler{
-    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/getNewsAndUpdates?token=%@",kHostName,[MRDefaults objectForKey:kAuthenticationToken]];
+-(void)getNewsAndUpdates:(NSString*)category
+              methodName:(NSString*)methodName
+             withHandler:(completionHandler)responseHandler {
+    NSMutableString *stringFormOfUrl = [NSMutableString stringWithFormat:@"%@/medrep-web/%@?token=%@",kHostName, methodName, [MRDefaults objectForKey:kAuthenticationToken]];
+    if (category != nil && category.length > 0) {
+        [stringFormOfUrl appendString:[NSString stringWithFormat:@"&category=%@", category]];
+    }
     
     NSURL *url = [NSURL URLWithString:stringFormOfUrl];
     NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
@@ -1398,7 +1389,6 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
     [urlRequest setValue:@"text/plain" forHTTPHeaderField:@"Content-Type"];
     self.serviceType = kMRWebServiceTypeGetDoctorContactsList;
     [self sendServiceRequest:urlRequest withHandler:responseHandler];
-    
 }
 
 -(void)getContactsAndGroups:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler{
@@ -2438,19 +2428,6 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
     return arrayList;
 }
 
-- (void)fetchNewsAndUpdatesListwithHandler:(completionHandler)responceHandler {
-    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/getNewsAndUpdates?token=%@",kHostName,[MRDefaults objectForKey:kAuthenticationToken]];
-    
-    NSURL *url = [NSURL URLWithString:stringFormOfUrl];
-    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
-    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
-    [urlRequest setTimeoutInterval:120];
-    [urlRequest setHTTPMethod:@"GET"];
-    [urlRequest setValue:@"text/plain" forHTTPHeaderField:@"Content-Type"];
-    self.serviceType = kMRWebServiceTypeGetContactList;
-    [self sendServiceRequest:urlRequest withHandler:responceHandler];
-}
-
 - (void)postNewTopic:(NSDictionary*)reqDict withHandler:(completionHandler)responceHandler {
     NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/postMessages?token=%@",kHostName,[MRDefaults objectForKey:kAuthenticationToken]];
     
@@ -2493,6 +2470,43 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
     [urlRequest setHTTPBody: jsonData];
     self.serviceType = kMRWebServiceTypeCreateGroup;
     [self sendServiceRequest:urlRequest withHandler:responceHandler];
+}
+
+- (void)getShareDetailsById:(NSInteger)topicId
+                withHandler:(completionHandler)responseHandler {
+
+    NSMutableString *stringFormOfUrl = [NSMutableString stringWithFormat:@"%@/medrep-web/getShareByTopic?token=%@&topicId=%ld",kHostName, [MRDefaults objectForKey:kAuthenticationToken], topicId];
+    
+    NSURL *url = [NSURL URLWithString:stringFormOfUrl];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [urlRequest setTimeoutInterval:120];
+    [urlRequest setHTTPMethod:@"GET"];
+    [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    self.serviceType = kMRWebServiceTypeGetDoctorContactsList;
+    [self sendServiceRequest:urlRequest withHandler:responseHandler];
+}
+
+- (void)getPostsForAMember:(NSInteger)contactId groupId:(NSInteger)groupId
+               withHandler:(completionHandler)responseHandler {
+    NSMutableString *stringFormOfUrl = [NSMutableString stringWithFormat:@"%@/medrep-web/getShareByTopic?token=%@",kHostName, [MRDefaults objectForKey:kAuthenticationToken]];
+    
+    if (contactId > 0) {
+        [stringFormOfUrl appendString:[NSString stringWithFormat:@"&contactId=%ld", contactId]];
+    }
+    
+    if (groupId > 0) {
+        [stringFormOfUrl appendString:[NSString stringWithFormat:@"&groupId=%ld", contactId]];
+    }
+    
+    NSURL *url = [NSURL URLWithString:stringFormOfUrl];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [urlRequest setTimeoutInterval:120];
+    [urlRequest setHTTPMethod:@"GET"];
+    [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    self.serviceType = kMRWebServiceTypeGetDoctorContactsList;
+    [self sendServiceRequest:urlRequest withHandler:responseHandler];
 }
 
 @end

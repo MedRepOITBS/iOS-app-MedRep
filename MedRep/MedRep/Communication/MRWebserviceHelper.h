@@ -164,8 +164,6 @@ withComplitionHandler:(completionHandler)responceHandler;
 
 - (void)getMyTeamPendingAppointments:(completionHandler)responceHandler;
 
-- (void)getNewswithHandler:(completionHandler)responceHandler;
-
 - (void)getMaterialwithHandler:(completionHandler)responceHandler;
 
 - (void)createGroup:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
@@ -234,7 +232,9 @@ withComplitionHandler:(completionHandler)responceHandler;
 
 -(void)getShareByDate:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler;
 
--(void)getNewsAndUpdates:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler;
+-(void)getNewsAndUpdates:(NSString*)category
+              methodName:(NSString*)methodName
+             withHandler:(completionHandler)responseHandler;
 
 -(void)getContactsAndGroups:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler;
 
@@ -257,8 +257,6 @@ withComplitionHandler:(completionHandler)responceHandler;
 + (NSArray*)parseRecords:(Class)entityClass allRecords:(NSArray*)allRecords
                  context:(NSManagedObjectContext*)context andData:(NSArray*)data;
 
-- (void)fetchNewsAndUpdatesListwithHandler:(completionHandler)responceHandler;
-
 - (void)postNewTopic:(NSDictionary*)reqDict withHandler:(completionHandler)responceHandler;
 
 
@@ -267,6 +265,12 @@ withComplitionHandler:(completionHandler)responceHandler;
 - (void)updateLikes:(NSInteger)likeCount commentCount:(NSInteger)commentCount
          shareCount:(NSInteger)shareCount  messageId:(NSInteger)messageId
         withHandler:(completionHandler)responceHandler;
+
+- (void)getShareDetailsById:(NSInteger)topicId
+                withHandler:(completionHandler)responseHandler;
+
+- (void)getPostsForAMember:(NSInteger)contactId groupId:(NSInteger)groupId
+               withHandler:(completionHandler)responseHandler;
 
 @end
 
