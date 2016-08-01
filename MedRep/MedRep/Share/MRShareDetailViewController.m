@@ -24,6 +24,7 @@
 #import "CommonBoxView.h"
 #import "MRDataManger.h"
 #import "NSDate+Utilities.h"
+#import "MRDatabaseHelper.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
@@ -32,6 +33,8 @@
     
     AVPlayerViewController *av;
 }
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *previewImageHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *webViewHeightConstraint;
 
 @property (strong, nonatomic) IBOutlet UIView *navView;
 @property (nonatomic) NSArray *recentActivity;
@@ -169,8 +172,13 @@
             self.webView.hidden = YES;
             self.previewImageView.hidden = NO;
             
-            self.previewImageView.image = [UIImage imageNamed:self.post.url];
+            self.previewImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.post.url]]];
             NSLog(@"%@",self.post.url);
+        } else {
+            self.webView.hidden = YES;
+            self.previewImageView.hidden = YES;
+            self.previewImageHeightConstraint.constant = 0;
+            self.webViewHeightConstraint.constant = 0;
         }
     }
 }
@@ -184,6 +192,7 @@
     if (self.recentActivity != nil && self.recentActivity.count > 0) {
         [self.emptyMessage setHidden:YES];
         [self.activitiesTable setHidden:NO];
+        [self.activitiesTable reloadData];
     } else {
         [self.emptyMessage setHidden:NO];
         [self.activitiesTable setHidden:YES];
@@ -298,10 +307,16 @@
 }
 
 - (void)sortRecentActivities {
-    self.recentActivity = [NSArray arrayWithArray:self.post.postedReplies.allObjects];
+    [MRDatabaseHelper fetchShareDetailsById:self.post.sharePostId.longValue
+                                withHandler:^(id result) {
+                                    self.recentActivity = [NSArray arrayWithArray:self.post.postedReplies.allObjects];
+                                    
+                                    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"postedOn" ascending:false];
+                                    self.recentActivity = [self.recentActivity sortedArrayUsingDescriptors:@[sortDescriptor]];
+                                    
+                                    [self setEmptyMessage];
+                                }];
     
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"postedOn" ascending:false];
-    self.recentActivity = [self.recentActivity sortedArrayUsingDescriptors:@[sortDescriptor]];
 }
 
 - (void)shareToSelected {

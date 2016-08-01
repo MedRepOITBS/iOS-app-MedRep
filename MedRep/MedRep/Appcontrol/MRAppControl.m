@@ -745,10 +745,10 @@
 + (UIImage*)getContactImage:(MRContact*)contact {
     UIImage *image = [UIImage imageNamed:@"person"];;
     
-    if (contact != nil) {
-        if (contact.profilePic != nil) {
-            image = [UIImage imageWithData:contact.profilePic];
-        }
+    if (contact != nil &&
+        contact.dPicture != nil && contact.dPicture.length > 0) {
+        image = [UIImage imageWithData:[NSData dataWithContentsOfURL:
+                                                   [NSURL URLWithString:contact.dPicture]]];
     }
     
     return image;
@@ -872,7 +872,10 @@
 + (void)getGroupImage:(MRGroup*)group andImageView:(UIImageView*)parentView {
     if (group.group_img_data != nil && group.group_img_data.length > 0) {
         parentView.image = [UIImage imageWithData:group.group_img_data];
-    } else if (group.group_name != nil && group.group_name.length > 0) {
+    } else if (group.imageUrl != nil && group.imageUrl.length > 0) {
+        parentView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:group.imageUrl]]];
+    }
+    else if (group.group_name != nil && group.group_name.length > 0) {
         UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:parentView.bounds];
         subscriptionTitleLabel.textAlignment = NSTextAlignmentCenter;
         subscriptionTitleLabel.font = [UIFont systemFontOfSize:15.0];
@@ -896,6 +899,13 @@
     } else {
         parentView.image = [UIImage imageNamed:@"Group"];
     }
+}
+
++(NSString*)getFileName {
+    NSNumber *tempDate = [NSNumber numberWithDouble:[NSDate date].timeIntervalSinceReferenceDate];
+    
+    NSString *fileName = [NSString stringWithFormat:@"%@_%ld.png",[MRAppControl sharedHelper].userRegData[@"doctorId"],tempDate.longValue];
+    return fileName;
 }
 
 @end

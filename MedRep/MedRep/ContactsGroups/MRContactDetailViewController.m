@@ -88,7 +88,6 @@
         [self setupUIWithGroupDetails];
     }
     
-    [self.postsTableView reloadData];
     self.postsTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
@@ -131,6 +130,33 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)fetchPosts {
+    
+    
+    if (self.mainContact != nil) {
+        if (self.mainContact.comments != nil && self.mainContact.comments.count > 0) {
+            self.posts = self.mainContact.comments.allObjects;
+        } else {
+            self.posts = [NSArray new];
+        }
+    } else if (self.mainGroup != nil) {
+        if (self.mainGroup.comment != nil && self.mainGroup.comment.count > 0) {
+            self.posts = self.mainGroup.comment.allObjects;
+        } else {
+            self.posts = [NSArray new];
+        }
+    }
+    if (self.posts != nil && self.posts.count > 0) {
+        [self.emptyPostsLabel setHidden:YES];
+        [self.postsTableView setHidden:NO];
+        [self.postsTableView reloadData];
+    } else {
+        self.posts = [[NSArray alloc] init];
+        [self.postsTableView setHidden:YES];
+        [self.emptyPostsLabel setHidden:NO];
+    }
+}
+
 - (void)backButtonAction{
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -165,13 +191,6 @@
     _city.text = [NSString stringWithFormat:@"City: %@",city];
     
     self.groupsUnderContact = [self.mainContact.groups allObjects];
-    if (self.mainContact.comments != nil && self.mainContact.comments.count > 0) {
-        self.posts = self.mainContact.comments.allObjects;
-        [self.emptyPostsLabel setHidden:YES];
-    } else {
-        self.posts = [[NSArray alloc] init];
-        [self.emptyPostsLabel setHidden:NO];
-    }
 }
 
 - (void)setupUIWithGroupDetails {
@@ -191,16 +210,7 @@
         self.contactsUnderGroup = [NSArray new];
     }
     
-    if (self.mainGroup.comment != nil && self.mainGroup.comment.count > 0) {
-        self.posts = [self.mainGroup.comment allObjects];
-        [self.emptyPostsLabel setHidden:YES];
-    } else {
-        self.posts = [[NSArray alloc] init];
-        [self.emptyPostsLabel setHidden:NO];
-    }
-
     [self getGroupMembersStatusWithGroupId];
-    
 }
 
 /*- (void)setContact:(MRContact*)contact {
@@ -437,8 +447,6 @@
         }
     }
     
-     canEditGroup = true;
-    
     if (self.mainGroup) {
         self.moreOptions = [[UIActionSheet alloc] initWithTitle:@"More Options"
                                                        delegate:self
@@ -476,8 +484,6 @@
         createGroupVC.group = self.mainGroup;
         [self.navigationController pushViewController:createGroupVC animated:NO];
     }else if (buttonIndex == 3 && canEditGroup) {
-        [self removeGroup];
-    }else if (buttonIndex == 4 && canEditGroup) {
         [self leaveGroup];
     }
 }
@@ -781,10 +787,23 @@
         receiverId = self.mainGroup.group_id.longValue;
     }
     
-    NSDictionary *dataDict = @{@"message" : message,
-                               @"message_type" : messageType,
-                               @"receiver_id" : [NSNumber numberWithLong:receiverId],
-                               @"message_id" : [NSNumber numberWithLong:[NSDate date].timeIntervalSinceReferenceDate]};
+    NSMutableDictionary *postMessage = [NSMutableDictionary new];
+    [postMessage setObject:[NSNumber numberWithInteger:2] forKey:@"postType"];
+    [postMessage setObject:messageType forKey:@"message_type"];
+    
+    if (imageData != nil) {
+       [postMessage setObject:[MRAppControl getFileName] forKey:@"fileName"];
+        [postMessage setObject:imageData forKey:@"fileData"];
+    }
+    
+    NSDictionary *dataDict = @{@"detail_desc" : message,
+                               @"title_desc" : @"",
+                               @"short_desc" : @"",
+                               @"postMessage" : postMessage
+//                               ,@"receiverId" : @[[NSNumber numberWithLong:receiverId]]
+                               };
+//    ,
+//                               @"topic_id" : [NSNumber numberWithLong:[NSDate date].timeIntervalSinceReferenceDate]};
     NSMutableDictionary *postedTopicDict = dataDict.mutableCopy;
     if (self.mainGroup != nil) {
         [postedTopicDict setValue:[NSNumber numberWithLong:receiverId]

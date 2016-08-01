@@ -2,7 +2,7 @@
 //  MRPostedReplies+CoreDataProperties.h
 //  MedRep
 //
-//  Created by Vamsi Katragadda on 7/9/16.
+//  Created by Vamsi Katragadda on 8/1/16.
 //  Copyright © 2016 MedRep. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -15,7 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MRPostedReplies (CoreDataProperties)
 
+@property (nullable, nonatomic, retain) NSNumber *contactId;
 @property (nullable, nonatomic, retain) NSNumber *contentType;
+@property (nullable, nonatomic, retain) NSNumber *groupId;
 @property (nullable, nonatomic, retain) NSData *image;
 @property (nullable, nonatomic, retain) NSNumber *parentSharePostId;
 @property (nullable, nonatomic, retain) NSString *postedBy;
@@ -24,10 +26,18 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSNumber *postedReplyId;
 @property (nullable, nonatomic, retain) NSString *text;
 @property (nullable, nonatomic, retain) NSString *url;
-@property (nullable, nonatomic, retain) NSNumber *contactId;
-@property (nullable, nonatomic, retain) NSNumber *groupId;
+@property (nullable, nonatomic, retain) NSNumber *message_id;
+@property (nullable, nonatomic, retain) NSNumber *member_id;
+@property (nullable, nonatomic, retain) NSNumber *group_id;
+@property (nullable, nonatomic, retain) NSString *message;
+@property (nullable, nonatomic, retain) NSString *message_type;
+@property (nullable, nonatomic, retain) NSDate *post_date;
+@property (nullable, nonatomic, retain) NSNumber *receiver_Id;
+@property (nullable, nonatomic, retain) NSNumber *topic_id;
+@property (nullable, nonatomic, retain) NSDate *share_date;
 @property (nullable, nonatomic, retain) MRContact *contactRelationship;
 @property (nullable, nonatomic, retain) MRGroup *groupRelationship;
+@property (nullable, nonatomic, retain) MRSharePost *sharePostRelationship;
 
 @end
 

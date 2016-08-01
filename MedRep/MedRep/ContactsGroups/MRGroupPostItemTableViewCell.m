@@ -27,6 +27,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contactLabelHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *postImageHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *profilePicWidthConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *postImageViewTopConstraint;
 
 @property (nonatomic) MRSharePost *post;
 
@@ -117,11 +118,13 @@
     if (image != nil) {
         self.postImageView.image = image;
         self.postImageHeightConstraint.constant = 128;
+        self.postImageViewTopConstraint.constant = 18;
     } else {
         self.postImageHeightConstraint.constant = 0;
+        self.postImageViewTopConstraint.constant = 0;
     }
     
-    NSString *name = @"";
+    NSString *name = @"No Name";
     if (self.post.sharedByProfileName != nil) {
         name = self.post.sharedByProfileName;
     }

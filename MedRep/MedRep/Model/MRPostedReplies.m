@@ -9,6 +9,7 @@
 #import "MRPostedReplies.h"
 #import "MRContact.h"
 #import "MRGroup.h"
+#import "MRSharePost.h"
 
 @implementation MRPostedReplies
 
