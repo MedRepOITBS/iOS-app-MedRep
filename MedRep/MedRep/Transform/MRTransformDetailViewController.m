@@ -214,15 +214,23 @@
     //    lastPost = posts.firstObject;
     //    NSLog(@"%ld", lastPost.groupPostId.longValue);
     
-    [MRDatabaseHelper shareAnArticle:self.post];
+    [MRDatabaseHelper shareAnArticle:self.post withHandler:nil];
 }
 
 - (IBAction)shareAction:(UIButton *)sender {
-    //    [self postTheTopicToTheWall];
-    [MRDatabaseHelper shareAnArticle:self.post];
+    [MRDatabaseHelper shareAnArticle:self.post withHandler:^(id result) {
+        if (result != nil && [result isKindOfClass:[NSNumber class]]) {
+            NSNumber *tempResult = (NSNumber*)result;
+            if (tempResult.boolValue) {
+                [MRCommon showAlert:@"Topic posted successfully !!!" delegate:nil];
+            } else {
+                [MRCommon showAlert:@"Some error occurred !!!" delegate:nil];
+            }
+        }
+    }];
     
-    MRShareViewController* contactsViewCont = [[MRShareViewController alloc] initWithNibName:@"MRShareViewController" bundle:nil];
-    [self.navigationController pushViewController:contactsViewCont animated:true];
+//    MRShareViewController* contactsViewCont = [[MRShareViewController alloc] initWithNibName:@"MRShareViewController" bundle:nil];
+//    [self.navigationController pushViewController:contactsViewCont animated:true];
 }
 
 - (IBAction)gotoWebAction:(id)sender {

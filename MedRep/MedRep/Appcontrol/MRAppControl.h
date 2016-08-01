@@ -68,4 +68,6 @@
 + (UIImage*)getGroupImage:(MRGroup*)group;
 + (void)getGroupImage:(MRGroup*)group andImageView:(UIImageView*)parentView;
 
++ (NSString*)getFileName;
+
 @end

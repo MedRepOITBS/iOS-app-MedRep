@@ -40,6 +40,8 @@ FOUNDATION_EXPORT NSString* const kNewsAndTransformAPIMethodName;
 
 + (MRDatabaseHelper *)sharedHelper;
 
++ (NSString*)getOAuthErrorCode:(NSDictionary*)response;
+
 + (void)addSuggestedContacts:(NSArray*)contacts;
 //+ (void)addGroupPosts:(NSArray*)groupPosts;
 
@@ -99,7 +101,7 @@ FOUNDATION_EXPORT NSString* const kNewsAndTransformAPIMethodName;
 +(NSArray *)getContactListForContactID:(int64_t)contactID;
 
 + (NSArray*)getShareArticles;
-+ (void)shareAnArticle:(MRTransformPost*)transformPost;
++ (void)shareAnArticle:(MRTransformPost*)transformPost withHandler:(WebServiceResponseHandler)handler;
 
 + (void)addCommentToAPost:(MRSharePost*)inPost
                      text:(NSString*)text

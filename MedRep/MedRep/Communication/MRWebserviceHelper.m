@@ -2429,7 +2429,7 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
 }
 
 - (void)postNewTopic:(NSDictionary*)reqDict withHandler:(completionHandler)responceHandler {
-    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/postMessages?token=%@",kHostName,[MRDefaults objectForKey:kAuthenticationToken]];
+    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/MedRepApplication/api/doctorPlus/postShare?token=%@",kHostName,[MRDefaults objectForKey:kAuthenticationToken]];
     
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:reqDict
                                                        options:NSJSONWritingPrettyPrinted
@@ -2439,8 +2439,8 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
     [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
     [urlRequest setTimeoutInterval:120];
     [urlRequest setHTTPMethod:@"POST"];
-    [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [urlRequest setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[jsonData length]] forHTTPHeaderField:@"Content-Length"];
+    [urlRequest setValue:@"text/plain" forHTTPHeaderField:@"Content-Type"];
+//    [urlRequest setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[jsonData length]] forHTTPHeaderField:@"Content-Length"];
     [urlRequest setHTTPBody: jsonData];
     self.serviceType = kMRWebServiceTypeCreateGroup;
     [self sendServiceRequest:urlRequest withHandler:responceHandler];

@@ -79,7 +79,7 @@
         [_createBtn setTitle:@"Update Group" forState:UIControlStateNormal];
     }else{
         isUpdateMode = NO;
-        groupIconData = UIImageJPEGRepresentation([UIImage imageNamed:@"Group"], 1.0);
+        groupIconData = UIImagePNGRepresentation([UIImage imageNamed:@"Group"]);
     }
 }
 
@@ -122,9 +122,10 @@
                              _txtName.text,@"group_name",
                              _txtShortDesc.text, @"group_short_desc",
                              _txtLongDesc.text, @"group_long_desc",
-                             [groupIconData base64EncodedStringWithOptions:0], @"group_img_data",
-                             @"png",@"group_mimeType",
+                             [groupIconData base64EncodedStringWithOptions:0], @"imgData",
                              nil];
+    
+    [dictReq setObject:[MRAppControl getFileName] forKey:@"fileName"];
     
     if (isUpdateMode) {
         [MRCommon showActivityIndicator:@"Updating..."];
@@ -144,38 +145,41 @@
                 [_imgView setImage:[UIImage imageNamed:@"Group.png"]];
                 groupIconData = nil;
             }
-            else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
-            {
-                [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
-                 {
-                     [MRCommon savetokens:responce];
-                     [[MRWebserviceHelper sharedWebServiceHelper] updateGroup:dictReq withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-                         [MRCommon stopActivityIndicator];
-                         if (status)
-                         {
-                             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Group updated!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-                             alert.tag = 11;
-                             [alert show];
-                             
-                             _txtName.text = @"";
-                             _txtLongDesc.text = @"";
-                             _txtShortDesc.text = @"";
-                             [_imgView setImage:[UIImage imageNamed:@"Group.png"]];
-                             groupIconData = nil;
-                         }else
-                         {
-                             NSArray *erros =  [details componentsSeparatedByString:@"-"];
-                             if (erros.count > 0)
-                                 [MRCommon showAlert:[erros lastObject] delegate:nil];
-                         }
+            else {
+                NSString *errorCode = [MRDatabaseHelper getOAuthErrorCode:responce];
+                if ([errorCode isEqualToString:@"invalid_token"])
+                {
+                    [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+                     {
+                         [MRCommon savetokens:responce];
+                         [[MRWebserviceHelper sharedWebServiceHelper] updateGroup:dictReq withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                             [MRCommon stopActivityIndicator];
+                             if (status)
+                             {
+                                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Group updated!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                                 alert.tag = 11;
+                                 [alert show];
+                                 
+                                 _txtName.text = @"";
+                                 _txtLongDesc.text = @"";
+                                 _txtShortDesc.text = @"";
+                                 [_imgView setImage:[UIImage imageNamed:@"Group.png"]];
+                                 groupIconData = nil;
+                             }else
+                             {
+                                 NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                                 if (erros.count > 0)
+                                     [MRCommon showAlert:[erros lastObject] delegate:nil];
+                             }
+                         }];
                      }];
-                 }];
-            }
-            else
-            {
-                NSArray *erros =  [details componentsSeparatedByString:@"-"];
-                if (erros.count > 0)
-                    [MRCommon showAlert:[erros lastObject] delegate:nil];
+                }
+                else
+                {
+                    NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                    if (erros.count > 0)
+                        [MRCommon showAlert:[erros lastObject] delegate:nil];
+                }
             }
         }];
     }else{
@@ -197,40 +201,43 @@
                 [_imgView setImage:[UIImage imageNamed:@"Group.png"]];
                 groupIconData = nil;
             }
-            else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
-            {
-                [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
-                 {
-                     [MRCommon savetokens:responce];
-                     [[MRWebserviceHelper sharedWebServiceHelper] createGroup:dictReq withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-                         [MRCommon stopActivityIndicator];
-                         if (status)
-                         {
-                             //[MRCommon showAlert:@"Group created!" delegate:nil];
-                             
-                             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Group created!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-                             alert.tag = 11;
-                             [alert show];
-                             
-                             _txtName.text = @"";
-                             _txtLongDesc.text = @"";
-                             _txtShortDesc.text = @"";
-                             [_imgView setImage:[UIImage imageNamed:@"Group.png"]];
-                             groupIconData = nil;
-                         }else
-                         {
-                             NSArray *erros =  [details componentsSeparatedByString:@"-"];
-                             if (erros.count > 0)
-                                 [MRCommon showAlert:[erros lastObject] delegate:nil];
-                         }
+            else {
+                NSString *errorCode = [MRDatabaseHelper getOAuthErrorCode:responce];
+                if ([errorCode isEqualToString:@"invalid_token"])
+                {
+                    [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+                     {
+                         [MRCommon savetokens:responce];
+                         [[MRWebserviceHelper sharedWebServiceHelper] createGroup:dictReq withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                             [MRCommon stopActivityIndicator];
+                             if (status)
+                             {
+                                 //[MRCommon showAlert:@"Group created!" delegate:nil];
+                                 
+                                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Group created!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                                 alert.tag = 11;
+                                 [alert show];
+                                 
+                                 _txtName.text = @"";
+                                 _txtLongDesc.text = @"";
+                                 _txtShortDesc.text = @"";
+                                 [_imgView setImage:[UIImage imageNamed:@"Group.png"]];
+                                 groupIconData = nil;
+                             }else
+                             {
+                                 NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                                 if (erros.count > 0)
+                                     [MRCommon showAlert:[erros lastObject] delegate:nil];
+                             }
+                         }];
                      }];
-                 }];
-            }
-            else
-            {
-                NSArray *erros =  [details componentsSeparatedByString:@"-"];
-                if (erros.count > 0)
-                    [MRCommon showAlert:[erros lastObject] delegate:nil];
+                }
+                else
+                {
+                    NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                    if (erros.count > 0)
+                        [MRCommon showAlert:[erros lastObject] delegate:nil];
+                }
             }
         }];
     }
@@ -309,7 +316,7 @@
     UIImage *theImage = [self imageWithImage:tmpImage convertToSize:CGSizeMake(newWidth, newHeight)];
     [_imgView setImage:theImage];
     
-    groupIconData = UIImageJPEGRepresentation(theImage, 1.0);
+    groupIconData = UIImagePNGRepresentation(theImage);
 }
 
 -(void)openCameraPicker{

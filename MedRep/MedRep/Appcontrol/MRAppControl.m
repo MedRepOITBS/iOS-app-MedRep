@@ -901,4 +901,11 @@
     }
 }
 
++(NSString*)getFileName {
+    NSNumber *tempDate = [NSNumber numberWithDouble:[NSDate date].timeIntervalSinceReferenceDate];
+    
+    NSString *fileName = [NSString stringWithFormat:@"%@_%ld.png",[MRAppControl sharedHelper].userRegData[@"doctorId"],tempDate.longValue];
+    return fileName;
+}
+
 @end

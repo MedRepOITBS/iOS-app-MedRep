@@ -846,64 +846,71 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
     return articles;
 }
 
-+ (void)shareAnArticle:(MRTransformPost*)transformPost {
-    NSInteger sharePostId = [[NSDate date] timeIntervalSince1970];
++ (void)shareAnArticle:(MRTransformPost*)transformPost withHandler:(WebServiceResponseHandler)handler {
+    NSDictionary *dataDict = @{@"topic_id" : transformPost.transformPostId,
+                               @"postType" : [NSNumber numberWithInteger:0]};
     
-    MRDataManger *dbManager = [MRDataManger sharedManager];
     
-    NSManagedObjectContext *context = [dbManager getNewPrivateManagedObjectContext];
+    [MRDatabaseHelper postANewTopic:@{@"postMessage" : dataDict} withHandler:handler];
     
-    MRSharePost *post  = (MRSharePost*)[dbManager createObjectForEntity:kMRSharePost
-                                                              inContext:context];
-    post.sharePostId = [NSNumber numberWithLong:sharePostId];
-    post.postedOn = [NSDate date];
-    post.likesCount = [NSNumber numberWithLong:0];
-    post.commentsCount = [NSNumber numberWithLong:0];
-    post.shareCount = [NSNumber numberWithLong:1];
     
-    post.sharedByProfileId = [NSNumber numberWithLong:0];
-    
-    MRAppControl *appControl = [MRAppControl sharedHelper];
-    NSDictionary *userDetailsDict = appControl.userRegData;
-    post.sharedByProfileName = [userDetailsDict objectOrNilForKey:@"displayName"];
-    
-    id profilePicData = [userDetailsDict objectForKey:KProfilePicture];
-    if (profilePicData != nil && [profilePicData isKindOfClass:[NSDictionary class]])
-    {
-        profilePicData = [profilePicData objectForKey:@"data"];
-    }
-    
-    if (profilePicData != nil) {
-        if ([profilePicData isKindOfClass:[NSString class]]) {
-            post.shareddByProfilePic = [NSData decodeBase64ForString:profilePicData];
-        } else {
-            post.shareddByProfilePic = profilePicData;
-        }
-    }
-    
-    post.parentTransformPostId = transformPost.transformPostId;
-    post.titleDescription = transformPost.titleDescription;
-    post.shortText = transformPost.shortArticleDescription;
-    post.detailedText = transformPost.detailedDescription;
-    post.contentType = transformPost.contentType;
-    post.url = transformPost.url;
-    post.source = @"Transform";
-    
-    // Create a child post as well to show in activities section
-    MRPostedReplies *childPost = (MRPostedReplies*)[dbManager createObjectForEntity:kMRPostedReplies
-                                                                  inContext:context];
-    childPost.parentSharePostId = [NSNumber numberWithLong:post.sharePostId.longValue];
-    childPost.postedReplyId = [NSNumber numberWithLong:[[NSDate date] timeIntervalSince1970]];
-    childPost.text = [NSString stringWithFormat:@"Shared the article"];
-    childPost.postedOn = post.postedOn;
-    
-    childPost.contentType = [NSNumber numberWithInteger:kTransformContentTypeText];
-    childPost.postedBy = post.sharedByProfileName;
-    childPost.postedByProfilePic = post.shareddByProfilePic;
-    
-    [post addPostedRepliesObject:childPost];
-    
-    [dbManager dbSaveInContext:context];
+//    NSInteger sharePostId = [[NSDate date] timeIntervalSince1970];
+//    
+//    MRDataManger *dbManager = [MRDataManger sharedManager];
+//    
+//    NSManagedObjectContext *context = [dbManager getNewPrivateManagedObjectContext];
+//    
+//    MRSharePost *post  = (MRSharePost*)[dbManager createObjectForEntity:kMRSharePost
+//                                                              inContext:context];
+//    post.sharePostId = [NSNumber numberWithLong:sharePostId];
+//    post.postedOn = [NSDate date];
+//    post.likesCount = [NSNumber numberWithLong:0];
+//    post.commentsCount = [NSNumber numberWithLong:0];
+//    post.shareCount = [NSNumber numberWithLong:1];
+//    
+//    post.sharedByProfileId = [NSNumber numberWithLong:0];
+//    
+//    MRAppControl *appControl = [MRAppControl sharedHelper];
+//    NSDictionary *userDetailsDict = appControl.userRegData;
+//    post.sharedByProfileName = [userDetailsDict objectOrNilForKey:@"displayName"];
+//    
+//    id profilePicData = [userDetailsDict objectForKey:KProfilePicture];
+//    if (profilePicData != nil && [profilePicData isKindOfClass:[NSDictionary class]])
+//    {
+//        profilePicData = [profilePicData objectForKey:@"data"];
+//    }
+//    
+//    if (profilePicData != nil) {
+//        if ([profilePicData isKindOfClass:[NSString class]]) {
+//            post.shareddByProfilePic = [NSData decodeBase64ForString:profilePicData];
+//        } else {
+//            post.shareddByProfilePic = profilePicData;
+//        }
+//    }
+//    
+//    post.parentTransformPostId = transformPost.transformPostId;
+//    post.titleDescription = transformPost.titleDescription;
+//    post.shortText = transformPost.shortArticleDescription;
+//    post.detailedText = transformPost.detailedDescription;
+//    post.contentType = transformPost.contentType;
+//    post.url = transformPost.url;
+//    post.source = @"Transform";
+//    
+//    // Create a child post as well to show in activities section
+//    MRPostedReplies *childPost = (MRPostedReplies*)[dbManager createObjectForEntity:kMRPostedReplies
+//                                                                  inContext:context];
+//    childPost.parentSharePostId = [NSNumber numberWithLong:post.sharePostId.longValue];
+//    childPost.postedReplyId = [NSNumber numberWithLong:[[NSDate date] timeIntervalSince1970]];
+//    childPost.text = [NSString stringWithFormat:@"Shared the article"];
+//    childPost.postedOn = post.postedOn;
+//    
+//    childPost.contentType = [NSNumber numberWithInteger:kTransformContentTypeText];
+//    childPost.postedBy = post.sharedByProfileName;
+//    childPost.postedByProfilePic = post.shareddByProfilePic;
+//    
+//    [post addPostedRepliesObject:childPost];
+//    
+//    [dbManager dbSaveInContext:context];
 }
 
 + (void)addCommentToAPost:(MRSharePost*)inPost
@@ -1534,7 +1541,7 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
     [MRCommon stopActivityIndicator];
     if (status)
     {
-        [MRDatabaseHelper filterGroupResponse:response andResponseHandler:responseHandler];
+        responseHandler([NSNumber numberWithBool:status]);
     }
     else {
         NSString *errorCode = [MRDatabaseHelper getOAuthErrorCode:response];

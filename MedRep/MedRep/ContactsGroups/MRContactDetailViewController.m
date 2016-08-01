@@ -484,8 +484,6 @@
         createGroupVC.group = self.mainGroup;
         [self.navigationController pushViewController:createGroupVC animated:NO];
     }else if (buttonIndex == 3 && canEditGroup) {
-        [self removeGroup];
-    }else if (buttonIndex == 4 && canEditGroup) {
         [self leaveGroup];
     }
 }
@@ -789,12 +787,21 @@
         receiverId = self.mainGroup.group_id.longValue;
     }
     
+    NSMutableDictionary *postMessage = [NSMutableDictionary new];
+    [postMessage setObject:[NSNumber numberWithInteger:2] forKey:@"postType"];
+    [postMessage setObject:messageType forKey:@"message_type"];
+    
+    if (imageData != nil) {
+       [postMessage setObject:[MRAppControl getFileName] forKey:@"fileName"];
+        [postMessage setObject:imageData forKey:@"fileData"];
+    }
+    
     NSDictionary *dataDict = @{@"detail_desc" : message,
                                @"title_desc" : @"",
                                @"short_desc" : @"",
-                               @"postType" : [NSNumber numberWithInteger:2],
-                               @"content_type" : messageType,
-                               @"receiverId" : @[[NSNumber numberWithLong:receiverId]]};
+                               @"postMessage" : postMessage
+//                               ,@"receiverId" : @[[NSNumber numberWithLong:receiverId]]
+                               };
 //    ,
 //                               @"topic_id" : [NSNumber numberWithLong:[NSDate date].timeIntervalSinceReferenceDate]};
     NSMutableDictionary *postedTopicDict = dataDict.mutableCopy;

@@ -429,9 +429,14 @@
 }
 
 - (IBAction)addButtonClicked:(id)sender {
-    MRAddMembersViewController* detailViewController = [[MRAddMembersViewController alloc] init];
-    detailViewController.groupID = 0;
-    [self.navigationController pushViewController:detailViewController animated:NO];
+    if (self.currentIndex == 0) {
+        MRAddMembersViewController* detailViewController = [[MRAddMembersViewController alloc] init];
+        detailViewController.groupID = 0;
+        [self.navigationController pushViewController:detailViewController animated:NO];
+    } else {
+        MRCreateGroupViewController* detailViewController = [[MRCreateGroupViewController alloc] init];
+        [self.navigationController pushViewController:detailViewController animated:NO];
+    }
 }
 
 - (IBAction)popOverTapped:(id)sender {

@@ -327,6 +327,8 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
     if (self.currentIndex == 0) {
         methodName = kNewsAndUpdatesAPIMethodName;
         category = nil;
+    } else {
+        category = [category stringByReplacingOccurrencesOfString:@" "  withString:@""];
     }
     
     [MRDatabaseHelper fetchNewsAndUpdates:category methodName:methodName
