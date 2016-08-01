@@ -2,7 +2,7 @@
 //  MRWorkExperience+CoreDataProperties.h
 //  MedRep
 //
-//  Created by Namit Nayak on 7/15/16.
+//  Created by Namit Nayak on 7/31/16.
 //  Copyright © 2016 MedRep. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -15,11 +15,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MRWorkExperience (CoreDataProperties)
 
-@property (nullable, nonatomic, retain) NSString *toDate;
 @property (nullable, nonatomic, retain) NSString *designation;
 @property (nullable, nonatomic, retain) NSString *fromDate;
 @property (nullable, nonatomic, retain) NSString *hospital;
 @property (nullable, nonatomic, retain) NSString *location;
+@property (nullable, nonatomic, retain) NSString *toDate;
+@property (nullable, nonatomic, retain) NSNumber *id;
 
 @end
 

@@ -113,7 +113,7 @@ typedef void (^WebServiceResponseHandler)(id result);
 
 + (NSArray*)getTransformArticles;
 + (void)addTransformArticles:(NSArray*)posts;
-+(void)addProfileData:(NSDictionary *)dictonary ;
++(void)addProfileData:(WebServiceResponseHandler)responseHandler;
 +(NSArray *)getProfileData;
 +(BOOL)addWorkExperience :(NSDictionary *)dictionary;
 +(BOOL)addEducationQualification:(NSDictionary *)dictonary ;

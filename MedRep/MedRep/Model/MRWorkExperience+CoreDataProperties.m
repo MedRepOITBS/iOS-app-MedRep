@@ -2,7 +2,7 @@
 //  MRWorkExperience+CoreDataProperties.m
 //  MedRep
 //
-//  Created by Namit Nayak on 7/15/16.
+//  Created by Namit Nayak on 7/31/16.
 //  Copyright © 2016 MedRep. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -13,10 +13,11 @@
 
 @implementation MRWorkExperience (CoreDataProperties)
 
-@dynamic toDate;
 @dynamic designation;
 @dynamic fromDate;
 @dynamic hospital;
 @dynamic location;
+@dynamic toDate;
+@dynamic id;
 
 @end

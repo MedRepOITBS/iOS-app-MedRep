@@ -274,7 +274,7 @@
 }
 
 
--(void)addPulblishArticle:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler{
+-(void)addPulblishArticle:(NSArray *)reqDict withHandler:(completionHandler)responseHandler{
     
     NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/api/doctor/info/publications/add?access_token=%@",kBaseURL,[MRDefaults objectForKey:kAuthenticationToken]];
     
@@ -1982,7 +1982,23 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
     self.serviceType = kMRWebServiceTypeGetAppointmentsByNotificationId;
     [self sendServiceRequest:urlRequest withHandler:responceHandler];
 }
-
+-(void)fetchDoctorInfoWithHandler:(completionHandler)responseHandler{
+    
+//    MedRepApplication/api/doctor/info/fetch
+    
+    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/api/doctor/info/fetch?access_token=%@",kBaseURL,[MRDefaults objectForKey:kAuthenticationToken]];
+    
+    NSURL *url = [NSURL URLWithString:stringFormOfUrl];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [urlRequest setTimeoutInterval:120];
+    [urlRequest setHTTPMethod:@"GET"];
+    [urlRequest setValue:@"text/plain" forHTTPHeaderField:@"Content-Type"];
+    self.serviceType = kMRWebServiceTypeGetDoctorProfileByID;
+    [self sendServiceRequest:urlRequest withHandler:responseHandler];
+    
+    
+}
 - (void)getDoctorProfileDetailsByID:(NSString*)doctorId
                     withHandler:(completionHandler)responceHandler
 {

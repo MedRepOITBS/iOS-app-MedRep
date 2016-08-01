@@ -2,7 +2,7 @@
 //  MRInterestArea+CoreDataProperties.m
 //  MedRep
 //
-//  Created by Namit Nayak on 7/15/16.
+//  Created by Namit Nayak on 7/31/16.
 //  Copyright © 2016 MedRep. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -14,5 +14,6 @@
 @implementation MRInterestArea (CoreDataProperties)
 
 @dynamic name;
+@dynamic id;
 
 @end

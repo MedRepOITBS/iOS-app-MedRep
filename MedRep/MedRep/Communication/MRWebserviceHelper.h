@@ -248,7 +248,7 @@ withComplitionHandler:(completionHandler)responceHandler;
 
 -(void)addInterestArea:(NSArray *)reqDict withHandler:(completionHandler)responseHandler;
 
--(void)addPulblishArticle:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler;
+-(void)addPulblishArticle:(NSArray *)reqDict withHandler:(completionHandler)responseHandler;
 
 -(void)addProfileAbout:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler;
 
@@ -260,7 +260,7 @@ withComplitionHandler:(completionHandler)responceHandler;
 - (void)fetchNewsAndUpdatesListwithHandler:(completionHandler)responceHandler;
 
 - (void)postNewTopic:(NSDictionary*)reqDict withHandler:(completionHandler)responceHandler;
-
+-(void)fetchDoctorInfoWithHandler:(completionHandler)responseHandler;
 
 -(void)addEducationArea:(NSArray *)reqDict withHandler: (completionHandler)responseHandler;
 

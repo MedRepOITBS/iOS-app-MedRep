@@ -2,7 +2,7 @@
 //  EducationalQualifications+CoreDataProperties.h
 //  MedRep
 //
-//  Created by Namit Nayak on 7/19/16.
+//  Created by Namit Nayak on 7/31/16.
 //  Copyright © 2016 MedRep. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -15,11 +15,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface EducationalQualifications (CoreDataProperties)
 
-@property (nullable, nonatomic, retain) NSString *aggregate;
+@property (nullable, nonatomic, retain) NSNumber *aggregate;
 @property (nullable, nonatomic, retain) NSString *collegeName;
 @property (nullable, nonatomic, retain) NSString *course;
-@property (nullable, nonatomic, retain) NSString *yearOfPassout;
 @property (nullable, nonatomic, retain) NSString *degree;
+@property (nullable, nonatomic, retain) NSString *yearOfPassout;
+@property (nullable, nonatomic, retain) NSNumber *id;
 
 @end
 

@@ -86,6 +86,7 @@
                                                                          style:UIBarButtonItemStylePlain target:self
                                                                         action:@selector(editButtonTapped:)];
     self.navigationItem.rightBarButtonItem = rightButtonItem;
+    self.tableView.allowsMultipleSelectionDuringEditing = NO;
     [self setupProfileData];
     // Do any additional setup after loading the view from its nib.
 }
@@ -97,53 +98,53 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [MRCommon showActivityIndicator:@""];
-    if ([MRAppControl sharedHelper].userType == 1 || [MRAppControl sharedHelper].userType == 2)
-    {
-        [[MRWebserviceHelper sharedWebServiceHelper] getDoctorProfileDetails:^(BOOL status, NSString *details, NSDictionary *responce)
-         {
-             [MRCommon stopActivityIndicator];
-             if (status)
-             {
-                 [[MRAppControl sharedHelper] setUserDetails:responce];
-             }
-             else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
-             {
-                 [MRCommon showActivityIndicator:@""];
-                 [[MRWebserviceHelper sharedWebServiceHelper] getDoctorProfileDetails:^(BOOL status, NSString *details, NSDictionary *responce)
-                  {
-                      [MRCommon stopActivityIndicator];
-                      if (status)
-                      {
-                          [[MRAppControl sharedHelper] setUserDetails:responce];
-                      }
-                  }];
-             }
-         }];
-    }
-    else if ([MRAppControl sharedHelper].userType == 3 || [MRAppControl sharedHelper].userType == 4)
-    {
-        [[MRWebserviceHelper sharedWebServiceHelper] getPharmaProfileDetails:^(BOOL status, NSString *details, NSDictionary *responce)
-         {
-             [MRCommon stopActivityIndicator];
-             if (status)
-             {
-                 [[MRAppControl sharedHelper] setUserDetails:responce];
-             }
-             else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
-             {
-                 [MRCommon showActivityIndicator:@""];
-                 [[MRWebserviceHelper sharedWebServiceHelper] getPharmaProfileDetails:^(BOOL status, NSString *details, NSDictionary *responce)
-                  {
-                      [MRCommon stopActivityIndicator];
-                      if (status)
-                      {
-                          [[MRAppControl sharedHelper] setUserDetails:responce];
-                      }
-                  }];
-             }
-         }];
-    }
+//    [MRCommon showActivityIndicator:@""];
+//    if ([MRAppControl sharedHelper].userType == 1 || [MRAppControl sharedHelper].userType == 2)
+//    {
+//        [[MRWebserviceHelper sharedWebServiceHelper] getDoctorProfileDetails:^(BOOL status, NSString *details, NSDictionary *responce)
+//         {
+//             [MRCommon stopActivityIndicator];
+//             if (status)
+//             {
+//                 [[MRAppControl sharedHelper] setUserDetails:responce];
+//             }
+//             else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+//             {
+//                 [MRCommon showActivityIndicator:@""];
+//                 [[MRWebserviceHelper sharedWebServiceHelper] getDoctorProfileDetails:^(BOOL status, NSString *details, NSDictionary *responce)
+//                  {
+//                      [MRCommon stopActivityIndicator];
+//                      if (status)
+//                      {
+//                          [[MRAppControl sharedHelper] setUserDetails:responce];
+//                      }
+//                  }];
+//             }
+//         }];
+//    }
+//    else if ([MRAppControl sharedHelper].userType == 3 || [MRAppControl sharedHelper].userType == 4)
+//    {
+//        [[MRWebserviceHelper sharedWebServiceHelper] getPharmaProfileDetails:^(BOOL status, NSString *details, NSDictionary *responce)
+//         {
+//             [MRCommon stopActivityIndicator];
+//             if (status)
+//             {
+//                 [[MRAppControl sharedHelper] setUserDetails:responce];
+//             }
+//             else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+//             {
+//                 [MRCommon showActivityIndicator:@""];
+//                 [[MRWebserviceHelper sharedWebServiceHelper] getPharmaProfileDetails:^(BOOL status, NSString *details, NSDictionary *responce)
+//                  {
+//                      [MRCommon stopActivityIndicator];
+//                      if (status)
+//                      {
+//                          [[MRAppControl sharedHelper] setUserDetails:responce];
+//                      }
+//                  }];
+//             }
+//         }];
+//    }
 
     [self setupProfileData];
 }
@@ -167,21 +168,26 @@
    
         // Create Dummy Data
         
-    NSArray * profileArr = [MRDatabaseHelper getProfileData];
-    if (profileArr.count == 0 || profileArr == nil) {
-        
-        NSString* filePath = [[NSBundle mainBundle] pathForResource:@"Profile" ofType:@"json"];
-        NSData* data = [NSData dataWithContentsOfFile:filePath];
-        NSError *error;
-        NSDictionary* transformArticles = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-        
-        [MRDatabaseHelper addProfileData:transformArticles];
-    }
+//    NSArray * profileArr = [MRDatabaseHelper getProfileData];
+//    if (profileArr.count == 0 || profileArr == nil) {
+    
+//        NSString* filePath = [[NSBundle mainBundle] pathForResource:@"Profile" ofType:@"json"];
+//        NSData* data = [NSData dataWithContentsOfFile:filePath];
+//        NSError *error;
+//        NSDictionary* transformArticles = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+    
+//        [MRDatabaseHelper addProfileData:transformArticles];
+//    }
 
     
-    _profileObj  = [[MRDatabaseHelper getProfileData] objectAtIndex:0];
+    [MRDatabaseHelper addProfileData:^(id result){
+    _profileObj  = [result objectAtIndex:0];
+        [self.tableView reloadData];
+
+    }];
     
-    [self.tableView reloadData];
+    
+    
     
 
     
@@ -372,6 +378,58 @@
 #pragma mark - Table view data source
 
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return YES if you want the specified item to be editable.
+    return YES;
+}
+
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+
+NSDictionary *valNDict = [[self setStructureForTableView] objectAtIndex:indexPath.row];
+    
+NSString *valN = [valNDict objectForKey:@"type"];
+
+
+ if ([valN isEqualToString:@"WORK_EXP_DETAIL"] || [valN isEqualToString:@"EDUCATION_QUAL_DETAIL"] || [valN isEqualToString:@"PUBLICATION_DETAIL"] || [valN isEqualToString:@"INTEREST_AREA_DETAIL"] ){
+
+    return UITableViewCellEditingStyleDelete;
+
+ }else
+ {
+    return UITableViewCellEditingStyleNone;
+ }
+}
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+   
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        //add code here for when you hit delete
+        NSDictionary *valNDict = [[self setStructureForTableView] objectAtIndex:indexPath.row];
+
+        NSString *valN = [valNDict objectForKey:@"type"];
+        if([valN isEqualToString:@"WORK_EXP_DETAIL"]){
+            
+            MRWorkExperience *exp = [valNDict objectForKey:@"object"];
+            
+            
+        }else if([valN isEqualToString:@"EDUCATION_QUAL_DETAIL"] ){
+            
+            
+        }else if ([valN isEqualToString:@"WORK_EXP_DETAIL"]){
+            
+            
+        }else if([valN isEqualToString:@"PUBLICATION_DETAIL"]){
+            
+        }else if([valN isEqualToString:@"INTEREST_AREA_DETAIL"]){
+            
+            
+        }
+     
+        
+    }
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self setStructureForTableView].count;

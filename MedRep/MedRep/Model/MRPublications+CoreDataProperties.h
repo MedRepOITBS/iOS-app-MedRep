@@ -2,7 +2,7 @@
 //  MRPublications+CoreDataProperties.h
 //  MedRep
 //
-//  Created by Namit Nayak on 7/19/16.
+//  Created by Namit Nayak on 7/31/16.
 //  Copyright © 2016 MedRep. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *articleName;
 @property (nullable, nonatomic, retain) NSString *publication;
 @property (nullable, nonatomic, retain) NSString *year;
+@property (nullable, nonatomic, retain) NSString *id;
 
 @end
 

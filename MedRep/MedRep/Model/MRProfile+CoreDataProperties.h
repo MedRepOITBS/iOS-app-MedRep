@@ -2,7 +2,7 @@
 //  MRProfile+CoreDataProperties.h
 //  MedRep
 //
-//  Created by Namit Nayak on 7/15/16.
+//  Created by Namit Nayak on 7/31/16.
 //  Copyright © 2016 MedRep. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -15,61 +15,63 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MRProfile (CoreDataProperties)
 
-@property (nullable, nonatomic, retain) NSString *name;
-@property (nullable, nonatomic, retain) NSString *location;
 @property (nullable, nonatomic, retain) NSString *designation;
-@property (nullable, nonatomic, retain) NSOrderedSet<NSManagedObject *> *workExperience;
-@property (nullable, nonatomic, retain) NSOrderedSet<NSManagedObject *> *educationlQualification;
-@property (nullable, nonatomic, retain) NSOrderedSet<NSManagedObject *> *interestArea;
-@property (nullable, nonatomic, retain) NSOrderedSet<NSManagedObject *> *publications;
+@property (nullable, nonatomic, retain) NSString *location;
+@property (nullable, nonatomic, retain) NSString *name;
+@property (nullable, nonatomic, retain) NSNumber *doctorId;
+@property (nullable, nonatomic, retain) NSNumber *id;
+@property (nullable, nonatomic, retain) NSOrderedSet<EducationalQualifications *> *educationlQualification;
+@property (nullable, nonatomic, retain) NSOrderedSet<MRInterestArea *> *interestArea;
+@property (nullable, nonatomic, retain) NSOrderedSet<MRPublications *> *publications;
+@property (nullable, nonatomic, retain) NSOrderedSet<MRWorkExperience *> *workExperience;
 
 @end
 
 @interface MRProfile (CoreDataGeneratedAccessors)
 
-- (void)insertObject:(NSManagedObject *)value inWorkExperienceAtIndex:(NSUInteger)idx;
-- (void)removeObjectFromWorkExperienceAtIndex:(NSUInteger)idx;
-- (void)insertWorkExperience:(NSArray<NSManagedObject *> *)value atIndexes:(NSIndexSet *)indexes;
-- (void)removeWorkExperienceAtIndexes:(NSIndexSet *)indexes;
-- (void)replaceObjectInWorkExperienceAtIndex:(NSUInteger)idx withObject:(NSManagedObject *)value;
-- (void)replaceWorkExperienceAtIndexes:(NSIndexSet *)indexes withWorkExperience:(NSArray<NSManagedObject *> *)values;
-- (void)addWorkExperienceObject:(NSManagedObject *)value;
-- (void)removeWorkExperienceObject:(NSManagedObject *)value;
-- (void)addWorkExperience:(NSOrderedSet<NSManagedObject *> *)values;
-- (void)removeWorkExperience:(NSOrderedSet<NSManagedObject *> *)values;
-
-- (void)insertObject:(NSManagedObject *)value inEducationlQualificationAtIndex:(NSUInteger)idx;
+- (void)insertObject:(EducationalQualifications *)value inEducationlQualificationAtIndex:(NSUInteger)idx;
 - (void)removeObjectFromEducationlQualificationAtIndex:(NSUInteger)idx;
-- (void)insertEducationlQualification:(NSArray<NSManagedObject *> *)value atIndexes:(NSIndexSet *)indexes;
+- (void)insertEducationlQualification:(NSArray<EducationalQualifications *> *)value atIndexes:(NSIndexSet *)indexes;
 - (void)removeEducationlQualificationAtIndexes:(NSIndexSet *)indexes;
-- (void)replaceObjectInEducationlQualificationAtIndex:(NSUInteger)idx withObject:(NSManagedObject *)value;
-- (void)replaceEducationlQualificationAtIndexes:(NSIndexSet *)indexes withEducationlQualification:(NSArray<NSManagedObject *> *)values;
-- (void)addEducationlQualificationObject:(NSManagedObject *)value;
-- (void)removeEducationlQualificationObject:(NSManagedObject *)value;
-- (void)addEducationlQualification:(NSOrderedSet<NSManagedObject *> *)values;
-- (void)removeEducationlQualification:(NSOrderedSet<NSManagedObject *> *)values;
+- (void)replaceObjectInEducationlQualificationAtIndex:(NSUInteger)idx withObject:(EducationalQualifications *)value;
+- (void)replaceEducationlQualificationAtIndexes:(NSIndexSet *)indexes withEducationlQualification:(NSArray<EducationalQualifications *> *)values;
+- (void)addEducationlQualificationObject:(EducationalQualifications *)value;
+- (void)removeEducationlQualificationObject:(EducationalQualifications *)value;
+- (void)addEducationlQualification:(NSOrderedSet<EducationalQualifications *> *)values;
+- (void)removeEducationlQualification:(NSOrderedSet<EducationalQualifications *> *)values;
 
-- (void)insertObject:(NSManagedObject *)value inInterestAreaAtIndex:(NSUInteger)idx;
+- (void)insertObject:(MRInterestArea *)value inInterestAreaAtIndex:(NSUInteger)idx;
 - (void)removeObjectFromInterestAreaAtIndex:(NSUInteger)idx;
-- (void)insertInterestArea:(NSArray<NSManagedObject *> *)value atIndexes:(NSIndexSet *)indexes;
+- (void)insertInterestArea:(NSArray<MRInterestArea *> *)value atIndexes:(NSIndexSet *)indexes;
 - (void)removeInterestAreaAtIndexes:(NSIndexSet *)indexes;
-- (void)replaceObjectInInterestAreaAtIndex:(NSUInteger)idx withObject:(NSManagedObject *)value;
-- (void)replaceInterestAreaAtIndexes:(NSIndexSet *)indexes withInterestArea:(NSArray<NSManagedObject *> *)values;
-- (void)addInterestAreaObject:(NSManagedObject *)value;
-- (void)removeInterestAreaObject:(NSManagedObject *)value;
-- (void)addInterestArea:(NSOrderedSet<NSManagedObject *> *)values;
-- (void)removeInterestArea:(NSOrderedSet<NSManagedObject *> *)values;
+- (void)replaceObjectInInterestAreaAtIndex:(NSUInteger)idx withObject:(MRInterestArea *)value;
+- (void)replaceInterestAreaAtIndexes:(NSIndexSet *)indexes withInterestArea:(NSArray<MRInterestArea *> *)values;
+- (void)addInterestAreaObject:(MRInterestArea *)value;
+- (void)removeInterestAreaObject:(MRInterestArea *)value;
+- (void)addInterestArea:(NSOrderedSet<MRInterestArea *> *)values;
+- (void)removeInterestArea:(NSOrderedSet<MRInterestArea *> *)values;
 
-- (void)insertObject:(NSManagedObject *)value inPublicationsAtIndex:(NSUInteger)idx;
+- (void)insertObject:(MRPublications *)value inPublicationsAtIndex:(NSUInteger)idx;
 - (void)removeObjectFromPublicationsAtIndex:(NSUInteger)idx;
-- (void)insertPublications:(NSArray<NSManagedObject *> *)value atIndexes:(NSIndexSet *)indexes;
+- (void)insertPublications:(NSArray<MRPublications *> *)value atIndexes:(NSIndexSet *)indexes;
 - (void)removePublicationsAtIndexes:(NSIndexSet *)indexes;
-- (void)replaceObjectInPublicationsAtIndex:(NSUInteger)idx withObject:(NSManagedObject *)value;
-- (void)replacePublicationsAtIndexes:(NSIndexSet *)indexes withPublications:(NSArray<NSManagedObject *> *)values;
-- (void)addPublicationsObject:(NSManagedObject *)value;
-- (void)removePublicationsObject:(NSManagedObject *)value;
-- (void)addPublications:(NSOrderedSet<NSManagedObject *> *)values;
-- (void)removePublications:(NSOrderedSet<NSManagedObject *> *)values;
+- (void)replaceObjectInPublicationsAtIndex:(NSUInteger)idx withObject:(MRPublications *)value;
+- (void)replacePublicationsAtIndexes:(NSIndexSet *)indexes withPublications:(NSArray<MRPublications *> *)values;
+- (void)addPublicationsObject:(MRPublications *)value;
+- (void)removePublicationsObject:(MRPublications *)value;
+- (void)addPublications:(NSOrderedSet<MRPublications *> *)values;
+- (void)removePublications:(NSOrderedSet<MRPublications *> *)values;
+
+- (void)insertObject:(MRWorkExperience *)value inWorkExperienceAtIndex:(NSUInteger)idx;
+- (void)removeObjectFromWorkExperienceAtIndex:(NSUInteger)idx;
+- (void)insertWorkExperience:(NSArray<MRWorkExperience *> *)value atIndexes:(NSIndexSet *)indexes;
+- (void)removeWorkExperienceAtIndexes:(NSIndexSet *)indexes;
+- (void)replaceObjectInWorkExperienceAtIndex:(NSUInteger)idx withObject:(MRWorkExperience *)value;
+- (void)replaceWorkExperienceAtIndexes:(NSIndexSet *)indexes withWorkExperience:(NSArray<MRWorkExperience *> *)values;
+- (void)addWorkExperienceObject:(MRWorkExperience *)value;
+- (void)removeWorkExperienceObject:(MRWorkExperience *)value;
+- (void)addWorkExperience:(NSOrderedSet<MRWorkExperience *> *)values;
+- (void)removeWorkExperience:(NSOrderedSet<MRWorkExperience *> *)values;
 
 @end
 

@@ -640,10 +640,6 @@
 		B4B4F1231D395DF300EFCC0E /* ExperienceSummaryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1211D395DF300EFCC0E /* ExperienceSummaryTableViewCell.m */; };
 		B4B4F1251D3983D300EFCC0E /* Profile.json in Resources */ = {isa = PBXBuildFile; fileRef = B4B4F1241D3983D300EFCC0E /* Profile.json */; };
 		B4B4F1261D3983D300EFCC0E /* Profile.json in Resources */ = {isa = PBXBuildFile; fileRef = B4B4F1241D3983D300EFCC0E /* Profile.json */; };
-		B4B4F13B1D39857E00EFCC0E /* MRProfile+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1281D39857E00EFCC0E /* MRProfile+CoreDataProperties.m */; };
-		B4B4F13C1D39857E00EFCC0E /* MRProfile+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1281D39857E00EFCC0E /* MRProfile+CoreDataProperties.m */; };
-		B4B4F13D1D39857E00EFCC0E /* MRProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F12A1D39857E00EFCC0E /* MRProfile.m */; };
-		B4B4F13E1D39857E00EFCC0E /* MRProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F12A1D39857E00EFCC0E /* MRProfile.m */; };
 		B4B4F13F1D39857E00EFCC0E /* MRWorkExperience+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F12C1D39857E00EFCC0E /* MRWorkExperience+CoreDataProperties.m */; };
 		B4B4F1401D39857E00EFCC0E /* MRWorkExperience+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F12C1D39857E00EFCC0E /* MRWorkExperience+CoreDataProperties.m */; };
 		B4B4F1411D39857E00EFCC0E /* MRWorkExperience.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F12E1D39857E00EFCC0E /* MRWorkExperience.m */; };
@@ -730,6 +726,10 @@
 		B4E02C6E1D4B2992003A1859 /* UIImage+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E02C6D1D4B2992003A1859 /* UIImage+Helpers.m */; };
 		B4E02C6F1D4B2992003A1859 /* UIImage+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E02C6D1D4B2992003A1859 /* UIImage+Helpers.m */; };
 		B4E02C701D4C391D003A1859 /* MRDatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 797560461BBFE4940034D0AC /* MRDatabaseHelper.m */; };
+		B4E02C751D4EBEC4003A1859 /* MRProfile+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E02C721D4EBEC4003A1859 /* MRProfile+CoreDataProperties.m */; };
+		B4E02C761D4EBEC4003A1859 /* MRProfile+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E02C721D4EBEC4003A1859 /* MRProfile+CoreDataProperties.m */; };
+		B4E02C771D4EBEC4003A1859 /* MRProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E02C741D4EBEC4003A1859 /* MRProfile.m */; };
+		B4E02C781D4EBEC4003A1859 /* MRProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E02C741D4EBEC4003A1859 /* MRProfile.m */; };
 		CC0123C11D25A66B001134F3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0123C01D25A66B001134F3 /* CoreGraphics.framework */; };
 		CC0123C21D25A677001134F3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0123C01D25A66B001134F3 /* CoreGraphics.framework */; };
 		CC01BA731D302ACF007E2AEB /* MRCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC01BA711D302ACF007E2AEB /* MRCommentViewController.m */; };
@@ -2101,10 +2101,6 @@
 		B4B4F1201D395DF300EFCC0E /* ExperienceSummaryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExperienceSummaryTableViewCell.h; sourceTree = "<group>"; };
 		B4B4F1211D395DF300EFCC0E /* ExperienceSummaryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExperienceSummaryTableViewCell.m; sourceTree = "<group>"; };
 		B4B4F1241D3983D300EFCC0E /* Profile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Profile.json; sourceTree = "<group>"; };
-		B4B4F1271D39857E00EFCC0E /* MRProfile+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MRProfile+CoreDataProperties.h"; sourceTree = "<group>"; };
-		B4B4F1281D39857E00EFCC0E /* MRProfile+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MRProfile+CoreDataProperties.m"; sourceTree = "<group>"; };
-		B4B4F1291D39857E00EFCC0E /* MRProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRProfile.h; sourceTree = "<group>"; };
-		B4B4F12A1D39857E00EFCC0E /* MRProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRProfile.m; sourceTree = "<group>"; };
 		B4B4F12B1D39857E00EFCC0E /* MRWorkExperience+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MRWorkExperience+CoreDataProperties.h"; sourceTree = "<group>"; };
 		B4B4F12C1D39857E00EFCC0E /* MRWorkExperience+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MRWorkExperience+CoreDataProperties.m"; sourceTree = "<group>"; };
 		B4B4F12D1D39857E00EFCC0E /* MRWorkExperience.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRWorkExperience.h; sourceTree = "<group>"; };
@@ -2170,6 +2166,10 @@
 		B4E02C651D4B0BB0003A1859 /* Drug_Search.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Drug_Search.jpg; sourceTree = "<group>"; };
 		B4E02C6C1D4B2992003A1859 /* UIImage+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Helpers.h"; sourceTree = "<group>"; };
 		B4E02C6D1D4B2992003A1859 /* UIImage+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Helpers.m"; sourceTree = "<group>"; };
+		B4E02C711D4EBEC4003A1859 /* MRProfile+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MRProfile+CoreDataProperties.h"; sourceTree = "<group>"; };
+		B4E02C721D4EBEC4003A1859 /* MRProfile+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MRProfile+CoreDataProperties.m"; sourceTree = "<group>"; };
+		B4E02C731D4EBEC4003A1859 /* MRProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRProfile.h; sourceTree = "<group>"; };
+		B4E02C741D4EBEC4003A1859 /* MRProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRProfile.m; sourceTree = "<group>"; };
 		CC0123C01D25A66B001134F3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		CC01BA701D302ACF007E2AEB /* MRCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRCommentViewController.h; path = CommentBox/MRCommentViewController.h; sourceTree = "<group>"; };
 		CC01BA711D302ACF007E2AEB /* MRCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRCommentViewController.m; path = CommentBox/MRCommentViewController.m; sourceTree = "<group>"; };
@@ -2972,10 +2972,6 @@
 				B41746DC1D0CD740009B7E7E /* MRGroupPost.m */,
 				B47E338B1D2F65540051724C /* MRSharePost.h */,
 				B47E338C1D2F65540051724C /* MRSharePost.m */,
-				B4B4F1271D39857E00EFCC0E /* MRProfile+CoreDataProperties.h */,
-				B4B4F1281D39857E00EFCC0E /* MRProfile+CoreDataProperties.m */,
-				B4B4F1291D39857E00EFCC0E /* MRProfile.h */,
-				B4B4F12A1D39857E00EFCC0E /* MRProfile.m */,
 				B4B4F12B1D39857E00EFCC0E /* MRWorkExperience+CoreDataProperties.h */,
 				B4B4F12C1D39857E00EFCC0E /* MRWorkExperience+CoreDataProperties.m */,
 				B4B4F12D1D39857E00EFCC0E /* MRWorkExperience.h */,
@@ -2994,6 +2990,10 @@
 				B40E13A71D3F251C005830DA /* MRPublications.m */,
 				B4E02C5E1D491760003A1859 /* MRSharePost+CoreDataProperties.h */,
 				B4E02C5F1D491760003A1859 /* MRSharePost+CoreDataProperties.m */,
+				B4E02C711D4EBEC4003A1859 /* MRProfile+CoreDataProperties.h */,
+				B4E02C721D4EBEC4003A1859 /* MRProfile+CoreDataProperties.m */,
+				B4E02C731D4EBEC4003A1859 /* MRProfile.h */,
+				B4E02C741D4EBEC4003A1859 /* MRProfile.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -5336,9 +5336,11 @@
 				79F4167A1B9F596B0089729B /* MPAppointmentViewController.m in Sources */,
 				B4B4F1051D38B52B00EFCC0E /* ProfileAboutTableViewCell.m in Sources */,
 				79DC37181BE7DEA90027F7DB /* MRMedRepListTableCell.m in Sources */,
+				B4E02C771D4EBEC4003A1859 /* MRProfile.m in Sources */,
 				7920D6991C1C9B69008D3386 /* MRProfileDetailsViewController.m in Sources */,
 				B40E13A21D3F137E005830DA /* PublicationsViewController.m in Sources */,
 				CC7DB2C91D0CC433007DFE4C /* MRContactCollectionCell.m in Sources */,
+				B4E02C751D4EBEC4003A1859 /* MRProfile+CoreDataProperties.m in Sources */,
 				CCA383F11D342D3500BCF5A9 /* MRGroupMembers+CoreDataProperties.m in Sources */,
 				79F5C9F11BB0586100435B6C /* MRMedRepMeetingsViewController.m in Sources */,
 				797560411BBFE3AA0034D0AC /* MRNotificationType.m in Sources */,
@@ -5363,7 +5365,6 @@
 				B4B4F1861D39E53E00EFCC0E /* NSMediumMonthComponent.m in Sources */,
 				79F84B201BE938310081613A /* MRViewAppointmnetViewController.m in Sources */,
 				797560441BBFE3AA0034D0AC /* MRTherapeuticArea.m in Sources */,
-				B4B4F13D1D39857E00EFCC0E /* MRProfile.m in Sources */,
 				B40E13A81D3F251C005830DA /* MRPublications+CoreDataProperties.m in Sources */,
 				CC7DB2741D0C9E15007DFE4C /* MPTransformTableViewCell.m in Sources */,
 				7969CFCE1BAF2E38004C2009 /* MRListViewController.m in Sources */,
@@ -5390,7 +5391,6 @@
 				B4E02C601D491760003A1859 /* MRSharePost+CoreDataProperties.m in Sources */,
 				B4B4F0FB1D38AEDF00EFCC0E /* addProfileItemsTableViewCell.m in Sources */,
 				B41746E41D0CE628009B7E7E /* GroupPostChildTableViewCell.m in Sources */,
-				B4B4F13B1D39857E00EFCC0E /* MRProfile+CoreDataProperties.m in Sources */,
 				79BD27DC1B809FD1007CA448 /* MRLoginViewController.m in Sources */,
 				B4B4F13F1D39857E00EFCC0E /* MRWorkExperience+CoreDataProperties.m in Sources */,
 				CC649F5F1D0D1BA10012289C /* MRDrugSearchViewController.m in Sources */,
@@ -5552,9 +5552,11 @@
 				B40E139F1D3F1268005830DA /* InterestViewController.m in Sources */,
 				CC7DB0271D0C8BEC007DFE4C /* WYPopoverController.m in Sources */,
 				CC7DB0281D0C8BEC007DFE4C /* MRViewRepAppointmnetViewController.m in Sources */,
+				B4E02C781D4EBEC4003A1859 /* MRProfile.m in Sources */,
 				B4B4F1021D38B4DF00EFCC0E /* ProfileBasicTableViewCell.m in Sources */,
 				B40E13A31D3F137E005830DA /* PublicationsViewController.m in Sources */,
 				CC7DB0291D0C8BEC007DFE4C /* MRForgotPasswordTwoViewController.m in Sources */,
+				B4E02C761D4EBEC4003A1859 /* MRProfile+CoreDataProperties.m in Sources */,
 				8AFE8CD41D0EFFD30000382E /* MRCreateGroupViewController.m in Sources */,
 				CC7DB02A1D0C8BEC007DFE4C /* MRDoctorDetailsTableViewCell.m in Sources */,
 				CC7DB02B1D0C8BEC007DFE4C /* MRFeedBackResultCell.m in Sources */,
@@ -5572,7 +5574,6 @@
 				CC7DB21A1D0C8CF2007DFE4C /* MRDevEnvironmentConfig.m in Sources */,
 				8A7169D81D27E23D00533A6D /* MRDrugTableViewCell.m in Sources */,
 				B4B4F1521D39A80C00EFCC0E /* ExpericeFillUpTableViewCell.m in Sources */,
-				B4B4F13E1D39857E00EFCC0E /* MRProfile.m in Sources */,
 				CC7DB0311D0C8BEC007DFE4C /* Base64Transcoder.m in Sources */,
 				CC7DB0321D0C8BEC007DFE4C /* MRCommon.m in Sources */,
 				B4E02C621D4921C0003A1859 /* MRSharePost.m in Sources */,
@@ -5674,7 +5675,6 @@
 				CC7DB0621D0C8BEC007DFE4C /* main.m in Sources */,
 				CC7DB0631D0C8BEC007DFE4C /* MRMenuTableViewCell.m in Sources */,
 				CC7DB0641D0C8BEC007DFE4C /* ViewController.m in Sources */,
-				B4B4F13C1D39857E00EFCC0E /* MRProfile+CoreDataProperties.m in Sources */,
 				CC7DB0651D0C8BEC007DFE4C /* MRWebserviceHelper.m in Sources */,
 				B4B4F1891D39E53E00EFCC0E /* NSShortMonthComponent.m in Sources */,
 				B4B4F1681D39E52600EFCC0E /* NSObject+Array.m in Sources */,
