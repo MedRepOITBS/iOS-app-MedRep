@@ -109,7 +109,7 @@
     
     if (self.post.contentType.integerValue == kTransformContentTypeImage) {
         if (self.post.url != nil && self.post.url.length > 0) {
-            image = [UIImage imageNamed:self.post.url];
+            image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.post.url]]];
         } else if (self.post.objectData != nil) {
             image = [UIImage imageWithData:self.post.objectData];
         }

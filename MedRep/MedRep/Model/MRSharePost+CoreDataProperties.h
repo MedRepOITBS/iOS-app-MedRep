@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSNumber *contactId;
 @property (nullable, nonatomic, retain) NSNumber *contentType;
 @property (nullable, nonatomic, retain) NSString *detailedText;
+@property (nullable, nonatomic, retain) NSString *doctor_Name;
 @property (nullable, nonatomic, retain) NSNumber *group_id;
 @property (nullable, nonatomic, retain) NSNumber *groupId;
 @property (nullable, nonatomic, retain) NSNumber *likesCount;
@@ -46,7 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSNumber *likes_count;
 @property (nullable, nonatomic, retain) NSNumber *comment_count;
 @property (nullable, nonatomic, retain) NSNumber *share_count;
-@property (nullable, nonatomic, retain) NSNumber *posted_on;
+@property (nullable, nonatomic, retain) NSDate *posted_on;
 @property (nullable, nonatomic, retain) NSNumber *parent_share_id;
 @property (nullable, nonatomic, retain) NSString *content_type;
 @property (nullable, nonatomic, retain) NSString *detail_desc;

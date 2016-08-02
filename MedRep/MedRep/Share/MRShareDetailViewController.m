@@ -29,7 +29,8 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
 
-@interface MRShareDetailViewController () <UITableViewDataSource, UITableViewDelegate, MRShareOptionsSelectionDelegate, UIWebViewDelegate, CommonBoxViewDelegate> {
+@interface MRShareDetailViewController () <UITableViewDataSource, UITableViewDelegate, MRShareOptionsSelectionDelegate, UIWebViewDelegate, CommonBoxViewDelegate,
+AVPlayerViewControllerDelegate> {
     
     AVPlayerViewController *av;
 }
@@ -118,6 +119,12 @@
     [self setEmptyMessage];
 }
 
+-(void) viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    [av.contentOverlayView removeObserver:self forKeyPath:@"bounds" context:NULL];
+}
+
 - (void)setupUI {
     [self setupPreview];
     [self setCountInLabels];
@@ -137,35 +144,16 @@
     if (self.post.contentType.integerValue == kTransformContentTypePDF) {
         [self.previewImageView setHidden:YES];
         
-        [self.webView setDelegate:self];
-        [self.webView setHidden:NO];
-        
-        NSURL *targetURL = [NSURL URLWithString:@"https://dl.dropboxusercontent.com/u/104553173/sample.pdf"];
-        NSURLRequest *request = [NSURLRequest requestWithURL:targetURL];
-        [self.webView loadRequest:request];
+        if (self.post.url != nil && self.post.url.length > 0) {
+            [self.webView setDelegate:self];
+            [self.webView setHidden:NO];
+            
+            NSURL *targetURL = [NSURL URLWithString:self.post.url];
+            NSURLRequest *request = [NSURLRequest requestWithURL:targetURL];
+            [self.webView loadRequest:request];
+        }
     } else if (self.post.contentType.integerValue == kTransformContentTypeVideo) {
-        
-        [self.previewImageView setHidden:YES];
-        
-        av = [[AVPlayerViewController alloc] init];
-        av.view.frame = CGRectMake(self.previewImageView.frame.origin.x,
-                                   self.previewImageView.frame.origin.y,
-                                   self.previewImageView.frame.size.height,
-                                   self.previewImageView.frame.size.height);
-        
-        AVAsset *avAsset = [AVAsset assetWithURL:[NSURL URLWithString:@"https://dl.dropboxusercontent.com/u/104553173/PK%20Song.mp4"]];
-        AVPlayerItem *avPlayerItem =[[AVPlayerItem alloc]initWithAsset:avAsset];
-        AVPlayer *avPlayer = [[AVPlayer alloc]initWithPlayerItem:avPlayerItem];
-        av.player = avPlayer;
-        [avPlayer seekToTime:kCMTimeZero];
-        [avPlayer pause];
-        
-        [self addChildViewController:av];
-        [self.view addSubview:av.view];
-        [av didMoveToParentViewController:self];
-        [av.contentOverlayView addObserver:self forKeyPath:@"bounds" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-        
-        //            [self setAVPlayerConstraints:av.view];
+        [self setupVideoPlayer];
         
     }else { //if ([self.selectedContent.contentType isEqualToString:@"Image"]) {
         if (self.post.url != nil && self.post.url.length > 0) {
@@ -180,6 +168,59 @@
             self.previewImageHeightConstraint.constant = 0;
             self.webViewHeightConstraint.constant = 0;
         }
+    }
+}
+
+- (void)setupVideoPlayer {
+    [self.previewImageView setHidden:YES];
+    
+    if (self.post.url != nil && self.post.url.length > 0) {
+        
+        NSLog(@"URL : %@", self.post.url);
+        
+        av = [[AVPlayerViewController alloc] init];
+        
+        av.view.frame = CGRectMake(self.previewImageView.frame.origin.x,
+                                   self.previewImageView.frame.origin.y,
+                                   self.previewImageView.frame.size.width,
+                                   self.previewImageView.frame.size.height);
+        
+        AVPlayer *avPlayer = [AVPlayer playerWithURL:[NSURL URLWithString:self.post.url]];
+        av.player = avPlayer;
+        [avPlayer seekToTime:kCMTimeZero];
+        [avPlayer pause];
+        
+        [self addChildViewController:av];
+        [self.view addSubview:av.view];
+        [av didMoveToParentViewController:self];
+        [av.contentOverlayView addObserver:self forKeyPath:@"bounds" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+    
+        NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:av.view
+                                                                          attribute:NSLayoutAttributeLeading
+                                                                          relatedBy:NSLayoutRelationEqual
+                                                                             toItem:self.view
+                                                                          attribute:NSLayoutAttributeLeading
+                                                                         multiplier:1.0 constant:10];
+        NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:av.view
+                                                                           attribute:NSLayoutAttributeTrailing
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:self.view
+                                                                           attribute:NSLayoutAttributeTrailing
+                                                                          multiplier:1.0 constant:10];
+        NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:av.view
+                                                                            attribute:NSLayoutAttributeHeight
+                                                                            relatedBy:NSLayoutRelationEqual
+                                                                               toItem:self.previewImageView
+                                                                            attribute:NSLayoutAttributeHeight
+                                                                           multiplier:1.0 constant:0];
+        NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:av.view
+                                                                         attribute:NSLayoutAttributeTop
+                                                                         relatedBy:NSLayoutRelationEqual
+                                                                            toItem:self.titleView
+                                                                         attribute:NSLayoutAttributeBottom
+                                                                        multiplier:1.0 constant:20];
+        
+        [self.view addConstraints:@[leftConstraint, rightConstraint, heightConstraint, topConstraint]];
     }
 }
 
@@ -312,7 +353,8 @@
                                     self.recentActivity = [NSArray arrayWithArray:self.post.postedReplies.allObjects];
                                     
                                     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"postedOn" ascending:false];
-                                    self.recentActivity = [self.recentActivity sortedArrayUsingDescriptors:@[sortDescriptor]];
+                                    NSSortDescriptor *sortNameDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"titleDescription" ascending:false];
+                                    self.recentActivity = [self.recentActivity sortedArrayUsingDescriptors:@[sortDescriptor, sortNameDescriptor]];
                                     
                                     [self setEmptyMessage];
                                 }];
@@ -406,6 +448,45 @@
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
     
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *, id> *)change context:(void *)context {
+    if (object == av.contentOverlayView) {
+        if ([keyPath isEqualToString:@"bounds"]) {
+            CGRect oldBounds = [change[NSKeyValueChangeOldKey] CGRectValue], newBounds = [change[NSKeyValueChangeNewKey] CGRectValue];
+            BOOL wasFullscreen = CGRectEqualToRect(oldBounds, [UIScreen mainScreen].bounds), isFullscreen = CGRectEqualToRect(newBounds, [UIScreen mainScreen].bounds);
+            if (isFullscreen && !wasFullscreen) {
+                if (CGRectEqualToRect(oldBounds, CGRectMake(0, 0, newBounds.size.height, newBounds.size.width))) {
+                    NSLog(@"rotated fullscreen");
+                }
+                else {
+                    NSLog(@"entered fullscreen");
+                    ((AppDelegate *)[UIApplication sharedApplication].delegate).enabledVideoRotation = YES;
+                    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeRight];
+                    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+                }
+            }
+            else if (!isFullscreen && wasFullscreen) {
+                NSLog(@"exited fullscreen");
+                ((AppDelegate *)[UIApplication sharedApplication].delegate).enabledVideoRotation = NO;
+                NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
+                [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+            }
+        }
+    }
+}
+
+#pragma mark - AVPlayerViewControllerDelegate
+- (void)playerViewController:(AVPlayerViewController *)playerViewController failedToStartPictureInPictureWithError:(NSError *)error {
+    NSLog(@"%@",error.localizedDescription);
+}
+
+- (void)playerViewControllerDidStartPictureInPicture:(AVPlayerViewController *)playerViewController {
+    NSLog(@"%s",__PRETTY_FUNCTION__);
+}
+
+- (void)playerViewControllerWillStartPictureInPicture:(AVPlayerViewController *)playerViewController {
+    NSLog(@"%s",__PRETTY_FUNCTION__);
 }
 
 @end

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15F34" minimumToolsVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15G31" minimumToolsVersion="Automatic">
     <entity name="EducationalQualifications" representedClassName="EducationalQualifications" syncable="YES">
         <attribute name="aggregate" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="collegeName" optional="YES" attributeType="String" syncable="YES"/>
@@ -187,6 +187,7 @@
         <attribute name="detail_desc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="detailedText" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="doctor_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="doctor_Name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="group_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="groupId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="likes_count" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -199,7 +200,7 @@
         <attribute name="parentSharePostId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="parentTransformPostId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="post_date" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="posted_on" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="posted_on" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="postedOn" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="receiver_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="share_count" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -281,7 +282,7 @@
         <element name="MRPublications" positionX="0" positionY="171" width="128" height="90"/>
         <element name="MRReplies" positionX="-36" positionY="135" width="128" height="120"/>
         <element name="MRRole" positionX="178" positionY="-72" width="128" height="105"/>
-        <element name="MRSharePost" positionX="151" positionY="366" width="128" height="615"/>
+        <element name="MRSharePost" positionX="151" positionY="366" width="128" height="630"/>
         <element name="MRSuggestedContact" positionX="187" positionY="174" width="128" height="105"/>
         <element name="MRTherapeuticArea" positionX="315" positionY="36" width="128" height="90"/>
         <element name="MRTransformPost" positionX="331" positionY="378" width="128" height="435"/>

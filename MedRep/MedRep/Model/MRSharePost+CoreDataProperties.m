@@ -18,6 +18,7 @@
 @dynamic contactId;
 @dynamic contentType;
 @dynamic detailedText;
+@dynamic doctor_Name;
 @dynamic group_id;
 @dynamic groupId;
 @dynamic likesCount;
@@ -59,6 +60,7 @@
         topicId = topic_id.longValue;
     }
     
+    self.sharePostId = [NSNumber numberWithLong:topicId];
     self.parentSharePostId = [NSNumber numberWithLong:topicId];
     self.parentTransformPostId = [NSNumber numberWithLong:topicId];
 }
@@ -81,21 +83,40 @@
     self.groupId = group_id;
 }
 
--(void)setMessage_type:(NSString *)message_type{
-    
-    if ([message_type isEqualToString:@"Text"]) {
-        self.contentType =[NSNumber numberWithInt: kTransformContentTypeText] ;
+-(void)setMessage_type:(NSString *)message_type {
+    [self applyMessageType:message_type];
+}
+
+- (void)setContent_type:(NSString *)content_type {
+    [self applyMessageType:content_type];
+}
+
+- (void)applyMessageType:(NSString*)message_type {
+    if ([message_type caseInsensitiveCompare:@"Image"] == NSOrderedSame) {
+        self.contentType =[NSNumber numberWithInt: kTransformContentTypeImage] ;
+    } else if ([message_type caseInsensitiveCompare:@"PDF"] == NSOrderedSame) {
+        self.contentType =[NSNumber numberWithInt: kTransformContentTypePDF] ;
+    } else if ([message_type caseInsensitiveCompare:@"Video"] == NSOrderedSame) {
+        self.contentType =[NSNumber numberWithInt: kTransformContentTypeVideo] ;
+    } else {
+         self.contentType =[NSNumber numberWithInt: kTransformContentTypeText];
     }
-    
-    
 }
 
 -(void)setPost_date:(NSDate *)post_date {
     self.postedOn =  post_date;
 }
 
+- (void)setPosted_on:(NSDate *)posted_on {
+    self.postedOn = posted_on;
+}
+
 - (void)setTitle_desc:(NSString *)title_desc {
     self.titleDescription = title_desc;
+}
+
+- (void)setDoctor_Name:(NSString *)doctor_Name {
+    self.sharedByProfileName = doctor_Name;
 }
 
 @end
