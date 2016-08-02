@@ -13,7 +13,8 @@
 
 @interface CommonBoxView : UIView <UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextView *commentTextView;
-
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak,nonatomic) IBOutlet UITextView *descriptionTextView;
 @property (nonatomic,weak) id<CommonBoxViewDelegate> delegate;
 
 -(void)setData:(MRContact*)contact group:(MRGroup*)group andSharedPost:(MRSharePost*)sharePost;

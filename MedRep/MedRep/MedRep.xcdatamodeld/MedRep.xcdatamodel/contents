@@ -33,9 +33,9 @@
         <attribute name="therapeuticArea" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="therapeuticName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <relationship name="comments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MRPostedReplies" inverseName="contactRelationship" inverseEntity="MRPostedReplies" syncable="YES"/>
-        <relationship name="groupPosts" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="MRGroupPost" inverseName="contact" inverseEntity="MRGroupPost" syncable="YES"/>
-        <relationship name="groups" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="MRGroup" syncable="YES"/>
+        <relationship name="comments" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MRPostedReplies" inverseName="contactRelationship" inverseEntity="MRPostedReplies" syncable="YES"/>
+        <relationship name="groupPosts" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MRGroupPost" inverseName="contact" inverseEntity="MRGroupPost" syncable="YES"/>
+        <relationship name="groups" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MRGroup" syncable="YES"/>
     </entity>
     <entity name="MRGroup" representedClassName="MRGroup" syncable="YES">
         <attribute name="admin_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -268,25 +268,23 @@
     <elements>
         <element name="EducationalQualifications" positionX="-9" positionY="162" width="128" height="135"/>
         <element name="MRCompanyDetails" positionX="-18" positionY="27" width="128" height="165"/>
-        <element name="MRContact" positionX="-36" positionY="135" width="128" height="300"/>
+        <element name="MRContact" positionX="-36" positionY="135" width="128" height="298"/>
         <element name="MRGroup" positionX="-27" positionY="144" width="128" height="210"/>
         <element name="MrGroupChildPost" positionX="-27" positionY="144" width="128" height="90"/>
         <element name="MRGroupMembers" positionX="-36" positionY="135" width="128" height="315"/>
         <element name="MRGroupPost" positionX="-18" positionY="153" width="128" height="195"/>
         <element name="MRInterestArea" positionX="-18" positionY="153" width="128" height="75"/>
         <element name="MRNotifications" positionX="-36" positionY="63" width="128" height="420"/>
-        <element name="MRNotificationType" positionX="-36" positionY="9" width="128" height="90"/>
-
-        <element name="MRPostedReplies" positionX="-18" positionY="153" width="128" height="390"/>
+        <element name="MRNotificationType" positionX="16" positionY="-135" width="128" height="90"/>
+        <element name="MRPostedReplies" positionX="-27" positionY="531" width="128" height="390"/>
         <element name="MRProfile" positionX="-36" positionY="135" width="128" height="150"/>
         <element name="MRPublications" positionX="0" positionY="171" width="128" height="90"/>
-
         <element name="MRReplies" positionX="-36" positionY="135" width="128" height="120"/>
-        <element name="MRRole" positionX="-63" positionY="-18" width="128" height="105"/>
-        <element name="MRSharePost" positionX="-27" positionY="144" width="128" height="615"/>
-        <element name="MRSuggestedContact" positionX="-9" positionY="162" width="128" height="105"/>
-        <element name="MRTherapeuticArea" positionX="-54" positionY="-9" width="128" height="90"/>
-        <element name="MRTransformPost" positionX="-36" positionY="135" width="128" height="435"/>
-        <element name="MRWorkExperience" positionX="-27" positionY="144" width="128" height="135"/>
+        <element name="MRRole" positionX="178" positionY="-72" width="128" height="105"/>
+        <element name="MRSharePost" positionX="151" positionY="366" width="128" height="615"/>
+        <element name="MRSuggestedContact" positionX="187" positionY="174" width="128" height="105"/>
+        <element name="MRTherapeuticArea" positionX="315" positionY="36" width="128" height="90"/>
+        <element name="MRTransformPost" positionX="331" positionY="378" width="128" height="435"/>
+        <element name="MRWorkExperience" positionX="358" positionY="171" width="128" height="135"/>
     </elements>
 </model>
