@@ -593,6 +593,7 @@ easier for colleagues to find you.</string>
                                 </connections>
                             </tableView>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="iPd-6W-Gg9" firstAttribute="leading" secondItem="YYZ-ek-zj8" secondAttribute="leading" id="0aX-jH-hwf"/>
                             <constraint firstAttribute="trailing" secondItem="iPd-6W-Gg9" secondAttribute="trailing" id="5Vx-sq-New"/>
