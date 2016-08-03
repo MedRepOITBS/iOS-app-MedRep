@@ -468,24 +468,32 @@ NSString *valN = [valNDict objectForKey:@"type"];
         if([valN isEqualToString:@"WORK_EXP_DETAIL"]){
             
             MRWorkExperience *exp = [valNDict objectForKey:@"object"];
-            
+            [MRDatabaseHelper deleteWorkExperienceFromTable:exp.id];
             
         }else if([valN isEqualToString:@"EDUCATION_QUAL_DETAIL"] ){
-            
-            
-        }else if ([valN isEqualToString:@"WORK_EXP_DETAIL"]){
-            
-            
+            EducationalQualifications  *educQal = [valNDict objectForKey:@"object"];
+            [MRDatabaseHelper deleteEducationQualificationFromTable:educQal.id];
+
         }else if([valN isEqualToString:@"PUBLICATION_DETAIL"]){
+         
+            MRPublications *pub = [valNDict objectForKey:@"object"];
+            [MRDatabaseHelper deletePublicationAreaFromTable:pub.id];
             
         }else if([valN isEqualToString:@"INTEREST_AREA_DETAIL"]){
             
-            
+            MRInterestArea *interestAre = [valNDict objectForKey:@"object"];
+            [MRDatabaseHelper deleteInterestAreaFromTable:interestAre.id];
         }
-     
+        _profileObj = nil;
         
+        _profileObj = [[MRDatabaseHelper getProfileData] objectAtIndex:0];
+        
+        [self.tableView reloadData];
     }
+    
 }
+
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self setStructureForTableView].count;

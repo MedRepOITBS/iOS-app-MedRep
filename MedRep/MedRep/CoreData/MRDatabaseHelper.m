@@ -1130,6 +1130,67 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
     return profileAra;
     
 }
+
+
+
++(void)deleteWorkExperienceFromTable:(NSNumber *)workExpID{
+    NSArray *profileAra = [[MRDataManger sharedManager] fetchObjectList:@"MRProfile"];
+    MRProfile * profile = [profileAra lastObject];
+    MRWorkExperience *workExp = [[MRDataManger sharedManager] fetchObject:@"MRWorkExperience" predicate:[NSPredicate predicateWithFormat:@"id == %@",workExpID]];
+    
+    [profile removeWorkExperienceObject:workExp];
+    
+//    [[MRDataManger sharedManager] delete:workExp];
+    [[MRDataManger sharedManager] saveContext];
+    
+    [[MRWebserviceHelper sharedWebServiceHelper] deleteWorkExperience:workExpID withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        
+    }];
+    
+}
++(void)deleteEducationQualificationFromTable:(NSNumber *)educationID{
+    
+    NSArray *profileAra = [[MRDataManger sharedManager] fetchObjectList:@"MRProfile"];
+    MRProfile * profile = [profileAra lastObject];
+    EducationalQualifications *educationExp = [[MRDataManger sharedManager] fetchObject:@"EducationalQualifications" predicate:[NSPredicate predicateWithFormat:@"id == %@",educationID]];
+    
+    [profile removeEducationlQualificationObject:educationExp];
+    
+//    [[MRDataManger sharedManager] delete:educationExp];
+    [[MRDataManger sharedManager] saveContext];
+
+    [[MRWebserviceHelper sharedWebServiceHelper] deleteEducationQualification:educationID withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        
+    }];
+}
++(void)deleteInterestAreaFromTable:(NSNumber *)interestID{
+    NSArray *profileAra = [[MRDataManger sharedManager] fetchObjectList:@"MRProfile"];
+    MRProfile * profile = [profileAra lastObject];
+    MRInterestArea *interestArea = [[MRDataManger sharedManager] fetchObject:@"MRInterestArea" predicate:[NSPredicate predicateWithFormat:@"id == %@",interestID]];
+    
+    [profile removeInterestAreaObject:interestArea];
+    
+    [[MRDataManger sharedManager] saveContext];
+[[MRWebserviceHelper sharedWebServiceHelper] deleteInterestArea:interestID withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+    
+}];
+    
+}
++(void)deletePublicationAreaFromTable:(NSNumber *)publicationID{
+    NSArray *profileAra = [[MRDataManger sharedManager] fetchObjectList:@"MRProfile"];
+    MRProfile * profile = [profileAra lastObject];
+    MRPublications *publicationObj = [[MRDataManger sharedManager] fetchObject:@"MRPublications" predicate:[NSPredicate predicateWithFormat:@"id == %@",publicationID]];
+    
+    [profile removePublicationsObject:publicationObj];
+    
+//    [[MRDataManger sharedManager] delete:publicationObj];
+    [[MRDataManger sharedManager] saveContext];
+[[MRWebserviceHelper sharedWebServiceHelper] deletePublish:publicationID withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+    
+}];
+    
+}
+
 +(BOOL)addInterestArea:(NSArray *)_array
 {
     NSArray *profileAra = [[MRDataManger sharedManager] fetchObjectList:@"MRProfile"];

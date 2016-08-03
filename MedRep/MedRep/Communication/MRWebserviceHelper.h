@@ -249,6 +249,14 @@ withComplitionHandler:(completionHandler)responceHandler;
 -(void)addOrUpdatePulblishArticle:(NSArray *)reqDict withUpdateFlag:(BOOL)isUpdate withHandler:(completionHandler)responseHandler;
 -(void)addOrUpdateProfileAbout:(NSDictionary *)reqDict withUpdateFlag:(BOOL)isUpdate withHandler:(completionHandler)responseHandler;
 -(void)addOrUpdateWorkExperience:(NSArray *)reqDict withUpdateFlag:(BOOL)isUpdate withHandler:(completionHandler)responseHandler;
+
+-(void)deleteWorkExperience:(NSNumber *)workExpID withHandler:(completionHandler)responseHandler;
+-(void)deleteEducationQualification:(NSNumber *)educationQualID withHandler:(completionHandler)responseHandler;
+-(void)deleteInterestArea:(NSNumber *)interestID withHandler:(completionHandler)responseHandler;
+-(void)deletePublish:(NSNumber *)publicationID withHandler:(completionHandler)responseHandler;
+
+
+
 + (id)parseNetworkResponse:(Class)inEntityClass andData:(NSArray*)data;
 
 + (NSArray*)parseRecords:(Class)entityClass allRecords:(NSArray*)allRecords

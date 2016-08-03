@@ -142,5 +142,8 @@ FOUNDATION_EXPORT NSString* const kNewsAndTransformAPIMethodName;
 +(BOOL)updateEducationQualification:(NSDictionary *)dictonary withEducationQualificationID:(NSNumber *)iD;
 +(BOOL)updateWorkExperience:(NSDictionary *)workExpDict withWorkExperienceID:(NSNumber *)iD;
 
-
++(void)deleteWorkExperienceFromTable:(NSNumber *)workExpID;
++(void)deleteEducationQualificationFromTable:(NSNumber *)educationID;
++(void)deleteInterestAreaFromTable:(NSNumber *)interestID;
++(void)deletePublicationAreaFromTable:(NSNumber *)publicationID;
 @end

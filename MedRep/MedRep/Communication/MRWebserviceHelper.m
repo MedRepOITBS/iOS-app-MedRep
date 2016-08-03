@@ -215,6 +215,74 @@
 }
 
 
+-(void)deleteWorkExperience:(NSNumber *)workExpID withHandler:(completionHandler)responseHandler{
+//    MedRepApplication/api/doctor/info/workexperience/delete/15?access_token=80d8abdc-0886-4e63-af8c-24867d86653e
+    NSString *stringFormOfUrl =  [NSString stringWithFormat:@"%@/api/doctor/info/workexperience/delete/%ld?access_token=%@",kBaseURL,(long)[workExpID integerValue],[MRDefaults objectForKey:kAuthenticationToken]];
+    
+    
+    NSURL *url = [NSURL URLWithString:stringFormOfUrl];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [urlRequest setTimeoutInterval:120];
+    
+    // Setting post
+    [urlRequest setHTTPMethod:@"GET"];
+    [urlRequest setValue:@"text/plain" forHTTPHeaderField:@"Content-Type"];
+    self.serviceType = kMRWebServiceTypeLogin;
+    [self sendServiceRequest:urlRequest withHandler:responseHandler];
+}
+
+-(void)deleteEducationQualification:(NSNumber *)educationQualID withHandler:(completionHandler)responseHandler{
+    //    MedRepApplication/api/doctor/info/workexperience/delete/15?access_token=80d8abdc-0886-4e63-af8c-24867d86653e
+    NSString *stringFormOfUrl =  [NSString stringWithFormat:@"%@/api/doctor/info/education/delete/%ld?access_token=%@",kBaseURL,(long)[educationQualID integerValue],[MRDefaults objectForKey:kAuthenticationToken]];
+    
+    
+    NSURL *url = [NSURL URLWithString:stringFormOfUrl];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [urlRequest setTimeoutInterval:120];
+    
+    // Setting post
+    [urlRequest setHTTPMethod:@"GET"];
+    [urlRequest setValue:@"text/plain" forHTTPHeaderField:@"Content-Type"];
+    self.serviceType = kMRWebServiceTypeLogin;
+    [self sendServiceRequest:urlRequest withHandler:responseHandler];
+}
+
+-(void)deleteInterestArea:(NSNumber *)interestID withHandler:(completionHandler)responseHandler{
+    //    MedRepApplication/api/doctor/info/workexperience/delete/15?access_token=80d8abdc-0886-4e63-af8c-24867d86653e
+    NSString *stringFormOfUrl =  [NSString stringWithFormat:@"%@/api/doctor/info/interests/delete/%ld?access_token=%@",kBaseURL,(long)[interestID integerValue],[MRDefaults objectForKey:kAuthenticationToken]];
+    
+    
+    NSURL *url = [NSURL URLWithString:stringFormOfUrl];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [urlRequest setTimeoutInterval:120];
+    
+    // Setting post
+    [urlRequest setHTTPMethod:@"GET"];
+    [urlRequest setValue:@"text/plain" forHTTPHeaderField:@"Content-Type"];
+    self.serviceType = kMRWebServiceTypeLogin;
+    [self sendServiceRequest:urlRequest withHandler:responseHandler];
+}
+
+-(void)deletePublish:(NSNumber *)publicationID withHandler:(completionHandler)responseHandler{
+    //    MedRepApplication/api/doctor/info/workexperience/delete/15?access_token=80d8abdc-0886-4e63-af8c-24867d86653e
+    NSString *stringFormOfUrl =  [NSString stringWithFormat:@"%@/api/doctor/info/publications/delete/%ld?access_token=%@",kBaseURL,(long)[publicationID integerValue],[MRDefaults objectForKey:kAuthenticationToken]];
+    
+    
+    NSURL *url = [NSURL URLWithString:stringFormOfUrl];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [urlRequest setTimeoutInterval:120];
+    
+    // Setting post
+    [urlRequest setHTTPMethod:@"GET"];
+    [urlRequest setValue:@"text/plain" forHTTPHeaderField:@"Content-Type"];
+    self.serviceType = kMRWebServiceTypeLogin;
+    [self sendServiceRequest:urlRequest withHandler:responseHandler];
+}
+
 
 -(void)addOrUpdateWorkExperience:(NSArray *)reqDict withUpdateFlag:(BOOL)isUpdate withHandler:(completionHandler)responseHandler{
     NSString *stringFormOfUrl;

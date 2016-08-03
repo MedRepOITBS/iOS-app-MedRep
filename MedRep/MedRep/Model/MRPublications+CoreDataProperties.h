@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *articleName;
 @property (nullable, nonatomic, retain) NSString *publication;
 @property (nullable, nonatomic, retain) NSString *year;
-@property (nullable, nonatomic, retain) NSString *id;
+@property (nullable, nonatomic, retain) NSNumber *id;
 
 @end
 
