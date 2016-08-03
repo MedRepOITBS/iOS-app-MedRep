@@ -146,4 +146,9 @@ FOUNDATION_EXPORT NSString* const kNewsAndTransformAPIMethodName;
 +(void)deleteEducationQualificationFromTable:(NSNumber *)educationID;
 +(void)deleteInterestAreaFromTable:(NSNumber *)interestID;
 +(void)deletePublicationAreaFromTable:(NSNumber *)publicationID;
+
++ (void)getMessagesOfAMember:(NSInteger)memberId
+                     groupId:(NSInteger)groupId
+                 withHandler:(WebServiceResponseHandler)handler;
+
 @end

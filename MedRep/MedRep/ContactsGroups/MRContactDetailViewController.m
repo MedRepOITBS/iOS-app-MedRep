@@ -94,6 +94,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [self fetchPosts];
+    
     if (self.launchMode == kContactDetailLaunchModeSuggestedContact) {
         [self.deleteConnectionButton setTitle:NSLocalizedString(kAddConnection, "")
                                forState:UIControlStateNormal];
@@ -131,30 +133,41 @@
 }
 
 - (void)fetchPosts {
-    
-    
-    if (self.mainContact != nil) {
-        if (self.mainContact.comments != nil && self.mainContact.comments.count > 0) {
-            self.posts = self.mainContact.comments.allObjects;
-        } else {
-            self.posts = [NSArray new];
-        }
-    } else if (self.mainGroup != nil) {
-        if (self.mainGroup.comment != nil && self.mainGroup.comment.count > 0) {
-            self.posts = self.mainGroup.comment.allObjects;
-        } else {
-            self.posts = [NSArray new];
-        }
+    NSInteger memberId = 0;
+    if (self.mainContact != nil && self.mainContact.doctorId != nil) {
+        memberId = self.mainContact.doctorId.longValue;
     }
-    if (self.posts != nil && self.posts.count > 0) {
-        [self.emptyPostsLabel setHidden:YES];
-        [self.postsTableView setHidden:NO];
-        [self.postsTableView reloadData];
-    } else {
-        self.posts = [[NSArray alloc] init];
-        [self.postsTableView setHidden:YES];
-        [self.emptyPostsLabel setHidden:NO];
+    
+    NSInteger groupId = 0;
+    if (self.mainGroup != nil && self.mainGroup.group_id != nil) {
+        groupId = self.mainGroup.group_id.longValue;
     }
+    
+    [MRDatabaseHelper getMessagesOfAMember:memberId groupId:groupId
+                               withHandler:^(id result) {
+                                   if (self.mainContact != nil) {
+                                       if (self.mainContact.comments != nil && self.mainContact.comments.count > 0) {
+                                           self.posts = self.mainContact.comments.allObjects;
+                                       } else {
+                                           self.posts = [NSArray new];
+                                       }
+                                   } else if (self.mainGroup != nil) {
+                                       if (self.mainGroup.comment != nil && self.mainGroup.comment.count > 0) {
+                                           self.posts = self.mainGroup.comment.allObjects;
+                                       } else {
+                                           self.posts = [NSArray new];
+                                       }
+                                   }
+                                   if (self.posts != nil && self.posts.count > 0) {
+                                       [self.emptyPostsLabel setHidden:YES];
+                                       [self.postsTableView setHidden:NO];
+                                       [self.postsTableView reloadData];
+                                   } else {
+                                       self.posts = [[NSArray alloc] init];
+                                       [self.postsTableView setHidden:YES];
+                                       [self.emptyPostsLabel setHidden:NO];
+                                   }
+                               }];
 }
 
 - (void)backButtonAction{

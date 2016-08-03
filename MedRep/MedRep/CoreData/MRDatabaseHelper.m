@@ -1680,7 +1680,8 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
         NSArray *tempResults = [[MRDataManger sharedManager] fetchObjectList:kMRTransformPost];
         
         NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"postedOn" ascending:false];
-        result = [tempResults sortedArrayUsingDescriptors:@[sortDescriptor]];
+        NSSortDescriptor *titleDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"titleDescription" ascending:true];
+        result = [tempResults sortedArrayUsingDescriptors:@[sortDescriptor, titleDescriptor]];
         responseHandler(result);
     }
 }
@@ -1849,6 +1850,71 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
                                                  andData:[response valueForKey:@"Responce"]];
     if (responseHandler != nil) {
         responseHandler(result);
+    }
+}
+
++ (void)getMessagesOfAMember:(NSInteger)memberId
+                     groupId:(NSInteger)groupId
+                 withHandler:(WebServiceResponseHandler)handler {
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] getPostsForAMember:memberId
+                                                            groupId:groupId
+                                                         withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                             [MRDatabaseHelper makeServiceCallForGetMessagesOfAMember:memberId
+                                                                                                              groupId:groupId
+                                                                                                              status:status
+                                                                                                             details:details
+                                                                                                            response:responce
+                                                                                                  andResponseHandler:handler];
+                                                         }];
+}
+
++ (void)makeServiceCallForGetMessagesOfAMember:(NSInteger)memberId
+                                       groupId:(NSInteger)groupId
+                                       status:(BOOL)status
+                                      details:(NSString*)details
+                                     response:(NSDictionary*)response
+                           andResponseHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon stopActivityIndicator];
+    if (status)
+    {
+        [MRDatabaseHelper parseGetShareDetailsByIdResponse:response andResponseHandler:responseHandler];
+    }
+    else {
+        NSString *errorCode = [MRDatabaseHelper getOAuthErrorCode:response];
+        if ([errorCode isEqualToString:@"invalid_token"])
+        {
+            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+             {
+                 [MRCommon savetokens:responce];
+                 [[MRWebserviceHelper sharedWebServiceHelper] getPostsForAMember:memberId
+                                                                           groupId:groupId
+                                                                      withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                                          [MRCommon stopActivityIndicator];
+                                                                          if (status)
+                                                                          {
+                                                                              [MRDatabaseHelper parseGetShareDetailsByIdResponse:responce
+                                                                                                              andResponseHandler:responseHandler];
+                                                                          } else
+                                                                          {
+                                                                              NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                                                                              if (erros.count > 0)
+                                                                                  [MRCommon showAlert:[erros lastObject] delegate:nil];
+                                                                          }
+                                                                      }];
+             }];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0) {
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+            }
+            
+            if (responseHandler != nil) {
+                responseHandler(nil);
+            }
+        }
     }
 }
 

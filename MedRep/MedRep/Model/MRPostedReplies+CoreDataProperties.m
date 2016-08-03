@@ -39,11 +39,24 @@
 @dynamic sharePostRelationship;
 
 - (void)setMessage_id:(NSNumber *)message_id {
+    [self willChangeValueForKey:@"message_id"];
+    [self setPrimitiveValue:message_id forKey:@"message_id"];
+    [self didChangeValueForKey:@"message_id"];
+    
     NSInteger replyId = 0;
     if (message_id != nil) {
         replyId = message_id.longValue;
     }
     self.postedReplyId = [NSNumber numberWithLong:replyId];
+}
+
+- (void)setMember_id:(NSNumber *)member_id {
+    NSInteger tempMemberid = 0;
+    if (member_id != nil) {
+        tempMemberid = member_id.longValue;
+    }
+    
+    self.contactId = [NSNumber numberWithLong:tempMemberid];
 }
 
 - (void)setGroup_id:(NSNumber *)group_id {
@@ -53,6 +66,15 @@
     }
     
     self.groupId = [NSNumber numberWithLong:tempGroupId];
+    
+    if (tempGroupId > 0) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K = %ld", @"group_id", tempGroupId];
+        MRGroup *group = [[MRDataManger sharedManager] fetchObject:kGroupEntity
+                                                             predicate:predicate
+                                                             inContext:self.managedObjectContext];
+        
+        [self setGroupRelationship:group];
+    }
 }
 
 - (void)setMessage:(NSString *)message {
@@ -70,6 +92,21 @@
     }
     
     self.contactId = [NSNumber numberWithLong:tempReceiverId];
+}
+
+- (void)setContactId:(NSNumber *)contactId {
+    [self willChangeValueForKey:@"contactId"];
+    [self setPrimitiveValue:contactId forKey:@"contactId"];
+    [self didChangeValueForKey:@"contactId"];
+    
+    if (contactId != nil) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K = %ld", @"doctorId", contactId.longValue];
+        MRContact *contact = [[MRDataManger sharedManager] fetchObject:kContactEntity
+                                                                 predicate:predicate
+                                                                 inContext:self.managedObjectContext];
+    
+        [self setContactRelationship:contact];
+    }
 }
 
 - (void)setTopic_id:(NSNumber *)topic_id {

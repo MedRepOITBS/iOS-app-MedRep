@@ -2549,7 +2549,7 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
 }
 
 - (void)postNewTopic:(NSDictionary*)reqDict withHandler:(completionHandler)responceHandler {
-    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/MedRepApplication/api/doctorPlus/postShare?token=%@",kHostName,[MRDefaults objectForKey:kAuthenticationToken]];
+    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/postShare?token=%@",kHostName,[MRDefaults objectForKey:kAuthenticationToken]];
     
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:reqDict
                                                        options:NSJSONWritingPrettyPrinted
@@ -2609,15 +2609,7 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
 
 - (void)getPostsForAMember:(NSInteger)contactId groupId:(NSInteger)groupId
                withHandler:(completionHandler)responseHandler {
-    NSMutableString *stringFormOfUrl = [NSMutableString stringWithFormat:@"%@/medrep-web/getShareByTopic?token=%@",kHostName, [MRDefaults objectForKey:kAuthenticationToken]];
-    
-    if (contactId > 0) {
-        [stringFormOfUrl appendString:[NSString stringWithFormat:@"&contactId=%ld", contactId]];
-    }
-    
-    if (groupId > 0) {
-        [stringFormOfUrl appendString:[NSString stringWithFormat:@"&groupId=%ld", contactId]];
-    }
+    NSMutableString *stringFormOfUrl = [NSMutableString stringWithFormat:@"%@/medrep-web/getMessageById?token=%@&memberId=%ld&groupId=%ld",kHostName, [MRDefaults objectForKey:kAuthenticationToken], contactId, groupId];
     
     NSURL *url = [NSURL URLWithString:stringFormOfUrl];
     NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
