@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class MRPublications;
 @interface PublicationsViewController : UIViewController
 @property (nonatomic,weak) IBOutlet UITextField *pulbicationsTextField;
 @property (nonatomic,weak) IBOutlet UITextField *publicationArticleTextField;
 @property (nonatomic,weak) IBOutlet UITextField *yearTextField;
-
+@property (nonatomic,strong) NSString *fromScreen;
+@property (nonatomic,strong) MRPublications *publications;
 @end

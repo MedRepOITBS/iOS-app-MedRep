@@ -216,9 +216,16 @@
 
 
 
--(void)addWorkExperience:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler{
+-(void)addOrUpdateWorkExperience:(NSArray *)reqDict withUpdateFlag:(BOOL)isUpdate withHandler:(completionHandler)responseHandler{
+    NSString *stringFormOfUrl;
+    if (isUpdate) {
+        stringFormOfUrl = [NSString stringWithFormat:@"%@/api/doctor/info/workexperience/update?access_token=%@",kBaseURL,[MRDefaults objectForKey:kAuthenticationToken]];
+        
+    }else{
+        stringFormOfUrl = [NSString stringWithFormat:@"%@/api/doctor/info/workexperience/add?access_token=%@",kBaseURL,[MRDefaults objectForKey:kAuthenticationToken]];
+        
+    }
     
-    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/api/doctor/info/workexperience/add?access_token=%@",kBaseURL,[MRDefaults objectForKey:kAuthenticationToken]];
     
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:reqDict
                                                        options:NSJSONWritingPrettyPrinted
@@ -234,10 +241,18 @@
     self.serviceType = kMRWebServiceTypeAddMember;
     [self sendServiceRequest:urlRequest withHandler:responseHandler];
 }
--(void)addEducationArea:(NSArray *)reqDict withHandler: (completionHandler)responseHandler{
-    
-    
-    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/api/doctor/info/education/add?access_token=%@",kBaseURL,[MRDefaults objectForKey:kAuthenticationToken]];
+
+
+
+-(void)addOrUpdateEducationArea:(NSArray *)reqDict withUpdateFlag:(BOOL)isUpdate withHandler: (completionHandler)responseHandler{
+    NSString *stringFormOfUrl;
+    if (isUpdate) {
+        stringFormOfUrl = [NSString stringWithFormat:@"%@/api/doctor/info/education/update?access_token=%@",kBaseURL,[MRDefaults objectForKey:kAuthenticationToken]];
+        
+    }else{
+        stringFormOfUrl = [NSString stringWithFormat:@"%@/api/doctor/info/education/add?access_token=%@",kBaseURL,[MRDefaults objectForKey:kAuthenticationToken]];
+
+    }
     
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:reqDict
                                                        options:NSJSONWritingPrettyPrinted
@@ -253,30 +268,16 @@
     self.serviceType = kMRWebServiceTypeAddMember;
     [self sendServiceRequest:urlRequest withHandler:responseHandler];
 }
--(void)addInterestArea:(NSArray *)reqDict withHandler:(completionHandler)responseHandler
+-(void)addorUpdateInterestArea:(NSArray *)reqDict withUpdateFlag:(BOOL)isUpdate  withHandler:(completionHandler)responseHandler
 {
-    
-    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/api/doctor/info/interests/add?access_token=%@",kBaseURL,[MRDefaults objectForKey:kAuthenticationToken]];
-    
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:reqDict
-                                                       options:NSJSONWritingPrettyPrinted
-                                                         error:nil];
-    NSURL *url = [NSURL URLWithString:stringFormOfUrl];
-    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
-    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
-    [urlRequest setTimeoutInterval:120];
-    [urlRequest setHTTPMethod:@"POST"];
-    [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [urlRequest setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[jsonData length]] forHTTPHeaderField:@"Content-Length"];
-    [urlRequest setHTTPBody: jsonData];
-    self.serviceType = kMRWebServiceTypeAddMember;
-    [self sendServiceRequest:urlRequest withHandler:responseHandler];
-}
-
-
--(void)addPulblishArticle:(NSArray *)reqDict withHandler:(completionHandler)responseHandler{
-    
-    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/api/doctor/info/publications/add?access_token=%@",kBaseURL,[MRDefaults objectForKey:kAuthenticationToken]];
+    NSString *stringFormOfUrl;
+    if (isUpdate) {
+        stringFormOfUrl = [NSString stringWithFormat:@"%@/api/doctor/info/interests/update?access_token=%@",kBaseURL,[MRDefaults objectForKey:kAuthenticationToken]];
+        
+    }else{
+        stringFormOfUrl = [NSString stringWithFormat:@"%@/api/doctor/info/interests/add?access_token=%@",kBaseURL,[MRDefaults objectForKey:kAuthenticationToken]];
+        
+    }
     
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:reqDict
                                                        options:NSJSONWritingPrettyPrinted
@@ -294,11 +295,46 @@
 }
 
 
-
-
--(void)addProfileAbout:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler{
+-(void)addOrUpdatePulblishArticle:(NSArray *)reqDict withUpdateFlag:(BOOL)isUpdate withHandler:(completionHandler)responseHandler{
+    NSString *stringFormOfUrl;
+    if (isUpdate) {
+        stringFormOfUrl = [NSString stringWithFormat:@"%@/api/doctor/info/publications/update?access_token=%@",kBaseURL,[MRDefaults objectForKey:kAuthenticationToken]];
+        
+    }else{
+        stringFormOfUrl = [NSString stringWithFormat:@"%@/api/doctor/info/publications/add?access_token=%@",kBaseURL,[MRDefaults objectForKey:kAuthenticationToken]];
+        
+    }
     
-    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/api/doctor/info/about/add?access_token=%@",kBaseURL,[MRDefaults objectForKey:kAuthenticationToken]];
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:reqDict
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:nil];
+    NSURL *url = [NSURL URLWithString:stringFormOfUrl];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [urlRequest setTimeoutInterval:120];
+    [urlRequest setHTTPMethod:@"POST"];
+    [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [urlRequest setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[jsonData length]] forHTTPHeaderField:@"Content-Length"];
+    [urlRequest setHTTPBody: jsonData];
+    self.serviceType = kMRWebServiceTypeAddMember;
+    [self sendServiceRequest:urlRequest withHandler:responseHandler];
+}
+
+
+
+
+-(void)addOrUpdateProfileAbout:(NSDictionary *)reqDict withUpdateFlag:(BOOL)isUpdate withHandler:(completionHandler)responseHandler{
+    
+    NSString *stringFormOfUrl;
+    if (isUpdate) {
+        stringFormOfUrl = [NSString stringWithFormat:@"%@/api/doctor/info/about/update?access_token=%@",kBaseURL,[MRDefaults objectForKey:kAuthenticationToken]];
+        
+    }else{
+        stringFormOfUrl = [NSString stringWithFormat:@"%@/api/doctor/info/about/add?access_token=%@",kBaseURL,[MRDefaults objectForKey:kAuthenticationToken]];
+        
+    }
+    
+  
     
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:reqDict
                                                        options:NSJSONWritingPrettyPrinted

@@ -13,7 +13,7 @@
 #import "MRDatabaseHelper.h"
 #import "NTMonthYearPicker.h"
 #import "MRConstants.h"
-
+#import "EducationalQualifications.h"
 
 @interface AddEducationViewController () <EducationDateTimeTableViewCellDelegate, CommonEducationTableViewCellDelegate,NTMonthYearPickerViewDelegate>
 @property (nonatomic,strong) UITextField *currentSelectedTextField;
@@ -74,8 +74,7 @@
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
-    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"DONE" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonTapped:)];
-    self.navigationItem.rightBarButtonItem = revealButtonItem;
+   
     self.navigationItem.title  = @"Add Education Details";
 
 //    [self initCustomDatePicker:self.customYearPicker withOption:NSCustomDatePickerOptionYear andOrder:NSCustomDatePickerOrderMonthDayAndYear];
@@ -85,8 +84,31 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [self setupPicker];
     [self updateLabel];
+    [self setUpdata];
 }
-
+-(void)setUpdata{
+    
+    
+    UIBarButtonItem *revealButtonItem;
+    
+    if (_educationQualObj!=nil) {
+        revealButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"UPDATE" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonTapped:)];
+        self.navigationItem.rightBarButtonItem = revealButtonItem;
+        
+        _degree = _educationQualObj.degree;
+        _institute = _educationQualObj.collegeName;
+        _speciality = _educationQualObj.course;
+        _type = [_educationQualObj.aggregate stringValue];
+        _fromYYYY = [[_educationQualObj.yearOfPassout componentsSeparatedByString:@" "] objectAtIndex:0];
+        _toYYYY = [[_educationQualObj.yearOfPassout componentsSeparatedByString:@" "] objectAtIndex:1];
+        
+        
+    }else{
+        revealButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"DONE" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonTapped:)];
+        self.navigationItem.rightBarButtonItem = revealButtonItem;
+    }
+    
+}
 - (void)updateLabel {
     
     
@@ -137,17 +159,22 @@
         return;
     }
     
+       NSDictionary * workExpDict;
     
     
+    if ([_fromScreen isEqualToString:@"UPDATE"]) {
         
+        workExpDict = [[NSDictionary alloc] initWithObjectsAndKeys:_degree,@"degree",_institute,@"collegeName",[NSString stringWithFormat:@"%@ %@",_fromYYYY,_toYYYY],@"yearOfPassout",_speciality,@"course",_type,@"aggregate",_educationQualObj.id,@"id", nil];
+        [MRDatabaseHelper updateEducationQualification:workExpDict withEducationQualificationID:_educationQualObj.id];
+        
+    }else{
+        
+        workExpDict = [[NSDictionary alloc] initWithObjectsAndKeys:_degree,@"degree",_institute,@"collegeName",[NSString stringWithFormat:@"%@ %@",_fromYYYY,_toYYYY],@"yearOfPassout",_speciality,@"course",_type,@"aggregate", nil];
+        [MRDatabaseHelper  addEducationQualification:workExpDict];
 
-    NSDictionary * workExpDict = [[NSDictionary alloc] initWithObjectsAndKeys:_degree,@"degree",_institute,@"collegeName",[NSString stringWithFormat:@"%@ %@",_fromYYYY,_toYYYY],@"yearOfPassout",_speciality,@"course",_type,@"aggregate", nil];
-    
-    BOOL ys =  [MRDatabaseHelper  addEducationQualification:workExpDict];
-    if (ys) {
-//        [self.navigationController popViewControllerAnimated:YES];
-        
     }
+    
+  
 }
 -(BOOL)isValidationSuccess{
     NSString *errorMsg;
@@ -241,7 +268,8 @@
             
             EducationDateTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EducationDateTimeTableViewCell" forIndexPath:indexPath];
             cell.delegate = self;
-            
+            cell.toYYYY.text = _toYYYY;
+            cell.fromYYYY.text = _fromYYYY;
             return cell;
         }
             break;
@@ -262,6 +290,8 @@
                     cell.titleEducationLbl.text = buttonTitle;
                     cell.inputTextField.placeholder = @"Aggregate Percentage ";
                     cell.inputTextField.tag = 800;
+
+                    cell.inputTextField.text = _type;
                     cell.inputTextField.keyboardType = UIKeyboardTypeNumberPad;
                     cell.hintLabel.hidden = YES;
                     
@@ -274,6 +304,8 @@
                     
                     cell.titleWidthConstraint.constant =  ceil(stringSize.width);
                     
+                    cell.inputTextField.text = _degree;
+
                     cell.titleEducationLbl.text = buttonTitle;
                     cell.inputTextField.placeholder = @"Degree";
                     cell.hintLabel.hidden = NO;
@@ -288,6 +320,8 @@
                     
                     cell.titleWidthConstraint.constant =  ceil(stringSize.width);
                     
+                    cell.inputTextField.text = _speciality;
+
                     cell.titleEducationLbl.text = buttonTitle;
                     cell.inputTextField.placeholder = @"speciality";
                     cell.hintLabel.hidden = YES;
@@ -303,6 +337,8 @@
                     
                     cell.titleWidthConstraint.constant =  ceil(stringSize.width);
                     
+                    cell.inputTextField.text = _institute;
+
                     cell.titleEducationLbl.text = buttonTitle;
                     cell.inputTextField.placeholder = @"institute";
                     cell.hintLabel.hidden = YES;

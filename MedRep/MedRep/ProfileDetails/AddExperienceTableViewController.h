@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class MRWorkExperience;
 @interface AddExperienceTableViewController : UIViewController
 
+@property (nonatomic,strong) NSString *fromScreen;
+@property (nonatomic,strong) MRWorkExperience *workExperience;
 @end

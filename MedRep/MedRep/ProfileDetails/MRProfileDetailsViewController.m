@@ -401,6 +401,62 @@ NSString *valN = [valNDict objectForKey:@"type"];
     return UITableViewCellEditingStyleNone;
  }
 }
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+   
+    NSLog(@"NAMIT");
+    
+    NSDictionary *valNDict = [[self setStructureForTableView] objectAtIndex:indexPath.row];
+    
+    NSString *valN = [valNDict objectForKey:@"type"];
+    NSLog(@"NAMIT %@",valN);
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"ProfileStoryboard" bundle:nil];
+    
+    if ([valN isEqualToString:@"WORK_EXP_DETAIL"]) {
+        AddExperienceTableViewController *profViewController = [sb instantiateViewControllerWithIdentifier:@"AddExperienceTableViewController"];
+        
+        //                MRProfileDetailsViewController *profViewController = [[MRProfileDetailsViewController alloc] initWithNibName:@"AddExperienceTableViewController" bundle:nil];
+        
+        
+        profViewController.fromScreen = @"UPDATE";
+        profViewController.workExperience = (MRWorkExperience *)[valNDict objectForKey:@"object"];
+        
+        [self.navigationController pushViewController:profViewController  animated:YES];
+        
+        
+    } else if ([valN isEqualToString:@"INTEREST_AREA_DETAIL"]){
+        //
+        InterestViewController *profViewController = [sb instantiateViewControllerWithIdentifier:@"InterestViewController"];
+                profViewController.fromScreen = @"UPDATE";
+        
+        profViewController.interestAreaObj = (MRInterestArea *)[valNDict objectForKey:@"object"];
+        
+        [self.navigationController pushViewController:profViewController  animated:YES];
+        
+    } else if ([valN isEqualToString:@"EDUCATION_QUAL_DETAIL"]){
+        
+        AddEducationViewController *educationViewController = (AddEducationViewController *)[sb instantiateViewControllerWithIdentifier:@"AddEducationViewController"];
+                educationViewController.fromScreen = @"UPDATE";
+        
+        
+        educationViewController.educationQualObj = (EducationalQualifications *)[valNDict objectForKey:@"object"];
+        
+        [self.navigationController pushViewController:educationViewController  animated:YES];
+        
+    }else if([valN isEqualToString:@"PUBLICATION_DETAIL"]){
+        
+        PublicationsViewController *profViewController = [sb instantiateViewControllerWithIdentifier:@"PublicationsViewController"];
+        
+        profViewController.fromScreen = @"UPDATE";
+
+        profViewController.publications = (MRPublications *)[valNDict objectForKey:@"object"];
+
+        [self.navigationController pushViewController:profViewController  animated:YES];
+        
+    }
+}
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
    

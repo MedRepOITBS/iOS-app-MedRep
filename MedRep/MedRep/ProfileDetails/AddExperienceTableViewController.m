@@ -15,7 +15,7 @@
 #import "MRDatabaseHelper.h"
 #import "NTMonthYearPicker.h"
 #import "MRConstants.h"
-
+#import "MRWorkExperience.h"
 @interface AddExperienceTableViewController () <ExperienceDateTimeTableViewCellDelegate,CommonTableViewCellDelegate, ExperienceSummaryTableViewCellDelegate, NTMonthYearPickerViewDelegate>
 
 //@property (nonatomic, weak) IBOutlet UICustomDatePicker *customDatePicker;
@@ -77,8 +77,9 @@
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
-    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"DONE" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonTapped:)];
-    self.navigationItem.rightBarButtonItem = revealButtonItem;
+    
+    
+    
 //    self.customDatePicker.hidden = YES;
 self.navigationItem.title  = @"Add Experience";
     
@@ -89,6 +90,26 @@ self.navigationItem.title  = @"Add Experience";
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [self setupPicker];
     [self updateLabel];
+    [self setupData];
+}
+
+-(void)setupData{
+    UIBarButtonItem *revealButtonItem;
+    if (_workExperience !=nil) {
+        
+        _designation = _workExperience.designation;
+        _organisation = _workExperience.hospital;
+        _location = _workExperience.location;
+        _fromMM = _workExperience.fromDate;
+        _toMM = _workExperience.toDate;
+        
+        [self.tableView reloadData];
+        revealButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"UPDATE" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonTapped:)];
+    }else{
+        revealButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"DONE" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonTapped:)];
+    }
+    self.navigationItem.rightBarButtonItem = revealButtonItem;
+
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -160,13 +181,23 @@ self.navigationItem.title  = @"Add Experience";
         
         
     }
-    NSDictionary * workExpDict = [[NSDictionary alloc] initWithObjectsAndKeys:_designation,@"designation",_organisation,@"hospital",[NSString stringWithFormat:@"%@",_fromMM],@"fromDate",[NSString stringWithFormat:@"%@",_toMM],@"toDate",_location,@"location", nil];
+    NSDictionary * workExpDict ;
     
-  BOOL ys =  [MRDatabaseHelper  addWorkExperience:workExpDict];
-    if (ys) {
-//        [self.navigationController popViewControllerAnimated:YES];
-        
+
+    
+    
+    if ([_fromScreen isEqualToString:@"UPDATE"]) {
+      workExpDict  = [[NSDictionary alloc] initWithObjectsAndKeys:_designation,@"designation",_organisation,@"hospital",[NSString stringWithFormat:@"%@",_fromMM],@"fromDate",[NSString stringWithFormat:@"%@",_toMM],@"toDate",_location,@"location",_workExperience.id, @"id", nil];
+        [MRDatabaseHelper  updateWorkExperience:workExpDict withWorkExperienceID:_workExperience.id];
+    }else{
+          workExpDict  = [[NSDictionary alloc] initWithObjectsAndKeys:_designation,@"designation",_organisation,@"hospital",[NSString stringWithFormat:@"%@",_fromMM],@"fromDate",[NSString stringWithFormat:@"%@",_toMM],@"toDate",_location,@"location", nil];
+        [MRDatabaseHelper  addWorkExperience:workExpDict];
     }
+//  BOOL ys =  [MRDatabaseHelper  addWorkExperience:workExpDict];
+//    if (ys) {
+////        [self.navigationController popViewControllerAnimated:YES];
+//        
+//    }
 }
 -(BOOL)isValidationSuccess{
     NSString *errorMsg;
@@ -301,6 +332,8 @@ self.navigationItem.title  = @"Add Experience";
         case 3:{
             ExperienceDateTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ExperienceDateTimeTableViewCell" forIndexPath:indexPath];
             cell.delegate = self;
+            cell.toMMTextField.text = _toMM;
+            cell.fromTextField.text = _fromMM;
             return cell;
         }
             break;

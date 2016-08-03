@@ -137,4 +137,10 @@ FOUNDATION_EXPORT NSString* const kNewsAndTransformAPIMethodName;
 + (void)fetchShareDetailsById:(NSInteger)topicId
                   withHandler:(WebServiceResponseHandler)responseHandler;
 
++(BOOL)updateInterest:(NSDictionary *)dictonary withInterestAreaID:(NSNumber *)iD;
++(BOOL)updatePublication:(NSDictionary *)dictonary withPublicationID:(NSNumber *)iD;
++(BOOL)updateEducationQualification:(NSDictionary *)dictonary withEducationQualificationID:(NSNumber *)iD;
++(BOOL)updateWorkExperience:(NSDictionary *)workExpDict withWorkExperienceID:(NSNumber *)iD;
+
+
 @end

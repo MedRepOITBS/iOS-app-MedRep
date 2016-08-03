@@ -13,7 +13,7 @@
 #import "MRConstants.h"
 #import "WYPopoverController.h"
 #import "MRListViewController.h"
-
+#import "MRInterestArea.h"
 @interface InterestViewController ()
 @property (strong, nonatomic) WYPopoverController *myPopoverController;
 @end
@@ -53,9 +53,13 @@
         return;
     }
     
-    BOOL YS = [MRDatabaseHelper addInterestArea:[NSArray arrayWithObjects:interestArticle, nil]];
-    if (YS) {
-        [self.navigationController popViewControllerAnimated:YES];
+    
+    if ([_fromScreen isEqualToString:@"UPDATE"]) {
+        
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:interestArticle,@"name",_interestAreaObj.id,@"id", nil];
+        [MRDatabaseHelper updateInterest:dict withInterestAreaID:_interestAreaObj.id];
+    }else{
+        [MRDatabaseHelper addInterestArea:[NSArray arrayWithObjects:interestArticle, nil]];
     }
     
 }

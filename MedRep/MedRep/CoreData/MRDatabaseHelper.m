@@ -1140,9 +1140,9 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
     
     NSMutableArray *array = [[NSMutableArray alloc] init];
     [array addObject: dict];
-        [[MRWebserviceHelper sharedWebServiceHelper] addInterestArea:array withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-            
-            
+    
+    [[MRWebserviceHelper sharedWebServiceHelper] addorUpdateInterestArea:array withUpdateFlag:NO withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        
             NSLog(@"%@",responce);
                MRInterestArea *interestArea = (MRInterestArea *)[[MRDataManger sharedManager] createObjectForEntity:@"MRInterestArea"];
                     interestArea.name  = [_array lastObject];
@@ -1162,13 +1162,62 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
 
     return false;
 }
+
++(BOOL)updateInterest:(NSDictionary *)dictonary withInterestAreaID:(NSNumber *)iD{
+ 
+    MRInterestArea *interestArea = [[MRDataManger sharedManager] fetchObject:@"MRInterestArea" predicate:[NSPredicate predicateWithFormat:@"id == %@",iD]];
+    
+    NSMutableArray *arrayObj = [[NSMutableArray alloc] init];
+    
+    [arrayObj addObject:dictonary];
+    
+
+    [[MRWebserviceHelper sharedWebServiceHelper] addorUpdateInterestArea:arrayObj withUpdateFlag:YES withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        
+        interestArea.name  = [dictonary objectForKey:@"name"];
+        [[MRDataManger sharedManager] saveContext];
+
+        
+    }];
+    
+    
+    return NO;
+}
+
+
+
++(BOOL)updatePublication:(NSDictionary *)dictonary withPublicationID:(NSNumber *)iD{
+
+    MRPublications *publications = [[MRDataManger sharedManager] fetchObject:@"MRPublications" predicate:[NSPredicate predicateWithFormat:@"id == %@",iD]];
+    
+    NSMutableArray *arrayObj = [[NSMutableArray alloc] init];
+    
+    [arrayObj addObject:dictonary];
+    
+
+
+    [[MRWebserviceHelper sharedWebServiceHelper] addOrUpdatePulblishArticle:arrayObj withUpdateFlag:YES withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        publications.articleName = [dictonary objectForKey:@"articleName"];
+        publications.publication = [dictonary objectForKey:@"publication"];
+        publications.year = [dictonary objectForKey:@"year"];
+        
+        [[MRDataManger sharedManager] saveContext];
+        
+        
+    }];
+    
+    
+    return NO;
+}
 +(BOOL)addPublications:(NSDictionary *)dictonary {
    
     
     NSMutableArray *requestAr = [[NSMutableArray alloc] init];
     
     [requestAr addObject:dictonary];
-    [[MRWebserviceHelper sharedWebServiceHelper] addPulblishArticle:requestAr withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+    
+    [[MRWebserviceHelper sharedWebServiceHelper] addOrUpdatePulblishArticle:requestAr withUpdateFlag:NO withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        
         
         NSArray *profileAra = [[MRDataManger sharedManager] fetchObjectList:@"MRProfile"];
         MRProfile * profile = [profileAra lastObject];
@@ -1195,40 +1244,37 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
     
         return true;
 }
+
+
++(BOOL)updateEducationQualification:(NSDictionary *)dictonary withEducationQualificationID:(NSNumber *)iD{
+    
+    
+    EducationalQualifications *educationQualification = [[MRDataManger sharedManager] fetchObject:@"EducationalQualifications" predicate:[NSPredicate predicateWithFormat:@"id == %@",iD]];
+    
+    NSMutableArray *arrayObj = [[NSMutableArray alloc] init];
+    
+    [arrayObj addObject:dictonary];
+    
+    [[MRWebserviceHelper sharedWebServiceHelper] addOrUpdateEducationArea:arrayObj withUpdateFlag:YES withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        educationQualification.degree = [dictonary objectForKey:@"degree"];
+        educationQualification.yearOfPassout = [dictonary objectForKey:@"yearOfPassout"];
+        educationQualification.collegeName = [dictonary objectForKey:@"collegeName"];
+        educationQualification.course = [dictonary objectForKey:@"course"];
+        educationQualification.aggregate = [NSNumber numberWithFloat:[[dictonary objectForKey:@"aggregate"]integerValue]];
+        
+        [[MRDataManger sharedManager] saveContext];
+        
+    }];
+    
+    return true;
+}
+
 +(BOOL)addEducationQualification:(NSDictionary *)dictonary {
     NSArray *profileAra = [[MRDataManger sharedManager] fetchObjectList:@"MRProfile"];
     MRProfile * profile = [profileAra lastObject];
 
     if (profile!=nil) {
-        /*
-          NSDictionary * workExpDict = [[NSDictionary alloc] initWithObjectsAndKeys:_degree,@"degree",_institute,@"collegeName",[NSString stringWithFormat:@"%@ %@",_fromYYYY,_toYYYY],@"yearOfPassout",_speciality,@"course",_type,@"aggregate", nil];
-         */
-//        EducationalQualifications * educationQualification = (EducationalQualifications *)[[MRDataManger sharedManager] createObjectForEntity:@"EducationalQualifications"];
-//        
-//        educationQualification.degree = [dictonary objectForKey:@"degree"];
-//        educationQualification.yearOfPassout = [dictonary objectForKey:@"yearOfPassout"];
-//        educationQualification.collegeName = [dictonary objectForKey:@"collegeName"];
-//        educationQualification.course = [dictonary objectForKey:@"course"];
-//        educationQualification.aggregate = [NSNumber numberWithFloat:[[dictonary objectForKey:@"aggregate"]integerValue]];
-//        
-//        
-//        [profile addEducationlQualificationObject:educationQualification];
-//        [[MRDataManger sharedManager] saveContext];
         
-//        NSDictionary * workExpDict = [[NSDictionary alloc] initWithObjectsAndKeys:_degree,@"degree",_institute,@"collegeName",[NSString stringWithFormat:@"%@ %@",_fromYYYY,_toYYYY],@"yearOfPassout",_speciality,@"course",_type,@"aggregate", nil];
-
-//  addEducationArea:(NSArray *)reqDict withHandler: (completionHandler)responseHandler
-        
-        /*
-         [
-         {"collegeName":"VRSEC",
-         "course":"BTECH",
-         "aggregate":77.76,
-         "yearOfPassout":2000
-         }
-         ]
-         */
-    
         NSMutableArray *arrayObj = [[NSMutableArray alloc] init];
         
         [arrayObj addObject:dictonary];
@@ -1237,9 +1283,6 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
             
             
             NSLog(@"%@",responce);
-            
-            
-            
             
           
             EducationalQualifications * educationQualification = (EducationalQualifications *)[[MRDataManger sharedManager] createObjectForEntity:@"EducationalQualifications"];
@@ -1272,25 +1315,36 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
 
 
 
++(BOOL)updateWorkExperience:(NSDictionary *)workExpDict withWorkExperienceID:(NSNumber *)iD{
+    
+    
+    MRWorkExperience *workExp = [[MRDataManger sharedManager] fetchObject:@"MRWorkExperience" predicate:[NSPredicate predicateWithFormat:@"id == %@",iD]];
+    
 
+    
+    NSArray *arrayObj = [NSArray arrayWithObject:workExpDict];
+[[MRWebserviceHelper sharedWebServiceHelper] addOrUpdateWorkExperience:arrayObj withUpdateFlag:YES withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+   
+    workExp.designation = [workExpDict objectForKey:@"designation"];
+    workExp.fromDate = [workExpDict objectForKey:@"fromDate"];
+    workExp.toDate = [workExpDict objectForKey:@"toDate"];
+    workExp.hospital = [workExpDict objectForKey:@"hospital"];
+    workExp.location = [workExpDict objectForKey:@"location"];
+    [[MRDataManger sharedManager] saveContext];
+    
+}];
+    
+//    [[MRDataManger sharedManager] fetchObject:@"MRWorkExperience" inContext:<#(NSManagedObjectContext *)#>]
+    
+    return true;
+    
+}
 +(BOOL)addWorkExperience :(NSDictionary *)dictionary{
    
     NSArray *profileAra = [[MRDataManger sharedManager] fetchObjectList:@"MRProfile"];
     MRProfile * profile = [profileAra lastObject];
     if (profile!=nil) {
         
-        NSDictionary *workExpDict  = (NSDictionary *)dictionary;
-        MRWorkExperience * workExp = (MRWorkExperience *)[[MRDataManger sharedManager] createObjectForEntity:@"MRWorkExperience"];
-        
-        workExp.designation = [workExpDict objectForKey:@"designation"];
-        workExp.fromDate = [workExpDict objectForKey:@"fromDate"];
-        workExp.toDate = [workExpDict objectForKey:@"toDate"];
-        workExp.hospital = [workExpDict objectForKey:@"hospital"];
-        workExp.location = [workExpDict objectForKey:@"location"];
-        
-        
-        [profile addWorkExperienceObject:workExp];
-        [[MRDataManger sharedManager] saveContext];
         
         /*
          [{
@@ -1302,13 +1356,24 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
          }]
          */
         
-        
-        [[MRWebserviceHelper sharedWebServiceHelper] addWorkExperience:workExpDict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        NSArray *obj = [NSArray arrayWithObject:dictionary];
+        [[MRWebserviceHelper sharedWebServiceHelper] addOrUpdateWorkExperience:obj withUpdateFlag:NO withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+            NSDictionary *workExpDict  = (NSDictionary *)dictionary;
+            MRWorkExperience * workExp = (MRWorkExperience *)[[MRDataManger sharedManager] createObjectForEntity:@"MRWorkExperience"];
+            workExp.id = [[responce objectForKey:@"id"] objectAtIndex:0];
+
+            workExp.designation = [workExpDict objectForKey:@"designation"];
+            workExp.fromDate = [workExpDict objectForKey:@"fromDate"];
+            workExp.toDate = [workExpDict objectForKey:@"toDate"];
+            workExp.hospital = [workExpDict objectForKey:@"hospital"];
+            workExp.location = [workExpDict objectForKey:@"location"];
             
             
-            
-            
+            [profile addWorkExperienceObject:workExp];
+            [[MRDataManger sharedManager] saveContext];
+
         }];
+        
         
         return true;
         

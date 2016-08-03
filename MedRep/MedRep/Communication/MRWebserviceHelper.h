@@ -244,14 +244,11 @@ withComplitionHandler:(completionHandler)responceHandler;
 
 -(void)updateShareCount:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler;
 
--(void)addWorkExperience:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler;
-
--(void)addInterestArea:(NSArray *)reqDict withHandler:(completionHandler)responseHandler;
-
--(void)addPulblishArticle:(NSArray *)reqDict withHandler:(completionHandler)responseHandler;
-
--(void)addProfileAbout:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler;
-
+-(void)addOrUpdateEducationArea:(NSArray *)reqDict withUpdateFlag:(BOOL)isUpdate withHandler: (completionHandler)responseHandler;
+-(void)addorUpdateInterestArea:(NSArray *)reqDict withUpdateFlag:(BOOL)isUpdate  withHandler:(completionHandler)responseHandler;
+-(void)addOrUpdatePulblishArticle:(NSArray *)reqDict withUpdateFlag:(BOOL)isUpdate withHandler:(completionHandler)responseHandler;
+-(void)addOrUpdateProfileAbout:(NSDictionary *)reqDict withUpdateFlag:(BOOL)isUpdate withHandler:(completionHandler)responseHandler;
+-(void)addOrUpdateWorkExperience:(NSArray *)reqDict withUpdateFlag:(BOOL)isUpdate withHandler:(completionHandler)responseHandler;
 + (id)parseNetworkResponse:(Class)inEntityClass andData:(NSArray*)data;
 
 + (NSArray*)parseRecords:(Class)entityClass allRecords:(NSArray*)allRecords
