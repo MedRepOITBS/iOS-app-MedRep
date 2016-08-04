@@ -267,8 +267,11 @@ withComplitionHandler:(completionHandler)responceHandler;
 
 -(void)addEducationArea:(NSArray *)reqDict withHandler: (completionHandler)responseHandler;
 
-- (void)updateLikes:(NSInteger)likeCount commentCount:(NSInteger)commentCount
-         shareCount:(NSInteger)shareCount  messageId:(NSInteger)messageId
+- (void)updateLikes:(NSInteger)postType
+          likeCount:(NSInteger)likeCount
+       commentCount:(NSInteger)commentCount
+         shareCount:(NSInteger)shareCount
+          messageId:(NSInteger)messageId
         withHandler:(completionHandler)responceHandler;
 
 - (void)getShareDetailsById:(NSInteger)topicId

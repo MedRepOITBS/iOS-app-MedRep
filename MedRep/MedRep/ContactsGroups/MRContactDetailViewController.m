@@ -790,17 +790,20 @@
     NSString *messageType = @"Text";
     
     if (imageData != nil) {
-        
+        messageType = @"image";
     }
+    
+    NSMutableDictionary *postMessage = [NSMutableDictionary new];
     
     NSInteger receiverId = 0;
     if (self.mainContact != nil) {
         receiverId = self.mainContact.contactId.longValue;
+        [postMessage setObject:@[[NSNumber numberWithLong:receiverId]] forKey:@"receiverId"];
     } else {
         receiverId = self.mainGroup.group_id.longValue;
+        [postMessage setObject:@[[NSNumber numberWithLong:receiverId]] forKey:@"groupId"];
     }
     
-    NSMutableDictionary *postMessage = [NSMutableDictionary new];
     [postMessage setObject:[NSNumber numberWithInteger:2] forKey:@"postType"];
     [postMessage setObject:messageType forKey:@"message_type"];
     
@@ -813,18 +816,10 @@
                                @"title_desc" : @"",
                                @"short_desc" : @"",
                                @"postMessage" : postMessage
-//                               ,@"receiverId" : @[[NSNumber numberWithLong:receiverId]]
                                };
-//    ,
-//                               @"topic_id" : [NSNumber numberWithLong:[NSDate date].timeIntervalSinceReferenceDate]};
-    NSMutableDictionary *postedTopicDict = dataDict.mutableCopy;
-    if (self.mainGroup != nil) {
-        [postedTopicDict setValue:[NSNumber numberWithLong:receiverId]
-                           forKey:@"group_id"];
-    }
-    
-    [MRDatabaseHelper postANewTopic:postedTopicDict withHandler:^(id result) {
-        
+
+    [MRDatabaseHelper postANewTopic:dataDict withHandler:^(id result) {
+        [self fetchPosts];
     }];
 }
 

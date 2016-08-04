@@ -848,10 +848,12 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
 
 + (void)shareAnArticle:(MRTransformPost*)transformPost withHandler:(WebServiceResponseHandler)handler {
     NSDictionary *dataDict = @{@"topic_id" : transformPost.transformPostId,
-                               @"postType" : [NSNumber numberWithInteger:0]};
+                               @"postMessage" :
+                                     @{@"postType" : [NSNumber numberWithInteger:0]}
+                              };
     
     
-    [MRDatabaseHelper postANewTopic:@{@"postMessage" : dataDict} withHandler:handler];
+    [MRDatabaseHelper postANewTopic:dataDict withHandler:handler];
     
     
 //    NSInteger sharePostId = [[NSDate date] timeIntervalSince1970];

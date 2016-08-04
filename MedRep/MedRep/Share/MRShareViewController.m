@@ -259,7 +259,8 @@ UIImagePickerControllerDelegate>
         currentPost = [self.posts objectAtIndex:index];
     }
     
-    [[MRWebserviceHelper sharedWebServiceHelper] updateLikes:currentPost.likesCount.longValue
+    [[MRWebserviceHelper sharedWebServiceHelper] updateLikes:3
+                                                   likeCount:currentPost.likesCount.longValue
                                                 commentCount:currentPost.commentsCount.longValue
                                                   shareCount:currentPost.shareCount.longValue
                                                    messageId:currentPost.sharePostId.longValue
