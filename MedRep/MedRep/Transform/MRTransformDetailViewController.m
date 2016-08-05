@@ -199,26 +199,16 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)postTheTopicToTheWall {
-    //    NSArray *myContacts = [MRDatabaseHelper getContacts];
-    //    myContacts = [myContacts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K == %@", @"self.name", @"Chris Martin"]];
-    //
-    //    MRContact *contact = myContacts.firstObject;
-    //    NSArray *posts = [contact.groupPosts allObjects];
-    //
-    //    MRGroupPost *lastPost = posts.firstObject;
-    //    NSLog(@"%ld", lastPost.groupPostId.longValue);
-    //
-    //    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"groupPostId" ascending:NO];
-    //    posts = [posts sortedArrayUsingDescriptors:@[sort]];
-    //    lastPost = posts.firstObject;
-    //    NSLog(@"%ld", lastPost.groupPostId.longValue);
-    
-    [MRDatabaseHelper shareAnArticle:self.post withHandler:nil];
-}
-
 - (IBAction)shareAction:(UIButton *)sender {
-    [MRDatabaseHelper shareAnArticle:self.post withHandler:^(id result) {
+    
+    NSInteger postType = 0;
+    if (self.currentTabIndex == 0) {
+        postType = 5;
+    }
+    
+    [MRDatabaseHelper shareAnArticle:postType
+                       transformPost:self.post
+                         withHandler:^(id result) {
         if (result != nil && [result isKindOfClass:[NSNumber class]]) {
             NSNumber *tempResult = (NSNumber*)result;
             if (tempResult.boolValue) {

@@ -54,6 +54,34 @@
 @dynamic title_desc;
 @dynamic postedReplies;
 
+- (void)setLikes_count:(NSNumber *)likes_count {
+    NSInteger tempLikes = [self updateValueOfKey:likes_count andKey:@"likes_count"];
+    self.likesCount = [NSNumber numberWithLong:tempLikes];
+}
+
+- (void)setComment_count:(NSNumber *)comment_count {
+    NSInteger tempLikes = [self updateValueOfKey:comment_count andKey:@"comment_count"];
+    self.commentsCount = [NSNumber numberWithLong:tempLikes];
+}
+
+- (void)setShare_count:(NSNumber *)share_count {
+    NSInteger tempLikes = [self updateValueOfKey:share_count andKey:@"share_count"];
+    self.commentsCount = [NSNumber numberWithLong:tempLikes];
+}
+
+- (NSInteger)updateValueOfKey:(NSNumber*)value andKey:(NSString*)key {
+    NSInteger tempLikes = 0;
+    if (value != nil) {
+        tempLikes = value.longValue;
+    }
+    
+    [self willChangeValueForKey:key];
+    [self setPrimitiveValue:[NSNumber numberWithLong:tempLikes] forKey:key];
+    [self didChangeValueForKey:key];
+    
+    return tempLikes;
+}
+
 - (void)setTopic_id:(NSNumber *)topic_id {
     NSInteger topicId = 0;
     if (topic_id != nil) {

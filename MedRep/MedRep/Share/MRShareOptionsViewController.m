@@ -60,8 +60,13 @@
 - (void)fetchContactsAndGroups {
     [MRDatabaseHelper getGroups:^(id result){
         [MRDatabaseHelper getContacts:^(id result) {
-            self.contacts = [[MRDataManger sharedManager] fetchObjectList:kContactEntity];
-            self.groups = [[MRDataManger sharedManager] fetchObjectList:kGroupEntity];
+            self.contacts = [[MRDataManger sharedManager] fetchObjectList:kContactEntity
+                                                                   attributeName:@"firstName"
+                                                             sortOrder:true];
+            
+            self.groups = [[MRDataManger sharedManager] fetchObjectList:kGroupEntity
+                                                          attributeName:@"group_name"
+                                                              sortOrder:true];
             [self updateUI];
             [self.tableView reloadData];
         }];
@@ -195,7 +200,7 @@
             [self.selectedContactsName addObject:[NSNumber numberWithLong:uniqueId]];
         }
     } else {
-        BOOL currentValue = ((NSNumber*)self.checkedContacts[indexPath.row]).boolValue;
+        BOOL currentValue = ((NSNumber*)self.checkedGroups[indexPath.row]).boolValue;
         self.checkedGroups[indexPath.row] = [NSNumber numberWithBool:!currentValue];
         
         if (currentValue) {
@@ -213,6 +218,8 @@
 }
 
 - (void)doneButtonClicked {
+    NSMutableDictionary *postMessage = [NSMutableDictionary new];
+    
     NSArray *selectedContacts = nil;
     NSArray *selectedGroups = nil;
     
@@ -223,81 +230,39 @@
     }
     
     if (self.selectedGroupsName.count > 0) {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K IN %@", @"name", self.selectedGroupsName];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K IN %@", @"group_id", self.selectedGroupsName];
         selectedGroups = [MRDatabaseHelper getObjectsForType:kGroupEntity
                                                   andPredicate:predicate];
+        
+        if (selectedGroups != nil && selectedGroups.count > 0) {
+            [postMessage setValue:[selectedGroups valueForKey:@"group_id"] forKey:@"groupId"];
+        }
     }
-    
-    MRDataManger *dbManager = [MRDataManger sharedManager];
-    NSManagedObjectContext *context = [dbManager getNewPrivateManagedObjectContext];
-    NSInteger currentSharesCount = self.parentPost.shareCount.longValue;
     
     if (selectedContacts != nil || selectedGroups != nil) {
+        [postMessage setObject:[NSNumber numberWithInteger:1] forKey:@"postType"];
+        [postMessage setObject:@"" forKey:@"message"];
         
-        // Set the current user in sharedBy
-        MRAppControl *appControl = [MRAppControl sharedHelper];
-        NSDictionary *userDetailsDict = appControl.userRegData;
-        NSString *sharedByProfileName = [userDetailsDict objectOrNilForKey:@"displayName"];
+        NSDictionary *dataDict = @{@"topic_id" : [NSNumber numberWithLong:self.parentPost.sharePostId.longValue],
+                                   @"postMessage" : postMessage
+                                   };
         
-        id profilePicData = [userDetailsDict objectForKey:KProfilePicture];
-        if (profilePicData != nil && [profilePicData isKindOfClass:[NSDictionary class]])
-        {
-            profilePicData = [profilePicData objectForKey:@"data"];
-        }
-        
-        NSData *shareddByProfilePic = nil;
-        
-        if (profilePicData != nil) {
-            if ([profilePicData isKindOfClass:[NSString class]]) {
-                shareddByProfilePic = [NSData decodeBase64ForString:profilePicData];
-            } else {
-                shareddByProfilePic = profilePicData;
-            }
-        }
-        
-        if (selectedContacts != nil) {
-            currentSharesCount += selectedContacts.count;
+        [MRDatabaseHelper postANewTopic:dataDict withHandler:^(id result) {
+            NSInteger currentSharesCount = 0;
             
-            for (NSInteger index = 0; index < selectedContacts.count; index++) {
-                MRContact *contact = ((MRContact*)[selectedContacts objectAtIndex:index]);
-                NSInteger contactId = contact.contactId.longValue;
-                
-                NSString *name = [MRAppControl getContactName:contact];
-                
-                [MRDatabaseHelper shareAPostWithContactOrGroup:self.parentPost
-                                                          text:[NSString stringWithFormat:@"Shared Article with %@",name]
-                                                   contentData:nil
-                                                   contentType:kTransformContentTypeText
-                                                     contactId:contactId
-                                                       groupId:0];
+            if (self.parentPost != nil && self.parentPost.shareCount != nil) {
+                currentSharesCount = self.parentPost.shareCount.longValue;
             }
-        }
-        
-        if (selectedGroups != nil) {
-            currentSharesCount += selectedGroups.count;
             
-            for (NSInteger index = 0; index < selectedGroups.count; index++) {
-                MRGroup *group = ((MRGroup*)[selectedGroups objectAtIndex:index]);
-                NSInteger groupId = group.group_id.longValue;
-                
-                [MRDatabaseHelper shareAPostWithContactOrGroup:self.parentPost
-                                                          text:[NSString stringWithFormat:@"Shared Article with %@", group.group_name]
-                                                    contentData:nil
-                                                    contentType:kTransformContentTypeText
-                                                      contactId:0
-                                                        groupId:groupId];
-            }
-        }
-    }
-    
-    self.parentPost.shareCount = [NSNumber numberWithLong:currentSharesCount];
-    
-    [dbManager dbSaveInContext:context];
-    
-    [self.navigationController popViewControllerAnimated:true];
-    
-    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(shareToSelected)]) {
-        [self.delegate shareToSelected];
+            self.parentPost.shareCount = [NSNumber numberWithLong:currentSharesCount];
+            [self.parentPost.managedObjectContext save:nil];
+             
+            [self.navigationController popViewControllerAnimated:true];
+             
+             if (self.delegate != nil && [self.delegate respondsToSelector:@selector(shareToSelected)]) {
+                 [self.delegate shareToSelected];
+             }
+        }];
     }
 }
 

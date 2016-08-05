@@ -101,7 +101,8 @@ FOUNDATION_EXPORT NSString* const kNewsAndTransformAPIMethodName;
 +(NSArray *)getContactListForContactID:(int64_t)contactID;
 
 + (NSArray*)getShareArticles;
-+ (void)shareAnArticle:(MRTransformPost*)transformPost withHandler:(WebServiceResponseHandler)handler;
++ (void)shareAnArticle:(NSInteger)postType transformPost:(MRTransformPost*)transformPost
+     withHandler:(WebServiceResponseHandler)handler;
 
 + (void)addCommentToAPost:(MRSharePost*)inPost
                      text:(NSString*)text

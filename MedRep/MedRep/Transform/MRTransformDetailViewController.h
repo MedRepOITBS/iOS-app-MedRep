@@ -12,6 +12,8 @@
 
 @interface MRTransformDetailViewController : UIViewController
 
+@property (nonatomic) NSInteger currentTabIndex;
+
 @property (nonatomic, strong) MRTransformPost *post;
 @property (weak, nonatomic) IBOutlet UIImageView *contentImage;
 @property (weak, nonatomic) IBOutlet UITextView *detailLbl;
