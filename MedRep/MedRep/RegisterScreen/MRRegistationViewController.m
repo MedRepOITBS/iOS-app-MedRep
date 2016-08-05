@@ -16,6 +16,8 @@
 #import "MRConstants.h"
 #import "MRWebserviceHelper.h"
 #import "MRLocationManager.h"
+#import "TutorialView.h"
+#import "KLCPopup.h"
 
 #define kHeaderView     [NSArray arrayWithObjects:@"ADD MOBILE NUMBER",@"ALTERNATIVE EMAIL ADDRESS", nil]
 #define kPlaceHolders   [NSArray arrayWithObjects:@"MCI REGISTRATION ID", @"FIRST NAME", @"LAST NAME", @"MOBILE NUMBER", @"MOBILE NUMBER", nil]
@@ -46,10 +48,21 @@ typedef void(^selectedComapany)(NSString *companyName);
 @property (assign, nonatomic) NSInteger selectedUserType;
 @property (strong, nonatomic) WYPopoverController *myPopoverController;
 @property (nonatomic, strong) selectedComapany userSelectedCompany;
+@property (strong,nonatomic) KLCPopup *tutorialViewKLCPopView;
+@property (strong,nonatomic) TutorialView *tutorialView;
 @end
 
 @implementation MRRegistationViewController
 
+-(void)setupTutorialView{
+    
+    NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"TutorialView" owner:self options:nil];
+    
+    _tutorialView = (TutorialView *)[arr objectAtIndex:0];
+    _tutorialView.layer.cornerRadius = 10;
+    _tutorialViewKLCPopView = [KLCPopup popupWithContentView:self.tutorialView];
+    [_tutorialViewKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutCenter)];
+}
 - (void)viewDidLoad {
     
     self.userDeatils = [[MRAppControl sharedHelper] userRegData];
@@ -64,6 +77,8 @@ typedef void(^selectedComapany)(NSString *companyName);
     [super viewDidLoad];
     
     self.registrationTable.contentInset = UIEdgeInsetsMake(-30, 0, 0, -20);
+    
+    
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -147,7 +162,10 @@ typedef void(^selectedComapany)(NSString *companyName);
         self.bottomConstraint.constant = 50;
     }
 }
-
+-(IBAction)whyThisBtnTapped:(id)sender{
+    [self setupTutorialView];
+    
+}
 - (NSInteger)getEmailCount:(NSArray*)emaileNumbers
 {
     NSInteger count = 0;
