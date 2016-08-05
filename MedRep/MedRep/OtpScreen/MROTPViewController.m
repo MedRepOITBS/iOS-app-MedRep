@@ -15,7 +15,8 @@
 #import "MRConstants.h"
 #import "MRListViewController.h"
 #import "WYPopoverController.h"
-
+#import "KLCPopup.h"
+#import "TutorialView.h"
 
 @interface MROTPViewController ()<UITextFieldDelegate, UIAlertViewDelegate,WYPopoverControllerDelegate,MRListViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *submitButton;
@@ -30,6 +31,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *therapeuticButton;
 @property (weak, nonatomic) IBOutlet UIButton *yearRegButton;
 @property (weak, nonatomic) IBOutlet UIButton *stateCouncilButton;
+@property (strong,nonatomic) KLCPopup *tutorialViewKLCPopView;
+@property (strong,nonatomic) TutorialView *tutorialView;
 @end
 
 @implementation MROTPViewController
@@ -56,6 +59,20 @@
 - (IBAction)backButtonAction:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
+-(void)setupTutorialView{
+    
+    NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"TutorialView" owner:self options:nil];
+    
+    _tutorialView = (TutorialView *)[arr objectAtIndex:0];
+    _tutorialView.layer.cornerRadius = 10;
+    _tutorialViewKLCPopView = [KLCPopup popupWithContentView:self.tutorialView];
+    [_tutorialViewKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutCenter)];
+}
+-(IBAction)whyThisBtnTapped:(id)sender{
+    [self setupTutorialView];
+    
+}
+
 
 - (IBAction)submitButtonAction:(id)sender
 {

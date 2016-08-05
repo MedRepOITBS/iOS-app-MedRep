@@ -28,6 +28,6 @@
 - (IBAction)privateButtonAction:(id)sender;
 - (IBAction)hospitalButtonAction:(id)sender;
 - (IBAction)nextButtonAction:(id)sender;
-
+-(IBAction)whyThisBtnTapped:(id)sender;
 
 @end

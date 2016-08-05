@@ -11,5 +11,6 @@
 @interface MROTPViewController : UIViewController
 
 @property (assign, nonatomic) BOOL isFromSinUp;
+-(IBAction)whyThisBtnTapped:(id)sender;
 
 @end

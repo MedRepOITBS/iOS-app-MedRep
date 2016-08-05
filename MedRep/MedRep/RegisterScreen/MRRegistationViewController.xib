@@ -71,6 +71,27 @@
                         <action selector="backButtonAction:" destination="-1" eventType="touchUpInside" id="Thj-EC-zy0"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ewe-Jb-L80">
+                    <rect key="frame" x="255" y="107" width="93" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="93" id="StI-nb-i1G"/>
+                        <constraint firstAttribute="height" constant="25" id="tEK-1v-kGu"/>
+                    </constraints>
+                    <state key="normal">
+                        <attributedString key="attributedTitle">
+                            <fragment content="Why This?">
+                                <attributes>
+                                    <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <font key="NSFont" size="15" name="RobotoCondensed-Regular"/>
+                                    <integer key="NSUnderline" value="1"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                    </state>
+                    <connections>
+                        <action selector="whyThisBtnTapped:" destination="-1" eventType="touchUpInside" id="P2t-kw-rF8"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -80,7 +101,9 @@
                 <constraint firstAttribute="centerX" secondItem="k1t-0i-NNU" secondAttribute="centerX" id="7JL-qi-Y5q"/>
                 <constraint firstAttribute="trailing" secondItem="WO6-xl-Gkm" secondAttribute="trailing" constant="20" id="CaL-Mk-Hft"/>
                 <constraint firstItem="kwC-q8-Jb7" firstAttribute="width" secondItem="Cok-sV-AwK" secondAttribute="width" id="El0-f8-zzx"/>
+                <constraint firstItem="ewe-Jb-L80" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" constant="1.5" id="S7v-Gz-NrU"/>
                 <constraint firstAttribute="bottom" secondItem="WuW-SH-IaV" secondAttribute="bottom" id="SSD-o3-kVt"/>
+                <constraint firstItem="WO6-xl-Gkm" firstAttribute="top" secondItem="ewe-Jb-L80" secondAttribute="bottom" constant="-2" id="T55-Zt-aVa"/>
                 <constraint firstAttribute="trailing" secondItem="WuW-SH-IaV" secondAttribute="trailing" id="XJB-ex-DBK"/>
                 <constraint firstItem="kwC-q8-Jb7" firstAttribute="top" secondItem="Cok-sV-AwK" secondAttribute="top" id="c3b-bX-PXP"/>
                 <constraint firstAttribute="trailing" secondItem="kwC-q8-Jb7" secondAttribute="trailing" constant="20" id="d3v-wv-5Er"/>

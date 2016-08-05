@@ -15,6 +15,8 @@
 #import "MRCommon.h"
 #import "MRConstants.h"
 #import "MRLocationManager.h"
+#import "TutorialView.h"
+#import "KLCPopup.h"
 
 #define kHeaderView     [NSArray arrayWithObjects:@"ADDITIONAL ADDRESS", nil]
 #define kPlaceHolders   [NSArray arrayWithObjects:@"ADDRESS LINE 1", @"ADDRESS LINE 2", @"STATE", @"CITY", @"ZIP CODE", nil]
@@ -39,7 +41,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *nextButtonBottomSpace;
 @property (assign, nonatomic) NSInteger selectedUserType;
 @property (assign, nonatomic) NSInteger selectedAddressType;
-
+@property (strong,nonatomic) KLCPopup *tutorialViewKLCPopView;
+@property (strong,nonatomic) TutorialView *tutorialView;
 @end
 
 @implementation MRRegistationTwoViewController
@@ -61,7 +64,20 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 }
-
+-(IBAction)whyThisBtnTapped:(id)sender{
+    
+    [self setupTutorialView];
+ 
+}
+-(void)setupTutorialView{
+    
+    NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"TutorialView" owner:self options:nil];
+    
+    _tutorialView = (TutorialView *)[arr objectAtIndex:0];
+    _tutorialView.layer.cornerRadius = 10;
+    _tutorialViewKLCPopView = [KLCPopup popupWithContentView:self.tutorialView];
+    [_tutorialViewKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutCenter)];
+}
 - (void)addLocationInSection:(NSInteger)section
 {
     NSMutableDictionary *sectDict = [self getDataByAddressType:[NSIndexPath indexPathForRow:0 inSection:section]];

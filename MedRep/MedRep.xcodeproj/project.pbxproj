@@ -730,6 +730,14 @@
 		B4E02C761D4EBEC4003A1859 /* MRProfile+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E02C721D4EBEC4003A1859 /* MRProfile+CoreDataProperties.m */; };
 		B4E02C771D4EBEC4003A1859 /* MRProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E02C741D4EBEC4003A1859 /* MRProfile.m */; };
 		B4E02C781D4EBEC4003A1859 /* MRProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E02C741D4EBEC4003A1859 /* MRProfile.m */; };
+		B4F635061D53D039008CE7C7 /* TutorialView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F635051D53D039008CE7C7 /* TutorialView.m */; };
+		B4F635071D53D039008CE7C7 /* TutorialView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F635051D53D039008CE7C7 /* TutorialView.m */; };
+		B4F635091D53D0F1008CE7C7 /* TutorialView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4F635081D53D0F1008CE7C7 /* TutorialView.xib */; };
+		B4F6350A1D53D0F1008CE7C7 /* TutorialView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4F635081D53D0F1008CE7C7 /* TutorialView.xib */; };
+		B4F6350C1D53E6DF008CE7C7 /* TutorialBG.png in Resources */ = {isa = PBXBuildFile; fileRef = B4F6350B1D53E6DF008CE7C7 /* TutorialBG.png */; };
+		B4F6350D1D53E6DF008CE7C7 /* TutorialBG.png in Resources */ = {isa = PBXBuildFile; fileRef = B4F6350B1D53E6DF008CE7C7 /* TutorialBG.png */; };
+		B4F6350F1D541E6E008CE7C7 /* tips.png in Resources */ = {isa = PBXBuildFile; fileRef = B4F6350E1D541E6E008CE7C7 /* tips.png */; };
+		B4F635101D541E6E008CE7C7 /* tips.png in Resources */ = {isa = PBXBuildFile; fileRef = B4F6350E1D541E6E008CE7C7 /* tips.png */; };
 		CC0123C11D25A66B001134F3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0123C01D25A66B001134F3 /* CoreGraphics.framework */; };
 		CC0123C21D25A677001134F3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0123C01D25A66B001134F3 /* CoreGraphics.framework */; };
 		CC01BA731D302ACF007E2AEB /* MRCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC01BA711D302ACF007E2AEB /* MRCommentViewController.m */; };
@@ -2170,6 +2178,11 @@
 		B4E02C721D4EBEC4003A1859 /* MRProfile+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MRProfile+CoreDataProperties.m"; sourceTree = "<group>"; };
 		B4E02C731D4EBEC4003A1859 /* MRProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRProfile.h; sourceTree = "<group>"; };
 		B4E02C741D4EBEC4003A1859 /* MRProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRProfile.m; sourceTree = "<group>"; };
+		B4F635041D53D039008CE7C7 /* TutorialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialView.h; sourceTree = "<group>"; };
+		B4F635051D53D039008CE7C7 /* TutorialView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialView.m; sourceTree = "<group>"; };
+		B4F635081D53D0F1008CE7C7 /* TutorialView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TutorialView.xib; sourceTree = "<group>"; };
+		B4F6350B1D53E6DF008CE7C7 /* TutorialBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TutorialBG.png; path = ../../../../Desktop/TutorialBG.png; sourceTree = "<group>"; };
+		B4F6350E1D541E6E008CE7C7 /* tips.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tips.png; sourceTree = "<group>"; };
 		CC0123C01D25A66B001134F3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		CC01BA701D302ACF007E2AEB /* MRCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRCommentViewController.h; path = CommentBox/MRCommentViewController.h; sourceTree = "<group>"; };
 		CC01BA711D302ACF007E2AEB /* MRCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRCommentViewController.m; path = CommentBox/MRCommentViewController.m; sourceTree = "<group>"; };
@@ -3195,6 +3208,7 @@
 				79BD27E71B80A11D007CA448 /* MRRegistationViewController.xib */,
 				7961A9701B8F26160035D63A /* MRRegistationTwoViewController.h */,
 				7961A9711B8F26160035D63A /* MRRegistationTwoViewController.m */,
+				B4F6350B1D53E6DF008CE7C7 /* TutorialBG.png */,
 				7961A9721B8F26160035D63A /* MRRegistationTwoViewController.xib */,
 				79D8CD891B83A59B0089F770 /* MRAddressView.h */,
 				79D8CD8A1B83A59B0089F770 /* MRAddressView.m */,
@@ -3211,6 +3225,10 @@
 				79FFD2511BB9BA7D00CEE606 /* MRRegistrationRoleCellTableViewCell.h */,
 				79FFD2521BB9BA7D00CEE606 /* MRRegistrationRoleCellTableViewCell.m */,
 				79FFD2531BB9BA7D00CEE606 /* MRRegistrationRoleCellTableViewCell.xib */,
+				B4F635041D53D039008CE7C7 /* TutorialView.h */,
+				B4F635051D53D039008CE7C7 /* TutorialView.m */,
+				B4F6350E1D541E6E008CE7C7 /* tips.png */,
+				B4F635081D53D0F1008CE7C7 /* TutorialView.xib */,
 			);
 			path = RegisterScreen;
 			sourceTree = "<group>";
@@ -4311,6 +4329,7 @@
 				79C709E51BE7D7F200223562 /* MRMedRepViewController.xib in Resources */,
 				79169E1D1BEBDD6800C11D13 /* pcminus@2x.png in Resources */,
 				79BD27D01B809A80007CA448 /* pageviewdots~iPad.png in Resources */,
+				B4F6350F1D541E6E008CE7C7 /* tips.png in Resources */,
 				79F0669B1B94E7AD00D113F0 /* navLogo.png in Resources */,
 				796E936C1BB8528B0031EA34 /* pcselect@3x.png in Resources */,
 				79841DDC1B98A02A00535916 /* otptic@2x.png in Resources */,
@@ -4356,6 +4375,7 @@
 				7929E3C91B9CBE4C001F1373 /* dashboard-bg@3x.png in Resources */,
 				79A5DC771BA2092E001D872C /* crgreyup-arrow@2x.png in Resources */,
 				CC7DB3211D0CC5F8007DFE4C /* PendingContactCustomCell.xib in Resources */,
+				B4F6350C1D53E6DF008CE7C7 /* TutorialBG.png in Resources */,
 				79BD27E41B80A0FB007CA448 /* MROptionsViewController.xib in Resources */,
 				79BD27CF1B809A80007CA448 /* pageviewdots@3x.png in Resources */,
 				799820911BA471FB0069128A /* MPCallMedrepViewController_iPhone.xib in Resources */,
@@ -4466,6 +4486,7 @@
 				79BD28131B80C6A5007CA448 /* MROTPViewController.xib in Resources */,
 				795366021BA09EBF0021CE4D /* favorite@2x.png in Resources */,
 				79421F411BB83BAE0055D9B7 /* MRDoctorDetailsTableViewCell.xib in Resources */,
+				B4F635091D53D0F1008CE7C7 /* TutorialView.xib in Resources */,
 				8AFE8D081D0F21BF0000382E /* profile_pic8.jpeg in Resources */,
 				8AFE8CE81D0F21BF0000382E /* medicine.jpg in Resources */,
 				79FFD2591BB9BAA300CEE606 /* reg@3x.png in Resources */,
@@ -4887,6 +4908,7 @@
 				CC7DB0C21D0C8BEC007DFE4C /* reveal-icon.png in Resources */,
 				CC7DB0C31D0C8BEC007DFE4C /* readnotification3@2x.jpg in Resources */,
 				CC7DB3821D0CC8A6007DFE4C /* profile_pic6.jpeg in Resources */,
+				B4F635101D541E6E008CE7C7 /* tips.png in Resources */,
 				CC7DB0C41D0C8BEC007DFE4C /* reminder@3x.png in Resources */,
 				CC7DB31A1D0CC530007DFE4C /* PendingContactsViewController.xib in Resources */,
 				CC7DB0C51D0C8BEC007DFE4C /* PHlocations@3x.png in Resources */,
@@ -5117,6 +5139,7 @@
 				CC7DB1781D0C8BEC007DFE4C /* PHdividers@2x.png in Resources */,
 				CC7DB1791D0C8BEC007DFE4C /* addicon@2x.png in Resources */,
 				CC7DB17A1D0C8BEC007DFE4C /* latestNotificatins@3x.png in Resources */,
+				B4F6350D1D53E6DF008CE7C7 /* TutorialBG.png in Resources */,
 				CC7DB17B1D0C8BEC007DFE4C /* MRDocotrActivityScoreViewController.xib in Resources */,
 				CC7DB17C1D0C8BEC007DFE4C /* notification_dash@3x.png in Resources */,
 				CC7DB17D1D0C8BEC007DFE4C /* fbSelectedRadio@2x.png in Resources */,
@@ -5248,6 +5271,7 @@
 				CC7DB1E31D0C8BEC007DFE4C /* pending_icon@3x.png in Resources */,
 				CC7DB1E41D0C8BEC007DFE4C /* MPCallMedrepViewController.xib in Resources */,
 				B4BB24D41D45CD4C00A3DD73 /* CameraClick.png in Resources */,
+				B4F6350A1D53D0F1008CE7C7 /* TutorialView.xib in Resources */,
 				CC7DB1E51D0C8BEC007DFE4C /* cncompany1@3x.jpg in Resources */,
 				CC649F691D0D1BAA0012289C /* MRDrugSearchViewController.xib in Resources */,
 				CC7DB1E61D0C8BEC007DFE4C /* cncompany3@2x.jpg in Resources */,
@@ -5393,6 +5417,7 @@
 				B41746E41D0CE628009B7E7E /* GroupPostChildTableViewCell.m in Sources */,
 				79BD27DC1B809FD1007CA448 /* MRLoginViewController.m in Sources */,
 				B4B4F13F1D39857E00EFCC0E /* MRWorkExperience+CoreDataProperties.m in Sources */,
+				B4F635061D53D039008CE7C7 /* TutorialView.m in Sources */,
 				CC649F5F1D0D1BA10012289C /* MRDrugSearchViewController.m in Sources */,
 				79F29A701BE6330300063DC2 /* MRDoctorActivityScoreViewController.m in Sources */,
 				B4B4F1931D3BFA6200EFCC0E /* EducationDateTimeTableViewCell.m in Sources */,
@@ -5609,6 +5634,7 @@
 				CC7DB0401D0C8BEC007DFE4C /* MRAppControl.m in Sources */,
 				CC7DB0411D0C8BEC007DFE4C /* MPNotificatinsTableViewCell.m in Sources */,
 				CC7DB0421D0C8BEC007DFE4C /* MRSurveyDetailsViewController.m in Sources */,
+				B4F635071D53D039008CE7C7 /* TutorialView.m in Sources */,
 				CC7DB0431D0C8BEC007DFE4C /* MRMedRepDetailsViewController.m in Sources */,
 				CC7DB0441D0C8BEC007DFE4C /* MRLoginViewController.m in Sources */,
 				CC7DB0451D0C8BEC007DFE4C /* MRDoctorActivityScoreViewController.m in Sources */,
