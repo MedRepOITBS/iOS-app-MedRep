@@ -250,6 +250,9 @@
                 [self.navigationController popToViewController:vc animated:YES];
             }
         }
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
+                                                            object:nil];
     }
 }
 
