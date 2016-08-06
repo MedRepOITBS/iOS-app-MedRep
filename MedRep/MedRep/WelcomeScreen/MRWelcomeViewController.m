@@ -179,10 +179,11 @@
     UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
     //NSLog(@"%@",chosenImage);
     
-    self.profileImage.image = [MRCommon imageWithImage:chosenImage scaledToSize:CGSizeMake(200, 200)];
+    chosenImage = [MRCommon imageWithImage:chosenImage scaledToSize:CGSizeMake(200, 200)];
+    self.profileImage.image = chosenImage;
     [picker dismissViewControllerAnimated:NO completion:NULL];
 
-    NSData *imageData = UIImageJPEGRepresentation([MRCommon imageWithImage:chosenImage scaledToSize:CGSizeMake(200, 200)], 1.0);
+    NSData *imageData = UIImageJPEGRepresentation(chosenImage, 1.0);
     [MRCommon showActivityIndicator:@"Uploading Profile Image..."];
     [[MRWebserviceHelper sharedWebServiceHelper] uploadDP:[NSDictionary dictionaryWithObjectsAndKeys:[imageData base64EncodedStringWithOptions:0],@"ImageData", nil] withHandler:^(BOOL status, NSString *details, NSDictionary *responce)
     {

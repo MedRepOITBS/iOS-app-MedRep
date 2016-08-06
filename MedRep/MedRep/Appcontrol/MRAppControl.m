@@ -902,9 +902,27 @@
 }
 
 +(NSString*)getFileName {
-    NSNumber *tempDate = [NSNumber numberWithDouble:[NSDate date].timeIntervalSinceReferenceDate];
     
-    NSString *fileName = [NSString stringWithFormat:@"%@_%ld.png",[MRAppControl sharedHelper].userRegData[@"doctorId"],tempDate.longValue];
+    NSMutableString *fileName = [NSMutableString new];
+    
+    NSString *doctorId = [MRAppControl sharedHelper].userRegData[@"doctorId"];
+    if (doctorId != nil && doctorId.length > 0) {
+        [fileName appendString:doctorId];
+    } else {
+        doctorId = [MRAppControl sharedHelper].userRegData[@"FirstName"];
+        if (doctorId != nil && doctorId.length > 0) {
+            [fileName appendString:doctorId];
+        }
+    }
+    
+    NSNumber *tempDate = [NSNumber numberWithDouble:[NSDate date].timeIntervalSinceReferenceDate];
+    if (tempDate != nil) {
+        if (fileName != nil && fileName.length > 0) {
+            [fileName appendString:@"_"];
+        }
+        
+        [fileName appendFormat:@"%ld.png", tempDate.longValue];
+    }
     return fileName;
 }
 

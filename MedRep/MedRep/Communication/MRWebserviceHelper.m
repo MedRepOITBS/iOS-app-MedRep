@@ -932,11 +932,11 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
      withHandler:(completionHandler)responceHandler
 {    
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-    [dict setObject:[NSNull null] forKey:@"dpId"];
+//    [dict setObject:[NSNull null] forKey:@"dpId"];
     [dict setObject:[DPdetails objectForKey:@"ImageData"] forKey:@"imgData"];
-    [dict setObject:@"JPEG" forKey:@"mimeType"];
+//    [dict setObject:@"JPEG" forKey:@"mimeType"];
     [dict setObject:[MRCommon getLoginEmail] forKey:@"loginId"];
-    [dict setObject:[NSNull null] forKey:@"securityId"];
+//    [dict setObject:[NSNull null] forKey:@"securityId"];
     [dict setObject:[MRAppControl getFileName] forKey:@"fileName"];
     
     NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/preapi/registration/uploadDP",kBaseURL];
