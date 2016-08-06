@@ -315,6 +315,7 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
 //        notiFicationViewController.post = self.searchResults[indexPath.row];
 //        
 //    }else{
+    notiFicationViewController.currentTabIndex = self.currentIndex;
         notiFicationViewController.post = self.filteredData[indexPath.row];
         
 //    }

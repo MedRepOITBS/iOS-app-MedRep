@@ -31,5 +31,6 @@
 -(void)commonBoxCancelButtonPressed;
 -(void)commonBoxCameraGalleryButtonTapped;
 - (void)commentPosted;
-- (void)commentPostedWithData:(NSString*)message andImageData:(NSData*)imageData;
+- (void)commentPostedWithData:(NSString*)message andImageData:(NSData*)imageData
+                withSharePost:(MRSharePost*)sharePost;
 @end

@@ -784,7 +784,8 @@
 //    [self.activitiesTable reloadData];
 }
 
-- (void)commentPostedWithData:(NSString *)message andImageData:(NSData *)imageData {
+- (void)commentPostedWithData:(NSString *)message andImageData:(NSData *)imageData
+                withSharePost:(MRSharePost *)sharePost {
     [_commentBoxKLCPopView dismissPresentingPopup];
     
     NSString *messageType = @"Text";

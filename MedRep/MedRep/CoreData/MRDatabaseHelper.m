@@ -846,10 +846,11 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
     return articles;
 }
 
-+ (void)shareAnArticle:(MRTransformPost*)transformPost withHandler:(WebServiceResponseHandler)handler {
++ (void)shareAnArticle:(NSInteger)postType transformPost:(MRTransformPost*)transformPost
+           withHandler:(WebServiceResponseHandler)handler {
     NSDictionary *dataDict = @{@"topic_id" : transformPost.transformPostId,
                                @"postMessage" :
-                                     @{@"postType" : [NSNumber numberWithInteger:0]}
+                                     @{@"postType" : [NSNumber numberWithInteger:postType]}
                               };
     
     

@@ -185,8 +185,6 @@ UIImagePickerControllerDelegate>
     [cell setParentTableView:self.postsTableView];
     [cell setDelegate:self];
     
-    
-    
     if (cell == nil)
     {
         NSArray *nibViews = [[NSBundle mainBundle] loadNibNamed:@"MRGroupPostItemTableViewCell" owner:nil options:nil];
@@ -194,10 +192,8 @@ UIImagePickerControllerDelegate>
     }
     
     
-        [cell setPostContent:[self.serachResults objectAtIndex:indexPath.row] tagIndex:tagIndex];
+    [cell setPostContent:[self.serachResults objectAtIndex:indexPath.row] tagIndex:tagIndex];
 
-   
-    
     return cell;
 }
 
@@ -209,11 +205,7 @@ UIImagePickerControllerDelegate>
     [shareDetailViewController setDelegate:self];
     [shareDetailViewController setIndexPath:indexPath];
     
-    
-    
-        [shareDetailViewController setPost:self.serachResults[indexPath.row]];
-        
-   
+    [shareDetailViewController setPost:self.serachResults[indexPath.row]];
     
     [self.navigationController pushViewController:shareDetailViewController animated:true];
 }
@@ -392,40 +384,48 @@ UIImagePickerControllerDelegate>
     [self.postsTableView reloadData];
 }
 
-- (void)commentPostedWithData:(NSString *)message andImageData:(NSData *)imageData {
+- (void)commentPostedWithData:(NSString *)message andImageData:(NSData *)imageData
+                withSharePost:(MRSharePost *)sharePost {
     [_commentBoxKLCPopView dismissPresentingPopup];
     
     NSString *messageType = @"Text";
     
     if (imageData != nil) {
-        
+        messageType = @"image";
     }
     
     NSMutableDictionary *postMessage = [NSMutableDictionary new];
-    [postMessage setObject:[NSNumber numberWithInteger:2] forKey:@"postType"];
+    [postMessage setObject:[NSNumber numberWithInteger:4] forKey:@"postType"];
     [postMessage setObject:messageType forKey:@"message_type"];
+    [postMessage setObject:message forKey:@"message"];
     
     if (imageData != nil) {
         [postMessage setObject:[MRAppControl getFileName] forKey:@"fileName"];
         [postMessage setObject:imageData forKey:@"fileData"];
     }
     
-    NSDictionary *dataDict = @{@"detail_desc" : message,
-                               @"title_desc" : @"",
-                               @"short_desc" : @"",
-                               @"postMessage" : postMessage
-                               //                               ,@"receiverId" : @[[NSNumber numberWithLong:receiverId]]
-                               };
-    //    ,
-    //                               @"topic_id" : [NSNumber numberWithLong:[NSDate date].timeIntervalSinceReferenceDate]};
-    NSMutableDictionary *postedTopicDict = dataDict.mutableCopy;
-//    if (self.mainGroup != nil) {
-//        [postedTopicDict setValue:[NSNumber numberWithLong:receiverId]
-//                           forKey:@"group_id"];
-//    }
+//    NSDictionary *dataDict = @{@"detail_desc" : message,
+//                               @"title_desc" : @"",
+//                               @"short_desc" : @"",
+//                               @"topic_id" : [NSNumber numberWithLong:sharePost.sharePostId.longValue],
+//                               @"postMessage" : postMessage
+//                               };
     
-    [MRDatabaseHelper postANewTopic:postedTopicDict withHandler:^(id result) {
+    NSDictionary *dataDict = @{@"topic_id" : [NSNumber numberWithLong:sharePost.sharePostId.longValue],
+                               @"postMessage" : postMessage
+                               };
+    
+    [MRDatabaseHelper postANewTopic:dataDict withHandler:^(id result) {
+        NSInteger commentsCount = 0;
+        if (sharePost != nil && sharePost.commentsCount != nil) {
+            commentsCount = sharePost.commentsCount.longValue;
+        }
         
+        sharePost.commentsCount = [NSNumber numberWithLong:commentsCount+1];
+        [sharePost.managedObjectContext save:nil];
+        
+        [self fetchPosts];
+        [self.postsTableView reloadData];
     }];
 }
 

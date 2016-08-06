@@ -34,6 +34,11 @@ AVPlayerViewControllerDelegate> {
     
     AVPlayerViewController *av;
 }
+
+@property (weak, nonatomic) IBOutlet UIImageView *profilePicImageView;
+
+@property (weak, nonatomic) IBOutlet UILabel *postedByProfileName;
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *previewImageHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *webViewHeightConstraint;
 
@@ -126,6 +131,19 @@ AVPlayerViewControllerDelegate> {
 }
 
 - (void)setupUI {
+    NSString *name = @"No Name";
+    if (self.post.sharedByProfileName != nil) {
+        name = self.post.sharedByProfileName;
+    }
+    self.postedByProfileName.text = name;
+    
+    NSData* imageData = self.post.shareddByProfilePic;
+    if (imageData && imageData.length > 0) {
+        self.profilePicImageView.image = [UIImage imageWithData:imageData];
+    } else {
+        self.profilePicImageView.image = [UIImage imageNamed:@"person"];
+    }
+    
     [self setupPreview];
     [self setCountInLabels];
 }
@@ -297,10 +315,24 @@ AVPlayerViewControllerDelegate> {
 - (void)likeButtonTapped:(UIGestureRecognizer*)gesture {
     NSInteger likeCount = self.post.likesCount.longValue;
     likeCount = likeCount + 1;
-    self.post.likesCount = [NSNumber numberWithLong:likeCount];
-    [self.post.managedObjectContext save:nil];
     
-    self.likeCount.text = [NSString stringWithFormat:@"%ld",(long)likeCount];
+    MRSharePost *currentPost;
+    if (self.post != nil) {
+        currentPost = self.post;
+    }
+    
+    [[MRWebserviceHelper sharedWebServiceHelper] updateLikes:3
+                                                   likeCount:likeCount
+                                                commentCount:currentPost.commentsCount.longValue
+                                                  shareCount:currentPost.shareCount.longValue
+                                                   messageId:currentPost.sharePostId.longValue
+                                                 withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                     self.post.likesCount = [NSNumber numberWithLong:likeCount];
+                                                     [self.post.managedObjectContext save:nil];
+                                                     
+                                                     self.likeCount.text = [NSString stringWithFormat:@"%ld",(long)likeCount];
+                                                 }];
+    
 }
 
 - (void)shareButtonTapped:(UIGestureRecognizer*)gesture {
@@ -345,6 +377,48 @@ AVPlayerViewControllerDelegate> {
     
     [self setCountInLabels];
     [self.activitiesTable reloadData];
+}
+
+- (void)commentPostedWithData:(NSString *)message andImageData:(NSData *)imageData
+                withSharePost:(MRSharePost *)sharePost {
+    [_commentBoxKLCPopView dismissPresentingPopup];
+    
+    NSString *messageType = @"Text";
+    
+    if (imageData != nil) {
+        messageType = @"image";
+    }
+    
+    NSMutableDictionary *postMessage = [NSMutableDictionary new];
+    [postMessage setObject:[NSNumber numberWithInteger:4] forKey:@"postType"];
+    [postMessage setObject:messageType forKey:@"message_type"];
+    [postMessage setObject:message forKey:@"message"];
+    
+    if (imageData != nil) {
+        [postMessage setObject:[MRAppControl getFileName] forKey:@"fileName"];
+        [postMessage setObject:imageData forKey:@"fileData"];
+    }
+    
+//    NSDictionary *dataDict = @{@"detail_desc" : message,
+//                               @"title_desc" : @"",
+//                               @"short_desc" : @"",
+//                               @"topic_id" : [NSNumber numberWithLong:self.post.sharePostId.longValue],
+//                               @"postMessage" : postMessage
+//                               };
+    
+    NSDictionary *dataDict = @{@"topic_id" : [NSNumber numberWithLong:sharePost.sharePostId.longValue],
+                               @"postMessage" : postMessage
+                               };
+    
+    [MRDatabaseHelper postANewTopic:dataDict withHandler:^(id result) {
+        self.recentActivity = nil;
+        if (self.post.postedReplies != nil && self.post.postedReplies.count > 0) {
+            self.recentActivity = self.post.postedReplies.allObjects;
+        }
+        
+        [self setCountInLabels];
+        [self.activitiesTable reloadData];
+    }];
 }
 
 - (void)sortRecentActivities {

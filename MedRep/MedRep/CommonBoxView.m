@@ -150,31 +150,17 @@
 }
 
 - (IBAction)okButtonTapped:(id)sender {
-    if (self.sharePost != nil) {
-        if (!_isPhotoSelected) {
-            [MRDatabaseHelper addCommentToAPost:self.sharePost text:self.commentTextView.text
-                                    contentData:nil contentType:kTransformContentTypeText];
-        } else {
-            [MRDatabaseHelper addCommentToAPost:self.sharePost text:self.commentTextView.text
-                                    contentData:UIImagePNGRepresentation(self.shareImageView.image)
-                                      contentType:kTransformContentTypeImage];
-            
-        }
-        
-        if (self.delegate != nil &&
-            [self.delegate respondsToSelector:@selector(commentPosted)]) {
-            [self.delegate commentPosted];
-        }
-    } else if (self.mainContact != nil) {
+    if (self.mainContact != nil) {
         
     } else {
         if (self.delegate != nil &&
-            [self.delegate respondsToSelector:@selector(commentPostedWithData:andImageData:)]) {
+            [self.delegate respondsToSelector:@selector(commentPostedWithData:andImageData:withSharePost:)]) {
             NSData *imageData = nil;
             if (self.isPhotoDone || self.isPhotoSelected) {
                 imageData = UIImagePNGRepresentation(self.shareImageView.image);
             }
-            [self.delegate commentPostedWithData:self.commentTextView.text andImageData:imageData];
+            [self.delegate commentPostedWithData:self.commentTextView.text andImageData:imageData
+             withSharePost:self.sharePost];
         }
     }
 }
