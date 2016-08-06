@@ -16,14 +16,13 @@
 
 @dynamic contactId;
 @dynamic contentType;
+@dynamic displayPicture;
+@dynamic fileUrl;
 @dynamic groupId;
-@dynamic image;
 @dynamic parentSharePostId;
-@dynamic postedBy;
-@dynamic postedByProfilePic;
+@dynamic doctor_Name;
 @dynamic postedOn;
 @dynamic postedReplyId;
-@dynamic text;
 @dynamic url;
 @dynamic message_id;
 @dynamic member_id;
@@ -75,10 +74,6 @@
         
         [self setGroupRelationship:group];
     }
-}
-
-- (void)setMessage:(NSString *)message {
-    self.text = message;
 }
 
 - (void)setPost_date:(NSDate *)post_date {

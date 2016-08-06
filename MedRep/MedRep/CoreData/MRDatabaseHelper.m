@@ -954,15 +954,11 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
     
     childPost.postedReplyId = [NSNumber numberWithLong:[[NSDate date] timeIntervalSince1970]];
     childPost.postedOn = [NSDate date];
-    childPost.text = text;
-    childPost.postedBy = sharedByProfileName;
-    childPost.postedByProfilePic = shareddByProfilePic;
+    childPost.message = text;
+    childPost.doctor_Name = sharedByProfileName;
     
     // Set the content type
     childPost.contentType = [NSNumber numberWithInteger:contentType];
-    if (data != nil) {
-        childPost.image = data;
-    }
     
     // Update the current post
     if (inPost != nil && inPost.sharePostId != nil) {
@@ -1018,15 +1014,12 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
     
     childPost.postedReplyId = [NSNumber numberWithLong:[[NSDate date] timeIntervalSince1970]];
     childPost.postedOn = [NSDate date];
-    childPost.text = text;
-    childPost.postedBy = sharedByProfileName;
-    childPost.postedByProfilePic = shareddByProfilePic;
+    childPost.message = text;
+    childPost.doctor_Name = sharedByProfileName;
     
     // Set the content type
     childPost.contentType = [NSNumber numberWithInteger:contentType];
-    if (data != nil) {
-        childPost.image = data;
-    }
+    
     MRContact *contact;
     MRGroup *group;
     if (contactId > 0) {
@@ -1081,11 +1074,9 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
     childPost.parentSharePostId = [NSNumber numberWithLong:inPost.sharePostId.longValue];
     childPost.postedReplyId = [NSNumber numberWithLong:[[NSDate date] timeIntervalSince1970]];
     childPost.postedOn = [NSDate date];
-    childPost.text = text;
-    childPost.image = data;
+    childPost.message = text;
     childPost.contentType = [NSNumber numberWithInteger:kTransformContentTypeText];
-    childPost.postedBy = name;
-    childPost.postedByProfilePic = pic;
+    childPost.doctor_Name = name;
     
     if (contactId > 0) {
         childPost.contactId = [NSNumber numberWithLong:contactId];

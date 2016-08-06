@@ -849,8 +849,8 @@
     UIImage *image = [UIImage imageNamed:@"person"];;
     
     if (replies != nil) {
-        if (replies.postedByProfilePic != nil) {
-            image = [UIImage imageWithData:replies.postedByProfilePic];
+        if (replies.displayPicture != nil && replies.displayPicture.length > 0) {
+            image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:replies.displayPicture]]];
         }
     }
     

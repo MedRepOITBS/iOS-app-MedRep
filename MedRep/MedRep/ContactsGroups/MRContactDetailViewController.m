@@ -253,7 +253,7 @@
     CGFloat rowHeight = 283;
     MRPostedReplies *post = [self.posts objectAtIndex:indexPath.row];
     
-    if (post.image == nil) {
+    if (post.fileUrl == nil || post.fileUrl.length == 0) {
         rowHeight -= 146;
     }
     

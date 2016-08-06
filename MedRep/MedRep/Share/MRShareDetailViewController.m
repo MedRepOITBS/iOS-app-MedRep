@@ -137,9 +137,8 @@ AVPlayerViewControllerDelegate> {
     }
     self.postedByProfileName.text = name;
     
-    NSData* imageData = self.post.shareddByProfilePic;
-    if (imageData && imageData.length > 0) {
-        self.profilePicImageView.image = [UIImage imageWithData:imageData];
+    if (self.post.displayPicture != nil && self.post.displayPicture.length > 0) {
+        self.profilePicImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.post.displayPicture]]];
     } else {
         self.profilePicImageView.image = [UIImage imageNamed:@"person"];
     }
@@ -267,7 +266,7 @@ AVPlayerViewControllerDelegate> {
     CGFloat rowHeight = 283;
     MRPostedReplies *post = [self.recentActivity objectAtIndex:indexPath.row];
     
-    if (post.image == nil) {
+    if (post.fileUrl == nil || post.fileUrl.length == 0) {
         rowHeight -= 146;
     }
     
@@ -427,7 +426,7 @@ AVPlayerViewControllerDelegate> {
                                     self.recentActivity = [NSArray arrayWithArray:self.post.postedReplies.allObjects];
                                     
                                     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"postedOn" ascending:false];
-                                    NSSortDescriptor *sortNameDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"titleDescription" ascending:false];
+                                    NSSortDescriptor *sortNameDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"message" ascending:true];
                                     self.recentActivity = [self.recentActivity sortedArrayUsingDescriptors:@[sortDescriptor, sortNameDescriptor]];
                                     
                                     [self setEmptyMessage];

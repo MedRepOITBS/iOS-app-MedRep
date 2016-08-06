@@ -19,6 +19,7 @@
 @dynamic contentType;
 @dynamic detailedText;
 @dynamic doctor_Name;
+@dynamic displayPicture;
 @dynamic group_id;
 @dynamic groupId;
 @dynamic likesCount;
@@ -35,7 +36,6 @@
 @dynamic shareCount;
 @dynamic sharedByProfileId;
 @dynamic sharedByProfileName;
-@dynamic shareddByProfilePic;
 @dynamic sharePostId;
 @dynamic shortText;
 @dynamic source;

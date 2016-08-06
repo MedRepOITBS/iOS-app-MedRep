@@ -45,7 +45,7 @@
         sharePost = [[MRDataManger sharedManager] fetchObject:kMRSharePost predicate:predicate];
     }
     
-    if (post.image == nil) {
+    if (post.fileUrl == nil || post.fileUrl.length == 0) {
         if (sharePost != nil && sharePost.objectData != nil) {
             self.heightConstraint.constant = 146;
             self.commentPic.image = [UIImage imageWithData:sharePost.objectData];
@@ -54,18 +54,26 @@
         }
     } else {
         self.heightConstraint.constant = 146;
-        self.commentPic.image = [UIImage imageWithData:post.image];
+        self.commentPic.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:post.fileUrl]]];
     }
     
-    NSString *postText = post.text;
-    if (postText == nil || postText.length == 0) {
-        if (sharePost != nil && sharePost.titleDescription != nil) {
-            postText = sharePost.titleDescription;
+    NSString *postText = @"";
+    if (post.message != nil && post.message.length > 0) {
+        postText = post.message;
+    } else {
+        if (postText == nil || postText.length == 0) {
+            if (sharePost != nil && sharePost.titleDescription != nil) {
+                postText = sharePost.titleDescription;
+            }
         }
     }
-    
     self.postText.text = postText;
-    self.profileNameLabel.text = post.postedBy;
+    
+    NSString *postedBy = @"";
+    if (post.doctor_Name != nil && post.doctor_Name.length > 0) {
+        postedBy = post.doctor_Name;
+    }
+    self.profileNameLabel.text = postedBy;
     self.profilePic.image = [MRAppControl getRepliedByProfileImage:post];
     
     self.postedDate.text = [NSString stringWithFormat:@"%@",[post.postedOn stringWithFormat:kIdletimeFormat]];

@@ -227,6 +227,10 @@
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K IN %@", @"contactId", self.selectedContactsName];
         selectedContacts = [MRDatabaseHelper getObjectsForType:kContactEntity
                                                            andPredicate:predicate];
+        
+        if (selectedContacts != nil && selectedContacts.count > 0) {
+            [postMessage setValue:[selectedContacts valueForKey:@"contactId"] forKey:@"receiverId"];
+        }
     }
     
     if (self.selectedGroupsName.count > 0) {
@@ -241,27 +245,29 @@
     
     if (selectedContacts != nil || selectedGroups != nil) {
         [postMessage setObject:[NSNumber numberWithInteger:1] forKey:@"postType"];
-        [postMessage setObject:@"" forKey:@"message"];
+        //[postMessage setObject:@"" forKey:@"message"];
         
         NSDictionary *dataDict = @{@"topic_id" : [NSNumber numberWithLong:self.parentPost.sharePostId.longValue],
                                    @"postMessage" : postMessage
                                    };
         
         [MRDatabaseHelper postANewTopic:dataDict withHandler:^(id result) {
-            NSInteger currentSharesCount = 0;
-            
-            if (self.parentPost != nil && self.parentPost.shareCount != nil) {
-                currentSharesCount = self.parentPost.shareCount.longValue;
+            if (result) {
+                NSInteger currentSharesCount = 0;
+                
+                if (self.parentPost != nil && self.parentPost.shareCount != nil) {
+                    currentSharesCount = self.parentPost.shareCount.longValue;
+                }
+                
+                self.parentPost.shareCount = [NSNumber numberWithLong:currentSharesCount + 1];
+                [self.parentPost.managedObjectContext save:nil];
+                 
+                [self.navigationController popViewControllerAnimated:true];
+                 
+                 if (self.delegate != nil && [self.delegate respondsToSelector:@selector(shareToSelected)]) {
+                     [self.delegate shareToSelected];
+                 }
             }
-            
-            self.parentPost.shareCount = [NSNumber numberWithLong:currentSharesCount];
-            [self.parentPost.managedObjectContext save:nil];
-             
-            [self.navigationController popViewControllerAnimated:true];
-             
-             if (self.delegate != nil && [self.delegate respondsToSelector:@selector(shareToSelected)]) {
-                 [self.delegate shareToSelected];
-             }
         }];
     }
 }
@@ -285,7 +291,6 @@
     
     // Set the current user in sharedBy
     newPost.sharedByProfileName = profileName;
-    newPost.shareddByProfilePic = profilePic;
     
     return newPost;
 }

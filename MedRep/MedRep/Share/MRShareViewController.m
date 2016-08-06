@@ -148,8 +148,9 @@ UIImagePickerControllerDelegate>
     self.posts = [MRDatabaseHelper getShareArticles];
     
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"postedOn" ascending:false];
-    NSSortDescriptor *sortNameDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"titleDescription" ascending:false];
-    self.posts = [self.posts sortedArrayUsingDescriptors:@[sortDescriptor, sortNameDescriptor]];
+    NSSortDescriptor *sortTitleDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"titleDescription" ascending:true];
+    NSSortDescriptor *sortNameDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"sharedByProfileName" ascending:true];
+    self.posts = [self.posts sortedArrayUsingDescriptors:@[sortDescriptor, sortTitleDescriptor, sortNameDescriptor]];
     
     self.serachResults = [self.posts mutableCopy];
     [self setEmptyMessage];

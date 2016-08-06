@@ -17,14 +17,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nullable, nonatomic, retain) NSNumber *contactId;
 @property (nullable, nonatomic, retain) NSNumber *contentType;
+@property (nullable, nonatomic, retain) NSString *displayPicture;
+@property (nullable, nonatomic, retain) NSString *fileUrl;
 @property (nullable, nonatomic, retain) NSNumber *groupId;
-@property (nullable, nonatomic, retain) NSData *image;
 @property (nullable, nonatomic, retain) NSNumber *parentSharePostId;
-@property (nullable, nonatomic, retain) NSString *postedBy;
-@property (nullable, nonatomic, retain) NSData *postedByProfilePic;
+@property (nullable, nonatomic, retain) NSString *doctor_Name;
 @property (nullable, nonatomic, retain) NSDate *postedOn;
 @property (nullable, nonatomic, retain) NSNumber *postedReplyId;
-@property (nullable, nonatomic, retain) NSString *text;
 @property (nullable, nonatomic, retain) NSString *url;
 
 @property (nullable, nonatomic, retain) NSNumber *message_id;
