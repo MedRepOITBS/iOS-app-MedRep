@@ -35,6 +35,7 @@ NSString* const kNewsAndUpdates = @"News & Updates";
 @dynamic therapeuticId;
 @dynamic therapeuticName;
 @dynamic title;
+@dynamic transformDesc;
 @dynamic userId;
 @dynamic videoFile;
 @dynamic videoUrl;
@@ -77,6 +78,11 @@ NSString* const kNewsAndUpdates = @"News & Updates";
 - (void)setNewsDesc:(NSString *)newsDesc {
     newsDesc = [self stripOutHTMLTags:newsDesc];
     self.detailedDescription = newsDesc;
+}
+
+- (void)setTransformDesc:(NSString *)transformDesc {
+    transformDesc = [self stripOutHTMLTags:transformDesc];
+    self.detailedDescription = transformDesc;
 }
 
 - (void)setCreatedOn:(NSDate *)createdOn {

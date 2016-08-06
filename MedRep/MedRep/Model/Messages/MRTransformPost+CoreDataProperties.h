@@ -35,6 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *therapeuticId;
 @property (nullable, nonatomic, retain) NSString *therapeuticName;
 @property (nullable, nonatomic, retain) NSString *title;
+@property (nullable, nonatomic, retain) NSString *transformDesc;
 @property (nullable, nonatomic, retain) NSString *userId;
 @property (nullable, nonatomic, retain) NSString *videoFile;
 @property (nullable, nonatomic, retain) NSString *videoUrl;

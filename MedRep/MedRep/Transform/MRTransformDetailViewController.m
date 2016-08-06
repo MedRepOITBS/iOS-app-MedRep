@@ -46,6 +46,11 @@
     self.navigationItem.rightBarButtonItem = rightButtonItem;
     
     if (self.post != nil) {
+        
+        if (self.post.postUrl == nil || self.post.postUrl.length == 0) {
+            [self.gotoButton setHidden:YES];
+        }
+        
         if (self.post.titleDescription != nil && self.post.titleDescription.length > 0) {
             _titleLbl.text = self.post.titleDescription;
         }
@@ -62,9 +67,11 @@
             [webView setDelegate:self];
             [webView setHidden:NO];
             
-            NSURL *targetURL = [NSURL URLWithString:@"https://dl.dropboxusercontent.com/u/104553173/sample.pdf"];
-            NSURLRequest *request = [NSURLRequest requestWithURL:targetURL];
-            [webView loadRequest:request];
+            if (self.post.innerImgUrl != nil && self.post.innerImgUrl.length > 0) {
+                NSURL *targetURL = [NSURL URLWithString:self.post.innerImgUrl];
+                NSURLRequest *request = [NSURLRequest requestWithURL:targetURL];
+                [webView loadRequest:request];
+            }
         } else if (self.post.contentType.integerValue == kTransformContentTypeVideo) {
             
             [thumbnailImage setHidden:YES];
@@ -77,23 +84,27 @@
                                        self.view.frame.size.width - 10,
                                        shareButton.frame.origin.y - (startY + 10));
             
-            AVAsset *avAsset = [AVAsset assetWithURL:[NSURL URLWithString:@"https://dl.dropboxusercontent.com/u/104553173/PK%20Song.mp4"]];
-            AVPlayerItem *avPlayerItem =[[AVPlayerItem alloc]initWithAsset:avAsset];
-            AVPlayer *avPlayer = [[AVPlayer alloc]initWithPlayerItem:avPlayerItem];
-            av.player = avPlayer;
-            [avPlayer seekToTime:kCMTimeZero];
-            [avPlayer pause];
+//            AVAsset *avAsset = [AVAsset assetWithURL:[NSURL URLWithString:self.post.videoUrl]];
+//            AVPlayerItem *avPlayerItem =[[AVPlayerItem alloc]initWithAsset:avAsset];
+//            AVPlayer *avPlayer = [[AVPlayer alloc]initWithPlayerItem:avPlayerItem];
             
-            [self addChildViewController:av];
-            [self.view addSubview:av.view];
-            [av didMoveToParentViewController:self];
-            [av.contentOverlayView addObserver:self forKeyPath:@"bounds" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+            if (self.post.videoUrl != nil && self.post.videoUrl.length > 0) {
+                AVPlayer *avPlayer = [AVPlayer playerWithURL:[NSURL URLWithString:self.post.videoUrl]];
+                av.player = avPlayer;
+                [avPlayer seekToTime:kCMTimeZero];
+                [avPlayer pause];
+                
+                [self addChildViewController:av];
+                [self.view addSubview:av.view];
+                [av didMoveToParentViewController:self];
+                [av.contentOverlayView addObserver:self forKeyPath:@"bounds" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+            }
             
             //            [self setAVPlayerConstraints:av.view];
             
         }else { //if ([self.selectedContent.contentType isEqualToString:@"Image"]) {
-            if (self.post.url != nil && self.post.url.length > 0) {
-                _contentImage.image = [UIImage imageNamed:self.post.url];
+            if (self.post.innerImgUrl != nil && self.post.innerImgUrl.length > 0) {
+                _contentImage.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.post.innerImgUrl]]];
             } else {
                 _contentImage.image = [UIImage imageNamed:@"Default"];
             }
@@ -226,9 +237,15 @@
 - (IBAction)gotoWebAction:(id)sender {
     NotificationWebViewController *notiFicationViewController = [[NotificationWebViewController alloc] initWithNibName:@"NotificationWebViewController" bundle:nil];
     notiFicationViewController.isFromTransform = YES;
-    if (self.post != nil && self.post.titleDescription != nil &&
-        self.post.titleDescription.length > 0) {
-        notiFicationViewController.headerTitle = self.post.titleDescription;
+    if (self.post != nil) {
+        if (self.post.postUrl != nil && self.post.postUrl.length > 0) {
+            notiFicationViewController.urlLink = self.post.postUrl;
+        }
+        
+        if(self.post.titleDescription != nil &&
+            self.post.titleDescription.length > 0) {
+            notiFicationViewController.headerTitle = self.post.titleDescription;
+        }
     }
     [self.navigationController pushViewController:notiFicationViewController animated:YES];
 }
