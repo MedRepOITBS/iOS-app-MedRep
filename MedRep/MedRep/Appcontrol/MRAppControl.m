@@ -863,6 +863,8 @@
     if (group != nil) {
         if (group.group_img_data != nil) {
             image = [UIImage imageWithData:group.group_img_data];
+        } else if (group.imageUrl != nil && group.imageUrl.length > 0) {
+            image =[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:group.imageUrl]]];
         }
     }
     

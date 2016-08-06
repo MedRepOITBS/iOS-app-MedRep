@@ -193,7 +193,7 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
 + (void)getPendingGroups:(WebServiceResponseHandler)responseHandler {
     [MRCommon showActivityIndicator:@"Requesting..."];
     [[MRWebserviceHelper sharedWebServiceHelper] fetchPendingGroupsListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-        [MRDatabaseHelper makeServiceCallForContactsFetch:status details:details
+        [MRDatabaseHelper makeServiceCallForGroupsFetch:status details:details
                                                  response:responce
                                        andResponseHandler:responseHandler];
     }];
