@@ -905,13 +905,13 @@
     
     NSMutableString *fileName = [NSMutableString new];
     
-    NSString *doctorId = [MRAppControl sharedHelper].userRegData[@"doctorId"];
-    if (doctorId != nil && doctorId.length > 0) {
-        [fileName appendString:doctorId];
+    NSNumber *doctorId = [MRAppControl sharedHelper].userRegData[@"doctorId"];
+    if (doctorId != nil) {
+        [fileName appendFormat:@"%ld",doctorId.longValue];
     } else {
-        doctorId = [MRAppControl sharedHelper].userRegData[@"FirstName"];
-        if (doctorId != nil && doctorId.length > 0) {
-            [fileName appendString:doctorId];
+        NSString *name = [MRAppControl sharedHelper].userRegData[@"FirstName"];
+        if (name != nil && name.length > 0) {
+            [fileName appendString:name];
         }
     }
     
