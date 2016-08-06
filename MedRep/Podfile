@@ -1,0 +1,18 @@
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+ 
+# My other pods
+ 
+def google_pods
+    pod 'GooglePlaces', '= 2.0.1'
+    pod 'GoogleMaps', '= 2.0.1'
+
+end
+ 
+target 'MedRepDev' do
+    google_pods
+end
+ 
+target 'MedRep' do
+    google_pods
+end

@@ -15,6 +15,8 @@
 
 #import "SWRevealViewController.h"
 #import "MRTransformDetailViewController.h"
+@import GooglePlaces;
+@import GoogleMaps;
 
 @interface AppDelegate ()
 
@@ -39,11 +41,11 @@
     
     // Override point for customization after application launch.
     [self registerForNotification];
-    
+    [GMSServices provideAPIKey:@"AIzaSyBTgV7M14YRcPONkBYkcY8FLmXhA0ELJJA"];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     self.window.backgroundColor = [MRCommon colorFromHexString:kStatusBarColor];
     [self.window makeKeyAndVisible];
-
+    [GMSPlacesClient provideAPIKey:@"AIzaSyBTgV7M14YRcPONkBYkcY8FLmXhA0ELJJA"];
     _counterChildPost = 1000;
     //_launchScreen = @"Survey";
     //_launchScreen = @"Notifications";

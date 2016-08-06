@@ -17,7 +17,8 @@
 #import "MRLocationManager.h"
 #import "TutorialView.h"
 #import "KLCPopup.h"
-
+@import GooglePlaces;
+@import GoogleMaps;
 #define kHeaderView     [NSArray arrayWithObjects:@"ADDITIONAL ADDRESS", nil]
 #define kPlaceHolders   [NSArray arrayWithObjects:@"ADDRESS LINE 1", @"ADDRESS LINE 2", @"STATE", @"CITY", @"ZIP CODE", nil]
 #define kPharmaPlaceHolders   [NSArray arrayWithObjects:@"Reporting Manager Name", @"Reporting Manager Email ID", @"Reporting Manager Mobile Number", nil]
@@ -43,10 +44,100 @@
 @property (assign, nonatomic) NSInteger selectedAddressType;
 @property (strong,nonatomic) KLCPopup *tutorialViewKLCPopView;
 @property (strong,nonatomic) TutorialView *tutorialView;
+@property (strong,nonatomic)  GMSPlacesClient *placesClient;
+
 @end
 
 @implementation MRRegistationTwoViewController
 
+-(void)getCurrentLocation{
+    [MRCommon showActivityIndicator:@""];
+    [_placesClient currentPlaceWithCallback:^(GMSPlaceLikelihoodList *placeLikelihoodList, NSError *error){
+        if (error != nil) {
+            NSLog(@"Pick Place error %@", [error localizedDescription]);
+            return;
+        }
+        
+        //        self.nameLabel.text = @"No current place";
+        //        self.addressLabel.text = @"";
+        
+        if (placeLikelihoodList != nil) {
+            GMSPlace *place = [[[placeLikelihoodList likelihoods] firstObject] place];
+            if (place != nil) {
+                
+                
+                NSLog(@"%@",place.name);
+                NSLog(@"%@",[[place.formattedAddress componentsSeparatedByString:@", "]
+                             componentsJoinedByString:@"\n"]);
+                
+                
+                [[GMSGeocoder geocoder] reverseGeocodeCoordinate:place.coordinate completionHandler:^(GMSReverseGeocodeResponse* response, NSError* error) {
+                    NSLog(@"reverse geocoding results:");
+                    GMSAddress* addressObj =  [response results].firstObject;
+                    
+//                    NSLog(@"coordinate.latitude=%f", addressObj.coordinate.latitude);
+//                    NSLog(@"coordinate.longitude=%f", addressObj.coordinate.longitude);
+//                    NSLog(@"thoroughfare=%@", addressObj.thoroughfare);
+//                    NSLog(@"locality=%@", addressObj.locality);
+//                    NSLog(@"subLocality=%@", addressObj.subLocality);
+//                    NSLog(@"administrativeArea=%@", addressObj.administrativeArea);
+//                    NSLog(@"postalCode=%@", addressObj.postalCode);
+//                    NSLog(@"country=%@", addressObj.country);
+//                    NSLog(@"lines=%@", addressObj.lines);
+//                    
+                    
+                    [MRCommon stopActivityIndicator];
+                    
+                    NSMutableDictionary *sectDict = [self getDataByAddressType:[NSIndexPath indexPathForRow:0 inSection:0]];
+                    
+                    if (place.name) {
+                        [sectDict setObject:place.name forKey:KAddressOne];
+                    } else {
+                        [sectDict setObject:@"" forKey:KAddressOne];
+                    }
+                    
+                    if (addressObj.subLocality) {
+                        
+                        [sectDict setObject:addressObj.subLocality forKey:KAdresstwo];
+                    } else {
+                        [sectDict setObject:@"" forKey:KAdresstwo];
+                    }
+                    
+                    
+                    if (addressObj.postalCode) {
+                        [sectDict setObject:addressObj.postalCode forKey:KZIPCode];
+                    } else {
+                        [sectDict setObject:@"" forKey:KZIPCode];
+                    }
+                    
+                    if (addressObj.administrativeArea) {
+                        [sectDict setObject:addressObj.administrativeArea forKey:KState];
+                    } else {
+                        [sectDict setObject:@"" forKey:KState];
+                    }
+                    if (addressObj.locality) {
+                        [sectDict setObject:addressObj.locality forKey:KCity];
+                    } else {
+                        [sectDict setObject:@"" forKey:KCity];
+                    }
+                    
+                    [self.regTableView reloadData];
+                    
+                }];
+                
+                
+                
+                
+                
+                
+                
+                
+            }
+        }
+    }];
+    
+    
+}
 - (void)viewDidLoad {
     
     [MRAppControl sharedHelper].addressType = 1;
@@ -55,19 +146,21 @@
     self.userDeatils = [[MRAppControl sharedHelper] userRegData];
     self.regTableView.contentInset = UIEdgeInsetsMake(-30, 0, 0, -20);
     [self setUPView];
-
+    _placesClient = [GMSPlacesClient sharedClient];
+    
     if (!self.isFromSinUp)
     {
         [self.nextButton setTitle:@"UPDATE" forState:UIControlStateNormal];
     }
-
+    
     [super viewDidLoad];
+    [self getCurrentLocation];
     // Do any additional setup after loading the view from its nib.
 }
 -(IBAction)whyThisBtnTapped:(id)sender{
     
     [self setupTutorialView];
- 
+    
 }
 -(void)setupTutorialView{
     
@@ -130,7 +223,7 @@
              }
          } ];
      }];
-
+    
 }
 
 -(void)setUPView
@@ -162,7 +255,7 @@
                 headerView.pickLocationButton.hidden = NO;
                 headerView.pickLocationImage.hidden = NO;
             }
-
+            
             [self.sectionsArray addObject:headerView];
         }
     }
@@ -227,14 +320,14 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 - (IBAction)privateButtonAction:(id)sender
 {
@@ -244,7 +337,7 @@
     [self.privateClinicButton setBackgroundImage:[UIImage imageNamed:@"privateHospital_selection@2x.png"] forState:UIControlStateNormal];
     [self.hospitalButton setBackgroundImage:[UIImage imageNamed:@"hospital@2x.png"] forState:UIControlStateNormal];
     [self.regTableView reloadData];
-
+    
 }
 
 - (IBAction)hospitalButtonAction:(id)sender
@@ -293,13 +386,13 @@
             [self updatePharmaRegistration];
         }
     }
-
-//    else if ([MRAppControl sharedHelper].userType == 1)
-//    {
-//        MROTPViewController *otpViewController = [[MROTPViewController alloc] initWithNibName:@"MROTPViewController" bundle:nil];
-//        otpViewController.isFromSinUp = self.isFromSinUp;
-//        [self.navigationController pushViewController:otpViewController animated:YES];
-//    }
+    
+    //    else if ([MRAppControl sharedHelper].userType == 1)
+    //    {
+    //        MROTPViewController *otpViewController = [[MROTPViewController alloc] initWithNibName:@"MROTPViewController" bundle:nil];
+    //        otpViewController.isFromSinUp = self.isFromSinUp;
+    //        [self.navigationController pushViewController:otpViewController animated:YES];
+    //    }
 }
 
 - (void)updateDoctorRegistration
@@ -376,7 +469,7 @@
     if (self.selectedAddressType == 1)
     {
         return ((1 == self.selectedUserType || 2 == self.selectedUserType) && self.registrationStage == 1) ? self.numberOfSections : 1;
-
+        
     }
     else
     {
@@ -391,10 +484,10 @@
     {
         return ((1 == self.selectedUserType || 2 == self.selectedUserType) || ((self.selectedUserType == 3 || self.selectedUserType == 4 ) && self.registrationStage == 1)) ? (section != 0) ? 40.0 : 0.0 : 0.0;
     }
-//    else
-//    {
-//        return ((1 == self.selectedUserType || 2 == self.selectedUserType) || ((self.selectedUserType == 3 || self.selectedUserType == 4 ) && self.registrationStage == 1)) ? (section != 0) ? 40.0 : 0.0 : 0.0;
-//    }
+    //    else
+    //    {
+    //        return ((1 == self.selectedUserType || 2 == self.selectedUserType) || ((self.selectedUserType == 3 || self.selectedUserType == 4 ) && self.registrationStage == 1)) ? (section != 0) ? 40.0 : 0.0 : 0.0;
+    //    }
 }
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -449,10 +542,10 @@
         }
         else if (1 == self.registrationStage)
         {
-            regCell = [self configureCellForDoctor:regCell atIndexPath:indexPath]; 
+            regCell = [self configureCellForDoctor:regCell atIndexPath:indexPath];
         }
     }
-
+    
     return regCell;
 }
 
@@ -596,7 +689,7 @@
     {
         if ([[dict objectForKey:KType] intValue] == self.selectedAddressType  && (self.selectedUserType == 3 || self.selectedUserType == 1  || self.selectedUserType == 2))
         {
-             [dataOne addObject:dict];
+            [dataOne addObject:dict];
         }
         else if ((self.selectedAddressType == 1 && [[dict objectForKey:KType] isEqualToString:@""]) && (self.selectedUserType == 3 || self.selectedUserType == 1  || self.selectedUserType == 2))
         {
@@ -608,7 +701,7 @@
         }
         
     }
-
+    
     return (dataOne.count > 0 && dataOne.count > path.section) ? [dataOne objectAtIndex:path.section] : nil;
 }
 
@@ -663,7 +756,7 @@
 - (void)setDataForCell:(MRRegTableViewCell*)cell
 {
     NSMutableDictionary *sectDict = [self getDataByAddressType:[NSIndexPath indexPathForRow:cell.rowNumber inSection:cell.sectionNumber]];
-   // if (cell.sectionNumber == 0)
+    // if (cell.sectionNumber == 0)
     
     if ([[sectDict objectForKey:@"type"] intValue] == 1 && self.selectedAddressType == 1)
     {
@@ -690,7 +783,7 @@
     {
         {
             [sectDict setObject:@"2" forKey:KType];
-
+            
             switch (cell.rowNumber)
             {
                 case 0:
@@ -708,7 +801,7 @@
             }
         }
     }
-
+    
 }
 
 - (void)setDataForPharmaCell:(MRRegTableViewCell*)cell
@@ -734,7 +827,7 @@
 
 - (void)mOneButtonActionDelegate:(MRRegTableViewCell*)cell
 {
-     NSMutableDictionary *sectDict = [self getDataByAddressType:[NSIndexPath indexPathForRow:cell.rowNumber inSection:cell.sectionNumber]];
+    NSMutableDictionary *sectDict = [self getDataByAddressType:[NSIndexPath indexPathForRow:cell.rowNumber inSection:cell.sectionNumber]];
     if ([[sectDict objectForKey:@"type"] intValue] == 1 && self.selectedAddressType == 1)
     {
         [sectDict setObject:cell.mOneTextFiled.text forKey:KState];
@@ -748,7 +841,7 @@
 
 - (void)mTwoButtonActionDelegate:(MRRegTableViewCell*)cell
 {
-     NSMutableDictionary *sectDict = [self getDataByAddressType:[NSIndexPath indexPathForRow:cell.rowNumber inSection:cell.sectionNumber]];
+    NSMutableDictionary *sectDict = [self getDataByAddressType:[NSIndexPath indexPathForRow:cell.rowNumber inSection:cell.sectionNumber]];
     if ([[sectDict objectForKey:@"type"] intValue] == 1 && self.selectedAddressType == 1)
     {
         [sectDict setObject:cell.mTwoTextField.text forKey:KCity];
@@ -823,7 +916,7 @@
         [self.view endEditing:YES];
         return;
     }
-
+    
     if (addType == 0)
     {
         if (self.selectedAddressType == 1)
@@ -877,14 +970,14 @@
         {
             [self.sectionsArray removeObjectAtIndex:self.numberOfSections - 3];
             self.numberOfSections--;
-
+            
             NSMutableArray *array = [self.userDeatils objectForKey:KRegistarionStageTwo];
             NSMutableDictionary *data = [self getDataByAddressType:[NSIndexPath indexPathForRow:0 inSection:self.numberOfSections - 1]];
             NSInteger index = [array indexOfObject:data];
             [array removeObjectAtIndex:index];
         }
         else
-        {            
+        {
             [self.addressTwosectionsArray removeObjectAtIndex:self.numberOfSectionsTwoTypes - 3];
             self.numberOfSectionsTwoTypes--;
             
@@ -896,7 +989,7 @@
     }
     
     [self.regTableView reloadData];
-  //  NSLog(@"Header View Delegates");
+    //  NSLog(@"Header View Delegates");
 }
 
 - (void)pickLocationButtonActionDelegate:(MRRegHeaderView*)section
@@ -946,16 +1039,16 @@
                     isSuccess = NO;
                     break;
                 }
-//                else
-//                {
-////                    if ([[dict objectForKey:KZIPCode] length] != 6)
-////                    {
-////                        [MRCommon showAlert:@"Provide a valid Zipcode." delegate:nil];
-////                        isSuccess = NO;
-////                        break;
-////                    }
-//                    
-//                }
+                //                else
+                //                {
+                ////                    if ([[dict objectForKey:KZIPCode] length] != 6)
+                ////                    {
+                ////                        [MRCommon showAlert:@"Provide a valid Zipcode." delegate:nil];
+                ////                        isSuccess = NO;
+                ////                        break;
+                ////                    }
+                //
+                //                }
             }
             else
             {
@@ -987,16 +1080,16 @@
                         isSuccess = NO;
                         break;
                     }
-//                    else
-////                    {
-//////                        if ([[dict objectForKey:KZIPCode] length] != 6)
-//////                        {
-//////                            [MRCommon showAlert:@"Provide a valid Zipcode." delegate:nil];
-//////                            isSuccess = NO;
-//////                            break;
-//////                        }
-////                        
-////                    }
+                    //                    else
+                    ////                    {
+                    //////                        if ([[dict objectForKey:KZIPCode] length] != 6)
+                    //////                        {
+                    //////                            [MRCommon showAlert:@"Provide a valid Zipcode." delegate:nil];
+                    //////                            isSuccess = NO;
+                    //////                            break;
+                    //////                        }
+                    ////
+                    ////                    }
                 }
             }
         }
@@ -1012,33 +1105,33 @@
                 return isSuccess;
             }
         }
-
-//        if ([MRCommon isStringEmpty:[[[MRAppControl sharedHelper] userRegData] objectForKey:kManagerName]])
-//        {
-//            [MRCommon showAlert:@"Reporting Manager Name should not be empty." delegate:nil];
-//            isSuccess = NO;
-//            return isSuccess;
-//        }
-//        else if (![MRCommon validateEmailWithString:[[[MRAppControl sharedHelper] userRegData] objectForKey:kManagerEmail]])
-//        {
-//            [MRCommon showAlert:@"Provide a valid email." delegate:nil];
-//            isSuccess = NO;
-//            return isSuccess;
-//        }
-//        else if ([MRCommon isStringEmpty:[[[MRAppControl sharedHelper] userRegData] objectForKey:kManagerMobileNumber]])
-//        {
-//            [MRCommon showAlert:@"Reporting Manager Mobile number should not be empty." delegate:nil];
-//            isSuccess = NO;
-//            return isSuccess;
-//        }
-//        else if ([[[[MRAppControl sharedHelper] userRegData] objectForKey:kManagerMobileNumber] length] != 10)
-//        {
-//            [MRCommon showAlert:@"Provide a valid Mobilenumber." delegate:nil];
-//            isSuccess = NO;
-//            return isSuccess;
-//        }
+        
+        //        if ([MRCommon isStringEmpty:[[[MRAppControl sharedHelper] userRegData] objectForKey:kManagerName]])
+        //        {
+        //            [MRCommon showAlert:@"Reporting Manager Name should not be empty." delegate:nil];
+        //            isSuccess = NO;
+        //            return isSuccess;
+        //        }
+        //        else if (![MRCommon validateEmailWithString:[[[MRAppControl sharedHelper] userRegData] objectForKey:kManagerEmail]])
+        //        {
+        //            [MRCommon showAlert:@"Provide a valid email." delegate:nil];
+        //            isSuccess = NO;
+        //            return isSuccess;
+        //        }
+        //        else if ([MRCommon isStringEmpty:[[[MRAppControl sharedHelper] userRegData] objectForKey:kManagerMobileNumber]])
+        //        {
+        //            [MRCommon showAlert:@"Reporting Manager Mobile number should not be empty." delegate:nil];
+        //            isSuccess = NO;
+        //            return isSuccess;
+        //        }
+        //        else if ([[[[MRAppControl sharedHelper] userRegData] objectForKey:kManagerMobileNumber] length] != 10)
+        //        {
+        //            [MRCommon showAlert:@"Provide a valid Mobilenumber." delegate:nil];
+        //            isSuccess = NO;
+        //            return isSuccess;
+        //        }
     }
-
+    
     return isSuccess;
 }
 
