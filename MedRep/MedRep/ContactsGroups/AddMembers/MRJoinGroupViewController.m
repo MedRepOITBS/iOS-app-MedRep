@@ -66,7 +66,7 @@
 }
 
 - (void)getAllGroups{
-    [MRDatabaseHelper getGroups:^(id result) {
+    [MRDatabaseHelper getMoreGroups:^(id result) {
         _pendingContactListArray = result;
         _fileredContacts = [_pendingContactListArray mutableCopy];
         [_tableViewMembers reloadData];
@@ -112,6 +112,7 @@
     [[MRWebserviceHelper sharedWebServiceHelper] joinGroup:dictReq withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
         [MRCommon stopActivityIndicator];
         if (status) {
+            [MRCommon showAlert:@"Succuessfully joined the group !!!!" delegate:nil];
             [self.navigationController popViewControllerAnimated:YES];
         }
         else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
@@ -154,44 +155,20 @@
         cell = (MRAddMemberTableViewCell *)[arr objectAtIndex:0];
     }
     
-//    MRGroup *contact = [_fileredContacts objectAtIndex:indexPath.row];
-//    
-//    for (UIView *view in cell.profilePic.subviews) {
-//        if ([view isKindOfClass:[UILabel class]]) {
-//            [view removeFromSuperview];
-//        }
-//    }
-//    
-//    NSString *fullName = contact.group_name;
-//    cell.userName.text = fullName;
-//    cell.phoneNo.text = contact.group_short_desc;
-//    cell.checkBtn.tag = indexPath.row;
-//    cell.cellDelegate = self;
-//    if (contact.group_img_data.length) {
-//        cell.profilePic.image = [MRCommon getImageFromBase64Data:[contact.group_img_data dataUsingEncoding:NSUTF8StringEncoding]];
-//    } else {
-//        cell.profilePic.image = nil;
-//        if (fullName.length > 0) {
-//            UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:cell.profilePic.bounds];
-//            subscriptionTitleLabel.textAlignment = NSTextAlignmentCenter;
-//            subscriptionTitleLabel.font = [UIFont systemFontOfSize:15.0];
-//            subscriptionTitleLabel.textColor = [UIColor lightGrayColor];
-//            subscriptionTitleLabel.layer.cornerRadius = 5.0;
-//            subscriptionTitleLabel.layer.masksToBounds = YES;
-//            subscriptionTitleLabel.layer.borderWidth =1.0;
-//            subscriptionTitleLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
-//            
-//            NSArray *substrngs = [fullName componentsSeparatedByString:@" "];
-//            NSString *imageString = @"";
-//            for(NSString *str in substrngs){
-//                if (str.length > 0) {
-//                    imageString = [imageString stringByAppendingString:[NSString stringWithFormat:@"%c",[str characterAtIndex:0]]];
-//                }
-//            }
-//            subscriptionTitleLabel.text = imageString.length > 2 ? [imageString substringToIndex:2] : imageString;
-//            [cell.profilePic addSubview:subscriptionTitleLabel];
-//        }
-//    }
+    MRGroup *contact = [_fileredContacts objectAtIndex:indexPath.row];
+    
+    for (UIView *view in cell.profilePic.subviews) {
+        if ([view isKindOfClass:[UILabel class]]) {
+            [view removeFromSuperview];
+        }
+    }
+    
+    NSString *fullName = contact.group_name;
+    cell.userName.text = fullName;
+    cell.phoneNo.text = contact.group_short_desc;
+    cell.checkBtn.tag = indexPath.row;
+    cell.cellDelegate = self;
+    cell.profilePic.image = [MRAppControl getGroupImage:contact];
     
     return cell;
 }
@@ -201,12 +178,12 @@
 }
 
 -(void) selectedMemberAtIndex:(NSInteger)index{
-//    MRGroupObject *contact = [_fileredContacts objectAtIndex:index];
-//    if ([selectedContacts containsObject:contact.group_id]) {
-//        [selectedContacts removeObject:contact.group_id];
-//    }else{
-//        [selectedContacts addObject:contact.group_id];
-//    }
+    MRGroup *contact = [_fileredContacts objectAtIndex:index];
+    if ([selectedContacts containsObject:contact.group_id]) {
+        [selectedContacts removeObject:contact.group_id];
+    }else{
+        [selectedContacts addObject:contact.group_id];
+    }
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {

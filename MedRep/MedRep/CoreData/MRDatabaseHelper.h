@@ -46,6 +46,7 @@ FOUNDATION_EXPORT NSString* const kNewsAndTransformAPIMethodName;
 //+ (void)addGroupPosts:(NSArray*)groupPosts;
 
 + (void)getGroups:(WebServiceResponseHandler)responseHandler;
++ (void)getMoreGroups:(WebServiceResponseHandler)responseHandler;
 + (void)getSuggestedGroups:(WebServiceResponseHandler)responseHandler;
 + (void)getPendingGroups:(WebServiceResponseHandler)responseHandler;
 + (void)getPendingGroupMembers:(NSNumber*)gid andResponseHandler:(WebServiceResponseHandler)responseHandler;

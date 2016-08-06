@@ -181,6 +181,16 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
     }];
 }
 
++ (void)getMoreGroups:(WebServiceResponseHandler)responseHandler {
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] getAllGroupListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [[MRDataManger sharedManager] removeAllObjects:kGroupEntity withPredicate:nil];
+        [MRDatabaseHelper makeServiceCallForGroupsFetch:status details:details
+                                               response:responce
+                                     andResponseHandler:responseHandler];
+    }];
+}
+
 + (void)getSuggestedGroups:(WebServiceResponseHandler)responseHandler {
     [MRCommon showActivityIndicator:@"Requesting..."];
     [[MRWebserviceHelper sharedWebServiceHelper] getSuggestedGroupListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
