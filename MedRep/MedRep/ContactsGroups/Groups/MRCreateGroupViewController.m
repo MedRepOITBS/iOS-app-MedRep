@@ -22,6 +22,13 @@
     BOOL isUpdateMode;
 }
 
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+
+@property (nonatomic) CGRect keyboardRect;
+@property (nonatomic) NSString *groupName;
+@property (nonatomic) NSString *shortDescription;
+@property (nonatomic) NSString *longDescription;
+
 @property (weak, nonatomic) IBOutlet UITextView *txtShortDesc;
 @property (weak, nonatomic) IBOutlet UITextView *txtLongDesc;
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
@@ -58,9 +65,18 @@
     [[self.txtShortDesc layer] setBorderWidth:1.0];
     [[self.txtShortDesc layer] setCornerRadius:5];
     
-    [[self.imgView layer] setBorderColor:[[UIColor blackColor] CGColor]];
-    [[self.imgView layer] setBorderWidth:1.0];
-    [[self.imgView layer] setCornerRadius:5];
+    
+    UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
+    numberToolbar.barStyle = UIBarStyleDefault;
+    numberToolbar.items = [NSArray arrayWithObjects:
+                           [[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(closeOnKeyboardPressed:)],
+                           [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil],
+                           [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneOnKeyboardPressed:)],
+                           nil];
+    [numberToolbar sizeToFit];
+    self.txtName.inputAccessoryView = numberToolbar;
+    self.txtLongDesc.inputAccessoryView = numberToolbar;
+    self.txtShortDesc.inputAccessoryView = numberToolbar;
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imgTapped)];
     [_imgView addGestureRecognizer:tap];
@@ -83,6 +99,19 @@
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardDidHideNotification object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -91,6 +120,28 @@
 - (void)backButtonAction{
     [activeTxtView resignFirstResponder];
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)closeOnKeyboardPressed:(id)sender {
+    if (activeTxtView == self.txtName) {
+        activeTxtView.text = self.groupName;
+    } else if (activeTxtView == self.txtShortDesc) {
+        activeTxtView.text = self.shortDescription;
+    } else {
+        activeTxtView.text = self.longDescription;
+    }
+    [activeTxtView resignFirstResponder];
+}
+
+- (void)doneOnKeyboardPressed:(id)sender {
+    if (activeTxtView == self.txtName) {
+        self.groupName = activeTxtView.text;
+    } else if (activeTxtView == self.txtShortDesc) {
+        self.shortDescription = activeTxtView.text;
+    } else {
+        self.longDescription = activeTxtView.text;
+    }
+    [activeTxtView resignFirstResponder];
 }
 
 /*
@@ -256,8 +307,21 @@
     }
 }
 
+- (void)keyboardWillShow:(NSNotification *)notification {
+    self.keyboardRect = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    self.keyboardRect = [self.view convertRect:self.keyboardRect fromView:nil]; //this is it!
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+    [self.scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+}
+
 - (void)textViewDidBeginEditing:(UITextView *)textView{
     activeTxtView = textView;
+    
+    if (activeTxtView == self.txtLongDesc) {
+        [self.scrollView setContentOffset:CGPointMake(0, textView.frame.origin.y - textView.frame.size.height) animated:YES];
+    }
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView{
