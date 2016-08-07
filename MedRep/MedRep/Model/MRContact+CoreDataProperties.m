@@ -23,7 +23,7 @@
 @dynamic member_id;
 @dynamic profilePic;
 @dynamic roleId;
-@dynamic status;
+@dynamic connStatus;
 @dynamic therapeuticArea;
 @dynamic therapeuticName;
 @dynamic userId;

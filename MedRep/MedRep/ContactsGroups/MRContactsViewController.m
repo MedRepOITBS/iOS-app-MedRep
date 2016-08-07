@@ -531,7 +531,11 @@
 
 - (void)getContactList {
     [MRDatabaseHelper getContacts:^(id results) {
-        self.myContacts = results;
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K like [cd]%@", @"connStatus", @"ACTIVE"];
+        self.myContacts = [[[MRDataManger sharedManager] fetchObjectList:kContactEntity
+                                                           attributeName:@"firstName"
+                                                               predicate:predicate
+                                                               sortOrder:SORT_ORDER_ASCENDING] mutableCopy];
         _fileredContacts = [self.myContacts mutableCopy];
         [self refreshLabels];
     }];

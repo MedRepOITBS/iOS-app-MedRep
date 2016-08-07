@@ -20,6 +20,7 @@
     </entity>
     <entity name="MRContact" representedClassName="MRContact" syncable="YES">
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="connStatus" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="contactId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="doctorDetails" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="doctorId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -29,7 +30,6 @@
         <attribute name="member_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="profilePic" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="roleId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="therapeuticArea" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="therapeuticName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -269,7 +269,7 @@
     <elements>
         <element name="EducationalQualifications" positionX="-9" positionY="162" width="128" height="135"/>
         <element name="MRCompanyDetails" positionX="-18" positionY="27" width="128" height="165"/>
-        <element name="MRContact" positionX="-36" positionY="135" width="128" height="298"/>
+        <element name="MRContact" positionX="-36" positionY="135" width="128" height="300"/>
         <element name="MRGroup" positionX="-27" positionY="144" width="128" height="210"/>
         <element name="MrGroupChildPost" positionX="-27" positionY="144" width="128" height="90"/>
         <element name="MRGroupMembers" positionX="-36" positionY="135" width="128" height="315"/>

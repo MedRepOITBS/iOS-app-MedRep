@@ -357,9 +357,8 @@
 
 -(void)getPendingConnections {
     [MRDatabaseHelper getPendingContacts:^(id result) {
-//        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"status like [cd]%@", @"Pending"];
-//        fileredContacts = [[MRDataManger sharedManager] fetchObjectList:kContactEntity predicate:predicate];
-        fileredContacts = result;
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K like [cd]%@", @"connStatus", @"PENDING"];
+        fileredContacts = [[[MRDataManger sharedManager] fetchObjectList:kContactEntity predicate:predicate] mutableCopy];
         _pendingContactListArra = result;
         [self refreshLabels];
     }];
