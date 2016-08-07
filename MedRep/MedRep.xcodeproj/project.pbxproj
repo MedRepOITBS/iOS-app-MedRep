@@ -611,6 +611,16 @@
 		B41746E51D0CE628009B7E7E /* GroupPostChildTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B41746E21D0CE628009B7E7E /* GroupPostChildTableViewCell.m */; };
 		B41746E61D0CE628009B7E7E /* GroupPostChildTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B41746E31D0CE628009B7E7E /* GroupPostChildTableViewCell.xib */; };
 		B41746E71D0CE628009B7E7E /* GroupPostChildTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B41746E31D0CE628009B7E7E /* GroupPostChildTableViewCell.xib */; };
+		B465658B1D569EA80016CDA8 /* eye.png in Resources */ = {isa = PBXBuildFile; fileRef = B465658A1D569EA80016CDA8 /* eye.png */; };
+		B465658C1D569EA80016CDA8 /* eye.png in Resources */ = {isa = PBXBuildFile; fileRef = B465658A1D569EA80016CDA8 /* eye.png */; };
+		B46565901D56B0E50016CDA8 /* MemberListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B465658E1D56B0E50016CDA8 /* MemberListViewController.m */; };
+		B46565911D56B0E50016CDA8 /* MemberListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B465658E1D56B0E50016CDA8 /* MemberListViewController.m */; };
+		B46565921D56B0E50016CDA8 /* MemberListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B465658F1D56B0E50016CDA8 /* MemberListViewController.xib */; };
+		B46565931D56B0E50016CDA8 /* MemberListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B465658F1D56B0E50016CDA8 /* MemberListViewController.xib */; };
+		B46565961D56B3040016CDA8 /* AddMemberTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B46565951D56B3040016CDA8 /* AddMemberTableViewCell.m */; };
+		B46565971D56B3040016CDA8 /* AddMemberTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B46565951D56B3040016CDA8 /* AddMemberTableViewCell.m */; };
+		B465659D1D56B9E20016CDA8 /* AddMemberTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B465659A1D56B9E20016CDA8 /* AddMemberTableViewCell.xib */; };
+		B465659E1D56B9E20016CDA8 /* AddMemberTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B465659A1D56B9E20016CDA8 /* AddMemberTableViewCell.xib */; };
 		B47E338E1D2F65540051724C /* MRSharePost.m in Sources */ = {isa = PBXBuildFile; fileRef = B47E338C1D2F65540051724C /* MRSharePost.m */; };
 		B4B4F0E81D382E7300EFCC0E /* AddExperienceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F0E61D382E7300EFCC0E /* AddExperienceTableViewController.m */; };
 		B4B4F0ED1D3842C500EFCC0E /* AddEducationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F0EB1D3842C500EFCC0E /* AddEducationViewController.m */; };
@@ -2088,6 +2098,13 @@
 		B41746E11D0CE628009B7E7E /* GroupPostChildTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupPostChildTableViewCell.h; sourceTree = "<group>"; };
 		B41746E21D0CE628009B7E7E /* GroupPostChildTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupPostChildTableViewCell.m; sourceTree = "<group>"; };
 		B41746E31D0CE628009B7E7E /* GroupPostChildTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupPostChildTableViewCell.xib; sourceTree = "<group>"; };
+		B465658A1D569EA80016CDA8 /* eye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eye.png; sourceTree = "<group>"; };
+		B465658D1D56B0E50016CDA8 /* MemberListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberListViewController.h; sourceTree = "<group>"; };
+		B465658E1D56B0E50016CDA8 /* MemberListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberListViewController.m; sourceTree = "<group>"; };
+		B465658F1D56B0E50016CDA8 /* MemberListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MemberListViewController.xib; sourceTree = "<group>"; };
+		B46565941D56B3040016CDA8 /* AddMemberTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddMemberTableViewCell.h; sourceTree = "<group>"; };
+		B46565951D56B3040016CDA8 /* AddMemberTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddMemberTableViewCell.m; sourceTree = "<group>"; };
+		B465659A1D56B9E20016CDA8 /* AddMemberTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddMemberTableViewCell.xib; sourceTree = "<group>"; };
 		B47E338B1D2F65540051724C /* MRSharePost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRSharePost.h; sourceTree = "<group>"; };
 		B47E338C1D2F65540051724C /* MRSharePost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRSharePost.m; sourceTree = "<group>"; };
 		B4B4F0E51D382E7300EFCC0E /* AddExperienceTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddExperienceTableViewController.h; sourceTree = "<group>"; };
@@ -3799,6 +3816,12 @@
 				8AFE8D181D11A4290000382E /* MRContactWithinGroupCollectionViewCell.h */,
 				8AFE8D191D11A4290000382E /* MRContactWithinGroupCollectionViewCell.m */,
 				8AFE8D1A1D11A4290000382E /* MRContactWithinGroupCollectionViewCell.xib */,
+				B465658D1D56B0E50016CDA8 /* MemberListViewController.h */,
+				B465658E1D56B0E50016CDA8 /* MemberListViewController.m */,
+				B465658F1D56B0E50016CDA8 /* MemberListViewController.xib */,
+				B46565941D56B3040016CDA8 /* AddMemberTableViewCell.h */,
+				B46565951D56B3040016CDA8 /* AddMemberTableViewCell.m */,
+				B465659A1D56B9E20016CDA8 /* AddMemberTableViewCell.xib */,
 			);
 			path = CellViews;
 			sourceTree = "<group>";
@@ -4075,6 +4098,7 @@
 				CC7DB2A31D0CC433007DFE4C /* MRContactDetailViewController.h */,
 				CC7DB2A41D0CC433007DFE4C /* MRContactDetailViewController.m */,
 				CC7DB2A51D0CC433007DFE4C /* MRContactDetailViewController.xib */,
+				B465658A1D569EA80016CDA8 /* eye.png */,
 				CC7DB2A61D0CC433007DFE4C /* MRContactsViewController.h */,
 				CC7DB2A71D0CC433007DFE4C /* MRContactsViewController.m */,
 				CC7DB2A81D0CC433007DFE4C /* MRContactsViewController.xib */,
@@ -4715,6 +4739,7 @@
 				B4BB24C31D4192AD00A3DD73 /* settings1.png in Resources */,
 				79BD27E91B80A11D007CA448 /* MRRegistationViewController.xib in Resources */,
 				79708AA01BB73C67007CE81D /* PHdoctor@2x.png in Resources */,
+				B46565921D56B0E50016CDA8 /* MemberListViewController.xib in Resources */,
 				7929E3DA1B9CC674001F1373 /* news_dash@2x.png in Resources */,
 				79F0749A1BBF16970049FDE7 /* favoriteSelected@2x.png in Resources */,
 				79F416A51B9F6E560089729B /* cncompany3@3x.jpg in Resources */,
@@ -4726,6 +4751,7 @@
 				7961A97E1B8F53C60035D63A /* camara-icon@3x.png in Resources */,
 				79A5DC761BA2092E001D872C /* crgreydown-arrow@3x.png in Resources */,
 				795366171BA0B7A90021CE4D /* MRReadNotificationsViewController.xib in Resources */,
+				B465659D1D56B9E20016CDA8 /* AddMemberTableViewCell.xib in Resources */,
 				8AFE8CDD1D0F213D0000382E /* posts.json in Resources */,
 				79F0749D1BBF16970049FDE7 /* feedbackSelected@3.png in Resources */,
 				79BD27D41B809A80007CA448 /* HomeLogo@3x.png in Resources */,
@@ -4765,6 +4791,7 @@
 				79BD27D71B809A80007CA448 /* Signup_plain@3x.png in Resources */,
 				79F416881B9F5CDB0089729B /* building-icon@3x.png in Resources */,
 				7961A96F1B8F25DA0035D63A /* stepTwo@2x.png in Resources */,
+				B465658B1D569EA80016CDA8 /* eye.png in Resources */,
 				795366011BA09EBF0021CE4D /* download@3x.png in Resources */,
 				B4BB24D31D45CD4C00A3DD73 /* CameraClick.png in Resources */,
 				795366001BA09EBF0021CE4D /* download@2x.png in Resources */,
@@ -4893,6 +4920,7 @@
 				B4E02C591D4706E7003A1859 /* logo_icon@3x.png in Resources */,
 				CC7DB0991D0C8BEC007DFE4C /* otptic@2x.png in Resources */,
 				CC7DB09A1D0C8BEC007DFE4C /* password@3x.png in Resources */,
+				B465659E1D56B9E20016CDA8 /* AddMemberTableViewCell.xib in Resources */,
 				B4BB24B21D416CA000A3DD73 /* profileBG1.png in Resources */,
 				CC7DB09B1D0C8BEC007DFE4C /* MRMedRepListViewController.xib in Resources */,
 				CC7DB09C1D0C8BEC007DFE4C /* PHdashboard-banner@2x.png in Resources */,
@@ -5081,6 +5109,7 @@
 				CC7DB2CC1D0CC433007DFE4C /* MRContactCollectionCell.xib in Resources */,
 				CC7DB12E1D0C8BEC007DFE4C /* locationPin@2x~iPad.png in Resources */,
 				CC7DB12F1D0C8BEC007DFE4C /* MRPHDashBoardViewController_iPhone.xib in Resources */,
+				B465658C1D569EA80016CDA8 /* eye.png in Resources */,
 				CC7DB3661D0CC8A6007DFE4C /* post_image7.jpeg in Resources */,
 				CC7DB1301D0C8BEC007DFE4C /* searc--for-drugs@2x.png in Resources */,
 				CC7DB1311D0C8BEC007DFE4C /* camara-icon@2x.png in Resources */,
@@ -5166,6 +5195,7 @@
 				CC7DB1761D0C8BEC007DFE4C /* dddoctor-analysis-normal@2x.png in Resources */,
 				CC7DB28F1D0C9ECA007DFE4C /* MRShareViewController.xib in Resources */,
 				CC7DB37E1D0CC8A6007DFE4C /* profile_pic4.jpeg in Resources */,
+				B46565931D56B0E50016CDA8 /* MemberListViewController.xib in Resources */,
 				CC463DE41D27A47E002AE85E /* MRDashBoardVC.xib in Resources */,
 				CC7DB1771D0C8BEC007DFE4C /* email.png in Resources */,
 				8AFE8D261D12EB310000382E /* MRAddMembersViewController.xib in Resources */,
@@ -5508,6 +5538,7 @@
 				7975603E1BBFE3AA0034D0AC /* MRRole.m in Sources */,
 				CC7DB3171D0CC530007DFE4C /* PendingContactsViewController.m in Sources */,
 				B4B4F18F1D3BF7CE00EFCC0E /* CommonEducationTableViewCell.m in Sources */,
+				B46565901D56B0E50016CDA8 /* MemberListViewController.m in Sources */,
 				8A7169D71D27E23D00533A6D /* MRDrugTableViewCell.m in Sources */,
 				796E93931BB8784D0031EA34 /* MRCompetitorAnalasysViewController.m in Sources */,
 				7929E3B41B9C8E5F001F1373 /* MRAppointmentCollectionViewCell.m in Sources */,
@@ -5542,6 +5573,7 @@
 				B41746E41D0CE628009B7E7E /* GroupPostChildTableViewCell.m in Sources */,
 				79BD27DC1B809FD1007CA448 /* MRLoginViewController.m in Sources */,
 				B4B4F13F1D39857E00EFCC0E /* MRWorkExperience+CoreDataProperties.m in Sources */,
+				B46565961D56B3040016CDA8 /* AddMemberTableViewCell.m in Sources */,
 				B4F635061D53D039008CE7C7 /* TutorialView.m in Sources */,
 				CC649F5F1D0D1BA10012289C /* MRDrugSearchViewController.m in Sources */,
 				79F29A701BE6330300063DC2 /* MRDoctorActivityScoreViewController.m in Sources */,
@@ -5725,6 +5757,7 @@
 				8A7169D81D27E23D00533A6D /* MRDrugTableViewCell.m in Sources */,
 				B4B4F1521D39A80C00EFCC0E /* ExpericeFillUpTableViewCell.m in Sources */,
 				CC7DB0311D0C8BEC007DFE4C /* Base64Transcoder.m in Sources */,
+				B46565911D56B0E50016CDA8 /* MemberListViewController.m in Sources */,
 				CC7DB0321D0C8BEC007DFE4C /* MRCommon.m in Sources */,
 				B4E02C621D4921C0003A1859 /* MRSharePost.m in Sources */,
 				CC7DB0331D0C8BEC007DFE4C /* MRPharmaNotificationDetailsViewController.m in Sources */,
@@ -5759,6 +5792,7 @@
 				CC7DB0401D0C8BEC007DFE4C /* MRAppControl.m in Sources */,
 				CC7DB0411D0C8BEC007DFE4C /* MPNotificatinsTableViewCell.m in Sources */,
 				CC7DB0421D0C8BEC007DFE4C /* MRSurveyDetailsViewController.m in Sources */,
+				B46565971D56B3040016CDA8 /* AddMemberTableViewCell.m in Sources */,
 				B4F635071D53D039008CE7C7 /* TutorialView.m in Sources */,
 				CC7DB0431D0C8BEC007DFE4C /* MRMedRepDetailsViewController.m in Sources */,
 				CC7DB0441D0C8BEC007DFE4C /* MRLoginViewController.m in Sources */,

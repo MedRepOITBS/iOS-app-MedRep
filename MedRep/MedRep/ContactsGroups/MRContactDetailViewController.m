@@ -26,7 +26,7 @@
 #import "MRGroup.h"
 #import "MrGroupChildPost.h"
 #import "MRContactsViewController.h"
-
+#import "MemberListViewController.h"
 @interface MRContactDetailViewController () <MRGroupPostItemTableViewCellDelegate, CommonBoxViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MRUpdateMemberProtocol> {
     NSMutableArray *groupsArrayObj;
     NSMutableArray *groupMemberArray;
@@ -205,9 +205,19 @@
     
     self.groupsUnderContact = [self.mainContact.groups allObjects];
 }
+-(IBAction)viewMoreOption:(id)sender{
+ 
+    
+    
+    MemberListViewController *membeVC = [[MemberListViewController alloc] init];
+    membeVC.contactsUnderGroup = [self.contactsUnderGroup copy];
+    [self.navigationController pushViewController:membeVC animated:NO];
+    
+}
 
 - (void)setupUIWithGroupDetails {
     self.navigationItem.title = @"Group Details";
+   
     
     [self.groupMembersView setHidden:false];
     [_city setHidden:YES];
@@ -312,7 +322,13 @@
     
     if (self.launchMode == kContactDetailLaunchModeGroup ||
         self.launchMode == kContactDetailLaunchModeSuggestedGroup) {
-        return self.contactsUnderGroup.count;
+        if (self.contactsUnderGroup.count>2) {
+            return 2;
+        }else{
+            return self.contactsUnderGroup.count;
+        }
+//        return 2;
+//        return self.contactsUnderGroup.count;
     } else {
         return self.groupsUnderContact.count;
     }
@@ -356,7 +372,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     //return CGSizeMake(110, collectionView.bounds.size.height);
-    return CGSizeMake(200, 60);
+    return CGSizeMake(150, 60);
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionView *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
@@ -654,6 +670,15 @@
           } else {
               self.contactsUnderGroup = [NSArray new];
           }
+                                          
+        if (self.contactsUnderGroup.count>2) {
+            _viewMoreButton.hidden = NO;
+            
+        }else{
+            _viewMoreButton.hidden = YES;
+            
+        }
+                                          
         [self.collectionView reloadData];
     }];
 }
