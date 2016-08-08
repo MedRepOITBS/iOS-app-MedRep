@@ -127,25 +127,46 @@
                             <rect key="frame" x="0.0" y="66" width="355" height="1"/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wCc-Pg-FEt">
-                            <rect key="frame" x="335" y="5" width="32" height="32"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wCc-Pg-FEt">
+                            <rect key="frame" x="325" y="5" width="42" height="36"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="32" id="P5c-2j-pMN"/>
-                                <constraint firstAttribute="width" constant="32" id="j2B-T7-jyL"/>
+                                <constraint firstAttribute="height" constant="36" id="P5c-2j-pMN"/>
+                                <constraint firstAttribute="width" constant="42" id="j2B-T7-jyL"/>
                             </constraints>
-                            <state key="normal" image="eye.png"/>
                             <connections>
                                 <action selector="viewMoreOption:" destination="-1" eventType="touchUpInside" id="tNZ-51-Eqo"/>
                             </connections>
                         </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eye.png" translatesAutoresizingMaskIntoConstraints="NO" id="eNe-h4-tpg">
+                            <rect key="frame" x="336" y="5" width="20" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="20" id="Xyc-Uf-fOS"/>
+                                <constraint firstAttribute="height" constant="20" id="bpW-Yh-j8o"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View More" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oo0-pr-vR4">
+                            <rect key="frame" x="325" y="21" width="42" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="42" id="Qbn-UV-m70"/>
+                                <constraint firstAttribute="height" constant="21" id="so7-pa-Qmd"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="oo0-pr-vR4" firstAttribute="top" secondItem="eNe-h4-tpg" secondAttribute="bottom" constant="-4" id="1n1-Fb-9Qb"/>
                         <constraint firstAttribute="trailing" secondItem="wCc-Pg-FEt" secondAttribute="trailing" constant="8" id="BBk-Pc-PML"/>
                         <constraint firstItem="Lro-Ao-ngq" firstAttribute="top" secondItem="hz0-WJ-hRl" secondAttribute="top" constant="50" id="BRb-qf-a7K"/>
+                        <constraint firstAttribute="trailing" secondItem="eNe-h4-tpg" secondAttribute="trailing" constant="19" id="CeP-3Q-ZyI"/>
                         <constraint firstItem="Lro-Ao-ngq" firstAttribute="leading" secondItem="hz0-WJ-hRl" secondAttribute="leading" constant="10" id="K00-0R-Yod"/>
+                        <constraint firstAttribute="trailing" secondItem="oo0-pr-vR4" secondAttribute="trailing" constant="8" id="Oiy-Ch-Bv2"/>
                         <constraint firstItem="wCc-Pg-FEt" firstAttribute="top" secondItem="hz0-WJ-hRl" secondAttribute="top" constant="5" id="Wqo-gQ-9N7"/>
                         <constraint firstAttribute="height" constant="85" id="d2b-86-cRk"/>
+                        <constraint firstItem="eNe-h4-tpg" firstAttribute="top" secondItem="hz0-WJ-hRl" secondAttribute="top" constant="5" id="oF1-dm-1jB"/>
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Posted Messages" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nqB-1F-QA0">
