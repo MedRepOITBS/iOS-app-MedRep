@@ -858,7 +858,7 @@
     
     NSInteger receiverId = 0;
     if (self.mainContact != nil) {
-        receiverId = self.mainContact.contactId.longValue;
+        receiverId = self.mainContact.doctorId.longValue;
         [postMessage setObject:@[[NSNumber numberWithLong:receiverId]] forKey:@"receiverId"];
     } else {
         receiverId = self.mainGroup.group_id.longValue;

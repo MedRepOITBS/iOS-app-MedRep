@@ -289,13 +289,17 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
             regCell.titleLbl.text = transformData.titleDescription;
             [regCell.titleLbl sizeToFit];
             [regCell.titleLbl layoutIfNeeded];
+        } else {
+            regCell.titleLbl.text = @"";
         }
         
         if (transformData.shortArticleDescription != nil && transformData.shortArticleDescription.length > 0) {
             regCell.descLbl.text = transformData.shortArticleDescription;
+        } else {
+            regCell.descLbl.text = @"";
         }
         
-            NSString *source = @"";
+        NSString *source = @"";
         if (transformData.source != nil && transformData.source.length > 0) {
             source = transformData.source;
         }

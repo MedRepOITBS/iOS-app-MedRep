@@ -263,12 +263,27 @@ AVPlayerViewControllerDelegate> {
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CGFloat rowHeight = 283;
+    CGFloat rowHeight = 44;
     MRPostedReplies *post = [self.recentActivity objectAtIndex:indexPath.row];
     
-    if (post.fileUrl == nil || post.fileUrl.length == 0) {
-        rowHeight -= 146;
+    if (post.fileUrl != nil && post.fileUrl.length > 0) {
+        rowHeight += 146;
     }
+    
+    NSString *postText = @"";
+    if (post.message != nil && post.message.length > 0) {
+        postText = post.message;
+    }
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 600)];
+    [label setNumberOfLines:0];
+    [label setFont:[UIFont fontWithName:@"HelveticaNeue-Medium" size:12.0]];
+    label.text = postText;
+    [label sizeToFit];
+    
+    rowHeight += label.frame.size.height;
+    
+    rowHeight += 35;
     
     return rowHeight;
 }

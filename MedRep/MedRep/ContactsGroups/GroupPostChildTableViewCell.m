@@ -17,7 +17,7 @@
 @interface GroupPostChildTableViewCell ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *commentPic;
-@property (weak, nonatomic) IBOutlet UITextView *postText;
+@property (weak, nonatomic) IBOutlet UILabel *postText;
 @property (weak,nonatomic) IBOutlet UILabel *profileNameLabel;
 @property (strong,nonatomic) IBOutlet NSLayoutConstraint *heightConstraint;
 @property (weak, nonatomic) IBOutlet UIImageView *profilePic;
@@ -67,7 +67,9 @@
             }
         }
     }
+    
     self.postText.text = postText;
+    [self.postText sizeToFit];
     
     NSString *postedBy = @"";
     if (post.doctor_Name != nil && post.doctor_Name.length > 0) {
