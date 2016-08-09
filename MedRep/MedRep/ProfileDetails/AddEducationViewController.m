@@ -55,14 +55,14 @@
     // Set maximum date to next month
     // This is optional; default is no max date
     [comps setDay:0];
-    [comps setMonth:1];
+    [comps setMonth:0];
     [comps setYear:0];
     _picker.maximumDate = [cal dateByAddingComponents:comps toDate:[NSDate date] options:0];
     
     // Set initial date to last month
     // This is optional; default is current month/year
     [comps setDay:0];
-    [comps setMonth:-1];
+    [comps setMonth:0];
     [comps setYear:0];
     _picker.date = [cal dateByAddingComponents:comps toDate:[NSDate date] options:0];
     _picker.hidden = YES;
@@ -165,12 +165,32 @@
     if ([_fromScreen isEqualToString:@"UPDATE"]) {
         
         workExpDict = [[NSDictionary alloc] initWithObjectsAndKeys:_degree,@"degree",_institute,@"collegeName",[NSString stringWithFormat:@"%@ %@",_fromYYYY,_toYYYY],@"yearOfPassout",_speciality,@"course",_type,@"aggregate",_educationQualObj.id,@"id", nil];
-        [MRDatabaseHelper updateEducationQualification:workExpDict withEducationQualificationID:_educationQualObj.id];
+        [MRDatabaseHelper updateEducationQualification:workExpDict withEducationQualificationID:_educationQualObj.id andHandler:^(id result) {
+            
+            if ([result isEqualToString:@"TRUE"]) {
+                
+                [MRCommon showAlert:@"Education Qualification Updated Successfully." delegate:nil];
+                
+                [self.navigationController popViewControllerAnimated:YES];
+            }else{
+            [MRCommon showAlert:@"Due to server error not able to update education details. Please try again later." delegate:nil];
+                
+            }
+            
+        }];
         
     }else{
         
         workExpDict = [[NSDictionary alloc] initWithObjectsAndKeys:_degree,@"degree",_institute,@"collegeName",[NSString stringWithFormat:@"%@ %@",_fromYYYY,_toYYYY],@"yearOfPassout",_speciality,@"course",_type,@"aggregate", nil];
-        [MRDatabaseHelper  addEducationQualification:workExpDict];
+        [MRDatabaseHelper addEducationQualification:workExpDict andHandler:^(id result) {
+         
+            if ([result isEqualToString:@"TRUE"]) {
+                
+                [MRCommon showAlert:@"Education Qualification Added Successfully." delegate:nil];
+                
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        }];
 
     }
     

@@ -486,9 +486,13 @@ NSString *valN = [valNDict objectForKey:@"type"];
         }
         _profileObj = nil;
         
-        _profileObj = [[MRDatabaseHelper getProfileData] objectAtIndex:0];
-        
-        [self.tableView reloadData];
+        [MRCommon showActivityIndicator:@""];
+        [MRDatabaseHelper addProfileData:^(id result){
+            _profileObj  = [result objectAtIndex:0];
+            [self.tableView reloadData];
+            [MRCommon stopActivityIndicator];
+            
+        }];
     }
     
 }

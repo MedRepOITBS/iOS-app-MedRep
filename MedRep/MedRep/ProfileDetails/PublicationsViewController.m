@@ -10,6 +10,8 @@
 #import "NTMonthYearPicker.h"
 #import "MRConstants.h"
 #import "MRDatabaseHelper.h"
+#import "MRCommon.h"
+#import "MRPublications.h"
 @interface PublicationsViewController () <NTMonthYearPickerViewDelegate>
 @property (nonatomic,strong) NTMonthYearPicker *picker;
 
@@ -41,14 +43,14 @@
     // Set maximum date to next month
     // This is optional; default is no max date
     [comps setDay:0];
-    [comps setMonth:1];
+    [comps setMonth:0];
     [comps setYear:0];
     _picker.maximumDate = [cal dateByAddingComponents:comps toDate:[NSDate date] options:0];
     
     // Set initial date to last month
     // This is optional; default is current month/year
     [comps setDay:0];
-    [comps setMonth:-1];
+    [comps setMonth:0];
     [comps setYear:0];
     _picker.date = [cal dateByAddingComponents:comps toDate:[NSDate date] options:0];
     _picker.hidden = YES;
@@ -98,13 +100,28 @@
     self.navigationItem.title  = @"Add Publications Details";
 
     
-    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"DONE" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonTapped:)];
-    self.navigationItem.rightBarButtonItem = revealButtonItem;
     
     UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"]  style:UIBarButtonItemStyleDone target:self action:@selector(backButtonTapped:)];
     [self setupPicker];
     [self updateLabel];
     self.navigationItem.leftBarButtonItem = leftButtonItem;
+    [self setupData];
+}
+
+
+
+-(void)setupData{
+    UIBarButtonItem *revealButtonItem;
+    if (_publications!=nil) {
+        self.publicationArticleTextField.text  = _publications.articleName;
+        self.pulbicationsTextField.text = _publications.publication;
+        self.yearTextField.text = _publications.year;
+        revealButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"UPDATE" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonTapped:)];
+    }else{
+        revealButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"DONE" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonTapped:)];
+    }
+    self.navigationItem.rightBarButtonItem = revealButtonItem;
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -129,11 +146,43 @@
         return;
     }
   
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:publicationArticleText,@"articleName",publicationsText,@"publication",yearText,@"year", nil];
-    BOOL YS = [MRDatabaseHelper addPublications:dict];
-    if (YS) {
-        [self.navigationController popViewControllerAnimated:YES];
+    NSDictionary *dict;
+    if ([_fromScreen isEqualToString:@"UPDATE"]) {
+        dict = [NSDictionary dictionaryWithObjectsAndKeys:publicationArticleText,@"articleName",publicationsText,@"publication",yearText,@"year",_publications.id,@"id", nil];
+        [MRDatabaseHelper updatePublication:dict withPublicationID:_publications.id andHandler:^(id result) {
+            NSString* YS = (NSString *)result;
+            if([YS isEqualToString:@"TRUE"]){
+                [MRCommon showAlert:@"Publication Update Successfully" delegate:nil];
+                
+                [self.navigationController popViewControllerAnimated:YES];
+                
+                
+            }else{
+                [MRCommon showAlert:@"Due to server error not able to update publications details. Please try again later." delegate:nil];
+            }
+        }];
+
+    }else{
+        
+        dict = [NSDictionary dictionaryWithObjectsAndKeys:publicationArticleText,@"articleName",publicationsText,@"publication",yearText,@"year", nil];
+        [MRDatabaseHelper addPublications:dict andHandler:^(id result) {
+            NSString* YS = (NSString *)result;
+            if([YS isEqualToString:@"TRUE"]){
+                [MRCommon showAlert:@"Publication Added Successfully" delegate:nil];
+                
+                [self.navigationController popViewControllerAnimated:YES];
+                
+                
+            }else{
+                [MRCommon showAlert:@"Due to server error not able to update publications details. Please try again later." delegate:nil];
+            }
+        }];
     }
+    
+
+    
+    
+    
     
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

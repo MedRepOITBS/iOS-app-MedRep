@@ -13,5 +13,7 @@
 @property (nonatomic,strong) NSString *fromScreen;
 @property (nonatomic,strong) MRInterestArea *interestAreaObj;
 @property (nonatomic,weak) IBOutlet UIButton *theurpaticBtn;
+@property (nonatomic,weak) IBOutlet UILabel *interestAreaLabel;
+
 -(IBAction)theurpaticBtnTapped:(id)sender;
 @end

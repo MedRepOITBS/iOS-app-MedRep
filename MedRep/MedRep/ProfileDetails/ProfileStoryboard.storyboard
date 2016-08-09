@@ -812,15 +812,31 @@ easier for colleagues to find you.</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="biu-wB-bcc">
                                 <rect key="frame" x="163" y="144" width="274" height="51"/>
                                 <subviews>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="dropDownButton.png" translatesAutoresizingMaskIntoConstraints="NO" id="1VT-K1-Chk">
+                                        <rect key="frame" x="241" y="11" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="6Zw-tt-skz"/>
+                                            <constraint firstAttribute="height" constant="30" id="P7B-jV-8kB"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Therapeutic Area" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MPJ-lp-Yfo">
+                                        <rect key="frame" x="8" y="15" width="232" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="232" id="FVJ-x5-ZI0"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WSe-8R-vRc">
-                                        <rect key="frame" x="17" y="11" width="264" height="30"/>
+                                        <rect key="frame" x="17" y="11" width="254" height="30"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="264" id="LE5-a0-I3F"/>
+                                            <constraint firstAttribute="width" constant="254" id="LE5-a0-I3F"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                         <inset key="contentEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="Select Therapeutic Area">
+                                        <state key="normal">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -828,21 +844,16 @@ easier for colleagues to find you.</string>
                                             <action selector="theurpaticBtnTapped:" destination="XVE-Vb-qGe" eventType="touchUpInside" id="Rpq-AM-lSn"/>
                                         </connections>
                                     </button>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="dropDownButton.png" translatesAutoresizingMaskIntoConstraints="NO" id="1VT-K1-Chk">
-                                        <rect key="frame" x="230" y="11" width="30" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="30" id="6Zw-tt-skz"/>
-                                            <constraint firstAttribute="height" constant="30" id="P7B-jV-8kB"/>
-                                        </constraints>
-                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.12549019610000001" green="0.69411764710000001" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="51" id="17R-Mc-3fh"/>
                                     <constraint firstItem="WSe-8R-vRc" firstAttribute="top" secondItem="biu-wB-bcc" secondAttribute="top" constant="11" id="6bo-rt-576"/>
                                     <constraint firstItem="WSe-8R-vRc" firstAttribute="leading" secondItem="biu-wB-bcc" secondAttribute="leading" constant="17" id="TAq-jj-vog"/>
-                                    <constraint firstItem="1VT-K1-Chk" firstAttribute="leading" secondItem="WSe-8R-vRc" secondAttribute="trailing" constant="-51" id="Xam-PW-HoB"/>
+                                    <constraint firstItem="1VT-K1-Chk" firstAttribute="leading" secondItem="WSe-8R-vRc" secondAttribute="trailing" constant="-30" id="Xam-PW-HoB"/>
+                                    <constraint firstItem="MPJ-lp-Yfo" firstAttribute="top" secondItem="biu-wB-bcc" secondAttribute="top" constant="15" id="dDr-DY-pzH"/>
                                     <constraint firstItem="1VT-K1-Chk" firstAttribute="top" secondItem="biu-wB-bcc" secondAttribute="top" constant="11" id="mRC-mO-DdX"/>
+                                    <constraint firstItem="MPJ-lp-Yfo" firstAttribute="leading" secondItem="biu-wB-bcc" secondAttribute="leading" constant="8" id="oBc-MZ-jeP"/>
                                     <constraint firstAttribute="width" constant="274" id="wXy-LE-7We"/>
                                     <constraint firstAttribute="bottom" secondItem="WSe-8R-vRc" secondAttribute="bottom" constant="10" id="xxD-b3-2tz"/>
                                 </constraints>
@@ -855,6 +866,7 @@ easier for colleagues to find you.</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="interestAreaLabel" destination="MPJ-lp-Yfo" id="m8c-7Y-biQ"/>
                         <outlet property="theurpaticBtn" destination="WSe-8R-vRc" id="hUK-U2-j0c"/>
                     </connections>
                 </viewController>
