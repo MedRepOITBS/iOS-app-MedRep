@@ -1195,7 +1195,7 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
     
 }
 
-+(BOOL)addInterestArea:(NSArray *)_array
++(void)addInterestArea:(NSArray *)_array  andHandler:(WebServiceResponseHandler)responseHandler
 {
     NSArray *profileAra = [[MRDataManger sharedManager] fetchObjectList:@"MRProfile"];
     MRProfile * profile = [profileAra lastObject];
@@ -1213,8 +1213,8 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
                     interestArea.name  = [_array lastObject];
                     interestArea.id = [[responce objectForKey:@"id"] objectAtIndex:0];
                     [profile addInterestAreaObject:interestArea];
-                    
-                    
+                    responseHandler(@"TRUE");
+        
             
                 
                 [[MRDataManger sharedManager] saveContext];
@@ -1225,10 +1225,9 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
     
     
 
-    return false;
 }
 
-+(BOOL)updateInterest:(NSDictionary *)dictonary withInterestAreaID:(NSNumber *)iD{
++(void)updateInterest:(NSDictionary *)dictonary withInterestAreaID:(NSNumber *)iD  andHandler:(WebServiceResponseHandler)responseHandler{
  
     MRInterestArea *interestArea = [[MRDataManger sharedManager] fetchObject:@"MRInterestArea" predicate:[NSPredicate predicateWithFormat:@"id == %@",iD]];
     
@@ -1241,17 +1240,17 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
         
         interestArea.name  = [dictonary objectForKey:@"name"];
         [[MRDataManger sharedManager] saveContext];
+        responseHandler(@"TRUE");
 
         
     }];
     
     
-    return NO;
 }
 
 
 
-+(BOOL)updatePublication:(NSDictionary *)dictonary withPublicationID:(NSNumber *)iD{
++(void)updatePublication:(NSDictionary *)dictonary withPublicationID:(NSNumber *)iD  andHandler:(WebServiceResponseHandler)responseHandler{
 
     MRPublications *publications = [[MRDataManger sharedManager] fetchObject:@"MRPublications" predicate:[NSPredicate predicateWithFormat:@"id == %@",iD]];
     
@@ -1267,14 +1266,13 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
         publications.year = [dictonary objectForKey:@"year"];
         
         [[MRDataManger sharedManager] saveContext];
-        
+        responseHandler(@"TRUE");
+
         
     }];
     
-    
-    return NO;
 }
-+(BOOL)addPublications:(NSDictionary *)dictonary {
++(void)addPublications:(NSDictionary *)dictonary andHandler:(WebServiceResponseHandler)responseHandler  {
    
     
     NSMutableArray *requestAr = [[NSMutableArray alloc] init];
@@ -1294,7 +1292,7 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
             publications.publication = [dictonary objectForKey:@"publication"];
             publications.year = [dictonary objectForKey:@"year"];
             publications.id = [[responce objectForKey:@"id"] objectAtIndex:0];
-            
+            responseHandler(@"TRUE");
             [profile addPublicationsObject:publications];
             [[MRDataManger sharedManager] saveContext];
 
@@ -1306,12 +1304,10 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
     }];
     
     
-    
-        return true;
 }
 
 
-+(BOOL)updateEducationQualification:(NSDictionary *)dictonary withEducationQualificationID:(NSNumber *)iD{
++(void)updateEducationQualification:(NSDictionary *)dictonary withEducationQualificationID:(NSNumber *)iD  andHandler:(WebServiceResponseHandler)responseHandler{
     
     
     EducationalQualifications *educationQualification = [[MRDataManger sharedManager] fetchObject:@"EducationalQualifications" predicate:[NSPredicate predicateWithFormat:@"id == %@",iD]];
@@ -1328,13 +1324,13 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
         educationQualification.aggregate = [NSNumber numberWithFloat:[[dictonary objectForKey:@"aggregate"]integerValue]];
         
         [[MRDataManger sharedManager] saveContext];
-        
+        responseHandler(@"TRUE");
+
     }];
     
-    return true;
 }
 
-+(BOOL)addEducationQualification:(NSDictionary *)dictonary {
++(void)addEducationQualification:(NSDictionary *)dictonary andHandler:(WebServiceResponseHandler)responseHandler {
     NSArray *profileAra = [[MRDataManger sharedManager] fetchObjectList:@"MRProfile"];
     MRProfile * profile = [profileAra lastObject];
 
@@ -1344,7 +1340,7 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
         
         [arrayObj addObject:dictonary];
         
-        [[MRWebserviceHelper sharedWebServiceHelper] addEducationArea:arrayObj withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [[MRWebserviceHelper sharedWebServiceHelper] addOrUpdateEducationArea:arrayObj withUpdateFlag:NO withHandler:^(BOOL status, NSString *details, NSDictionary *responce)  {
             
             
             NSLog(@"%@",responce);
@@ -1361,26 +1357,18 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
             
             [profile addEducationlQualificationObject:educationQualification];
             [[MRDataManger sharedManager] saveContext];
-
+            responseHandler(@"TRUE");
             
         }];
 
         
-        return true;
     }
-//    -(void)addWorkExperience:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
-//    -(void)addInterestArea:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandle
-    
-    
- 
-    
-    
-    return false;
+
 }
 
 
 
-+(BOOL)updateWorkExperience:(NSDictionary *)workExpDict withWorkExperienceID:(NSNumber *)iD{
++(void)updateWorkExperience:(NSDictionary *)workExpDict withWorkExperienceID:(NSNumber *)iD  andHandler:(WebServiceResponseHandler)responseHandler{
     
     
     MRWorkExperience *workExp = [[MRDataManger sharedManager] fetchObject:@"MRWorkExperience" predicate:[NSPredicate predicateWithFormat:@"id == %@",iD]];
@@ -1397,14 +1385,14 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
     workExp.location = [workExpDict objectForKey:@"location"];
     [[MRDataManger sharedManager] saveContext];
     
+    responseHandler(@"TRUE");
 }];
     
 //    [[MRDataManger sharedManager] fetchObject:@"MRWorkExperience" inContext:<#(NSManagedObjectContext *)#>]
     
-    return true;
     
 }
-+(BOOL)addWorkExperience :(NSDictionary *)dictionary{
++(void)addWorkExperience :(NSDictionary *)dictionary andHandler:(WebServiceResponseHandler)responseHandler{
    
     NSArray *profileAra = [[MRDataManger sharedManager] fetchObjectList:@"MRProfile"];
     MRProfile * profile = [profileAra lastObject];
@@ -1432,18 +1420,15 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
             workExp.toDate = [workExpDict objectForKey:@"toDate"];
             workExp.hospital = [workExpDict objectForKey:@"hospital"];
             workExp.location = [workExpDict objectForKey:@"location"];
-            
-            
+            responseHandler(@"TRUE");
             [profile addWorkExperienceObject:workExp];
             [[MRDataManger sharedManager] saveContext];
 
         }];
         
         
-        return true;
         
     }
-    return false;
     
 }
 
@@ -1487,7 +1472,7 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
             workExp.toDate = [workExpDict objectForKey:@"toDate"];
             workExp.hospital = [workExpDict objectForKey:@"hospital"];
             workExp.location = [workExpDict objectForKey:@"location"];
-            
+
             [profile addWorkExperienceObject:workExp];
             
         }];

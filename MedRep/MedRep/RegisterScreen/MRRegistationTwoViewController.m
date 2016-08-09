@@ -45,15 +45,19 @@
 @property (strong,nonatomic) KLCPopup *tutorialViewKLCPopView;
 @property (strong,nonatomic) TutorialView *tutorialView;
 @property (strong,nonatomic)  GMSPlacesClient *placesClient;
-
+@property (nonatomic) BOOL isLocationUpdateGet;
 @end
 
 @implementation MRRegistationTwoViewController
 
 -(void)getCurrentLocation{
     [MRCommon showActivityIndicator:@""];
+    
+    
     [_placesClient currentPlaceWithCallback:^(GMSPlaceLikelihoodList *placeLikelihoodList, NSError *error){
         if (error != nil) {
+            [MRCommon stopActivityIndicator];
+
             NSLog(@"Pick Place error %@", [error localizedDescription]);
             return;
         }
@@ -74,17 +78,12 @@
                 [[GMSGeocoder geocoder] reverseGeocodeCoordinate:place.coordinate completionHandler:^(GMSReverseGeocodeResponse* response, NSError* error) {
                     NSLog(@"reverse geocoding results:");
                     GMSAddress* addressObj =  [response results].firstObject;
-                    
-//                    NSLog(@"coordinate.latitude=%f", addressObj.coordinate.latitude);
-//                    NSLog(@"coordinate.longitude=%f", addressObj.coordinate.longitude);
-//                    NSLog(@"thoroughfare=%@", addressObj.thoroughfare);
-//                    NSLog(@"locality=%@", addressObj.locality);
-//                    NSLog(@"subLocality=%@", addressObj.subLocality);
-//                    NSLog(@"administrativeArea=%@", addressObj.administrativeArea);
-//                    NSLog(@"postalCode=%@", addressObj.postalCode);
-//                    NSLog(@"country=%@", addressObj.country);
-//                    NSLog(@"lines=%@", addressObj.lines);
-//                    
+                    if (_isLocationUpdateGet) {
+                       
+                        [MRCommon stopActivityIndicator];
+                        return;
+                    }
+       
                     
                     [MRCommon stopActivityIndicator];
                     
@@ -138,6 +137,13 @@
     
     
 }
+
+-(void)isLocationUpdateDone{
+    
+    _isLocationUpdateGet = YES;
+    [MRCommon stopActivityIndicator];
+
+}
 - (void)viewDidLoad {
     
     [MRAppControl sharedHelper].addressType = 1;
@@ -155,6 +161,7 @@
     
     [super viewDidLoad];
     [self getCurrentLocation];
+    [self performSelector:@selector(isLocationUpdateGet) withObject:nil afterDelay:.12];
     // Do any additional setup after loading the view from its nib.
 }
 -(IBAction)whyThisBtnTapped:(id)sender{

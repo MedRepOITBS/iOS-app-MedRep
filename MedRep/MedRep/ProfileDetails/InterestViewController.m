@@ -23,15 +23,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationItem.title  = @"Add Interest Area";
+    self.navigationItem.title  = @"Add Therapeutic Area";
 
     
-    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"DONE" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonTapped:)];
-    self.navigationItem.rightBarButtonItem = revealButtonItem;
     
     UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"]  style:UIBarButtonItemStyleDone target:self action:@selector(backButtonTapped:)];
     self.navigationItem.leftBarButtonItem = leftButtonItem;
 
+    [self setupData];
+    
+}
+-(void)setupData{
+    UIBarButtonItem *revealButtonItem;
+    if (_interestAreaObj!=nil) {
+        self.interestAreaLabel.text = _interestAreaObj.name;
+    
+        revealButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"UPDATE" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonTapped:)];
+    }else{
+        revealButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"DONE" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonTapped:)];
+    }
+    self.navigationItem.rightBarButtonItem = revealButtonItem;
+    
 }
 
 
@@ -43,7 +55,7 @@
     // Dispose of any resources that can be recreated.
 }
 -(void)doneButtonTapped:(id)sender{
-    NSString *interestArticle = [self.theurpaticBtn.titleLabel.text stringByTrimmingCharactersInSet:
+    NSString *interestArticle = [self.interestAreaLabel.text stringByTrimmingCharactersInSet:
                                         [NSCharacterSet whitespaceCharacterSet]];
     
     
@@ -57,9 +69,31 @@
     if ([_fromScreen isEqualToString:@"UPDATE"]) {
         
         NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:interestArticle,@"name",_interestAreaObj.id,@"id", nil];
-        [MRDatabaseHelper updateInterest:dict withInterestAreaID:_interestAreaObj.id];
+        [MRDatabaseHelper updateInterest:dict withInterestAreaID:_interestAreaObj.id andHandler:^(id result) {
+            if ([result isEqualToString:@"TRUE"]) {
+                
+                [MRCommon showAlert:@"Therapeutic Area Updated Successfully." delegate:nil];
+                
+                [self.navigationController popViewControllerAnimated:YES];
+            }else{
+                [MRCommon showAlert:@"Due to server error not able to update Therapeutic Area. Please try again later." delegate:nil];
+                
+            }
+
+        } ];
     }else{
-        [MRDatabaseHelper addInterestArea:[NSArray arrayWithObjects:interestArticle, nil]];
+        [MRDatabaseHelper addInterestArea:[NSArray arrayWithObjects:interestArticle, nil] andHandler:^(id result) {
+            if ([result isEqualToString:@"TRUE"]) {
+                
+                [MRCommon showAlert:@"Therapeutic Area Added Successfully." delegate:nil];
+                
+                [self.navigationController popViewControllerAnimated:YES];
+            }else{
+                [MRCommon showAlert:@"Due to server error not able to update Therapeutic Area. Please try again later." delegate:nil];
+                
+            }
+
+        }];
     }
     
 }
@@ -139,7 +173,7 @@
     NSDictionary *item = (NSDictionary*)listItem;
     
     if ([item objectForKey:@"therapeuticId"]) {
-        [_theurpaticBtn setTitle:[item objectForKey:@"therapeuticName"] forState:UIControlStateNormal];
+        _interestAreaLabel.text =[item objectForKey:@"therapeuticName"];
         [[MRAppControl sharedHelper].userRegData setObject:[item objectForKey:@"therapeuticId"] forKey:@"therapeuticId"];
         //[myTherapeuticDict objectForKey:@"therapeuticId"];
     }

@@ -265,8 +265,7 @@ withComplitionHandler:(completionHandler)responceHandler;
 - (void)postNewTopic:(NSDictionary*)reqDict withHandler:(completionHandler)responceHandler;
 -(void)fetchDoctorInfoWithHandler:(completionHandler)responseHandler;
 
--(void)addEducationArea:(NSArray *)reqDict withHandler: (completionHandler)responseHandler;
-
+-(void)addOrUpdateEducationArea:(NSArray *)reqDict withUpdateFlag:(BOOL)isUpdate withHandler: (completionHandler)responseHandler;
 - (void)updateLikes:(NSInteger)postType
           likeCount:(NSInteger)likeCount
        commentCount:(NSInteger)commentCount

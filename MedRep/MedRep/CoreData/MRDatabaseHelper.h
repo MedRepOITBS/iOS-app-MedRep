@@ -121,10 +121,7 @@ FOUNDATION_EXPORT NSString* const kNewsAndTransformAPIMethodName;
 + (void)addTransformArticles:(NSArray*)posts;
 +(void)addProfileData:(WebServiceResponseHandler)responseHandler;
 +(NSArray *)getProfileData;
-+(BOOL)addWorkExperience :(NSDictionary *)dictionary;
-+(BOOL)addEducationQualification:(NSDictionary *)dictonary ;
-+(BOOL)addPublications:(NSDictionary *)dictonary;
-+(BOOL)addInterestArea:(NSArray *)array;
+
 
 +(void)fetchShare:(WebServiceResponseHandler)responseHandler;
 + (void)fetchNewsAndUpdates:(NSString*)category
@@ -139,11 +136,6 @@ FOUNDATION_EXPORT NSString* const kNewsAndTransformAPIMethodName;
 + (void)fetchShareDetailsById:(NSInteger)topicId
                   withHandler:(WebServiceResponseHandler)responseHandler;
 
-+(BOOL)updateInterest:(NSDictionary *)dictonary withInterestAreaID:(NSNumber *)iD;
-+(BOOL)updatePublication:(NSDictionary *)dictonary withPublicationID:(NSNumber *)iD;
-+(BOOL)updateEducationQualification:(NSDictionary *)dictonary withEducationQualificationID:(NSNumber *)iD;
-+(BOOL)updateWorkExperience:(NSDictionary *)workExpDict withWorkExperienceID:(NSNumber *)iD;
-
 +(void)deleteWorkExperienceFromTable:(NSNumber *)workExpID;
 +(void)deleteEducationQualificationFromTable:(NSNumber *)educationID;
 +(void)deleteInterestAreaFromTable:(NSNumber *)interestID;
@@ -152,5 +144,17 @@ FOUNDATION_EXPORT NSString* const kNewsAndTransformAPIMethodName;
 + (void)getMessagesOfAMember:(NSInteger)memberId
                      groupId:(NSInteger)groupId
                  withHandler:(WebServiceResponseHandler)handler;
++(void)addInterestArea:(NSArray *)_array  andHandler:(WebServiceResponseHandler)responseHandler;
++(void)addPublications:(NSDictionary *)dictonary andHandler:(WebServiceResponseHandler)responseHandler;
++(void)addEducationQualification:(NSDictionary *)dictonary andHandler:(WebServiceResponseHandler)responseHandler;
++(void)addWorkExperience :(NSDictionary *)dictionary andHandler:(WebServiceResponseHandler)responseHandler;
+
+
++(void)updateInterest:(NSDictionary *)dictonary withInterestAreaID:(NSNumber *)iD  andHandler:(WebServiceResponseHandler)responseHandler;
+
++(void)updatePublication:(NSDictionary *)dictonary withPublicationID:(NSNumber *)iD  andHandler:(WebServiceResponseHandler)responseHandler;
++(void)updateEducationQualification:(NSDictionary *)dictonary withEducationQualificationID:(NSNumber *)iD  andHandler:(WebServiceResponseHandler)responseHandler;
++(void)updateWorkExperience:(NSDictionary *)workExpDict withWorkExperienceID:(NSNumber *)iD  andHandler:(WebServiceResponseHandler)responseHandler;
+
 
 @end

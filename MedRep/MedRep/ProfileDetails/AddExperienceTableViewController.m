@@ -16,6 +16,7 @@
 #import "NTMonthYearPicker.h"
 #import "MRConstants.h"
 #import "MRWorkExperience.h"
+#import "MRCommon.h"
 @interface AddExperienceTableViewController () <ExperienceDateTimeTableViewCellDelegate,CommonTableViewCellDelegate, ExperienceSummaryTableViewCellDelegate, NTMonthYearPickerViewDelegate>
 
 //@property (nonatomic, weak) IBOutlet UICustomDatePicker *customDatePicker;
@@ -60,14 +61,14 @@
     // Set maximum date to next month
     // This is optional; default is no max date
     [comps setDay:0];
-    [comps setMonth:1];
+    [comps setMonth:0];
     [comps setYear:0];
     _picker.maximumDate = [cal dateByAddingComponents:comps toDate:[NSDate date] options:0];
     
     // Set initial date to last month
     // This is optional; default is current month/year
     [comps setDay:0];
-    [comps setMonth:-1];
+    [comps setMonth:0];
     [comps setYear:0];
     _picker.date = [cal dateByAddingComponents:comps toDate:[NSDate date] options:0];
     _picker.hidden = YES;
@@ -179,6 +180,7 @@ self.navigationItem.title  = @"Add Experience";
         [formatter  setDateFormat:@"MMM"];
         _toMM = [formatter stringFromDate:[NSDate date]];
         
+        _toMM = [NSString stringWithFormat:@"%@ %@",_toMM,_toYYYY];
         
     }
     NSDictionary * workExpDict ;
@@ -188,10 +190,28 @@ self.navigationItem.title  = @"Add Experience";
     
     if ([_fromScreen isEqualToString:@"UPDATE"]) {
       workExpDict  = [[NSDictionary alloc] initWithObjectsAndKeys:_designation,@"designation",_organisation,@"hospital",[NSString stringWithFormat:@"%@",_fromMM],@"fromDate",[NSString stringWithFormat:@"%@",_toMM],@"toDate",_location,@"location",_workExperience.id, @"id", nil];
-        [MRDatabaseHelper  updateWorkExperience:workExpDict withWorkExperienceID:_workExperience.id];
+        [MRDatabaseHelper updateWorkExperience:workExpDict withWorkExperienceID:_workExperience.id andHandler:^(id result) {
+            if ([result isEqualToString:@"TRUE"]) {
+                
+                [MRCommon showAlert:@"Work Experience Updated Successfully." delegate:nil];
+                
+                [self.navigationController popViewControllerAnimated:YES];
+            }else{
+                [MRCommon showAlert:@"Due to server error not able to update Work Experience. Please try again later." delegate:nil];
+
+            }
+ 
+        }];
     }else{
           workExpDict  = [[NSDictionary alloc] initWithObjectsAndKeys:_designation,@"designation",_organisation,@"hospital",[NSString stringWithFormat:@"%@",_fromMM],@"fromDate",[NSString stringWithFormat:@"%@",_toMM],@"toDate",_location,@"location", nil];
-        [MRDatabaseHelper  addWorkExperience:workExpDict];
+        [MRDatabaseHelper addWorkExperience:workExpDict andHandler:^(id result) {
+            if ([result isEqualToString:@"TRUE"]) {
+                
+                [MRCommon showAlert:@"Work Experience Add Successfully." delegate:nil];
+
+                        [self.navigationController popViewControllerAnimated:YES];
+                    }
+        } ];
     }
 //  BOOL ys =  [MRDatabaseHelper  addWorkExperience:workExpDict];
 //    if (ys) {
