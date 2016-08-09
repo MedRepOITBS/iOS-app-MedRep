@@ -102,14 +102,14 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     [self.superview setFrame:CGRectMake(self.superview.frame.origin.x,
-                                       self.superview.frame.origin.y - 150,
+                                       self.superview.frame.origin.y - 200,
                                        self.superview.frame.size.width,
                                        self.superview.frame.size.height)];
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
     [self.superview setFrame:CGRectMake(self.superview.frame.origin.x,
-                                        self.superview.frame.origin.y + 150,
+                                        self.superview.frame.origin.y + 200,
                                         self.superview.frame.size.width,
                                         self.superview.frame.size.height)];
 }

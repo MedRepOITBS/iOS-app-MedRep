@@ -245,7 +245,8 @@
     
     if (selectedContacts != nil || selectedGroups != nil) {
         [postMessage setObject:[NSNumber numberWithInteger:1] forKey:@"postType"];
-        //[postMessage setObject:@"" forKey:@"message"];
+        [postMessage setObject:self.parentPost.short_desc forKey:@"message"];
+        [postMessage setObject:self.parentPost.message_type forKey:@"message_type"];
         
         NSDictionary *dataDict = @{@"topic_id" : [NSNumber numberWithLong:self.parentPost.sharePostId.longValue],
                                    @"postMessage" : postMessage
@@ -253,6 +254,7 @@
         
         [MRDatabaseHelper postANewTopic:dataDict withHandler:^(id result) {
             if (result) {
+                [MRCommon showAlert:@"Successfully shared the topic!!!" delegate:nil];
                 NSInteger currentSharesCount = 0;
                 
                 if (self.parentPost != nil && self.parentPost.shareCount != nil) {
@@ -267,6 +269,8 @@
                  if (self.delegate != nil && [self.delegate respondsToSelector:@selector(shareToSelected)]) {
                      [self.delegate shareToSelected];
                  }
+            } else {
+                [MRCommon showAlert:@"Failed to share the topic !!!" delegate:nil];
             }
         }];
     }

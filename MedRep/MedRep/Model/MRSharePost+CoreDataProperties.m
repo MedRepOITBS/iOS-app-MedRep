@@ -113,10 +113,15 @@
 
 -(void)setMessage_type:(NSString *)message_type {
     [self applyMessageType:message_type];
+    
+    [self willChangeValueForKey:@"message_type"];
+    [self setPrimitiveValue:message_type forKey:@"message_type"];
+    [self didChangeValueForKey:@"message_type"];
 }
 
 - (void)setContent_type:(NSString *)content_type {
     [self applyMessageType:content_type];
+    [self setMessage_type:content_type];
 }
 
 - (void)applyMessageType:(NSString*)message_type {
