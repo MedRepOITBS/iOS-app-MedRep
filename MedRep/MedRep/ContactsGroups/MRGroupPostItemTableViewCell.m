@@ -125,7 +125,7 @@
     }
     
     NSString *name = @"No Name";
-    if (self.post.sharedByProfileName != nil) {
+    if (self.post.sharedByProfileName != nil && self.post.sharedByProfileName.length > 0) {
         name = self.post.sharedByProfileName;
     }
     self.contactNameLabel.text = name;

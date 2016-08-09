@@ -15,6 +15,8 @@
 
 @interface CommonBoxView() <UIImagePickerControllerDelegate,UITextViewDelegate >
 
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+
 @property (weak, nonatomic) IBOutlet UILabel *noPreviewMessage;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *profilePicWidthConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *profilePicPreviewConstant;
@@ -31,6 +33,8 @@
 @property (strong, nonatomic) MRContact* mainContact;
 @property (strong, nonatomic) MRGroup* mainGroup;
 @property (strong, nonatomic) MRSharePost* sharePost;
+
+@property (nonatomic) NSString *message;
 
 @property (nonatomic)BOOL isPhotoDone;
 @property (strong,nonatomic) NSIndexPath *cellIndexPath;
@@ -74,10 +78,44 @@
                                                                                               action:@selector(galleryBtnTapped)];
     [self.galleryView addGestureRecognizer:galleryGestureRecognizer];
     
-    [self.commentTextView becomeFirstResponder];
+    // Add Tool bar to text view
+    UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, self.superview.frame.size.width, 50)];
+    numberToolbar.barStyle = UIBarStyleDefault;
+    numberToolbar.items = [NSArray arrayWithObjects:
+                           [[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(closeOnKeyboardPressed:)],
+                           [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil],
+                           [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneOnKeyboardPressed:)],
+                           nil];
+    [numberToolbar sizeToFit];
+    self.commentTextView.inputAccessoryView = numberToolbar;
 }
 
-- (BOOL)textView:(UITextView *)txtView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+- (void)closeOnKeyboardPressed:(id)sender {
+    self.commentTextView.text = self.message;
+    [self.commentTextView resignFirstResponder];
+}
+
+- (void)doneOnKeyboardPressed:(id)sender {
+    self.message = self.commentTextView.text;
+    [self.commentTextView resignFirstResponder];
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    [self.superview setFrame:CGRectMake(self.superview.frame.origin.x,
+                                       self.superview.frame.origin.y - 150,
+                                       self.superview.frame.size.width,
+                                       self.superview.frame.size.height)];
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    [self.superview setFrame:CGRectMake(self.superview.frame.origin.x,
+                                        self.superview.frame.origin.y + 150,
+                                        self.superview.frame.size.width,
+                                        self.superview.frame.size.height)];
+}
+
+- (BOOL)textView:(UITextView *)txtView shouldChangeTextInRange:(NSRange)range
+ replacementText:(NSString *)text {
     if( [text rangeOfCharacterFromSet:[NSCharacterSet newlineCharacterSet]].location == NSNotFound ) {
         return YES;
     }
@@ -93,10 +131,11 @@
     }
     return self;
 }
+
 -(MRSharePost *)getSelectedPost{
-    
     return self.sharePost;
 }
+
 - (void)setData:(MRContact*)contact group:(MRGroup*)group andSharedPost:(MRSharePost*)sharePost {
     if (sharePost != nil) {
         NSLog(@"sharePost id = %ld",sharePost.sharePostId.longValue);
@@ -136,17 +175,9 @@
 }
 
 - (void)cameraBtnTapped {
-//    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-//    picker.delegate = self;
-//    picker.allowsEditing = YES;
-//    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
     if (self.delegate != nil  && [self.delegate respondsToSelector:@selector(commonBoxCameraButtonTapped)]) {
-        
         [self.delegate commonBoxCameraButtonTapped];
     }
-    
-    
-    
 }
 
 - (IBAction)okButtonTapped:(id)sender {

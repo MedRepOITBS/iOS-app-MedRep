@@ -21,7 +21,6 @@
 @dynamic firstName;
 @dynamic lastName;
 @dynamic member_id;
-@dynamic profilePic;
 @dynamic roleId;
 @dynamic connStatus;
 @dynamic therapeuticArea;

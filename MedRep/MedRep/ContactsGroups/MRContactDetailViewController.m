@@ -114,7 +114,7 @@
         [self.deleteConnectionButton setTitle:NSLocalizedString(kJoinGroup, "")
                                      forState:UIControlStateNormal];
         [self.deleteConnectionButton addTarget:self
-                                        action:@selector(removeGroup)
+                                        action:@selector(joinGroup)
                               forControlEvents:UIControlEventTouchUpInside];
         [self.deleteConnectionButton setBackgroundColor:[MRCommon colorFromHexString:@"#20B18A"]];
     } else {
@@ -291,11 +291,8 @@
 }
 
 - (void)setupCommentBox {
-    NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"commentBox" owner:self options:nil];
-    
-    _commentBoxView = (CommonBoxView *)[arr objectAtIndex:0];
-    _commentBoxKLCPopView = [KLCPopup popupWithContentView:self.commentBoxView];
-    [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutTop)];
+    _commentBoxKLCPopView = [MRAppControl setupCommentBox:self];
+    _commentBoxView = (CommonBoxView*)(_commentBoxKLCPopView.contentView);
 }
 
 /*
@@ -558,6 +555,52 @@
     }];
 }
 
+- (void)joinGroup {
+    NSDictionary *dict =[NSDictionary dictionaryWithObjectsAndKeys:
+                         [NSNumber numberWithLong:self.mainGroup.group_id.longValue], @"group_id",
+                         @"EXIT", @"status",
+                         [MRAppControl sharedHelper].userRegData[@"doctorId"], @"member_id",
+                         nil];
+    
+    [MRCommon showActivityIndicator:@"Leaving..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] joinGroup:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [MRCommon stopActivityIndicator];
+        if (status)
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"You joined the group!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            alert.tag = 11;
+            [alert show];
+        }
+        else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+        {
+            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+             {
+                 [MRCommon savetokens:responce];
+                 [[MRWebserviceHelper sharedWebServiceHelper] joinGroup:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                     [MRCommon stopActivityIndicator];
+                     if (status)
+                     {
+                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"You joined the group!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                         alert.tag = 11;
+                         [alert show];
+                     } else
+                     {
+                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                         if (erros.count > 0)
+                             [MRCommon showAlert:[erros lastObject] delegate:nil];
+                     }
+                 }];
+             }];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }];
+}
+
 -(void) leaveGroup{
     NSDictionary *dict =[NSDictionary dictionaryWithObjectsAndKeys:
                          [NSNumber numberWithLong:self.mainGroup.group_id.longValue], @"group_id",
@@ -610,9 +653,7 @@
                                                             object:nil];
         
         [self.navigationController popViewControllerAnimated:YES];
-    }
-    
-    if (alertView.tag == 12) {
+    } else if (alertView.tag == 12) {
         if (buttonIndex) {
             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
                                                                 object:nil];
@@ -771,12 +812,8 @@
 }
 
 - (IBAction)postTopicButtonTapped:(id)sender {
-    NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"commentBox" owner:self options:nil];
-    
-    _commentBoxView = (CommonBoxView *)[arr objectAtIndex:0];
-    [_commentBoxView setDelegate:self];
-    _commentBoxKLCPopView = [KLCPopup popupWithContentView:self.commentBoxView];
-    [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutTop)];
+    _commentBoxKLCPopView = [MRAppControl setupCommentBox:self];
+    _commentBoxView = (CommonBoxView*)(_commentBoxKLCPopView.contentView);
 }
 
 #pragma mark - CommonBoxView Delegate methods

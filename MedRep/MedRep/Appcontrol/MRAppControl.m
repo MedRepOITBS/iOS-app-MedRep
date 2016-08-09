@@ -26,6 +26,8 @@
 #import "MRGroup.h"
 #import "MRPostedReplies.h"
 #import "MRGroupMembers.h"
+#import "KLCPopup.h"
+#import "CommonBoxView.h"
 
 @interface MRAppControl () <SWRevealViewControllerDelegate, ViewControllerDelegate,MRMenuViewControllerDelegate,MRPharmaMenuViewControllerDelegate,MRWelcomeViewControllerDelegate>
 
@@ -925,7 +927,28 @@
         
         [fileName appendFormat:@"%ld.png", tempDate.longValue];
     }
+    
+    if (fileName != nil && fileName.length > 0) {
+        fileName = [[fileName stringByReplacingOccurrencesOfString:@" " withString:@""] mutableCopy];
+    }
+    
     return fileName;
+}
+
++ (KLCPopup*)setupCommentBox:(id)delegate {
+    NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"commentBox" owner:self options:nil];
+    
+    CommonBoxView *commentBoxView = (CommonBoxView *)[arr objectAtIndex:0];
+    [commentBoxView setDelegate:delegate];
+    KLCPopup *commentBoxKLCPopView = [KLCPopup popupWithContentView:commentBoxView
+                                                  showType:KLCPopupShowTypeSlideInFromBottom
+                                               dismissType:KLCPopupDismissTypeSlideOutToBottom
+                                                  maskType:KLCPopupMaskTypeDimmed
+                                  dismissOnBackgroundTouch:YES
+                                     dismissOnContentTouch:NO];
+    [commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutCenter)];
+    
+    return commentBoxKLCPopView;
 }
 
 @end

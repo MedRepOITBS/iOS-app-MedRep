@@ -279,13 +279,8 @@ UIImagePickerControllerDelegate>
 }
 
 - (void)setupCommentBox {
-    NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"commentBox" owner:self options:nil];
-    
-    _commentBoxView = (CommonBoxView *)[arr objectAtIndex:0];
-    [_commentBoxView setDelegate:self];
-    _commentBoxKLCPopView = [KLCPopup popupWithContentView:self.commentBoxView];
-    [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutAboveCenter)];
-    [_commentBoxView.commentTextView becomeFirstResponder];
+    _commentBoxKLCPopView = [MRAppControl setupCommentBox:self];
+    _commentBoxView = (CommonBoxView*)(_commentBoxKLCPopView.contentView);
 }
 
 #pragma mark
@@ -376,7 +371,7 @@ UIImagePickerControllerDelegate>
 
 #pragma mark - CommonBoxView Delegate methods
 - (void)commonBoxCancelButtonPressed {
-    [_commentBoxKLCPopView dismissPresentingPopup];
+    [_commentBoxKLCPopView dismiss:YES];
 }
 
 - (void)commentPosted {

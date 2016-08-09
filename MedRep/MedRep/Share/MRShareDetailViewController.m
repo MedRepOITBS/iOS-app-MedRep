@@ -347,12 +347,8 @@ AVPlayerViewControllerDelegate> {
 }
 
 - (void)setupCommentBox {
-    NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"commentBox" owner:self options:nil];
-    
-    _commentBoxView = (CommonBoxView *)[arr objectAtIndex:0];
-    [_commentBoxView setDelegate:self];
-    _commentBoxKLCPopView = [KLCPopup popupWithContentView:self.commentBoxView];
-    [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutTop)];
+    _commentBoxKLCPopView = [MRAppControl setupCommentBox:self];
+    _commentBoxView = (CommonBoxView*)(_commentBoxKLCPopView.contentView);
 }
 
 - (void)commonBoxCancelButtonPressed {
@@ -506,15 +502,11 @@ AVPlayerViewControllerDelegate> {
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
-    //    self.imageView.image = chosenImage;
-    
-    
     [_commentBoxView setImageForShareImage:chosenImage];
-    MRSharePost *sharePost = [_commentBoxView getSelectedPost];
-    
-    
     [picker dismissViewControllerAnimated:YES completion:NULL];
-    [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutTop)];
+    [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutAboveCenter)];
+    
+    MRSharePost *sharePost = [_commentBoxView getSelectedPost];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {

@@ -10,7 +10,7 @@
 @import UIKit;
 @class Reachability;
 
-@class ViewController, MRContact, MRGroup, MRGroupMembers, MRPostedReplies;
+@class ViewController, MRContact, MRGroup, MRGroupMembers, MRPostedReplies, KLCPopup;
 
 @interface MRAppControl : NSObject
 {
@@ -69,5 +69,6 @@
 + (void)getGroupImage:(MRGroup*)group andImageView:(UIImageView*)parentView;
 
 + (NSString*)getFileName;
++ (KLCPopup*)setupCommentBox:(id)delegate;
 
 @end
