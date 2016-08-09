@@ -194,6 +194,7 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
 + (void)getSuggestedGroups:(WebServiceResponseHandler)responseHandler {
     [MRCommon showActivityIndicator:@"Requesting..."];
     [[MRWebserviceHelper sharedWebServiceHelper] getSuggestedGroupListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [[MRDataManger sharedManager] removeAllObjects:kGroupEntity withPredicate:nil];
         [MRDatabaseHelper makeServiceCallForGroupsFetch:status details:details
                                                  response:responce
                                        andResponseHandler:responseHandler];

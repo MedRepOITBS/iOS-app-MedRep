@@ -66,7 +66,7 @@
 
 - (void)setShare_count:(NSNumber *)share_count {
     NSInteger tempLikes = [self updateValueOfKey:share_count andKey:@"share_count"];
-    self.commentsCount = [NSNumber numberWithLong:tempLikes];
+    self.shareCount = [NSNumber numberWithLong:tempLikes];
 }
 
 - (NSInteger)updateValueOfKey:(NSNumber*)value andKey:(NSString*)key {

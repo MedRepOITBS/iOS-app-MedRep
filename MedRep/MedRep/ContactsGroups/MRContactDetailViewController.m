@@ -562,7 +562,7 @@
                          [MRAppControl sharedHelper].userRegData[@"doctorId"], @"member_id",
                          nil];
     
-    [MRCommon showActivityIndicator:@"Leaving..."];
+    [MRCommon showActivityIndicator:@"Joining..."];
     [[MRWebserviceHelper sharedWebServiceHelper] joinGroup:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
         [MRCommon stopActivityIndicator];
         if (status)
