@@ -59,8 +59,8 @@
                                         [NSCharacterSet whitespaceCharacterSet]];
     
     
-    if (interestArticle!=nil && [interestArticle isEqualToString:@""]) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please enter the all mandatory fields." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    if ((interestArticle!=nil && [interestArticle isEqualToString:@""] )|| [interestArticle isEqualToString:@"Select Therapeutic Area"]) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please select the Therapeutic Area." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];
         return;
     }
