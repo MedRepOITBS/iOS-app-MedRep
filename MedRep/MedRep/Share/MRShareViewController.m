@@ -302,14 +302,10 @@ UIImagePickerControllerDelegate>
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
-    //    self.imageView.image = chosenImage;
-    
-    
     [_commentBoxView setImageForShareImage:chosenImage];
-   MRSharePost *sharePost = [_commentBoxView getSelectedPost];
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
-    [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutAboveCenter)];
+    [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutCenter)];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {

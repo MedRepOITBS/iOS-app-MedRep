@@ -47,29 +47,6 @@ NSString* const kNewsAndUpdates = @"News & Updates";
     self.titleDescription = title;
 }
 
-- (NSString*)stripOutHTMLTags:(NSString*)originalString {
-    NSString *replacedString = originalString;
-    if (originalString != nil && originalString.length > 0) {
-        replacedString = [replacedString stringByReplacingOccurrencesOfString:@"<p>"
-                                                                   withString:@""];
-        replacedString = [replacedString stringByReplacingOccurrencesOfString:@"</p>"
-                                                                   withString:@""];
-        replacedString = [replacedString stringByReplacingOccurrencesOfString:@"<a>"
-                                                                   withString:@""];
-        replacedString = [replacedString stringByReplacingOccurrencesOfString:@"</a>"
-                                                                   withString:@""];
-        replacedString = [replacedString stringByReplacingOccurrencesOfString:@"<em>"
-                                                                   withString:@""];
-        replacedString = [replacedString stringByReplacingOccurrencesOfString:@"</em>"
-                                                                   withString:@""];
-        replacedString = [replacedString stringByReplacingOccurrencesOfString:@"<a rel=\"nofollow\" href="
-                                                                   withString:@""];
-
-    }
-    
-    return replacedString;
-}
-
 - (void)setTagDesc:(NSString *)tagDesc {
     tagDesc = [self stripOutHTMLTags:tagDesc];
     self.shortArticleDescription = tagDesc;

@@ -28,6 +28,8 @@
 
 - (float)sizeInBytes;
 
+- (NSString*)stripOutHTMLTags:(NSString*)originalString;
+
 @end
 
 @interface MRManagedObject : NSManagedObject<MRManagedObject>

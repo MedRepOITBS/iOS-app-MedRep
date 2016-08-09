@@ -89,6 +89,15 @@
     self.contactId = [NSNumber numberWithLong:tempReceiverId];
 }
 
+- (void)setMessage:(NSString *)message {
+    message = [self stripOutHTMLTags:message];
+    
+    [self willChangeValueForKey:@"message"];
+    [self setPrimitiveValue:message forKey:@"message"];
+    [self didChangeValueForKey:@"message"];
+}
+
+
 - (void)setContactId:(NSNumber *)contactId {
     [self willChangeValueForKey:@"contactId"];
     [self setPrimitiveValue:contactId forKey:@"contactId"];

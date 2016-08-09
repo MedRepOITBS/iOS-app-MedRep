@@ -141,7 +141,7 @@
                         <constraint firstAttribute="height" constant="1" id="Kzc-cd-7f8"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CiT-Gh-LmU">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CiT-Gh-LmU">
                     <rect key="frame" x="10" y="336" width="580" height="260"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
@@ -204,12 +204,12 @@
                 <mask key="constraints">
                     <exclude reference="g4p-mx-VhZ"/>
                     <exclude reference="TL4-yT-hv9"/>
-                    <exclude reference="bDu-xX-9Sf"/>
-                    <exclude reference="kgM-Y2-sCu"/>
                     <exclude reference="zB0-Vd-dxf"/>
                     <exclude reference="AYE-gV-YKQ"/>
                     <exclude reference="6X6-2x-chs"/>
                     <exclude reference="OZN-pS-00P"/>
+                    <exclude reference="bDu-xX-9Sf"/>
+                    <exclude reference="kgM-Y2-sCu"/>
                 </mask>
             </variation>
         </view>

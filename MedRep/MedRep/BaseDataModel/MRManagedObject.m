@@ -196,4 +196,27 @@ NSString *const kLastRefreshedDateAttributeName = @"lastRefreshedDate";
 	return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 }
 
+- (NSString*)stripOutHTMLTags:(NSString*)originalString {
+    NSString *replacedString = originalString;
+    if (originalString != nil && originalString.length > 0) {
+        replacedString = [replacedString stringByReplacingOccurrencesOfString:@"<p>"
+                                                                   withString:@""];
+        replacedString = [replacedString stringByReplacingOccurrencesOfString:@"</p>"
+                                                                   withString:@""];
+        replacedString = [replacedString stringByReplacingOccurrencesOfString:@"<a>"
+                                                                   withString:@""];
+        replacedString = [replacedString stringByReplacingOccurrencesOfString:@"</a>"
+                                                                   withString:@""];
+        replacedString = [replacedString stringByReplacingOccurrencesOfString:@"<em>"
+                                                                   withString:@""];
+        replacedString = [replacedString stringByReplacingOccurrencesOfString:@"</em>"
+                                                                   withString:@""];
+        replacedString = [replacedString stringByReplacingOccurrencesOfString:@"<a rel=\"nofollow\" href="
+                                                                   withString:@""];
+        
+    }
+    
+    return replacedString;
+}
+
 @end
