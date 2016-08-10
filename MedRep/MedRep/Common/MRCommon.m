@@ -222,6 +222,26 @@
     return [self deviceHasScreenWithIdiom:UIUserInterfaceIdiomPhone scale:3.0 height:736.0];
 }
 
+
++(NSInteger)getMonthIndexForShortName:(NSString *)shortAbbreviation{
+    __block NSInteger monthIndex = -1;
+    
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    NSArray *dfShortMonthSymbols =  [df shortMonthSymbols];
+    [dfShortMonthSymbols enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSString *monthName = obj;
+        
+        if ([shortAbbreviation isEqualToString:monthName]) {
+            monthIndex = idx;
+            
+            *stop = TRUE;
+        }
+        
+        
+    }];
+    
+    return monthIndex+1;
+}
 + (BOOL) deviceHasScreenWithIdiom:(UIUserInterfaceIdiom)userInterfaceIdiom scale:(CGFloat)scale height:(CGFloat)height
 {
     CGRect mainScreenBounds = [[UIScreen mainScreen] bounds];

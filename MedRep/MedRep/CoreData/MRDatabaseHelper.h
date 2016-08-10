@@ -136,10 +136,11 @@ FOUNDATION_EXPORT NSString* const kNewsAndTransformAPIMethodName;
 + (void)fetchShareDetailsById:(NSInteger)topicId
                   withHandler:(WebServiceResponseHandler)responseHandler;
 
-+(void)deleteWorkExperienceFromTable:(NSNumber *)workExpID;
-+(void)deleteEducationQualificationFromTable:(NSNumber *)educationID;
-+(void)deleteInterestAreaFromTable:(NSNumber *)interestID;
-+(void)deletePublicationAreaFromTable:(NSNumber *)publicationID;
+
++(void)deleteWorkExperienceFromTable:(NSNumber *)workExpID withHandler:(WebServiceResponseHandler)responseHandler;
++(void)deleteEducationQualificationFromTable:(NSNumber *)educationID withHandler:(WebServiceResponseHandler)responseHandler;
++(void)deleteInterestAreaFromTable:(NSNumber *)interestID withHandler:(WebServiceResponseHandler)responseHandler;
++(void)deletePublicationAreaFromTable:(NSNumber *)publicationID withHandler:(WebServiceResponseHandler)responseHandler;
 
 + (void)getMessagesOfAMember:(NSInteger)memberId
                      groupId:(NSInteger)groupId

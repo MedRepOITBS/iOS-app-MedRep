@@ -121,5 +121,5 @@
 
 + (NSString*)stringWithRelativeWordsForDate:(NSDate*)date;
 + (NSString*)convertDateToString:(NSDate*)date andFormat:(NSString*)dateFormat;
-
++(NSInteger)getMonthIndexForShortName:(NSString *)shortAbbreviation;
 @end

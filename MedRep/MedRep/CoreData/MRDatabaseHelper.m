@@ -1138,22 +1138,24 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
 
 
 
-+(void)deleteWorkExperienceFromTable:(NSNumber *)workExpID{
++(void)deleteWorkExperienceFromTable:(NSNumber *)workExpID withHandler:(WebServiceResponseHandler)responseHandler{
     NSArray *profileAra = [[MRDataManger sharedManager] fetchObjectList:@"MRProfile"];
     MRProfile * profile = [profileAra lastObject];
     MRWorkExperience *workExp = [[MRDataManger sharedManager] fetchObject:@"MRWorkExperience" predicate:[NSPredicate predicateWithFormat:@"id == %@",workExpID]];
     
     [profile removeWorkExperienceObject:workExp];
     
-//    [[MRDataManger sharedManager] delete:workExp];
+    [[MRDataManger sharedManager] removeObject:workExp];
     [[MRDataManger sharedManager] saveContext];
     
     [[MRWebserviceHelper sharedWebServiceHelper] deleteWorkExperience:workExpID withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+       
+        responseHandler(responce);
         
     }];
     
 }
-+(void)deleteEducationQualificationFromTable:(NSNumber *)educationID{
++(void)deleteEducationQualificationFromTable:(NSNumber *)educationID withHandler:(WebServiceResponseHandler)responseHandler{
     
     NSArray *profileAra = [[MRDataManger sharedManager] fetchObjectList:@"MRProfile"];
     MRProfile * profile = [profileAra lastObject];
@@ -1161,37 +1163,38 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
     
     [profile removeEducationlQualificationObject:educationExp];
     
-//    [[MRDataManger sharedManager] delete:educationExp];
+    [[MRDataManger sharedManager] removeObject:educationExp];
     [[MRDataManger sharedManager] saveContext];
 
     [[MRWebserviceHelper sharedWebServiceHelper] deleteEducationQualification:educationID withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-        
+        responseHandler(responce);
     }];
 }
-+(void)deleteInterestAreaFromTable:(NSNumber *)interestID{
++(void)deleteInterestAreaFromTable:(NSNumber *)interestID withHandler:(WebServiceResponseHandler)responseHandler{
     NSArray *profileAra = [[MRDataManger sharedManager] fetchObjectList:@"MRProfile"];
     MRProfile * profile = [profileAra lastObject];
     MRInterestArea *interestArea = [[MRDataManger sharedManager] fetchObject:@"MRInterestArea" predicate:[NSPredicate predicateWithFormat:@"id == %@",interestID]];
     
     [profile removeInterestAreaObject:interestArea];
-    
+    [[MRDataManger sharedManager] removeObject:interestArea];
+
     [[MRDataManger sharedManager] saveContext];
 [[MRWebserviceHelper sharedWebServiceHelper] deleteInterestArea:interestID withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-    
+    responseHandler(responce);
 }];
     
 }
-+(void)deletePublicationAreaFromTable:(NSNumber *)publicationID{
++(void)deletePublicationAreaFromTable:(NSNumber *)publicationID withHandler:(WebServiceResponseHandler)responseHandler{
     NSArray *profileAra = [[MRDataManger sharedManager] fetchObjectList:@"MRProfile"];
     MRProfile * profile = [profileAra lastObject];
     MRPublications *publicationObj = [[MRDataManger sharedManager] fetchObject:@"MRPublications" predicate:[NSPredicate predicateWithFormat:@"id == %@",publicationID]];
     
     [profile removePublicationsObject:publicationObj];
     
-//    [[MRDataManger sharedManager] delete:publicationObj];
+    [[MRDataManger sharedManager] removeObject:publicationObj];
     [[MRDataManger sharedManager] saveContext];
 [[MRWebserviceHelper sharedWebServiceHelper] deletePublish:publicationID withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-    
+    responseHandler(responce);
 }];
     
 }
@@ -1384,6 +1387,10 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
     workExp.toDate = [workExpDict objectForKey:@"toDate"];
     workExp.hospital = [workExpDict objectForKey:@"hospital"];
     workExp.location = [workExpDict objectForKey:@"location"];
+    workExp.currentJob = [workExpDict objectForKey:@"currentJob"];
+    workExp.summary = [workExpDict objectForKey:@"summary"];
+    
+
     [[MRDataManger sharedManager] saveContext];
     
     responseHandler(@"TRUE");
@@ -1421,6 +1428,9 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
             workExp.toDate = [workExpDict objectForKey:@"toDate"];
             workExp.hospital = [workExpDict objectForKey:@"hospital"];
             workExp.location = [workExpDict objectForKey:@"location"];
+            workExp.currentJob = [workExpDict objectForKey:@"currentJob"];
+            workExp.summary = [workExpDict objectForKey:@"summary"];
+            
             responseHandler(@"TRUE");
             [profile addWorkExperienceObject:workExp];
             [[MRDataManger sharedManager] saveContext];
@@ -1473,7 +1483,8 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
             workExp.toDate = [workExpDict objectForKey:@"toDate"];
             workExp.hospital = [workExpDict objectForKey:@"hospital"];
             workExp.location = [workExpDict objectForKey:@"location"];
-
+            workExp.currentJob = [workExpDict objectForKey:@"currentJob"];
+            workExp.summary = [workExpDict objectForKey:@"summary"];
             [profile addWorkExperienceObject:workExp];
             
         }];

@@ -17,6 +17,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *toMMTextField;
 @property (nonatomic,weak) id<ExperienceDateTimeTableViewCellDelegate> delegate;
 @property (nonatomic) BOOL isChecked;
+-(void)setCurrentCheckBox:(BOOL)isCheck;
+
 @end
 
 @protocol ExperienceDateTimeTableViewCellDelegate <NSObject>

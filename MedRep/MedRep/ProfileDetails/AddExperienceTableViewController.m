@@ -17,6 +17,7 @@
 #import "MRConstants.h"
 #import "MRWorkExperience.h"
 #import "MRCommon.h"
+#import "NSDate+Utilities.h"
 @interface AddExperienceTableViewController () <ExperienceDateTimeTableViewCellDelegate,CommonTableViewCellDelegate, ExperienceSummaryTableViewCellDelegate, NTMonthYearPickerViewDelegate>
 
 //@property (nonatomic, weak) IBOutlet UICustomDatePicker *customDatePicker;
@@ -29,7 +30,8 @@
 @property (nonatomic,strong) NSString *toYYYY;
 @property (nonatomic) BOOL isCurrentChecked;
 @property (nonatomic,strong) NSString *summaryText;
-
+@property (nonatomic,strong) NSDate *fromDate;
+@property (nonatomic,strong)NSDate *toDate;
 @property (nonatomic,weak) IBOutlet UITableView *tableView;
 @property (nonatomic,strong) UITextField *currentSelectedTextField;
 @property (nonatomic,strong) NTMonthYearPicker *picker;
@@ -103,7 +105,41 @@ self.navigationItem.title  = @"Add Experience";
         _location = _workExperience.location;
         _fromMM = _workExperience.fromDate;
         _toMM = _workExperience.toDate;
+        _isCurrentChecked = [_workExperience.currentJob boolValue];
+        _summaryText = _workExperience.summary;
+       
+        if (![_fromMM isEqualToString:@""]) {
+            
+            NSArray *fromArrDate = [_fromMM componentsSeparatedByString:@" "];
+            NSDateComponents *comps = [[NSDateComponents alloc] init];
+            NSCalendar *cal = [NSCalendar currentCalendar];
+            [comps setDay:1];
+            [comps setMonth:[MRCommon getMonthIndexForShortName:[fromArrDate objectAtIndex:0]]];
+            NSString *year = [fromArrDate objectAtIndex:1];
+            
+            [comps setYear:year.intValue];
+            _fromDate = [cal dateFromComponents:comps];
+
+            
+            
+        }
         
+        
+        if (![_toMM isEqualToString:@""]) {
+            
+            NSArray *fromArrDate = [_toMM componentsSeparatedByString:@" "];
+            NSDateComponents *comps = [[NSDateComponents alloc] init];
+            NSCalendar *cal = [NSCalendar currentCalendar];
+            [comps setDay:1];
+            [comps setMonth:[MRCommon getMonthIndexForShortName:[fromArrDate objectAtIndex:0]]];
+            NSString *year = [fromArrDate objectAtIndex:1];
+            
+            [comps setYear:year.intValue];
+            _toDate = [cal dateFromComponents:comps];
+            
+            
+            
+        }
         [self.tableView reloadData];
         revealButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"UPDATE" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonTapped:)];
     }else{
@@ -144,10 +180,11 @@ self.navigationItem.title  = @"Add Experience";
     stringFromDate = [formatter stringFromDate:_picker.date];
     if (_currentSelectedTextField.tag == 500) {
         _fromMM = stringFromDate;
+        _fromDate = _picker.date;
     }
     else if(_currentSelectedTextField.tag == 502) {
         _toMM = stringFromDate;
-        
+        _toDate = _picker.date;
     }
     
     
@@ -189,7 +226,7 @@ self.navigationItem.title  = @"Add Experience";
     
     
     if ([_fromScreen isEqualToString:@"UPDATE"]) {
-      workExpDict  = [[NSDictionary alloc] initWithObjectsAndKeys:_designation,@"designation",_organisation,@"hospital",[NSString stringWithFormat:@"%@",_fromMM],@"fromDate",[NSString stringWithFormat:@"%@",_toMM],@"toDate",_location,@"location",_workExperience.id, @"id", nil];
+      workExpDict  = [[NSDictionary alloc] initWithObjectsAndKeys:_designation,@"designation",_organisation,@"hospital",[NSString stringWithFormat:@"%@",_fromMM],@"fromDate",[NSString stringWithFormat:@"%@",_toMM],@"toDate",_location,@"location",_workExperience.id, @"id",[NSNumber numberWithBool:_isCurrentChecked],@"currentJob",_summaryText,@"summary", nil];
         [MRDatabaseHelper updateWorkExperience:workExpDict withWorkExperienceID:_workExperience.id andHandler:^(id result) {
             if ([result isEqualToString:@"TRUE"]) {
                 
@@ -203,7 +240,7 @@ self.navigationItem.title  = @"Add Experience";
  
         }];
     }else{
-          workExpDict  = [[NSDictionary alloc] initWithObjectsAndKeys:_designation,@"designation",_organisation,@"hospital",[NSString stringWithFormat:@"%@",_fromMM],@"fromDate",[NSString stringWithFormat:@"%@",_toMM],@"toDate",_location,@"location", nil];
+          workExpDict  = [[NSDictionary alloc] initWithObjectsAndKeys:_designation,@"designation",_organisation,@"hospital",[NSString stringWithFormat:@"%@",_fromMM],@"fromDate",[NSString stringWithFormat:@"%@",_toMM],@"toDate",_location,@"location",[NSNumber numberWithBool:_isCurrentChecked],@"currentJob",_summaryText,@"summary", nil];
         [MRDatabaseHelper addWorkExperience:workExpDict andHandler:^(id result) {
             if ([result isEqualToString:@"TRUE"]) {
                 
@@ -260,7 +297,12 @@ self.navigationItem.title  = @"Add Experience";
     }
     else if(!_isCurrentChecked)
     {
-        if([_toMM isEqualToString:@""] || _toMM == nil){
+         if([_fromDate isLaterThanDate:_toDate]){
+            
+            [MRCommon showAlert:@"From Date should be smaller then To Date." delegate:nil];
+            return NO;
+        }
+         if([_toMM isEqualToString:@""] || _toMM == nil){
                     errorMsg = @"Please enter the end month";
             isValidationPassed = NO;
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorMsg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
@@ -270,6 +312,8 @@ self.navigationItem.title  = @"Add Experience";
             
         }
     }
+    
+    
     return isValidationPassed;
 }
 
@@ -352,6 +396,8 @@ self.navigationItem.title  = @"Add Experience";
         case 3:{
             ExperienceDateTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ExperienceDateTimeTableViewCell" forIndexPath:indexPath];
             cell.delegate = self;
+            cell.isChecked = _isCurrentChecked;
+            [cell setCurrentCheckBox:_isCurrentChecked];
             cell.toMMTextField.text = _toMM;
             cell.fromTextField.text = _fromMM;
             return cell;

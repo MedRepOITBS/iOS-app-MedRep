@@ -51,6 +51,20 @@
 
 /// return NO to disallow editing.
 
+
+-(void)setCurrentCheckBox:(BOOL)isCheck{
+    
+    if (isCheck) {
+        [self.checkCurrentBtn setImage:[UIImage imageNamed:@"selected.png"] forState:UIControlStateNormal];
+        _isChecked = YES;
+        _toView.hidden = YES;
+    }else{
+        _isChecked = NO;
+        _toView.hidden = NO;
+        [self.checkCurrentBtn setImage:[UIImage imageNamed:@"unselected.png"] forState:UIControlStateNormal];
+    }
+    
+}
 - (IBAction)currentBtnPressed:(id)sender {
     if (!_isChecked) {
         [self.checkCurrentBtn setImage:[UIImage imageNamed:@"selected.png"] forState:UIControlStateNormal];

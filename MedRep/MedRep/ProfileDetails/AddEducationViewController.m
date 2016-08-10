@@ -133,11 +133,20 @@
     _currentSelectedTextField.text = stringFromDate;
 }
 - (void)didSelectDate {
+    [UIView animateWithDuration:0.5 animations:^{
+        self.topConstraint.constant = 0;
+        [self.tableView updateConstraintsIfNeeded];
+    }];
+
     [_picker setHidden:YES];
     [self updateLabel];
 }
 
 - (void)cancelDateSelection {
+    [UIView animateWithDuration:0.5 animations:^{
+        self.topConstraint.constant = 0;
+        [self.tableView updateConstraintsIfNeeded];
+    }];
     [_picker setHidden:YES];
 }
 
@@ -248,6 +257,10 @@
         
         return isValidationPassed;
         
+        
+    }else if([_toYYYY integerValue] < [_fromYYYY integerValue]){
+        [MRCommon showAlert:@"From Year Cannot be smaller then To Year. Please change the ear accordingly." delegate:nil];
+        return NO;
         
     }
        return isValidationPassed;
@@ -434,12 +447,41 @@
     // Pass the selected object to the new view controller.
 }
 */
+- (void)viewWillAppear:(BOOL)animated {
+  }
+
+- (void)viewWillDisappear:(BOOL)animated {
+    
+}
+#pragma mark - keyboard movements
+
+
 
 -(void)EducationDateTimeTableViewCellDelegateForTextFieldClicked:(EducationDateTimeTableViewCell *)cell withTextField:(UITextField *)textField{
+    
+    
+    [UIView animateWithDuration:0.5 animations:^{
+//        CGRect f = self.view.frame;
+//        f.origin.y = -150+50;
+      self.topConstraint.constant = -150+50;
+        [self.tableView updateConstraintsIfNeeded];
+    }];
+
     _currentSelectedTextField = textField;
     self.picker.hidden = NO;
     
 }
+-(void)CommonEducationTableViewCellDelegateForTextFieldDidBeginEditing:(CommonEducationTableViewCell *)cell withTextField:(UITextField *)textField{
+    if(textField.tag == 803){
+        [UIView animateWithDuration:0.5 animations:^{
+            self.topConstraint.constant = -100;
+            [self.tableView updateConstraintsIfNeeded];
+        }];
+       
+    }
+    
+}
+
 -(void)CommonEducationTableViewCellDelegateForTextFieldDidEndEditing:(CommonEducationTableViewCell *)cell withTextField:(UITextField *)textField{
     NSString *trimmedString = [textField.text stringByTrimmingCharactersInSet:
                                [NSCharacterSet whitespaceCharacterSet]];
@@ -452,6 +494,10 @@
     else if(textField.tag == 802){
         _speciality = trimmedString;
     }else if(textField.tag == 803){
+        [UIView animateWithDuration:0.5 animations:^{
+            self.topConstraint.constant = 0;
+            [self.tableView updateConstraintsIfNeeded];
+        }];
         _institute = trimmedString;
     }
 
