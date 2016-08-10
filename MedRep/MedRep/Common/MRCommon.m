@@ -714,7 +714,12 @@
 }
 
 + (void)applyNavigationBarStyling:(UINavigationController*)navigationController {
-    
+    [MRCommon applyNavigationBarStyling:navigationController andBarColor:kStatusBarColor];
+}
+
++ (void)applyNavigationBarStyling:(UINavigationController*)navigationController
+                    andBarColor:(NSString*)barColor {
+
     [[UINavigationBar appearance] setTitleTextAttributes:@{
                                             NSForegroundColorAttributeName:[UIColor whiteColor],
                                             NSFontAttributeName: [UIFont boldSystemFontOfSize:16.0]
@@ -723,7 +728,7 @@
     
     // shadowImage removes under navigation line
     navigationController.navigationBar.shadowImage = [UIImage new];
-    navigationController.navigationBar.barTintColor = [MRCommon colorFromHexString:kStatusBarColor];
+    navigationController.navigationBar.barTintColor = [MRCommon colorFromHexString:barColor];
     navigationController.navigationBar.tintColor = [UIColor whiteColor];
     navigationController.navigationBar.translucent = false;
     [navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];

@@ -32,6 +32,9 @@
     NSMutableArray *groupMemberArray;
     BOOL canEditGroup;
 }
+
+@property (weak, nonatomic) IBOutlet UIButton *postTopicButton;
+
 @property (weak, nonatomic) IBOutlet UIView *groupMembersView;
 @property (weak, nonatomic) IBOutlet UILabel *emptyPostsLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *groupMembersHeightConstraint;
@@ -97,6 +100,7 @@
     [self fetchPosts];
     
     if (self.launchMode == kContactDetailLaunchModeSuggestedContact) {
+        [self.postTopicButton setHidden:YES];
         [self.deleteConnectionButton setTitle:NSLocalizedString(kAddConnection, "")
                                forState:UIControlStateNormal];
         [self.deleteConnectionButton addTarget:self
@@ -111,6 +115,7 @@
                               forControlEvents:UIControlEventTouchUpInside];
         [self.deleteConnectionButton setBackgroundColor:[MRCommon colorFromHexString:@"#FF0000"]];
     } else if (self.launchMode == kContactDetailLaunchModeSuggestedGroup) {
+        [self.postTopicButton setHidden:YES];
         [self.deleteConnectionButton setTitle:NSLocalizedString(kJoinGroup, "")
                                      forState:UIControlStateNormal];
         [self.deleteConnectionButton addTarget:self
@@ -218,8 +223,13 @@
 - (void)setupUIWithGroupDetails {
     self.navigationItem.title = @"Group Details";
    
+    if (self.launchMode == kContactDetailLaunchModeSuggestedGroup) {
+        [self.groupMembersView setHidden:true];
+        self.groupMembersHeightConstraint.constant = 0;
+    } else {
+        [self.groupMembersView setHidden:false];
+    }
     
-    [self.groupMembersView setHidden:false];
     [_city setHidden:YES];
     
     [MRAppControl getGroupImage:self.mainGroup andImageView:self.mainImageView];
@@ -687,9 +697,9 @@
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    
     [picker dismissViewControllerAnimated:YES completion:NULL];
     
+    [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutCenter)];
 }
 
 - (void)getGroupMembersStatusWithGroupId{

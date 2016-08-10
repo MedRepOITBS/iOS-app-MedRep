@@ -312,6 +312,7 @@ UIImagePickerControllerDelegate>
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
     
+    [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutCenter)];
 }
 
 - (void)refetchPost:(NSIndexPath *)indexPath {

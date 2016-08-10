@@ -108,7 +108,7 @@
     _searchTxt.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 30)];
     _searchTxt.leftViewMode = UITextFieldViewModeAlways;
     
-    [self.titleView setBackgroundColor:[MRCommon colorFromHexString:kStatusBarColor]];
+//    [self.titleView setBackgroundColor:[MRCommon colorFromHexString:kStatusBarColor]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -116,9 +116,9 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void) viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    [MRCommon applyNavigationBarStyling:self.navigationController];
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [MRCommon applyNavigationBarStyling:self.navigationController andBarColor:@"#20B18A"];
 }
 
 /*

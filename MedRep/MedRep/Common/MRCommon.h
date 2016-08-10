@@ -118,6 +118,8 @@
 + (UIView*)createTabBarView:(UIView*)parentView;
 
 + (void)applyNavigationBarStyling:(UINavigationController*)navigationController;
++ (void)applyNavigationBarStyling:(UINavigationController*)navigationController
+                      andBarColor:(NSString*)barColor;
 
 + (NSString*)stringWithRelativeWordsForDate:(NSDate*)date;
 + (NSString*)convertDateToString:(NSDate*)date andFormat:(NSString*)dateFormat;

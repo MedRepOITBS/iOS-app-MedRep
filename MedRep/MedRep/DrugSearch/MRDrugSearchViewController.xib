@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -49,7 +49,7 @@
                             <state key="normal" title="V"/>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.17254901960784313" green="0.56470588235294117" blue="0.68235294117647061" alpha="0.80439116379310338" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.12549019610000001" green="0.69411764710000001" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="D9U-gU-ueB" secondAttribute="trailing" constant="41" id="3gF-A0-Cue"/>
                         <constraint firstAttribute="trailing" secondItem="5hQ-kE-n9l" secondAttribute="trailing" constant="41" id="7rQ-2T-R5m"/>
@@ -67,8 +67,9 @@
                         </mask>
                     </variation>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Drug_Search.jpg" highlightedImage=" " translatesAutoresizingMaskIntoConstraints="NO" id="lId-zk-MlA">
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Drug_Search.jpg" highlightedImage=" " translatesAutoresizingMaskIntoConstraints="NO" id="lId-zk-MlA">
                     <rect key="frame" x="0.0" y="60" width="375" height="607"/>
+                    <color key="backgroundColor" red="0.16862745098039217" green="0.96470588235294119" blue="0.75294117647058822" alpha="1" colorSpace="calibratedRGB"/>
                 </imageView>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o5n-NT-IVK">
                     <rect key="frame" x="0.0" y="85" width="375" height="150"/>
@@ -241,7 +242,7 @@
                     </variation>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.16862745098039217" green="0.96470588235294119" blue="0.75294117647058822" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="o5n-NT-IVK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="91W-NO-I6A"/>
                 <constraint firstAttribute="bottom" secondItem="lQg-IS-Lpj" secondAttribute="bottom" id="Dvr-7g-nan"/>
