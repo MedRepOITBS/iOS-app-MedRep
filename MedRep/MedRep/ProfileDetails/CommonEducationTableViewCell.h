@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 @protocol CommonEducationTableViewCellDelegate;
 
-@interface CommonEducationTableViewCell : UITableViewCell
+@interface CommonEducationTableViewCell : UITableViewCell<UITextFieldDelegate>
+
 @property (weak, nonatomic) IBOutlet UILabel *titleEducationLbl;
 @property (weak, nonatomic) IBOutlet UILabel *hintLabel;
 @property (weak, nonatomic) IBOutlet UITextField *inputTextField;
@@ -20,6 +21,8 @@
 @protocol CommonEducationTableViewCellDelegate <NSObject>
 
 @optional
+-(void)CommonEducationTableViewCellDelegateForTextFieldDidBeginEditing:(CommonEducationTableViewCell *)cell withTextField:(UITextField *)textField;
+
 
 -(void)CommonEducationTableViewCellDelegateForTextFieldDidEndEditing:(CommonEducationTableViewCell *)cell withTextField:(UITextField *)textField;
 

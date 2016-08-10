@@ -41,6 +41,12 @@
 
     // Configure the view for the selected state
 }
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    if ([self.delegate respondsToSelector:@selector(CommonEducationTableViewCellDelegateForTextFieldDidBeginEditing:withTextField:)]) {
+        [self.delegate CommonEducationTableViewCellDelegateForTextFieldDidBeginEditing:self withTextField:textField];
+    }
+    
+}
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     
    

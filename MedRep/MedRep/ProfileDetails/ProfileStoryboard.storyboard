@@ -791,6 +791,7 @@ easier for colleagues to find you.</string>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="RKu-y3-eFL" id="FQg-Lf-M5Y"/>
+                        <outlet property="topConstraint" destination="bD2-uE-aD6" id="kiq-bi-OXN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iTz-1Q-KAj" userLabel="First Responder" sceneMemberID="firstResponder"/>
