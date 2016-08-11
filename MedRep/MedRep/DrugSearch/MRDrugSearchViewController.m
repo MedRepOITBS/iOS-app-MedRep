@@ -108,7 +108,7 @@
     _searchTxt.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 30)];
     _searchTxt.leftViewMode = UITextFieldViewModeAlways;
     
-//    [self.titleView setBackgroundColor:[MRCommon colorFromHexString:kStatusBarColor]];
+    [self.titleView setBackgroundColor:[MRCommon colorFromHexString:kStatusBarColor]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -116,20 +116,20 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void) viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [MRCommon applyNavigationBarStyling:self.navigationController andBarColor:@"#20B18A"];
+-(void) viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [MRCommon applyNavigationBarStyling:self.navigationController];
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 - (void)backButtonAction
 {
@@ -167,10 +167,10 @@
 }
 -(BOOL) textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
-//    if (textField.text.length) {
-//        searchString = [textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-//        [self getMedicineSuggestions];
-//    }
+    //    if (textField.text.length) {
+    //        searchString = [textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    //        [self getMedicineSuggestions];
+    //    }
     return YES;
 }
 

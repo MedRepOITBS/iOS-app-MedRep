@@ -287,7 +287,7 @@ UIImagePickerControllerDelegate>
 #pragma CAMERA IMAGE CAPTURE
 
 -(void)takePhoto:(UIImagePickerControllerSourceType)type {
-    [_commentBoxKLCPopView dismiss:YES];
+    [_commentBoxKLCPopView setHidden:YES];
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.allowsEditing = YES;
@@ -305,14 +305,14 @@ UIImagePickerControllerDelegate>
     [_commentBoxView setImageForShareImage:chosenImage];
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
-    [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutCenter)];
+    [_commentBoxKLCPopView setHidden:NO];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
     
-    [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutCenter)];
+    [_commentBoxKLCPopView setHidden:NO];
 }
 
 - (void)refetchPost:(NSIndexPath *)indexPath {

@@ -36,14 +36,19 @@
     int i;
     NSTimer *timer;
 }
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *moreOptionsWidthConstraint;
+
+@property (weak, nonatomic) IBOutlet UIView *pendingConnectionsView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *pendingConnectionsViewWidthConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *pendingConnectionsLeadingConstraint;
+
+@property (weak, nonatomic) IBOutlet UIView *moreOptionsView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *moreOptionsTrailingConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *moreOptionsWidthConstraint;
 
 @property (weak, nonatomic) IBOutlet UICollectionView* myContactsCollectionView;
 //@property (weak, nonatomic) IBOutlet UICollectionView* suggestedContactsCollectionView;
 @property (weak, nonatomic) IBOutlet UICollectionView* titlesCollectionView;
 @property (weak, nonatomic) IBOutlet UISearchBar* searchBar;
-@property (weak, nonatomic) IBOutlet UIButton* switchButton;
 @property (weak, nonatomic) IBOutlet UIButton* moreOptions;
 @property (weak, nonatomic) IBOutlet UITabBar* tabBar;
 //@property (weak, nonatomic) IBOutlet UITabBarItem* myContactsButton;
@@ -83,7 +88,6 @@
     [self.myContactsCollectionView registerNib:[UINib nibWithNibName:@"MRContactCollectionCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"contactCell"];
     [self.titlesCollectionView registerNib:[UINib nibWithNibName:@"MRTransformTitleCollectionViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"transformTitleCollectionViewCell"];
     //[self.suggestedContactsCollectionView registerNib:[UINib nibWithNibName:@"MRContactCollectionCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"contactCell"];
-    [self readData];
     self.fileredContacts = self.myContacts;
     
     self.navigationItem.title = @"Connect";
@@ -118,6 +122,7 @@
     [tabBarView setNavigationController:self.navigationController];
     [tabBarView setContactsViewController:self];
     [tabBarView updateActiveViewController:self andTabIndex:DoctorPlusTabConnect];
+    self.moreOptions.layer.cornerRadius = self.moreOptions.bounds.size.width / 2.0;
 
     [self fetchDataFromServer];
 }
@@ -152,13 +157,23 @@
 
 - (void)updatePlusButton {
     if (self.currentIndex == 1 || self.currentIndex == 3) {
-        [self.moreOptions setHidden:true];
-        self.moreOptionsWidthConstraint.constant = 0;
-        self.moreOptionsTrailingConstraint.constant = 0;
+        // My Contacts & Groups
+        [self.pendingConnectionsView setHidden:YES];
+        self.pendingConnectionsViewWidthConstraint.constant = 0.0;
+        self.moreOptionsTrailingConstraint.constant = 0.0;
+        
+        [self.moreOptions setHidden:YES];
+        self.moreOptionsWidthConstraint.constant = 0.0;
+        self.moreOptionsTrailingConstraint.constant = 0.0;
     } else {
-        [self.moreOptions setHidden:false];
-        self.moreOptionsWidthConstraint.constant = 30;
-        self.moreOptionsTrailingConstraint.constant = 20;
+        // My Contacts & Groups
+        [self.pendingConnectionsView setHidden:NO];
+        self.pendingConnectionsViewWidthConstraint.constant = 50.0;
+        self.moreOptionsTrailingConstraint.constant = 5.0;
+        
+        [self.moreOptions setHidden:NO];
+        self.moreOptionsWidthConstraint.constant = 30.0;
+        self.moreOptionsTrailingConstraint.constant = 10.0;
     }
 }
 
@@ -191,29 +206,6 @@
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     i = scrollView.contentOffset.x;
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-- (void)readData {
-    self.myContacts = [NSMutableArray array];//[[MRDatabaseHelper getContacts] mutableCopy];
-    self.suggestedContacts = [NSMutableArray array];//[[MRDatabaseHelper getSuggestedContacts] mutableCopy];
-    
-    if (self.myContacts != nil && self.myContacts.count >0) {
-        self.noContactErrorMsgLbl.hidden = YES;
-        self.clickHereToAddBtn.hidden = YES;
-    }else {
-        self.noContactErrorMsgLbl.hidden = NO;
-        self.clickHereToAddBtn.hidden = NO;
-    }
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -340,6 +332,7 @@
         }else {
             self.noContactErrorMsgLbl.text = @"LOOKS LIKE YOU DON'T HAVE ANY CONNECTIONS";
             self.noContactErrorMsgLbl.hidden = NO;
+            [self.clickHereToAddBtn setTitle:@"CLICK HERE TO ADD" forState:UIControlStateNormal];
             self.clickHereToAddBtn.hidden = NO;
         }
     } else if (self.currentIndex == 1) {
@@ -357,8 +350,9 @@
             self.noContactErrorMsgLbl.hidden = YES;
             self.clickHereToAddBtn.hidden = YES;
         }else {
-            self.noContactErrorMsgLbl.text = @"LOOKS LIKE YOU DON'T HAVE ANY GROUPS";
+            self.noContactErrorMsgLbl.text = @"LOOKS LIKE YOU ARE NOT PART OF ANY GROUP";
             self.noContactErrorMsgLbl.hidden = NO;
+            [self.clickHereToAddBtn setTitle:@"CLICK HERE TO JOIN A GROUP" forState:UIControlStateNormal];
             self.clickHereToAddBtn.hidden = NO;
         }
     } else if (self.currentIndex == 3) {
@@ -373,59 +367,11 @@
     }
     
     [_myContactsCollectionView reloadData];
-//    [_titlesCollectionView reloadData];
 }
-
-//- (void)setupPieMenu {
-//    self.pieMenu = [[PieMenu alloc] init];
-//    PieMenuItem *itemA = [[PieMenuItem alloc] initWithTitle:@"Connect"
-//                                                      label:nil
-//                                                     target:self
-//                                                   selector:@selector(itemSelected:)
-//                                                   userInfo:nil
-//                                                       icon:[UIImage imageNamed:@"Contact.png"]];
-//
-//    PieMenuItem *itemB = [[PieMenuItem alloc] initWithTitle:@"Share"
-//                                                      label:nil
-//                                                     target:self
-//                                                   selector:@selector(itemSelected:)
-//                                                   userInfo:nil
-//                                                       icon:[UIImage imageNamed:@"Contact.png"]];
-//
-//    PieMenuItem *itemC = [[PieMenuItem alloc] initWithTitle:@"Transform"
-//                                                      label:nil
-//                                                     target:self
-//                                                   selector:@selector(itemSelected:)
-//                                                   userInfo:nil
-//                                                       icon:[UIImage imageNamed:@"Contact.png"]];
-//
-//    PieMenuItem *itemD = [[PieMenuItem alloc] initWithTitle:@"Serve"
-//                                                      label:nil
-//                                                     target:self
-//                                                   selector:@selector(itemSelected:)
-//                                                   userInfo:nil
-//                                                       icon:[UIImage imageNamed:@"Contact.png"]];
-//
-//    //[pieMenu addItem:itemD];
-//    [self.pieMenu addItem:itemA];
-//    [self.pieMenu addItem:itemB];
-//    [self.pieMenu addItem:itemC];
-//    [self.pieMenu addItem:itemD];
-//}
 
 - (void)viewTapped:(UITapGestureRecognizer*)tapGesture {
     [self.searchBar resignFirstResponder];
     self.tapGesture.enabled = NO;
-}
-
-- (IBAction)switchButtonTapped:(id)sender {
-    /*[UIView transitionWithView:self.navigationController.view
-                      duration:0.75
-                       options:UIViewAnimationOptionTransitionCurlUp
-                    animations:^{
-                        [self.navigationController pushViewController:self.groupsListViewController animated:NO];
-                    }
-                    completion:nil];*/
 }
 
 - (IBAction)addButtonClicked:(id)sender {
@@ -434,12 +380,14 @@
         detailViewController.groupID = 0;
         [self.navigationController pushViewController:detailViewController animated:NO];
     } else {
-        MRCreateGroupViewController* detailViewController = [[MRCreateGroupViewController alloc] init];
-        [self.navigationController pushViewController:detailViewController animated:NO];
+        MRJoinGroupViewController *joinGroupViewController = [MRJoinGroupViewController new];
+        [self.navigationController pushViewController:joinGroupViewController animated:NO];
     }
 }
 
 - (IBAction)popOverTapped:(id)sender {
+    [self.searchBar resignFirstResponder];
+    
     if (self.currentIndex == 0 || self.currentIndex == 1) {
         self.menu = [[UIActionSheet alloc] initWithTitle:@"More Options"
                                                 delegate:self
@@ -451,7 +399,7 @@
                                                 delegate:self
                                        cancelButtonTitle:@"Cancel"
                                   destructiveButtonTitle:nil
-                                       otherButtonTitles:@"Pending Groups", @"Create Group", @"More Groups", nil];
+                                       otherButtonTitles:@"My Pending Groups", @"Create Group", @"More Groups", nil];
     }
     
     [self.menu showFromRect:self.moreOptions.frame inView:self.view animated:YES];
@@ -540,26 +488,6 @@
         [self refreshLabels];
     }];
 }
-
-
-/*- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
-    if (item == self.myContactsButton) {
-//        [self.switchButton setImage:[UIImage imageNamed:@"Group.png"] forState:UIControlStateNormal];
-//        [self.switchButton setImage:[UIImage imageNamed:@"Group.png"] forState:UIControlStateSelected];
-        //self.myContactsCollectionView.hidden = NO;
-        //self.suggestedContactsCollectionView.hidden = YES;
-        self.fileredContacts = self.myContacts;
-        [self.myContactsCollectionView reloadData];
-    } else {
-//        [self.switchButton setImage:[UIImage imageNamed:@"Contact.png"] forState:UIControlStateNormal];
-//        [self.switchButton setImage:[UIImage imageNamed:@"Contact.png"] forState:UIControlStateSelected];
-        //self.myContactsCollectionView.hidden = YES;
-        //self.suggestedContactsCollectionView.hidden = NO;
-        self.fileredContacts = self.suggestedContacts;
-        [self.myContactsCollectionView reloadData];
-    }
-    self.searchBar.text = @"";
-}*/
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     if (self.currentIndex == 0) {

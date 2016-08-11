@@ -33,6 +33,11 @@
     BOOL canEditGroup;
 }
 
+
+@property (weak, nonatomic) IBOutlet UIView *viewAllGroupMembers;
+
+@property (weak, nonatomic) IBOutlet UILabel *postedMessagesTitleLabel;
+
 @property (weak, nonatomic) IBOutlet UIButton *postTopicButton;
 
 @property (weak, nonatomic) IBOutlet UIView *groupMembersView;
@@ -85,6 +90,11 @@
     self.postsTableView.estimatedRowHeight = 283;
     self.postsTableView.rowHeight = UITableViewAutomaticDimension;
     
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                 action:@selector(viewAllGroupMembersTapped)];
+    [tapGesture setNumberOfTapsRequired:1];
+    [self.viewAllGroupMembers addGestureRecognizer:tapGesture];
+    
     if (self.mainContact) {
         [self setupUIWithContactDetails];
     } else {
@@ -97,10 +107,13 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self fetchPosts];
-    
     if (self.launchMode == kContactDetailLaunchModeSuggestedContact) {
         [self.postTopicButton setHidden:YES];
+        [self.plusBtn setHidden:YES];
+        [self.postsTableView setHidden:YES];
+        [self.postedMessagesTitleLabel setHidden:YES];
+        [self.emptyPostsLabel setHidden:YES];
+        
         [self.deleteConnectionButton setTitle:NSLocalizedString(kAddConnection, "")
                                forState:UIControlStateNormal];
         [self.deleteConnectionButton addTarget:self
@@ -114,8 +127,15 @@
                                         action:@selector(leaveGroup)
                               forControlEvents:UIControlEventTouchUpInside];
         [self.deleteConnectionButton setBackgroundColor:[MRCommon colorFromHexString:@"#FF0000"]];
+        
+        [self fetchPosts];
     } else if (self.launchMode == kContactDetailLaunchModeSuggestedGroup) {
         [self.postTopicButton setHidden:YES];
+        [self.plusBtn setHidden:YES];
+        [self.postsTableView setHidden:YES];
+        [self.postedMessagesTitleLabel setHidden:YES];
+        [self.emptyPostsLabel setHidden:YES];
+        
         [self.deleteConnectionButton setTitle:NSLocalizedString(kJoinGroup, "")
                                      forState:UIControlStateNormal];
         [self.deleteConnectionButton addTarget:self
@@ -129,6 +149,8 @@
                                   action:@selector(deleteConnection:)
                         forControlEvents:UIControlEventTouchUpInside];
         [self.deleteConnectionButton setBackgroundColor:[MRCommon colorFromHexString:@"#FF0000"]];
+        
+        [self fetchPosts];
     }
 }
 
@@ -675,7 +697,7 @@
 
 #pragma mark
 -(void)takePhoto:(UIImagePickerControllerSourceType)type {
-    [_commentBoxKLCPopView dismiss:YES];
+    [_commentBoxKLCPopView setHidden:YES];
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.allowsEditing = YES;
@@ -693,13 +715,12 @@
     [_commentBoxView setImageForShareImage:chosenImage];
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
-    [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutCenter)];
+    [_commentBoxKLCPopView setHidden:NO];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [picker dismissViewControllerAnimated:YES completion:NULL];
-    
-    [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutCenter)];
+    [_commentBoxKLCPopView setHidden:NO];
 }
 
 - (void)getGroupMembersStatusWithGroupId{
@@ -930,6 +951,10 @@
     }
     
     [MRDatabaseHelper addGroupChildPost:post withPostDict:saveData];
+}
+
+- (void)viewAllGroupMembersTapped {
+    
 }
 
 @end

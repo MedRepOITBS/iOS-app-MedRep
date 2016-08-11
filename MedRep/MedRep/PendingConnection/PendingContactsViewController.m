@@ -422,8 +422,6 @@
         }
         
         cell.cellDelegate = self;
-        cell.acceptBtn.tag = indexPath.row;
-        cell.rejectBtn.tag = indexPath.row;
         
         if (_isFromGroup) {
             MRGroup *group = [fileredContacts objectAtIndex:indexPath.row];
@@ -435,15 +433,15 @@
             
             cell.phoneNo.text = @"";
             cell.profilePic.image = [MRAppControl getGroupImage:group];
-            cell.acceptBtn.hidden = YES;
-            cell.rejectBtn.hidden = YES;
+            cell.acceptConnectionView.hidden = YES;
+            cell.rejectConnectionView.hidden = YES;
             
             return cell;
         }
         
         if (!_canEdit && _isFromMember) {
-            cell.acceptBtn.hidden = YES;
-            cell.rejectBtn.hidden = YES;
+            cell.acceptConnectionView.hidden = YES;
+            cell.rejectConnectionView.hidden = YES;
         }
         
         MRContact *contact = [fileredContacts objectAtIndex:indexPath.row];

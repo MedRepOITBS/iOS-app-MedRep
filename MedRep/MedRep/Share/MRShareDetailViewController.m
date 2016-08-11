@@ -502,7 +502,8 @@ AVPlayerViewControllerDelegate> {
 #pragma CAMERA IMAGE CAPTURE
 
 -(void)takePhoto:(UIImagePickerControllerSourceType)type {
-    [_commentBoxKLCPopView dismiss:YES];
+    [_commentBoxKLCPopView setHidden:YES];
+    
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.allowsEditing = YES;
@@ -519,7 +520,7 @@ AVPlayerViewControllerDelegate> {
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
     [_commentBoxView setImageForShareImage:chosenImage];
     [picker dismissViewControllerAnimated:YES completion:NULL];
-    [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutAboveCenter)];
+    [_commentBoxKLCPopView setHidden:NO];
     
     MRSharePost *sharePost = [_commentBoxView getSelectedPost];
 }
@@ -528,7 +529,7 @@ AVPlayerViewControllerDelegate> {
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
     
-    [_commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutCenter)];
+    [_commentBoxKLCPopView setHidden:NO];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *, id> *)change context:(void *)context {

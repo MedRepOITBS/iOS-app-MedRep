@@ -22,8 +22,10 @@
 @property (weak, nonatomic) IBOutlet UIImageView *profilePic;
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 @property (weak, nonatomic) IBOutlet UILabel *phoneNo;
-@property (weak, nonatomic) IBOutlet UIButton *rejectBtn;
-@property (weak, nonatomic) IBOutlet UIButton *acceptBtn;
+
+@property (weak, nonatomic) IBOutlet UIView *acceptConnectionView;
+
+@property (weak, nonatomic) IBOutlet UIView *rejectConnectionView;
 
 - (IBAction)rejectAction:(id)sender;
 - (IBAction)acceptAction:(id)sender;

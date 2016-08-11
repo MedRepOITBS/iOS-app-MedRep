@@ -4148,12 +4148,12 @@
 				CC7DB31D1D0CC5F8007DFE4C /* PendingContactCustomCell.xib */,
 				CC7DB31E1D0CC5F8007DFE4C /* PendingContactCustomFilterTableViewCell.h */,
 				CC7DB31F1D0CC5F8007DFE4C /* PendingContactCustomFilterTableViewCell.m */,
-				CC7DB3201D0CC5F8007DFE4C /* PendingContactTableViewCell.xib */,
 				CC7DB3121D0CC530007DFE4C /* PendingContactsViewController.h */,
 				CC7DB3131D0CC530007DFE4C /* PendingContactsViewController.m */,
 				CC7DB3141D0CC530007DFE4C /* PendingContactsViewController.xib */,
 				CC7DB3151D0CC530007DFE4C /* PendingContactTableViewCell.h */,
 				CC7DB3161D0CC530007DFE4C /* PendingContactTableViewCell.m */,
+				CC7DB3201D0CC5F8007DFE4C /* PendingContactTableViewCell.xib */,
 			);
 			path = PendingConnection;
 			sourceTree = "<group>";
