@@ -27,6 +27,8 @@
 #import "MrGroupChildPost.h"
 #import "MRContactsViewController.h"
 #import "MemberListViewController.h"
+#import "MRGroupMembersViewController.h"
+
 @interface MRContactDetailViewController () <MRGroupPostItemTableViewCellDelegate, CommonBoxViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MRUpdateMemberProtocol> {
     NSMutableArray *groupsArrayObj;
     NSMutableArray *groupMemberArray;
@@ -741,13 +743,12 @@
               self.contactsUnderGroup = [NSArray new];
           }
                                           
-        if (self.contactsUnderGroup.count>2) {
-            _viewMoreButton.hidden = NO;
-            
-        }else{
-            _viewMoreButton.hidden = YES;
-            
-        }
+//        if (self.contactsUnderGroup.count>2) {
+//            [self.viewAllGroupMembers setHidden:NO];
+//            
+//        } else {
+//            [self.viewAllGroupMembers setHidden:YES];
+//        }
                                           
         [self.collectionView reloadData];
     }];
@@ -954,7 +955,10 @@
 }
 
 - (void)viewAllGroupMembersTapped {
-    
+    MRGroupMembersViewController *groupMembersViewController = [MRGroupMembersViewController new];
+    [groupMembersViewController setGroup:self.mainGroup];
+    [self.navigationController pushViewController:groupMembersViewController
+                                         animated:YES];
 }
 
 @end

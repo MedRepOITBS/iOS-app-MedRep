@@ -789,8 +789,8 @@
 }
 
 + (void)getGroupMemberImage:(MRGroupMembers*)member andImageView:(UIImageView*)parentView {
-    if (member.data != nil && member.data.length > 0) {
-        parentView.image = [UIImage imageWithData:member.data];
+    if (member.imageUrl != nil && member.imageUrl.length > 0) {
+        parentView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:member.imageUrl]]];
     } else {
         NSString *fullName = [MRAppControl getGroupMemberName:member];
         if (fullName != nil && fullName.length > 0) {

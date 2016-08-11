@@ -18,13 +18,13 @@
 @dynamic member_id;
 @dynamic status;
 @dynamic is_admin;
+@dynamic imageUrl;
 @dynamic doctor;
 @dynamic memberList;
 @dynamic groupList;
 @dynamic firstName;
 @dynamic lastName;
 @dynamic alias;
-@dynamic data;
 @dynamic mimeType;
 @dynamic therapeuticName;
 @dynamic therapeuticDesc;

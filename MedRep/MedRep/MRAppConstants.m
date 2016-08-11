@@ -54,4 +54,7 @@ NSString* const kConnectionAdded = @"Connection Added Successfully !!!";
 
 NSString* const kNotificationRefreshContactList = @"RefreshContactList";
 
+NSString* const kPendingGroupMembers = @"Pending Members";
+NSString* const kActiveGroupMembers = @"Active Members";
+
 @end

@@ -20,13 +20,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSNumber *member_id;
 @property (nullable, nonatomic, retain) NSString *status;
 @property (nullable, nonatomic, retain) NSNumber *is_admin;
+@property (nullable, nonatomic, retain) NSString *imageUrl;
 @property (nullable, nonatomic, retain) NSData *doctor;
 @property (nullable, nonatomic, retain) NSData *memberList;
 @property (nullable, nonatomic, retain) NSData *groupList;
 @property (nullable, nonatomic, retain) NSString *firstName;
 @property (nullable, nonatomic, retain) NSString *lastName;
 @property (nullable, nonatomic, retain) NSString *alias;
-@property (nullable, nonatomic, retain) NSData *data;
 @property (nullable, nonatomic, retain) NSString *mimeType;
 @property (nullable, nonatomic, retain) NSString *therapeuticName;
 @property (nullable, nonatomic, retain) NSString *therapeuticDesc;

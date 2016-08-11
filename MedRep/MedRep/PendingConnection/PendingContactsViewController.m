@@ -422,6 +422,7 @@
         }
         
         cell.cellDelegate = self;
+        cell.tag = indexPath.row;
         
         if (_isFromGroup) {
             MRGroup *group = [fileredContacts objectAtIndex:indexPath.row];
