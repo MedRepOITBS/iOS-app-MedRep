@@ -31,13 +31,13 @@
 #import "UIImage+Helpers.h"
 
 #import "PublicationsViewController.h"
-@interface MRProfileDetailsViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate,CommonProfileSectionTableViewCellDelegate>
+@interface MRProfileDetailsViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate,ProfileBasicTableViewCellDelegate,CommonProfileSectionTableViewCellDelegate>
 
 
 @property (assign, nonatomic) BOOL isImageUploaded;
 @property (nonatomic,strong) NSMutableArray *commonSectionArray;
 @property (nonatomic,strong) MRProfile *profileObj;
-
+@property (nonatomic,strong) UIImage *profileImage;
 
 @end
 
@@ -292,28 +292,6 @@
     }
 }
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 2)
-    {
-        
-    }
-    else
-    {
-        UIImagePickerController *imagePickController=[[UIImagePickerController alloc] init];
-        if (buttonIndex == 0)
-        {
-            imagePickController.sourceType = UIImagePickerControllerSourceTypeCamera;
-        }
-        else
-        {
-            imagePickController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        }
-        imagePickController.allowsEditing = NO;
-        imagePickController.delegate = self;
-        [self presentViewController:imagePickController animated:YES completion:nil];
-    }
-}
 
 - (IBAction)profileEditButtonAction:(id)sender
 {
@@ -347,6 +325,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
+    
     //NSLog(@"%@",chosenImage);
     
 //    self.profileImageView.image = [MRCommon imageWithImage:chosenImage scaledToSize:CGSizeMake(200, 200)];
@@ -360,8 +339,10 @@
          if (status)
          {
              self.isImageUploaded = YES;
-             [[MRAppControl sharedHelper].userRegData setObject:[imageData base64EncodedDataWithOptions:0] forKey:KProfilePicture];
+//             [[MRAppControl sharedHelper].userRegData setObject:[imageData base64EncodedDataWithOptions:0] forKey:KProfilePicture];
 //             self.profileImageView.image = [MRCommon imageWithImage:chosenImage scaledToSize:CGSizeMake(200, 200)];
+             _profileImage = chosenImage;
+             [self.tableView reloadData];
              [MRCommon showAlert:@"Profile Picture Updated Sucessfully" delegate:nil];
              
          }
@@ -653,7 +634,7 @@ NSString *valN = [valNDict objectForKey:@"type"];
      if ([valN isEqualToString:@"PROFILE_BASIC"]) {
          ProfileBasicTableViewCell  *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"ProfileBasicTableViewCell"] forIndexPath:indexPath];
          NSDictionary *userdata = [MRAppControl sharedHelper].userRegData;
-         
+         cell.delegate = self;
          
          NSInteger userType = [MRAppControl sharedHelper].userType;
          
@@ -661,17 +642,24 @@ NSString *valN = [valNDict objectForKey:@"type"];
          cell.userLocation.text = _profileObj.location;
          
          
-         NSURL * imageURL = [NSURL URLWithString:[userdata objectForKey:KProfilePicture]];
-
+         if (_profileImage!=nil) {
+             cell.profileimageView.image = _profileImage;
+         }else{
+             
+             NSURL * imageURL = [NSURL URLWithString:[userdata objectForKey:KProfilePicture]];
+             
+             
+             dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+             dispatch_async(queue, ^{
+                 NSData *data = [NSData dataWithContentsOfURL:imageURL];
+                 UIImage *image = [UIImage imageWithData:data];
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                     
+                     cell.profileimageView.image = image;
+                 });  
+             });
+         }
          
-         dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
-         dispatch_async(queue, ^{
-             NSData *data = [NSData dataWithContentsOfURL:imageURL];
-             UIImage *image = [UIImage imageWithData:data];
-             dispatch_async(dispatch_get_main_queue(), ^{
-                cell.profileimageView.image = image;
-             });  
-         });
         
          
          return cell;
@@ -779,6 +767,50 @@ NSString *valN = [valNDict objectForKey:@"type"];
     }
     
 }
+-(void)ProfileBasicTableViewCellDelegateForButtonPressed:(ProfileBasicTableViewCell *)cell withButtonType:(NSString *)buttonType{
+    UIActionSheet* popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take New Picture", @"Choose From Library", nil];
+    
+    popupQuery.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+    [popupQuery showInView:self.view];
+    NSLog(@"ProfileButtonTableViewCell");
+    
+}
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    NSInteger i = buttonIndex;
+    
+    switch(i) {
+            
+        case 0:
+        {
+            
+            //Code for camera
+            [self takePhoto:UIImagePickerControllerSourceTypeCamera];
+        }
+            break;
+        case 1:
+        {
+            [self takePhoto:UIImagePickerControllerSourceTypePhotoLibrary];
+        }
+            
+        default:
+            // Do Nothing.........
+            break;
+            
+    }
+}
+-(void)takePhoto:(UIImagePickerControllerSourceType)type {
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = type;
+    
+    [self presentViewController:picker animated:YES completion:NULL];
+    
+}
+
+
 
 /*-(void)addProfileItemsTableViewCellDelegateForButtonPressed:(addProfileItemsTableViewCell *)cell;
 

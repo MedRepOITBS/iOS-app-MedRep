@@ -611,6 +611,12 @@
 		B41746E51D0CE628009B7E7E /* GroupPostChildTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B41746E21D0CE628009B7E7E /* GroupPostChildTableViewCell.m */; };
 		B41746E61D0CE628009B7E7E /* GroupPostChildTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B41746E31D0CE628009B7E7E /* GroupPostChildTableViewCell.xib */; };
 		B41746E71D0CE628009B7E7E /* GroupPostChildTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B41746E31D0CE628009B7E7E /* GroupPostChildTableViewCell.xib */; };
+		B421E4611D5D5A1700F15599 /* pencil.png in Resources */ = {isa = PBXBuildFile; fileRef = B421E45E1D5D5A1700F15599 /* pencil.png */; };
+		B421E4621D5D5A1700F15599 /* pencil.png in Resources */ = {isa = PBXBuildFile; fileRef = B421E45E1D5D5A1700F15599 /* pencil.png */; };
+		B421E4631D5D5A1700F15599 /* pencil@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B421E45F1D5D5A1700F15599 /* pencil@2x.png */; };
+		B421E4641D5D5A1700F15599 /* pencil@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B421E45F1D5D5A1700F15599 /* pencil@2x.png */; };
+		B421E4651D5D5A1700F15599 /* pencil@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B421E4601D5D5A1700F15599 /* pencil@3x.png */; };
+		B421E4661D5D5A1700F15599 /* pencil@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B421E4601D5D5A1700F15599 /* pencil@3x.png */; };
 		B465658B1D569EA80016CDA8 /* eye.png in Resources */ = {isa = PBXBuildFile; fileRef = B465658A1D569EA80016CDA8 /* eye.png */; };
 		B465658C1D569EA80016CDA8 /* eye.png in Resources */ = {isa = PBXBuildFile; fileRef = B465658A1D569EA80016CDA8 /* eye.png */; };
 		B46565901D56B0E50016CDA8 /* MemberListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B465658E1D56B0E50016CDA8 /* MemberListViewController.m */; };
@@ -2102,6 +2108,9 @@
 		B41746E11D0CE628009B7E7E /* GroupPostChildTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupPostChildTableViewCell.h; sourceTree = "<group>"; };
 		B41746E21D0CE628009B7E7E /* GroupPostChildTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupPostChildTableViewCell.m; sourceTree = "<group>"; };
 		B41746E31D0CE628009B7E7E /* GroupPostChildTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupPostChildTableViewCell.xib; sourceTree = "<group>"; };
+		B421E45E1D5D5A1700F15599 /* pencil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pencil.png; sourceTree = "<group>"; };
+		B421E45F1D5D5A1700F15599 /* pencil@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pencil@2x.png"; sourceTree = "<group>"; };
+		B421E4601D5D5A1700F15599 /* pencil@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pencil@3x.png"; sourceTree = "<group>"; };
 		B465658A1D569EA80016CDA8 /* eye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eye.png; sourceTree = "<group>"; };
 		B465658D1D56B0E50016CDA8 /* MemberListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberListViewController.h; sourceTree = "<group>"; };
 		B465658E1D56B0E50016CDA8 /* MemberListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberListViewController.m; sourceTree = "<group>"; };
@@ -2487,6 +2496,9 @@
 				B4BB24B01D416CA000A3DD73 /* profileBG1.png */,
 				B4BB24B91D416DF000A3DD73 /* userProfilePic.png */,
 				B4BB24AA1D416AF900A3DD73 /* profileBG.png */,
+				B421E45E1D5D5A1700F15599 /* pencil.png */,
+				B421E45F1D5D5A1700F15599 /* pencil@2x.png */,
+				B421E4601D5D5A1700F15599 /* pencil@3x.png */,
 				B4BB24A71D4167AD00A3DD73 /* Layer_1.png */,
 				B4BB24A41D41653700A3DD73 /* crossPlusButton.png */,
 				B4BB24BC1D417E8000A3DD73 /* userLocal.png */,
@@ -4626,6 +4638,7 @@
 				7929E3741B9C78B5001F1373 /* activity-score@2x.png in Resources */,
 				8AFE8CE91D0F21BF0000382E /* plus.png in Resources */,
 				7961A9741B8F26160035D63A /* MRRegistationTwoViewController.xib in Resources */,
+				B421E4611D5D5A1700F15599 /* pencil.png in Resources */,
 				795366031BA09EBF0021CE4D /* favorite@3x.png in Resources */,
 				79AC946C1B9E116000B81452 /* ndInput@3x.png in Resources */,
 				CC7DB2DB1D0CC433007DFE4C /* MRGroupPostItemTableViewCell.xib in Resources */,
@@ -4719,6 +4732,7 @@
 				79A5DC791BA2092E001D872C /* crthera@2x.png in Resources */,
 				79421F4D1BB83BBB0055D9B7 /* MRPharmaMenuViewController.xib in Resources */,
 				79AC94661B9E0DA000B81452 /* White-right-arrow@3x.png in Resources */,
+				B421E4651D5D5A1700F15599 /* pencil@3x.png in Resources */,
 				79AC945E1B9E0DA000B81452 /* NDcompany1@3x.jpg in Resources */,
 				79BD27A51B80980F007CA448 /* Icon-76.png in Resources */,
 				B4BB24A51D41653700A3DD73 /* crossPlusButton.png in Resources */,
@@ -4840,6 +4854,7 @@
 				79F0749B1BBF16970049FDE7 /* favoriteSelected@3x.png in Resources */,
 				7929E3E01B9CC674001F1373 /* surveys_dashboard@2x.png in Resources */,
 				79AC94641B9E0DA000B81452 /* NDcompany4@3x.jpg in Resources */,
+				B421E4631D5D5A1700F15599 /* pencil@2x.png in Resources */,
 				79173C651BB48EE100842E4C /* PHnotifications@2x.png in Resources */,
 				791C37DD1C4FF96400914728 /* minus.png in Resources */,
 				796E936A1BB8528B0031EA34 /* pcright-arrow@3x.png in Resources */,
@@ -4927,6 +4942,7 @@
 				CC7DB0921D0C8BEC007DFE4C /* pageviewdots@2x~iPad.png in Resources */,
 				CC7DB0931D0C8BEC007DFE4C /* MROTPVerifiedViewController.xib in Resources */,
 				B4B4F1161D394F4100EFCC0E /* selected@2x.png in Resources */,
+				B421E4621D5D5A1700F15599 /* pencil.png in Resources */,
 				CC7DB0941D0C8BEC007DFE4C /* MRMedRepViewController.xib in Resources */,
 				CC7DB0951D0C8BEC007DFE4C /* pcminus@2x.png in Resources */,
 				CC7DB0961D0C8BEC007DFE4C /* pageviewdots~iPad.png in Resources */,
@@ -4987,6 +5003,7 @@
 				CC7DB0C11D0C8BEC007DFE4C /* NDcompany1@2x.jpg in Resources */,
 				CC7DB0C21D0C8BEC007DFE4C /* reveal-icon.png in Resources */,
 				CC7DB0C31D0C8BEC007DFE4C /* readnotification3@2x.jpg in Resources */,
+				B421E4641D5D5A1700F15599 /* pencil@2x.png in Resources */,
 				CC7DB3821D0CC8A6007DFE4C /* profile_pic6.jpeg in Resources */,
 				B4F635101D541E6E008CE7C7 /* tips.png in Resources */,
 				CC7DB0C41D0C8BEC007DFE4C /* reminder@3x.png in Resources */,
@@ -5053,6 +5070,7 @@
 				CC7DB0F61D0C8BEC007DFE4C /* otpTiccMark@2x.png in Resources */,
 				8AFE8D2D1D12F6A70000382E /* MRAddMemberTableViewCell.xib in Resources */,
 				CC7DB0F71D0C8BEC007DFE4C /* catransparent@2x.jpg in Resources */,
+				B421E4661D5D5A1700F15599 /* pencil@3x.png in Resources */,
 				CC7DB3581D0CC8A6007DFE4C /* post_image10.jpeg in Resources */,
 				CC7DB0F81D0C8BEC007DFE4C /* smallTickmark@2x.png in Resources */,
 				CC7DB0F91D0C8BEC007DFE4C /* MRCompetitorAnalasysCell.xib in Resources */,
