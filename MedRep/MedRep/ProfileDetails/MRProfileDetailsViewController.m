@@ -339,7 +339,7 @@
          if (status)
          {
              self.isImageUploaded = YES;
-//             [[MRAppControl sharedHelper].userRegData setObject:[imageData base64EncodedDataWithOptions:0] forKey:KProfilePicture];
+             [[MRAppControl sharedHelper].userRegData setObject:[responce objectForKey:@"result"] forKey:KProfilePicture];
 //             self.profileImageView.image = [MRCommon imageWithImage:chosenImage scaledToSize:CGSizeMake(200, 200)];
              _profileImage = chosenImage;
              [self.tableView reloadData];
@@ -642,10 +642,10 @@ NSString *valN = [valNDict objectForKey:@"type"];
          cell.userLocation.text = _profileObj.location;
          
          
-         if (_profileImage!=nil) {
-             cell.profileimageView.image = _profileImage;
-         }else{
-             
+//         if (_profileImage!=nil) {
+//             cell.profileimageView.image = _profileImage;
+//         }else{
+         
              NSURL * imageURL = [NSURL URLWithString:[userdata objectForKey:KProfilePicture]];
              
              
@@ -658,7 +658,7 @@ NSString *valN = [valNDict objectForKey:@"type"];
                      cell.profileimageView.image = image;
                  });  
              });
-         }
+         //}
          
         
          
@@ -694,7 +694,7 @@ NSString *valN = [valNDict objectForKey:@"type"];
              
              cell.title.text = obj.course;
              cell.dateDesc.text = [NSString stringWithFormat:@"%@",obj.yearOfPassout    ];
-             cell.otherDesc.text = [NSString stringWithFormat:@"From %@ with Aggregate %% %@",obj.collegeName,obj.aggregate];
+             cell.otherDesc.text = [NSString stringWithFormat:@"From %@ with Aggregate %@%%",obj.collegeName,obj.aggregate];
              
              
          }

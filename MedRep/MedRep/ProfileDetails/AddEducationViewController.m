@@ -173,7 +173,7 @@
     
     if ([_fromScreen isEqualToString:@"UPDATE"]) {
         
-        workExpDict = [[NSDictionary alloc] initWithObjectsAndKeys:_degree,@"degree",_institute,@"collegeName",[NSString stringWithFormat:@"%@ %@",_fromYYYY,_toYYYY],@"yearOfPassout",_speciality,@"course",_type,@"aggregate",_educationQualObj.id,@"id", nil];
+        workExpDict = [[NSDictionary alloc] initWithObjectsAndKeys:_degree,@"degree",_institute,@"collegeName",[NSString stringWithFormat:@"%@ - %@",_fromYYYY,_toYYYY],@"yearOfPassout",_speciality,@"course",_type,@"aggregate",_educationQualObj.id,@"id", nil];
         [MRDatabaseHelper updateEducationQualification:workExpDict withEducationQualificationID:_educationQualObj.id andHandler:^(id result) {
             
             if ([result isEqualToString:@"TRUE"]) {
@@ -190,7 +190,7 @@
         
     }else{
         
-        workExpDict = [[NSDictionary alloc] initWithObjectsAndKeys:_degree,@"degree",_institute,@"collegeName",[NSString stringWithFormat:@"%@ %@",_fromYYYY,_toYYYY],@"yearOfPassout",_speciality,@"course",_type,@"aggregate", nil];
+        workExpDict = [[NSDictionary alloc] initWithObjectsAndKeys:_degree,@"degree",_institute,@"collegeName",[NSString stringWithFormat:@"%@ - %@",_fromYYYY,_toYYYY],@"yearOfPassout",_speciality,@"course",_type,@"aggregate", nil];
         [MRDatabaseHelper addEducationQualification:workExpDict andHandler:^(id result) {
          
             if ([result isEqualToString:@"TRUE"]) {

@@ -28,6 +28,7 @@
                            nil];
     [numberToolbar sizeToFit];
     self.inputTextField.inputAccessoryView = numberToolbar;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeKeyboardNotification) name:@"NOTIFY_KEYBORD_OFF" object:nil];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -40,7 +41,12 @@
     self.text = text;
     [self.inputTextField setText:text];
 }
-
+-(void)removeKeyboardNotification{
+    if (self.inputTextField != nil) {
+    [self.inputTextField resignFirstResponder];
+    }
+    
+}
 - (void)closeOnKeyboardPressed:(id)sender {
     self.inputTextField.text = self.text;
     [self.inputTextField resignFirstResponder];
@@ -50,6 +56,10 @@
     [self.inputTextField resignFirstResponder];
 }
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"HIDE_DATE_PICKER" object:nil];
+}
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     [self doneWithEditing:textField];
 }

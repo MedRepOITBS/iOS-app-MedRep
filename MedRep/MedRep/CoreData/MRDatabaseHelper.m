@@ -1268,6 +1268,7 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
         publications.articleName = [dictonary objectForKey:@"articleName"];
         publications.publication = [dictonary objectForKey:@"publication"];
         publications.year = [dictonary objectForKey:@"year"];
+        publications.url = [dictonary objectForKey:@"url"];
         
         [[MRDataManger sharedManager] saveContext];
         responseHandler(@"TRUE");
@@ -1295,6 +1296,8 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
             publications.articleName = [dictonary objectForKey:@"articleName"];
             publications.publication = [dictonary objectForKey:@"publication"];
             publications.year = [dictonary objectForKey:@"year"];
+            publications.url = [dictonary objectForKey:@"url"];
+
             publications.id = [[responce objectForKey:@"id"] objectAtIndex:0];
             responseHandler(@"TRUE");
             [profile addPublicationsObject:publications];
@@ -1540,6 +1543,7 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
             interestArea.publication = [publicationAraDict objectForKey:@"publication"];
             interestArea.articleName = [publicationAraDict objectForKey:@"articleName"];
             interestArea.year = [publicationAraDict objectForKey:@"year"];
+            interestArea.url = [publicationAraDict objectForKey:@"url"];
             interestArea.id = [publicationAraDict objectForKey:@"id"];
             [profile addPublicationsObject:interestArea];
             

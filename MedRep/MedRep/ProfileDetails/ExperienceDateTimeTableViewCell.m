@@ -43,6 +43,8 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"NOTIFY_KEYBORD_OFF" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"NOTIFY_KEYBORD_OFF_TEXTVIEW" object:nil];
     if ([self.delegate respondsToSelector:@selector(ExperienceDateTimeTableViewCellDelegateForTextFieldClicked:withTextField:)]) {
         [self.delegate ExperienceDateTimeTableViewCellDelegateForTextFieldClicked:self withTextField:textField];
     }

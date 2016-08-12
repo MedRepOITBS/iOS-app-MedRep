@@ -94,6 +94,13 @@ self.navigationItem.title  = @"Add Experience";
     [self setupPicker];
     [self updateLabel];
     [self setupData];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideDatePicker) name:@"HIDE_DATE_PICKER" object:nil];
+}
+
+-(void)hideDatePicker{
+    
+    [_picker setHidden:YES];
+
 }
 
 -(void)setupData{

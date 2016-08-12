@@ -34,6 +34,7 @@
                            nil];
     [numberToolbar sizeToFit];
     self.summaryTextField.inputAccessoryView = numberToolbar;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeKeyboardNotification) name:@"NOTIFY_KEYBORD_OFF_TEXTVIEW" object:nil];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -49,6 +50,8 @@
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"HIDE_DATE_PICKER" object:nil];
+
     UITableView *tempParentView = (UITableView*)self.parentView;
     CGRect rect = CGRectMake(tempParentView.frame.origin.x, tempParentView.frame.origin.y - 300,
                              tempParentView.frame.size.width, tempParentView.frame.size.height);
@@ -60,7 +63,12 @@
 - (void)textViewDidEndEditing:(UITextView *)textView {
     [self doneTypingInTextView:textView];
 }
-
+-(void)removeKeyboardNotification{
+    if (self.summaryTextField != nil) {
+        [self.summaryTextField resignFirstResponder];
+    }
+    
+}
 - (void)doneTypingInTextView:(UITextView*)textView {
 
     NSLog(@"textfield %@",textView.text);

@@ -2,7 +2,7 @@
 //  MRPublications+CoreDataProperties.m
 //  MedRep
 //
-//  Created by Namit Nayak on 7/31/16.
+//  Created by Namit Nayak on 8/12/16.
 //  Copyright © 2016 MedRep. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -14,8 +14,9 @@
 @implementation MRPublications (CoreDataProperties)
 
 @dynamic articleName;
+@dynamic id;
 @dynamic publication;
 @dynamic year;
-@dynamic id;
+@dynamic url;
 
 @end

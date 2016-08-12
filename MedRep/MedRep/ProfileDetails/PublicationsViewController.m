@@ -116,6 +116,7 @@
         self.publicationArticleTextField.text  = _publications.articleName;
         self.pulbicationsTextField.text = _publications.publication;
         self.yearTextField.text = _publications.year;
+        self.urlTextField.text = _publications.url;
         revealButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"UPDATE" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonTapped:)];
     }else{
         revealButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"DONE" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonTapped:)];
@@ -145,10 +146,12 @@
         [alertView show];
         return;
     }
+    NSString *publicationURLString = @"";
+    publicationURLString = _urlTextField.text;
   
     NSDictionary *dict;
     if ([_fromScreen isEqualToString:@"UPDATE"]) {
-        dict = [NSDictionary dictionaryWithObjectsAndKeys:publicationArticleText,@"articleName",publicationsText,@"publication",yearText,@"year",_publications.id,@"id", nil];
+        dict = [NSDictionary dictionaryWithObjectsAndKeys:publicationArticleText,@"articleName",publicationsText,@"publication",publicationURLString,@"url",yearText,@"year",_publications.id,@"id", nil];
         [MRDatabaseHelper updatePublication:dict withPublicationID:_publications.id andHandler:^(id result) {
             NSString* YS = (NSString *)result;
             if([YS isEqualToString:@"TRUE"]){
@@ -164,7 +167,7 @@
 
     }else{
         
-        dict = [NSDictionary dictionaryWithObjectsAndKeys:publicationArticleText,@"articleName",publicationsText,@"publication",yearText,@"year", nil];
+        dict = [NSDictionary dictionaryWithObjectsAndKeys:publicationArticleText,@"articleName",publicationsText,@"publication",publicationURLString,@"url",yearText,@"year", nil];
         [MRDatabaseHelper addPublications:dict andHandler:^(id result) {
             NSString* YS = (NSString *)result;
             if([YS isEqualToString:@"TRUE"]){

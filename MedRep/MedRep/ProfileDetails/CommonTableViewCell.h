@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @protocol CommonTableViewCellDelegate;
 
-@interface CommonTableViewCell : UITableViewCell
+@interface CommonTableViewCell : UITableViewCell <UITextFieldDelegate>
 
 @property(nonatomic,weak) IBOutlet UILabel *title;
 @property(nonatomic,weak) IBOutlet UITextField *inputTextField;
