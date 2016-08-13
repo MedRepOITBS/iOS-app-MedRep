@@ -99,7 +99,7 @@
         _institute = _educationQualObj.collegeName;
         _speciality = _educationQualObj.course;
         _type = [_educationQualObj.aggregate stringValue];
-        _fromYYYY = [[_educationQualObj.yearOfPassout componentsSeparatedByString:@" "] objectAtIndex:0];
+        _fromYYYY = [[_educationQualObj.yearOfPassout componentsSeparatedByString:@"-"] objectAtIndex:0];
         _toYYYY = [[_educationQualObj.yearOfPassout componentsSeparatedByString:@" "] objectAtIndex:1];
         
         

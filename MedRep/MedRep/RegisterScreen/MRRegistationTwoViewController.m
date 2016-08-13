@@ -226,12 +226,43 @@
                  
              } else {
                  NSLog(@"%@", error.debugDescription);
-                 [MRCommon showAlert:error.description delegate:nil];
+                 [self showLocationErrorAlert];
              }
          } ];
      }];
     
 }
+
+-(void)showLocationErrorAlert{
+    UIAlertView* curr2=[[UIAlertView alloc] initWithTitle:@"MedRep Location Services Disabled" message:@"Please enable your device Location Service to locate your location address." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Settings", nil];
+    curr2.tag=121;
+    [curr2 show];
+}
+
+
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"buttonIndex:%ld",(long)buttonIndex);
+    if (alertView.tag == 121) {
+        if (buttonIndex == 0) {
+            
+        }else{
+            [[UIApplication sharedApplication] openURL:[NSURL  URLWithString:UIApplicationOpenSettingsURLString]];
+        }
+    }
+    
+    if (alertView.tag == 6789 )
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    //code for opening settings app in iOS 8
+    
+    
+    
+}
+
+
 
 -(void)setUPView
 {
@@ -1142,12 +1173,6 @@
     return isSuccess;
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (alertView.tag == 6789 )
-    {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-}
+
 
 @end

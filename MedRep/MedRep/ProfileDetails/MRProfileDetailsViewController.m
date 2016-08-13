@@ -85,7 +85,7 @@
     UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"userLocal.png"]
                                                                          style:UIBarButtonItemStylePlain target:self
                                                                         action:@selector(editButtonTapped:)];
-    self.navigationItem.rightBarButtonItem = rightButtonItem;
+//    self.navigationItem.rightBarButtonItem = rightButtonItem;
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
     [self setupProfileData];
     // Do any additional setup after loading the view from its nib.
@@ -573,9 +573,17 @@ NSString *valN = [valNDict objectForKey:@"type"];
     [_profileObj.workExperience.array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
         MRWorkExperience * workexp = (MRWorkExperience *)obj;
-        [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"WORK_EXP_DETAIL",@"type",workexp,@"object" ,nil]];
+        
+        if(_profileObj.workExperience.array.count-1 == idx){
+            [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"WORK_EXP_DETAIL",@"type",workexp,@"object",@"YES",@"lastObj" ,nil]];
+            
+        }else{
+            [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"WORK_EXP_DETAIL",@"type",workexp,@"object",@"NO",@"lastObj" ,nil]];
+            
 
-       
+        }
+        
+        
         
     }];
    // [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"ADD_BUTTON",@"type", nil]];
@@ -603,8 +611,14 @@ NSString *valN = [valNDict objectForKey:@"type"];
     
     [_profileObj.educationlQualification.array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         EducationalQualifications * workexp = (EducationalQualifications *)obj;
-        [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"EDUCATION_QUAL_DETAIL",@"type",workexp,@"object" ,nil]];
+        if (_profileObj.educationlQualification.array.count-1 == idx) {
+           
+            [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"EDUCATION_QUAL_DETAIL",@"type",workexp,@"object",@"YES",@"lastObj"  ,nil]];
 
+        }else{
+        
+        [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"EDUCATION_QUAL_DETAIL",@"type",workexp,@"object",@"NO",@"lastObj"  ,nil]];
+        }
         
     }];
    
@@ -638,7 +652,7 @@ NSString *valN = [valNDict objectForKey:@"type"];
          
          NSInteger userType = [MRAppControl sharedHelper].userType;
          
-         cell.userNameLbl.text         = _profileObj.designation;
+         cell.userNameLbl.text         = _profileObj.name;
          cell.userLocation.text = _profileObj.location;
          
          
@@ -681,6 +695,10 @@ NSString *valN = [valNDict objectForKey:@"type"];
      }
     else if ([valN isEqualToString:@"WORK_EXP_DETAIL"] || [valN isEqualToString:@"EDUCATION_QUAL_DETAIL"] ){
          ExpericeFillUpTableViewCell * cell  =(ExpericeFillUpTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"ExpericeFillUpTableViewCell"];
+        
+        if ([[valNDict objectForKey:@"lastObj"] isEqualToString:@"YES"]) {
+            cell.viewLabel.hidden = YES;
+        }
          if ([valN isEqualToString:@"WORK_EXP_DETAIL"]) {
              MRWorkExperience * obj  = [valNDict objectForKey:@"object"];
              

@@ -190,7 +190,14 @@ self.navigationItem.title  = @"Add Experience";
         _fromDate = _picker.date;
     }
     else if(_currentSelectedTextField.tag == 502) {
+       
         _toMM = stringFromDate;
+        
+        if([_fromDate isLaterThanDate:_picker.date]){
+            
+            [MRCommon showAlert:@"From Date should be smaller then To Date." delegate:nil];
+            return;
+        }
         _toDate = _picker.date;
     }
     
@@ -201,6 +208,7 @@ self.navigationItem.title  = @"Add Experience";
 }
 
 - (void)didSelectDate {
+    
     [_picker setHidden:YES];
     [self updateLabel];
 }

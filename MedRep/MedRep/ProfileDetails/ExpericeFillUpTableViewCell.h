@@ -12,5 +12,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *dateDesc;
 @property (weak, nonatomic) IBOutlet UILabel *otherDesc;
 @property (weak, nonatomic) IBOutlet UILabel *title;
-
+@property (weak,nonatomic) IBOutlet UIView *viewLabel;
 @end
