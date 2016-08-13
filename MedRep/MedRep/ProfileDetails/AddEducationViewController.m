@@ -100,7 +100,7 @@
         _speciality = _educationQualObj.course;
         _type = [_educationQualObj.aggregate stringValue];
         _fromYYYY = [[_educationQualObj.yearOfPassout componentsSeparatedByString:@"-"] objectAtIndex:0];
-        _toYYYY = [[_educationQualObj.yearOfPassout componentsSeparatedByString:@" "] objectAtIndex:1];
+        _toYYYY = [[_educationQualObj.yearOfPassout componentsSeparatedByString:@"-"] objectAtIndex:1];
         
         
     }else{
@@ -123,6 +123,12 @@
         _fromYYYY = stringFromDate;
     }
     else if(_currentSelectedTextField.tag == 1201) {
+        
+        if([stringFromDate integerValue] < [_fromYYYY integerValue]){
+            [MRCommon showAlert:@"From Year Cannot be smaller then To Year. Please change the year accordingly." delegate:nil];
+            return ;
+            
+        }
         _toYYYY = stringFromDate;
         
     }
@@ -259,7 +265,7 @@
         
         
     }else if([_toYYYY integerValue] < [_fromYYYY integerValue]){
-        [MRCommon showAlert:@"From Year Cannot be smaller then To Year. Please change the ear accordingly." delegate:nil];
+        [MRCommon showAlert:@"From Year Cannot be smaller then To Year. Please change the year accordingly." delegate:nil];
         return NO;
         
     }
