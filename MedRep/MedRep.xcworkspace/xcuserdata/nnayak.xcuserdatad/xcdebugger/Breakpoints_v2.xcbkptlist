@@ -74,12 +74,12 @@
                   moduleName = "MedRepDev"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/nnayak/iOS-app-MedRep/MedRep/MedRep/RegisterScreen/MRRegistationTwoViewController.m"
-                  timestampString = "492755759.73457"
+                  timestampString = "493104575.524524"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "57"
                   endingLineNumber = "57"
-                  offsetFromSymbolStart = "81">
+                  offsetFromSymbolStart = "118">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -89,12 +89,12 @@
                   moduleName = "MedRepDev"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/nnayak/iOS-app-MedRep/MedRep/MedRep/RegisterScreen/MRRegistationTwoViewController.m"
-                  timestampString = "492755759.734711"
+                  timestampString = "493104575.52464"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "58"
                   endingLineNumber = "58"
-                  offsetFromSymbolStart = "78">
+                  offsetFromSymbolStart = "46">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -218,12 +218,12 @@
                   moduleName = "MedRepDev"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/nnayak/iOS-app-MedRep/MedRep/MedRep/RegisterScreen/MRRegistationTwoViewController.m"
-                  timestampString = "492755759.740695"
+                  timestampString = "493104575.528461"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "78"
                   endingLineNumber = "78"
-                  offsetFromSymbolStart = "635">
+                  offsetFromSymbolStart = "634">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -233,12 +233,12 @@
                   moduleName = "MedRepDev"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/nnayak/iOS-app-MedRep/MedRep/MedRep/RegisterScreen/MRRegistationTwoViewController.m"
-                  timestampString = "492755759.740829"
+                  timestampString = "493104575.528563"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "78"
                   endingLineNumber = "78"
-                  offsetFromSymbolStart = "19">
+                  offsetFromSymbolStart = "14">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -602,12 +602,12 @@
                   moduleName = "MedRepDev"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/nnayak/iOS-app-MedRep/MedRep/MedRep/CoreData/MRDatabaseHelper.m"
-                  timestampString = "492755759.756816"
+                  timestampString = "493104575.538015"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "1601"
                   endingLineNumber = "1601"
-                  offsetFromSymbolStart = "134">
+                  offsetFromSymbolStart = "188">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -617,12 +617,12 @@
                   moduleName = "MedRepDev"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/nnayak/iOS-app-MedRep/MedRep/MedRep/CoreData/MRDatabaseHelper.m"
-                  timestampString = "492755759.75695"
+                  timestampString = "493104575.538102"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "1601"
                   endingLineNumber = "1601"
-                  offsetFromSymbolStart = "19">
+                  offsetFromSymbolStart = "16">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -730,12 +730,12 @@
                   moduleName = "MedRepDev"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/nnayak/iOS-app-MedRep/MedRep/MedRep/CoreData/MRDatabaseHelper.m"
-                  timestampString = "492755759.760807"
+                  timestampString = "493104575.54069"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "1424"
                   endingLineNumber = "1424"
-                  offsetFromSymbolStart = "246">
+                  offsetFromSymbolStart = "308">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -745,12 +745,12 @@
                   moduleName = "MedRepDev"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/nnayak/iOS-app-MedRep/MedRep/MedRep/CoreData/MRDatabaseHelper.m"
-                  timestampString = "492755759.760931"
+                  timestampString = "493104575.540783"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "1424"
                   endingLineNumber = "1424"
-                  offsetFromSymbolStart = "22">
+                  offsetFromSymbolStart = "16">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -1178,12 +1178,12 @@
                   moduleName = "MedRepDev"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/nnayak/iOS-app-MedRep/MedRep/MedRep/ProfileDetails/MRProfileDetailsViewController.m"
-                  timestampString = "492755759.78357"
+                  timestampString = "493104575.551142"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "462"
                   endingLineNumber = "462"
-                  offsetFromSymbolStart = "202">
+                  offsetFromSymbolStart = "240">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -1193,12 +1193,12 @@
                   moduleName = "MedRepDev"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/nnayak/iOS-app-MedRep/MedRep/MedRep/ProfileDetails/MRProfileDetailsViewController.m"
-                  timestampString = "492755759.783691"
+                  timestampString = "493104575.55125"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "462"
                   endingLineNumber = "462"
-                  offsetFromSymbolStart = "51">
+                  offsetFromSymbolStart = "34">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -1208,12 +1208,12 @@
                   moduleName = "MedRepDev"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/nnayak/iOS-app-MedRep/MedRep/MedRep/ProfileDetails/MRProfileDetailsViewController.m"
-                  timestampString = "492755759.783794"
+                  timestampString = "493104575.551332"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "462"
                   endingLineNumber = "462"
-                  offsetFromSymbolStart = "29">
+                  offsetFromSymbolStart = "18">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -1423,6 +1423,406 @@
             startingLineNumber = "103"
             endingLineNumber = "103"
             landmarkName = "-setUpdata"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MedRep/AppDelegate.m"
+            timestampString = "493015228.858314"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "-application:didRegisterForRemoteNotificationsWithDeviceToken:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MedRep/Communication/MRWebserviceHelper.m"
+            timestampString = "493047859.519238"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "536"
+            endingLineNumber = "536"
+            landmarkName = "-registerDeviceToken:withHandler:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MedRep/Login/MRLoginViewController.m"
+            timestampString = "493104201.785672"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
+            landmarkName = "-signinButtonAction:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MedRep/Login/MRLoginViewController.m"
+            timestampString = "493104202.718999"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
+            landmarkName = "-signinButtonAction:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MedRep/Login/MRLoginViewController.m"
+            timestampString = "493104205.971723"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "-signinButtonAction:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MedRep/Login/MRLoginViewController.m"
+            timestampString = "493104206.648518"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "-signinButtonAction:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MedRep/Login/MRLoginViewController.m"
+            timestampString = "493104208.394302"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
+            landmarkName = "-signinButtonAction:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MedRep/Login/MRLoginViewController.m"
+            timestampString = "493104209.197077"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
+            landmarkName = "-signinButtonAction:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MedRep/Login/MRLoginViewController.m"
+            timestampString = "493104209.982332"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
+            landmarkName = "-signinButtonAction:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MedRep/Login/MRLoginViewController.m"
+            timestampString = "493104213.664332"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
+            landmarkName = "-signinButtonAction:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MedRep/Login/MRLoginViewController.m"
+            timestampString = "493104214.376203"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+            landmarkName = "-signinButtonAction:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MedRep/Login/MRLoginViewController.m"
+            timestampString = "493104219.624196"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
+            landmarkName = "-signinButtonAction:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MedRep/Login/MRLoginViewController.m"
+            timestampString = "493104220.537997"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
+            landmarkName = "-signinButtonAction:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MedRep/Login/MRLoginViewController.m"
+            timestampString = "493104221.507907"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "157"
+            endingLineNumber = "157"
+            landmarkName = "-signinButtonAction:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MedRep/Login/MRLoginViewController.m"
+            timestampString = "493104222.246093"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
+            landmarkName = "-signinButtonAction:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MedRep/Appcontrol/MRAppControl.m"
+            timestampString = "493104326.750294"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "703"
+            endingLineNumber = "703"
+            landmarkName = "-registerDeviceToken"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MedRep/Appcontrol/MRAppControl.m"
+            timestampString = "493104327.430518"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "707"
+            endingLineNumber = "707"
+            landmarkName = "-registerDeviceToken"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[MRAppControl registerDeviceToken]"
+                  moduleName = "MedRepDev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nnayak/iOS-app-MedRep/MedRep/MedRep/Appcontrol/MRAppControl.m"
+                  timestampString = "493104575.628485"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "707"
+                  endingLineNumber = "707"
+                  offsetFromSymbolStart = "322">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__35-[MRAppControl registerDeviceToken]_block_invoke"
+                  moduleName = "MedRepDev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nnayak/iOS-app-MedRep/MedRep/MedRep/Appcontrol/MRAppControl.m"
+                  timestampString = "493104575.628584"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "708"
+                  endingLineNumber = "708"
+                  offsetFromSymbolStart = "56">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MedRep/Login/MRLoginViewController.m"
+            timestampString = "493104349.82346"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
+            landmarkName = "-signinButtonAction:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MedRep/Login/MRLoginViewController.m"
+            timestampString = "493104350.549838"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
+            landmarkName = "-signinButtonAction:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MedRep/Login/MRLoginViewController.m"
+            timestampString = "493104351.1974"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
+            landmarkName = "-signinButtonAction:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MedRep/Login/MRLoginViewController.m"
+            timestampString = "493104352.024019"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
+            landmarkName = "-signinButtonAction:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MedRep/Login/MRLoginViewController.m"
+            timestampString = "493104407.425942"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
+            landmarkName = "-signinButtonAction:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MedRep/AppDelegate.m"
+            timestampString = "493104472.395043"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
+            landmarkName = "-application:didReceiveRemoteNotification:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
