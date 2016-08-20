@@ -38,7 +38,7 @@
 
 - (void)setGroup:(MRGroup*)group {
     [self.collectionView registerNib:[UINib nibWithNibName:@"MRContactWithinGroupCollectionCellCollectionViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"contactWithinGroupCell"];
-    self.groupImageView.image = [MRAppControl getGroupImage:group];
+    [MRAppControl getGroupImage:group andImageView:self.groupImageView];
     self.nameLabel.text = group.group_name;
     self.groupObject = group;
     self.contacts = [group.members allObjects];
@@ -47,7 +47,7 @@
 
 - (void)setGroupData:(MRGroup*)group {
     [self.collectionView registerNib:[UINib nibWithNibName:@"MRContactWithinGroupCollectionCellCollectionViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"contactWithinGroupCell"];
-    self.groupImageView.image = [MRAppControl getGroupImage:group];
+    [MRAppControl getGroupImage:group andImageView:self.groupImageView];
     self.nameLabel.text = group.group_name;
     //self.groupObject = group;
     self.contacts = nil;

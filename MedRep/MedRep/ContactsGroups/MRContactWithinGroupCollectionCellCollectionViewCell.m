@@ -25,13 +25,12 @@
 }
 
 - (void)setContact:(MRContact *)contact {
-    self.imageView.image = [MRAppControl getContactImage:contact];
-    
+    [MRAppControl getContactImage:contact andImageView:self.imageView];
     self.label.text = [MRAppControl getContactName:contact];
 }
 
 - (void)setGroup:(MRGroup *)group {
-    self.imageView.image = [MRAppControl getGroupImage:group];
+    [MRAppControl getGroupImage:group andImageView:self.imageView];
     //[UIImage imageNamed:group.groupPicture];
     self.label.text = group.group_name;
 }

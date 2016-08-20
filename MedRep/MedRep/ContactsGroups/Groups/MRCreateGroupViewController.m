@@ -88,7 +88,7 @@
 //        UIImage *theImage= [MRCommon getImageFromBase64Data:[self.group.group_img_data dataUsingEncoding:NSUTF8StringEncoding]];
 //        groupIconData = UIImageJPEGRepresentation(theImage, 1.0);
         
-        self.imgView.image = [MRAppControl getGroupImage:self.group];
+        [MRAppControl getGroupImage:self.group andImageView:self.imgView];
         
         isUpdateMode = YES;
         self.navigationItem.title = @"Update Group";

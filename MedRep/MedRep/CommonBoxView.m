@@ -152,13 +152,13 @@
         self.profilePicPreviewConstant.constant = 5;
         self.profilePicWidthConstraint.constant = 40;
         
-        self.personImageView.image = [MRAppControl getContactImage:self.mainContact];
+        [MRAppControl getContactImage:self.mainContact andImageView:self.personImageView];
     } else if (self.mainGroup != nil) {
         title = self.mainGroup.group_name;
         self.profilePicPreviewConstant.constant = 5;
         self.profilePicWidthConstraint.constant = 40;
         
-        self.personImageView.image = [MRAppControl getGroupImage:self.mainGroup];
+        [MRAppControl getGroupImage:self.mainGroup andImageView:self.personImageView];
     } else {
         title = @"New Post";
     }

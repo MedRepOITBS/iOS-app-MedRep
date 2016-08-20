@@ -433,7 +433,7 @@
             cell.userName.text = groupName;
             
             cell.phoneNo.text = @"";
-            cell.profilePic.image = [MRAppControl getGroupImage:group];
+            [MRAppControl getGroupImage:group andImageView:cell.profilePic];
             cell.acceptConnectionView.hidden = YES;
             cell.rejectConnectionView.hidden = YES;
             
@@ -448,7 +448,7 @@
         MRContact *contact = [fileredContacts objectAtIndex:indexPath.row];
         cell.userName.text = [MRAppControl getContactName:contact];
         cell.phoneNo.text = contact.therapeuticArea;
-        cell.profilePic.image = [MRAppControl getContactImage:contact];
+        [MRAppControl getContactImage:contact andImageView:cell.profilePic];
         
         return cell;
     }

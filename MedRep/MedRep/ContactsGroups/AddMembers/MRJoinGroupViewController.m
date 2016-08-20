@@ -168,7 +168,7 @@
     cell.phoneNo.text = contact.group_short_desc;
     cell.checkBtn.tag = indexPath.row;
     cell.cellDelegate = self;
-    cell.profilePic.image = [MRAppControl getGroupImage:contact];
+    [MRAppControl getGroupImage:contact andImageView:cell.profilePic];
     
     return cell;
 }

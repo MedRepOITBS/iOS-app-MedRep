@@ -60,12 +60,11 @@
 
 + (NSString*)getContactName:(MRContact*)contact;
 + (NSString*)getGroupMemberName:(MRGroupMembers*)members;
-+ (UIImage*)getContactImage:(MRContact*)contact;
+
 + (void)getContactImage:(MRContact*)contact andImageView:(UIImageView*)parentView;
 + (void)getGroupMemberImage:(MRGroupMembers*)member andImageView:(UIImageView*)parentView;
-+ (UIImage*)getRepliedByProfileImage:(MRPostedReplies*)replies;
++ (UIImage*)getRepliedByProfileImage:(MRPostedReplies*)replies andImageView:(UIImageView*)parentView;
 
-+ (UIImage*)getGroupImage:(MRGroup*)group;
 + (void)getGroupImage:(MRGroup*)group andImageView:(UIImageView*)parentView;
 
 + (NSString*)getFileName;

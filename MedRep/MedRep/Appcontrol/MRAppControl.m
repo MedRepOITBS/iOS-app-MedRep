@@ -745,22 +745,18 @@
     return name;
 }
 
-+ (UIImage*)getContactImage:(MRContact*)contact {
-    UIImage *image = [UIImage imageNamed:@"person"];;
-    
-    if (contact != nil &&
-        contact.dPicture != nil && contact.dPicture.length > 0) {
-        image = [UIImage imageWithData:[NSData dataWithContentsOfURL:
-                                                   [NSURL URLWithString:contact.dPicture]]];
-    }
-    
-    return image;
-}
-
 + (void)getContactImage:(MRContact*)contact andImageView:(UIImageView*)parentView {
     if (contact.dPicture != nil && contact.dPicture.length > 0) {
-        parentView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:
-                            [NSURL URLWithString:contact.dPicture]]];
+        parentView.image = [UIImage imageNamed:@"person"];
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:contact.dPicture]];
+            if (imageData != nil) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    parentView.image = [UIImage imageWithData:imageData];
+                });
+            }
+        });
     } else {
         NSString *fullName = [MRAppControl getContactName:contact];
         if (fullName != nil && fullName.length > 0) {
@@ -791,7 +787,16 @@
 
 + (void)getGroupMemberImage:(MRGroupMembers*)member andImageView:(UIImageView*)parentView {
     if (member.imageUrl != nil && member.imageUrl.length > 0) {
-        parentView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:member.imageUrl]]];
+        parentView.image = [UIImage imageNamed:@"person"];
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:member.imageUrl]];
+            if (imageData != nil) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    parentView.image = [UIImage imageWithData:imageData];
+                });
+            }
+        });
     } else {
         NSString *fullName = [MRAppControl getGroupMemberName:member];
         if (fullName != nil && fullName.length > 0) {
@@ -848,26 +853,20 @@
     }
 }
 
-+ (UIImage*)getRepliedByProfileImage:(MRPostedReplies*)replies {
++ (UIImage*)getRepliedByProfileImage:(MRPostedReplies*)replies andImageView:(UIImageView*)parentView {
     UIImage *image = [UIImage imageNamed:@"person"];;
     
     if (replies != nil) {
         if (replies.displayPicture != nil && replies.displayPicture.length > 0) {
-            image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:replies.displayPicture]]];
-        }
-    }
-    
-    return image;
-}
-
-+ (UIImage*)getGroupImage:(MRGroup*)group {
-    UIImage *image = [UIImage imageNamed:@"Group"];;
-    
-    if (group != nil) {
-        if (group.group_img_data != nil) {
-            image = [UIImage imageWithData:group.group_img_data];
-        } else if (group.imageUrl != nil && group.imageUrl.length > 0) {
-            image =[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:group.imageUrl]]];
+            [parentView setImage:image];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:replies.displayPicture]];
+                if (imageData != nil) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        parentView.image = [UIImage imageWithData:imageData];
+                    });
+                }
+            });
         }
     }
     
@@ -887,7 +886,6 @@
                 });
             }
         });
-//        parentView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:group.imageUrl]]];
     }
     else if (group.group_name != nil && group.group_name.length > 0) {
         UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:parentView.bounds];

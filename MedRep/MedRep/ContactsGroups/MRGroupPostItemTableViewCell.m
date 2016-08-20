@@ -109,7 +109,14 @@
     
     if (self.post.contentType.integerValue == kTransformContentTypeImage) {
         if (self.post.url != nil && self.post.url.length > 0) {
-            image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.post.url]]];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.post.url]];
+                if (imageData != nil) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        self.postImageView.image = [UIImage imageWithData:imageData];
+                    });
+                }
+            });
         } else if (self.post.objectData != nil) {
             image = [UIImage imageWithData:self.post.objectData];
         }
@@ -131,7 +138,15 @@
     self.contactNameLabel.text = name;
     
     if (post.displayPicture != nil && post.displayPicture.length > 0) {
-        self.profilePicImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:post.displayPicture]]];
+        self.profilePicImageView.image = [UIImage imageNamed:@"person"];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:post.displayPicture]];
+            if (imageData != nil) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.profilePicImageView.image = [UIImage imageWithData:imageData];
+                });
+            }
+        });
     } else {
         self.profilePicImageView.image = [UIImage imageNamed:@"person"];
     }

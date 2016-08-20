@@ -76,7 +76,7 @@
         postedBy = post.doctor_Name;
     }
     self.profileNameLabel.text = postedBy;
-    self.profilePic.image = [MRAppControl getRepliedByProfileImage:post];
+    [MRAppControl getRepliedByProfileImage:post andImageView:self.profilePic];
     
     self.postedDate.text = [NSString stringWithFormat:@"%@",[post.postedOn stringWithFormat:kIdletimeFormat]];
     
