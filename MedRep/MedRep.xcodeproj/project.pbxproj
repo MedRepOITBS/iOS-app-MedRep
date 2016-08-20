@@ -780,6 +780,10 @@
 		CC649F671D0D1BAA0012289C /* MRDrugDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC649F531D0D1BA10012289C /* MRDrugDetailViewController.xib */; };
 		CC649F681D0D1BAA0012289C /* MRDrugSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC649F551D0D1BA10012289C /* MRDrugSearchViewController.m */; };
 		CC649F691D0D1BAA0012289C /* MRDrugSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC649F561D0D1BA10012289C /* MRDrugSearchViewController.xib */; };
+		CC7527CD1D68D2A8001189F0 /* MRPendingRecordsCount+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7527CA1D68D2A8001189F0 /* MRPendingRecordsCount+CoreDataProperties.m */; };
+		CC7527CE1D68D2A8001189F0 /* MRPendingRecordsCount+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7527CA1D68D2A8001189F0 /* MRPendingRecordsCount+CoreDataProperties.m */; };
+		CC7527CF1D68D2A8001189F0 /* MRPendingRecordsCount.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7527CC1D68D2A8001189F0 /* MRPendingRecordsCount.m */; };
+		CC7527D01D68D2A8001189F0 /* MRPendingRecordsCount.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7527CC1D68D2A8001189F0 /* MRPendingRecordsCount.m */; };
 		CC7DB0221D0C8BEC007DFE4C /* MRAppointmentListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79169E241BEBE70500C11D13 /* MRAppointmentListViewController.m */; };
 		CC7DB0231D0C8BEC007DFE4C /* MRCompaignsDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7930A3921BB9153A003112E4 /* MRCompaignsDetailsViewController.m */; };
 		CC7DB0241D0C8BEC007DFE4C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B7820E1B7919EA0070645C /* Reachability.m */; };
@@ -2239,6 +2243,10 @@
 		CC649F541D0D1BA10012289C /* MRDrugSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRDrugSearchViewController.h; sourceTree = "<group>"; };
 		CC649F551D0D1BA10012289C /* MRDrugSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRDrugSearchViewController.m; sourceTree = "<group>"; };
 		CC649F561D0D1BA10012289C /* MRDrugSearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRDrugSearchViewController.xib; sourceTree = "<group>"; };
+		CC7527C91D68D2A8001189F0 /* MRPendingRecordsCount+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MRPendingRecordsCount+CoreDataProperties.h"; sourceTree = "<group>"; };
+		CC7527CA1D68D2A8001189F0 /* MRPendingRecordsCount+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MRPendingRecordsCount+CoreDataProperties.m"; sourceTree = "<group>"; };
+		CC7527CB1D68D2A8001189F0 /* MRPendingRecordsCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRPendingRecordsCount.h; sourceTree = "<group>"; };
+		CC7527CC1D68D2A8001189F0 /* MRPendingRecordsCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRPendingRecordsCount.m; sourceTree = "<group>"; };
 		CC7DB2161D0C8BEC007DFE4C /* MedRepDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MedRepDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC7DB2181D0C8C46007DFE4C /* MRDevEnvironmentConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRDevEnvironmentConfig.h; sourceTree = "<group>"; };
 		CC7DB2191D0C8CF2007DFE4C /* MRDevEnvironmentConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRDevEnvironmentConfig.m; sourceTree = "<group>"; };
@@ -2984,6 +2992,10 @@
 		797560381BBFE2CC0034D0AC /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CC7527C91D68D2A8001189F0 /* MRPendingRecordsCount+CoreDataProperties.h */,
+				CC7527CA1D68D2A8001189F0 /* MRPendingRecordsCount+CoreDataProperties.m */,
+				CC7527CB1D68D2A8001189F0 /* MRPendingRecordsCount.h */,
+				CC7527CC1D68D2A8001189F0 /* MRPendingRecordsCount.m */,
 				CCA383ED1D342D3500BCF5A9 /* MRGroupMembers+CoreDataProperties.h */,
 				CCA383EE1D342D3500BCF5A9 /* MRGroupMembers+CoreDataProperties.m */,
 				CCA383EF1D342D3500BCF5A9 /* MRGroupMembers.h */,
@@ -5597,6 +5609,7 @@
 				83B781F31B7916670070645C /* MRAppControl.m in Sources */,
 				79AC94491B9E011D00B81452 /* MPNotificatinsTableViewCell.m in Sources */,
 				7950AF241BBF91D700A93106 /* MRSurveyDetailsViewController.m in Sources */,
+				CC7527CD1D68D2A8001189F0 /* MRPendingRecordsCount+CoreDataProperties.m in Sources */,
 				79F84B141BE92CB70081613A /* MRMedRepDetailsViewController.m in Sources */,
 				8A7169D11D27B07D00533A6D /* MRDrugDetailModel.m in Sources */,
 				CC9857F51D2E51B300C74438 /* MRManagedObject.m in Sources */,
@@ -5604,6 +5617,7 @@
 				8AFE8D231D12EB310000382E /* MRAddMembersViewController.m in Sources */,
 				B4B4F1821D39E53E00EFCC0E /* NSDayComponent.m in Sources */,
 				B4B4F1411D39857E00EFCC0E /* MRWorkExperience.m in Sources */,
+				CC7527CF1D68D2A8001189F0 /* MRPendingRecordsCount.m in Sources */,
 				B4B4F1801D39E53E00EFCC0E /* NSDateElement.m in Sources */,
 				CC7DB2C51D0CC433007DFE4C /* MRCollectionView.m in Sources */,
 				B4E02C601D491760003A1859 /* MRSharePost+CoreDataProperties.m in Sources */,
@@ -5817,6 +5831,7 @@
 				8A7169D21D27B07D00533A6D /* MRDrugDetailModel.m in Sources */,
 				8AFE8D241D12EB310000382E /* MRAddMembersViewController.m in Sources */,
 				CC9857F61D2E51B300C74438 /* MRManagedObject.m in Sources */,
+				CC7527CE1D68D2A8001189F0 /* MRPendingRecordsCount+CoreDataProperties.m in Sources */,
 				CC7DB2D21D0CC433007DFE4C /* MRContactsViewController.m in Sources */,
 				CC7DB03C1D0C8BEC007DFE4C /* MRListViewController.m in Sources */,
 				CC7DB2E21D0CC433007DFE4C /* MRGroupsViewController.m in Sources */,
@@ -5824,6 +5839,7 @@
 				CC7DB03D1D0C8BEC007DFE4C /* MRDRActivityTableViewCell.m in Sources */,
 				CC7DB3081D0CC4E2007DFE4C /* MRGroup+CoreDataProperties.m in Sources */,
 				CC86FE3B1D29A7780030B23D /* MRShareDetailViewController.m in Sources */,
+				CC7527D01D68D2A8001189F0 /* MRPendingRecordsCount.m in Sources */,
 				CC7DB03E1D0C8BEC007DFE4C /* MRMedrepMeetingsCell.m in Sources */,
 				CC9857D51D2D82CC00C74438 /* MRGroupPost+CoreDataProperties.m in Sources */,
 				B4B4F1061D38B52B00EFCC0E /* ProfileAboutTableViewCell.m in Sources */,
@@ -6138,7 +6154,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "766c2c59-fcea-4eab-8a31-70ee452a1ed5";
+				PROVISIONING_PROFILE = "c4d46433-dea4-407d-8f95-f9f1a3d92b26";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -6156,7 +6172,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "766c2c59-fcea-4eab-8a31-70ee452a1ed5";
+				PROVISIONING_PROFILE = "c4d46433-dea4-407d-8f95-f9f1a3d92b26";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
