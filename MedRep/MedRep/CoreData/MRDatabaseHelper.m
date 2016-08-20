@@ -32,6 +32,7 @@
 #import "MRInterestArea.h"
 #import "EducationalQualifications.h"
 #import "MRPublications.h"
+#import "MRPendingRecordsCount.h"
 
 static MRDatabaseHelper *sharedDataManager = nil;
 
@@ -261,11 +262,110 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
     }
 }
 
++ (void)makeServiceCallForFetchingConnections:(BOOL)status details:(NSString*)details
+                               response:(NSDictionary*)response
+                     andResponseHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon stopActivityIndicator];
+    if (status)
+    {
+        [MRDatabaseHelper filterRootLevelContactResponse:response andResponseHandler:responseHandler];
+    }
+    else {
+        NSString *errorCode = [MRDatabaseHelper getOAuthErrorCode:response];
+        
+        if ([errorCode isEqualToString:@"invalid_token"])
+        {
+            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+             {
+                 [MRCommon savetokens:responce];
+                 [[MRWebserviceHelper sharedWebServiceHelper] getContactListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                     [MRCommon stopActivityIndicator];
+                     if (status)
+                     {
+                         [MRDatabaseHelper filterRootLevelContactResponse:responce andResponseHandler:responseHandler];
+                     } else
+                     {
+                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                         if (erros.count > 0)
+                             [MRCommon showAlert:[erros lastObject] delegate:nil];
+                     }
+                 }];
+             }];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }
+}
+
++ (void)filterRootLevelContactResponse:(NSDictionary*)response andResponseHandler:(WebServiceResponseHandler) responseHandler {
+    if (response != nil && [response allKeys].count > 0) {
+        id tempValue = [response valueForKey:@"result"];
+        if (tempValue != nil && [tempValue isKindOfClass:[NSDictionary class]]) {
+            id pendingConnections = [tempValue objectOrNilForKey:@"pendingConnections"];
+            if (pendingConnections != nil) {
+                MRDataManger *dbManager = [MRDataManger sharedManager];
+                NSManagedObjectContext *context = [dbManager getNewPrivateManagedObjectContext];
+                
+                NSArray *pendingRecordsCount = [[MRDataManger sharedManager] fetchObjectList:kPendingRecordsCountEntity
+                                                                                   inContext:context];
+                
+                MRManagedObject *entity = nil;
+                if (pendingRecordsCount == nil) {
+                    NSString *entityName = NSStringFromClass(MRPendingRecordsCount.class);
+                    
+                    NSEntityDescription *entityDescription = [[[dbManager managedObjectModel] entitiesByName] objectForKey:entityName];
+                    
+                    entity = [[MRManagedObject alloc] initWithEntity:entityDescription
+                                      insertIntoManagedObjectContext:context];
+                } else {
+                    entity = pendingRecordsCount.firstObject;
+                }
+                
+                NSNumber *tempCount = nil;
+                if ([pendingConnections isKindOfClass:[NSNumber class]]) {
+                    tempCount = pendingConnections;
+                }
+                
+                [entity setValue:[NSNumber numberWithLong:tempCount.longValue] forKey:@"pendingConnections"];
+                [dbManager dbSaveInContext:context];
+            }
+            id myContacts = [tempValue objectOrNilForKey:@"myContacts"];
+            if (myContacts != nil) {
+                id result = [MRWebserviceHelper parseNetworkResponse:MRContact.class
+                                                             andData:myContacts];
+                if (responseHandler != nil) {
+                    NSArray *tempResults = [[MRDataManger sharedManager] fetchObjectList:kContactEntity];
+                    
+                    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:true];
+                    result = [tempResults sortedArrayUsingDescriptors:@[sortDescriptor]];
+                    responseHandler(result);
+                }
+            } else {
+                if (responseHandler != nil) {
+                    responseHandler(nil);
+                }
+            }
+        } else {
+            if (responseHandler != nil) {
+                responseHandler(nil);
+            }
+        }
+    } else {
+        if (responseHandler != nil) {
+            responseHandler(nil);
+        }
+    }
+}
+
 + (void)getContacts:(WebServiceResponseHandler)responseHandler {
     [MRCommon showActivityIndicator:@"Requesting..."];
     [[MRWebserviceHelper sharedWebServiceHelper] getContactListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
         [[MRDataManger sharedManager] removeAllObjects:kContactEntity withPredicate:nil];
-        [MRDatabaseHelper makeServiceCallForContactsFetch:status details:details
+        [MRDatabaseHelper makeServiceCallForFetchingConnections:status details:details
                                                  response:responce
                                        andResponseHandler:responseHandler];
     }];

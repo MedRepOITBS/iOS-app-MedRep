@@ -393,7 +393,7 @@
                                                 delegate:self
                                        cancelButtonTitle:@"Cancel"
                                   destructiveButtonTitle:nil
-                                       otherButtonTitles:@"Pending Connections",@"Add Connections", nil];
+                                       otherButtonTitles:@"Pending Connections",@"Add Connections", @"Invite Contacts", nil];
     }else{
         self.menu = [[UIActionSheet alloc] initWithTitle:@"More Options"
                                                 delegate:self
@@ -423,6 +423,8 @@
             MRAddMembersViewController* detailViewController = [[MRAddMembersViewController alloc] init];
             detailViewController.groupID = 0;
             [self.navigationController pushViewController:detailViewController animated:NO];
+        } else if (buttonIndex == 2) {
+            [MRAppControl invokeInviteContact:self];
         }
     }else{
         if (buttonIndex == 0) {

@@ -71,4 +71,6 @@
 + (NSString*)getFileName;
 + (KLCPopup*)setupCommentBox:(id)delegate;
 
++ (void)invokeInviteContact:(UIViewController*)viewController;
+
 @end

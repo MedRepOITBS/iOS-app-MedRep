@@ -234,14 +234,11 @@
     
     self.groupsUnderContact = [self.mainContact.groups allObjects];
 }
--(IBAction)viewMoreOption:(id)sender{
- 
-    
-    
-    MemberListViewController *membeVC = [[MemberListViewController alloc] init];
+
+- (IBAction)viewMoreOption:(id)sender{
+   MemberListViewController *membeVC = [[MemberListViewController alloc] init];
     membeVC.contactsUnderGroup = [self.contactsUnderGroup copy];
     [self.navigationController pushViewController:membeVC animated:NO];
-    
 }
 
 - (void)setupUIWithGroupDetails {

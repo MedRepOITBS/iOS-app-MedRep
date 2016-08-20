@@ -146,7 +146,7 @@
     [self.userRegData setObject:[details objectOrNilForKey:@"lastName"] forKey:KLastName];
     [self.userRegData setObject:[details objectOrNilForKey:@"userId"] forKey:@"userId"];
     [self.userRegData setObject:[details objectOrNilForKey:@"status"] forKey:@"status"];
-    [self.userRegData setObject:[details objectOrNilForKey:kDisplayName] forKey:kDisplayName];
+    [self.userRegData setObjectForKey:kDisplayName andValue:[details objectOrNilForKey:kDisplayName]];
     
     id locations = [details objectOrNilForKey:@"locations"];
     if ([locations isKindOfClass:[NSArray class]]) {
@@ -188,9 +188,10 @@
         }
     }
     
+    [self.userRegData setObjectForKey:KTitle andValue:[details objectOrNilForKey:KTitle]];
+    
     //[self.userRegData setObject:@"medrep@123" forKey:KPassword];
     NSDictionary *temp = [details objectForKey:@"profilePicture"];
-    [self.userRegData setObject:[details objectOrNilForKey:KTitle] forKey:KTitle];
 
 //    if ([temp isKindOfClass:[NSDictionary class]])
 //    {
@@ -205,7 +206,7 @@
 //        }
 //        
 //    }
-    [self.userRegData setObject:[temp objectForKey:@"imageUrl"] forKey:KProfilePicture];
+    [self.userRegData setObjectForKey:KProfilePicture andValue:[temp objectForKey:@"imageUrl"]];
     [self.userRegData setObject:[NSMutableArray arrayWithObjects:[details objectOrNilForKey:@"mobileNo"],[details objectOrNilForKey:@"phoneNo"], nil] forKey:KMobileNumber];
     [self.userRegData setObject:[NSMutableArray arrayWithObjects:[details objectOrNilForKey:@"emailId"],[details objectOrNilForKey:@"alternateEmailId"], nil] forKey:KEmail];
     
@@ -877,7 +878,16 @@
     if (group.group_img_data != nil && group.group_img_data.length > 0) {
         parentView.image = [UIImage imageWithData:group.group_img_data];
     } else if (group.imageUrl != nil && group.imageUrl.length > 0) {
-        parentView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:group.imageUrl]]];
+        parentView.image = [UIImage imageNamed:@"Group"];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:group.imageUrl]];
+            if (imageData != nil) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    parentView.image = [UIImage imageWithData:imageData];
+                });
+            }
+        });
+//        parentView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:group.imageUrl]]];
     }
     else if (group.group_name != nil && group.group_name.length > 0) {
         UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:parentView.bounds];
@@ -949,6 +959,18 @@
     [commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutCenter)];
     
     return commentBoxKLCPopView;
+}
+
++ (void)invokeInviteContact:(UIViewController*)viewController {
+    NSString *textToShare = [NSString stringWithFormat:@"Dr. %@ %@ has invited you to join 'MedRep', a digital collboration platform for doctors. Please Download from iTunes and Google Playstore. iTunes link https://itunes.apple.com/in/app/medrep/id1087940083?mt=8 ", [MRAppControl sharedHelper].userRegData[@"FirstName"],[MRAppControl sharedHelper].userRegData[@"LastName"]];
+    NSURL *myWebsite = [NSURL URLWithString:@"http://www.erfolglifesciences.com/"];
+    
+    NSArray *objectsToShare = @[textToShare, myWebsite];
+    
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
+    
+    
+    [viewController presentViewController:activityVC animated:YES completion:nil];
 }
 
 @end

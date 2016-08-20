@@ -339,5 +339,22 @@ withComplitionHandler:(completionHandler)responceHandler;
     }
     return [NSDictionary dictionaryWithDictionary:[replaced copy]];
 }
+
+@end
+
+@interface NSMutableDictionary (CategoryName)
+
+- (void)setObjectForKey:(id)aKey andValue:(id)value;
+
+@end
+
+@implementation NSMutableDictionary (CategoryName)
+
+- (void)setObjectForKey:(id)aKey andValue:(id)value {
+    if (value != nil) {
+        [self setObject:value forKey:aKey];
+    }
+}
+
 @end
 
