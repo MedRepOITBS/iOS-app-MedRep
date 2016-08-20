@@ -1373,7 +1373,8 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
 }
 
 - (void)getSearchContactList:(NSString *)str withHandler:(completionHandler)responceHandler{
-    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/getDoctorContacts/%@?token=%@",kHostName, str, [MRDefaults objectForKey:kAuthenticationToken]];
+    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/searchContact?token=%@&name=%@",kHostName, [MRDefaults objectForKey:kAuthenticationToken], str];
+    //[NSString stringWithFormat:@"%@/medrep-web/getDoctorContacts/%@?token=%@",kHostName, str, [MRDefaults objectForKey:kAuthenticationToken]];
     stringFormOfUrl = [stringFormOfUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     
     NSURL *url = [NSURL URLWithString:stringFormOfUrl];
