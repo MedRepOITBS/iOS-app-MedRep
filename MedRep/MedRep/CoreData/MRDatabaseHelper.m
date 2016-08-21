@@ -172,13 +172,105 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
     }
 }
 
++ (void)makeServiceCallForFetchingGroups:(BOOL)status details:(NSString*)details
+                             response:(NSDictionary*)response
+                   andResponseHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon stopActivityIndicator];
+    if (status)
+    {
+        [MRDatabaseHelper filterRootLevelGroupResponse:response andResponseHandler:responseHandler];
+    }
+    else {
+        NSString *errorCode = [MRDatabaseHelper getOAuthErrorCode:response];
+        if ([errorCode isEqualToString:@"invalid_token"])
+        {
+            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+             {
+                 [MRCommon savetokens:responce];
+                 [[MRWebserviceHelper sharedWebServiceHelper] getGroupListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                     [MRCommon stopActivityIndicator];
+                     if (status)
+                     {
+                         [MRDatabaseHelper filterRootLevelGroupResponse:responce
+                                                     andResponseHandler:responseHandler];
+                     } else
+                     {
+                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                         if (erros.count > 0)
+                             [MRCommon showAlert:[erros lastObject] delegate:nil];
+                     }
+                 }];
+             }];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }
+}
+
++ (void)filterRootLevelGroupResponse:(NSDictionary*)response andResponseHandler:(WebServiceResponseHandler) responseHandler {
+    if (response != nil && [response allKeys].count > 0) {
+        id pendingGroups = [response objectOrNilForKey:@"pendingGroups"];
+        if (pendingGroups != nil) {
+            MRDataManger *dbManager = [MRDataManger sharedManager];
+            NSManagedObjectContext *context = [dbManager getNewPrivateManagedObjectContext];
+            
+            NSArray *pendingRecordsCount = [[MRDataManger sharedManager] fetchObjectList:kPendingRecordsCountEntity
+                                                                               inContext:context];
+            
+            MRManagedObject *entity = nil;
+            if (pendingRecordsCount == nil) {
+                NSString *entityName = NSStringFromClass(MRPendingRecordsCount.class);
+                
+                NSEntityDescription *entityDescription = [[[dbManager managedObjectModel] entitiesByName] objectForKey:entityName];
+                
+                entity = [[MRManagedObject alloc] initWithEntity:entityDescription
+                                  insertIntoManagedObjectContext:context];
+            } else {
+                entity = pendingRecordsCount.firstObject;
+            }
+            
+            NSNumber *tempCount = nil;
+            if ([pendingGroups isKindOfClass:[NSNumber class]]) {
+                tempCount = pendingGroups;
+            }
+            
+            [entity setValue:[NSNumber numberWithLong:tempCount.longValue] forKey:@"pendingGroups"];
+            [dbManager dbSaveInContext:context];
+        }
+        id groups = [response objectOrNilForKey:@"groups"];
+        if (groups != nil) {
+            id result = [MRWebserviceHelper parseNetworkResponse:MRGroup.class
+                                                         andData:groups];
+            if (responseHandler != nil) {
+                NSArray *tempResults = [[MRDataManger sharedManager] fetchObjectList:kGroupEntity];
+                
+                NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"group_name" ascending:true];
+                result = [tempResults sortedArrayUsingDescriptors:@[sortDescriptor]];
+                responseHandler(result);
+            }
+        } else {
+            if (responseHandler != nil) {
+                responseHandler(nil);
+            }
+        }
+    } else {
+        if (responseHandler != nil) {
+            responseHandler(nil);
+        }
+    }
+}
+
 + (void)getGroups:(WebServiceResponseHandler)responseHandler {
     [MRCommon showActivityIndicator:@"Requesting..."];
     [[MRWebserviceHelper sharedWebServiceHelper] getGroupListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
         [[MRDataManger sharedManager] removeAllObjects:kGroupEntity withPredicate:nil];
-        [MRDatabaseHelper makeServiceCallForGroupsFetch:status details:details
-                                                 response:responce
-                                       andResponseHandler:responseHandler];
+        [MRDatabaseHelper makeServiceCallForFetchingGroups:status details:details
+                                                  response:responce
+                                        andResponseHandler:responseHandler];
     }];
 }
 

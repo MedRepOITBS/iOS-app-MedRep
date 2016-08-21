@@ -11,8 +11,11 @@
 #import "MRSharePost.h"
 #import "MRTransformPost.h"
 #import "MRContact.h"
+#import "NSDate+Utilities.h"
 
 @interface MRGroupPostItemTableViewCell()
+
+@property (weak, nonatomic) IBOutlet UILabel *postedOnLabel;
 
 @property (weak, nonatomic) IBOutlet UIImageView* profilePicImageView;
 @property (weak, nonatomic) IBOutlet UILabel* contactNameLabel;
@@ -104,6 +107,8 @@
     NSLog(@"Post : %ld",post.sharePostId.longValue);
     
     self.postLabel.text = post.titleDescription;
+    self.postedOnLabel.text = [NSDate convertNSDateToNSString:post.postedOn
+                                                   dateFormatStyle:NSDateFormatterMediumStyle];
     
     UIImage *image = nil;
     

@@ -105,6 +105,20 @@ static const unsigned componentFlags = (NSCalendarUnitYear| NSCalendarUnitMonth 
     return selectedDate;
 }
 
++ (NSString*)convertNSDateToNSString:(NSDate*)date dateFormat:(NSString*)dateFormat {
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    formatter.dateFormat = dateFormat;
+    [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
+    return [formatter stringFromDate:date];
+}
+
++ (NSString*)convertNSDateToNSString:(NSDate*)date dateFormatStyle:(NSDateFormatterStyle)dateFormatStyle {
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    formatter.dateStyle = dateFormatStyle;
+    [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
+    return [formatter stringFromDate:date];
+}
+
 #pragma mark - String Properties
 - (NSString *) stringWithFormat: (NSString *) format
 {

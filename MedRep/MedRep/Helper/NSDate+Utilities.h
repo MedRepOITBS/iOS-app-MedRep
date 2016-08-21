@@ -98,6 +98,8 @@
 - (NSInteger)distanceInDaysToDate:(NSDate *)anotherDate;
 
 + (NSDate*)convertStringToNSDate:(NSString*)dateString dateFormat:(NSString*)dateFormat;
++ (NSString*)convertNSDateToNSString:(NSDate*)date dateFormat:(NSString*)dateFormat;
++ (NSString*)convertNSDateToNSString:(NSDate*)date dateFormatStyle:(NSDateFormatterStyle)dateFormatStyle;
 
 // Decomposing dates
 @property (readonly) NSInteger nearestHour;

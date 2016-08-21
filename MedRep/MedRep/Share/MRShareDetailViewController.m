@@ -153,7 +153,11 @@ AVPlayerViewControllerDelegate> {
     self.commentsCount.text = [NSString stringWithFormat:@"%ld",self.post.commentsCount.longValue];
     self.likeCount.text = [NSString stringWithFormat:@"%ld",self.post.likesCount.longValue];
     
-    self.postedBY.text = [NSString stringWithFormat:@"Posted By:%@", self.post.source];
+    if (self.post.source != nil && self.post.source.length > 0) {
+        self.postedBY.text = [NSString stringWithFormat:@"Posted By:%@", self.post.source];
+    } else {
+        [self.postedBY setHidden:YES];
+    }
     self.titleView.text = self.post.titleDescription;
 }
 

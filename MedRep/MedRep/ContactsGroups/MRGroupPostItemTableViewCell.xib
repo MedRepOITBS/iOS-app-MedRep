@@ -7,11 +7,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="groupCell" rowHeight="260" id="KGk-i7-Jjw" customClass="MRGroupPostItemTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="401" height="260"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="groupCell" rowHeight="264" id="KGk-i7-Jjw" customClass="MRGroupPostItemTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="401" height="270"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="401" height="259.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="401" height="269.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Contact.png" translatesAutoresizingMaskIntoConstraints="NO" id="a73-kz-f15">
@@ -99,21 +99,33 @@
                             <constraint firstAttribute="height" constant="25" id="1Zt-Vz-fZM"/>
                         </constraints>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eOX-Om-FaU">
+                        <rect key="frame" x="5" y="250" width="390" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="14" id="svD-f3-kSC"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Italic" family="Helvetica Neue" pointSize="12"/>
+                        <color key="textColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="bottom" secondItem="eOX-Om-FaU" secondAttribute="bottom" constant="5.5" id="1e4-9O-ym2"/>
                     <constraint firstItem="vje-fL-WVv" firstAttribute="top" secondItem="rNP-m8-iBC" secondAttribute="bottom" constant="18" id="2yR-Zr-8to"/>
                     <constraint firstItem="rNP-m8-iBC" firstAttribute="leading" secondItem="jhR-Qo-e9G" secondAttribute="leading" id="3WW-i2-Jus"/>
                     <constraint firstItem="a73-kz-f15" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="3vv-sp-PSq"/>
                     <constraint firstItem="jhR-Qo-e9G" firstAttribute="leading" secondItem="a73-kz-f15" secondAttribute="trailing" constant="11" id="EE5-DM-gYK"/>
                     <constraint firstItem="ej0-hE-p3i" firstAttribute="leading" secondItem="jhR-Qo-e9G" secondAttribute="leading" id="H2q-fa-iMA"/>
                     <constraint firstAttribute="trailing" secondItem="vje-fL-WVv" secondAttribute="trailing" constant="8" id="Ncz-LU-m6H"/>
+                    <constraint firstAttribute="trailing" secondItem="eOX-Om-FaU" secondAttribute="trailing" constant="6" id="OCp-mc-D4y"/>
+                    <constraint firstItem="eOX-Om-FaU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="aas-1k-k9k"/>
                     <constraint firstItem="jhR-Qo-e9G" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="d0b-Ot-Kj5"/>
                     <constraint firstAttribute="trailing" secondItem="ej0-hE-p3i" secondAttribute="trailing" constant="8" id="eUb-dy-BC7"/>
                     <constraint firstItem="a73-kz-f15" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="hcq-xF-c9o"/>
                     <constraint firstItem="vje-fL-WVv" firstAttribute="leading" secondItem="jhR-Qo-e9G" secondAttribute="leading" id="jxg-CG-nFh"/>
                     <constraint firstAttribute="trailing" secondItem="rNP-m8-iBC" secondAttribute="trailing" constant="8" id="mhP-H0-JU7"/>
                     <constraint firstItem="rNP-m8-iBC" firstAttribute="top" secondItem="jhR-Qo-e9G" secondAttribute="bottom" constant="2" id="qWb-RV-jiX"/>
-                    <constraint firstAttribute="bottom" secondItem="ej0-hE-p3i" secondAttribute="bottom" constant="12" id="qug-0X-pf6"/>
+                    <constraint firstAttribute="bottom" secondItem="ej0-hE-p3i" secondAttribute="bottom" constant="22" id="qug-0X-pf6"/>
                     <constraint firstItem="ej0-hE-p3i" firstAttribute="top" secondItem="vje-fL-WVv" secondAttribute="bottom" constant="8" id="sLn-Of-26H"/>
                     <constraint firstAttribute="trailing" secondItem="jhR-Qo-e9G" secondAttribute="trailing" constant="8" id="w66-X1-22F"/>
                 </constraints>
@@ -129,6 +141,7 @@
                 <outlet property="postImageView" destination="vje-fL-WVv" id="zaW-DG-Fnl"/>
                 <outlet property="postImageViewTopConstraint" destination="2yR-Zr-8to" id="rAb-yS-7nw"/>
                 <outlet property="postLabel" destination="rNP-m8-iBC" id="p8p-Jh-kWf"/>
+                <outlet property="postedOnLabel" destination="eOX-Om-FaU" id="Zbd-xo-aSP"/>
                 <outlet property="profilePicImageView" destination="a73-kz-f15" id="OAD-qC-l88"/>
                 <outlet property="profilePicWidthConstraint" destination="FDH-4E-Gnc" id="eMk-3y-n8f"/>
                 <outlet property="shareCountLabel" destination="3n7-sh-NyL" id="csg-QH-Kua"/>

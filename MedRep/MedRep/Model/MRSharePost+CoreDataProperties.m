@@ -150,6 +150,10 @@
 
 - (void)setDoctor_Name:(NSString *)doctor_Name {
     self.sharedByProfileName = doctor_Name;
+    
+    [self willChangeValueForKey:@"doctor_Name"];
+    [self setPrimitiveValue:doctor_Name forKey:@"doctor_Name"];
+    [self didChangeValueForKey:@"doctor_Name"];
 }
 
 @end
