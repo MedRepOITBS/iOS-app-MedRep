@@ -30,7 +30,7 @@
 #import <AVKit/AVKit.h>
 
 @interface MRShareDetailViewController () <UITableViewDataSource, UITableViewDelegate, MRShareOptionsSelectionDelegate, UIWebViewDelegate, CommonBoxViewDelegate,
-AVPlayerViewControllerDelegate> {
+AVPlayerViewControllerDelegate, UIAlertViewDelegate> {
     
     AVPlayerViewController *av;
 }
@@ -410,7 +410,9 @@ AVPlayerViewControllerDelegate> {
     
     if (imageData != nil) {
         [postMessage setObject:[MRAppControl getFileName] forKey:@"fileName"];
-        [postMessage setObject:imageData forKey:@"fileData"];
+        
+        NSString *jsonData = [imageData base64EncodedStringWithOptions:0];
+        [postMessage setObject:jsonData forKey:@"fileData"];
     }
     
 //    NSDictionary *dataDict = @{@"detail_desc" : message,
@@ -425,13 +427,7 @@ AVPlayerViewControllerDelegate> {
                                };
     
     [MRDatabaseHelper postANewTopic:dataDict withHandler:^(id result) {
-        self.recentActivity = nil;
-        if (self.post.postedReplies != nil && self.post.postedReplies.count > 0) {
-            self.recentActivity = self.post.postedReplies.allObjects;
-        }
-        
-        [self setCountInLabels];
-        [self.activitiesTable reloadData];
+        [MRCommon showAlert:@"Comment posted successfully !!!" delegate:self withTag:1000];
     }];
 }
 
@@ -445,6 +441,7 @@ AVPlayerViewControllerDelegate> {
                                     self.recentActivity = [self.recentActivity sortedArrayUsingDescriptors:@[sortDescriptor, sortNameDescriptor]];
                                     
                                     [self setEmptyMessage];
+                                    [self setCountInLabels];
                                 }];
     
 }
@@ -573,6 +570,15 @@ AVPlayerViewControllerDelegate> {
 
 - (void)playerViewControllerWillStartPictureInPicture:(AVPlayerViewController *)playerViewController {
     NSLog(@"%s",__PRETTY_FUNCTION__);
+}
+
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSInteger tag = alertView.tag;
+    
+    if (tag == 1000) {
+        [self sortRecentActivities];
+    }
 }
 
 @end

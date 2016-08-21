@@ -54,7 +54,23 @@
         }
     } else {
         self.heightConstraint.constant = 146;
-        self.commentPic.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:post.fileUrl]]];
+        
+        UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        // If you need custom color, use color property
+        // activityIndicator.color = yourDesirableColor;
+        [self.commentPic addSubview:activityIndicator];
+        [activityIndicator startAnimating];
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:post.fileUrl]];
+            if (imageData != nil) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.commentPic.image = [UIImage imageWithData:imageData];
+                    [activityIndicator stopAnimating];
+                    [activityIndicator removeFromSuperview];
+                });
+            }
+        });
     }
     
     NSString *postText = @"";

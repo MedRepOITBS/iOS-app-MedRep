@@ -394,7 +394,9 @@ UIImagePickerControllerDelegate>
     
     if (imageData != nil) {
         [postMessage setObject:[MRAppControl getFileName] forKey:@"fileName"];
-        [postMessage setObject:imageData forKey:@"fileData"];
+
+        NSString *jsonData = [imageData base64EncodedStringWithOptions:0];
+        [postMessage setObject:jsonData forKey:@"fileData"];
     }
     
 //    NSDictionary *dataDict = @{@"detail_desc" : message,
