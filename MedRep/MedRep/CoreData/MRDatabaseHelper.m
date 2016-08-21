@@ -426,7 +426,7 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
                 [dbManager dbSaveInContext:context];
             }
             id myContacts = [tempValue objectOrNilForKey:@"myContacts"];
-            if (myContacts != nil) {
+            if (myContacts != nil && [myContacts isKindOfClass:[NSArray class]]) {
                 id result = [MRWebserviceHelper parseNetworkResponse:MRContact.class
                                                              andData:myContacts];
                 if (responseHandler != nil) {
