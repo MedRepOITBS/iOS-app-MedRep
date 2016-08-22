@@ -52,6 +52,7 @@
 @dynamic detail_desc;
 @dynamic short_desc;
 @dynamic title_desc;
+@dynamic transform_post_id;
 @dynamic postedReplies;
 
 - (void)setLikes_count:(NSNumber *)likes_count {
@@ -154,6 +155,16 @@
     [self willChangeValueForKey:@"doctor_Name"];
     [self setPrimitiveValue:doctor_Name forKey:@"doctor_Name"];
     [self didChangeValueForKey:@"doctor_Name"];
+}
+
+- (void)setTransform_post_id:(NSNumber *)transform_post_id {
+    NSInteger postId = 0;
+    if (transform_post_id != nil) {
+        postId = transform_post_id.longLongValue;
+        self.source = @"Transform";
+    }
+    
+    self.parentTransformPostId = [NSNumber numberWithLongLong:postId];
 }
 
 @end

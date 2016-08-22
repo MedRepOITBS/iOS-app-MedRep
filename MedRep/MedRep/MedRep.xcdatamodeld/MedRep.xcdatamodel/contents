@@ -219,6 +219,7 @@
         <attribute name="title_desc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="titleDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="topic_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="transform_post_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="postedReplies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MRPostedReplies" inverseName="sharePostRelationship" inverseEntity="MRPostedReplies" syncable="YES"/>
     </entity>
@@ -283,16 +284,16 @@
         <element name="MRInterestArea" positionX="-18" positionY="153" width="128" height="75"/>
         <element name="MRNotifications" positionX="-36" positionY="63" width="128" height="420"/>
         <element name="MRNotificationType" positionX="16" positionY="-135" width="128" height="90"/>
+        <element name="MRPendingRecordsCount" positionX="153" positionY="9" width="128" height="75"/>
         <element name="MRPostedReplies" positionX="-27" positionY="531" width="128" height="375"/>
         <element name="MRProfile" positionX="-36" positionY="135" width="128" height="150"/>
         <element name="MRPublications" positionX="0" positionY="171" width="128" height="120"/>
         <element name="MRReplies" positionX="-36" positionY="135" width="128" height="120"/>
         <element name="MRRole" positionX="178" positionY="-72" width="128" height="105"/>
-        <element name="MRSharePost" positionX="151" positionY="366" width="128" height="630"/>
+        <element name="MRSharePost" positionX="151" positionY="366" width="128" height="645"/>
         <element name="MRSuggestedContact" positionX="187" positionY="174" width="128" height="105"/>
         <element name="MRTherapeuticArea" positionX="315" positionY="36" width="128" height="90"/>
         <element name="MRTransformPost" positionX="331" positionY="378" width="128" height="450"/>
         <element name="MRWorkExperience" positionX="358" positionY="171" width="128" height="165"/>
-        <element name="MRPendingRecordsCount" positionX="153" positionY="9" width="128" height="75"/>
     </elements>
 </model>

@@ -191,22 +191,19 @@
     [self.userRegData setObjectForKey:KTitle andValue:[details objectOrNilForKey:KTitle]];
     
     //[self.userRegData setObject:@"medrep@123" forKey:KPassword];
-    NSDictionary *temp = [details objectForKey:@"profilePicture"];
+    id temp = [details objectForKey:@"profilePicture"];
 
-//    if ([temp isKindOfClass:[NSDictionary class]])
-//    {
-//        
-//        id profileDat = [temp objectForKey:@"data"];
-//        
-//        
-//        if (profileDat == [NSNull null] || profileDat == nil || [profileDat isEqualToString:@"<nil>"]) {
-//            
-//        }else{
-//        [self.userRegData setObject:[temp objectForKey:@"data"] forKey:KProfilePicture];    
-//        }
-//        
-//    }
-    [self.userRegData setObjectForKey:KProfilePicture andValue:[temp objectForKey:@"imageUrl"]];
+    if (temp != nil && [temp isKindOfClass:[NSDictionary class]])
+    {
+        [self.userRegData setObjectForKey:KProfilePicture andValue:[temp objectForKey:@"imageUrl"]];
+    } else {
+        temp = [details objectForKey:@"dPicture"];
+        if ([temp isKindOfClass:[NSString class]]) {
+            [self.userRegData setObjectForKey:KProfilePicture andValue:temp];
+        }
+    }
+    
+    
     [self.userRegData setObject:[NSMutableArray arrayWithObjects:[details objectOrNilForKey:@"mobileNo"],[details objectOrNilForKey:@"phoneNo"], nil] forKey:KMobileNumber];
     [self.userRegData setObject:[NSMutableArray arrayWithObjects:[details objectOrNilForKey:@"emailId"],[details objectOrNilForKey:@"alternateEmailId"], nil] forKey:KEmail];
     
