@@ -113,6 +113,8 @@
         [MRCommon stopActivityIndicator];
         if (status) {
             [MRCommon showAlert:@"Succuessfully joined the group !!!!" delegate:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
+                                                                object:nil];
             [self.navigationController popViewControllerAnimated:YES];
         }
         else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])

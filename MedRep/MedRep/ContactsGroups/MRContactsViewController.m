@@ -25,6 +25,7 @@
 #import "MRAddMembersViewController.h"
 #import "MRJoinGroupViewController.h"
 #import "MRCustomTabBar.h"
+#import "MRPendingRecordsCount.h"
 
 @interface MRContactsViewController () <UICollectionViewDataSource,UICollectionViewDelegate,UIActionSheetDelegate,UISearchBarDelegate, SWRevealViewControllerDelegate>{
     
@@ -36,6 +37,7 @@
     int i;
     NSTimer *timer;
 }
+@property (weak, nonatomic) IBOutlet UILabel *pendingConnectionsCountLabel;
 
 @property (weak, nonatomic) IBOutlet UIView *pendingConnectionsView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *pendingConnectionsViewWidthConstraint;
@@ -157,7 +159,7 @@
 
 - (void)updatePlusButton {
     if (self.currentIndex == 1 || self.currentIndex == 3) {
-        // My Contacts & Groups
+        // Suggested Connections & Suggested Groups
         [self.pendingConnectionsView setHidden:YES];
         self.pendingConnectionsViewWidthConstraint.constant = 0.0;
         self.moreOptionsTrailingConstraint.constant = 0.0;
@@ -166,7 +168,20 @@
         self.moreOptionsWidthConstraint.constant = 0.0;
         self.moreOptionsTrailingConstraint.constant = 0.0;
     } else {
+        MRPendingRecordsCount *pendingRecordsCountEntity = [[MRDataManger sharedManager] fetchObject:NSStringFromClass(MRPendingRecordsCount.class)];
+        
         // My Contacts & Groups
+        if (pendingRecordsCountEntity != nil) {
+            if (self.currentIndex == 0) {
+                if (pendingRecordsCountEntity.pendingConnections != nil) {
+                    self.pendingConnectionsCountLabel.text = [NSString stringWithFormat:@"%ld", pendingRecordsCountEntity.pendingConnections.longValue];
+                }
+            } else {
+                if (pendingRecordsCountEntity.pendingGroups != nil) {
+                    self.pendingConnectionsCountLabel.text = [NSString stringWithFormat:@"%ld", pendingRecordsCountEntity.pendingGroups.longValue];
+                }
+            }
+        }
         [self.pendingConnectionsView setHidden:NO];
         self.pendingConnectionsViewWidthConstraint.constant = 50.0;
         self.moreOptionsTrailingConstraint.constant = 5.0;

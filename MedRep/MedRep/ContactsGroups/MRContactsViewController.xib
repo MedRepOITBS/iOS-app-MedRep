@@ -15,6 +15,7 @@
                 <outlet property="myContactsCollectionView" destination="D3L-qD-CdE" id="NQX-d7-OAz"/>
                 <outlet property="navView" destination="CQB-W1-IAr" id="9ev-CA-va6"/>
                 <outlet property="noContactErrorMsgLbl" destination="X5o-Dm-SYC" id="vYZ-1f-2fr"/>
+                <outlet property="pendingConnectionsCountLabel" destination="dIV-Uq-9dj" id="bL1-bW-Thp"/>
                 <outlet property="pendingConnectionsLeadingConstraint" destination="KqW-LK-U0F" id="uff-Ix-UzQ"/>
                 <outlet property="pendingConnectionsView" destination="hQC-FA-SPX" id="9RD-8G-pQ0"/>
                 <outlet property="pendingConnectionsViewWidthConstraint" destination="hKz-eB-5pA" id="044-sg-0Qf"/>

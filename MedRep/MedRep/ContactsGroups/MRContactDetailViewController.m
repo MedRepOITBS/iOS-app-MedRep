@@ -589,7 +589,7 @@
 - (void)joinGroup {
     NSDictionary *dict =[NSDictionary dictionaryWithObjectsAndKeys:
                          [NSNumber numberWithLong:self.mainGroup.group_id.longValue], @"group_id",
-                         @"EXIT", @"status",
+                         @"PENDING", @"status",
                          [MRAppControl sharedHelper].userRegData[@"doctorId"], @"member_id",
                          nil];
     
@@ -598,6 +598,8 @@
         [MRCommon stopActivityIndicator];
         if (status)
         {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
+                                                                object:nil];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"You joined the group!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
             alert.tag = 11;
             [alert show];
