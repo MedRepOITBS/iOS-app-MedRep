@@ -21,6 +21,7 @@
                 <outlet property="profilePicImageView" destination="q0w-3n-12f" id="b2Q-l6-taF"/>
                 <outlet property="sharesCount" destination="nQP-O8-8zh" id="Ead-TT-Osf"/>
                 <outlet property="sharesView" destination="cir-4k-2dC" id="E9d-QB-9S5"/>
+                <outlet property="takeMeToTransformButton" destination="3Mv-bt-y1P" id="lb5-kY-ghn"/>
                 <outlet property="titleView" destination="zep-sb-8Pd" id="LOp-sp-5dj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="webView" destination="QdC-d9-6PM" id="9NO-Oa-t85"/>
@@ -128,6 +129,24 @@
                         <constraint firstAttribute="height" constant="25" id="aek-6U-rtw"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Mv-bt-y1P">
+                    <rect key="frame" x="450" y="290" width="150" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="25" id="UAQ-dq-IqN"/>
+                        <constraint firstAttribute="height" constant="30" id="gbJ-Hk-xL0"/>
+                        <constraint firstAttribute="width" constant="150" id="vDS-lg-JZD"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                    <state key="normal" title="Take me to &quot;Tramsform&quot;"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="gbJ-Hk-xL0"/>
+                        </mask>
+                    </variation>
+                    <connections>
+                        <action selector="takeMeToTransformButtonClicked:" destination="-1" eventType="touchUpInside" id="UVc-CP-yZ1"/>
+                    </connections>
+                </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Posted By : Transform" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UyU-ae-e9s">
                     <rect key="frame" x="471" y="270" width="118.5" height="25"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Italic" family="Helvetica Neue" pointSize="12"/>
@@ -180,6 +199,7 @@
                 <constraint firstItem="qRM-Jl-yS7" firstAttribute="top" secondItem="zep-sb-8Pd" secondAttribute="bottom" constant="20" id="TL4-yT-hv9"/>
                 <constraint firstItem="6Vf-zE-TTO" firstAttribute="leading" secondItem="q0w-3n-12f" secondAttribute="trailing" constant="10" id="Ukd-OA-sYY"/>
                 <constraint firstAttribute="trailing" secondItem="qRM-Jl-yS7" secondAttribute="trailing" constant="10" id="W7C-ej-AnY"/>
+                <constraint firstAttribute="trailing" secondItem="3Mv-bt-y1P" secondAttribute="trailing" id="X7w-Sm-ZIR"/>
                 <constraint firstAttribute="bottom" secondItem="CiT-Gh-LmU" secondAttribute="bottom" constant="4" id="YDV-ET-hRd"/>
                 <constraint firstAttribute="trailing" secondItem="zep-sb-8Pd" secondAttribute="trailing" constant="20" id="ZMX-rS-oBa"/>
                 <constraint firstItem="UyU-ae-e9s" firstAttribute="leading" secondItem="yVO-Mp-ye6" secondAttribute="trailing" constant="-220" id="bDu-xX-9Sf"/>
@@ -197,6 +217,7 @@
                 <constraint firstItem="UyU-ae-e9s" firstAttribute="top" secondItem="yVO-Mp-ye6" secondAttribute="top" id="l73-Px-Agj"/>
                 <constraint firstAttribute="trailing" secondItem="vo1-pO-xbS" secondAttribute="trailing" constant="10" id="nMT-ya-8b5"/>
                 <constraint firstItem="6Vf-zE-TTO" firstAttribute="bottom" secondItem="q0w-3n-12f" secondAttribute="bottom" id="w25-bp-c8a"/>
+                <constraint firstItem="3Mv-bt-y1P" firstAttribute="top" secondItem="UyU-ae-e9s" secondAttribute="bottom" constant="-5" id="wZZ-HU-7O0"/>
                 <constraint firstItem="QdC-d9-6PM" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="wf7-us-bMP"/>
                 <constraint firstItem="vo1-pO-xbS" firstAttribute="top" secondItem="yVO-Mp-ye6" secondAttribute="bottom" id="zB0-Vd-dxf"/>
             </constraints>

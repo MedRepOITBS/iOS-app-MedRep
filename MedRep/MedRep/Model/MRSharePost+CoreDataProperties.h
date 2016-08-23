@@ -53,6 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *detail_desc;
 @property (nullable, nonatomic, retain) NSString *short_desc;
 @property (nullable, nonatomic, retain) NSString *title_desc;
+@property (nullable, nonatomic, retain) NSNumber *transform_post_id;
 @property (nullable, nonatomic, retain) NSSet<MRPostedReplies *> *postedReplies;
 
 @end

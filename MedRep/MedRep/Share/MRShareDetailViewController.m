@@ -25,6 +25,7 @@
 #import "MRDataManger.h"
 #import "NSDate+Utilities.h"
 #import "MRDatabaseHelper.h"
+#import "MRTransformViewController.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
@@ -34,6 +35,8 @@ AVPlayerViewControllerDelegate, UIAlertViewDelegate> {
     
     AVPlayerViewController *av;
 }
+
+@property (weak, nonatomic) IBOutlet UIButton *takeMeToTransformButton;
 
 @property (weak, nonatomic) IBOutlet UIImageView *profilePicImageView;
 
@@ -155,6 +158,9 @@ AVPlayerViewControllerDelegate, UIAlertViewDelegate> {
     
     if (self.post.source != nil && self.post.source.length > 0) {
         self.postedBY.text = [NSString stringWithFormat:@"Posted By:%@", self.post.source];
+        if (self.post.parentTransformPostId != nil && self.post.parentTransformPostId.longValue > 0) {
+            [self.takeMeToTransformButton setHidden:NO];
+        }
     } else {
         [self.postedBY setHidden:YES];
     }
@@ -579,6 +585,11 @@ AVPlayerViewControllerDelegate, UIAlertViewDelegate> {
     if (tag == 1000) {
         [self sortRecentActivities];
     }
+}
+
+- (IBAction)takeMeToTransformButtonClicked:(id)sender {
+    MRTransformViewController *notiFicationViewController = [[MRTransformViewController alloc] initWithNibName:@"MRTransformViewController" bundle:nil];
+    [self.navigationController pushViewController:notiFicationViewController animated:NO];
 }
 
 @end
