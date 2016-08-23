@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -9,6 +9,8 @@
             <connections>
                 <outlet property="contentImage" destination="IpJ-Zj-5IA" id="1zm-Eg-WiG"/>
                 <outlet property="detailLbl" destination="fGM-Y8-nCV" id="NbS-hR-2BC"/>
+                <outlet property="goToButtonHeightConstraint" destination="Qmu-MN-TAh" id="chM-Hz-eOm"/>
+                <outlet property="goToButtonTopConstraint" destination="kXa-Qn-5Wo" id="nNk-mX-wYS"/>
                 <outlet property="gotoButton" destination="fth-Op-KYR" id="KjB-tt-mgE"/>
                 <outlet property="imageHeight" destination="51k-Pt-T3h" id="TyC-63-Ci8"/>
                 <outlet property="navView" destination="jSK-Xr-DKs" id="O1n-Il-Ns4"/>
@@ -88,14 +90,11 @@
             <constraints>
                 <constraint firstItem="SnF-gA-CzC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="1W9-Fv-TN8"/>
                 <constraint firstItem="ona-8Z-5Md" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="25" id="2FB-3A-FOD"/>
-                <constraint firstAttribute="bottom" secondItem="fGM-Y8-nCV" secondAttribute="bottom" constant="2" id="4Q6-iz-hU7"/>
                 <constraint firstItem="IpJ-Zj-5IA" firstAttribute="top" secondItem="ubM-8R-fTi" secondAttribute="bottom" id="7Ex-86-K7q"/>
                 <constraint firstItem="ubM-8R-fTi" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="8Dc-6C-eUx"/>
                 <constraint firstItem="9QU-aI-FP8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Ahb-D0-y90"/>
-                <constraint firstItem="fGM-Y8-nCV" firstAttribute="leading" secondItem="ona-8Z-5Md" secondAttribute="trailing" constant="-345" id="CAD-1J-VIg"/>
                 <constraint firstItem="IpJ-Zj-5IA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="CgB-nJ-OIN"/>
                 <constraint firstAttribute="trailing" secondItem="IpJ-Zj-5IA" secondAttribute="trailing" id="Dl9-CF-fs7"/>
-                <constraint firstAttribute="trailing" secondItem="IpJ-Zj-5IA" secondAttribute="trailing" id="FJ2-39-wXl"/>
                 <constraint firstItem="ona-8Z-5Md" firstAttribute="top" secondItem="9QU-aI-FP8" secondAttribute="bottom" constant="14" id="FoR-Gk-Kqq"/>
                 <constraint firstItem="ona-8Z-5Md" firstAttribute="top" secondItem="fGM-Y8-nCV" secondAttribute="bottom" constant="10" id="GjW-pg-vWP"/>
                 <constraint firstItem="ubM-8R-fTi" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="JdM-pJ-0SG"/>
@@ -106,7 +105,6 @@
                 <constraint firstItem="fth-Op-KYR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="25" id="Y82-c0-Mew"/>
                 <constraint firstAttribute="trailing" secondItem="fGM-Y8-nCV" secondAttribute="trailing" constant="5" id="dvy-Q7-2jz"/>
                 <constraint firstItem="9QU-aI-FP8" firstAttribute="top" secondItem="ubM-8R-fTi" secondAttribute="bottom" id="fBM-lB-Bzp"/>
-                <constraint firstItem="fGM-Y8-nCV" firstAttribute="top" secondItem="IpJ-Zj-5IA" secondAttribute="bottom" constant="10" id="fF6-eQ-1MF"/>
                 <constraint firstItem="fth-Op-KYR" firstAttribute="top" secondItem="ona-8Z-5Md" secondAttribute="bottom" constant="10" id="kXa-Qn-5Wo"/>
                 <constraint firstAttribute="trailing" secondItem="9QU-aI-FP8" secondAttribute="trailing" id="nwY-tm-qWW"/>
                 <constraint firstAttribute="trailing" secondItem="SnF-gA-CzC" secondAttribute="trailing" id="uWh-qq-of4"/>
@@ -117,14 +115,6 @@
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="FJ2-39-wXl"/>
-                    <exclude reference="4Q6-iz-hU7"/>
-                    <exclude reference="CAD-1J-VIg"/>
-                    <exclude reference="fF6-eQ-1MF"/>
-                </mask>
-            </variation>
         </view>
         <view contentMode="scaleToFill" id="jSK-Xr-DKs">
             <rect key="frame" x="0.0" y="0.0" width="40" height="33"/>

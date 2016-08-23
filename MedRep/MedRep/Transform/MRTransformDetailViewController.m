@@ -26,6 +26,8 @@
 }
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageHeight;
 @property (strong, nonatomic) IBOutlet UIView *navView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *goToButtonHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *goToButtonTopConstraint;
 
 @property (nonatomic) UIActivityIndicatorView *activityIndicator;
 @end
@@ -49,6 +51,8 @@
         
         if (self.post.postUrl == nil || self.post.postUrl.length == 0) {
             [self.gotoButton setHidden:YES];
+            self.goToButtonTopConstraint.constant = 0.0;
+            self.goToButtonHeightConstraint.constant = 0.0;
         }
         
         if (self.post.titleDescription != nil && self.post.titleDescription.length > 0) {
