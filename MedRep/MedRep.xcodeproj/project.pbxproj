@@ -627,6 +627,10 @@
 		B46565971D56B3040016CDA8 /* AddMemberTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B46565951D56B3040016CDA8 /* AddMemberTableViewCell.m */; };
 		B465659D1D56B9E20016CDA8 /* AddMemberTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B465659A1D56B9E20016CDA8 /* AddMemberTableViewCell.xib */; };
 		B465659E1D56B9E20016CDA8 /* AddMemberTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B465659A1D56B9E20016CDA8 /* AddMemberTableViewCell.xib */; };
+		B4746B211D6A877800325F9E /* cancelBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = B4746B1F1D6A877800325F9E /* cancelBtn.png */; };
+		B4746B221D6A877800325F9E /* cancelBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = B4746B1F1D6A877800325F9E /* cancelBtn.png */; };
+		B4746B231D6A877800325F9E /* cancelBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4746B201D6A877800325F9E /* cancelBtn@2x.png */; };
+		B4746B241D6A877800325F9E /* cancelBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4746B201D6A877800325F9E /* cancelBtn@2x.png */; };
 		B47E338E1D2F65540051724C /* MRSharePost.m in Sources */ = {isa = PBXBuildFile; fileRef = B47E338C1D2F65540051724C /* MRSharePost.m */; };
 		B4B4F0E81D382E7300EFCC0E /* AddExperienceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F0E61D382E7300EFCC0E /* AddExperienceTableViewController.m */; };
 		B4B4F0ED1D3842C500EFCC0E /* AddEducationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F0EB1D3842C500EFCC0E /* AddEducationViewController.m */; };
@@ -2122,6 +2126,8 @@
 		B46565941D56B3040016CDA8 /* AddMemberTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddMemberTableViewCell.h; sourceTree = "<group>"; };
 		B46565951D56B3040016CDA8 /* AddMemberTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddMemberTableViewCell.m; sourceTree = "<group>"; };
 		B465659A1D56B9E20016CDA8 /* AddMemberTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddMemberTableViewCell.xib; sourceTree = "<group>"; };
+		B4746B1F1D6A877800325F9E /* cancelBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancelBtn.png; sourceTree = "<group>"; };
+		B4746B201D6A877800325F9E /* cancelBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancelBtn@2x.png"; sourceTree = "<group>"; };
 		B47E338B1D2F65540051724C /* MRSharePost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRSharePost.h; sourceTree = "<group>"; };
 		B47E338C1D2F65540051724C /* MRSharePost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRSharePost.m; sourceTree = "<group>"; };
 		B4B4F0E51D382E7300EFCC0E /* AddExperienceTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddExperienceTableViewController.h; sourceTree = "<group>"; };
@@ -2494,6 +2500,8 @@
 				B4B4F0F71D38AEAB00EFCC0E /* ChildTableViewCell */,
 				7920D6961C1C9B69008D3386 /* MRProfileDetailsViewController.h */,
 				7920D6971C1C9B69008D3386 /* MRProfileDetailsViewController.m */,
+				B4746B1F1D6A877800325F9E /* cancelBtn.png */,
+				B4746B201D6A877800325F9E /* cancelBtn@2x.png */,
 				B4B4F0E51D382E7300EFCC0E /* AddExperienceTableViewController.h */,
 				B4B4F0E61D382E7300EFCC0E /* AddExperienceTableViewController.m */,
 				B4B4F0EA1D3842C500EFCC0E /* AddEducationViewController.h */,
@@ -4445,6 +4453,7 @@
 				7991FAC21B810AB100516DDF /* otpTiccMark@2x~iPad.png in Resources */,
 				79AC94611B9E0DA000B81452 /* ndcompany3@2x.jpg in Resources */,
 				79AC943C1B9DFDB800B81452 /* comapny-logo@2x.png in Resources */,
+				B4746B231D6A877800325F9E /* cancelBtn@2x.png in Resources */,
 				8AFE8D071D0F21BF0000382E /* profile_pic7.jpeg in Resources */,
 				79DC37191BE7DEA90027F7DB /* MRMedRepListTableCell.xib in Resources */,
 				796E938E1BB869FA0031EA34 /* MRConvertAppointmentCell.xib in Resources */,
@@ -4817,6 +4826,7 @@
 				79F5C9F71BB061BE00435B6C /* MRMedrepMeetingsCell.xib in Resources */,
 				795366291BA0BFD20021CE4D /* favFilter-wrong@3x.png in Resources */,
 				79421EF01BB7EF950055D9B7 /* PHmarketingMenu@2x.png in Resources */,
+				B4746B211D6A877800325F9E /* cancelBtn.png in Resources */,
 				8AFE8D031D0F21BF0000382E /* profile_pic3.jpeg in Resources */,
 				79421F431BB83BAE0055D9B7 /* MRDoctorDetailsViewController.xib in Resources */,
 				7929E3781B9C78B5001F1373 /* logout@2x.png in Resources */,
@@ -5096,6 +5106,7 @@
 				CC7DB1001D0C8BEC007DFE4C /* crup-arrow@2x.png in Resources */,
 				CC7DB2871D0C9E7B007DFE4C /* NotificationWebViewController.xib in Resources */,
 				CC7DB1011D0C8BEC007DFE4C /* dddoctor-analysis-hover@2x.png in Resources */,
+				B4746B221D6A877800325F9E /* cancelBtn.png in Resources */,
 				CC7DB1021D0C8BEC007DFE4C /* navLogo@2x.png in Resources */,
 				CC7DB1031D0C8BEC007DFE4C /* notification@3x.png in Resources */,
 				CC7DB3801D0CC8A6007DFE4C /* profile_pic5.jpeg in Resources */,
@@ -5296,6 +5307,7 @@
 				CC7DB19D1D0C8BEC007DFE4C /* dashboard-bg@2x.png in Resources */,
 				CC7DB19E1D0C8BEC007DFE4C /* ddpresent-activity-hover@3x.png in Resources */,
 				CC7DB19F1D0C8BEC007DFE4C /* InfoPlist.strings in Resources */,
+				B4746B241D6A877800325F9E /* cancelBtn@2x.png in Resources */,
 				CC7DB1A01D0C8BEC007DFE4C /* MPNotificationAlertViewController.xib in Resources */,
 				CC7DB1A11D0C8BEC007DFE4C /* pcfeedback@3x.png in Resources */,
 				CC7DB1A21D0C8BEC007DFE4C /* dropDownButton@2x~iPad.png in Resources */,

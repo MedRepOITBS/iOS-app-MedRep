@@ -7,10 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol ExpericeFillUpTableViewCellDelegate;
 
 @interface ExpericeFillUpTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *dateDesc;
 @property (weak, nonatomic) IBOutlet UILabel *otherDesc;
 @property (weak, nonatomic) IBOutlet UILabel *title;
 @property (weak,nonatomic) IBOutlet UIView *viewLabel;
+@property (nonatomic,weak) id<ExpericeFillUpTableViewCellDelegate> delegate;
+
+-(IBAction)deleteBtnTapped:(id)sender;
+@end
+
+
+@protocol ExpericeFillUpTableViewCellDelegate <NSObject>
+
+@optional
+
+-(void)ExpericeFillUpTableViewCellDelegateForButtonPressed:(ExpericeFillUpTableViewCell *)cell withButtonType:(NSString *)buttonType;
+
 @end
