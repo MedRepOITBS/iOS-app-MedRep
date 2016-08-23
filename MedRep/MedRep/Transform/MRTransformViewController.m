@@ -270,19 +270,26 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
         
 //    }
     
-        if (transformData != nil) {
-        if (transformData.url != nil && transformData.url.length > 0) {
-            if (transformData.contentType.integerValue == kTransformContentTypeImage) {
-                regCell.img.image = [UIImage imageNamed:transformData.url];
-            } else if (transformData.contentType.integerValue == kTransformContentTypeVideo) {
-                regCell.img.image = [UIImage imageNamed:@"video"];
-            } else if (transformData.contentType.integerValue == kTransformContentTypePDF) {
-                regCell.img.image = [UIImage imageNamed:@"pdf"];
+    if (transformData != nil) {
+        if (transformData.coverImgUrl != nil && transformData.coverImgUrl.length > 0) {
+            regCell.img.image = [UIImage imageNamed:@"Default"];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                regCell.img.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:transformData.coverImgUrl]]];
+            });
+        } else {
+            if (transformData.url != nil && transformData.url.length > 0) {
+                if (transformData.contentType.integerValue == kTransformContentTypeImage) {
+                    regCell.img.image = [UIImage imageNamed:transformData.url];
+                } else if (transformData.contentType.integerValue == kTransformContentTypeVideo) {
+                    regCell.img.image = [UIImage imageNamed:@"video"];
+                } else if (transformData.contentType.integerValue == kTransformContentTypePDF) {
+                    regCell.img.image = [UIImage imageNamed:@"pdf"];
+                } else {
+                    regCell.img.image = [UIImage imageNamed:@"Default"];
+                }
             } else {
                 regCell.img.image = [UIImage imageNamed:@"Default"];
             }
-        } else {
-            regCell.img.image = [UIImage imageNamed:@"Default"];
         }
         
         if (transformData.titleDescription != nil && transformData.titleDescription.length > 0) {

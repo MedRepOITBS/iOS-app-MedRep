@@ -103,10 +103,12 @@
             //            [self setAVPlayerConstraints:av.view];
             
         }else { //if ([self.selectedContent.contentType isEqualToString:@"Image"]) {
+            _contentImage.image = [UIImage imageNamed:@"Default"];
+            
             if (self.post.innerImgUrl != nil && self.post.innerImgUrl.length > 0) {
-                _contentImage.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.post.innerImgUrl]]];
-            } else {
-                _contentImage.image = [UIImage imageNamed:@"Default"];
+               dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    _contentImage.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.post.innerImgUrl]]];
+                });
             }
         }
     }
