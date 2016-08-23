@@ -519,7 +519,78 @@ NSString *valN = [valNDict objectForKey:@"type"];
 
 -(void)ExpericeFillUpTableViewCellDelegateForButtonPressed:(ExpericeFillUpTableViewCell *)cell withButtonType:(NSString *)buttonType{
     
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    [MRCommon showActivityIndicator:@""];
     
+    //add code here for when you hit delete
+    NSDictionary *valNDict = [[self setStructureForTableView] objectAtIndex:indexPath.row];
+    
+    NSString *valN = [valNDict objectForKey:@"type"];
+    if([valN isEqualToString:@"WORK_EXP_DETAIL"]){
+        
+        MRWorkExperience *exp = [valNDict objectForKey:@"object"];
+        [MRDatabaseHelper deleteWorkExperienceFromTable:exp.id withHandler:^(id result) {
+            _profileObj = nil;
+            
+            [MRDatabaseHelper addProfileData:^(id result){
+                _profileObj  = [result objectAtIndex:0];
+                [self.tableView reloadData];
+                [MRCommon stopActivityIndicator];
+                
+            }];
+            
+        }];
+        
+    }else if([valN isEqualToString:@"EDUCATION_QUAL_DETAIL"] ){
+        EducationalQualifications  *educQal = [valNDict objectForKey:@"object"];
+        [MRDatabaseHelper deleteEducationQualificationFromTable:educQal.id withHandler:^(id result) {
+            _profileObj = nil;
+            
+            [MRDatabaseHelper addProfileData:^(id result){
+                _profileObj  = [result objectAtIndex:0];
+                [self.tableView reloadData];
+                [MRCommon stopActivityIndicator];
+                
+            }];
+            
+        }];
+        
+        
+    }else if([valN isEqualToString:@"PUBLICATION_DETAIL"]){
+        
+        MRPublications *pub = [valNDict objectForKey:@"object"];
+        [MRDatabaseHelper deletePublicationAreaFromTable:pub.id withHandler:^(id result) {
+            _profileObj = nil;
+            
+            [MRDatabaseHelper addProfileData:^(id result){
+                _profileObj  = [result objectAtIndex:0];
+                [self.tableView reloadData];
+                [MRCommon stopActivityIndicator];
+                
+            }];
+            
+        }];
+        
+        
+    }else if([valN isEqualToString:@"INTEREST_AREA_DETAIL"]){
+        
+        MRInterestArea *interestAre = [valNDict objectForKey:@"object"];
+        
+        [MRDatabaseHelper deleteInterestAreaFromTable:interestAre.id withHandler:^(id result) {
+            _profileObj = nil;
+            
+            [MRDatabaseHelper addProfileData:^(id result){
+                _profileObj  = [result objectAtIndex:0];
+                [self.tableView reloadData];
+                [MRCommon stopActivityIndicator];
+                
+            }];
+            
+        }];
+        
+    }
+    
+
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
