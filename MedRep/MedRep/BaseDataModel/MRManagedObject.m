@@ -133,7 +133,13 @@ NSString *const kLastRefreshedDateAttributeName = @"lastRefreshedDate";
             else if ([value isKindOfClass:[NSNumber class]])
             {
                 NSNumber *dateValue = value;
-                value = [[NSDate alloc]initWithTimeIntervalSince1970:(dateValue.doubleValue/1000)];
+                value = [[NSDate alloc]initWithTimeIntervalSince1970:dateValue.doubleValue];
+//                NSDateFormatter *formatter = [NSDateFormatter new];
+//                [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
+//                [formatter setDateFormat:kServerDateFormat];
+//                
+//                value = [formatter stringFromDate:tempValue];
+//                value = [formatter dateFromString:value];
             }
         } else if (attributeType == NSBinaryDataAttributeType) {
             if ([value isKindOfClass:[NSString class]]) {

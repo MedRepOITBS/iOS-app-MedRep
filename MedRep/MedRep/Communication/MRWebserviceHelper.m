@@ -2085,7 +2085,7 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
     
 //    MedRepApplication/api/doctor/info/fetch
     
-    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/api/doctor/info/fetch?access_token=%@",kBaseURL,[MRDefaults objectForKey:kAuthenticationToken]];
+    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/doctorinfo/fetch?token=%@",kHostName,[MRDefaults objectForKey:kAuthenticationToken]];
     
     NSURL *url = [NSURL URLWithString:stringFormOfUrl];
     NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
