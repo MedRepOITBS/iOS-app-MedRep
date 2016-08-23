@@ -8,6 +8,8 @@
 
 #import "ExpericeFillUpTableViewCell.h"
 
+
+
 @implementation ExpericeFillUpTableViewCell
 
 - (void)awakeFromNib {
@@ -21,4 +23,10 @@
     // Configure the view for the selected state
 }
 
+-(IBAction)deleteBtnTapped:(id)sender{
+    if ([self.delegate respondsToSelector:@selector(ExpericeFillUpTableViewCellDelegateForButtonPressed:withButtonType:)]) {
+        [self.delegate ExpericeFillUpTableViewCellDelegateForButtonPressed:self withButtonType:@"ExperienceDetail"];
+    }
+    
+}
 @end

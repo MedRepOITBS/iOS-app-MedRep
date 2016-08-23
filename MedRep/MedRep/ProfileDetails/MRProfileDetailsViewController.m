@@ -31,7 +31,7 @@
 #import "UIImage+Helpers.h"
 
 #import "PublicationsViewController.h"
-@interface MRProfileDetailsViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate,ProfileBasicTableViewCellDelegate,CommonProfileSectionTableViewCellDelegate>
+@interface MRProfileDetailsViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate,ProfileBasicTableViewCellDelegate,CommonProfileSectionTableViewCellDelegate,ExpericeFillUpTableViewCellDelegate>
 
 
 @property (assign, nonatomic) BOOL isImageUploaded;
@@ -517,6 +517,10 @@ NSString *valN = [valNDict objectForKey:@"type"];
 }
 
 
+-(void)ExpericeFillUpTableViewCellDelegateForButtonPressed:(ExpericeFillUpTableViewCell *)cell withButtonType:(NSString *)buttonType{
+    
+    
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self setStructureForTableView].count;
@@ -695,7 +699,7 @@ NSString *valN = [valNDict objectForKey:@"type"];
      }
     else if ([valN isEqualToString:@"WORK_EXP_DETAIL"] || [valN isEqualToString:@"EDUCATION_QUAL_DETAIL"] ){
          ExpericeFillUpTableViewCell * cell  =(ExpericeFillUpTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"ExpericeFillUpTableViewCell"];
-        
+        cell.delegate = self;
         if ([[valNDict objectForKey:@"lastObj"] isEqualToString:@"YES"]) {
             cell.viewLabel.hidden = YES;
         }

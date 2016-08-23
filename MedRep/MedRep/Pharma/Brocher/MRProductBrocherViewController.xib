@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MRProductBrocherViewController">
@@ -21,7 +21,7 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="yJi-Y1-nOa">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+            <rect key="frame" x="0.0" y="64" width="600" height="536"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S8t-Vb-qUf" userLabel="Title View">
@@ -29,7 +29,6 @@
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Brochure" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sji-j4-l9s">
                             <rect key="frame" x="44" y="0.0" width="546" height="44"/>
-                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="nK6-VT-hSS"/>
                             </constraints>
@@ -39,7 +38,6 @@
                         </label>
                         <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="notificationback.png" translatesAutoresizingMaskIntoConstraints="NO" id="vhG-P3-VBB">
                             <rect key="frame" x="5" y="5" width="30" height="30"/>
-                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="WXB-bU-s2h"/>
                                 <constraint firstAttribute="width" constant="30" id="vNm-mX-be8"/>
@@ -47,7 +45,6 @@
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KML-fu-5Cm">
                             <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                            <animations/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="44" id="3jM-zl-n3m"/>
@@ -58,7 +55,6 @@
                             </connections>
                         </button>
                     </subviews>
-                    <animations/>
                     <color key="backgroundColor" red="0.1843137255" green="0.1843137255" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="KML-fu-5Cm" firstAttribute="top" secondItem="S8t-Vb-qUf" secondAttribute="top" id="O5r-0R-KD5"/>
@@ -76,7 +72,6 @@
                     <subviews>
                         <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ea9-ub-GAE">
                             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                            <animations/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="600" id="HQA-AC-NXA"/>
@@ -84,7 +79,6 @@
                             </constraints>
                         </imageView>
                     </subviews>
-                    <animations/>
                     <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="deviceRGB"/>
                     <constraints>
                         <constraint firstItem="ea9-ub-GAE" firstAttribute="leading" secondItem="qnd-Bl-jBj" secondAttribute="leading" id="3M7-GG-T0U"/>
@@ -95,7 +89,6 @@
                 </scrollView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rOf-yn-g1A" userLabel="LeftButton">
                     <rect key="frame" x="0.0" y="243" width="50" height="50"/>
-                    <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="50" id="Czc-U2-kD4"/>
@@ -110,7 +103,6 @@
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qFr-c3-OsV" userLabel="RightButton">
                     <rect key="frame" x="550" y="243" width="50" height="50"/>
-                    <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="DAh-IG-91B"/>
@@ -124,7 +116,6 @@
                     </connections>
                 </button>
             </subviews>
-            <animations/>
             <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="S8t-Vb-qUf" firstAttribute="leading" secondItem="yJi-Y1-nOa" secondAttribute="leading" id="8RT-Jg-dqC"/>
@@ -147,10 +138,8 @@
             <subviews>
                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="navLogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="gjo-jO-QHz">
                     <rect key="frame" x="0.0" y="0.0" width="123" height="33"/>
-                    <animations/>
                 </imageView>
             </subviews>
-            <animations/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
