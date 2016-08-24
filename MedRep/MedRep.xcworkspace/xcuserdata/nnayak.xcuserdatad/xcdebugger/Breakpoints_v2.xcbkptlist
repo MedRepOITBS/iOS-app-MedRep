@@ -74,7 +74,7 @@
                   moduleName = "MedRepDev"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/nnayak/iOS-app-MedRep/MedRep/MedRep/RegisterScreen/MRRegistationTwoViewController.m"
-                  timestampString = "493612272.900933"
+                  timestampString = "493713672.097254"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "57"
@@ -89,7 +89,7 @@
                   moduleName = "MedRepDev"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/nnayak/iOS-app-MedRep/MedRep/MedRep/RegisterScreen/MRRegistationTwoViewController.m"
-                  timestampString = "493612272.901037"
+                  timestampString = "493713672.097356"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "58"
@@ -218,7 +218,7 @@
                   moduleName = "MedRepDev"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/nnayak/iOS-app-MedRep/MedRep/MedRep/RegisterScreen/MRRegistationTwoViewController.m"
-                  timestampString = "493612272.905085"
+                  timestampString = "493713672.101134"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "78"
@@ -233,7 +233,7 @@
                   moduleName = "MedRepDev"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/nnayak/iOS-app-MedRep/MedRep/MedRep/RegisterScreen/MRRegistationTwoViewController.m"
-                  timestampString = "493612272.905196"
+                  timestampString = "493713672.101222"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "78"
@@ -383,7 +383,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "179"
             endingLineNumber = "179"
-            landmarkName = "-setupUIWithContactDetails"
+            landmarkName = "-fetchPosts"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -399,7 +399,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "219"
             endingLineNumber = "219"
-            landmarkName = "-setupUIWithGroupDetails"
+            landmarkName = "-setupUIWithContactDetails"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -447,7 +447,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "353"
             endingLineNumber = "353"
-            landmarkName = "-collectionView:cellForItemAtIndexPath:"
+            landmarkName = "-collectionView:numberOfItemsInSection:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -463,7 +463,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "354"
             endingLineNumber = "354"
-            landmarkName = "-collectionView:cellForItemAtIndexPath:"
+            landmarkName = "-collectionView:numberOfItemsInSection:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -479,7 +479,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "212"
             endingLineNumber = "212"
-            landmarkName = "-viewMoreOption:"
+            landmarkName = "-setupUIWithContactDetails"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1018,11 +1018,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MedRep/ProfileDetails/MRProfileDetailsViewController.m"
-            timestampString = "492661429.27467"
+            timestampString = "493706764.137853"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "445"
-            endingLineNumber = "445"
+            startingLineNumber = "434"
+            endingLineNumber = "434"
             landmarkName = "-tableView:commitEditingStyle:forRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1050,11 +1050,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MedRep/ProfileDetails/MRProfileDetailsViewController.m"
-            timestampString = "492661429.27467"
+            timestampString = "493706764.137853"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "459"
-            endingLineNumber = "459"
+            startingLineNumber = "448"
+            endingLineNumber = "448"
             landmarkName = "-tableView:commitEditingStyle:forRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1066,11 +1066,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MedRep/ProfileDetails/MRProfileDetailsViewController.m"
-            timestampString = "492661429.27467"
+            timestampString = "493706764.137853"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "460"
-            endingLineNumber = "460"
+            startingLineNumber = "449"
+            endingLineNumber = "449"
             landmarkName = "-tableView:commitEditingStyle:forRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1082,11 +1082,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MedRep/ProfileDetails/MRProfileDetailsViewController.m"
-            timestampString = "492661429.27467"
+            timestampString = "493706764.137853"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "461"
-            endingLineNumber = "461"
+            startingLineNumber = "450"
+            endingLineNumber = "450"
             landmarkName = "-tableView:commitEditingStyle:forRowAtIndexPath:"
             landmarkType = "5">
             <Locations>
@@ -1098,11 +1098,11 @@
                   moduleName = "MedRepDev"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/nnayak/iOS-app-MedRep/MedRep/MedRep/ProfileDetails/MRProfileDetailsViewController.m"
-                  timestampString = "493612272.934889"
+                  timestampString = "493713672.121834"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "462"
-                  endingLineNumber = "462"
+                  startingLineNumber = "451"
+                  endingLineNumber = "451"
                   offsetFromSymbolStart = "202">
                </Location>
                <Location
@@ -1113,11 +1113,11 @@
                   moduleName = "MedRepDev"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/nnayak/iOS-app-MedRep/MedRep/MedRep/ProfileDetails/MRProfileDetailsViewController.m"
-                  timestampString = "493612272.935072"
+                  timestampString = "493713672.121924"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "462"
-                  endingLineNumber = "462"
+                  startingLineNumber = "451"
+                  endingLineNumber = "451"
                   offsetFromSymbolStart = "51">
                </Location>
                <Location
@@ -1128,11 +1128,11 @@
                   moduleName = "MedRepDev"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/nnayak/iOS-app-MedRep/MedRep/MedRep/ProfileDetails/MRProfileDetailsViewController.m"
-                  timestampString = "493612272.935182"
+                  timestampString = "493713672.121993"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "462"
-                  endingLineNumber = "462"
+                  startingLineNumber = "451"
+                  endingLineNumber = "451"
                   offsetFromSymbolStart = "29">
                </Location>
             </Locations>
@@ -1600,6 +1600,38 @@
             endingLineNumber = "703"
             landmarkName = "-registerDeviceToken"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[MRAppControl registerDeviceToken]"
+                  moduleName = "MedRepDev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nnayak/iOS-app-MedRep/MedRep/MedRep/Appcontrol/MRAppControl.m"
+                  timestampString = "493713672.131004"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "705"
+                  endingLineNumber = "705"
+                  offsetFromSymbolStart = "270">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__35-[MRAppControl registerDeviceToken]_block_invoke"
+                  moduleName = "MedRepDev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nnayak/iOS-app-MedRep/MedRep/MedRep/Appcontrol/MRAppControl.m"
+                  timestampString = "493713672.131156"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "706"
+                  endingLineNumber = "706"
+                  offsetFromSymbolStart = "96">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1616,38 +1648,6 @@
             endingLineNumber = "707"
             landmarkName = "-registerDeviceToken"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[MRAppControl registerDeviceToken]"
-                  moduleName = "MedRepDev"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/nnayak/iOS-app-MedRep/MedRep/MedRep/Appcontrol/MRAppControl.m"
-                  timestampString = "493612272.961392"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "708"
-                  endingLineNumber = "708"
-                  offsetFromSymbolStart = "270">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__35-[MRAppControl registerDeviceToken]_block_invoke"
-                  moduleName = "MedRepDev"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/nnayak/iOS-app-MedRep/MedRep/MedRep/Appcontrol/MRAppControl.m"
-                  timestampString = "493612272.961502"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "709"
-                  endingLineNumber = "709"
-                  offsetFromSymbolStart = "96">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

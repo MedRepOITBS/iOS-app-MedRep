@@ -20,5 +20,10 @@
 
     // Configure the view for the selected state
 }
-
+-(IBAction)deleteBtnTapped:(id)sender{
+    if ([self.delegate respondsToSelector:@selector(basicInfoTableViewCellDelegateForButtonPressed:withButtonType:)]) {
+        [self.delegate basicInfoTableViewCellDelegateForButtonPressed:self withButtonType:@"ExperienceDetail"];
+    }
+    
+}
 @end

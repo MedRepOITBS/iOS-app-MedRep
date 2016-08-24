@@ -31,7 +31,7 @@
 #import "UIImage+Helpers.h"
 
 #import "PublicationsViewController.h"
-@interface MRProfileDetailsViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate,ProfileBasicTableViewCellDelegate,CommonProfileSectionTableViewCellDelegate,ExpericeFillUpTableViewCellDelegate>
+@interface MRProfileDetailsViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate,ProfileBasicTableViewCellDelegate,CommonProfileSectionTableViewCellDelegate,ExpericeFillUpTableViewCellDelegate,basicInfoTableViewCellDelegate>
 
 
 @property (assign, nonatomic) BOOL isImageUploaded;
@@ -366,21 +366,10 @@
 
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
 
-NSDictionary *valNDict = [[self setStructureForTableView] objectAtIndex:indexPath.row];
-    
-NSString *valN = [valNDict objectForKey:@"type"];
-
-
- if ([valN isEqualToString:@"WORK_EXP_DETAIL"] || [valN isEqualToString:@"EDUCATION_QUAL_DETAIL"] || [valN isEqualToString:@"PUBLICATION_DETAIL"] || [valN isEqualToString:@"INTEREST_AREA_DETAIL"] ){
-
-    return UITableViewCellEditingStyleDelete;
-
- }else
- {
+ 
     return UITableViewCellEditingStyleNone;
- }
+
 }
 
 
@@ -515,11 +504,21 @@ NSString *valN = [valNDict objectForKey:@"type"];
     }
     
 }
-
+-(void)basicInfoTableViewCellDelegateForButtonPressed:(basicInfoTableViewCell *)cell withButtonType:(NSString *)buttonType{
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    [self deleteProfileData:indexPath];
+    
+    
+}
 
 -(void)ExpericeFillUpTableViewCellDelegateForButtonPressed:(ExpericeFillUpTableViewCell *)cell withButtonType:(NSString *)buttonType{
-    
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    [self deleteProfileData:indexPath];
+    
+
+}
+-(void)deleteProfileData:(NSIndexPath *)indexPath{
+    
     [MRCommon showActivityIndicator:@""];
     
     //add code here for when you hit delete
@@ -589,10 +588,8 @@ NSString *valN = [valNDict objectForKey:@"type"];
         }];
         
     }
-    
 
 }
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self setStructureForTableView].count;
 }
@@ -797,6 +794,7 @@ NSString *valN = [valNDict objectForKey:@"type"];
      {
          
          basicInfoTableViewCell *cell =(basicInfoTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"basicInfoTableViewCell"];
+         cell.delegate = self;
          if ([valN isEqualToString:@"PUBLICATION_DETAIL"] ) {
              
              MRPublications * obj  = [valNDict objectForKey:@"object"];
