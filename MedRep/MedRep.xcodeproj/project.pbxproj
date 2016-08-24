@@ -1420,6 +1420,10 @@
 		CC86FE4A1D29BA4F0030B23D /* MRReplies+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CC86FE461D29BA4F0030B23D /* MRReplies+CoreDataProperties.m */; };
 		CC86FE4B1D29BA4F0030B23D /* MRReplies.m in Sources */ = {isa = PBXBuildFile; fileRef = CC86FE481D29BA4F0030B23D /* MRReplies.m */; };
 		CC86FE4C1D29BA4F0030B23D /* MRReplies.m in Sources */ = {isa = PBXBuildFile; fileRef = CC86FE481D29BA4F0030B23D /* MRReplies.m */; };
+		CC87CD6F1D6E32E40083DB26 /* EditLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC87CD6D1D6E32E40083DB26 /* EditLocationViewController.m */; };
+		CC87CD701D6E32E40083DB26 /* EditLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC87CD6D1D6E32E40083DB26 /* EditLocationViewController.m */; };
+		CC87CD711D6E32E40083DB26 /* EditLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC87CD6E1D6E32E40083DB26 /* EditLocationViewController.xib */; };
+		CC87CD721D6E32E40083DB26 /* EditLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC87CD6E1D6E32E40083DB26 /* EditLocationViewController.xib */; };
 		CC9037371D5D11F000FD15A7 /* MRGroupMembersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9037351D5D11F000FD15A7 /* MRGroupMembersViewController.m */; };
 		CC9037381D5D11F000FD15A7 /* MRGroupMembersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9037351D5D11F000FD15A7 /* MRGroupMembersViewController.m */; };
 		CC9037391D5D11F000FD15A7 /* MRGroupMembersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC9037361D5D11F000FD15A7 /* MRGroupMembersViewController.xib */; };
@@ -2387,6 +2391,9 @@
 		CC86FE461D29BA4F0030B23D /* MRReplies+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MRReplies+CoreDataProperties.m"; sourceTree = "<group>"; };
 		CC86FE471D29BA4F0030B23D /* MRReplies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRReplies.h; sourceTree = "<group>"; };
 		CC86FE481D29BA4F0030B23D /* MRReplies.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRReplies.m; sourceTree = "<group>"; };
+		CC87CD6C1D6E32E40083DB26 /* EditLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditLocationViewController.h; path = EditLocation/EditLocationViewController.h; sourceTree = "<group>"; };
+		CC87CD6D1D6E32E40083DB26 /* EditLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditLocationViewController.m; path = EditLocation/EditLocationViewController.m; sourceTree = "<group>"; };
+		CC87CD6E1D6E32E40083DB26 /* EditLocationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EditLocationViewController.xib; path = EditLocation/EditLocationViewController.xib; sourceTree = "<group>"; };
 		CC9037341D5D11F000FD15A7 /* MRGroupMembersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRGroupMembersViewController.h; path = GroupMembers/MRGroupMembersViewController.h; sourceTree = "<group>"; };
 		CC9037351D5D11F000FD15A7 /* MRGroupMembersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRGroupMembersViewController.m; path = GroupMembers/MRGroupMembersViewController.m; sourceTree = "<group>"; };
 		CC9037361D5D11F000FD15A7 /* MRGroupMembersViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MRGroupMembersViewController.xib; path = GroupMembers/MRGroupMembersViewController.xib; sourceTree = "<group>"; };
@@ -2503,6 +2510,7 @@
 		7920D6951C1C9A61008D3386 /* ProfileDetails */ = {
 			isa = PBXGroup;
 			children = (
+				CC87CD6B1D6E329F0083DB26 /* EditLocation */,
 				B4B4F18C1D3BF7B300EFCC0E /* AddEducation */,
 				B4B4F1171D395C2700EFCC0E /* AddExperience */,
 				B4B4F0F71D38AEAB00EFCC0E /* ChildTableViewCell */,
@@ -4259,6 +4267,16 @@
 			path = stubImages;
 			sourceTree = "<group>";
 		};
+		CC87CD6B1D6E329F0083DB26 /* EditLocation */ = {
+			isa = PBXGroup;
+			children = (
+				CC87CD6C1D6E32E40083DB26 /* EditLocationViewController.h */,
+				CC87CD6D1D6E32E40083DB26 /* EditLocationViewController.m */,
+				CC87CD6E1D6E32E40083DB26 /* EditLocationViewController.xib */,
+			);
+			name = EditLocation;
+			sourceTree = "<group>";
+		};
 		CC9037331D5D11B900FD15A7 /* GroupMembers */ = {
 			isa = PBXGroup;
 			children = (
@@ -4503,6 +4521,7 @@
 				8AFE8CE31D0F21BF0000382E /* Contact.png in Resources */,
 				79708AA11BB73C67007CE81D /* PHdoctor@3x.png in Resources */,
 				8AFE8CF51D0F21BF0000382E /* post_image4.jpeg in Resources */,
+				CC87CD711D6E32E40083DB26 /* EditLocationViewController.xib in Resources */,
 				79BD27F51B80A8C3007CA448 /* password@2x.png in Resources */,
 				CC9BCEC31D0F2A3900702EBC /* MRTransformViewController.xib in Resources */,
 				79AC945D1B9E0DA000B81452 /* NDcompany1@2x.jpg in Resources */,
@@ -5307,6 +5326,7 @@
 				CC7DB1921D0C8BEC007DFE4C /* ndchecked@2x.png in Resources */,
 				CC7DB1931D0C8BEC007DFE4C /* discussion-forum@2x.png in Resources */,
 				CC7DB1951D0C8BEC007DFE4C /* dsbg@2x.jpg in Resources */,
+				CC87CD721D6E32E40083DB26 /* EditLocationViewController.xib in Resources */,
 				CC7DB1961D0C8BEC007DFE4C /* MRAppointmentCollectionViewCell.xib in Resources */,
 				CC7DB1971D0C8BEC007DFE4C /* PHmail@3x.png in Resources */,
 				CC7DB2E41D0CC433007DFE4C /* MRGroupsViewController.xib in Resources */,
@@ -5685,6 +5705,7 @@
 				CC7DB2D11D0CC433007DFE4C /* MRContactsViewController.m in Sources */,
 				CC7DB30D1D0CC4E2007DFE4C /* MRSuggestedContact.m in Sources */,
 				79A5DC5C1BA1EBBF001D872C /* MPNotificationAlertViewController.m in Sources */,
+				CC87CD6F1D6E32E40083DB26 /* EditLocationViewController.m in Sources */,
 				CC86FE411D29B34D0030B23D /* MRShareDetailTableViewCell.m in Sources */,
 				7953661B1BA0B7E40021CE4D /* MRFavoritesNotificationsViewController.m in Sources */,
 				B41746CF1D0CD5CE009B7E7E /* KLCPopup.m in Sources */,
@@ -5909,6 +5930,7 @@
 				B40E13AB1D3F251C005830DA /* MRPublications.m in Sources */,
 				B40E13A91D3F251C005830DA /* MRPublications+CoreDataProperties.m in Sources */,
 				CC7DB0521D0C8BEC007DFE4C /* MPNotificationAlertViewController.m in Sources */,
+				CC87CD701D6E32E40083DB26 /* EditLocationViewController.m in Sources */,
 				CC7DB0531D0C8BEC007DFE4C /* MRFavoritesNotificationsViewController.m in Sources */,
 				CC7DB0541D0C8BEC007DFE4C /* MRAddressView.m in Sources */,
 				CC7DB2C21D0CC433007DFE4C /* PieMenuItem.m in Sources */,

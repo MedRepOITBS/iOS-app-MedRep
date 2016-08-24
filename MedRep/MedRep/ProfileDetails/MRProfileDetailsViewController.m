@@ -29,6 +29,7 @@
 #import "AddEducationViewController.h"
 #import "InterestViewController.h"
 #import "UIImage+Helpers.h"
+#import "EditLocationViewController.h"
 
 #import "PublicationsViewController.h"
 @interface MRProfileDetailsViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate,ProfileBasicTableViewCellDelegate,CommonProfileSectionTableViewCellDelegate,ExpericeFillUpTableViewCellDelegate,basicInfoTableViewCellDelegate>
