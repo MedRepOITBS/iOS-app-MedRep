@@ -108,7 +108,7 @@
     
     self.postLabel.text = post.titleDescription;
     self.postedOnLabel.text = [NSDate convertNSDateToNSString:post.postedOn
-                                                   dateFormatStyle:NSDateFormatterMediumStyle];
+                                                   dateFormatStyle:NSDateFormatterLongStyle];
     
     UIImage *image = nil;
     

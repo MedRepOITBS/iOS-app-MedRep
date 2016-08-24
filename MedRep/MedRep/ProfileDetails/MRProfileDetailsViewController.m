@@ -33,7 +33,6 @@
 #import "PublicationsViewController.h"
 @interface MRProfileDetailsViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate,ProfileBasicTableViewCellDelegate,CommonProfileSectionTableViewCellDelegate,ExpericeFillUpTableViewCellDelegate>
 
-
 @property (assign, nonatomic) BOOL isImageUploaded;
 @property (nonatomic,strong) NSMutableArray *commonSectionArray;
 @property (nonatomic,strong) MRProfile *profileObj;
@@ -765,6 +764,12 @@ NSString *valN = [valNDict objectForKey:@"type"];
          
                [cell setCommonProfileDataForType:valN withUserProfileData:_profileObj];
          cell.delegate = self;
+         
+         if ([valN isEqualToString:@"EDUCATION_QUAL"]) {
+             [cell.indicatorImageView setImage:[UIImage imageNamed:@"EducationQualifications"]];
+         } else if ([valN isEqualToString:@"INTEREST_AREA"]) {
+             [cell.indicatorImageView setImage:[UIImage imageNamed:@"TherapeuticArea"]];
+         }
          return cell;
          
      }

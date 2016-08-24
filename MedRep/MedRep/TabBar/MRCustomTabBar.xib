@@ -26,7 +26,7 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.png" translatesAutoresizingMaskIntoConstraints="NO" id="ZwL-nx-oFB">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Connect" translatesAutoresizingMaskIntoConstraints="NO" id="ZwL-nx-oFB">
                             <rect key="frame" x="60" y="2" width="30" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="60S-8F-gQC"/>
@@ -64,7 +64,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1aO-be-Yy7">
                     <rect key="frame" x="150" y="0.0" width="150" height="50"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="news.png" translatesAutoresizingMaskIntoConstraints="NO" id="jYK-0F-5MD">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Transform" translatesAutoresizingMaskIntoConstraints="NO" id="jYK-0F-5MD">
                             <rect key="frame" x="60" y="2" width="30" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="2fo-9Q-Ghd"/>
@@ -116,7 +116,7 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="compose.png" translatesAutoresizingMaskIntoConstraints="NO" id="a8P-iA-jrs">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Share" translatesAutoresizingMaskIntoConstraints="NO" id="a8P-iA-jrs">
                             <rect key="frame" x="60" y="2" width="30" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="74L-Qj-WbQ"/>
@@ -148,7 +148,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qJy-pP-LdW">
                     <rect key="frame" x="450" y="0.0" width="150" height="50"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="crthera.png" translatesAutoresizingMaskIntoConstraints="NO" id="7Ru-bc-UBb">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Serve.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="7Ru-bc-UBb">
                             <rect key="frame" x="60" y="2" width="30" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="5bb-yT-S40"/>
@@ -245,9 +245,9 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
-        <image name="compose.png" width="128" height="128"/>
-        <image name="crthera.png" width="20" height="22"/>
-        <image name="news.png" width="26" height="22"/>
-        <image name="person.png" width="512" height="512"/>
+        <image name="Connect" width="512" height="512"/>
+        <image name="Serve" width="225" height="225"/>
+        <image name="Share" width="626" height="626"/>
+        <image name="Transform" width="225" height="225"/>
     </resources>
 </document>

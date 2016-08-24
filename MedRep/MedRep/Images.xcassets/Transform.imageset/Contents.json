@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "social_network-3-512 (Connect).png",
+      "filename" : "Transform.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "social_network-3-512 (Connect)-1.png",
+      "filename" : "Transform-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "social_network-3-512 (Connect)-2.png",
+      "filename" : "Transform-2.png",
       "scale" : "3x"
     }
   ],

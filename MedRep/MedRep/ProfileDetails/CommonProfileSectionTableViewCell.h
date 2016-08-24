@@ -11,6 +11,7 @@
 @protocol CommonProfileSectionTableViewCellDelegate;
 
 @interface CommonProfileSectionTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *indicatorImageView;
 
 @property (nonatomic,weak) IBOutlet UILabel *sectionTitleName;
 @property (nonatomic,weak) IBOutlet  UILabel *sectionDescName;
