@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "MRManagedObject.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface AddressInfo : NSManagedObject
+@interface AddressInfo : MRManagedObject
 
 // Insert code here to declare functionality of your managed object subclass
 

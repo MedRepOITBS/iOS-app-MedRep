@@ -11,5 +11,8 @@
 @implementation ContactInfo
 
 // Insert code here to add functionality to your managed object subclass
++ (NSString*)primaryKeyColumnName {
+    return @"mobileNo";
+}
 
 @end

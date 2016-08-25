@@ -1471,6 +1471,10 @@
 		CC9BCEC91D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9BCEC61D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.m */; };
 		CC9BCECA1D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC9BCEC71D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.xib */; };
 		CC9BCECB1D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC9BCEC71D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.xib */; };
+		CC9DAFA21D6F9E46008B2822 /* EditContactInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9DAFA01D6F9E46008B2822 /* EditContactInfoViewController.m */; };
+		CC9DAFA31D6F9E46008B2822 /* EditContactInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9DAFA01D6F9E46008B2822 /* EditContactInfoViewController.m */; };
+		CC9DAFA41D6F9E46008B2822 /* EditContactInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC9DAFA11D6F9E46008B2822 /* EditContactInfoViewController.xib */; };
+		CC9DAFA51D6F9E46008B2822 /* EditContactInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC9DAFA11D6F9E46008B2822 /* EditContactInfoViewController.xib */; };
 		CCA383F11D342D3500BCF5A9 /* MRGroupMembers+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA383EE1D342D3500BCF5A9 /* MRGroupMembers+CoreDataProperties.m */; };
 		CCA383F21D342D3500BCF5A9 /* MRGroupMembers+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA383EE1D342D3500BCF5A9 /* MRGroupMembers+CoreDataProperties.m */; };
 		CCA383F31D342D3500BCF5A9 /* MRGroupMembers.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA383F01D342D3500BCF5A9 /* MRGroupMembers.m */; };
@@ -2447,6 +2451,9 @@
 		CC9BCEC51D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRTransformTitleCollectionViewCell.h; sourceTree = "<group>"; };
 		CC9BCEC61D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRTransformTitleCollectionViewCell.m; sourceTree = "<group>"; };
 		CC9BCEC71D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRTransformTitleCollectionViewCell.xib; sourceTree = "<group>"; };
+		CC9DAF9F1D6F9E46008B2822 /* EditContactInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditContactInfoViewController.h; path = EditContactInfo/EditContactInfoViewController.h; sourceTree = "<group>"; };
+		CC9DAFA01D6F9E46008B2822 /* EditContactInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditContactInfoViewController.m; path = EditContactInfo/EditContactInfoViewController.m; sourceTree = "<group>"; };
+		CC9DAFA11D6F9E46008B2822 /* EditContactInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EditContactInfoViewController.xib; path = EditContactInfo/EditContactInfoViewController.xib; sourceTree = "<group>"; };
 		CCA383ED1D342D3500BCF5A9 /* MRGroupMembers+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MRGroupMembers+CoreDataProperties.h"; sourceTree = "<group>"; };
 		CCA383EE1D342D3500BCF5A9 /* MRGroupMembers+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MRGroupMembers+CoreDataProperties.m"; sourceTree = "<group>"; };
 		CCA383EF1D342D3500BCF5A9 /* MRGroupMembers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRGroupMembers.h; sourceTree = "<group>"; };
@@ -2532,6 +2539,7 @@
 		7920D6951C1C9A61008D3386 /* ProfileDetails */ = {
 			isa = PBXGroup;
 			children = (
+				CC9DAF9E1D6F9E1F008B2822 /* EditContactInfo */,
 				CC87CD6B1D6E329F0083DB26 /* EditLocation */,
 				B4B4F18C1D3BF7B300EFCC0E /* AddEducation */,
 				B4B4F1171D395C2700EFCC0E /* AddExperience */,
@@ -4339,6 +4347,16 @@
 			path = BaseDataModel;
 			sourceTree = "<group>";
 		};
+		CC9DAF9E1D6F9E1F008B2822 /* EditContactInfo */ = {
+			isa = PBXGroup;
+			children = (
+				CC9DAF9F1D6F9E46008B2822 /* EditContactInfoViewController.h */,
+				CC9DAFA01D6F9E46008B2822 /* EditContactInfoViewController.m */,
+				CC9DAFA11D6F9E46008B2822 /* EditContactInfoViewController.xib */,
+			);
+			name = EditContactInfo;
+			sourceTree = "<group>";
+		};
 		CEE2F1A4AA4B2FB2CD0887DA /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -4557,6 +4575,7 @@
 				CC87CD711D6E32E40083DB26 /* EditLocationViewController.xib in Resources */,
 				79BD27F51B80A8C3007CA448 /* password@2x.png in Resources */,
 				CC9BCEC31D0F2A3900702EBC /* MRTransformViewController.xib in Resources */,
+				CC9DAFA41D6F9E46008B2822 /* EditContactInfoViewController.xib in Resources */,
 				79AC945D1B9E0DA000B81452 /* NDcompany1@2x.jpg in Resources */,
 				79539E9E1B90C6AE001516C3 /* reveal-icon.png in Resources */,
 				793602E61BA35D6800BB85E6 /* readnotification3@2x.jpg in Resources */,
@@ -5202,6 +5221,7 @@
 				B4B4F1261D3983D300EFCC0E /* Profile.json in Resources */,
 				CC7DB1181D0C8BEC007DFE4C /* Icon-Small@2x.png in Resources */,
 				CC7DB2D81D0CC433007DFE4C /* MRContactWithinGroupCollectionCellCollectionViewCell.xib in Resources */,
+				CC9DAFA51D6F9E46008B2822 /* EditContactInfoViewController.xib in Resources */,
 				B4E02C671D4B0BB0003A1859 /* Dashboard.jpg in Resources */,
 				CC7DB1191D0C8BEC007DFE4C /* transperent-bg@2x.png in Resources */,
 				CC7DB11A1D0C8BEC007DFE4C /* PHactivity@3x.png in Resources */,
@@ -5771,6 +5791,7 @@
 				B4746B3F1D6E8F3700325F9E /* AddressInfo+CoreDataProperties.m in Sources */,
 				7953662E1BA0C0300021CE4D /* MRFavoriteFilterViewController.m in Sources */,
 				B4746B271D6DFB9200325F9E /* AddressInfoTableViewCell.m in Sources */,
+				CC9DAFA21D6F9E46008B2822 /* EditContactInfoViewController.m in Sources */,
 				79A5DC621BA1ED21001D872C /* MPCallMedrepViewController.m in Sources */,
 				CC463DEC1D27B921002AE85E /* MRGradientView.m in Sources */,
 				8AFE8CDA1D0F20BC0000382E /* NotificationUUIDViewController.m in Sources */,
@@ -6000,6 +6021,7 @@
 				B4746B401D6E8F3700325F9E /* AddressInfo+CoreDataProperties.m in Sources */,
 				CC9858071D2E726300C74438 /* MRShareOptionTableViewCell.m in Sources */,
 				B4746B281D6DFB9200325F9E /* AddressInfoTableViewCell.m in Sources */,
+				CC9DAFA31D6F9E46008B2822 /* EditContactInfoViewController.m in Sources */,
 				B4B4F1611D39E4F200EFCC0E /* UICustomDatePicker.m in Sources */,
 				CC7DB0601D0C8BEC007DFE4C /* MRNewProductCompaignsViewController.m in Sources */,
 				CC7DB0611D0C8BEC007DFE4C /* MRNotifications.m in Sources */,

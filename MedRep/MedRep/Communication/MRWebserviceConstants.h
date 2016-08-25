@@ -113,7 +113,8 @@ typedef enum kMRWebServiceType
     kMRWebServiceTypeGetSearchContactList,
     kMRWebServiceTypeGetMedicineSuggestions,
     kMRWebServiceTypeGetMedicineAlterations,
-    kMRWebServiceTypeGetMedicineDetails
+    kMRWebServiceTypeGetMedicineDetails,
+    kMRWebServiceTypeEditLocation
 } kMRWebServiceType;
 
 

@@ -53,6 +53,7 @@ NSString* const kLeaveGroup = @"Leave Group";
 NSString* const kConnectionAdded = @"Connection Added Successfully !!!";
 
 NSString* const kNotificationRefreshContactList = @"RefreshContactList";
+NSString* const kNotificationRefreshProfile = @"RefreshProfile";
 
 NSString* const kPendingGroupMembers = @"Pending Members";
 NSString* const kActiveGroupMembers = @"Active Members";

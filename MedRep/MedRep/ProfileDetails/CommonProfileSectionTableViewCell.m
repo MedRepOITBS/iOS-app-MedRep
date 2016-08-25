@@ -56,6 +56,14 @@
             }
                 break;
                 
+            case 406:
+                
+            {
+                [self.delegate  CommonProfileSectionTableViewCellDelegateForButtonPressed:self withButtonType:@"CONTACT_INFO"];
+                
+            }
+                break;
+                
             default:
                 break;
         }
@@ -109,6 +117,14 @@
         _sectionTitleName.text = @"Addresses";
         _sectionDescName.text = @"Edit your addresses if there is any change in them.";
         _addButton.tag = 405;
+    } else if ([type isEqualToString:@"CONTACT_INFO"]) {
+        
+        if ([profile.addressInfo.array count]>0) {
+            _sectionDescName.hidden = YES;
+        }
+        _sectionTitleName.text = @"Contact Details";
+        _sectionDescName.text = @"Edit your contact details.";
+        _addButton.tag = 406;
     }
 }
 @end

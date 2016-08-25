@@ -155,6 +155,7 @@
     
     i = 0;
     [timer invalidate];
+    
 }
 
 - (void)updatePlusButton {
@@ -190,12 +191,6 @@
         self.moreOptionsWidthConstraint.constant = 30.0;
         self.moreOptionsTrailingConstraint.constant = 10.0;
     }
-}
-
-- (void)refreshData {
-    [self fetchDataFromServer];
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:kNotificationRefreshContactList object:nil];
 }
 
 - (void)fetchDataFromServer {

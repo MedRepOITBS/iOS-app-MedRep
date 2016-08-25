@@ -35,6 +35,7 @@
 #import "MRPendingRecordsCount.h"
 #import "AddressInfo.h"
 #import "ContactInfo.h"
+
 static MRDatabaseHelper *sharedDataManager = nil;
 
 @implementation MRDatabaseHelper
@@ -1694,14 +1695,15 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
             AddressInfo *addressInfo =(AddressInfo *)[[MRDataManger sharedManager] createObjectForEntity:@"AddressInfo"];
             
             NSDictionary *addressDict = (NSDictionary *)obj;
+            [addressInfo updateFromDictionary:addressDict];
             
-            addressInfo.address1 = [addressDict objectForKey:@"address1"];
-            addressInfo.address2 = [addressDict objectForKey:@"address2"];
-            addressInfo.city  =[addressDict objectForKey:@"city"];
-            addressInfo.state = [addressDict objectForKey:@"state"];
-            addressInfo.country = [addressDict objectForKey:@"country"];
-            addressInfo.zipcode = [addressDict objectForKey:@"zipcode"];
-            addressInfo.type = [NSNumber numberWithInteger:[[addressDict objectForKey:@"type"] integerValue]];
+//            addressInfo.address1 = [addressDict objectForKey:@"address1"];
+//            addressInfo.address2 = [addressDict objectForKey:@"address2"];
+//            addressInfo.city  =[addressDict objectForKey:@"city"];
+//            addressInfo.state = [addressDict objectForKey:@"state"];
+//            addressInfo.country = [addressDict objectForKey:@"country"];
+//            addressInfo.zipcode = [addressDict objectForKey:@"zipcode"];
+//            addressInfo.type = [NSNumber numberWithInteger:[[addressDict objectForKey:@"type"] integerValue]];
             [profile addAddressInfoObject:addressInfo];
         }];
         
@@ -2146,6 +2148,104 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
             if (responseHandler != nil) {
                 responseHandler(nil);
             }
+        }
+    }
+}
+
++ (void)editLocation:dataDict andHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] editLocation:dataDict
+                                                  withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                      [MRDatabaseHelper makeServiceCallForEditLocation:dataDict
+                                                                                                status:status
+                                                                                               details:details
+                                                                                              response:responce
+                                                                                    andResponseHandler:responseHandler];
+    }];
+}
+
++ (void)makeServiceCallForEditLocation:(NSDictionary*)dataDict
+                                status:(BOOL)status
+                               details:(NSString*)details
+                              response:(NSDictionary*)response
+                           andResponseHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon stopActivityIndicator];
+    if (status)
+    {
+        [MRDatabaseHelper updateLocationDataInCoreData:dataDict
+                                              response:response
+                                    andResponseHandler:responseHandler];
+    }
+    else {
+        NSString *errorCode = [MRDatabaseHelper getOAuthErrorCode:response];
+        
+        if ([errorCode isEqualToString:@"invalid_token"])
+        {
+            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+             {
+                 [MRCommon savetokens:responce];
+                 [[MRWebserviceHelper sharedWebServiceHelper] editLocation:dataDict
+                                                               withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                     [MRCommon stopActivityIndicator];
+                     if (status)
+                     {
+                         [MRDatabaseHelper updateLocationDataInCoreData:dataDict
+                                                               response:response
+                                                     andResponseHandler:responseHandler];
+                     } else
+                     {
+                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                         if (erros.count > 0)
+                             [MRCommon showAlert:[erros lastObject] delegate:nil];
+                     }
+                 }];
+             }];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }
+}
+
++ (void)updateLocationDataInCoreData:dataDict
+                            response:(NSDictionary*)response
+                  andResponseHandler:(WebServiceResponseHandler) responseHandler {
+    if (response != nil && [response allKeys].count > 0) {
+        id tempValue = [response valueForKey:@"status"];
+        if (tempValue != nil) {
+            if ([tempValue isKindOfClass:[NSString class]]) {
+                NSString *status = tempValue;
+                if (status.length > 0  && [status caseInsensitiveCompare:@"success"] == NSOrderedSame) {
+                    id locationDataDict = [dataDict objectOrNilForKey:@"location"];
+                    if (locationDataDict != nil && [locationDataDict isKindOfClass:[NSDictionary class] ]) {
+                        [MRWebserviceHelper parseNetworkResponse:AddressInfo.class
+                                                         andData:@[locationDataDict]];
+                    } else if ([dataDict isKindOfClass:[NSDictionary class]]) {
+                        ContactInfo *entity = [[MRDataManger sharedManager] fetchObject:NSStringFromClass(ContactInfo.class)];
+                        [entity updateFromDictionary:dataDict];
+                    }
+                    responseHandler(tempValue);
+                } else {
+                    if (responseHandler != nil) {
+                        responseHandler(nil);
+                    }
+                }
+            } else {
+                if (responseHandler != nil) {
+                    responseHandler(nil);
+                }
+            }
+        } else {
+            if (responseHandler != nil) {
+                responseHandler(nil);
+            }
+        }
+    } else {
+        if (responseHandler != nil) {
+            responseHandler(nil);
         }
     }
 }

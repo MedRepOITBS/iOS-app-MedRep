@@ -35,6 +35,8 @@
 #import "PublicationsViewController.h"
 #import "ContactInfo+CoreDataProperties.h"
 #import "AddressInfo+CoreDataProperties.h"
+#import "EditContactInfoViewController.h"
+
 @interface MRProfileDetailsViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate,ProfileBasicTableViewCellDelegate,CommonProfileSectionTableViewCellDelegate,ExpericeFillUpTableViewCellDelegate,basicInfoTableViewCellDelegate>
 
 @property (assign, nonatomic) BOOL isImageUploaded;
@@ -90,7 +92,7 @@
                                                                         action:@selector(editButtonTapped:)];
 //    self.navigationItem.rightBarButtonItem = rightButtonItem;
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
-    [self setupProfileData];
+//    [self setupProfileData];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -101,55 +103,18 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-//    [MRCommon showActivityIndicator:@""];
-//    if ([MRAppControl sharedHelper].userType == 1 || [MRAppControl sharedHelper].userType == 2)
-//    {
-//        [[MRWebserviceHelper sharedWebServiceHelper] getDoctorProfileDetails:^(BOOL status, NSString *details, NSDictionary *responce)
-//         {
-//             [MRCommon stopActivityIndicator];
-//             if (status)
-//             {
-//                 [[MRAppControl sharedHelper] setUserDetails:responce];
-//             }
-//             else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
-//             {
-//                 [MRCommon showActivityIndicator:@""];
-//                 [[MRWebserviceHelper sharedWebServiceHelper] getDoctorProfileDetails:^(BOOL status, NSString *details, NSDictionary *responce)
-//                  {
-//                      [MRCommon stopActivityIndicator];
-//                      if (status)
-//                      {
-//                          [[MRAppControl sharedHelper] setUserDetails:responce];
-//                      }
-//                  }];
-//             }
-//         }];
-//    }
-//    else if ([MRAppControl sharedHelper].userType == 3 || [MRAppControl sharedHelper].userType == 4)
-//    {
-//        [[MRWebserviceHelper sharedWebServiceHelper] getPharmaProfileDetails:^(BOOL status, NSString *details, NSDictionary *responce)
-//         {
-//             [MRCommon stopActivityIndicator];
-//             if (status)
-//             {
-//                 [[MRAppControl sharedHelper] setUserDetails:responce];
-//             }
-//             else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
-//             {
-//                 [MRCommon showActivityIndicator:@""];
-//                 [[MRWebserviceHelper sharedWebServiceHelper] getPharmaProfileDetails:^(BOOL status, NSString *details, NSDictionary *responce)
-//                  {
-//                      [MRCommon stopActivityIndicator];
-//                      if (status)
-//                      {
-//                          [[MRAppControl sharedHelper] setUserDetails:responce];
-//                      }
-//                  }];
-//             }
-//         }];
-//    }
-
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refreshData)
+                                                 name:kNotificationRefreshProfile                                               object:nil];
+    
     [self setupProfileData];
+}
+
+- (void)refreshData {
+    [self setupProfileData];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:kNotificationRefreshProfile object:nil];
 }
 
 - (void)setupProfileData
@@ -158,30 +123,12 @@
     _commonSectionArray = [NSMutableArray array];
     
     [_commonSectionArray addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"Work Experience",@"title",@"+ Add Experience",@"Button",@"Add Details of your Work Experience and make it easier for colleagues to find you.",@"detail", nil]];
-        [_commonSectionArray addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"Interest Areas",@"title",@"+ Add Interest Area",@"Button",@"Add your Interest Area",@"detail", nil]];
-        [_commonSectionArray addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"Educational Qualifications",@"title",@"+ Add Qualification",@"Button",@"Add your Qualification",@"detail", nil]];
+    [_commonSectionArray addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"Interest Areas",@"title",@"+ Add Interest Area",@"Button",@"Add your Interest Area",@"detail", nil]];
+    [_commonSectionArray addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"Educational Qualifications",@"title",@"+ Add Qualification",@"Button",@"Add your Qualification",@"detail", nil]];
     [_commonSectionArray addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"Publications",@"title",@"+ Add Publication",@"Button",@"Add a Publication and be recognised for your research",@"detail", nil]];
-        [_commonSectionArray addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"Awards",@"title",@"+ Add Award",@"Button",@"Add an Award",@"detail", nil]];
+    [_commonSectionArray addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"Awards",@"title",@"+ Add Award",@"Button",@"Add an Award",@"detail", nil]];
     [_commonSectionArray addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"Memberships & Positions",@"title",@"+ Add Membership",@"Button",@"Add a Membership or Position",@"detail", nil]];
     
-    
-    
-    
-    
-   
-        // Create Dummy Data
-        
-//    NSArray * profileArr = [MRDatabaseHelper getProfileData];
-//    if (profileArr.count == 0 || profileArr == nil) {
-    
-//        NSString* filePath = [[NSBundle mainBundle] pathForResource:@"Profile" ofType:@"json"];
-//        NSData* data = [NSData dataWithContentsOfFile:filePath];
-//        NSError *error;
-//        NSDictionary* transformArticles = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-    
-//        [MRDatabaseHelper addProfileData:transformArticles];
-//    }
-
     
     [MRDatabaseHelper addProfileData:^(id result){
     _profileObj  = [result objectAtIndex:0];
@@ -189,23 +136,6 @@
 
     }];
     
-    
-    
-    
-
-    
-    
-    
-    
-   /*  self.profileNameLabel.text              = @"";
-
-    self.mobileNumberLabel.text             = @"";
-    self.AlternateMobileNumberLabel.text    = @"";
-    self.emailLabel.text                    = @"";
-    self.alternateEmailLabel.text           = @"";
-    self.addressOneLabel.text               = @"";
-    self.addressTwoLabel.text               = @"";
-   */
     NSDictionary *userdata = [MRAppControl sharedHelper].userRegData;
     
     NSInteger userType = [MRAppControl sharedHelper].userType;
@@ -385,16 +315,7 @@
     NSString *valN = [valNDict objectForKey:@"type"];
     NSLog(@"NAMIT %@",valN);
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"ProfileStoryboard" bundle:nil];
-    if ([valN isEqualToString:@"ADDRESS_INFO"]) {
-        
-        
-        EditLocationViewController *notifications = [[EditLocationViewController alloc] initWithNibName:@"EditLocationViewController" bundle:nil];
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:notifications];
-        notifications.addressObject = [_profileObj.addressInfo.array lastObject];
-        [self.navigationController pushViewController:notifications animated:YES];
-
-    }
-    else if ([valN isEqualToString:@"WORK_EXP_DETAIL"]) {
+    if ([valN isEqualToString:@"WORK_EXP_DETAIL"]) {
         AddExperienceTableViewController *profViewController = [sb instantiateViewControllerWithIdentifier:@"AddExperienceTableViewController"];
         
         //                MRProfileDetailsViewController *profViewController = [[MRProfileDetailsViewController alloc] initWithNibName:@"AddExperienceTableViewController" bundle:nil];
@@ -612,7 +533,7 @@
     if ([valN isEqualToString:@"PROFILE_BASIC"]) {
         return 152;
     }
-   else if ([valN isEqualToString:@"CONTACT_INFO"]) {
+   else if ([valN isEqualToString:@"CONTACT_INFO_DETAIL"]) {
         return 104;
     }
     else  if ([valN isEqualToString:@"ABOUT"]){
@@ -621,7 +542,7 @@
         return 128;
     }
     else if([valN isEqualToString:@"WORK_EXP"]|| [valN isEqualToString:@"INTEREST_AREA"] || [valN isEqualToString:@"EDUCATION_QUAL"] || [valN isEqualToString:@"PUBLICATION"] ||
-            [valN isEqualToString:@"ADDRESS_INFO"]) {
+            [valN isEqualToString:@"ADDRESS_INFO"] || [valN isEqualToString:@"CONTACT_INFO"]) {
       return   [self heightAdjustOnBasisOfRecordsForType:valN];
     }
     else if([valN isEqualToString:@"ADD_BUTTON"]) {
@@ -641,7 +562,8 @@
     if (([type isEqualToString:@"INTEREST_AREA"] && _profileObj.interestArea.array.count >0 ) ||
         ([type isEqualToString:@"ADDRESS_INFO"] && _profileObj.addressInfo.array.count >0) ||
         ([type isEqualToString:@"WORK_EXP"] && _profileObj.workExperience.array.count >0) ||
-        ([type isEqualToString:@"EDUCATION_QUAL"] && _profileObj.educationlQualification.array.count >0) || ([type isEqualToString:@"PUBLICATION"] && _profileObj.publications.array.count >0)
+        ([type isEqualToString:@"EDUCATION_QUAL"] && _profileObj.educationlQualification.array.count >0) || ([type isEqualToString:@"PUBLICATION"] && _profileObj.publications.array.count >0) ||
+            ([type isEqualToString:@"CONTACT_INFO"] && _profileObj.contactInfo != nil)
         ) {
         return 64;
     }
@@ -656,6 +578,10 @@
        [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"ABOUT",@"type", nil]];
     
     [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"CONTACT_INFO",@"type", nil]];
+    if (_profileObj.contactInfo != nil) {
+        [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"CONTACT_INFO_DETAIL",@"type",_profileObj.contactInfo,@"object",@"NO",@"lastObj" ,nil]];
+    }
+    
     [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"ADDRESS_INFO",@"type", nil]];
     
     [_profileObj.addressInfo.array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -761,7 +687,7 @@
         
          
          return cell;
-     } else if([valN isEqualToString:@"CONTACT_INFO"]){
+     } else if([valN isEqualToString:@"CONTACT_INFO_DETAIL"]){
          ContactInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"ContactInfoTableViewCell"] forIndexPath:indexPath];
          if (_profileObj.contactInfo) {
              if (_profileObj.contactInfo.alternateEmail != nil) {
@@ -782,7 +708,7 @@
          AddressInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"AddressInfoTableViewCell"] forIndexPath:indexPath];
         
          AddressInfo *addressInfo = (AddressInfo *)_profileObj.addressInfo.lastObject;
-         [cell setCellData:addressInfo andParentViewController:self];
+         [cell setCellData:addressInfo contactInfo:_profileObj.contactInfo andParentViewController:self];
              
          if ([[valNDict objectForKey:@"lastObj"] isEqualToString:@"YES"]) {
              cell.viewLabel.hidden = YES;
@@ -799,10 +725,10 @@
      
      else if([valN isEqualToString:@"WORK_EXP"]|| [valN isEqualToString:@"INTEREST_AREA"] ||
              [valN isEqualToString:@"EDUCATION_QUAL"] || [valN isEqualToString:@"PUBLICATION"] ||
-             [valN isEqualToString:@"ADDRESS_INFO"]) {
+             [valN isEqualToString:@"ADDRESS_INFO"] || [valN isEqualToString:@"CONTACT_INFO"]) {
          CommonProfileSectionTableViewCell  *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"CommonProfileSectionTableViewCell"] forIndexPath:indexPath];
          
-               [cell setCommonProfileDataForType:valN withUserProfileData:_profileObj];
+        [cell setCommonProfileDataForType:valN withUserProfileData:_profileObj];
          cell.delegate = self;
          
          if ([valN isEqualToString:@"EDUCATION_QUAL"]) {
@@ -811,6 +737,8 @@
              [cell.indicatorImageView setImage:[UIImage imageNamed:@"TherapeuticArea"]];
          } else if ([valN isEqualToString:@"ADDRESS_INFO"]) {
              [cell.addButton setHidden:YES];
+         } else if ([valN isEqualToString:@"CONTACT_INFO"]) {
+             [cell.addButton setImage:[UIImage imageNamed:@"pencil"] forState:UIControlStateNormal];
          }
          return cell;
          
@@ -888,11 +816,16 @@
         
         [self.navigationController pushViewController:educationViewController  animated:YES];
         
-    }else if([buttonType isEqualToString:@"PUBLICATION"]){
+    } else if([buttonType isEqualToString:@"PUBLICATION"]){
         
         PublicationsViewController *profViewController = [sb instantiateViewControllerWithIdentifier:@"PublicationsViewController"];
         
         [self.navigationController pushViewController:profViewController  animated:YES];
+    } else if([buttonType isEqualToString:@"CONTACT_INFO"]){
+        
+        EditContactInfoViewController *editContactVC = [EditContactInfoViewController new];
+        [editContactVC setContactInfo:_profileObj.contactInfo];
+        [self.navigationController pushViewController:editContactVC  animated:YES];
     }
 }
 -(void)ProfileBasicTableViewCellDelegateForButtonPressed:(ProfileBasicTableViewCell *)cell withButtonType:(NSString *)buttonType{

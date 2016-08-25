@@ -279,6 +279,8 @@ withComplitionHandler:(completionHandler)responceHandler;
 - (void)getPostsForAMember:(NSInteger)contactId groupId:(NSInteger)groupId
                withHandler:(completionHandler)responseHandler;
 
+- (void)editLocation:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
+
 @end
 
 @interface NSDictionary (CategoryName)

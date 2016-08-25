@@ -1,40 +1,37 @@
 //
-//  EditLocationViewController.m
+//  EditContactInfoViewController.m
 //  MedRep
 //
-//  Created by Vamsi Katragadda on 8/25/16.
+//  Created by Vamsi Katragadda on 8/26/16.
 //  Copyright © 2016 MedRep. All rights reserved.
 //
 
-#import "EditLocationViewController.h"
+#import "EditContactInfoViewController.h"
+#import "ContactInfo.h"
 #import "MRDatabaseHelper.h"
 #import "MRCommon.h"
-#import "AddressInfo.h"
-#import "ContactInfo.h"
 
-
-@interface EditLocationViewController () <UITextFieldDelegate>
+@interface EditContactInfoViewController () <UITextFieldDelegate>
 
 @property (nonatomic) NSString *currentText;
 
-@property (weak, nonatomic) IBOutlet UITextField *addressLine1;
-@property (weak, nonatomic) IBOutlet UITextField *addressLine2;
-@property (weak, nonatomic) IBOutlet UITextField *city;
-@property (weak, nonatomic) IBOutlet UITextField *state;
-@property (weak, nonatomic) IBOutlet UITextField *country;
-@property (weak, nonatomic) IBOutlet UITextField *zipCode;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UITextField *mobileNumberTextField;
+@property (weak, nonatomic) IBOutlet UITextField *phoneNumberTextField;
+@property (weak, nonatomic) IBOutlet UITextField *emailTextField;
+@property (weak, nonatomic) IBOutlet UITextField *alternateEmailTextField;
 
 @property (nonatomic) UITextField *activeTextField;
 
+
 @end
 
-@implementation EditLocationViewController
+@implementation EditContactInfoViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title  = @"Edit Location";
+    self.navigationItem.title  = @"Edit Contact Info";
     
     UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"]
                                                                        style:UIBarButtonItemStyleDone
@@ -120,86 +117,60 @@
 
 - (void)doneButtonTapped:(id)sender {
     NSMutableDictionary *dictionary = [NSMutableDictionary new];
-    if (self.contactInfo != nil) {
-        if (self.contactInfo.alternateEmail != nil && self.contactInfo.alternateEmail.length > 0) {
-            [dictionary setObject:self.contactInfo.alternateEmail forKey:@"alternateEmailId"];
-        }
-        
-        if (self.contactInfo.email != nil && self.contactInfo.email.length > 0) {
-            [dictionary setObject:self.contactInfo.email forKey:@"emailId"];
-        }
-        
-        if (self.contactInfo.mobileNo != nil && self.contactInfo.mobileNo.length > 0) {
-            [dictionary setObject:self.contactInfo.mobileNo forKey:@"mobileNo"];
-        }
-        
-        if (self.contactInfo.phoneNo != nil && self.contactInfo.phoneNo.length > 0) {
-            [dictionary setObject:self.contactInfo.phoneNo forKey:@"phoneNo"];
-        }
-    }
     
-    NSMutableDictionary *locationDictionary = [NSMutableDictionary new];
-    NSString *value = self.addressLine1.text;
+    NSString *value = self.alternateEmailTextField.text;
     if (value != nil && value.length > 0) {
-        [locationDictionary setObject:value forKey:@"address1"];
+        [dictionary setObject:self.contactInfo.alternateEmail forKey:@"alternateEmailId"];
     }
     
-    value = self.addressLine2.text;
+    value = self.emailTextField.text;
     if (value != nil && value.length > 0) {
-        [locationDictionary setObject:value forKey:@"address2"];
+        [dictionary setObject:self.contactInfo.email forKey:@"emailId"];
     }
     
-    value = self.city.text;
+    value = self.mobileNumberTextField.text;
     if (value != nil && value.length > 0) {
-        [locationDictionary setObject:value forKey:@"city"];
+        [dictionary setObject:self.contactInfo.mobileNo forKey:@"mobileNo"];
     }
     
-    value = self.country.text;
+    value = self.phoneNumberTextField.text;
     if (value != nil && value.length > 0) {
-        [locationDictionary setObject:value forKey:@"country"];
+        [dictionary setObject:self.contactInfo.phoneNo forKey:@"phoneNo"];
     }
     
-    value = self.state.text;
-    if (value != nil && value.length > 0) {
-        [locationDictionary setObject:value forKey:@"state"];
-    }
-    
-    value = self.zipCode.text;
-    if (value != nil && value.length > 0) {
-        [locationDictionary setObject:value forKey:@"zipcode"];
-    }
-    
-    if (self.addressObject != nil && self.addressObject.locationId != nil) {
-        [locationDictionary setObject:[NSNumber numberWithLong:self.addressObject.locationId.longValue]
-                               forKey:@"locationId"];
-    }
-    
-    [dictionary setObject:locationDictionary forKey:@"location"];
-
     [MRDatabaseHelper editLocation:dictionary
                         andHandler:^(id result) {
-        if ([result caseInsensitiveCompare:@"success"] == NSOrderedSame) {
-            
-            [MRCommon showAlert:@"Location updated successfully !!!" delegate:nil];
-            
-            [self.navigationController popViewControllerAnimated:YES];
-            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshProfile
-                                                                object:nil];
-        }else{
-            [MRCommon showAlert:@"Failed to update location" delegate:nil];
-        }
-    }];
+                            if ([result caseInsensitiveCompare:@"success"] == NSOrderedSame) {
+                                
+                                [MRCommon showAlert:@"Contact Info updated successfully !!!" delegate:nil];
+                                
+                                [self.navigationController popViewControllerAnimated:YES];
+                                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshProfile
+                                                                                    object:nil];
+                            }else{
+                                [MRCommon showAlert:@"Failed to update contact info" delegate:nil];
+                            }
+                        }];
 }
 
 - (void)setUpData {
     
-    if (_addressObject!=nil) {
-        _addressLine1.text = _addressObject.address1;
-        _addressLine2.text = _addressObject.address2;
-        _city.text = _addressObject.city;
-        _state.text = _addressObject.state;
-        _zipCode.text = _addressObject.zipcode;
-        _country.text = _addressObject.country;
+    if (self.contactInfo != nil) {
+        if (self.contactInfo.phoneNo != nil && self.contactInfo.phoneNo.length > 0) {
+            self.phoneNumberTextField.text = self.contactInfo.phoneNo;
+        }
+        
+        if (self.contactInfo.mobileNo != nil && self.contactInfo.mobileNo.length > 0) {
+            self.mobileNumberTextField.text = self.contactInfo.mobileNo;
+        }
+        
+        if (self.contactInfo.email != nil && self.contactInfo.email.length > 0) {
+            self.emailTextField.text = self.contactInfo.email;
+        }
+        
+        if (self.contactInfo.alternateEmail != nil && self.contactInfo.alternateEmail.length > 0) {
+            self.alternateEmailTextField.text = self.contactInfo.alternateEmail;
+        }
     }
     
     UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
@@ -210,12 +181,10 @@
                            [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneOnKeyboardPressed:)],
                            nil];
     [numberToolbar sizeToFit];
-    _addressLine1.inputAccessoryView = numberToolbar;
-    _addressLine2.inputAccessoryView = numberToolbar;
-    _city.inputAccessoryView = numberToolbar;
-    _state.inputAccessoryView = numberToolbar;
-    _zipCode.inputAccessoryView = numberToolbar;
-    _country.inputAccessoryView = numberToolbar;
+    self.phoneNumberTextField.inputAccessoryView = numberToolbar;
+    self.mobileNumberTextField.inputAccessoryView = numberToolbar;
+    self.emailTextField.inputAccessoryView = numberToolbar;
+    self.alternateEmailTextField.inputAccessoryView = numberToolbar;
 }
 
 - (void)closeOnKeyboardPressed:(id)sender {

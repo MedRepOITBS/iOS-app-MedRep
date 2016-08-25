@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-@class AddressInfo;
+
+@class AddressInfo, ContactInfo;
+
 @interface EditLocationViewController : UIViewController
 
 @property (nonatomic,strong) AddressInfo *addressObject;
+@property (nonatomic,strong) ContactInfo *contactInfo;
+
 @end
