@@ -9,9 +9,14 @@
 #import "EditLocationViewController.h"
 #import "MRDatabaseHelper.h"
 #import "MRCommon.h"
-
+#import "AddressInfo.h"
 @interface EditLocationViewController ()
-
+@property (weak, nonatomic) IBOutlet UITextField *addressLine1;
+@property (weak, nonatomic) IBOutlet UITextField *addressLine2;
+@property (weak, nonatomic) IBOutlet UITextField *city;
+@property (weak, nonatomic) IBOutlet UITextField *state;
+@property (weak, nonatomic) IBOutlet UITextField *country;
+@property (weak, nonatomic) IBOutlet UITextField *zipCode;
 @end
 
 @implementation EditLocationViewController
@@ -32,6 +37,7 @@
                                                                        target:self
                                                                        action:@selector(doneButtonTapped:)];
     self.navigationItem.rightBarButtonItem = rightButtonItem;
+    [self setUpData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -68,7 +74,17 @@
         
     }];
 }
-
+-(void)setUpData{
+    
+    if (_addressObject!=nil) {
+        _addressLine1.text = _addressObject.address1;
+        _addressLine2.text = _addressObject.address2;
+        _city.text = _addressObject.city;
+        _state.text = _addressObject.state;
+        _zipCode.text = _addressObject.zipcode;
+        _country.text = _addressObject.country;
+    }
+}
 /*
 #pragma mark - Navigation
 

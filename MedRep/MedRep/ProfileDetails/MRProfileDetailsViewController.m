@@ -385,8 +385,16 @@
     NSString *valN = [valNDict objectForKey:@"type"];
     NSLog(@"NAMIT %@",valN);
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"ProfileStoryboard" bundle:nil];
-    
-    if ([valN isEqualToString:@"WORK_EXP_DETAIL"]) {
+    if ([valN isEqualToString:@"ADDRESS_INFO"]) {
+        
+        
+        EditLocationViewController *notifications = [[EditLocationViewController alloc] initWithNibName:@"EditLocationViewController" bundle:nil];
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:notifications];
+        notifications.addressObject = [_profileObj.addressInfo.array lastObject];
+        [self.revealViewController pushFrontViewController:navigationController animated:YES];
+
+    }
+    else if ([valN isEqualToString:@"WORK_EXP_DETAIL"]) {
         AddExperienceTableViewController *profViewController = [sb instantiateViewControllerWithIdentifier:@"AddExperienceTableViewController"];
         
         //                MRProfileDetailsViewController *profViewController = [[MRProfileDetailsViewController alloc] initWithNibName:@"AddExperienceTableViewController" bundle:nil];
