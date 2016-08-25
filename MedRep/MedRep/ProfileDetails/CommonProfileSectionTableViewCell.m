@@ -73,7 +73,7 @@
         _sectionDescName.text = @"Add Details of your Work Experience and make it easier for colleagues to find you.";
         _addButton.tag = 401;
         
-    }else if([type isEqualToString:@"INTEREST_AREA"]) {
+    } else if([type isEqualToString:@"INTEREST_AREA"]) {
         _sectionTitleName.text = @"Therapeutic Areas";
         _sectionDescName.text = @"Add your Therapeutic Area";
         
@@ -101,7 +101,14 @@
         _sectionDescName.text = @"Add a Publication and be recognised for your research";
         
         _addButton.tag = 404;
+    } else if ([type isEqualToString:@"ADDRESS_INFO"]) {
+        
+        if ([profile.addressInfo.array count]>0) {
+            _sectionDescName.hidden = YES;
+        }
+        _sectionTitleName.text = @"Addresses";
+        _sectionDescName.text = @"Edit your addresses if there is any change in them.";
+        _addButton.tag = 405;
     }
-    
 }
 @end

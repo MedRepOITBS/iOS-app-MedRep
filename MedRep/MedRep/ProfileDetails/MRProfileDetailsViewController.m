@@ -604,6 +604,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self setStructureForTableView].count;
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSDictionary *valNDict = [[self setStructureForTableView] objectAtIndex:indexPath.row];
     NSString *valN = [valNDict objectForKey:@"type"];
@@ -614,21 +615,18 @@
    else if ([valN isEqualToString:@"CONTACT_INFO"]) {
         return 104;
     }
-    else  if ([valN isEqualToString:@"ADDRESS_INFO"]){
-        return 128;
-    }
     else  if ([valN isEqualToString:@"ABOUT"]){
         return 85;
+    } else if ([valN isEqualToString:@"ADDRESS_INFO_DETAIL"]) {
+        return 128;
     }
- 
-    else if([valN isEqualToString:@"WORK_EXP"]|| [valN isEqualToString:@"INTEREST_AREA"] || [valN isEqualToString:@"EDUCATION_QUAL"] || [valN isEqualToString:@"PUBLICATION"]) {
-        
+    else if([valN isEqualToString:@"WORK_EXP"]|| [valN isEqualToString:@"INTEREST_AREA"] || [valN isEqualToString:@"EDUCATION_QUAL"] || [valN isEqualToString:@"PUBLICATION"] ||
+            [valN isEqualToString:@"ADDRESS_INFO"]) {
       return   [self heightAdjustOnBasisOfRecordsForType:valN];
-//        heightAdjustOnBasisOfRecordsForType:(NSString *)type
     }
     else if([valN isEqualToString:@"ADD_BUTTON"]) {
         return 40;
-    } else if ([valN isEqualToString:@"WORK_EXP_DETAIL"] || [valN isEqualToString:@"EDUCATION_QUAL_DETAIL"] ){
+    } else if ([valN isEqualToString:@"WORK_EXP_DETAIL"] || [valN isEqualToString:@"EDUCATION_QUAL_DETAIL"]){
         return 95;
     }else if ([valN isEqualToString:@"PUBLICATION_DETAIL"] || [valN isEqualToString:@"INTEREST_AREA_DETAIL"] )
     {
@@ -640,7 +638,11 @@
 
 -(NSInteger)heightAdjustOnBasisOfRecordsForType:(NSString *)type{
 
-    if (([type isEqualToString:@"INTEREST_AREA"] && _profileObj.interestArea.array.count >0 ) || ([type isEqualToString:@"WORK_EXP"] && _profileObj.workExperience.array.count >0)|| ([type isEqualToString:@"EDUCATION_QUAL"] && _profileObj.educationlQualification.array.count >0) || ([type isEqualToString:@"PUBLICATION"] && _profileObj.publications.array.count >0)) {
+    if (([type isEqualToString:@"INTEREST_AREA"] && _profileObj.interestArea.array.count >0 ) ||
+        ([type isEqualToString:@"ADDRESS_INFO"] && _profileObj.addressInfo.array.count >0) ||
+        ([type isEqualToString:@"WORK_EXP"] && _profileObj.workExperience.array.count >0) ||
+        ([type isEqualToString:@"EDUCATION_QUAL"] && _profileObj.educationlQualification.array.count >0) || ([type isEqualToString:@"PUBLICATION"] && _profileObj.publications.array.count >0)
+        ) {
         return 64;
     }
     
@@ -649,19 +651,27 @@
 -(NSArray*)setStructureForTableView{
     
     NSMutableArray *temp = [NSMutableArray array];
-  
-   
     
     [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"PROFILE_BASIC",@"type", nil]];
        [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"ABOUT",@"type", nil]];
     
     [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"CONTACT_INFO",@"type", nil]];
     [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"ADDRESS_INFO",@"type", nil]];
+    
+    [_profileObj.addressInfo.array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        AddressInfo * addressInfo = (AddressInfo *)obj;
+        
+        if (_profileObj.addressInfo.array.count-1 == idx){
+            [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"ADDRESS_INFO_DETAIL",@"type",addressInfo,@"object",@"YES",@"lastObj" ,nil]];
+            
+        } else{
+            [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"ADDRESS_INFO_DETAIL",@"type",addressInfo,@"object",@"NO",@"lastObj" ,nil]];
+        }
+    }];
 
     [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"WORK_EXP",@"type", nil]];
     
-    
-//    NSArray *workEXP = _profileObj.workExperience.array;
     [_profileObj.workExperience.array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
         MRWorkExperience * workexp = (MRWorkExperience *)obj;
@@ -671,14 +681,9 @@
             
         }else{
             [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"WORK_EXP_DETAIL",@"type",workexp,@"object",@"NO",@"lastObj" ,nil]];
-            
-
         }
-        
-        
-        
     }];
-   // [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"ADD_BUTTON",@"type", nil]];
+   
     [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"INTEREST_AREA",@"type", nil]];
 
     
@@ -695,12 +700,8 @@
         }
     }];
     
-    //[temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"ADD_BUTTON",@"type", nil]];
-
     [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"EDUCATION_QUAL",@"type", nil]];
 
-    
-    
     [_profileObj.educationlQualification.array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         EducationalQualifications * workexp = (EducationalQualifications *)obj;
         if (_profileObj.educationlQualification.array.count-1 == idx) {
@@ -714,22 +715,13 @@
         
     }];
    
-    //[temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"ADD_BUTTON",@"type", nil]];
     [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"PUBLICATION",@"type", nil]];
-
 
     [_profileObj.publications.array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         MRPublications * workexp = (MRPublications *)obj;
         [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"PUBLICATION_DETAIL",@"type",workexp,@"object" ,nil]];
-
-        
     }];
-   // [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"ADD_BUTTON",@"type", nil]];
-
- 
-    
-    
-    
+  
     return temp;
 }
  - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -769,9 +761,7 @@
         
          
          return cell;
-     }
-     
-     else if([valN isEqualToString:@"CONTACT_INFO"]){
+     } else if([valN isEqualToString:@"CONTACT_INFO"]){
          ContactInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"ContactInfoTableViewCell"] forIndexPath:indexPath];
          if (_profileObj.contactInfo) {
              if (_profileObj.contactInfo.alternateEmail != nil) {
@@ -788,22 +778,18 @@
              
          }
          return cell;
-     }
-     
-     else if([valN isEqualToString:@"ADDRESS_INFO"]){
+     } else if([valN isEqualToString:@"ADDRESS_INFO_DETAIL"]){
          AddressInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"AddressInfoTableViewCell"] forIndexPath:indexPath];
-         if (_profileObj.addressInfo.array.count<2) {
-             cell.hospitalAddressView.hidden = NO;
-             cell.clinicAddressView.hidden = YES;
-             AddressInfo *addressInfo = (AddressInfo *)_profileObj.addressInfo.lastObject;
+        
+         AddressInfo *addressInfo = (AddressInfo *)_profileObj.addressInfo.lastObject;
+         [cell setCellData:addressInfo andParentViewController:self];
              
-             cell.hp_address1Lbl.text =addressInfo.address1;
-             cell.hp_address2Lbl.text = addressInfo.address2;
-             cell.hp_cityStateZipLbl.text = [NSString stringWithFormat:@"%@, %@, %@",addressInfo.city,addressInfo.state,addressInfo.zipcode];
+         if ([[valNDict objectForKey:@"lastObj"] isEqualToString:@"YES"]) {
+             cell.viewLabel.hidden = YES;
          }
+         
          return cell;
-     }
-     else if([valN isEqualToString:@"ABOUT"]) {
+     } else if([valN isEqualToString:@"ABOUT"]) {
          ProfileAboutTableViewCell  *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"ProfileAboutTableViewCell"] forIndexPath:indexPath];
          cell.specialityLbl.text = _profileObj.designation;
          
@@ -811,7 +797,9 @@
 
      }
      
-     else if([valN isEqualToString:@"WORK_EXP"]|| [valN isEqualToString:@"INTEREST_AREA"] || [valN isEqualToString:@"EDUCATION_QUAL"] || [valN isEqualToString:@"PUBLICATION"]) {
+     else if([valN isEqualToString:@"WORK_EXP"]|| [valN isEqualToString:@"INTEREST_AREA"] ||
+             [valN isEqualToString:@"EDUCATION_QUAL"] || [valN isEqualToString:@"PUBLICATION"] ||
+             [valN isEqualToString:@"ADDRESS_INFO"]) {
          CommonProfileSectionTableViewCell  *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"CommonProfileSectionTableViewCell"] forIndexPath:indexPath];
          
                [cell setCommonProfileDataForType:valN withUserProfileData:_profileObj];
@@ -821,6 +809,8 @@
              [cell.indicatorImageView setImage:[UIImage imageNamed:@"EducationQualifications"]];
          } else if ([valN isEqualToString:@"INTEREST_AREA"]) {
              [cell.indicatorImageView setImage:[UIImage imageNamed:@"TherapeuticArea"]];
+         } else if ([valN isEqualToString:@"ADDRESS_INFO"]) {
+             [cell.addButton setHidden:YES];
          }
          return cell;
          
@@ -887,23 +877,13 @@
     
     if ([buttonType isEqualToString:@"WORK_EXP"]) {
         AddExperienceTableViewController *profViewController = [sb instantiateViewControllerWithIdentifier:@"AddExperienceTableViewController"];
-        
-        //                MRProfileDetailsViewController *profViewController = [[MRProfileDetailsViewController alloc] initWithNibName:@"AddExperienceTableViewController" bundle:nil];
-        
-        
         [self.navigationController pushViewController:profViewController  animated:YES];
-        
 
     } else if ([buttonType isEqualToString:@"INTEREST_AREA"]){
-//
         InterestViewController *profViewController = [sb instantiateViewControllerWithIdentifier:@"InterestViewController"];
-        
-         
-        
         [self.navigationController pushViewController:profViewController  animated:YES];
         
     } else if ([buttonType isEqualToString:@"EDUCATION_QUAL"]){
-        
         AddEducationViewController *educationViewController = (AddEducationViewController *)[sb instantiateViewControllerWithIdentifier:@"AddEducationViewController"];
         
         [self.navigationController pushViewController:educationViewController  animated:YES];
@@ -912,11 +892,8 @@
         
         PublicationsViewController *profViewController = [sb instantiateViewControllerWithIdentifier:@"PublicationsViewController"];
         
-        
         [self.navigationController pushViewController:profViewController  animated:YES];
-        
     }
-    
 }
 -(void)ProfileBasicTableViewCellDelegateForButtonPressed:(ProfileBasicTableViewCell *)cell withButtonType:(NSString *)buttonType{
     UIActionSheet* popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take New Picture", @"Choose From Library", nil];

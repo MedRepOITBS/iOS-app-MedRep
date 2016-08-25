@@ -10,5 +10,5 @@
 @class AddressInfo;
 @interface EditLocationViewController : UIViewController
 
-@property (nonatomic,strong) AddressInfo*addressObject;
+@property (nonatomic,strong) AddressInfo *addressObject;
 @end
