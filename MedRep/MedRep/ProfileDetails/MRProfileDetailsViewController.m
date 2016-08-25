@@ -391,7 +391,7 @@
         EditLocationViewController *notifications = [[EditLocationViewController alloc] initWithNibName:@"EditLocationViewController" bundle:nil];
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:notifications];
         notifications.addressObject = [_profileObj.addressInfo.array lastObject];
-        [self.revealViewController pushFrontViewController:navigationController animated:YES];
+        [self.navigationController pushViewController:notifications animated:YES];
 
     }
     else if ([valN isEqualToString:@"WORK_EXP_DETAIL"]) {
