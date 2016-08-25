@@ -11,7 +11,7 @@
 #import "MRAppControl.h"
 #import "MRCommon.h"
 
-@interface NotificationWebViewController () <SWRevealViewControllerDelegate>
+@interface NotificationWebViewController () <SWRevealViewControllerDelegate, UIWebViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIWebView *web;
 @property (strong, nonatomic) IBOutlet UIView *navView;
@@ -46,6 +46,9 @@
     } else {
         [self.titleView setText:self.headerTitle];
     }
+    
+    [MRCommon showActivityIndicator:@"Loading..."];
+    [self.web setDelegate:self];
     
     //self.notificationDetailsList = [self.selectedNotification objectForKey:@"notificationDetails"];
     [self loadNotificationDetails];
@@ -91,6 +94,11 @@
     {
         self.view.userInteractionEnabled = YES;
     }
+}
+
+#pragma mark - UIWebViewDelegate
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [MRCommon stopActivityIndicator];
 }
 
 @end
