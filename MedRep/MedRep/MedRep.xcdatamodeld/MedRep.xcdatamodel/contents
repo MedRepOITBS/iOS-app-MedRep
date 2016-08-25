@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15G31" minimumToolsVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15F34" minimumToolsVersion="Automatic">
+    <entity name="AddressInfo" representedClassName="AddressInfo" syncable="YES">
+        <attribute name="address1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="address2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="locationId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="state" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="zipcode" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="ContactInfo" representedClassName="ContactInfo" syncable="YES">
+        <attribute name="alternateEmail" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mobileNo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phoneNo" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="EducationalQualifications" representedClassName="EducationalQualifications" syncable="YES">
         <attribute name="aggregate" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="collegeName" optional="YES" attributeType="String" syncable="YES"/>
@@ -156,6 +172,8 @@
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="addressInfo" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="AddressInfo" syncable="YES"/>
+        <relationship name="contactInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ContactInfo" syncable="YES"/>
         <relationship name="educationlQualification" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="EducationalQualifications" syncable="YES"/>
         <relationship name="interestArea" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="MRInterestArea" syncable="YES"/>
         <relationship name="publications" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="MRPublications" syncable="YES"/>
@@ -286,7 +304,7 @@
         <element name="MRNotificationType" positionX="16" positionY="-135" width="128" height="90"/>
         <element name="MRPendingRecordsCount" positionX="153" positionY="9" width="128" height="75"/>
         <element name="MRPostedReplies" positionX="-27" positionY="531" width="128" height="375"/>
-        <element name="MRProfile" positionX="-36" positionY="135" width="128" height="150"/>
+        <element name="MRProfile" positionX="-36" positionY="135" width="128" height="210"/>
         <element name="MRPublications" positionX="0" positionY="171" width="128" height="120"/>
         <element name="MRReplies" positionX="-36" positionY="135" width="128" height="120"/>
         <element name="MRRole" positionX="178" positionY="-72" width="128" height="105"/>
@@ -295,5 +313,7 @@
         <element name="MRTherapeuticArea" positionX="315" positionY="36" width="128" height="90"/>
         <element name="MRTransformPost" positionX="331" positionY="378" width="128" height="450"/>
         <element name="MRWorkExperience" positionX="358" positionY="171" width="128" height="165"/>
+        <element name="AddressInfo" positionX="153" positionY="9" width="128" height="165"/>
+        <element name="ContactInfo" positionX="162" positionY="18" width="128" height="105"/>
     </elements>
 </model>

@@ -2,7 +2,7 @@
 //  MRProfile+CoreDataProperties.m
 //  MedRep
 //
-//  Created by Namit Nayak on 7/31/16.
+//  Created by Namit Nayak on 8/24/16.
 //  Copyright © 2016 MedRep. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -14,13 +14,15 @@
 @implementation MRProfile (CoreDataProperties)
 
 @dynamic designation;
-@dynamic location;
-@dynamic name;
 @dynamic doctorId;
 @dynamic id;
+@dynamic location;
+@dynamic name;
 @dynamic educationlQualification;
 @dynamic interestArea;
 @dynamic publications;
 @dynamic workExperience;
+@dynamic contactInfo;
+@dynamic addressInfo;
 
 @end

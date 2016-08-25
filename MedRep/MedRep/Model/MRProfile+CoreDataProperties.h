@@ -2,7 +2,7 @@
 //  MRProfile+CoreDataProperties.h
 //  MedRep
 //
-//  Created by Namit Nayak on 7/31/16.
+//  Created by Namit Nayak on 8/24/16.
 //  Copyright © 2016 MedRep. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -16,14 +16,16 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MRProfile (CoreDataProperties)
 
 @property (nullable, nonatomic, retain) NSString *designation;
-@property (nullable, nonatomic, retain) NSString *location;
-@property (nullable, nonatomic, retain) NSString *name;
 @property (nullable, nonatomic, retain) NSNumber *doctorId;
 @property (nullable, nonatomic, retain) NSNumber *id;
+@property (nullable, nonatomic, retain) NSString *location;
+@property (nullable, nonatomic, retain) NSString *name;
 @property (nullable, nonatomic, retain) NSOrderedSet<EducationalQualifications *> *educationlQualification;
 @property (nullable, nonatomic, retain) NSOrderedSet<MRInterestArea *> *interestArea;
 @property (nullable, nonatomic, retain) NSOrderedSet<MRPublications *> *publications;
 @property (nullable, nonatomic, retain) NSOrderedSet<MRWorkExperience *> *workExperience;
+@property (nullable, nonatomic, retain) ContactInfo *contactInfo;
+@property (nullable, nonatomic, retain) NSOrderedSet<AddressInfo *> *addressInfo;
 
 @end
 
@@ -72,6 +74,17 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)removeWorkExperienceObject:(MRWorkExperience *)value;
 - (void)addWorkExperience:(NSOrderedSet<MRWorkExperience *> *)values;
 - (void)removeWorkExperience:(NSOrderedSet<MRWorkExperience *> *)values;
+
+- (void)insertObject:(AddressInfo *)value inAddressInfoAtIndex:(NSUInteger)idx;
+- (void)removeObjectFromAddressInfoAtIndex:(NSUInteger)idx;
+- (void)insertAddressInfo:(NSArray<AddressInfo *> *)value atIndexes:(NSIndexSet *)indexes;
+- (void)removeAddressInfoAtIndexes:(NSIndexSet *)indexes;
+- (void)replaceObjectInAddressInfoAtIndex:(NSUInteger)idx withObject:(AddressInfo *)value;
+- (void)replaceAddressInfoAtIndexes:(NSIndexSet *)indexes withAddressInfo:(NSArray<AddressInfo *> *)values;
+- (void)addAddressInfoObject:(AddressInfo *)value;
+- (void)removeAddressInfoObject:(AddressInfo *)value;
+- (void)addAddressInfo:(NSOrderedSet<AddressInfo *> *)values;
+- (void)removeAddressInfo:(NSOrderedSet<AddressInfo *> *)values;
 
 @end
 
