@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -7,7 +7,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditLocationViewController">
             <connections>
+                <outlet property="addressLine1" destination="2kn-U6-rTN" id="eGm-JS-82h"/>
+                <outlet property="addressLine2" destination="YXg-DA-NiH" id="Cnx-n7-FO0"/>
+                <outlet property="city" destination="vpo-Fq-Sfl" id="8e9-mi-q1r"/>
+                <outlet property="country" destination="zhF-KZ-bFy" id="s59-Qr-EEz"/>
+                <outlet property="state" destination="Pwf-ZT-NUk" id="g2N-go-hEq"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="zipCode" destination="5Pj-fQ-bNa" id="2YO-tP-fLE"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

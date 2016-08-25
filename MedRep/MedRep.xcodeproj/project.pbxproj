@@ -635,6 +635,22 @@
 		B4746B281D6DFB9200325F9E /* AddressInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4746B261D6DFB9200325F9E /* AddressInfoTableViewCell.m */; };
 		B4746B2B1D6DFBB200325F9E /* ContactInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4746B2A1D6DFBB200325F9E /* ContactInfoTableViewCell.m */; };
 		B4746B2C1D6DFBB200325F9E /* ContactInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4746B2A1D6DFBB200325F9E /* ContactInfoTableViewCell.m */; };
+		B4746B321D6E78D500325F9E /* addressbook-green-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B4746B311D6E78D500325F9E /* addressbook-green-icon.png */; };
+		B4746B331D6E78D500325F9E /* addressbook-green-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B4746B311D6E78D500325F9E /* addressbook-green-icon.png */; };
+		B4746B351D6E7A0F00325F9E /* telephone.png in Resources */ = {isa = PBXBuildFile; fileRef = B4746B341D6E7A0F00325F9E /* telephone.png */; };
+		B4746B361D6E7A0F00325F9E /* telephone.png in Resources */ = {isa = PBXBuildFile; fileRef = B4746B341D6E7A0F00325F9E /* telephone.png */; };
+		B4746B3F1D6E8F3700325F9E /* AddressInfo+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4746B381D6E8F3700325F9E /* AddressInfo+CoreDataProperties.m */; };
+		B4746B401D6E8F3700325F9E /* AddressInfo+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4746B381D6E8F3700325F9E /* AddressInfo+CoreDataProperties.m */; };
+		B4746B411D6E8F3700325F9E /* AddressInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B4746B3A1D6E8F3700325F9E /* AddressInfo.m */; };
+		B4746B421D6E8F3700325F9E /* AddressInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B4746B3A1D6E8F3700325F9E /* AddressInfo.m */; };
+		B4746B431D6E8F3700325F9E /* ContactInfo+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4746B3C1D6E8F3700325F9E /* ContactInfo+CoreDataProperties.m */; };
+		B4746B441D6E8F3700325F9E /* ContactInfo+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4746B3C1D6E8F3700325F9E /* ContactInfo+CoreDataProperties.m */; };
+		B4746B451D6E8F3700325F9E /* ContactInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B4746B3E1D6E8F3700325F9E /* ContactInfo.m */; };
+		B4746B461D6E8F3700325F9E /* ContactInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B4746B3E1D6E8F3700325F9E /* ContactInfo.m */; };
+		B4746B491D6E926000325F9E /* MRProfile+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4746B481D6E926000325F9E /* MRProfile+CoreDataProperties.m */; };
+		B4746B4A1D6E926000325F9E /* MRProfile+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4746B481D6E926000325F9E /* MRProfile+CoreDataProperties.m */; };
+		B4746B4D1D6E929100325F9E /* MRProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = B4746B4C1D6E929100325F9E /* MRProfile.m */; };
+		B4746B4E1D6E929100325F9E /* MRProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = B4746B4C1D6E929100325F9E /* MRProfile.m */; };
 		B47E338E1D2F65540051724C /* MRSharePost.m in Sources */ = {isa = PBXBuildFile; fileRef = B47E338C1D2F65540051724C /* MRSharePost.m */; };
 		B4B4F0E81D382E7300EFCC0E /* AddExperienceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F0E61D382E7300EFCC0E /* AddExperienceTableViewController.m */; };
 		B4B4F0ED1D3842C500EFCC0E /* AddEducationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F0EB1D3842C500EFCC0E /* AddEducationViewController.m */; };
@@ -752,10 +768,6 @@
 		B4E02C6E1D4B2992003A1859 /* UIImage+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E02C6D1D4B2992003A1859 /* UIImage+Helpers.m */; };
 		B4E02C6F1D4B2992003A1859 /* UIImage+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E02C6D1D4B2992003A1859 /* UIImage+Helpers.m */; };
 		B4E02C701D4C391D003A1859 /* MRDatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 797560461BBFE4940034D0AC /* MRDatabaseHelper.m */; };
-		B4E02C751D4EBEC4003A1859 /* MRProfile+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E02C721D4EBEC4003A1859 /* MRProfile+CoreDataProperties.m */; };
-		B4E02C761D4EBEC4003A1859 /* MRProfile+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E02C721D4EBEC4003A1859 /* MRProfile+CoreDataProperties.m */; };
-		B4E02C771D4EBEC4003A1859 /* MRProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E02C741D4EBEC4003A1859 /* MRProfile.m */; };
-		B4E02C781D4EBEC4003A1859 /* MRProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E02C741D4EBEC4003A1859 /* MRProfile.m */; };
 		B4F635061D53D039008CE7C7 /* TutorialView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F635051D53D039008CE7C7 /* TutorialView.m */; };
 		B4F635071D53D039008CE7C7 /* TutorialView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F635051D53D039008CE7C7 /* TutorialView.m */; };
 		B4F635091D53D0F1008CE7C7 /* TutorialView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4F635081D53D0F1008CE7C7 /* TutorialView.xib */; };
@@ -2140,6 +2152,20 @@
 		B4746B261D6DFB9200325F9E /* AddressInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressInfoTableViewCell.m; sourceTree = "<group>"; };
 		B4746B291D6DFBB200325F9E /* ContactInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactInfoTableViewCell.h; sourceTree = "<group>"; };
 		B4746B2A1D6DFBB200325F9E /* ContactInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactInfoTableViewCell.m; sourceTree = "<group>"; };
+		B4746B311D6E78D500325F9E /* addressbook-green-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addressbook-green-icon.png"; sourceTree = "<group>"; };
+		B4746B341D6E7A0F00325F9E /* telephone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = telephone.png; sourceTree = "<group>"; };
+		B4746B371D6E8F3700325F9E /* AddressInfo+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AddressInfo+CoreDataProperties.h"; sourceTree = "<group>"; };
+		B4746B381D6E8F3700325F9E /* AddressInfo+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AddressInfo+CoreDataProperties.m"; sourceTree = "<group>"; };
+		B4746B391D6E8F3700325F9E /* AddressInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressInfo.h; sourceTree = "<group>"; };
+		B4746B3A1D6E8F3700325F9E /* AddressInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressInfo.m; sourceTree = "<group>"; };
+		B4746B3B1D6E8F3700325F9E /* ContactInfo+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ContactInfo+CoreDataProperties.h"; sourceTree = "<group>"; };
+		B4746B3C1D6E8F3700325F9E /* ContactInfo+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ContactInfo+CoreDataProperties.m"; sourceTree = "<group>"; };
+		B4746B3D1D6E8F3700325F9E /* ContactInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactInfo.h; sourceTree = "<group>"; };
+		B4746B3E1D6E8F3700325F9E /* ContactInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactInfo.m; sourceTree = "<group>"; };
+		B4746B471D6E926000325F9E /* MRProfile+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MRProfile+CoreDataProperties.h"; sourceTree = "<group>"; };
+		B4746B481D6E926000325F9E /* MRProfile+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MRProfile+CoreDataProperties.m"; sourceTree = "<group>"; };
+		B4746B4B1D6E929100325F9E /* MRProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRProfile.h; sourceTree = "<group>"; };
+		B4746B4C1D6E929100325F9E /* MRProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRProfile.m; sourceTree = "<group>"; };
 		B47E338B1D2F65540051724C /* MRSharePost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRSharePost.h; sourceTree = "<group>"; };
 		B47E338C1D2F65540051724C /* MRSharePost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRSharePost.m; sourceTree = "<group>"; };
 		B4B4F0E51D382E7300EFCC0E /* AddExperienceTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddExperienceTableViewController.h; sourceTree = "<group>"; };
@@ -2232,10 +2258,6 @@
 		B4E02C651D4B0BB0003A1859 /* Drug_Search.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Drug_Search.jpg; sourceTree = "<group>"; };
 		B4E02C6C1D4B2992003A1859 /* UIImage+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Helpers.h"; sourceTree = "<group>"; };
 		B4E02C6D1D4B2992003A1859 /* UIImage+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Helpers.m"; sourceTree = "<group>"; };
-		B4E02C711D4EBEC4003A1859 /* MRProfile+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MRProfile+CoreDataProperties.h"; sourceTree = "<group>"; };
-		B4E02C721D4EBEC4003A1859 /* MRProfile+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MRProfile+CoreDataProperties.m"; sourceTree = "<group>"; };
-		B4E02C731D4EBEC4003A1859 /* MRProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRProfile.h; sourceTree = "<group>"; };
-		B4E02C741D4EBEC4003A1859 /* MRProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRProfile.m; sourceTree = "<group>"; };
 		B4F635041D53D039008CE7C7 /* TutorialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialView.h; sourceTree = "<group>"; };
 		B4F635051D53D039008CE7C7 /* TutorialView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialView.m; sourceTree = "<group>"; };
 		B4F635081D53D0F1008CE7C7 /* TutorialView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TutorialView.xib; sourceTree = "<group>"; };
@@ -2517,6 +2539,8 @@
 				7920D6961C1C9B69008D3386 /* MRProfileDetailsViewController.h */,
 				7920D6971C1C9B69008D3386 /* MRProfileDetailsViewController.m */,
 				B4746B1F1D6A877800325F9E /* cancelBtn.png */,
+				B4746B311D6E78D500325F9E /* addressbook-green-icon.png */,
+				B4746B341D6E7A0F00325F9E /* telephone.png */,
 				B4746B201D6A877800325F9E /* cancelBtn@2x.png */,
 				B4B4F0E51D382E7300EFCC0E /* AddExperienceTableViewController.h */,
 				B4B4F0E61D382E7300EFCC0E /* AddExperienceTableViewController.m */,
@@ -3082,10 +3106,18 @@
 				B40E13A71D3F251C005830DA /* MRPublications.m */,
 				B4E02C5E1D491760003A1859 /* MRSharePost+CoreDataProperties.h */,
 				B4E02C5F1D491760003A1859 /* MRSharePost+CoreDataProperties.m */,
-				B4E02C711D4EBEC4003A1859 /* MRProfile+CoreDataProperties.h */,
-				B4E02C721D4EBEC4003A1859 /* MRProfile+CoreDataProperties.m */,
-				B4E02C731D4EBEC4003A1859 /* MRProfile.h */,
-				B4E02C741D4EBEC4003A1859 /* MRProfile.m */,
+				B4746B371D6E8F3700325F9E /* AddressInfo+CoreDataProperties.h */,
+				B4746B381D6E8F3700325F9E /* AddressInfo+CoreDataProperties.m */,
+				B4746B391D6E8F3700325F9E /* AddressInfo.h */,
+				B4746B3A1D6E8F3700325F9E /* AddressInfo.m */,
+				B4746B3B1D6E8F3700325F9E /* ContactInfo+CoreDataProperties.h */,
+				B4746B3C1D6E8F3700325F9E /* ContactInfo+CoreDataProperties.m */,
+				B4746B3D1D6E8F3700325F9E /* ContactInfo.h */,
+				B4746B3E1D6E8F3700325F9E /* ContactInfo.m */,
+				B4746B471D6E926000325F9E /* MRProfile+CoreDataProperties.h */,
+				B4746B481D6E926000325F9E /* MRProfile+CoreDataProperties.m */,
+				B4746B4B1D6E929100325F9E /* MRProfile.h */,
+				B4746B4C1D6E929100325F9E /* MRProfile.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4500,6 +4532,7 @@
 				796E93861BB869120031EA34 /* cathera@2x.png in Resources */,
 				7961A9681B8F25DA0035D63A /* addressPinIcon@2x.png in Resources */,
 				79F4168F1B9F5CDB0089729B /* time-icon@2x.png in Resources */,
+				B4746B351D6E7A0F00325F9E /* telephone.png in Resources */,
 				7929E3DE1B9CC674001F1373 /* search@2x.png in Resources */,
 				CC86FE3C1D29A7780030B23D /* MRShareDetailViewController.xib in Resources */,
 				79BD27871B8096D6007CA448 /* medrep@3x.png in Resources */,
@@ -4920,6 +4953,7 @@
 				79DE1BEC1B826245005289D6 /* downArrow@2x~iPad.png in Resources */,
 				8AFE8CE21D0F21BF0000382E /* compose.png in Resources */,
 				79421EF41BB7EF950055D9B7 /* PHprescription@2x.png in Resources */,
+				B4746B321D6E78D500325F9E /* addressbook-green-icon.png in Resources */,
 				79AC94441B9DFDB800B81452 /* notificationback@2x.png in Resources */,
 				8AFE8CDE1D0F21400000382E /* my_contacts.json in Resources */,
 				791C37EA1C50256E00914728 /* pending_icon@2x.png in Resources */,
@@ -5015,6 +5049,7 @@
 				CC7DB09D1D0C8BEC007DFE4C /* pcright-arrow@2x.png in Resources */,
 				CC7DB09E1D0C8BEC007DFE4C /* MRMedRepTableCell.xib in Resources */,
 				CC7DB09F1D0C8BEC007DFE4C /* privateHospital_selection@2x.png in Resources */,
+				B4746B361D6E7A0F00325F9E /* telephone.png in Resources */,
 				CC7DB0A01D0C8BEC007DFE4C /* otpTiccMark@2x~iPad.png in Resources */,
 				CC7DB0A11D0C8BEC007DFE4C /* ndcompany3@2x.jpg in Resources */,
 				CC7DB0A21D0C8BEC007DFE4C /* comapny-logo@2x.png in Resources */,
@@ -5355,6 +5390,7 @@
 				CC7DB1AB1D0C8BEC007DFE4C /* favoriteSelected@2x.png in Resources */,
 				CC7DB1AC1D0C8BEC007DFE4C /* cncompany3@3x.jpg in Resources */,
 				B4BB24C41D4192AD00A3DD73 /* settings1.png in Resources */,
+				B4746B331D6E78D500325F9E /* addressbook-green-icon.png in Resources */,
 				CC7DB27D1D0C9E20007DFE4C /* MRTransformDetailViewController.xib in Resources */,
 				CC7DB3501D0CC8A6007DFE4C /* group_pic3.png in Resources */,
 				CC7DB1AD1D0C8BEC007DFE4C /* MRMenuViewController.xib in Resources */,
@@ -5609,15 +5645,14 @@
 				79F4167A1B9F596B0089729B /* MPAppointmentViewController.m in Sources */,
 				B4B4F1051D38B52B00EFCC0E /* ProfileAboutTableViewCell.m in Sources */,
 				79DC37181BE7DEA90027F7DB /* MRMedRepListTableCell.m in Sources */,
-				B4E02C771D4EBEC4003A1859 /* MRProfile.m in Sources */,
 				7920D6991C1C9B69008D3386 /* MRProfileDetailsViewController.m in Sources */,
 				B40E13A21D3F137E005830DA /* PublicationsViewController.m in Sources */,
 				CC7DB2C91D0CC433007DFE4C /* MRContactCollectionCell.m in Sources */,
-				B4E02C751D4EBEC4003A1859 /* MRProfile+CoreDataProperties.m in Sources */,
 				CCA383F11D342D3500BCF5A9 /* MRGroupMembers+CoreDataProperties.m in Sources */,
 				79F5C9F11BB0586100435B6C /* MRMedRepMeetingsViewController.m in Sources */,
 				797560411BBFE3AA0034D0AC /* MRNotificationType.m in Sources */,
 				79708A701BB71D68007CE81D /* Base64Transcoder.m in Sources */,
+				B4746B451D6E8F3700325F9E /* ContactInfo.m in Sources */,
 				B41746D51D0CD6E1009B7E7E /* MrGroupChildPost+CoreDataProperties.m in Sources */,
 				B4B4F11A1D395C7B00EFCC0E /* CommonTableViewCell.m in Sources */,
 				83B781F91B7916900070645C /* MRCommon.m in Sources */,
@@ -5642,6 +5677,7 @@
 				B40E13A81D3F251C005830DA /* MRPublications+CoreDataProperties.m in Sources */,
 				CC7DB2741D0C9E15007DFE4C /* MPTransformTableViewCell.m in Sources */,
 				7969CFCE1BAF2E38004C2009 /* MRListViewController.m in Sources */,
+				B4746B411D6E8F3700325F9E /* AddressInfo.m in Sources */,
 				B4B4F1881D39E53E00EFCC0E /* NSShortMonthComponent.m in Sources */,
 				79D5EAA01C1E00D50037CE23 /* MRDRActivityTableViewCell.m in Sources */,
 				B4B4F1551D39A8D600EFCC0E /* basicInfoTableViewCell.m in Sources */,
@@ -5651,6 +5687,7 @@
 				B4B4F0ED1D3842C500EFCC0E /* AddEducationViewController.m in Sources */,
 				CC7DB30F1D0CC4E2007DFE4C /* MRSuggestedContact+CoreDataProperties.m in Sources */,
 				83B781F31B7916670070645C /* MRAppControl.m in Sources */,
+				B4746B431D6E8F3700325F9E /* ContactInfo+CoreDataProperties.m in Sources */,
 				79AC94491B9E011D00B81452 /* MPNotificatinsTableViewCell.m in Sources */,
 				7950AF241BBF91D700A93106 /* MRSurveyDetailsViewController.m in Sources */,
 				CC7527CD1D68D2A8001189F0 /* MRPendingRecordsCount+CoreDataProperties.m in Sources */,
@@ -5669,6 +5706,7 @@
 				B4B4F0FB1D38AEDF00EFCC0E /* addProfileItemsTableViewCell.m in Sources */,
 				B41746E41D0CE628009B7E7E /* GroupPostChildTableViewCell.m in Sources */,
 				79BD27DC1B809FD1007CA448 /* MRLoginViewController.m in Sources */,
+				B4746B4D1D6E929100325F9E /* MRProfile.m in Sources */,
 				B4B4F13F1D39857E00EFCC0E /* MRWorkExperience+CoreDataProperties.m in Sources */,
 				B46565961D56B3040016CDA8 /* AddMemberTableViewCell.m in Sources */,
 				B4F635061D53D039008CE7C7 /* TutorialView.m in Sources */,
@@ -5730,6 +5768,7 @@
 				CC7DB2E51D0CC433007DFE4C /* MRPopoverControllerViewController.m in Sources */,
 				B41746CA1D0CD455009B7E7E /* CommonBoxView.m in Sources */,
 				B41746D71D0CD6E1009B7E7E /* MrGroupChildPost.m in Sources */,
+				B4746B3F1D6E8F3700325F9E /* AddressInfo+CoreDataProperties.m in Sources */,
 				7953662E1BA0C0300021CE4D /* MRFavoriteFilterViewController.m in Sources */,
 				B4746B271D6DFB9200325F9E /* AddressInfoTableViewCell.m in Sources */,
 				79A5DC621BA1ED21001D872C /* MPCallMedrepViewController.m in Sources */,
@@ -5767,6 +5806,7 @@
 				CC9BCEC81D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.m in Sources */,
 				79AC942A1B9DFAF000B81452 /* MRNotificationsViewController.m in Sources */,
 				7961A9731B8F26160035D63A /* MRRegistationTwoViewController.m in Sources */,
+				B4746B491D6E926000325F9E /* MRProfile+CoreDataProperties.m in Sources */,
 				79A4AA731BA75850004F6E1E /* UILabel+WhiteUIDatePickerLabels.m in Sources */,
 				79BD27E81B80A11D007CA448 /* MRRegistationViewController.m in Sources */,
 				79BD28121B80C6A5007CA448 /* MROTPViewController.m in Sources */,
@@ -5834,15 +5874,14 @@
 				B40E139F1D3F1268005830DA /* InterestViewController.m in Sources */,
 				CC7DB0271D0C8BEC007DFE4C /* WYPopoverController.m in Sources */,
 				CC7DB0281D0C8BEC007DFE4C /* MRViewRepAppointmnetViewController.m in Sources */,
-				B4E02C781D4EBEC4003A1859 /* MRProfile.m in Sources */,
 				B4B4F1021D38B4DF00EFCC0E /* ProfileBasicTableViewCell.m in Sources */,
 				B40E13A31D3F137E005830DA /* PublicationsViewController.m in Sources */,
 				CC7DB0291D0C8BEC007DFE4C /* MRForgotPasswordTwoViewController.m in Sources */,
-				B4E02C761D4EBEC4003A1859 /* MRProfile+CoreDataProperties.m in Sources */,
 				8AFE8CD41D0EFFD30000382E /* MRCreateGroupViewController.m in Sources */,
 				CC7DB02A1D0C8BEC007DFE4C /* MRDoctorDetailsTableViewCell.m in Sources */,
 				CC7DB02B1D0C8BEC007DFE4C /* MRFeedBackResultCell.m in Sources */,
 				CC7DB02C1D0C8BEC007DFE4C /* MPAppointmentViewController.m in Sources */,
+				B4746B461D6E8F3700325F9E /* ContactInfo.m in Sources */,
 				CC7DB2C41D0CC433007DFE4C /* PieView.m in Sources */,
 				B41746E51D0CE628009B7E7E /* GroupPostChildTableViewCell.m in Sources */,
 				CC7DB02D1D0C8BEC007DFE4C /* MRMedRepListTableCell.m in Sources */,
@@ -5867,6 +5906,7 @@
 				CC7DB0361D0C8BEC007DFE4C /* MRNotificationInsiderViewController.m in Sources */,
 				CC7DB0371D0C8BEC007DFE4C /* MRRole.m in Sources */,
 				CC7DB0381D0C8BEC007DFE4C /* MRCompetitorAnalasysViewController.m in Sources */,
+				B4746B421D6E8F3700325F9E /* AddressInfo.m in Sources */,
 				CC7DB0391D0C8BEC007DFE4C /* MRAppointmentCollectionViewCell.m in Sources */,
 				CC7DB03A1D0C8BEC007DFE4C /* MRViewAppointmnetViewController.m in Sources */,
 				CC649F4E1D0D181E0012289C /* NotificationUUIDViewController.m in Sources */,
@@ -5876,6 +5916,7 @@
 				B41746D61D0CD6E1009B7E7E /* MrGroupChildPost+CoreDataProperties.m in Sources */,
 				B4B4F1461D39857E00EFCC0E /* MRInterestArea.m in Sources */,
 				8A7169D21D27B07D00533A6D /* MRDrugDetailModel.m in Sources */,
+				B4746B441D6E8F3700325F9E /* ContactInfo+CoreDataProperties.m in Sources */,
 				8AFE8D241D12EB310000382E /* MRAddMembersViewController.m in Sources */,
 				CC9857F61D2E51B300C74438 /* MRManagedObject.m in Sources */,
 				CC7527CE1D68D2A8001189F0 /* MRPendingRecordsCount+CoreDataProperties.m in Sources */,
@@ -5894,6 +5935,7 @@
 				CC7DB03F1D0C8BEC007DFE4C /* GraphView.m in Sources */,
 				CC7DB0401D0C8BEC007DFE4C /* MRAppControl.m in Sources */,
 				CC7DB0411D0C8BEC007DFE4C /* MPNotificatinsTableViewCell.m in Sources */,
+				B4746B4E1D6E929100325F9E /* MRProfile.m in Sources */,
 				CC7DB0421D0C8BEC007DFE4C /* MRSurveyDetailsViewController.m in Sources */,
 				B46565971D56B3040016CDA8 /* AddMemberTableViewCell.m in Sources */,
 				B4F635071D53D039008CE7C7 /* TutorialView.m in Sources */,
@@ -5955,6 +5997,7 @@
 				CC7DB05E1D0C8BEC007DFE4C /* MRFavoriteFilterViewController.m in Sources */,
 				B4B4F0FC1D38AEDF00EFCC0E /* addProfileItemsTableViewCell.m in Sources */,
 				CC7DB05F1D0C8BEC007DFE4C /* MPCallMedrepViewController.m in Sources */,
+				B4746B401D6E8F3700325F9E /* AddressInfo+CoreDataProperties.m in Sources */,
 				CC9858071D2E726300C74438 /* MRShareOptionTableViewCell.m in Sources */,
 				B4746B281D6DFB9200325F9E /* AddressInfoTableViewCell.m in Sources */,
 				B4B4F1611D39E4F200EFCC0E /* UICustomDatePicker.m in Sources */,
@@ -5992,6 +6035,7 @@
 				CC7DB06E1D0C8BEC007DFE4C /* MROTPViewController.m in Sources */,
 				CC7DB06F1D0C8BEC007DFE4C /* MRAppointmentListCell.m in Sources */,
 				CC7DB0701D0C8BEC007DFE4C /* MRDocotrActivityScoreViewController.m in Sources */,
+				B4746B4A1D6E926000325F9E /* MRProfile+CoreDataProperties.m in Sources */,
 				CC9BCEC21D0F2A3900702EBC /* MRTransformViewController.m in Sources */,
 				CC7DB0711D0C8BEC007DFE4C /* MRHomeViewContoller.m in Sources */,
 				B4E02C701D4C391D003A1859 /* MRDatabaseHelper.m in Sources */,

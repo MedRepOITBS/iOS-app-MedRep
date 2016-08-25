@@ -1,5 +1,5 @@
 //
-//  MRProfile.h
+//  AddressInfo.h
 //  MedRep
 //
 //  Created by Namit Nayak on 8/24/16.
@@ -9,11 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class AddressInfo, ContactInfo, EducationalQualifications, MRInterestArea, MRPublications, MRWorkExperience;
-
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MRProfile : NSManagedObject
+@interface AddressInfo : NSManagedObject
 
 // Insert code here to declare functionality of your managed object subclass
 
@@ -21,4 +19,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-#import "MRProfile+CoreDataProperties.h"
+#import "AddressInfo+CoreDataProperties.h"

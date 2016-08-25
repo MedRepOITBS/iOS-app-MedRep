@@ -30,8 +30,11 @@
 #import "InterestViewController.h"
 #import "UIImage+Helpers.h"
 #import "EditLocationViewController.h"
-
+#import "ContactInfoTableViewCell.h"
+#import "AddressInfoTableViewCell.h"
 #import "PublicationsViewController.h"
+#import "ContactInfo+CoreDataProperties.h"
+#import "AddressInfo+CoreDataProperties.h"
 @interface MRProfileDetailsViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate,ProfileBasicTableViewCellDelegate,CommonProfileSectionTableViewCellDelegate,ExpericeFillUpTableViewCellDelegate,basicInfoTableViewCellDelegate>
 
 @property (assign, nonatomic) BOOL isImageUploaded;
@@ -382,8 +385,16 @@
     NSString *valN = [valNDict objectForKey:@"type"];
     NSLog(@"NAMIT %@",valN);
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"ProfileStoryboard" bundle:nil];
-    
-    if ([valN isEqualToString:@"WORK_EXP_DETAIL"]) {
+    if ([valN isEqualToString:@"ADDRESS_INFO"]) {
+        
+        
+        EditLocationViewController *notifications = [[EditLocationViewController alloc] initWithNibName:@"EditLocationViewController" bundle:nil];
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:notifications];
+        notifications.addressObject = [_profileObj.addressInfo.array lastObject];
+        [self.revealViewController pushFrontViewController:navigationController animated:YES];
+
+    }
+    else if ([valN isEqualToString:@"WORK_EXP_DETAIL"]) {
         AddExperienceTableViewController *profViewController = [sb instantiateViewControllerWithIdentifier:@"AddExperienceTableViewController"];
         
         //                MRProfileDetailsViewController *profViewController = [[MRProfileDetailsViewController alloc] initWithNibName:@"AddExperienceTableViewController" bundle:nil];
@@ -600,6 +611,12 @@
     if ([valN isEqualToString:@"PROFILE_BASIC"]) {
         return 152;
     }
+   else if ([valN isEqualToString:@"CONTACT_INFO"]) {
+        return 104;
+    }
+    else  if ([valN isEqualToString:@"ADDRESS_INFO"]){
+        return 128;
+    }
     else  if ([valN isEqualToString:@"ABOUT"]){
         return 85;
     }
@@ -633,11 +650,14 @@
     
     NSMutableArray *temp = [NSMutableArray array];
   
+   
     
     [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"PROFILE_BASIC",@"type", nil]];
        [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"ABOUT",@"type", nil]];
     
-    
+    [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"CONTACT_INFO",@"type", nil]];
+    [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"ADDRESS_INFO",@"type", nil]];
+
     [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"WORK_EXP",@"type", nil]];
     
     
@@ -749,7 +769,41 @@
         
          
          return cell;
-     } else if([valN isEqualToString:@"ABOUT"]) {
+     }
+     
+     else if([valN isEqualToString:@"CONTACT_INFO"]){
+         ContactInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"ContactInfoTableViewCell"] forIndexPath:indexPath];
+         if (_profileObj.contactInfo) {
+             if (_profileObj.contactInfo.alternateEmail != nil) {
+                 cell.secondaryEmailLbl.text = _profileObj.contactInfo.alternateEmail;
+             cell.secondaryEmailLbl.hidden = NO;
+             }else{
+                 cell.secondaryEmailLbl.hidden = YES;
+             }
+             cell.primaryEmailLbl.text = _profileObj.contactInfo.email;
+             cell.primaryContactNumberLbl.text = _profileObj.contactInfo.mobileNo;
+             if (_profileObj.contactInfo.phoneNo!=nil) {
+                 cell.secondaryContactNumberLbl.text = _profileObj.contactInfo.phoneNo;
+             }
+             
+         }
+         return cell;
+     }
+     
+     else if([valN isEqualToString:@"ADDRESS_INFO"]){
+         AddressInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"AddressInfoTableViewCell"] forIndexPath:indexPath];
+         if (_profileObj.addressInfo.array.count<2) {
+             cell.hospitalAddressView.hidden = NO;
+             cell.clinicAddressView.hidden = YES;
+             AddressInfo *addressInfo = (AddressInfo *)_profileObj.addressInfo.lastObject;
+             
+             cell.hp_address1Lbl.text =addressInfo.address1;
+             cell.hp_address2Lbl.text = addressInfo.address2;
+             cell.hp_cityStateZipLbl.text = [NSString stringWithFormat:@"%@, %@, %@",addressInfo.city,addressInfo.state,addressInfo.zipcode];
+         }
+         return cell;
+     }
+     else if([valN isEqualToString:@"ABOUT"]) {
          ProfileAboutTableViewCell  *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"ProfileAboutTableViewCell"] forIndexPath:indexPath];
          cell.specialityLbl.text = _profileObj.designation;
          

@@ -33,7 +33,8 @@
 #import "EducationalQualifications.h"
 #import "MRPublications.h"
 #import "MRPendingRecordsCount.h"
-
+#import "AddressInfo.h"
+#import "ContactInfo.h"
 static MRDatabaseHelper *sharedDataManager = nil;
 
 @implementation MRDatabaseHelper
@@ -1684,6 +1685,39 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
             [profile addWorkExperienceObject:workExp];
             
         }];
+        NSArray *addressInfoArra= [result objectForKey:@"address"];
+        
+        
+        
+        [addressInfoArra enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+            AddressInfo *addressInfo =(AddressInfo *)[[MRDataManger sharedManager] createObjectForEntity:@"AddressInfo"];
+            
+            NSDictionary *addressDict = (NSDictionary *)obj;
+            
+            addressInfo.address1 = [addressDict objectForKey:@"address1"];
+            addressInfo.address2 = [addressDict objectForKey:@"address2"];
+            addressInfo.city  =[addressDict objectForKey:@"city"];
+            addressInfo.state = [addressDict objectForKey:@"state"];
+            addressInfo.country = [addressDict objectForKey:@"country"];
+            addressInfo.zipcode = [addressDict objectForKey:@"zipcode"];
+            addressInfo.type = [NSNumber numberWithInteger:[[addressDict objectForKey:@"type"] integerValue]];
+            [profile addAddressInfoObject:addressInfo];
+        }];
+        
+        NSDictionary *contactInfoDict = [result objectForKey:@"contactInfo"];
+        if (contactInfoDict!=nil) {
+            ContactInfo *contactInfo = (ContactInfo *)[[MRDataManger sharedManager] createObjectForEntity:@"ContactInfo"];
+            
+            contactInfo.phoneNo = [contactInfoDict objectForKey:@"phoneNo"];
+            contactInfo.alternateEmail = [contactInfoDict objectForKey:@"alternateEmail"];
+            contactInfo.email = [contactInfoDict objectForKey:@"email"];
+            contactInfo.mobileNo = [contactInfoDict objectForKey:@"mobileNo"];
+            
+            profile.contactInfo = contactInfo;
+            
+        }
+
         
         
         NSArray *educationQualificationArra = [result objectForKey:@"educationdetails"];
