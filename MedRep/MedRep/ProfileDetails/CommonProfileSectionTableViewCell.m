@@ -56,6 +56,14 @@
             }
                 break;
                 
+            case 405:
+                
+            {
+                [self.delegate  CommonProfileSectionTableViewCellDelegateForButtonPressed:self withButtonType:@"ADDRESS_INFO"];
+                
+            }
+                break;
+                
             case 406:
                 
             {

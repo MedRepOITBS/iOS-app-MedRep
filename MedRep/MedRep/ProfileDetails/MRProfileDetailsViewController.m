@@ -575,7 +575,7 @@
     NSMutableArray *temp = [NSMutableArray array];
     
     [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"PROFILE_BASIC",@"type", nil]];
-       [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"ABOUT",@"type", nil]];
+    [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"ABOUT",@"type", nil]];
     
     [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"CONTACT_INFO",@"type", nil]];
     if (_profileObj.contactInfo != nil) {
@@ -706,8 +706,11 @@
          return cell;
      } else if([valN isEqualToString:@"ADDRESS_INFO_DETAIL"]){
          AddressInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"AddressInfoTableViewCell"] forIndexPath:indexPath];
-        
-         AddressInfo *addressInfo = (AddressInfo *)_profileObj.addressInfo.lastObject;
+         
+         AddressInfo *addressInfo = [valNDict valueForKey:@"object"];
+         NSMutableArray *tempAddresses = [_profileObj.addressInfo mutableCopy];
+         [tempAddresses removeLastObject];
+         
          [cell setCellData:addressInfo contactInfo:_profileObj.contactInfo andParentViewController:self];
              
          if ([[valNDict objectForKey:@"lastObj"] isEqualToString:@"YES"]) {
@@ -735,8 +738,6 @@
              [cell.indicatorImageView setImage:[UIImage imageNamed:@"EducationQualifications"]];
          } else if ([valN isEqualToString:@"INTEREST_AREA"]) {
              [cell.indicatorImageView setImage:[UIImage imageNamed:@"TherapeuticArea"]];
-         } else if ([valN isEqualToString:@"ADDRESS_INFO"]) {
-             [cell.addButton setHidden:YES];
          } else if ([valN isEqualToString:@"CONTACT_INFO"]) {
              [cell.addButton setImage:[UIImage imageNamed:@"pencil"] forState:UIControlStateNormal];
          }
@@ -826,6 +827,9 @@
         EditContactInfoViewController *editContactVC = [EditContactInfoViewController new];
         [editContactVC setContactInfo:_profileObj.contactInfo];
         [self.navigationController pushViewController:editContactVC  animated:YES];
+    } else if([buttonType isEqualToString:@"ADDRESS_INFO"]) {
+        EditLocationViewController *editLocationVC = [EditLocationViewController new];
+        [self.navigationController pushViewController:editLocationVC  animated:YES];
     }
 }
 -(void)ProfileBasicTableViewCellDelegateForButtonPressed:(ProfileBasicTableViewCell *)cell withButtonType:(NSString *)buttonType{
