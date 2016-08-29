@@ -457,8 +457,8 @@ easier for colleagues to find you.</string>
                                     <variation key="default">
                                         <mask key="constraints">
                                             <exclude reference="YTm-t3-dBF"/>
-                                            <exclude reference="6LF-1Y-Sqf"/>
                                             <exclude reference="6nB-G4-0dI"/>
+                                            <exclude reference="6LF-1Y-Sqf"/>
                                         </mask>
                                     </variation>
                                     <variation key="heightClass=regular-widthClass=regular" ambiguous="YES">

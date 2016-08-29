@@ -55,7 +55,7 @@ andParentViewController:(UIViewController*)parentViewController {
     
     if (addressInfo.zipcode != nil && addressInfo.zipcode.length > 0) {
         if (countryZipString.length > 0) {
-            [countryZipString appendString:@","];
+            [countryZipString appendString:@"-"];
         }
         [countryZipString appendString:addressInfo.zipcode];
     }

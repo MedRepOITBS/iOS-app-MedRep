@@ -120,25 +120,25 @@
     
     NSString *value = self.alternateEmailTextField.text;
     if (value != nil && value.length > 0) {
-        [dictionary setObject:self.contactInfo.alternateEmail forKey:@"alternateEmailId"];
+        [dictionary setObject:value forKey:@"alternateEmailId"];
     }
     
     value = self.emailTextField.text;
     if (value != nil && value.length > 0) {
-        [dictionary setObject:self.contactInfo.email forKey:@"emailId"];
+        [dictionary setObject:value forKey:@"emailId"];
     }
     
     value = self.mobileNumberTextField.text;
     if (value != nil && value.length > 0) {
-        [dictionary setObject:self.contactInfo.mobileNo forKey:@"mobileNo"];
+        [dictionary setObject:value forKey:@"mobileNo"];
     }
     
     value = self.phoneNumberTextField.text;
     if (value != nil && value.length > 0) {
-        [dictionary setObject:self.contactInfo.phoneNo forKey:@"phoneNo"];
+        [dictionary setObject:value forKey:@"phoneNo"];
     }
     
-    [MRDatabaseHelper editLocation:dictionary
+    [MRDatabaseHelper editContactInfo:dictionary
                         andHandler:^(id result) {
                             if ([result caseInsensitiveCompare:@"success"] == NSOrderedSame) {
                                 

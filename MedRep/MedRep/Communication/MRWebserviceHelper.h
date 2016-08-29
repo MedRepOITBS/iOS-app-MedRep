@@ -279,7 +279,8 @@ withComplitionHandler:(completionHandler)responceHandler;
 - (void)getPostsForAMember:(NSInteger)contactId groupId:(NSInteger)groupId
                withHandler:(completionHandler)responseHandler;
 
-- (void)editLocation:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
+- (void)editLocation:(id)reqDict withHandler:(completionHandler)responceHandler;
+- (void)editContactInfo:(id)reqDict withHandler:(completionHandler)responceHandler;
 
 @end
 

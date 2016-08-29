@@ -129,8 +129,6 @@
                                         action:@selector(leaveGroup)
                               forControlEvents:UIControlEventTouchUpInside];
         [self.deleteConnectionButton setBackgroundColor:[MRCommon colorFromHexString:@"#FF0000"]];
-        
-        [self fetchPosts];
     } else if (self.launchMode == kContactDetailLaunchModeSuggestedGroup) {
         [self.postTopicButton setHidden:YES];
         [self.plusBtn setHidden:YES];
@@ -152,7 +150,6 @@
                         forControlEvents:UIControlEventTouchUpInside];
         [self.deleteConnectionButton setBackgroundColor:[MRCommon colorFromHexString:@"#FF0000"]];
         
-        [self fetchPosts];
     }
 }
 
@@ -682,6 +679,7 @@
 
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (alertView.tag == 11) {
+        [self fetchPosts];
         [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
                                                             object:nil];
         
@@ -784,8 +782,6 @@
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Connection deleted!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
             alert.tag = 11;
             [alert show];
-            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
-                                                                object:nil];
         }
         else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
         {
@@ -800,8 +796,6 @@
                          UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Connection deleted!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                          alert.tag = 11;
                          [alert show];
-                         [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
-                                                                             object:nil];
                      }else
                      {
                          NSArray *erros =  [details componentsSeparatedByString:@"-"];

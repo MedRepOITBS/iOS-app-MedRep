@@ -199,7 +199,9 @@ UIImagePickerControllerDelegate>
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     [tableView deselectRowAtIndexPath:indexPath animated:true];
+    
     MRShareDetailViewController *shareDetailViewController =
                 [[MRShareDetailViewController alloc] initWithNibName:@"MRShareDetailViewController"
                                                               bundle:nil];
@@ -387,8 +389,14 @@ UIImagePickerControllerDelegate>
         messageType = @"image";
     }
     
+    NSInteger messageIndex = 4;
     NSMutableDictionary *postMessage = [NSMutableDictionary new];
-    [postMessage setObject:[NSNumber numberWithInteger:4] forKey:@"postType"];
+    
+    if (_commentBoxView.tag == 1000) {
+        messageIndex = 2;
+    }
+    [postMessage setObject:[NSNumber numberWithInteger:messageIndex] forKey:@"postType"];
+    
     [postMessage setObject:messageType forKey:@"message_type"];
     [postMessage setObject:message forKey:@"message"];
     
@@ -466,6 +474,13 @@ UIImagePickerControllerDelegate>
     //    self.posts = [self.mainContact.groupPosts allObjects];
     //    [self totalPosts];
     //    [self.postsTableView reloadData];
+}
+
+- (IBAction)postANewTopicButtonClicked:(id)sender {
+    [self setupCommentBox];
+    [_commentBoxView setData:nil group:nil andSharedPost:nil];
+    
+    [_commentBoxView setTag:1000];
 }
 
 @end

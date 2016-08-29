@@ -141,7 +141,13 @@ AVPlayerViewControllerDelegate, UIAlertViewDelegate> {
     self.postedByProfileName.text = name;
     
     if (self.post.displayPicture != nil && self.post.displayPicture.length > 0) {
-        self.profilePicImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.post.displayPicture]]];
+        self.profilePicImageView.image = [UIImage imageNamed:@"person"];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+           UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.post.displayPicture]]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.profilePicImageView.image = image;
+            });
+        });
     } else {
         self.profilePicImageView.image = [UIImage imageNamed:@"person"];
     }

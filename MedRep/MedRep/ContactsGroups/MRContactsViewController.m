@@ -133,7 +133,7 @@
     [super viewWillAppear:animated];
     [self.searchBar resignFirstResponder];
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(refreshData)
+                                             selector:@selector(fetchDataFromServer)
                                                  name:kNotificationRefreshContactList                                               object:nil];
     
     [self updatePlusButton];

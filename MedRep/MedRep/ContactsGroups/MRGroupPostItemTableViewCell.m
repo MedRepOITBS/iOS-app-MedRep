@@ -119,6 +119,8 @@
                 if (imageData != nil) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         self.postImageView.image = [UIImage imageWithData:imageData];
+                        self.postImageHeightConstraint.constant = 128;
+                        self.postImageViewTopConstraint.constant = 18;
                     });
                 }
             });
@@ -127,10 +129,15 @@
         }
     }
     
-    if (image != nil) {
-        self.postImageView.image = image;
-        self.postImageHeightConstraint.constant = 128;
-        self.postImageViewTopConstraint.constant = 18;
+    if (self.post.contentType.integerValue == kTransformContentTypeImage) {
+        if (self.post.url != nil && self.post.url.length > 0) {
+            self.postImageView.image = image;
+            self.postImageHeightConstraint.constant = 128;
+            self.postImageViewTopConstraint.constant = 18;
+        } else {
+            self.postImageHeightConstraint.constant = 0;
+            self.postImageViewTopConstraint.constant = 0;
+        }
     } else {
         self.postImageHeightConstraint.constant = 0;
         self.postImageViewTopConstraint.constant = 0;

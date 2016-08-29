@@ -120,23 +120,23 @@
 
 - (void)doneButtonTapped:(id)sender {
     NSMutableDictionary *dictionary = [NSMutableDictionary new];
-    if (self.contactInfo != nil) {
-        if (self.contactInfo.alternateEmail != nil && self.contactInfo.alternateEmail.length > 0) {
-            [dictionary setObject:self.contactInfo.alternateEmail forKey:@"alternateEmailId"];
-        }
-        
-        if (self.contactInfo.email != nil && self.contactInfo.email.length > 0) {
-            [dictionary setObject:self.contactInfo.email forKey:@"emailId"];
-        }
-        
-        if (self.contactInfo.mobileNo != nil && self.contactInfo.mobileNo.length > 0) {
-            [dictionary setObject:self.contactInfo.mobileNo forKey:@"mobileNo"];
-        }
-        
-        if (self.contactInfo.phoneNo != nil && self.contactInfo.phoneNo.length > 0) {
-            [dictionary setObject:self.contactInfo.phoneNo forKey:@"phoneNo"];
-        }
-    }
+//    if (self.contactInfo != nil) {
+//        if (self.contactInfo.alternateEmail != nil && self.contactInfo.alternateEmail.length > 0) {
+//            [dictionary setObject:self.contactInfo.alternateEmail forKey:@"alternateEmailId"];
+//        }
+//        
+//        if (self.contactInfo.email != nil && self.contactInfo.email.length > 0) {
+//            [dictionary setObject:self.contactInfo.email forKey:@"emailId"];
+//        }
+//        
+//        if (self.contactInfo.mobileNo != nil && self.contactInfo.mobileNo.length > 0) {
+//            [dictionary setObject:self.contactInfo.mobileNo forKey:@"mobileNo"];
+//        }
+//        
+//        if (self.contactInfo.phoneNo != nil && self.contactInfo.phoneNo.length > 0) {
+//            [dictionary setObject:self.contactInfo.phoneNo forKey:@"phoneNo"];
+//        }
+//    }
     
     NSMutableDictionary *locationDictionary = [NSMutableDictionary new];
     NSString *value = self.addressLine1.text;
@@ -174,9 +174,11 @@
                                forKey:@"locationId"];
     }
     
+    NSArray *locationsArray = @[locationDictionary];
+    
     [dictionary setObject:locationDictionary forKey:@"location"];
 
-    [MRDatabaseHelper editLocation:dictionary
+    [MRDatabaseHelper editLocation:locationsArray
                         andHandler:^(id result) {
         if ([result caseInsensitiveCompare:@"success"] == NSOrderedSame) {
             

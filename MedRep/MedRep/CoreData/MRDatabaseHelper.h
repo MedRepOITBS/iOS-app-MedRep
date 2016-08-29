@@ -160,5 +160,6 @@ FOUNDATION_EXPORT NSString* const kNewsAndTransformAPIMethodName;
 +(void)updateWorkExperience:(NSDictionary *)workExpDict withWorkExperienceID:(NSNumber *)iD  andHandler:(WebServiceResponseHandler)responseHandler;
 
 + (void)editLocation:dataDict andHandler:(WebServiceResponseHandler)responseHandler;
++ (void)editContactInfo:dataDict andHandler:(WebServiceResponseHandler)responseHandler;
 
 @end
