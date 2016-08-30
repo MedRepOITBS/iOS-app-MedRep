@@ -308,7 +308,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
    
-    NSLog(@"NAMIT");
+    [tableView deselectRowAtIndexPath:indexPath animated:false];
     
     NSDictionary *valNDict = [[self setStructureForTableView] objectAtIndex:indexPath.row];
     

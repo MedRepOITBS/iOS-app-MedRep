@@ -1366,16 +1366,17 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
     }];
 }
 +(void)deleteInterestAreaFromTable:(NSNumber *)interestID withHandler:(WebServiceResponseHandler)responseHandler{
-    NSArray *profileAra = [[MRDataManger sharedManager] fetchObjectList:@"MRProfile"];
-    MRProfile * profile = [profileAra lastObject];
-    MRInterestArea *interestArea = [[MRDataManger sharedManager] fetchObject:@"MRInterestArea" predicate:[NSPredicate predicateWithFormat:@"id == %@",interestID]];
-    
-    [profile removeInterestAreaObject:interestArea];
-    [[MRDataManger sharedManager] removeObject:interestArea];
+    [[MRWebserviceHelper sharedWebServiceHelper] deleteInterestArea:interestID withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        NSArray *profileAra = [[MRDataManger sharedManager] fetchObjectList:@"MRProfile"];
+        MRProfile * profile = [profileAra lastObject];
+        MRInterestArea *interestArea = [[MRDataManger sharedManager] fetchObject:@"MRInterestArea" predicate:[NSPredicate predicateWithFormat:@"id == %@",interestID]];
+        
+        [profile removeInterestAreaObject:interestArea];
+        [[MRDataManger sharedManager] removeObject:interestArea];
+        
+        [[MRDataManger sharedManager] saveContext];
 
-    [[MRDataManger sharedManager] saveContext];
-[[MRWebserviceHelper sharedWebServiceHelper] deleteInterestArea:interestID withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-    responseHandler(responce);
+        responseHandler(responce);
 }];
     
 }
