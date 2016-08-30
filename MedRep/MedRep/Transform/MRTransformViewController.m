@@ -28,6 +28,11 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
     int i;
     NSTimer *timer;
 }
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *therapeuticAreaDropDownWidthConstraint;
+@property (weak, nonatomic) IBOutlet UIView *therapeuticAreaDropDown;
+@property (weak, nonatomic) IBOutlet UILabel *currentTherapeuticAreaTitleView;
+@property (weak, nonatomic) IBOutlet UITableView *therapeuticAreaListTableView;
+@property (weak, nonatomic) IBOutlet UIControl *therapeuticAreaListTableViewContainerview;
 
 @property (strong, nonatomic) IBOutlet UIView *navView;
 
@@ -39,9 +44,11 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
 
 @property NSArray *categories;
 @property (strong, nonatomic) NSArray *contentData;
-@property (strong, nonatomic) NSMutableArray *filteredData;
+@property (strong, nonatomic) NSArray *filteredData;
 @property (strong, nonatomic) UITapGestureRecognizer* tapGesture;
 @property (strong, nonatomic) NSMutableArray *searchResults;
+
+@property NSArray *therapeuticAreasList;
 
 @property NSInteger currentIndex;
 
@@ -74,7 +81,16 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
 //    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName]];
     
     self.currentIndex = 0;
-
+    
+    UITapGestureRecognizer *recoginzer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                 action:@selector(dropDownClicked)];
+    [recoginzer setNumberOfTapsRequired:1];
+    [self.therapeuticAreaDropDown addGestureRecognizer:recoginzer];
+    [self.therapeuticAreaDropDown.layer setCornerRadius:5.0];
+    [self.therapeuticAreaListTableViewContainerview addTarget:self
+                                                       action:@selector(therapeuticAreaListTableViewContainerviewTapped)
+                                             forControlEvents:UIControlEventTouchUpInside];
+    
 //    self.prevIndex = 0;
     self.categories = @[@"News & Updates", @"Therapeutic Area", @"Regulatory", @"Education", @"Journals", @"Medical Innovation", @"Podcasts / Webcasts", @"Best Practices", @"Case Studies", @"Whitepapers", @"Videos", @"Clinical Trials"];
     
@@ -92,6 +108,7 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
     self.tapGesture.cancelsTouchesInView = YES;
     self.tapGesture.enabled = NO;
     [self.view addGestureRecognizer:self.tapGesture];
+    [self.therapeuticAreaListTableView.layer setCornerRadius:5.0];
     
     MRCustomTabBar *tabBarView = (MRCustomTabBar*)[MRCommon createTabBarView:self.view];
     [tabBarView setNavigationController:self.navigationController];
@@ -186,6 +203,15 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
     NSInteger prevIndex = self.currentIndex;
     self.currentIndex = indexPath.row;
     
+    if (self.currentIndex > 0) {
+        self.therapeuticAreaDropDownWidthConstraint.constant = 0.0;
+        [self.therapeuticAreaDropDown setHidden:YES];
+    } else {
+        self.
+        self.therapeuticAreaDropDownWidthConstraint.constant = 142.0;
+        [self.therapeuticAreaDropDown setHidden:NO];
+        [self.currentTherapeuticAreaTitleView setText:@"All"];
+    }
     
     NSString *currentCategory = self.categories[indexPath.row];
     [self fetchNewsAndUpdates:currentCategory];
@@ -242,95 +268,130 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
 //        return self.searchResults.count;
 //        
 //    }
-//    
-    return self.filteredData.count;
+//
+    if (tableView.tag == 500) {
+        return self.therapeuticAreasList.count;
+    } else {
+        return self.filteredData.count;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 112.0;
+    if (tableView.tag == 500) {
+        return UITableViewAutomaticDimension;
+    } else {
+        return 112.0;
+    }
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *CellIdentifier = @"MPTransformTableViewCell";
-    MPTransformTableViewCell *regCell = (MPTransformTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    if (regCell == nil)
-    {
-        NSArray *nibViews = [[NSBundle mainBundle] loadNibNamed:@"MPTransformTableViewCell" owner:nil options:nil];
-        regCell = (MPTransformTableViewCell *)[nibViews lastObject];
-    }
-    MRTransformPost *transformData;
-//    if (tableView == self.searchDisplayController.searchResultsTableView) {
-//
-//   transformData = self.searchResults[indexPath.row];
-//    }else{
-       transformData = self.filteredData[indexPath.row];
+    if (tableView.tag == 500) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellIdentifier"];
+        if (cell == nil)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                           reuseIdentifier:@"cellIdentifier"];
+            cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:12.0];
+            [cell.textLabel setBackgroundColor:[UIColor clearColor]];
+            [cell setBackgroundColor:[UIColor clearColor]];
+        }
+        [cell.textLabel setText:[self.therapeuticAreasList objectAtIndex:indexPath.row]];
         
-//    }
-    
-    if (transformData != nil) {
-        if (transformData.coverImgUrl != nil && transformData.coverImgUrl.length > 0) {
-            regCell.img.image = [UIImage imageNamed:@"Default"];
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                regCell.img.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:transformData.coverImgUrl]]];
-            });
-        } else {
-            if (transformData.url != nil && transformData.url.length > 0) {
-                if (transformData.contentType.integerValue == kTransformContentTypeImage) {
-                    regCell.img.image = [UIImage imageNamed:transformData.url];
-                } else if (transformData.contentType.integerValue == kTransformContentTypeVideo) {
-                    regCell.img.image = [UIImage imageNamed:@"video"];
-                } else if (transformData.contentType.integerValue == kTransformContentTypePDF) {
-                    regCell.img.image = [UIImage imageNamed:@"pdf"];
+        return cell;
+    } else {
+        NSString *CellIdentifier = @"MPTransformTableViewCell";
+        MPTransformTableViewCell *regCell = (MPTransformTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        if (regCell == nil)
+        {
+            NSArray *nibViews = [[NSBundle mainBundle] loadNibNamed:@"MPTransformTableViewCell" owner:nil options:nil];
+            regCell = (MPTransformTableViewCell *)[nibViews lastObject];
+        }
+        MRTransformPost *transformData;
+    //    if (tableView == self.searchDisplayController.searchResultsTableView) {
+    //
+    //   transformData = self.searchResults[indexPath.row];
+    //    }else{
+           transformData = self.filteredData[indexPath.row];
+            
+    //    }
+        
+        if (transformData != nil) {
+            if (transformData.coverImgUrl != nil && transformData.coverImgUrl.length > 0) {
+                regCell.img.image = [UIImage imageNamed:@"Default"];
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    regCell.img.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:transformData.coverImgUrl]]];
+                });
+            } else {
+                if (transformData.url != nil && transformData.url.length > 0) {
+                    if (transformData.contentType.integerValue == kTransformContentTypeImage) {
+                        regCell.img.image = [UIImage imageNamed:transformData.url];
+                    } else if (transformData.contentType.integerValue == kTransformContentTypeVideo) {
+                        regCell.img.image = [UIImage imageNamed:@"video"];
+                    } else if (transformData.contentType.integerValue == kTransformContentTypePDF) {
+                        regCell.img.image = [UIImage imageNamed:@"pdf"];
+                    } else {
+                        regCell.img.image = [UIImage imageNamed:@"Default"];
+                    }
                 } else {
                     regCell.img.image = [UIImage imageNamed:@"Default"];
                 }
-            } else {
-                regCell.img.image = [UIImage imageNamed:@"Default"];
             }
-        }
-        
-        if (transformData.titleDescription != nil && transformData.titleDescription.length > 0) {
-            regCell.titleLbl.text = transformData.titleDescription;
-            [regCell.titleLbl sizeToFit];
-            [regCell.titleLbl layoutIfNeeded];
-        } else {
-            regCell.titleLbl.text = @"";
-        }
-        
-        if (transformData.shortArticleDescription != nil && transformData.shortArticleDescription.length > 0) {
-            regCell.descLbl.text = transformData.shortArticleDescription;
-        } else {
-            regCell.descLbl.text = @"";
-        }
-        
-        NSString *source = @"";
-        if (transformData.source != nil && transformData.source.length > 0) {
-            source = transformData.source;
-        }
             
-        regCell.sourceLabel.text = [NSString stringWithFormat:@"SOURCE : %@", source];
+            if (transformData.titleDescription != nil && transformData.titleDescription.length > 0) {
+                regCell.titleLbl.text = transformData.titleDescription;
+                [regCell.titleLbl sizeToFit];
+                [regCell.titleLbl layoutIfNeeded];
+            } else {
+                regCell.titleLbl.text = @"";
+            }
+            
+            if (transformData.shortArticleDescription != nil && transformData.shortArticleDescription.length > 0) {
+                regCell.descLbl.text = transformData.shortArticleDescription;
+            } else {
+                regCell.descLbl.text = @"";
+            }
+            
+            NSString *source = @"";
+            if (transformData.source != nil && transformData.source.length > 0) {
+                source = transformData.source;
+            }
+                
+            regCell.sourceLabel.text = [NSString stringWithFormat:@"SOURCE : %@", source];
+        }
+        
+        return regCell;
     }
-    
-    return regCell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MRTransformDetailViewController *notiFicationViewController = [[MRTransformDetailViewController alloc] initWithNibName:@"MRTransformDetailViewController" bundle:nil];
-    
-//    if (tableView == self.searchDisplayController.searchResultsTableView) {
-//
-//        notiFicationViewController.post = self.searchResults[indexPath.row];
-//        
-//    }else{
-    notiFicationViewController.currentTabIndex = self.currentIndex;
-        notiFicationViewController.post = self.filteredData[indexPath.row];
+    if (tableView.tag == 500) {
+        [self therapeuticAreaListTableViewContainerviewTapped];
+        if (indexPath.row == 0) {
+            self.filteredData = self.contentData;
+        } else {
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @"therapeuticName",
+                                      [self.therapeuticAreasList objectAtIndex:indexPath.row]];
+            self.filteredData = [self.contentData filteredArrayUsingPredicate:predicate];
+        }
+        [self.contentTableView reloadData];
+    } else {
+        MRTransformDetailViewController *notiFicationViewController = [[MRTransformDetailViewController alloc] initWithNibName:@"MRTransformDetailViewController" bundle:nil];
         
-//    }
-    [self.navigationController pushViewController:notiFicationViewController animated:YES];
+    //    if (tableView == self.searchDisplayController.searchResultsTableView) {
+    //
+    //        notiFicationViewController.post = self.searchResults[indexPath.row];
+    //        
+    //    }else{
+        notiFicationViewController.currentTabIndex = self.currentIndex;
+            notiFicationViewController.post = self.filteredData[indexPath.row];
+            
+    //    }
+        [self.navigationController pushViewController:notiFicationViewController animated:YES];
+    }
 }
 
 #pragma mark - Fetch News & Updates
@@ -352,6 +413,15 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
 //        self.filteredData = [[self.contentData filteredArrayUsingPredicate:predicate] mutableCopy];
 
         self.filteredData = self.contentData;
+                                  
+          NSMutableArray *therapeuticAreasList = [NSMutableArray new];
+          [therapeuticAreasList addObject:@"All"];
+          [therapeuticAreasList addObjectsFromArray:[self.filteredData valueForKey:@"therapeuticName"]];
+                                  
+        NSOrderedSet *orderedSet = [NSOrderedSet orderedSetWithArray:therapeuticAreasList];
+                                  
+          self.therapeuticAreasList = orderedSet.array;
+                                  
         [self.contentTableView reloadData];
     }];
 }
@@ -414,6 +484,18 @@ shouldReloadTableForSearchString:(NSString *)searchString
     generator.maximumSize = maxSize;
     [generator generateCGImagesAsynchronouslyForTimes:[NSArray arrayWithObject:[NSValue valueWithCMTime:thumbTime]] completionHandler:handler];
     return thumbImg;
+}
+
+#pragma mark - drop down clicked
+- (void)dropDownClicked {
+    [self.therapeuticAreaListTableViewContainerview setHidden:NO];
+    [self.therapeuticAreaListTableView setHidden:NO];
+    [self.therapeuticAreaListTableView reloadData];
+}
+
+- (void)therapeuticAreaListTableViewContainerviewTapped {
+    [self.therapeuticAreaListTableView setHidden:YES];
+    [self.therapeuticAreaListTableViewContainerview setHidden:YES];
 }
 
 /*
