@@ -13,6 +13,10 @@
 @interface AddressInfoTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIView *viewLabel;
+@property (weak, nonatomic) IBOutlet UIButton *deleteAddressButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *deleteAddressButtonWidthConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *deleteAddressButtonTrailingConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *editButtonTrailingConstraint;
 
 - (void)setCellData:(AddressInfo*)addressInfo contactInfo:(ContactInfo*)contactInfo
 andParentViewController:(UIViewController*)parentViewController;

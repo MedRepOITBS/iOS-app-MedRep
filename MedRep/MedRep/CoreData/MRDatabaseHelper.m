@@ -2253,6 +2253,104 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
     }
 }
 
++ (void)deleteLocation:dataDict andHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] deleteLocation:dataDict
+                                                  withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                      [MRDatabaseHelper makeServiceCallForDeleteLocation:dataDict
+                                                                                                status:status
+                                                                                               details:details
+                                                                                              response:responce
+                                                                                    andResponseHandler:responseHandler];
+                                                  }];
+}
+
++ (void)makeServiceCallForDeleteLocation:(id)dataDict
+                                status:(BOOL)status
+                               details:(NSString*)details
+                              response:(NSDictionary*)response
+                    andResponseHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon stopActivityIndicator];
+    if (status)
+    {
+        [MRDatabaseHelper deleteLocationDataInCoreData:dataDict
+                                              response:response
+                                    andResponseHandler:responseHandler];
+    }
+    else {
+        NSString *errorCode = [MRDatabaseHelper getOAuthErrorCode:response];
+        
+        if ([errorCode isEqualToString:@"invalid_token"])
+        {
+            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+             {
+                 [MRCommon savetokens:responce];
+                 [[MRWebserviceHelper sharedWebServiceHelper] deleteLocation:dataDict
+                                                               withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                                   [MRCommon stopActivityIndicator];
+                                                                   if (status)
+                                                                   {
+                                                                       [MRDatabaseHelper deleteLocationDataInCoreData:dataDict
+                                                                                                             response:response
+                                                                                                   andResponseHandler:responseHandler];
+                                                                   } else
+                                                                   {
+                                                                       NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                                                                       if (erros.count > 0)
+                                                                           [MRCommon showAlert:[erros lastObject] delegate:nil];
+                                                                   }
+                                                               }];
+             }];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }
+}
+
++ (void)deleteLocationDataInCoreData:dataDict
+                            response:(NSDictionary*)response
+                  andResponseHandler:(WebServiceResponseHandler) responseHandler {
+    if (response != nil && [response allKeys].count > 0) {
+        id tempValue = [response valueForKey:@"status"];
+        if (tempValue != nil) {
+            if ([tempValue isKindOfClass:[NSString class]]) {
+                NSString *status = tempValue;
+                if (status.length > 0  && [status caseInsensitiveCompare:@"success"] == NSOrderedSame) {
+                    if ([dataDict isKindOfClass:[NSArray class]]) {
+                        NSArray *tempLocationArray = dataDict;
+                        id locationDataDict = [tempLocationArray firstObject];
+                        if (locationDataDict != nil && [locationDataDict isKindOfClass:[NSDictionary class] ]) {
+//                            [MRWebserviceHelper parseNetworkResponse:AddressInfo.class
+//                                                             andData:@[locationDataDict]];
+                        }
+                    }
+                    responseHandler(tempValue);
+                } else {
+                    if (responseHandler != nil) {
+                        responseHandler(nil);
+                    }
+                }
+            } else {
+                if (responseHandler != nil) {
+                    responseHandler(nil);
+                }
+            }
+        } else {
+            if (responseHandler != nil) {
+                responseHandler(nil);
+            }
+        }
+    } else {
+        if (responseHandler != nil) {
+            responseHandler(nil);
+        }
+    }
+}
+
 + (void)editContactInfo:dataDict andHandler:(WebServiceResponseHandler)responseHandler {
     [MRCommon showActivityIndicator:@"Requesting..."];
     [[MRWebserviceHelper sharedWebServiceHelper] editContactInfo:dataDict

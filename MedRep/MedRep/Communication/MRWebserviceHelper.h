@@ -280,6 +280,7 @@ withComplitionHandler:(completionHandler)responceHandler;
                withHandler:(completionHandler)responseHandler;
 
 - (void)editLocation:(id)reqDict withHandler:(completionHandler)responceHandler;
+- (void)deleteLocation:(id)reqDict withHandler:(completionHandler)responceHandler;
 - (void)editContactInfo:(id)reqDict withHandler:(completionHandler)responceHandler;
 
 @end

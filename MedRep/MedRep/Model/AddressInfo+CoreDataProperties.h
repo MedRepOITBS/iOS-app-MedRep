@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *state;
 @property (nullable, nonatomic, retain) NSString *country;
 @property (nullable, nonatomic, retain) NSString *zipcode;
-@property (nullable, nonatomic, retain) NSNumber *type;
+@property (nullable, nonatomic, retain) NSString *type;
 
 @end
 

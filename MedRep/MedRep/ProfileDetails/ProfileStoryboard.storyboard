@@ -98,10 +98,10 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address Info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="stC-IC-60J">
-                                            <rect key="frame" x="77" y="8" width="109" height="21"/>
+                                            <rect key="frame" x="77" y="8" width="400" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="AvK-Mb-Dns"/>
-                                                <constraint firstAttribute="width" constant="109" id="Bkf-GB-crr"/>
+                                                <constraint firstAttribute="width" constant="400" id="Bkf-GB-crr"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -177,14 +177,24 @@
                                                 <constraint firstAttribute="height" constant="2" id="IIc-vV-kc9"/>
                                             </constraints>
                                         </view>
-                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M4d-Ga-kMJ">
-                                            <rect key="frame" x="554" y="8" width="18" height="19"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M4d-Ga-kMJ">
+                                            <rect key="frame" x="534" y="8" width="18" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="18" id="FrC-da-OZg"/>
                                             </constraints>
                                             <state key="normal" image="pencil.png"/>
                                             <connections>
                                                 <action selector="editAddressButtonTapped:" destination="vTn-Xu-0Vm" eventType="touchUpInside" id="724-6T-1M2"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ogc-AP-PKd">
+                                            <rect key="frame" x="562" y="8" width="18" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="18" id="GSh-s9-PcU"/>
+                                            </constraints>
+                                            <state key="normal" image="RedCross"/>
+                                            <connections>
+                                                <action selector="deleteAddressButtonTapped:" destination="vTn-Xu-0Vm" eventType="touchUpInside" id="ORI-o2-4xN"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -196,16 +206,24 @@
                                         <constraint firstItem="stC-IC-60J" firstAttribute="leading" secondItem="Suu-j5-uEw" secondAttribute="trailing" constant="7" id="Vy7-Vb-weq"/>
                                         <constraint firstAttribute="trailing" secondItem="uES-3R-SnK" secondAttribute="trailing" id="bbQ-xF-kZq"/>
                                         <constraint firstAttribute="topMargin" secondItem="Suu-j5-uEw" secondAttribute="top" id="dh7-kL-6le"/>
-                                        <constraint firstAttribute="trailing" secondItem="M4d-Ga-kMJ" secondAttribute="trailing" constant="28" id="e9r-Py-CwJ"/>
+                                        <constraint firstItem="ogc-AP-PKd" firstAttribute="bottom" secondItem="Suu-j5-uEw" secondAttribute="bottom" id="eQZ-ux-oNy"/>
                                         <constraint firstItem="Suu-j5-uEw" firstAttribute="leading" secondItem="8F4-gx-MVX" secondAttribute="leading" constant="50" id="iqe-vr-XKg"/>
                                         <constraint firstItem="M4d-Ga-kMJ" firstAttribute="top" secondItem="Suu-j5-uEw" secondAttribute="top" id="lXp-iP-z6f"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="vI5-cJ-I7D" secondAttribute="bottom" constant="2" id="p3c-rk-d3Q"/>
+                                        <constraint firstItem="ogc-AP-PKd" firstAttribute="leading" secondItem="M4d-Ga-kMJ" secondAttribute="trailing" constant="10" id="sJd-4F-Niq"/>
                                         <constraint firstItem="uES-3R-SnK" firstAttribute="top" secondItem="vI5-cJ-I7D" secondAttribute="bottom" constant="7" id="sJo-eo-zCs"/>
                                         <constraint firstItem="vI5-cJ-I7D" firstAttribute="top" secondItem="stC-IC-60J" secondAttribute="bottom" constant="5" id="tV2-nU-hK8"/>
+                                        <constraint firstAttribute="trailing" secondItem="ogc-AP-PKd" secondAttribute="trailing" constant="20" id="u0N-CC-tSJ"/>
+                                        <constraint firstItem="ogc-AP-PKd" firstAttribute="top" secondItem="Suu-j5-uEw" secondAttribute="top" id="u5W-PC-4Cq"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
+                                    <outlet property="addressInfoTitle" destination="stC-IC-60J" id="3MY-yF-SbM"/>
+                                    <outlet property="deleteAddressButton" destination="ogc-AP-PKd" id="JV4-7X-1hb"/>
+                                    <outlet property="deleteAddressButtonTrailingConstraint" destination="u0N-CC-tSJ" id="S0g-Da-j1v"/>
+                                    <outlet property="deleteAddressButtonWidthConstraint" destination="GSh-s9-PcU" id="L4F-lD-BuL"/>
+                                    <outlet property="editButtonTrailingConstraint" destination="sJd-4F-Niq" id="vOA-nv-Axm"/>
                                     <outlet property="hospitalAddressView" destination="vI5-cJ-I7D" id="5bd-RD-hcQ"/>
                                     <outlet property="hp_address1Lbl" destination="pgn-Aj-sVY" id="Ic0-Ra-bha"/>
                                     <outlet property="hp_address2Lbl" destination="T4P-7K-0iK" id="kuK-Wx-1xV"/>

@@ -1463,6 +1463,8 @@
 		CC98580F1D2FE43400C74438 /* MRPostedReplies+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CC98580B1D2FE43300C74438 /* MRPostedReplies+CoreDataProperties.m */; };
 		CC9858101D2FE43400C74438 /* MRPostedReplies.m in Sources */ = {isa = PBXBuildFile; fileRef = CC98580D1D2FE43400C74438 /* MRPostedReplies.m */; };
 		CC9858111D2FE43400C74438 /* MRPostedReplies.m in Sources */ = {isa = PBXBuildFile; fileRef = CC98580D1D2FE43400C74438 /* MRPostedReplies.m */; };
+		CC9A70651D76227A00846D67 /* Drug Search White.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CC9A70641D76227A00846D67 /* Drug Search White.jpg */; };
+		CC9A70661D76227A00846D67 /* Drug Search White.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CC9A70641D76227A00846D67 /* Drug Search White.jpg */; };
 		CC9BCEC11D0F2A3900702EBC /* MRTransformViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9BCEBF1D0F2A3900702EBC /* MRTransformViewController.m */; };
 		CC9BCEC21D0F2A3900702EBC /* MRTransformViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9BCEBF1D0F2A3900702EBC /* MRTransformViewController.m */; };
 		CC9BCEC31D0F2A3900702EBC /* MRTransformViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC9BCEC01D0F2A3900702EBC /* MRTransformViewController.xib */; };
@@ -2445,6 +2447,7 @@
 		CC98580B1D2FE43300C74438 /* MRPostedReplies+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MRPostedReplies+CoreDataProperties.m"; sourceTree = "<group>"; };
 		CC98580C1D2FE43300C74438 /* MRPostedReplies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRPostedReplies.h; sourceTree = "<group>"; };
 		CC98580D1D2FE43400C74438 /* MRPostedReplies.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRPostedReplies.m; sourceTree = "<group>"; };
+		CC9A70641D76227A00846D67 /* Drug Search White.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Drug Search White.jpg"; sourceTree = "<group>"; };
 		CC9BCEBE1D0F2A3900702EBC /* MRTransformViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRTransformViewController.h; sourceTree = "<group>"; };
 		CC9BCEBF1D0F2A3900702EBC /* MRTransformViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRTransformViewController.m; sourceTree = "<group>"; };
 		CC9BCEC01D0F2A3900702EBC /* MRTransformViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRTransformViewController.xib; sourceTree = "<group>"; };
@@ -4117,6 +4120,7 @@
 		CC649F6F1D0D2C0E0012289C /* TempImages */ = {
 			isa = PBXGroup;
 			children = (
+				CC9A70641D76227A00846D67 /* Drug Search White.jpg */,
 				8A9FB4B71D2836C70095F690 /* searchMed.jpg */,
 			);
 			path = TempImages;
@@ -4544,6 +4548,7 @@
 				79BD27C91B809A80007CA448 /* bg@3x.png in Resources */,
 				79AC945B1B9E0DA000B81452 /* NDcomapny-logo@2x.png in Resources */,
 				79BD27FF1B80B37F007CA448 /* categoryBG~iPad.jpg in Resources */,
+				CC9A70651D76227A00846D67 /* Drug Search White.jpg in Resources */,
 				8AFE8CFB1D0F21BF0000382E /* profile_pic1.jpeg in Resources */,
 				79314AD41BD2773E00EB3A48 /* MRNotificationInsiderViewController.xib in Resources */,
 				8AFE8D041D0F21BF0000382E /* profile_pic4.jpeg in Resources */,
@@ -5447,6 +5452,7 @@
 				CC7DB1C61D0C8BEC007DFE4C /* MRDoctorDetailsViewController.xib in Resources */,
 				CC7DB1C71D0C8BEC007DFE4C /* logout@2x.png in Resources */,
 				CC7DB2E01D0CC433007DFE4C /* MRGroupsListViewController.xib in Resources */,
+				CC9A70661D76227A00846D67 /* Drug Search White.jpg in Resources */,
 				CC7DB1C81D0C8BEC007DFE4C /* pcminus@3x.png in Resources */,
 				CC7DB1C91D0C8BEC007DFE4C /* PHproduct-campaigns@3x.png in Resources */,
 				CC7DB1CA1D0C8BEC007DFE4C /* pcplus@2x.png in Resources */,

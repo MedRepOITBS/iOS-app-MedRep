@@ -717,6 +717,13 @@
              cell.viewLabel.hidden = YES;
          }
          
+         if (_profileObj.addressInfo.array.count == 1) {
+             // There is only one location at present
+             cell.deleteAddressButtonWidthConstraint.constant = 0.0;
+             cell.deleteAddressButtonTrailingConstraint.constant = 0.0;
+             cell.editButtonTrailingConstraint.constant = 20.0;
+         }
+         
          return cell;
      } else if([valN isEqualToString:@"ABOUT"]) {
          ProfileAboutTableViewCell  *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"ProfileAboutTableViewCell"] forIndexPath:indexPath];

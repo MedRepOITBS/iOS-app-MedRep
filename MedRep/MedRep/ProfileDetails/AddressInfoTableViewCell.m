@@ -10,8 +10,10 @@
 #import "AddressInfo.h"
 #import "ContactInfo.h"
 #import "EditLocationViewController.h"
+#import "MRCommon.h"
+#import "MRDatabaseHelper.h"
 
-@interface AddressInfoTableViewCell ()
+@interface AddressInfoTableViewCell () <UIAlertViewDelegate>
 
 @property (nonatomic) AddressInfo *addressInfo;
 @property (nonatomic) ContactInfo *contactInfo;
@@ -22,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *hp_address2Lbl;
 @property (weak, nonatomic) IBOutlet UILabel *hp_cityStateZipLbl;
 @property (weak, nonatomic) IBOutlet UILabel *hp_countryZiplbl;
+@property (weak, nonatomic) IBOutlet UILabel *addressInfoTitle;
 
 @end
 
@@ -60,6 +63,13 @@ andParentViewController:(UIViewController*)parentViewController {
         [countryZipString appendString:addressInfo.zipcode];
     }
     self.hp_countryZiplbl.text = countryZipString;
+    
+    NSMutableString *title = [NSMutableString stringWithString:@"Address Info"];
+    if (addressInfo.type != nil && addressInfo.type.length > 0) {
+        [title appendString:@" - "];
+        [title appendString:addressInfo.type];
+    }
+    [self.addressInfoTitle setText:title];
 }
 
 - (IBAction)editAddressButtonTapped:(id)sender {
@@ -67,6 +77,19 @@ andParentViewController:(UIViewController*)parentViewController {
     editLocationVC.addressObject = self.addressInfo;
     editLocationVC.contactInfo = self.contactInfo;
     [self.parentViewController.navigationController pushViewController:editLocationVC  animated:YES];
+}
+
+- (IBAction)deleteAddressButtonTapped:(id)sender {
+    [MRCommon showConformationOKNoAlert:@"Are you sure to delete address?" delegate:self withTag:11];
+}
+
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        [MRDatabaseHelper deleteLocation:@{@"locationIds":self.addressInfo.locationId} andHandler:^(id result) {
+            
+        }];
+    }
 }
 
 @end
