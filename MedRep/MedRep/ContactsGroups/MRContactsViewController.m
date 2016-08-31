@@ -376,6 +376,8 @@
         }
     }
     
+    [self updatePlusButton];
+    
     [_myContactsCollectionView reloadData];
 }
 

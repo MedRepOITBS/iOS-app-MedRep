@@ -1635,20 +1635,10 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
             [[MRDataManger sharedManager] saveContext];
 
         }];
-        
-        
-        
     }
-    
 }
 
-
-
-
-
-
 +(void)addProfileData:(WebServiceResponseHandler)responseHandler{
-    
 
     [[MRWebserviceHelper sharedWebServiceHelper] fetchDoctorInfoWithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
         NSLog(@"%@",responce);
@@ -1657,8 +1647,6 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
          NSManagedObjectContext *context = [dbManager getNewPrivateManagedObjectContext];
         [[MRDataManger sharedManager] removeAllObjects:@"MRProfile" inContext:context
                                           andPredicate:nil];
-        
-        
         
         NSDictionary * result =[responce objectForKey:@"result"];
         
@@ -1669,8 +1657,6 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
         profile.designation = [aboutDict objectForKey:@"designation"];
         profile.id = [NSNumber numberWithInteger:[[aboutDict  objectForKey:@"id"] integerValue]];
         profile.doctorId = [NSNumber numberWithInteger:[[aboutDict  objectForKey:@"doctorId"] integerValue]];
-        
-        
         
         NSArray * workExpArra = [result objectForKey:@"workexperiences"];
         [workExpArra enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {

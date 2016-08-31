@@ -145,7 +145,8 @@
 }
 
 - (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    [MRCommon showAlert:[NSString stringWithFormat:@"Received Remote Notification\n%@", userInfo] delegate:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
+                                                        object:nil];
 }
 
 #pragma mark - Core Data stack
