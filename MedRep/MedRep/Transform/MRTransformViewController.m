@@ -90,6 +90,8 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
     [self.therapeuticAreaListTableViewContainerview addTarget:self
                                                        action:@selector(therapeuticAreaListTableViewContainerviewTapped)
                                              forControlEvents:UIControlEventTouchUpInside];
+    self.therapeuticAreaDropDownWidthConstraint.constant = 0.0;
+    [self.therapeuticAreaDropDown setHidden:YES];
     
 //    self.prevIndex = 0;
     self.categories = @[@"News & Updates", @"Therapeutic Area", @"Regulatory", @"Education", @"Journals", @"Medical Innovation", @"Podcasts / Webcasts", @"Best Practices", @"Case Studies", @"Whitepapers", @"Videos", @"Clinical Trials"];
@@ -203,14 +205,13 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
     NSInteger prevIndex = self.currentIndex;
     self.currentIndex = indexPath.row;
     
-    if (self.currentIndex > 0) {
-        self.therapeuticAreaDropDownWidthConstraint.constant = 0.0;
-        [self.therapeuticAreaDropDown setHidden:YES];
-    } else {
-        self.
+    if (self.currentIndex == 1) {
         self.therapeuticAreaDropDownWidthConstraint.constant = 142.0;
         [self.therapeuticAreaDropDown setHidden:NO];
         [self.currentTherapeuticAreaTitleView setText:@"All"];
+    } else {
+        self.therapeuticAreaDropDownWidthConstraint.constant = 0.0;
+        [self.therapeuticAreaDropDown setHidden:YES];
     }
     
     NSString *currentCategory = self.categories[indexPath.row];
