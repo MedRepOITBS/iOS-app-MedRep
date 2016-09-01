@@ -538,7 +538,7 @@
         return 104;
     }
     else  if ([valN isEqualToString:@"ABOUT"]){
-        return 85;
+        return 60;
     } else if ([valN isEqualToString:@"ADDRESS_INFO_DETAIL"]) {
         return 128;
     }

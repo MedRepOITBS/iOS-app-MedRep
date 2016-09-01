@@ -202,24 +202,26 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSInteger prevIndex = self.currentIndex;
-    self.currentIndex = indexPath.row;
-    
-    if (self.currentIndex == 1) {
-        self.therapeuticAreaDropDownWidthConstraint.constant = 142.0;
-        [self.therapeuticAreaDropDown setHidden:NO];
-        [self.currentTherapeuticAreaTitleView setText:@"All"];
-    } else {
-        self.therapeuticAreaDropDownWidthConstraint.constant = 0.0;
-        [self.therapeuticAreaDropDown setHidden:YES];
+    if (self.currentIndex != indexPath.row) {
+        NSInteger prevIndex = self.currentIndex;
+        self.currentIndex = indexPath.row;
+        
+        if (self.currentIndex == 1) {
+            self.therapeuticAreaDropDownWidthConstraint.constant = 142.0;
+            [self.therapeuticAreaDropDown setHidden:NO];
+            [self.currentTherapeuticAreaTitleView setText:@"All"];
+        } else {
+            self.therapeuticAreaDropDownWidthConstraint.constant = 0.0;
+            [self.therapeuticAreaDropDown setHidden:YES];
+        }
+        
+        NSString *currentCategory = self.categories[indexPath.row];
+        [self fetchNewsAndUpdates:currentCategory];
+        
+        [self.titleCollectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:prevIndex
+                                                                               inSection:0],
+                                                            indexPath]];
     }
-    
-    NSString *currentCategory = self.categories[indexPath.row];
-    [self fetchNewsAndUpdates:currentCategory];
-    
-    [self.titleCollectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:prevIndex
-                                                                           inSection:0],
-                                                        indexPath]];
 }
 
 

@@ -86,7 +86,9 @@ andParentViewController:(UIViewController*)parentViewController {
 #pragma mark - UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
-        [MRDatabaseHelper deleteLocation:@{@"locationIds":self.addressInfo.locationId} andHandler:^(id result) {
+        NSDictionary *dataDict = @{@"locationIds":self.addressInfo.locationId};
+        NSArray *dataArray = @[dataDict];
+        [MRDatabaseHelper deleteLocation:dataDict andHandler:^(id result) {
             
         }];
     }

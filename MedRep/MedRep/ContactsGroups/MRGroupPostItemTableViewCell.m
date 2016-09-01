@@ -117,32 +117,25 @@ andParentViewController:(UIViewController *)parentViewController {
     
     UIImage *image = nil;
     
-    if (self.post.contentType.integerValue == kTransformContentTypeImage) {
-        if (self.post.url != nil && self.post.url.length > 0) {
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.post.url]];
-                if (imageData != nil) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        self.postImageView.image = [UIImage imageWithData:imageData];
-                        self.postImageHeightConstraint.constant = 128;
-                        self.postImageViewTopConstraint.constant = 18;
-                    });
-                }
-            });
-        } else if (self.post.objectData != nil) {
-            image = [UIImage imageWithData:self.post.objectData];
-        }
+    if (self.post.url != nil && self.post.url.length > 0) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.post.url]];
+            if (imageData != nil) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.postImageView.image = [UIImage imageWithData:imageData];
+                    self.postImageHeightConstraint.constant = 128;
+                    self.postImageViewTopConstraint.constant = 18;
+                });
+            }
+        });
+    } else if (self.post.objectData != nil) {
+        image = [UIImage imageWithData:self.post.objectData];
     }
     
-    if (self.post.contentType.integerValue == kTransformContentTypeImage) {
-        if (self.post.url != nil && self.post.url.length > 0) {
-            self.postImageView.image = image;
-            self.postImageHeightConstraint.constant = 128;
-            self.postImageViewTopConstraint.constant = 18;
-        } else {
-            self.postImageHeightConstraint.constant = 0;
-            self.postImageViewTopConstraint.constant = 0;
-        }
+    if (self.post.url != nil && self.post.url.length > 0) {
+        self.postImageView.image = image;
+        self.postImageHeightConstraint.constant = 128;
+        self.postImageViewTopConstraint.constant = 18;
     } else {
         self.postImageHeightConstraint.constant = 0;
         self.postImageViewTopConstraint.constant = 0;

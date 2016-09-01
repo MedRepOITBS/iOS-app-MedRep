@@ -104,6 +104,7 @@
     }
     
     self.postsTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    [self fetchPosts];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

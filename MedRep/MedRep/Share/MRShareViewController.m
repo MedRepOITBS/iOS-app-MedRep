@@ -124,7 +124,10 @@ UIImagePickerControllerDelegate>
         [self reloadView];
     }
     
-    
+    [self fetchPostsFromServer];
+}
+
+- (void)fetchPostsFromServer {
     [MRDatabaseHelper fetchShare:^(id result) {
         [MRCommon stopActivityIndicator];
 
@@ -394,12 +397,11 @@ UIImagePickerControllerDelegate>
     NSMutableDictionary *postMessage = [NSMutableDictionary new];
     
     if (_commentBoxView.tag == 1000) {
-        messageIndex = 2;
+        messageIndex = 1;
     }
     [postMessage setObject:[NSNumber numberWithInteger:messageIndex] forKey:@"postType"];
     
     [postMessage setObject:messageType forKey:@"message_type"];
-    [postMessage setObject:message forKey:@"message"];
     
     if (imageData != nil) {
         [postMessage setObject:[MRAppControl getFileName] forKey:@"fileName"];
@@ -408,16 +410,19 @@ UIImagePickerControllerDelegate>
         [postMessage setObject:jsonData forKey:@"fileData"];
     }
     
-//    NSDictionary *dataDict = @{@"detail_desc" : message,
-//                               @"title_desc" : @"",
-//                               @"short_desc" : @"",
-//                               @"topic_id" : [NSNumber numberWithLong:sharePost.sharePostId.longValue],
-//                               @"postMessage" : postMessage
-//                               };
-    
-    NSDictionary *dataDict = @{@"topic_id" : [NSNumber numberWithLong:sharePost.sharePostId.longValue],
+    NSDictionary *dataDict;
+    if (_commentBoxView.tag == 1000) {
+        dataDict = @{@"detail_desc" : message,
+                     @"title_desc" : @"",
+                     @"short_desc" : @"",
+                     @"postMessage" : postMessage
+                     };
+    } else {
+        [postMessage setObject:message forKey:@"message"];
+        dataDict = @{@"topic_id" : [NSNumber numberWithLong:sharePost.sharePostId.longValue],
                                @"postMessage" : postMessage
-                               };
+                    };
+    }
     
     [MRDatabaseHelper postANewTopic:dataDict withHandler:^(id result) {
         NSInteger commentsCount = 0;
@@ -428,8 +433,7 @@ UIImagePickerControllerDelegate>
         sharePost.commentsCount = [NSNumber numberWithLong:commentsCount+1];
         [sharePost.managedObjectContext save:nil];
         
-        [self fetchPosts];
-        [self.postsTableView reloadData];
+        [self fetchPostsFromServer];
     }];
 }
 

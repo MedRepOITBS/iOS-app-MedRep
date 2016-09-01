@@ -126,6 +126,11 @@
     [tabBarView updateActiveViewController:self andTabIndex:DoctorPlusTabConnect];
     self.moreOptions.layer.cornerRadius = self.moreOptions.bounds.size.width / 2.0;
 
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                 action:@selector(pendingCountViewTapped)];
+    [recognizer setNumberOfTapsRequired:1];
+    [self.pendingConnectionsView addGestureRecognizer:recognizer];
+    
     [self fetchDataFromServer];
 }
 
@@ -553,6 +558,18 @@
 - (void)shareButtonTapped {
     MRShareViewController* contactsViewCont = [[MRShareViewController alloc] initWithNibName:@"MRShareViewController" bundle:nil];
     [self.navigationController pushViewController:contactsViewCont animated:NO];
+}
+
+- (void)pendingCountViewTapped {
+    PendingContactsViewController *pendingViewController =[[PendingContactsViewController alloc] initWithNibName:@"PendingContactsViewController" bundle:[NSBundle mainBundle]];
+    
+    if (self.currentIndex == 0) {
+        pendingViewController.isFromGroup = NO;
+    } else {
+        pendingViewController.isFromGroup = YES;
+    }
+    pendingViewController.gid = 0;
+    [self.navigationController pushViewController:pendingViewController animated:NO];
 }
 
 @end
