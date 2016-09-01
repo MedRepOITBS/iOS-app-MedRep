@@ -710,10 +710,6 @@
                      cell.profileimageView.image = image;
                  });  
              });
-         //}
-         
-        
-         
          return cell;
      } else if([valN isEqualToString:@"CONTACT_INFO_DETAIL"]){
          ContactInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"ContactInfoTableViewCell"] forIndexPath:indexPath];
@@ -729,7 +725,6 @@
              if (_profileObj.contactInfo.phoneNo!=nil) {
                  cell.secondaryContactNumberLbl.text = _profileObj.contactInfo.phoneNo;
              }
-             
          }
          return cell;
      } else if([valN isEqualToString:@"ADDRESS_INFO_DETAIL"]){
