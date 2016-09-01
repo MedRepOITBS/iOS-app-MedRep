@@ -277,7 +277,8 @@
              _profileImage = chosenImage;
              [self.tableView reloadData];
              [MRCommon showAlert:@"Profile Picture Updated Sucessfully" delegate:nil];
-             
+             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshMenu
+                                                                 object:self];
          }
          else
          {

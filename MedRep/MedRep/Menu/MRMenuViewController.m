@@ -47,13 +47,16 @@
     }
 
     // Do any additional setup after loading the view from its nib.
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refreshMenu)
+                                                 name:kNotificationRefreshMenu
+                                               object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -385,6 +388,11 @@
     [revealController pushFrontViewController:navigationController animated:YES];
 
 }
+
+- (void)refreshMenu {
+    [self.menuList reloadData];
+}
+
 /*
 #pragma mark - Navigation
 

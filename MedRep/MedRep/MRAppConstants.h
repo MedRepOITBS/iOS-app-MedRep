@@ -53,6 +53,7 @@ FOUNDATION_EXPORT NSString* const kConnectionAdded;
 
 FOUNDATION_EXPORT NSString* const kNotificationRefreshContactList;
 FOUNDATION_EXPORT NSString* const kNotificationRefreshProfile;
+FOUNDATION_EXPORT NSString* const kNotificationRefreshMenu;
 
 FOUNDATION_EXPORT NSString* const kPendingGroupMembers;
 FOUNDATION_EXPORT NSString* const kActiveGroupMembers;
