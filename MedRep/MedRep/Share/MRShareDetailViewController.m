@@ -286,9 +286,20 @@ AVPlayerViewControllerDelegate, UIAlertViewDelegate> {
         rowHeight += 146;
     }
     
-    NSString *postText = @"";
+    NSString *postText = @"Dummy Text";
     if (post.message != nil && post.message.length > 0) {
         postText = post.message;
+    } else {
+        if (postText == nil || postText.length == 0) {
+            MRSharePost *sharePost = nil;
+            if (post.parentSharePostId != nil) {
+                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"sharePostId", post.parentSharePostId.longValue];
+                sharePost = [[MRDataManger sharedManager] fetchObject:kMRSharePost predicate:predicate];
+            }
+            if (sharePost != nil && sharePost.titleDescription != nil) {
+                postText = sharePost.titleDescription;
+            }
+        }
     }
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 600)];
@@ -299,7 +310,7 @@ AVPlayerViewControllerDelegate, UIAlertViewDelegate> {
     
     rowHeight += label.frame.size.height;
     
-    rowHeight += 35;
+    rowHeight += 45;
     
     return rowHeight;
 }

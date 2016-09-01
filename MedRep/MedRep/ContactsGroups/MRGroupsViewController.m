@@ -66,7 +66,8 @@
     NSInteger tagIndex = (indexPath.section + indexPath.row) * 100;
     [cell setTag:tagIndex];
     [cell setParentTableView:self.tableView];
-    [cell setPostContent:[self.posts objectAtIndex:indexPath.row] tagIndex:tagIndex];
+    [cell setPostContent:[self.posts objectAtIndex:indexPath.row] tagIndex:tagIndex
+ andParentViewController:self];
     return cell;
 }
 

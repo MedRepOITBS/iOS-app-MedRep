@@ -791,6 +791,8 @@
              MRInterestArea * obj  = [valNDict objectForKey:@"object"];
              if ([[valNDict objectForKey:@"lastObj"] isEqualToString:@"YES"]) {
                  cell.viewLabel.hidden = YES;
+             } else {
+                 cell.viewLabel.hidden = NO;
              }
              cell.titleOther.text = obj.name;
          }

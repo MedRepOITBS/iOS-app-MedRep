@@ -16,7 +16,8 @@
 @property (nonatomic,weak) id<MRGroupPostItemTableViewCellDelegate> delegate;
 
 @property (nonatomic,weak) UITableView *parentTableView;
-- (void)setPostContent:(MRSharePost*)post tagIndex:(NSInteger)tagIndex;
+- (void)setPostContent:(MRSharePost*)post tagIndex:(NSInteger)tagIndex
+andParentViewController:(UIViewController*)parentViewController;
 
 @end
 

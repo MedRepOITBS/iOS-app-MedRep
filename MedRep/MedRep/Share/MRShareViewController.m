@@ -193,7 +193,8 @@ UIImagePickerControllerDelegate>
     }
     
     
-    [cell setPostContent:[self.serachResults objectAtIndex:indexPath.row] tagIndex:tagIndex];
+    [cell setPostContent:[self.serachResults objectAtIndex:indexPath.row] tagIndex:tagIndex
+ andParentViewController:self];
 
     return cell;
 }

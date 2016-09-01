@@ -12,8 +12,11 @@
 #import "MRTransformPost.h"
 #import "MRContact.h"
 #import "NSDate+Utilities.h"
+#import "MRProfileDetailsViewController.h"
 
 @interface MRGroupPostItemTableViewCell()
+
+@property (nonatomic) UIViewController *parentViewController;
 
 @property (weak, nonatomic) IBOutlet UILabel *postedOnLabel;
 
@@ -101,8 +104,10 @@
  
  */
 
-- (void)setPostContent:(MRSharePost *)post  tagIndex:(NSInteger)tagIndex {
+- (void)setPostContent:(MRSharePost *)post tagIndex:(NSInteger)tagIndex
+andParentViewController:(UIViewController *)parentViewController {
     self.post = post;
+    self.parentViewController = parentViewController;
     
     NSLog(@"Post : %ld",post.sharePostId.longValue);
     
@@ -163,6 +168,11 @@
         self.profilePicImageView.image = [UIImage imageNamed:@"person"];
     }
     
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                 action:@selector(authorImageSelected)];
+    [recognizer setNumberOfTapsRequired:1];
+    [self.profilePicImageView addGestureRecognizer:recognizer];
+    
     tagIndex++;
     [self.likeView setTag:tagIndex];
     self.likeCountLabel.text = [NSString stringWithFormat:@"%ld",post.likesCount.longValue];
@@ -182,6 +192,16 @@
         
     }
 
+}
+
+- (void)authorImageSelected {
+    if (self.parentViewController != nil) {
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"ProfileStoryboard" bundle:nil];
+        MRProfileDetailsViewController *profViewController = [sb instantiateInitialViewController];
+        
+        profViewController.isFromSinUp = NO;
+        [self.parentViewController.navigationController pushViewController:profViewController animated:YES];
+    }
 }
 
 @end
