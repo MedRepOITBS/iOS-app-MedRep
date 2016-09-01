@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *title;
 @property (weak,nonatomic) IBOutlet UIView *viewLabel;
 @property (nonatomic,weak) id<ExpericeFillUpTableViewCellDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UIButton *addButton;
 
 -(IBAction)deleteBtnTapped:(id)sender;
 @end

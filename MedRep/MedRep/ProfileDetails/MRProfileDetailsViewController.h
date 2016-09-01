@@ -25,7 +25,9 @@ typedef enum
 
 @interface MRProfileDetailsViewController : UITableViewController
 
+@property (nonatomic) BOOL showAsReadable;
 @property (assign, nonatomic) BOOL isFromSinUp;
+
 - (IBAction)changeButtonAction:(id)sender;
 - (IBAction)profileEditButtonAction:(id)sender;
 - (IBAction)addressEditButtonAction:(id)sender;

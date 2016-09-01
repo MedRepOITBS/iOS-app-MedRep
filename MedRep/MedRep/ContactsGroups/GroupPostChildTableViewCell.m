@@ -13,8 +13,11 @@
 #import "NSDate+Utilities.h"
 #import "MRPostedReplies.h"
 #import "MRSharePost.h"
+#import "MRProfileDetailsViewController.h"
 
 @interface GroupPostChildTableViewCell ()
+
+@property (nonatomic) UIViewController *parentViewController;
 
 @property (weak, nonatomic) IBOutlet UIImageView *commentPic;
 @property (weak, nonatomic) IBOutlet UILabel *postText;
@@ -38,7 +41,10 @@
     // Configure the view for the selected state
 }
 
-- (void)fillCellWithData:(MRPostedReplies*)post {
+- (void)fillCellWithData:(MRPostedReplies*)post
+ andParentViewController:(UIViewController *)parentViewController {
+    self.parentViewController = parentViewController;
+    
     MRSharePost *sharePost = nil;
     if (post.parentSharePostId != nil) {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"sharePostId", post.parentSharePostId.longValue];
@@ -92,10 +98,26 @@
         postedBy = post.doctor_Name;
     }
     self.profileNameLabel.text = postedBy;
+    
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                 action:@selector(authorImageSelected)];
+    [recognizer setNumberOfTapsRequired:1];
+    [self.profilePic addGestureRecognizer:recognizer];
     [MRAppControl getRepliedByProfileImage:post andImageView:self.profilePic];
     
     self.postedDate.text = [NSString stringWithFormat:@"%@",[post.postedOn stringWithFormat:kIdletimeFormat]];
     
+}
+
+- (void)authorImageSelected {
+    if (self.parentViewController != nil) {
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"ProfileStoryboard" bundle:nil];
+        MRProfileDetailsViewController *profViewController = [sb instantiateInitialViewController];
+        
+        profViewController.isFromSinUp = NO;
+        [profViewController setShowAsReadable:YES];
+        [self.parentViewController.navigationController pushViewController:profViewController animated:YES];
+    }
 }
 
 @end

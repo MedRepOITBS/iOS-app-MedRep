@@ -16,6 +16,9 @@
 @property (nonatomic,weak) id<ProfileBasicTableViewCellDelegate> delegate;
 
 @property(weak,nonatomic) IBOutlet UIButton *imageBtn;
+
+@property (weak, nonatomic) IBOutlet UIButton *pencilBtn;
+
 -(IBAction)imageButtonTapped:(id)sender;
 @end
 @protocol ProfileBasicTableViewCellDelegate <NSObject>

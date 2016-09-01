@@ -48,6 +48,13 @@
 
 @implementation MRProfileDetailsViewController
 
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        self.showAsReadable = NO;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -76,17 +83,25 @@
     
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
-    SWRevealViewController *revealController = [self revealViewController];
-    revealController.delegate = self;
-    [revealController panGestureRecognizer];
-    [revealController tapGestureRecognizer];
     
-    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon.png"]
+    UIBarButtonItem *revealButtonItem;
+    if (self.showAsReadable) {
+        revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"] style:UIBarButtonItemStylePlain
+                                                           target:self
+                                                           action:@selector(backButtonAction)];
+    } else {
+        SWRevealViewController *revealController = [self revealViewController];
+        revealController.delegate = self;
+        [revealController panGestureRecognizer];
+        [revealController tapGestureRecognizer];
+        
+        revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon.png"]
                                                                          style:UIBarButtonItemStylePlain target:revealController
-                                                                        action:@selector(revealToggle:)];
+                                                                    action:@selector(revealToggle:)];
+    }
+    
     self.navigationItem.leftBarButtonItem = revealButtonItem;
     
-
     UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"userLocal.png"]
                                                                          style:UIBarButtonItemStylePlain target:self
                                                                         action:@selector(editButtonTapped:)];
@@ -94,6 +109,10 @@
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
 //    [self setupProfileData];
     // Do any additional setup after loading the view from its nib.
+}
+
+- (void)backButtonAction{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)editButtonTapped:(id)sender{
@@ -666,6 +685,14 @@
          cell.userNameLbl.text         = _profileObj.name;
          cell.userLocation.text = _profileObj.location;
          
+         if (self.showAsReadable) {
+             [cell.pencilBtn setHidden:NO];
+             [cell.imageBtn setUserInteractionEnabled:NO];
+         } else {
+             [cell.pencilBtn setHidden:YES];
+             [cell.imageBtn setUserInteractionEnabled:YES];
+         }
+         
          
 //         if (_profileImage!=nil) {
 //             cell.profileimageView.image = _profileImage;
@@ -725,6 +752,11 @@
              cell.editButtonTrailingConstraint.constant = 20.0;
          }
          
+         if (self.showAsReadable) {
+             [cell.deleteAddressButton setHidden:YES];
+             [cell.editButton setHidden:YES];
+         }
+         
          return cell;
      } else if([valN isEqualToString:@"ABOUT"]) {
          ProfileAboutTableViewCell  *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"ProfileAboutTableViewCell"] forIndexPath:indexPath];
@@ -749,8 +781,12 @@
          } else if ([valN isEqualToString:@"CONTACT_INFO"]) {
              [cell.addButton setImage:[UIImage imageNamed:@"pencil"] forState:UIControlStateNormal];
          }
-         return cell;
          
+         if (self.showAsReadable) {
+             [cell.addButton setHidden:YES];
+         }
+         
+         return cell;
      }
     else if ([valN isEqualToString:@"WORK_EXP_DETAIL"] || [valN isEqualToString:@"EDUCATION_QUAL_DETAIL"] ){
          ExpericeFillUpTableViewCell * cell  =(ExpericeFillUpTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"ExpericeFillUpTableViewCell"];
@@ -772,9 +808,11 @@
              cell.title.text = obj.course;
              cell.dateDesc.text = [NSString stringWithFormat:@"%@",obj.yearOfPassout    ];
              cell.otherDesc.text = [NSString stringWithFormat:@"From %@ with Aggregate %@%%",obj.collegeName,obj.aggregate];
-             
-             
          }
+        
+        if (self.showAsReadable) {
+            [cell.addButton setHidden:YES];
+        }
          return cell;
          
      }else if ([valN isEqualToString:@"PUBLICATION_DETAIL"] || [valN isEqualToString:@"INTEREST_AREA_DETAIL"] )
@@ -798,16 +836,17 @@
              cell.titleOther.text = obj.name;
          }
          
+         if (self.showAsReadable) {
+             [cell.addButton setHidden:YES];
+         }
+         
          return cell;
          
      }
-     
-     
-     
-     
+
      // Configure the cell...
  
- return nil;
+     return nil;
  }
 
 -(void)CommonProfileSectionTableViewCellDelegateForButtonPressed:(CommonProfileSectionTableViewCell *)cell withButtonType:(NSString *)buttonType{

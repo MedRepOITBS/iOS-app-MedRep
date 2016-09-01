@@ -193,6 +193,7 @@ andParentViewController:(UIViewController *)parentViewController {
         MRProfileDetailsViewController *profViewController = [sb instantiateInitialViewController];
         
         profViewController.isFromSinUp = NO;
+        [profViewController setShowAsReadable:YES];
         [self.parentViewController.navigationController pushViewController:profViewController animated:YES];
     }
 }

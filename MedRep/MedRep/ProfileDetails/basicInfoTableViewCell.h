@@ -13,7 +13,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleOther;
 @property (weak,nonatomic) IBOutlet UIView *viewLabel;
 @property (nonatomic,weak) id<basicInfoTableViewCellDelegate> delegate;
+
+@property (weak, nonatomic) IBOutlet UIButton *addButton;
+
 -(IBAction)deleteBtnTapped:(id)sender;
+
 @end
 
 

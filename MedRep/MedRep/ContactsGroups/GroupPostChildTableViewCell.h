@@ -12,6 +12,6 @@
 
 @interface GroupPostChildTableViewCell : UITableViewCell
 
-- (void)fillCellWithData:(MRPostedReplies*)post;
+- (void)fillCellWithData:(MRPostedReplies*)post andParentViewController:(UIViewController *)parentViewController;
 
 @end

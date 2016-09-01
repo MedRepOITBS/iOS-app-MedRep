@@ -309,7 +309,7 @@
         cell = (GroupPostChildTableViewCell *)[arr objectAtIndex:0];
     }
     
-    [cell fillCellWithData:childPost];
+    [cell fillCellWithData:childPost andParentViewController:self];
 
     return cell;
 }

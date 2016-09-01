@@ -193,7 +193,13 @@ AVPlayerViewControllerDelegate, UIAlertViewDelegate> {
             self.webView.hidden = YES;
             self.previewImageView.hidden = NO;
             
-            self.previewImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.post.url]]];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.post.url]]];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.previewImageView.image = image;
+                });
+            });
+            
             NSLog(@"%@",self.post.url);
         } else {
             self.webView.hidden = YES;
@@ -343,7 +349,7 @@ AVPlayerViewControllerDelegate, UIAlertViewDelegate> {
     }
     
     MRPostedReplies *currentReply = [self.recentActivity objectAtIndex:indexPath.row];
-    [cell fillCellWithData:currentReply];
+    [cell fillCellWithData:currentReply andParentViewController:self];
     
     return cell;
 }

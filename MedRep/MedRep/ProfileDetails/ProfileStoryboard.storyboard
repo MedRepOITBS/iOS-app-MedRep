@@ -223,6 +223,7 @@
                                     <outlet property="deleteAddressButton" destination="ogc-AP-PKd" id="JV4-7X-1hb"/>
                                     <outlet property="deleteAddressButtonTrailingConstraint" destination="u0N-CC-tSJ" id="S0g-Da-j1v"/>
                                     <outlet property="deleteAddressButtonWidthConstraint" destination="GSh-s9-PcU" id="L4F-lD-BuL"/>
+                                    <outlet property="editButton" destination="M4d-Ga-kMJ" id="Ngb-Fl-VvM"/>
                                     <outlet property="editButtonTrailingConstraint" destination="sJd-4F-Niq" id="vOA-nv-Axm"/>
                                     <outlet property="hospitalAddressView" destination="vI5-cJ-I7D" id="5bd-RD-hcQ"/>
                                     <outlet property="hp_address1Lbl" destination="pgn-Aj-sVY" id="Ic0-Ra-bha"/>
@@ -286,6 +287,9 @@
                                                         <constraint firstAttribute="height" constant="32" id="Y6e-zf-O3R"/>
                                                     </constraints>
                                                     <state key="normal" image="pencil.png"/>
+                                                    <connections>
+                                                        <action selector="imageButtonTapped:" destination="Pc9-JN-HbD" eventType="touchUpInside" id="hte-e7-8aY"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hy2-lB-yk9">
                                                     <rect key="frame" x="137" y="97" width="326" height="42.5"/>
@@ -326,6 +330,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="imageBtn" destination="vFR-eQ-u3j" id="fgX-dY-oms"/>
+                                    <outlet property="pencilBtn" destination="ACA-wV-x0c" id="f0R-Nw-cdO"/>
                                     <outlet property="profileimageView" destination="hnH-yE-qKB" id="Upb-26-jDM"/>
                                     <outlet property="userLocation" destination="RAu-br-9wf" id="eam-SI-GyY"/>
                                     <outlet property="userNameLbl" destination="hy2-lB-yk9" id="fh4-br-0v3"/>
@@ -572,6 +577,7 @@ easier for colleagues to find you.</string>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
+                                    <outlet property="addButton" destination="v1h-Tl-JJv" id="zuj-XK-vqw"/>
                                     <outlet property="dateDesc" destination="sDK-1T-TOS" id="gDP-2D-HkP"/>
                                     <outlet property="otherDesc" destination="GOb-Iv-Foq" id="BVM-Kx-vAi"/>
                                     <outlet property="title" destination="HEc-sM-GkT" id="mRI-LE-wtp"/>
@@ -648,6 +654,7 @@ easier for colleagues to find you.</string>
                                     <constraint firstItem="VlL-K2-sxQ" firstAttribute="centerY" secondItem="Wof-2Q-8eY" secondAttribute="centerY" id="USM-AN-Lh2"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="addButton" destination="VlL-K2-sxQ" id="V8p-L7-FMU"/>
                                     <outlet property="titleOther" destination="GZ7-s9-peM" id="FpR-f0-DGR"/>
                                     <outlet property="viewLabel" destination="W2D-4M-tes" id="Mvg-dV-cdS"/>
                                 </connections>
