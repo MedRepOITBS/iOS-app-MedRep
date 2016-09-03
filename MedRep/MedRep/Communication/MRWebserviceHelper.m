@@ -2081,11 +2081,16 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
     self.serviceType = kMRWebServiceTypeGetAppointmentsByNotificationId;
     [self sendServiceRequest:urlRequest withHandler:responceHandler];
 }
--(void)fetchDoctorInfoWithHandler:(completionHandler)responseHandler{
+-(void)fetchDoctorInfoWithHandler:(NSInteger)doctorId responseHandler:(completionHandler)responseHandler{
     
 //    MedRepApplication/api/doctor/info/fetch
     
-    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/doctorinfo/fetch?token=%@",kHostName,[MRDefaults objectForKey:kAuthenticationToken]];
+    NSString *stringFormOfUrl;
+    if (doctorId > 0) {
+        stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/doctorinfo/fetchByDoctorId?token=%@&doctorId=%@",kHostName,[MRDefaults objectForKey:kAuthenticationToken], [NSNumber numberWithInteger:doctorId]];
+    } else {
+        stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/doctorinfo/fetch?token=%@",kHostName,[MRDefaults objectForKey:kAuthenticationToken]];
+    }
     
     NSURL *url = [NSURL URLWithString:stringFormOfUrl];
     NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];

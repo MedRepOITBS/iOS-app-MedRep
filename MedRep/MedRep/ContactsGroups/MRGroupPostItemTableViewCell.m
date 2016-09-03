@@ -192,8 +192,13 @@ andParentViewController:(UIViewController *)parentViewController {
         UIStoryboard *sb = [UIStoryboard storyboardWithName:@"ProfileStoryboard" bundle:nil];
         MRProfileDetailsViewController *profViewController = [sb instantiateInitialViewController];
         
+        if (self.post.doctor_id != nil) {
+            profViewController.doctorId = self.post.doctor_id.longValue;
+        }
+        
         profViewController.isFromSinUp = NO;
         [profViewController setShowAsReadable:YES];
+        
         [self.parentViewController.navigationController pushViewController:profViewController animated:YES];
     }
 }

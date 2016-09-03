@@ -3,18 +3,17 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditLocationViewController">
             <connections>
-                <outlet property="addressLine1" destination="2kn-U6-rTN" id="eGm-JS-82h"/>
-                <outlet property="addressLine2" destination="YXg-DA-NiH" id="Cnx-n7-FO0"/>
-                <outlet property="city" destination="vpo-Fq-Sfl" id="8e9-mi-q1r"/>
-                <outlet property="country" destination="zhF-KZ-bFy" id="s59-Qr-EEz"/>
+                <outlet property="addressViewHeader" destination="ENg-2K-16P" id="NHb-7C-wWi"/>
+                <outlet property="hospitalButton" destination="nuK-6c-Rze" id="0Ag-Az-BYA"/>
+                <outlet property="privateClinicButton" destination="ZWc-Rw-Qey" id="eIM-gl-0Rr"/>
+                <outlet property="regTableView" destination="dc1-yz-wgu" id="Ihq-MT-X7r"/>
                 <outlet property="scrollView" destination="quH-rQ-AMb" id="pzs-IG-wSE"/>
-                <outlet property="state" destination="Pwf-ZT-NUk" id="g2N-go-hEq"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
-                <outlet property="zipCode" destination="5Pj-fQ-bNa" id="2YO-tP-fLE"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -22,98 +21,115 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="quH-rQ-AMb">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="quH-rQ-AMb">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Address Line 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="64f-hS-CAl">
-                            <rect key="frame" x="15" y="31" width="345" height="21"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                            <color key="textColor" red="0.1824377995" green="0.40996995679999998" blue="0.80620015369999998" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2kn-U6-rTN">
-                            <rect key="frame" x="15" y="60" width="345" height="30"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
+                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="categoryBG-667h.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="dJj-r0-clg">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        </imageView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ENg-2K-16P">
+                            <rect key="frame" x="20" y="10" width="335" height="60"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nuK-6c-Rze">
+                                    <rect key="frame" x="3" y="0.0" width="161" height="58"/>
+                                    <state key="normal" backgroundImage="hospital_selection.png">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="hospitalButtonAction:" destination="-1" eventType="touchUpInside" id="LhY-DV-lfi"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZWc-Rw-Qey">
+                                    <rect key="frame" x="171" y="0.0" width="161" height="58"/>
+                                    <state key="normal" backgroundImage="privateHospital.png">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="privateButtonAction:" destination="-1" eventType="touchUpInside" id="uve-Ta-6rQ"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="ZWc-Rw-Qey" firstAttribute="top" secondItem="nuK-6c-Rze" secondAttribute="top" id="927-Ac-NL5"/>
+                                <constraint firstAttribute="height" constant="60" id="IyU-V0-KlU"/>
+                                <constraint firstItem="ZWc-Rw-Qey" firstAttribute="width" secondItem="ENg-2K-16P" secondAttribute="width" multiplier="0.48" id="Nt4-qj-nNt"/>
+                                <constraint firstItem="nuK-6c-Rze" firstAttribute="leading" secondItem="ENg-2K-16P" secondAttribute="leading" multiplier="5" id="RiR-Xu-C5r"/>
+                                <constraint firstItem="ZWc-Rw-Qey" firstAttribute="bottom" secondItem="nuK-6c-Rze" secondAttribute="bottom" id="bt7-VO-jaA"/>
+                                <constraint firstItem="nuK-6c-Rze" firstAttribute="leading" secondItem="ENg-2K-16P" secondAttribute="leading" constant="3" id="cqD-CW-pj2"/>
+                                <constraint firstItem="ZWc-Rw-Qey" firstAttribute="leading" secondItem="nuK-6c-Rze" secondAttribute="trailing" constant="7" id="d9f-gf-oZM"/>
+                                <constraint firstItem="nuK-6c-Rze" firstAttribute="top" secondItem="ENg-2K-16P" secondAttribute="top" id="hdq-a1-FfG"/>
+                                <constraint firstItem="nuK-6c-Rze" firstAttribute="width" secondItem="ENg-2K-16P" secondAttribute="width" multiplier="0.48" id="mTI-uV-IDz"/>
+                            </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="RiR-Xu-C5r"/>
+                                </mask>
+                            </variation>
+                        </view>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dc1-yz-wgu">
+                            <rect key="frame" x="20" y="80" width="335" height="180"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="180" id="7TK-5X-03v"/>
+                            </constraints>
+                            <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <connections>
-                                <outlet property="delegate" destination="-1" id="pjg-Kp-djl"/>
+                                <outlet property="dataSource" destination="-1" id="xHG-bb-HwX"/>
+                                <outlet property="delegate" destination="-1" id="cia-DX-gpg"/>
                             </connections>
-                        </textField>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Address Line 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nVT-eI-vj7">
-                            <rect key="frame" x="15" y="110" width="345" height="21"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                            <color key="textColor" red="0.1824377995" green="0.40996995679999998" blue="0.80620015369999998" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YXg-DA-NiH">
-                            <rect key="frame" x="15" y="139" width="345" height="30"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
+                        </tableView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q3d-JD-HRB">
+                            <rect key="frame" x="255" y="260" width="100" height="30"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="ExN-UF-MCV"/>
+                                <constraint firstAttribute="width" constant="100" id="kCD-BT-0lD"/>
+                            </constraints>
+                            <state key="normal" image="picklocation.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
                             <connections>
-                                <outlet property="delegate" destination="-1" id="BfZ-iK-kad"/>
+                                <action selector="pickALocationClicked:" destination="-1" eventType="touchUpInside" id="AuX-zL-voU"/>
                             </connections>
-                        </textField>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fUg-Dj-mjs">
-                            <rect key="frame" x="15" y="190" width="345" height="21"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                            <color key="textColor" red="0.1824377995" green="0.40996995679999998" blue="0.80620015369999998" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vpo-Fq-Sfl">
-                            <rect key="frame" x="15" y="220" width="345" height="30"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <outlet property="delegate" destination="-1" id="Smt-s6-t8q"/>
-                            </connections>
-                        </textField>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="State" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="byh-Rd-yxM">
-                            <rect key="frame" x="15" y="270" width="345" height="21"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                            <color key="textColor" red="0.1824377995" green="0.40996995679999998" blue="0.80620015369999998" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <textField opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pwf-ZT-NUk">
-                            <rect key="frame" x="15" y="299" width="345" height="30"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <outlet property="delegate" destination="-1" id="5pP-9N-Fcx"/>
-                            </connections>
-                        </textField>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Country" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qkp-ef-Gva">
-                            <rect key="frame" x="15" y="349" width="345" height="21"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                            <color key="textColor" red="0.1824377995" green="0.40996995679999998" blue="0.80620015369999998" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <textField opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zhF-KZ-bFy">
-                            <rect key="frame" x="15" y="378" width="345" height="30"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <outlet property="delegate" destination="-1" id="6VU-BC-tY3"/>
-                            </connections>
-                        </textField>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Zipcode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uuq-Y3-2wl">
-                            <rect key="frame" x="15" y="428" width="345" height="21"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                            <color key="textColor" red="0.1824377995" green="0.40996995679999998" blue="0.80620015369999998" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <textField opaque="NO" clipsSubviews="YES" tag="6" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Pj-fQ-bNa">
-                            <rect key="frame" x="15" y="457" width="345" height="30"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <outlet property="delegate" destination="-1" id="qT1-Q2-KEt"/>
-                            </connections>
-                        </textField>
+                        </button>
                     </subviews>
+                    <constraints>
+                        <constraint firstItem="ENg-2K-16P" firstAttribute="leading" secondItem="dc1-yz-wgu" secondAttribute="leading" id="1Po-XM-TOd"/>
+                        <constraint firstAttribute="bottom" secondItem="dc1-yz-wgu" secondAttribute="bottom" constant="222" id="1s2-ok-y1p"/>
+                        <constraint firstItem="ENg-2K-16P" firstAttribute="top" secondItem="quH-rQ-AMb" secondAttribute="top" constant="10" id="BPh-td-LLY"/>
+                        <constraint firstAttribute="trailing" secondItem="dc1-yz-wgu" secondAttribute="trailing" constant="20" id="GEr-tJ-6em"/>
+                        <constraint firstItem="Q3d-JD-HRB" firstAttribute="trailing" secondItem="dc1-yz-wgu" secondAttribute="trailing" id="Uja-kJ-Rw6"/>
+                        <constraint firstAttribute="trailing" secondItem="ENg-2K-16P" secondAttribute="trailing" constant="20" id="YN6-2V-30U"/>
+                        <constraint firstItem="ENg-2K-16P" firstAttribute="leading" secondItem="quH-rQ-AMb" secondAttribute="leading" constant="20" id="YSY-87-pwO"/>
+                        <constraint firstItem="Q3d-JD-HRB" firstAttribute="top" secondItem="dc1-yz-wgu" secondAttribute="bottom" id="gHf-cO-LS9"/>
+                        <constraint firstItem="dc1-yz-wgu" firstAttribute="top" secondItem="ENg-2K-16P" secondAttribute="bottom" constant="10" id="lFf-CS-dek"/>
+                        <constraint firstItem="ENg-2K-16P" firstAttribute="centerX" secondItem="dJj-r0-clg" secondAttribute="centerX" id="rCY-S6-AdC"/>
+                    </constraints>
                 </scrollView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="quH-rQ-AMb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="L7d-wo-Zbp"/>
+                <constraint firstItem="quH-rQ-AMb" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="PYe-uu-el2"/>
+                <constraint firstItem="quH-rQ-AMb" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="VT2-qg-ySc"/>
+                <constraint firstAttribute="bottom" secondItem="quH-rQ-AMb" secondAttribute="bottom" id="Xo2-zH-qfk"/>
+                <constraint firstAttribute="bottom" secondItem="dJj-r0-clg" secondAttribute="bottom" id="Zva-zF-tg7"/>
+                <constraint firstAttribute="trailing" secondItem="dJj-r0-clg" secondAttribute="trailing" id="bhW-29-aZm"/>
+                <constraint firstItem="dJj-r0-clg" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="dOf-wJ-iPj"/>
+                <constraint firstAttribute="trailing" secondItem="quH-rQ-AMb" secondAttribute="trailing" id="gei-TP-NiV"/>
+                <constraint firstItem="dJj-r0-clg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="jou-V5-5Bb"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
         </view>
     </objects>
+    <resources>
+        <image name="categoryBG-667h.jpg" width="375" height="667"/>
+        <image name="hospital_selection.png" width="135" height="58"/>
+        <image name="picklocation.png" width="90" height="30"/>
+        <image name="privateHospital.png" width="150" height="58"/>
+    </resources>
 </document>

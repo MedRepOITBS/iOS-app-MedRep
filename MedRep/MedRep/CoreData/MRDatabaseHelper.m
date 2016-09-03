@@ -1638,9 +1638,10 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
     }
 }
 
-+(void)addProfileData:(WebServiceResponseHandler)responseHandler{
++(void)addProfileData:(NSInteger)doctorId responseHandler:(WebServiceResponseHandler)responseHandler{
 
-    [[MRWebserviceHelper sharedWebServiceHelper] fetchDoctorInfoWithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+    [[MRWebserviceHelper sharedWebServiceHelper] fetchDoctorInfoWithHandler:doctorId
+                                                            responseHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
         NSLog(@"%@",responce);
         MRDataManger *dbManager = [MRDataManger sharedManager];
 
@@ -1696,18 +1697,26 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
         
         NSDictionary *contactInfoDict = [result objectForKey:@"contactInfo"];
         if (contactInfoDict!=nil) {
-            ContactInfo *contactInfo = (ContactInfo *)[[MRDataManger sharedManager] createObjectForEntity:@"ContactInfo"];
             
-            contactInfo.phoneNo = [contactInfoDict objectForKey:@"phoneNo"];
-            contactInfo.alternateEmail = [contactInfoDict objectForKey:@"alternateEmail"];
-            contactInfo.email = [contactInfoDict objectForKey:@"email"];
-            contactInfo.mobileNo = [contactInfoDict objectForKey:@"mobileNo"];
+            NSArray *records = [MRWebserviceHelper parseRecords:ContactInfo.class
+                                  allRecords:nil
+                                     context:profile.managedObjectContext
+                                     andData:@[contactInfoDict]];
             
-            profile.contactInfo = contactInfo;
+//            ContactInfo *contactInfo = (ContactInfo *)[[MRDataManger sharedManager] createObjectForEntity:@"ContactInfo"];
+//            
+//            
+//            contactInfo.phoneNo = [contactInfoDict objectForKey:@"phoneNo"];
+//            contactInfo.alternateEmail = [contactInfoDict objectForKey:@"alternateEmail"];
+//            contactInfo.email = [contactInfoDict objectForKey:@"email"];
+//            contactInfo.mobileNo = [contactInfoDict objectForKey:@"mobileNo"];
             
+            if (records != nil && records.count > 0) {
+                profile.contactInfo = records.firstObject;
+            }
+        } else {
+            profile.contactInfo = nil;
         }
-
-        
         
         NSArray *educationQualificationArra = [result objectForKey:@"educationdetails"];
         

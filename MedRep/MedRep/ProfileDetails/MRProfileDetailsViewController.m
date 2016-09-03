@@ -36,6 +36,7 @@
 #import "ContactInfo+CoreDataProperties.h"
 #import "AddressInfo+CoreDataProperties.h"
 #import "EditContactInfoViewController.h"
+#import "MRContact.h"
 
 @interface MRProfileDetailsViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate,ProfileBasicTableViewCellDelegate,CommonProfileSectionTableViewCellDelegate,ExpericeFillUpTableViewCellDelegate,basicInfoTableViewCellDelegate>
 
@@ -60,11 +61,13 @@
     [super viewDidLoad];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
-    NSDictionary *userdata = [MRAppControl sharedHelper].userRegData;
-    
-    NSInteger userType = [MRAppControl sharedHelper].userType;
-    
-   self.navigationItem.title         = (userType == 2 || userType == 1) ? [NSString stringWithFormat:@"Dr. %@ %@", [userdata objectForKey:KFirstName],[userdata objectForKey:KLastName]] : [NSString stringWithFormat:@"Mr. %@ %@", [userdata objectForKey:KFirstName],[userdata objectForKey:KLastName]];
+    if (self.doctorId == 0) {
+        NSDictionary *userdata = [MRAppControl sharedHelper].userRegData;
+        
+        NSInteger userType = [MRAppControl sharedHelper].userType;
+        
+        self.navigationItem.title = (userType == 2 || userType == 1) ? [NSString stringWithFormat:@"Dr. %@ %@", [userdata objectForKey:KFirstName],[userdata objectForKey:KLastName]] : [NSString stringWithFormat:@"Mr. %@ %@", [userdata objectForKey:KFirstName],[userdata objectForKey:KLastName]];
+    }
     
     
     [[UINavigationBar appearance] setTitleTextAttributes:@{
@@ -149,8 +152,28 @@
     [_commonSectionArray addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"Memberships & Positions",@"title",@"+ Add Membership",@"Button",@"Add a Membership or Position",@"detail", nil]];
     
     
-    [MRDatabaseHelper addProfileData:^(id result){
+    [MRDatabaseHelper addProfileData:self.doctorId responseHandler:^(id result){
     _profileObj  = [result objectAtIndex:0];
+        
+        NSMutableString *navigationTitle = [NSMutableString stringWithString:@"Dr. "];
+        if (_profileObj.name != nil && _profileObj.name.length > 0) {
+            [navigationTitle appendString:_profileObj.name];
+        } else {
+            if (_profileObj.contactInfo.firstName != nil && _profileObj.contactInfo.firstName.length > 0) {
+                [navigationTitle appendFormat:@"%@ ",_profileObj.contactInfo.firstName];
+            }
+            
+            if (_profileObj.contactInfo.middleName != nil && _profileObj.contactInfo.middleName.length > 0) {
+                [navigationTitle appendFormat:@"%@ ",_profileObj.contactInfo.middleName];
+            }
+            
+            if (_profileObj.contactInfo.lastName != nil && _profileObj.contactInfo.lastName.length > 0) {
+                [navigationTitle appendFormat:@"%@ ",_profileObj.contactInfo.lastName];
+            }
+        }
+        
+        self.navigationItem.title = navigationTitle;
+        
         [self.tableView reloadData];
 
     }];
@@ -395,7 +418,7 @@
             [MRDatabaseHelper deleteWorkExperienceFromTable:exp.id withHandler:^(id result) {
                 _profileObj = nil;
                 
-                [MRDatabaseHelper addProfileData:^(id result){
+                [MRDatabaseHelper addProfileData:self.doctorId responseHandler:^(id result){
                     _profileObj  = [result objectAtIndex:0];
                     [self.tableView reloadData];
                     [MRCommon stopActivityIndicator];
@@ -409,7 +432,7 @@
             [MRDatabaseHelper deleteEducationQualificationFromTable:educQal.id withHandler:^(id result) {
                 _profileObj = nil;
                 
-                [MRDatabaseHelper addProfileData:^(id result){
+                [MRDatabaseHelper addProfileData:self.doctorId responseHandler:^(id result){
                     _profileObj  = [result objectAtIndex:0];
                     [self.tableView reloadData];
                     [MRCommon stopActivityIndicator];
@@ -425,7 +448,7 @@
             [MRDatabaseHelper deletePublicationAreaFromTable:pub.id withHandler:^(id result) {
                 _profileObj = nil;
                 
-                [MRDatabaseHelper addProfileData:^(id result){
+                [MRDatabaseHelper addProfileData:self.doctorId responseHandler:^(id result){
                     _profileObj  = [result objectAtIndex:0];
                     [self.tableView reloadData];
                     [MRCommon stopActivityIndicator];
@@ -442,7 +465,7 @@
             [MRDatabaseHelper deleteInterestAreaFromTable:interestAre.id withHandler:^(id result) {
                 _profileObj = nil;
                 
-                [MRDatabaseHelper addProfileData:^(id result){
+                [MRDatabaseHelper addProfileData:self.doctorId responseHandler:^(id result){
                     _profileObj  = [result objectAtIndex:0];
                     [self.tableView reloadData];
                     [MRCommon stopActivityIndicator];
@@ -483,7 +506,7 @@
         [MRDatabaseHelper deleteWorkExperienceFromTable:exp.id withHandler:^(id result) {
             _profileObj = nil;
             
-            [MRDatabaseHelper addProfileData:^(id result){
+            [MRDatabaseHelper addProfileData:self.doctorId responseHandler:^(id result){
                 _profileObj  = [result objectAtIndex:0];
                 [self.tableView reloadData];
                 [MRCommon stopActivityIndicator];
@@ -497,7 +520,7 @@
         [MRDatabaseHelper deleteEducationQualificationFromTable:educQal.id withHandler:^(id result) {
             _profileObj = nil;
             
-            [MRDatabaseHelper addProfileData:^(id result){
+            [MRDatabaseHelper addProfileData:self.doctorId responseHandler:^(id result){
                 _profileObj  = [result objectAtIndex:0];
                 [self.tableView reloadData];
                 [MRCommon stopActivityIndicator];
@@ -513,7 +536,7 @@
         [MRDatabaseHelper deletePublicationAreaFromTable:pub.id withHandler:^(id result) {
             _profileObj = nil;
             
-            [MRDatabaseHelper addProfileData:^(id result){
+            [MRDatabaseHelper addProfileData:self.doctorId responseHandler:^(id result){
                 _profileObj  = [result objectAtIndex:0];
                 [self.tableView reloadData];
                 [MRCommon stopActivityIndicator];
@@ -530,7 +553,7 @@
         [MRDatabaseHelper deleteInterestAreaFromTable:interestAre.id withHandler:^(id result) {
             _profileObj = nil;
             
-            [MRDatabaseHelper addProfileData:^(id result){
+            [MRDatabaseHelper addProfileData:self.doctorId responseHandler:^(id result){
                 _profileObj  = [result objectAtIndex:0];
                 [self.tableView reloadData];
                 [MRCommon stopActivityIndicator];

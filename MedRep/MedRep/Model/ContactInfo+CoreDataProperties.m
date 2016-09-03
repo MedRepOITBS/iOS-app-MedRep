@@ -10,6 +10,7 @@
 //
 
 #import "ContactInfo+CoreDataProperties.h"
+#import "MRWebserviceHelper.h"
 
 @implementation ContactInfo (CoreDataProperties)
 
@@ -17,5 +18,21 @@
 @dynamic alternateEmail;
 @dynamic email;
 @dynamic mobileNo;
+@dynamic name;
+@dynamic firstName;
+@dynamic middleName;
+@dynamic lastName;
+
+- (void)setName:(NSData *)name {
+    id tempObject = name;
+    if ([tempObject isKindOfClass:[NSDictionary class]]) {
+        NSDictionary *nameDictionary = tempObject;
+        self.firstName = [nameDictionary objectOrNilForKey:@"firstName"];
+        self.middleName = [nameDictionary objectOrNilForKey:@"middleNam"];
+        self.lastName = [nameDictionary objectOrNilForKey:@"lastName"];
+    } else if ([tempObject isKindOfClass:[NSString class]]){
+        self.firstName = (NSString*)name;
+    }
+}
 
 @end

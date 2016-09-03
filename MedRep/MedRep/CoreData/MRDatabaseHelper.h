@@ -121,7 +121,7 @@ FOUNDATION_EXPORT NSString* const kNewsAndTransformAPIMethodName;
 
 + (NSArray*)getTransformArticles;
 + (void)addTransformArticles:(NSArray*)posts;
-+(void)addProfileData:(WebServiceResponseHandler)responseHandler;
++(void)addProfileData:(NSInteger)doctorId responseHandler:(WebServiceResponseHandler)responseHandler;
 +(NSArray *)getProfileData;
 
 

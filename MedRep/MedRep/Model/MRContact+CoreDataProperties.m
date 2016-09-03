@@ -19,6 +19,7 @@
 @dynamic doctorId;
 @dynamic dPicture;
 @dynamic firstName;
+@dynamic middleName;
 @dynamic lastName;
 @dynamic member_id;
 @dynamic roleId;

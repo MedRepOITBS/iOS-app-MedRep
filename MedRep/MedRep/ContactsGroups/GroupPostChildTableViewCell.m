@@ -17,6 +17,8 @@
 
 @interface GroupPostChildTableViewCell ()
 
+@property (nonatomic) MRPostedReplies *post;
+
 @property (nonatomic) UIViewController *parentViewController;
 
 @property (weak, nonatomic) IBOutlet UIImageView *commentPic;
@@ -44,6 +46,7 @@
 - (void)fillCellWithData:(MRPostedReplies*)post
  andParentViewController:(UIViewController *)parentViewController {
     self.parentViewController = parentViewController;
+    self.post = post;
     
     MRSharePost *sharePost = nil;
     if (post.parentSharePostId != nil) {
@@ -113,6 +116,10 @@
     if (self.parentViewController != nil) {
         UIStoryboard *sb = [UIStoryboard storyboardWithName:@"ProfileStoryboard" bundle:nil];
         MRProfileDetailsViewController *profViewController = [sb instantiateInitialViewController];
+        
+        if (self.post.contactId != nil) {
+            profViewController.doctorId = self.post.contactId.longValue;
+        }
         
         profViewController.isFromSinUp = NO;
         [profViewController setShowAsReadable:YES];

@@ -25,6 +25,8 @@ typedef enum
 
 @interface MRProfileDetailsViewController : UITableViewController
 
+@property (nonatomic) NSInteger doctorId;
+
 @property (nonatomic) BOOL showAsReadable;
 @property (assign, nonatomic) BOOL isFromSinUp;
 

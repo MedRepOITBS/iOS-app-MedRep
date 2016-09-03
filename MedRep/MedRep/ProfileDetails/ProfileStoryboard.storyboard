@@ -407,9 +407,8 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Work Experience" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D0G-MW-Q1C">
-                                            <rect key="frame" x="61" y="29" width="418" height="21"/>
+                                            <rect key="frame" x="61" y="29" width="468" height="21"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="418" id="FXh-dQ-Aok"/>
                                                 <constraint firstAttribute="height" constant="21" id="edS-Yk-lNb"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
@@ -420,7 +419,6 @@
                                             <rect key="frame" x="33" y="60" width="560" height="47.5"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="47.5" id="Szm-zU-PUL"/>
-                                                <constraint firstAttribute="width" constant="560" id="rM4-HQ-4er"/>
                                             </constraints>
                                             <string key="text">Add Details of your Work Experience and make it
 easier for colleagues to find you.</string>
@@ -457,6 +455,7 @@ easier for colleagues to find you.</string>
                                     </subviews>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                     <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="qJS-Sc-Dzr" secondAttribute="trailing" constant="7" id="2AZ-U3-JfB"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="ta5-gc-aUF" secondAttribute="trailing" constant="6" id="3Eq-1C-pWg"/>
                                         <constraint firstItem="Lx1-i9-E7T" firstAttribute="leading" secondItem="YXL-Ka-sQi" secondAttribute="leadingMargin" constant="-8" id="6BT-n8-10k"/>
                                         <constraint firstItem="qJS-Sc-Dzr" firstAttribute="centerX" secondItem="YXL-Ka-sQi" secondAttribute="centerX" id="6LF-1Y-Sqf"/>
@@ -470,6 +469,7 @@ easier for colleagues to find you.</string>
                                         <constraint firstAttribute="topMargin" secondItem="D0G-MW-Q1C" secondAttribute="top" constant="-21" id="c3F-W1-Sjh"/>
                                         <constraint firstItem="qJS-Sc-Dzr" firstAttribute="leading" secondItem="Lx1-i9-E7T" secondAttribute="leading" constant="33" id="kG9-wo-4qg"/>
                                         <constraint firstItem="Svt-V9-YUm" firstAttribute="leading" secondItem="YXL-Ka-sQi" secondAttribute="leading" constant="20" id="odh-jU-oLp"/>
+                                        <constraint firstItem="ta5-gc-aUF" firstAttribute="leading" secondItem="D0G-MW-Q1C" secondAttribute="trailing" constant="21" id="rRi-SW-wnD"/>
                                         <constraint firstAttribute="topMargin" secondItem="ta5-gc-aUF" secondAttribute="top" constant="-15" id="uqf-WR-FmD"/>
                                     </constraints>
                                     <variation key="default">

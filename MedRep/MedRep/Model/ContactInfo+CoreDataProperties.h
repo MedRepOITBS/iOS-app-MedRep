@@ -19,6 +19,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *alternateEmail;
 @property (nullable, nonatomic, retain) NSString *email;
 @property (nullable, nonatomic, retain) NSString *mobileNo;
+@property (nullable, nonatomic, retain) NSData   *name;
+@property (nullable, nonatomic, retain) NSString *firstName;
+@property (nullable, nonatomic, retain) NSString *middleName;
+@property (nullable, nonatomic, retain) NSString *lastName;
 
 @end
 

@@ -263,7 +263,7 @@ withComplitionHandler:(completionHandler)responceHandler;
                  context:(NSManagedObjectContext*)context andData:(NSArray*)data;
 
 - (void)postNewTopic:(NSDictionary*)reqDict withHandler:(completionHandler)responceHandler;
--(void)fetchDoctorInfoWithHandler:(completionHandler)responseHandler;
+-(void)fetchDoctorInfoWithHandler:(NSInteger)doctorId responseHandler:(completionHandler)responseHandler;
 
 -(void)addOrUpdateEducationArea:(NSArray *)reqDict withUpdateFlag:(BOOL)isUpdate withHandler: (completionHandler)responseHandler;
 - (void)updateLikes:(NSInteger)postType
