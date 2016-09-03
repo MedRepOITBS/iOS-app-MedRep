@@ -2,17 +2,16 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Transform.png",
+      "filename" : "Survey.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Transform-1.png",
+      "filename" : "Survey@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Transform-2.png",
       "scale" : "3x"
     }
   ],
