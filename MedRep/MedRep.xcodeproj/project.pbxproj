@@ -1477,6 +1477,14 @@
 		CC9DAFA31D6F9E46008B2822 /* EditContactInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9DAFA01D6F9E46008B2822 /* EditContactInfoViewController.m */; };
 		CC9DAFA41D6F9E46008B2822 /* EditContactInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC9DAFA11D6F9E46008B2822 /* EditContactInfoViewController.xib */; };
 		CC9DAFA51D6F9E46008B2822 /* EditContactInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC9DAFA11D6F9E46008B2822 /* EditContactInfoViewController.xib */; };
+		CC9F60581D7B5DA90036513F /* TransformSubCategories+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9F60551D7B5DA90036513F /* TransformSubCategories+CoreDataProperties.m */; };
+		CC9F60591D7B5DA90036513F /* TransformSubCategories+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9F60551D7B5DA90036513F /* TransformSubCategories+CoreDataProperties.m */; };
+		CC9F605A1D7B5DA90036513F /* TransformSubCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9F60571D7B5DA90036513F /* TransformSubCategories.m */; };
+		CC9F605B1D7B5DA90036513F /* TransformSubCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9F60571D7B5DA90036513F /* TransformSubCategories.m */; };
+		CC9F60601D7B62840036513F /* MRTransformPageData+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9F605D1D7B62840036513F /* MRTransformPageData+CoreDataProperties.m */; };
+		CC9F60611D7B62840036513F /* MRTransformPageData+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9F605D1D7B62840036513F /* MRTransformPageData+CoreDataProperties.m */; };
+		CC9F60621D7B62840036513F /* MRTransformPageData.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9F605F1D7B62840036513F /* MRTransformPageData.m */; };
+		CC9F60631D7B62840036513F /* MRTransformPageData.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9F605F1D7B62840036513F /* MRTransformPageData.m */; };
 		CCA383F11D342D3500BCF5A9 /* MRGroupMembers+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA383EE1D342D3500BCF5A9 /* MRGroupMembers+CoreDataProperties.m */; };
 		CCA383F21D342D3500BCF5A9 /* MRGroupMembers+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA383EE1D342D3500BCF5A9 /* MRGroupMembers+CoreDataProperties.m */; };
 		CCA383F31D342D3500BCF5A9 /* MRGroupMembers.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA383F01D342D3500BCF5A9 /* MRGroupMembers.m */; };
@@ -2457,6 +2465,14 @@
 		CC9DAF9F1D6F9E46008B2822 /* EditContactInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditContactInfoViewController.h; path = EditContactInfo/EditContactInfoViewController.h; sourceTree = "<group>"; };
 		CC9DAFA01D6F9E46008B2822 /* EditContactInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditContactInfoViewController.m; path = EditContactInfo/EditContactInfoViewController.m; sourceTree = "<group>"; };
 		CC9DAFA11D6F9E46008B2822 /* EditContactInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EditContactInfoViewController.xib; path = EditContactInfo/EditContactInfoViewController.xib; sourceTree = "<group>"; };
+		CC9F60541D7B5DA90036513F /* TransformSubCategories+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TransformSubCategories+CoreDataProperties.h"; sourceTree = "<group>"; };
+		CC9F60551D7B5DA90036513F /* TransformSubCategories+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TransformSubCategories+CoreDataProperties.m"; sourceTree = "<group>"; };
+		CC9F60561D7B5DA90036513F /* TransformSubCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransformSubCategories.h; sourceTree = "<group>"; };
+		CC9F60571D7B5DA90036513F /* TransformSubCategories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransformSubCategories.m; sourceTree = "<group>"; };
+		CC9F605C1D7B62840036513F /* MRTransformPageData+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MRTransformPageData+CoreDataProperties.h"; sourceTree = "<group>"; };
+		CC9F605D1D7B62840036513F /* MRTransformPageData+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MRTransformPageData+CoreDataProperties.m"; sourceTree = "<group>"; };
+		CC9F605E1D7B62840036513F /* MRTransformPageData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRTransformPageData.h; sourceTree = "<group>"; };
+		CC9F605F1D7B62840036513F /* MRTransformPageData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRTransformPageData.m; sourceTree = "<group>"; };
 		CCA383ED1D342D3500BCF5A9 /* MRGroupMembers+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MRGroupMembers+CoreDataProperties.h"; sourceTree = "<group>"; };
 		CCA383EE1D342D3500BCF5A9 /* MRGroupMembers+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MRGroupMembers+CoreDataProperties.m"; sourceTree = "<group>"; };
 		CCA383EF1D342D3500BCF5A9 /* MRGroupMembers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRGroupMembers.h; sourceTree = "<group>"; };
@@ -3051,6 +3067,14 @@
 		797560381BBFE2CC0034D0AC /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CC9F605C1D7B62840036513F /* MRTransformPageData+CoreDataProperties.h */,
+				CC9F605D1D7B62840036513F /* MRTransformPageData+CoreDataProperties.m */,
+				CC9F605E1D7B62840036513F /* MRTransformPageData.h */,
+				CC9F605F1D7B62840036513F /* MRTransformPageData.m */,
+				CC9F60541D7B5DA90036513F /* TransformSubCategories+CoreDataProperties.h */,
+				CC9F60551D7B5DA90036513F /* TransformSubCategories+CoreDataProperties.m */,
+				CC9F60561D7B5DA90036513F /* TransformSubCategories.h */,
+				CC9F60571D7B5DA90036513F /* TransformSubCategories.m */,
 				CC7527C91D68D2A8001189F0 /* MRPendingRecordsCount+CoreDataProperties.h */,
 				CC7527CA1D68D2A8001189F0 /* MRPendingRecordsCount+CoreDataProperties.m */,
 				CC7527CB1D68D2A8001189F0 /* MRPendingRecordsCount.h */,
@@ -5659,6 +5683,7 @@
 				B4B4F1511D39A80C00EFCC0E /* ExpericeFillUpTableViewCell.m in Sources */,
 				CC86FE491D29BA4F0030B23D /* MRReplies+CoreDataProperties.m in Sources */,
 				CC01BA731D302ACF007E2AEB /* MRCommentViewController.m in Sources */,
+				CC9F605A1D7B5DA90036513F /* TransformSubCategories.m in Sources */,
 				B4B4F17C1D39E53E00EFCC0E /* NSBaseDateComponent.m in Sources */,
 				83B782121B7919EA0070645C /* Reachability.m in Sources */,
 				79AC942F1B9DFB0300B81452 /* MRNotificationsDetailsViewController.m in Sources */,
@@ -5793,12 +5818,14 @@
 				CC7DB2C31D0CC433007DFE4C /* PieView.m in Sources */,
 				CC7DB2E51D0CC433007DFE4C /* MRPopoverControllerViewController.m in Sources */,
 				B41746CA1D0CD455009B7E7E /* CommonBoxView.m in Sources */,
+				CC9F60621D7B62840036513F /* MRTransformPageData.m in Sources */,
 				B41746D71D0CD6E1009B7E7E /* MrGroupChildPost.m in Sources */,
 				B4746B3F1D6E8F3700325F9E /* AddressInfo+CoreDataProperties.m in Sources */,
 				7953662E1BA0C0300021CE4D /* MRFavoriteFilterViewController.m in Sources */,
 				B4746B271D6DFB9200325F9E /* AddressInfoTableViewCell.m in Sources */,
 				CC9DAFA21D6F9E46008B2822 /* EditContactInfoViewController.m in Sources */,
 				79A5DC621BA1ED21001D872C /* MPCallMedrepViewController.m in Sources */,
+				CC9F60601D7B62840036513F /* MRTransformPageData+CoreDataProperties.m in Sources */,
 				CC463DEC1D27B921002AE85E /* MRGradientView.m in Sources */,
 				8AFE8CDA1D0F20BC0000382E /* NotificationUUIDViewController.m in Sources */,
 				8AFE8D2A1D12F6A70000382E /* MRAddMemberTableViewCell.m in Sources */,
@@ -5843,6 +5870,7 @@
 				CC7DB2841D0C9E75007DFE4C /* NotificationWebViewController.m in Sources */,
 				CC7DB28C1D0C9EC2007DFE4C /* MRShareViewController.m in Sources */,
 				CC9858011D2E53EA00C74438 /* MRContact.m in Sources */,
+				CC9F60581D7B5DA90036513F /* TransformSubCategories+CoreDataProperties.m in Sources */,
 				CC7DB2E11D0CC433007DFE4C /* MRGroupsViewController.m in Sources */,
 				79BD27B31B809982007CA448 /* MRHomeViewContoller.m in Sources */,
 				79A4F8AE1BC186B200E58DC7 /* GraphPoint.m in Sources */,
@@ -5889,6 +5917,7 @@
 				CC7DB0231D0C8BEC007DFE4C /* MRCompaignsDetailsViewController.m in Sources */,
 				B4B4F11B1D395C7B00EFCC0E /* CommonTableViewCell.m in Sources */,
 				CC7DB0241D0C8BEC007DFE4C /* Reachability.m in Sources */,
+				CC9F605B1D7B5DA90036513F /* TransformSubCategories.m in Sources */,
 				B4B4F1231D395DF300EFCC0E /* ExperienceSummaryTableViewCell.m in Sources */,
 				B40E139B1D3F059C005830DA /* EducationalQualifications.m in Sources */,
 				CC7DB2861D0C9E7B007DFE4C /* NotificationWebViewController.m in Sources */,
@@ -6023,12 +6052,14 @@
 				8AFF27B11D21C3DE00080DF0 /* MRInviteViewController.m in Sources */,
 				CC7DB05E1D0C8BEC007DFE4C /* MRFavoriteFilterViewController.m in Sources */,
 				B4B4F0FC1D38AEDF00EFCC0E /* addProfileItemsTableViewCell.m in Sources */,
+				CC9F60631D7B62840036513F /* MRTransformPageData.m in Sources */,
 				CC7DB05F1D0C8BEC007DFE4C /* MPCallMedrepViewController.m in Sources */,
 				B4746B401D6E8F3700325F9E /* AddressInfo+CoreDataProperties.m in Sources */,
 				CC9858071D2E726300C74438 /* MRShareOptionTableViewCell.m in Sources */,
 				B4746B281D6DFB9200325F9E /* AddressInfoTableViewCell.m in Sources */,
 				CC9DAFA31D6F9E46008B2822 /* EditContactInfoViewController.m in Sources */,
 				B4B4F1611D39E4F200EFCC0E /* UICustomDatePicker.m in Sources */,
+				CC9F60611D7B62840036513F /* MRTransformPageData+CoreDataProperties.m in Sources */,
 				CC7DB0601D0C8BEC007DFE4C /* MRNewProductCompaignsViewController.m in Sources */,
 				CC7DB0611D0C8BEC007DFE4C /* MRNotifications.m in Sources */,
 				CC9857FA1D2E523E00C74438 /* NSDictionary+CaseInsensitive.m in Sources */,
@@ -6073,6 +6104,7 @@
 				B4B4F1401D39857E00EFCC0E /* MRWorkExperience+CoreDataProperties.m in Sources */,
 				B40E13991D3F059C005830DA /* EducationalQualifications+CoreDataProperties.m in Sources */,
 				CC9858021D2E53EA00C74438 /* MRContact.m in Sources */,
+				CC9F60591D7B5DA90036513F /* TransformSubCategories+CoreDataProperties.m in Sources */,
 				B41746E01D0CD740009B7E7E /* MRGroupPost.m in Sources */,
 				CC7DB0721D0C8BEC007DFE4C /* GraphPoint.m in Sources */,
 				CC7DB0731D0C8BEC007DFE4C /* MedRep.xcdatamodeld in Sources */,

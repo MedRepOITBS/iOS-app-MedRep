@@ -112,6 +112,8 @@
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
 //    [self setupProfileData];
     // Do any additional setup after loading the view from its nib.
+    
+    [MRCommon showActivityIndicator:nil];
 }
 
 - (void)backButtonAction{
@@ -153,7 +155,9 @@
     
     
     [MRDatabaseHelper addProfileData:self.doctorId responseHandler:^(id result){
-    _profileObj  = [result objectAtIndex:0];
+        [MRCommon stopActivityIndicator];
+        
+        _profileObj  = [result objectAtIndex:0];
         
         NSMutableString *navigationTitle = [NSMutableString stringWithString:@"Dr. "];
         if (_profileObj.name != nil && _profileObj.name.length > 0) {

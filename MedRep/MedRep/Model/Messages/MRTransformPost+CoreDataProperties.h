@@ -41,6 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *videoUrl;
 @property (nullable, nonatomic, retain) NSString *innerImgFile;
 @property (nullable, nonatomic, retain) NSString *innerImgUrl;
+@property (nullable, nonatomic, retain) NSString   *subCategory;
 @property (nullable, nonatomic, retain) NSSet<MRSharePost *> *childSharePosts;
 
 @end

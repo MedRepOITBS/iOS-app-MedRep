@@ -257,6 +257,10 @@
         <attribute name="therapeuticId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="therapeuticName" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="MRTransformPageData" representedClassName="MRTransformPageData" syncable="YES">
+        <attribute name="subCategories" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="transforms" optional="YES" attributeType="Binary" syncable="YES"/>
+    </entity>
     <entity name="MRTransformPost" representedClassName="MRTransformPost" syncable="YES">
         <attribute name="contentType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="coverImgFile" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
@@ -273,6 +277,7 @@
         <attribute name="source" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sourceId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="sourceName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="subCategory" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tagDesc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="therapeuticId" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
         <attribute name="therapeuticName" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
@@ -296,6 +301,9 @@
         <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="toDate" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="TransformSubCategories" representedClassName="TransformSubCategories" syncable="YES">
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
         <element name="AddressInfo" positionX="153" positionY="9" width="128" height="165"/>
         <element name="ContactInfo" positionX="162" positionY="18" width="128" height="165"/>
@@ -318,7 +326,9 @@
         <element name="MRSharePost" positionX="151" positionY="366" width="128" height="645"/>
         <element name="MRSuggestedContact" positionX="187" positionY="174" width="128" height="105"/>
         <element name="MRTherapeuticArea" positionX="315" positionY="36" width="128" height="90"/>
-        <element name="MRTransformPost" positionX="331" positionY="378" width="128" height="450"/>
+        <element name="MRTransformPost" positionX="331" positionY="378" width="128" height="465"/>
         <element name="MRWorkExperience" positionX="358" positionY="171" width="128" height="165"/>
+        <element name="TransformSubCategories" positionX="153" positionY="9" width="128" height="60"/>
+        <element name="MRTransformPageData" positionX="162" positionY="18" width="128" height="75"/>
     </elements>
 </model>

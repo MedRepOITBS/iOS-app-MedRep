@@ -25,6 +25,8 @@
 #define kMRSharePost         @"MRSharePost"
 #define kMRPostedReplies     @"MRPostedReplies"
 
+#define kMRTransformPageData     @"MRTransformPageData"
+
 #define kPendingRecordsCountEntity  @"MRPendingRecordsCount"
 
 @class MRGroupPost;

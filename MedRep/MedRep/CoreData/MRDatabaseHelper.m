@@ -1843,6 +1843,8 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
     [[MRWebserviceHelper sharedWebServiceHelper] getNewsAndUpdates:category
                                                         methodName:methodName
                                                        withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                    
+        [[MRDataManger sharedManager] removeAllObjects:kMRTransformPageData withPredicate:nil];
         [[MRDataManger sharedManager] removeAllObjects:kMRTransformPost withPredicate:nil];
         [MRDatabaseHelper makeServiceCallForNewsAndUpdatesFetch:category
                                                      methodName:methodName
@@ -1862,7 +1864,8 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
     [MRCommon stopActivityIndicator];
     if (status)
     {
-        [MRDatabaseHelper parseNewsAndUpdatesResponse:response andResponseHandler:responseHandler];
+        [MRDatabaseHelper parseNewsAndUpdatesResponse:response category:category
+                                   andResponseHandler:responseHandler];
     }
     else {
         NSString *errorCode = [MRDatabaseHelper getOAuthErrorCode:response];
@@ -1878,6 +1881,7 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
                      if (status)
                      {
                          [MRDatabaseHelper parseNewsAndUpdatesResponse:responce
+                                                            category:category
                                                     andResponseHandler:responseHandler];
                      } else
                      {
@@ -1903,9 +1907,17 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
 }
 
 + (void)parseNewsAndUpdatesResponse:(NSDictionary*)response
+                         category:(NSString*)category
                  andResponseHandler:(WebServiceResponseHandler) responseHandler {
-    id result = [MRWebserviceHelper parseNetworkResponse:NSClassFromString(kMRTransformPost)
+    
+    id result;
+    if (category != nil && [category caseInsensitiveCompare:@"TherapeuticArea"] == NSOrderedSame) {
+        result = [MRWebserviceHelper parseNetworkResponse:NSClassFromString(kMRTransformPageData)
+                                                  andData:@[response]];
+    } else {
+        result = [MRWebserviceHelper parseNetworkResponse:NSClassFromString(kMRTransformPost)
                                                  andData:[response valueForKey:@"Responce"]];
+    }
     if (responseHandler != nil) {
         NSArray *tempResults = [[MRDataManger sharedManager] fetchObjectList:kMRTransformPost];
         

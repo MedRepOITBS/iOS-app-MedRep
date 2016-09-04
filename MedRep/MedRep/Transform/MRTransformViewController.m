@@ -21,6 +21,7 @@
 #import "MRServeViewController.h"
 #import "MRConstants.h"
 #import "MRCustomTabBar.h"
+#import "TransformSubCategories.h"
 
 @interface MRTransformViewController () <UICollectionViewDelegate, UICollectionViewDataSource,
                                          UITableViewDelegate, UITableViewDataSource,
@@ -111,6 +112,7 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
     self.tapGesture.enabled = NO;
     [self.view addGestureRecognizer:self.tapGesture];
     [self.therapeuticAreaListTableView.layer setCornerRadius:5.0];
+//    [self.therapeuticAreaListTableView setHidden:YES];
     
     MRCustomTabBar *tabBarView = (MRCustomTabBar*)[MRCommon createTabBarView:self.view];
     [tabBarView setNavigationController:self.navigationController];
@@ -137,14 +139,8 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self fetchNewsAndUpdates:[self.categories objectAtIndex:self.currentIndex]];
-}
-
--(void) viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
     [MRCommon applyNavigationBarStyling:self.navigationController];
-    
-    //timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(AutoScroll) userInfo:nil repeats:YES];
+    [self fetchNewsAndUpdates:[self.categories objectAtIndex:self.currentIndex]];
 }
 
 -(void) viewWillDisappear:(BOOL)animated{
@@ -376,11 +372,20 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
         if (indexPath.row == 0) {
             self.filteredData = self.contentData;
         } else {
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @"therapeuticName",
-                                      [self.therapeuticAreasList objectAtIndex:indexPath.row]];
+            NSString *category = [self.therapeuticAreasList objectAtIndex:indexPath.row];
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @"subCategory",
+                                      category];
             self.filteredData = [self.contentData filteredArrayUsingPredicate:predicate];
+            [self.currentTherapeuticAreaTitleView setText:category];
         }
+        
         [self.contentTableView reloadData];
+        
+        if (self.filteredData != nil && self.filteredData.count > 0) {
+            [self.contentTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
+                                     atScrollPosition:UITableViewScrollPositionTop
+                                             animated:YES];
+        }
     } else {
         MRTransformDetailViewController *notiFicationViewController = [[MRTransformDetailViewController alloc] initWithNibName:@"MRTransformDetailViewController" bundle:nil];
         
@@ -416,38 +421,33 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
 //        self.filteredData = [[self.contentData filteredArrayUsingPredicate:predicate] mutableCopy];
 
         self.filteredData = self.contentData;
+        NSMutableArray *therapeuticAreasList = [NSMutableArray new];
+
+        if (self.currentIndex == 1) {
+            
+            NSArray *subCategories = [[MRDataManger sharedManager] fetchObjectList:NSStringFromClass(TransformSubCategories.class)];
+
+            [therapeuticAreasList addObject:@"All"];
+            [therapeuticAreasList addObjectsFromArray:[subCategories valueForKey:@"title"]];
                                   
-          NSMutableArray *therapeuticAreasList = [NSMutableArray new];
-          [therapeuticAreasList addObject:@"All"];
-          [therapeuticAreasList addObjectsFromArray:[self.filteredData valueForKey:@"therapeuticName"]];
+            NSOrderedSet *orderedSet = [NSOrderedSet orderedSetWithArray:therapeuticAreasList];
                                   
-        NSOrderedSet *orderedSet = [NSOrderedSet orderedSetWithArray:therapeuticAreasList];
+            self.therapeuticAreasList = orderedSet.array;
+        }
                                   
-          self.therapeuticAreasList = orderedSet.array;
+                                  [self.contentTableView reloadData];
                                   
-        [self.contentTableView reloadData];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [self.contentTableView reloadData];
+//        });
+                                  
+//                                  dispatch_async(dispatch_get_main_queue(), ^{
+//                                      NSLog(@"");
+//                                  });
     }];
 }
 
 #pragma mark - Dummy Data
-
-- (void)createDummyData {
-    // Create Dummy Data
-    
-    self.contentData = [MRDatabaseHelper getTransformArticles];
-    
-    if (self.contentData == nil || self.contentData.count == 0) {
-        
-        NSString* filePath = [[NSBundle mainBundle] pathForResource:@"TransformPosts" ofType:@"json"];
-        NSData* data = [NSData dataWithContentsOfFile:filePath];
-        NSError *error;
-        NSArray* transformArticles = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-        
-        [MRDatabaseHelper addTransformArticles:transformArticles];
-    
-        self.contentData = [MRDatabaseHelper getTransformArticles];
-    }
-}
 
 - (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
 {

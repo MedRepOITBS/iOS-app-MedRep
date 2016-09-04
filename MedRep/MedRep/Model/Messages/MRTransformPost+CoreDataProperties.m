@@ -42,6 +42,7 @@ NSString* const kNewsAndUpdates = @"News & Updates";
 @dynamic innerImgFile;
 @dynamic innerImgUrl;
 @dynamic childSharePosts;
+@dynamic subCategory;
 
 - (void)setTitle:(NSString *)title {
     self.titleDescription = title;
@@ -77,6 +78,10 @@ NSString* const kNewsAndUpdates = @"News & Updates";
     }
     
     self.transformPostId = [NSNumber numberWithLong:tempNewsId];
+}
+
+- (void)setSubCategories:(NSData *)subCategories {
+    
 }
 
 @end
