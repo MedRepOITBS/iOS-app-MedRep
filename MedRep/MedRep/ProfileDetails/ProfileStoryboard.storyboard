@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ejh-Kg-xic">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ejh-Kg-xic">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -439,7 +439,7 @@ easier for colleagues to find you.</string>
                                                 <constraint firstAttribute="width" constant="36" id="lqk-Mw-kES"/>
                                                 <constraint firstAttribute="height" constant="35" id="vqZ-Fc-kVY"/>
                                             </constraints>
-                                            <state key="normal" image="crossPlusButton.png"/>
+                                            <state key="normal" image="Plus"/>
                                             <connections>
                                                 <action selector="addButtonTapped:" destination="n84-q9-rPi" eventType="touchUpInside" id="fXE-Jf-iI9"/>
                                             </connections>
@@ -536,7 +536,7 @@ easier for colleagues to find you.</string>
                                                 <constraint firstAttribute="height" constant="19" id="QkN-tS-us2"/>
                                                 <constraint firstAttribute="width" constant="18" id="X8O-R5-RNR"/>
                                             </constraints>
-                                            <state key="normal" image="RedCross"/>
+                                            <state key="normal" image="Cancel"/>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
@@ -620,7 +620,7 @@ easier for colleagues to find you.</string>
                                                 <constraint firstAttribute="height" constant="19" id="6f7-hG-qxC"/>
                                                 <constraint firstAttribute="width" constant="18" id="Crw-2t-NZw"/>
                                             </constraints>
-                                            <state key="normal" image="RedCross"/>
+                                            <state key="normal" image="Cancel"/>
                                             <connections>
                                                 <action selector="deleteBtnTapped:" destination="Wof-2Q-8eY" eventType="touchUpInside" id="mOY-s2-0h0"/>
                                             </connections>
@@ -1349,11 +1349,12 @@ easier for colleagues to find you.</string>
         </scene>
     </scenes>
     <resources>
+        <image name="Cancel" width="50" height="50"/>
         <image name="Layer_1.png" width="64" height="64"/>
+        <image name="Plus" width="50" height="50"/>
         <image name="ProfileBG" width="2018" height="1199"/>
         <image name="RedCross" width="128" height="128"/>
         <image name="addressbook-green-icon.png" width="32" height="32"/>
-        <image name="crossPlusButton.png" width="104" height="105"/>
         <image name="dropDownButton.png" width="38" height="47"/>
         <image name="pencil.png" width="32" height="32"/>
         <image name="settings1" width="64" height="64"/>
