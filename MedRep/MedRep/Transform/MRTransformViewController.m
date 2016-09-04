@@ -88,11 +88,13 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
     [recoginzer setNumberOfTapsRequired:1];
     [self.therapeuticAreaDropDown addGestureRecognizer:recoginzer];
     [self.therapeuticAreaDropDown.layer setCornerRadius:5.0];
+    self.therapeuticAreaDropDownWidthConstraint.constant = 0.0;
+    [self.therapeuticAreaDropDown setHidden:YES];
+    
     [self.therapeuticAreaListTableViewContainerview addTarget:self
                                                        action:@selector(therapeuticAreaListTableViewContainerviewTapped)
                                              forControlEvents:UIControlEventTouchUpInside];
-    self.therapeuticAreaDropDownWidthConstraint.constant = 0.0;
-    [self.therapeuticAreaDropDown setHidden:YES];
+    [self.therapeuticAreaListTableViewContainerview setHidden:YES];
     
 //    self.prevIndex = 0;
     self.categories = @[@"News & Updates", @"Therapeutic Area", @"Regulatory", @"Education", @"Journals", @"Medical Innovation", @"Podcasts / Webcasts", @"Best Practices", @"Case Studies", @"Whitepapers", @"Videos", @"Clinical Trials"];
