@@ -316,7 +316,7 @@ AVPlayerViewControllerDelegate, UIAlertViewDelegate> {
     
     rowHeight += label.frame.size.height;
     
-    rowHeight += 45;
+    rowHeight += 30;
     
     return rowHeight;
 }
