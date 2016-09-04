@@ -520,13 +520,11 @@
 		8AFE8CDE1D0F21400000382E /* my_contacts.json in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB2B81D0CC433007DFE4C /* my_contacts.json */; };
 		8AFE8CDF1D0F21430000382E /* suggested_contacts.json in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB2BA1D0CC433007DFE4C /* suggested_contacts.json */; };
 		8AFE8CE01D0F21BF0000382E /* person.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3AB1D0CCA0D007DFE4C /* person.png */; };
-		8AFE8CE11D0F21BF0000382E /* comment.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3891D0CC8C8007DFE4C /* comment.png */; };
 		8AFE8CE21D0F21BF0000382E /* compose.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB38A1D0CC8C8007DFE4C /* compose.png */; };
 		8AFE8CE31D0F21BF0000382E /* Contact.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB38B1D0CC8C8007DFE4C /* Contact.png */; };
 		8AFE8CE41D0F21BF0000382E /* Contacts.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB38C1D0CC8C8007DFE4C /* Contacts.png */; };
 		8AFE8CE51D0F21BF0000382E /* Group.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB38D1D0CC8C8007DFE4C /* Group.png */; };
 		8AFE8CE61D0F21BF0000382E /* groups.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB38E1D0CC8C8007DFE4C /* groups.png */; };
-		8AFE8CE71D0F21BF0000382E /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB38F1D0CC8C8007DFE4C /* like.png */; };
 		8AFE8CE81D0F21BF0000382E /* medicine.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3901D0CC8C8007DFE4C /* medicine.jpg */; };
 		8AFE8CE91D0F21BF0000382E /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3911D0CC8C8007DFE4C /* plus.png */; };
 		8AFE8CEA1D0F21BF0000382E /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3921D0CC8C8007DFE4C /* share.png */; };
@@ -1409,13 +1407,11 @@
 		CC7DB3841D0CC8A6007DFE4C /* profile_pic7.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3481D0CC8A6007DFE4C /* profile_pic7.jpeg */; };
 		CC7DB3861D0CC8A6007DFE4C /* profile_pic8.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3491D0CC8A6007DFE4C /* profile_pic8.jpeg */; };
 		CC7DB3881D0CC8A6007DFE4C /* profile_pic9.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB34A1D0CC8A6007DFE4C /* profile_pic9.jpeg */; };
-		CC7DB3941D0CC8C8007DFE4C /* comment.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3891D0CC8C8007DFE4C /* comment.png */; };
 		CC7DB3961D0CC8C8007DFE4C /* compose.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB38A1D0CC8C8007DFE4C /* compose.png */; };
 		CC7DB3981D0CC8C8007DFE4C /* Contact.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB38B1D0CC8C8007DFE4C /* Contact.png */; };
 		CC7DB39A1D0CC8C8007DFE4C /* Contacts.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB38C1D0CC8C8007DFE4C /* Contacts.png */; };
 		CC7DB39C1D0CC8C8007DFE4C /* Group.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB38D1D0CC8C8007DFE4C /* Group.png */; };
 		CC7DB39E1D0CC8C8007DFE4C /* groups.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB38E1D0CC8C8007DFE4C /* groups.png */; };
-		CC7DB3A01D0CC8C8007DFE4C /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB38F1D0CC8C8007DFE4C /* like.png */; };
 		CC7DB3A21D0CC8C8007DFE4C /* medicine.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3901D0CC8C8007DFE4C /* medicine.jpg */; };
 		CC7DB3A41D0CC8C8007DFE4C /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3911D0CC8C8007DFE4C /* plus.png */; };
 		CC7DB3A61D0CC8C8007DFE4C /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3921D0CC8C8007DFE4C /* share.png */; };
@@ -2409,13 +2405,11 @@
 		CC7DB3481D0CC8A6007DFE4C /* profile_pic7.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profile_pic7.jpeg; sourceTree = "<group>"; };
 		CC7DB3491D0CC8A6007DFE4C /* profile_pic8.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profile_pic8.jpeg; sourceTree = "<group>"; };
 		CC7DB34A1D0CC8A6007DFE4C /* profile_pic9.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profile_pic9.jpeg; sourceTree = "<group>"; };
-		CC7DB3891D0CC8C8007DFE4C /* comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = comment.png; path = MedRep/RESOURCES/comment.png; sourceTree = SOURCE_ROOT; };
 		CC7DB38A1D0CC8C8007DFE4C /* compose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = compose.png; path = MedRep/RESOURCES/compose.png; sourceTree = SOURCE_ROOT; };
 		CC7DB38B1D0CC8C8007DFE4C /* Contact.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Contact.png; path = MedRep/RESOURCES/Contact.png; sourceTree = SOURCE_ROOT; };
 		CC7DB38C1D0CC8C8007DFE4C /* Contacts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Contacts.png; path = MedRep/RESOURCES/Contacts.png; sourceTree = SOURCE_ROOT; };
 		CC7DB38D1D0CC8C8007DFE4C /* Group.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Group.png; path = MedRep/RESOURCES/Group.png; sourceTree = SOURCE_ROOT; };
 		CC7DB38E1D0CC8C8007DFE4C /* groups.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = groups.png; path = MedRep/RESOURCES/groups.png; sourceTree = SOURCE_ROOT; };
-		CC7DB38F1D0CC8C8007DFE4C /* like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = like.png; path = MedRep/RESOURCES/like.png; sourceTree = SOURCE_ROOT; };
 		CC7DB3901D0CC8C8007DFE4C /* medicine.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = medicine.jpg; path = MedRep/RESOURCES/medicine.jpg; sourceTree = SOURCE_ROOT; };
 		CC7DB3911D0CC8C8007DFE4C /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = plus.png; path = MedRep/RESOURCES/plus.png; sourceTree = SOURCE_ROOT; };
 		CC7DB3921D0CC8C8007DFE4C /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = share.png; path = MedRep/RESOURCES/share.png; sourceTree = SOURCE_ROOT; };
@@ -4298,13 +4292,11 @@
 			isa = PBXGroup;
 			children = (
 				CC7DB3AB1D0CCA0D007DFE4C /* person.png */,
-				CC7DB3891D0CC8C8007DFE4C /* comment.png */,
 				CC7DB38A1D0CC8C8007DFE4C /* compose.png */,
 				CC7DB38B1D0CC8C8007DFE4C /* Contact.png */,
 				CC7DB38C1D0CC8C8007DFE4C /* Contacts.png */,
 				CC7DB38D1D0CC8C8007DFE4C /* Group.png */,
 				CC7DB38E1D0CC8C8007DFE4C /* groups.png */,
-				CC7DB38F1D0CC8C8007DFE4C /* like.png */,
 				CC7DB3901D0CC8C8007DFE4C /* medicine.jpg */,
 				CC7DB3911D0CC8C8007DFE4C /* plus.png */,
 				CC7DB3921D0CC8C8007DFE4C /* share.png */,
@@ -4650,7 +4642,6 @@
 				8AFE8CE41D0F21BF0000382E /* Contacts.png in Resources */,
 				B4E02C581D4706E7003A1859 /* logo_icon@3x.png in Resources */,
 				791C37DE1C4FF96400914728 /* minus@2x.png in Resources */,
-				8AFE8CE11D0F21BF0000382E /* comment.png in Resources */,
 				791432A81C32EB7D0031FB91 /* dashboard_menu@2x.png in Resources */,
 				CC7DB2C71D0CC433007DFE4C /* MRCollectionView.xib in Resources */,
 				79169E261BEBE70500C11D13 /* MRAppointmentListViewController.xib in Resources */,
@@ -4673,7 +4664,6 @@
 				79DE1BE71B826245005289D6 /* upArrow@2x.png in Resources */,
 				7929E3A41B9C8979001F1373 /* left-arrow@3x.png in Resources */,
 				795366091BA09EBF0021CE4D /* img1@3x.jpg in Resources */,
-				8AFE8CE71D0F21BF0000382E /* like.png in Resources */,
 				79F416871B9F5CDB0089729B /* building-icon@2x.png in Resources */,
 				79A5DC721BA2092E001D872C /* crdown-arrow@3x.png in Resources */,
 				79FFD2651BB9DC3100CEE606 /* fbUnSelectedRadio@3x.png in Resources */,
@@ -5337,7 +5327,6 @@
 				B4BB24AC1D416AF900A3DD73 /* profileBG.png in Resources */,
 				CC7DB14E1D0C8BEC007DFE4C /* team@2x.png in Resources */,
 				CC7DB14F1D0C8BEC007DFE4C /* MRAppointmentCell.xib in Resources */,
-				CC7DB3A01D0CC8C8007DFE4C /* like.png in Resources */,
 				CC7DB1501D0C8BEC007DFE4C /* comapny-logo@3x.png in Resources */,
 				CC7DB1511D0C8BEC007DFE4C /* caclock-icon@2x.png in Resources */,
 				CC7DB1521D0C8BEC007DFE4C /* discussion-forum@3x.png in Resources */,
@@ -5506,7 +5495,6 @@
 				CC7DB1D61D0C8BEC007DFE4C /* MRMedRepMeetingsViewController.xib in Resources */,
 				CC7DB1D71D0C8BEC007DFE4C /* picklocation@2x.png in Resources */,
 				CC7DB1D81D0C8BEC007DFE4C /* Icon-Small-50@2x.png in Resources */,
-				CC7DB3941D0CC8C8007DFE4C /* comment.png in Resources */,
 				CC7DB2D01D0CC433007DFE4C /* MRContactDetailViewController.xib in Resources */,
 				CC7DB1D91D0C8BEC007DFE4C /* cathera@3x.png in Resources */,
 				CC7DB39E1D0CC8C8007DFE4C /* groups.png in Resources */,
