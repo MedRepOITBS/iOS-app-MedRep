@@ -171,24 +171,17 @@
                     }
                 }];
             }
-            else if (NO == [MRCommon isStringEmpty:details])
-            {
+            else {
                 [MRCommon stopActivityIndicator];
-                NSArray *erros =  [details componentsSeparatedByString:@"-"];
-                if (erros.count > 0)
-                [MRCommon showAlert:[erros lastObject] delegate:nil];
-            } else {
-                // vamsi, dummy
-                NSMutableDictionary *dict = [NSMutableDictionary new];
-                [dict setValue:@"Dinesh" forKey:@"firstName"];
-                [dict setValue:@"Reddy" forKey:@"lastName"];
-                [dict setValue:[NSNumber numberWithInteger:1] forKey:@"roleId"];
-                [dict setValue:@"1" forKey:@"therapeuticId"];
-                [dict setValue:[NSDictionary new] forKey:@"locations"];
                 
-                [MRCommon stopActivityIndicator];
-                 [[MRAppControl sharedHelper] setUserDetails:dict];
-                         [[MRAppControl sharedHelper] loadDashboardScreen];
+                if (NO == [MRCommon isStringEmpty:details])
+                {
+                    NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                    if (erros.count > 0)
+                    [MRCommon showAlert:[erros lastObject] delegate:nil];
+                } else {
+                    [MRCommon showAlert:@"Login failed !!!" delegate:self];
+                }
             }
         }];
     }
