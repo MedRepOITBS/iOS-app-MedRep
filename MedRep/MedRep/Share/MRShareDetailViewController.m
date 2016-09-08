@@ -36,6 +36,8 @@ AVPlayerViewControllerDelegate, UIAlertViewDelegate> {
     AVPlayerViewController *av;
 }
 
+@property (weak, nonatomic) IBOutlet UIImageView *likeImageView;
+
 @property (weak, nonatomic) IBOutlet UIButton *takeMeToTransformButton;
 
 @property (weak, nonatomic) IBOutlet UIImageView *profilePicImageView;
@@ -156,11 +158,22 @@ AVPlayerViewControllerDelegate, UIAlertViewDelegate> {
     [self setCountInLabels];
 }
 
-- (void)setCountInLabels {
+- (void)setLikeImageData {
+    NSString *likeImageName = @"Unlike";
+    if (self.post.like != nil && self.post.like.boolValue) {
+        likeImageName = @"Like";
+    }
+    
+    self.likeImageView.image = [UIImage imageNamed:likeImageName];
+    self.likeCount.text = [NSString stringWithFormat:@"%ld",self.post.likesCount.longValue];
+}
 
+- (void)setCountInLabels {
+    
+    [self setLikeImageData];
+    
     self.sharesCount.text = [NSString stringWithFormat:@"%ld",self.post.shareCount.longValue];
     self.commentsCount.text = [NSString stringWithFormat:@"%ld",self.post.commentsCount.longValue];
-    self.likeCount.text = [NSString stringWithFormat:@"%ld",self.post.likesCount.longValue];
     
     if (self.post.source != nil && self.post.source.length > 0) {
         self.postedBY.text = [NSString stringWithFormat:@"Posted By:%@", self.post.source];
@@ -368,16 +381,31 @@ AVPlayerViewControllerDelegate, UIAlertViewDelegate> {
         currentPost = self.post;
     }
     
+    BOOL like = true;
+    if (currentPost.like != nil && currentPost.like.boolValue) {
+        like = false;
+    }
+    
     [[MRWebserviceHelper sharedWebServiceHelper] updateLikes:3
-                                                   likeCount:likeCount
-                                                commentCount:currentPost.commentsCount.longValue
-                                                  shareCount:currentPost.shareCount.longValue
+                                                   likeCount:like
                                                    messageId:currentPost.sharePostId.longValue
                                                  withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                     NSInteger likeCount = 0;
+                                                     if (currentPost.likesCount != nil) {
+                                                         likeCount = currentPost.likesCount.longValue;
+                                                     }
+                                                     if (like) {
+                                                         likeCount++;
+                                                     } else {
+                                                         likeCount--;
+                                                     }
+                                                     
                                                      self.post.likesCount = [NSNumber numberWithLong:likeCount];
+                                                     self.post.like = [NSNumber numberWithBool:like];
+                                                     
                                                      [self.post.managedObjectContext save:nil];
                                                      
-                                                     self.likeCount.text = [NSString stringWithFormat:@"%ld",(long)likeCount];
+                                                     [self setLikeImageData];
                                                  }];
     
 }

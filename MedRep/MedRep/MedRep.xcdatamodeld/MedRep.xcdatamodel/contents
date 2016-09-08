@@ -217,6 +217,7 @@
         <attribute name="doctor_Name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="group_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="groupId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="like" optional="YES" attributeType="Boolean" defaultValueString="0" syncable="YES"/>
         <attribute name="likes_count" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="likesCount" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="member_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -323,12 +324,12 @@
         <element name="MRPublications" positionX="0" positionY="171" width="128" height="120"/>
         <element name="MRReplies" positionX="-36" positionY="135" width="128" height="120"/>
         <element name="MRRole" positionX="178" positionY="-72" width="128" height="105"/>
-        <element name="MRSharePost" positionX="151" positionY="366" width="128" height="645"/>
+        <element name="MRSharePost" positionX="151" positionY="366" width="128" height="660"/>
         <element name="MRSuggestedContact" positionX="187" positionY="174" width="128" height="105"/>
         <element name="MRTherapeuticArea" positionX="315" positionY="36" width="128" height="90"/>
+        <element name="MRTransformPageData" positionX="162" positionY="18" width="128" height="75"/>
         <element name="MRTransformPost" positionX="331" positionY="378" width="128" height="465"/>
         <element name="MRWorkExperience" positionX="358" positionY="171" width="128" height="165"/>
         <element name="TransformSubCategories" positionX="153" positionY="9" width="128" height="60"/>
-        <element name="MRTransformPageData" positionX="162" positionY="18" width="128" height="75"/>
     </elements>
 </model>

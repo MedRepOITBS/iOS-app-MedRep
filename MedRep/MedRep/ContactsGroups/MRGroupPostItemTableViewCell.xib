@@ -136,6 +136,7 @@
                 <outlet property="contactLabelHeightConstraint" destination="N7R-FG-kX6" id="P7f-wY-xlp"/>
                 <outlet property="contactNameLabel" destination="jhR-Qo-e9G" id="ECg-Rl-quR"/>
                 <outlet property="likeCountLabel" destination="mUT-Lg-IsJ" id="uDQ-Wx-fdX"/>
+                <outlet property="likeImageView" destination="EbM-hj-dYk" id="nLv-pU-uBL"/>
                 <outlet property="likeView" destination="ryj-ok-xYs" id="QsH-kA-tQ2"/>
                 <outlet property="postImageHeightConstraint" destination="Xjp-iu-BvE" id="KRa-uq-Daz"/>
                 <outlet property="postImageView" destination="vje-fL-WVv" id="zaW-DG-Fnl"/>

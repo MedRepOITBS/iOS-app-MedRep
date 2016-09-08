@@ -2577,14 +2577,10 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
 }
 
 - (void)updateLikes:(NSInteger)postType
-          likeCount:(NSInteger)likeCount
-       commentCount:(NSInteger)commentCount
-         shareCount:(NSInteger)shareCount
+          likeCount:(BOOL)like
           messageId:(NSInteger)messageId
         withHandler:(completionHandler)responceHandler {
-    NSDictionary *reqDict = @{@"likes_count" : [NSNumber numberWithLong:likeCount],
-                              @"comment_count" : [NSNumber numberWithLong:commentCount],
-                              @"share_count" : [NSNumber numberWithLong:shareCount],
+    NSDictionary *reqDict = @{@"like" : [NSNumber numberWithBool:like],
                               @"topic_id" : [NSNumber numberWithLong:messageId],
                               @"postMessage" : @{@"postType" : [NSNumber numberWithInteger:postType]}
                               //@"likes":@{@"like_status":@"LIKE"}

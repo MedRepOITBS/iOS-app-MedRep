@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -12,6 +12,7 @@
                 <outlet property="commentsView" destination="OZZ-0h-8zK" id="O4V-xK-F1F"/>
                 <outlet property="emptyMessage" destination="Xxn-v8-chC" id="QUK-o2-BNN"/>
                 <outlet property="likeCount" destination="G8v-sp-f1F" id="H1p-d5-sHk"/>
+                <outlet property="likeImageView" destination="AX7-lq-29Q" id="3nh-cK-1oX"/>
                 <outlet property="likesView" destination="FVh-jw-Ac2" id="ftt-tT-aJm"/>
                 <outlet property="navView" destination="bpH-Lq-1Q5" id="T84-qs-Qk9"/>
                 <outlet property="postedBY" destination="UyU-ae-e9s" id="gGf-VF-QLP"/>
@@ -77,7 +78,7 @@
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FVh-jw-Ac2">
                             <rect key="frame" x="0.0" y="0.0" width="70" height="25"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="like.png" translatesAutoresizingMaskIntoConstraints="NO" id="AX7-lq-29Q">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Like" translatesAutoresizingMaskIntoConstraints="NO" id="AX7-lq-29Q">
                                     <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="139" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G8v-sp-f1F">
@@ -93,7 +94,7 @@
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OZZ-0h-8zK">
                             <rect key="frame" x="70" y="0.0" width="70" height="25"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="comment.png" translatesAutoresizingMaskIntoConstraints="NO" id="hhB-Hc-8QX">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Comment" translatesAutoresizingMaskIntoConstraints="NO" id="hhB-Hc-8QX">
                                     <rect key="frame" x="8" y="0.0" width="20" height="20"/>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="139" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wiU-Fg-ykx">
@@ -250,9 +251,9 @@
         </view>
     </objects>
     <resources>
+        <image name="Comment" width="44" height="44"/>
         <image name="Contact.png" width="50" height="50"/>
-        <image name="comment.png" width="2000" height="2000"/>
-        <image name="like.png" width="1095" height="1005"/>
+        <image name="Like" width="44" height="44"/>
         <image name="logo_icon.png" width="35" height="33"/>
         <image name="share.png" width="512" height="512"/>
     </resources>

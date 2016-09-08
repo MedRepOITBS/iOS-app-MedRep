@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *displayPicture;
 @property (nullable, nonatomic, retain) NSNumber *group_id;
 @property (nullable, nonatomic, retain) NSNumber *groupId;
+@property (nullable, nonatomic, retain) NSNumber *like;
 @property (nullable, nonatomic, retain) NSNumber *likesCount;
 @property (nullable, nonatomic, retain) NSNumber *member_id;
 @property (nullable, nonatomic, retain) NSNumber *message_id;

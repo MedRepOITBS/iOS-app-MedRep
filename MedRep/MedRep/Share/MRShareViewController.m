@@ -258,13 +258,38 @@ UIImagePickerControllerDelegate>
         currentPost = [self.posts objectAtIndex:index];
     }
     
+    BOOL like = true;
+    if (currentPost.like != nil && currentPost.like.boolValue) {
+        like = false;
+    }
+    
+    if (currentPost.likesCount != nil) {
+        NSLog(@"Vamsi : %ld", currentPost.likesCount.longValue);
+    }
+    
     [[MRWebserviceHelper sharedWebServiceHelper] updateLikes:3
-                                                   likeCount:currentPost.likesCount.longValue
-                                                commentCount:currentPost.commentsCount.longValue
-                                                  shareCount:currentPost.shareCount.longValue
+                                                   likeCount:like
                                                    messageId:currentPost.sharePostId.longValue
                                                  withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                     NSInteger likeCount = 0;
+                                                     if (currentPost.likesCount != nil) {
+                                                         likeCount = currentPost.likesCount.longValue;
+                                                     }
+                                                     if (like) {
+                                                         likeCount++;
+                                                     } else {
+                                                         likeCount--;
+                                                     }
+                                                     
+                                                     currentPost.likesCount = [NSNumber numberWithLong:likeCount];
+                                                     currentPost.like = [NSNumber numberWithBool:like];
+                                                     [currentPost.managedObjectContext save:nil];
+                                                     
                                                      [self fetchPosts];
+                                                     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index
+                                                                                                 inSection:0];
+                                                     
+                                                     [self.postsTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
                                                  }];
 }
 

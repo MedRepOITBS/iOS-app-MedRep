@@ -109,7 +109,6 @@
     [MRAppControl getRepliedByProfileImage:post andImageView:self.profilePic];
     
     self.postedDate.text = [NSString stringWithFormat:@"%@",[post.postedOn stringWithFormat:kIdletimeFormat]];
-    
 }
 
 - (void)authorImageSelected {

@@ -19,6 +19,7 @@
 @property (nonatomic) UIViewController *parentViewController;
 
 @property (weak, nonatomic) IBOutlet UILabel *postedOnLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *likeImageView;
 
 @property (weak, nonatomic) IBOutlet UIImageView* profilePicImageView;
 @property (weak, nonatomic) IBOutlet UILabel* contactNameLabel;
@@ -47,12 +48,12 @@
     
     NSInteger tagIndex = sender.tag - 1;
     
-    NSInteger likeCount = [_likeCountLabel.text integerValue];
-    likeCount = likeCount +1;
-    self.post.likesCount = [NSNumber numberWithLong:likeCount];
-    [self.post.managedObjectContext save:nil];
-    
-    _shareCountLabel.text = [NSString stringWithFormat:@"%ld",(long)likeCount];
+//    NSInteger likeCount = [_likeCountLabel.text integerValue];
+//    likeCount = likeCount +1;
+//    self.post.likesCount = [NSNumber numberWithLong:likeCount];
+//    [self.post.managedObjectContext save:nil];
+//    
+//    _shareCountLabel.text = [NSString stringWithFormat:@"%ld",(long)likeCount];
     
     tagIndex = tagIndex / 100;
     
@@ -185,6 +186,12 @@ andParentViewController:(UIViewController *)parentViewController {
         
     }
 
+    NSString *likeImageName = @"Unlike";
+    if (post.like != nil && post.like.boolValue) {
+        likeImageName = @"Like";
+    }
+    
+    self.likeImageView.image = [UIImage imageNamed:likeImageName];
 }
 
 - (void)authorImageSelected {

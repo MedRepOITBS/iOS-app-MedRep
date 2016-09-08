@@ -22,6 +22,7 @@
 @dynamic displayPicture;
 @dynamic group_id;
 @dynamic groupId;
+@dynamic like;
 @dynamic likesCount;
 @dynamic member_id;
 @dynamic message_id;
@@ -54,6 +55,17 @@
 @dynamic title_desc;
 @dynamic transform_post_id;
 @dynamic postedReplies;
+
+//- (void)setLike:(NSNumber *)like {
+//    BOOL tempLike = false;
+//    if (like != nil) {
+//        tempLike = like.boolValue;
+//    }
+//    
+//    [self willChangeValueForKey:@"like"];
+//    [self setPrimitiveValue:[NSNumber numberWithBool:tempLike] forKey:@"like"];
+//    [self didChangeValueForKey:@"like"];
+//}
 
 - (void)setLikes_count:(NSNumber *)likes_count {
     NSInteger tempLikes = [self updateValueOfKey:likes_count andKey:@"likes_count"];
