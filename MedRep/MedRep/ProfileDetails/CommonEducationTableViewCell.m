@@ -8,15 +8,23 @@
 
 #import "CommonEducationTableViewCell.h"
 
+@interface CommonEducationTableViewCell ()
+
+@property (nonatomic) NSString *previousString;
+
+@end
+
 @implementation CommonEducationTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-  
+    self.previousString = @"";
+    
         // Initialization code
         UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, self.superview.frame.size.width, 50)];
         numberToolbar.barStyle = UIBarStyleDefault;
+    [numberToolbar setBackgroundColor:[UIColor darkTextColor]];
         numberToolbar.items = [NSArray arrayWithObjects:
                                [[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(closeOnKeyboardPressed:)],
                                [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil],
@@ -28,7 +36,7 @@
     // Initialization code
 }
 - (void)closeOnKeyboardPressed:(id)sender {
-    self.inputTextField.text = self.text;
+    self.inputTextField.text = self.previousString;
     [self.inputTextField resignFirstResponder];
 }
 
@@ -42,6 +50,8 @@
     // Configure the view for the selected state
 }
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
+    self.previousString = textField.text;
+    
     if ([self.delegate respondsToSelector:@selector(CommonEducationTableViewCellDelegateForTextFieldDidBeginEditing:withTextField:)]) {
         [self.delegate CommonEducationTableViewCellDelegateForTextFieldDidBeginEditing:self withTextField:textField];
     }

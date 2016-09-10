@@ -790,6 +790,7 @@
          
          if ([valN isEqualToString:@"EDUCATION_QUAL"]) {
              [cell.indicatorImageView setImage:[UIImage imageNamed:@"EducationQualifications"]];
+             [cell.addButton setImage:[UIImage imageNamed:@"Plus"] forState:UIControlStateNormal];
          } else if ([valN isEqualToString:@"INTEREST_AREA"]) {
              [cell.indicatorImageView setImage:[UIImage imageNamed:@"TherapeuticArea"]];
          } else if ([valN isEqualToString:@"CONTACT_INFO"]) {

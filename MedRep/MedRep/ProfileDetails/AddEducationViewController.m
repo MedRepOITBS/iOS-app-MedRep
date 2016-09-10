@@ -138,23 +138,6 @@
     NSLog(@"%@",stringFromDate);
     _currentSelectedTextField.text = stringFromDate;
 }
-- (void)didSelectDate {
-    [UIView animateWithDuration:0.5 animations:^{
-        self.topConstraint.constant = 0;
-        [self.tableView updateConstraintsIfNeeded];
-    }];
-
-    [_picker setHidden:YES];
-    [self updateLabel];
-}
-
-- (void)cancelDateSelection {
-    [UIView animateWithDuration:0.5 animations:^{
-        self.topConstraint.constant = 0;
-        [self.tableView updateConstraintsIfNeeded];
-    }];
-    [_picker setHidden:YES];
-}
 
 -(void)viewDidAppear:(BOOL)animated{
     
@@ -166,7 +149,7 @@
     //    CGRect pickerFrame = CGRectMake( 0, [[UIScreen mainScreen] bounds].size.height - (pickerSize.height+50), temp, pickerSize.height );
     //    [_picker updateFrame:pickerFrame];
     
-    _picker.backgroundColor = [UIColor greenColor];
+    _picker.backgroundColor = [UIColor lightTextColor];
     [self.view addSubview:_picker];
 }
 -(void)doneButtonTapped:(id)sender{
@@ -272,9 +255,6 @@
        return isValidationPassed;
 }
 
-
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -285,115 +265,126 @@
 
 #pragma mark - Table view data source
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 0;
+}
 
+- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 0;
+}
+
+- (UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return nil;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSInteger rowCount = 2;
     
-    
-    if (indexPath.row ==4) {
-        return 124;
+    if (section == 0) {
+        rowCount = 4;
     }
-    return 84;
+    
+    return rowCount;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-   
-    switch (indexPath.row) {
-        case 4:
-        {
-            
-            EducationDateTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EducationDateTimeTableViewCell" forIndexPath:indexPath];
-            cell.delegate = self;
-            cell.toYYYY.text = _toYYYY;
-            cell.fromYYYY.text = _fromYYYY;
-            return cell;
+    
+    if (indexPath.section == 1) {
+        EducationDateTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EducationDateTimeTableViewCell" forIndexPath:indexPath];
+        cell.delegate = self;
+        if (indexPath.row == 0) {
+            [cell.mandatoryItemIcon setHidden:YES];
+            cell.textLabel.text = _fromYYYY;
+        } else {
+            cell.textLabel.text = _toYYYY;
+            [cell.itemLabel setText:@"TO"];
+            cell.itemLabelWidthConstraint.constant = 25.0;
         }
-            break;
-
+        return cell;
+    } else {
+        CommonEducationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommonEducationTableViewCell" forIndexPath:indexPath];
         
-        default:
-        {
-            CommonEducationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommonEducationTableViewCell" forIndexPath:indexPath];
-            
-            switch (indexPath.row) {
-                case 0:
-                {
-                 
-                    NSString *buttonTitle =@"AGGREGATE";
-                    CGSize stringSize = [buttonTitle sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:17.0f]}];
-                   
-                    cell.titleWidthConstraint.constant =  ceil(stringSize.width);
-                    cell.titleEducationLbl.text = buttonTitle;
-                    cell.inputTextField.placeholder = @"Aggregate Percentage ";
-                    cell.inputTextField.tag = 800;
+        switch (indexPath.row) {
+            case 0:
+            {
+             
+                NSString *buttonTitle =@"AGGREGATE";
+                CGSize stringSize = [buttonTitle sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:17.0f]}];
+               
+                cell.titleWidthConstraint.constant =  ceil(stringSize.width);
+                cell.titleEducationLbl.text = buttonTitle;
+                cell.inputTextField.placeholder = @"Aggregate Percentage ";
+                cell.inputTextField.tag = 800;
 
-                    cell.inputTextField.text = _type;
-                    cell.inputTextField.keyboardType = UIKeyboardTypeNumberPad;
-                    cell.hintLabel.hidden = YES;
-                    
-                }
-                    break;
-                case  1:
-                {
-                    NSString *buttonTitle =@"DEGREE";
-                    CGSize stringSize = [buttonTitle sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:17.0f]}];
-                    
-                    cell.titleWidthConstraint.constant =  ceil(stringSize.width);
-                    
-                    cell.inputTextField.text = _degree;
-
-                    cell.titleEducationLbl.text = buttonTitle;
-                    cell.inputTextField.placeholder = @"Degree";
-                    cell.hintLabel.hidden = NO;
-                    cell.inputTextField.tag = 801;
-                    
-                }
-                    break;
-                case  2:
-                {
-                    NSString *buttonTitle =@"SPECIALITY";
-                    CGSize stringSize = [buttonTitle sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:17.0f]}];
-                    
-                    cell.titleWidthConstraint.constant =  ceil(stringSize.width);
-                    
-                    cell.inputTextField.text = _speciality;
-
-                    cell.titleEducationLbl.text = buttonTitle;
-                    cell.inputTextField.placeholder = @"speciality";
-                    cell.hintLabel.hidden = YES;
-                    cell.inputTextField.tag = 802;
-                    
-                }
-                    break;
-                case  3:
-                {
-                    
-                    NSString *buttonTitle =@"INSTITUTE";
-                    CGSize stringSize = [buttonTitle sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:17.0f]}];
-                    
-                    cell.titleWidthConstraint.constant =  ceil(stringSize.width);
-                    
-                    cell.inputTextField.text = _institute;
-
-                    cell.titleEducationLbl.text = buttonTitle;
-                    cell.inputTextField.placeholder = @"institute";
-                    cell.hintLabel.hidden = YES;
-                    cell.inputTextField.tag = 803;
-                    
-                }
-                    break;
-                    
-                default:
-                    break;
+                cell.inputTextField.text = _type;
+                cell.inputTextField.keyboardType = UIKeyboardTypeNumberPad;
+                cell.hintLabel.hidden = YES;
+                
             }
-            cell.delegate = self;
-            return cell;
-            
+                break;
+            case  1:
+            {
+                NSString *buttonTitle =@"DEGREE";
+                CGSize stringSize = [buttonTitle sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:17.0f]}];
+                
+                cell.titleWidthConstraint.constant =  ceil(stringSize.width);
+                
+                cell.inputTextField.text = _degree;
+
+                cell.titleEducationLbl.text = buttonTitle;
+                cell.inputTextField.placeholder = @"For eg. MBBS, MD, DGO, FRCS etc.";
+                cell.hintLabel.hidden = NO;
+                cell.inputTextField.tag = 801;
+                
+            }
+                break;
+            case  2:
+            {
+                NSString *buttonTitle =@"SPECIALITY";
+                CGSize stringSize = [buttonTitle sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:17.0f]}];
+                
+                cell.titleWidthConstraint.constant =  ceil(stringSize.width);
+                
+                cell.inputTextField.text = _speciality;
+
+                cell.titleEducationLbl.text = buttonTitle;
+                cell.inputTextField.placeholder = @"speciality";
+                cell.hintLabel.hidden = YES;
+                cell.inputTextField.tag = 802;
+                
+            }
+                break;
+            case  3:
+            {
+                
+                NSString *buttonTitle =@"INSTITUTE";
+                CGSize stringSize = [buttonTitle sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:17.0f]}];
+                
+                cell.titleWidthConstraint.constant =  ceil(stringSize.width);
+                
+                cell.inputTextField.text = _institute;
+
+                cell.titleEducationLbl.text = buttonTitle;
+                cell.inputTextField.placeholder = @"institute";
+                cell.hintLabel.hidden = YES;
+                cell.inputTextField.tag = 803;
+                
+            }
+                break;
+                
+            default:
+                break;
         }
-            break;
+        cell.delegate = self;
+        return cell;
     }
     return nil;
 }
@@ -465,6 +456,7 @@
 
 -(void)EducationDateTimeTableViewCellDelegateForTextFieldClicked:(EducationDateTimeTableViewCell *)cell withTextField:(UITextField *)textField{
     
+    [_currentSelectedTextField resignFirstResponder];
     
     [UIView animateWithDuration:0.5 animations:^{
 //        CGRect f = self.view.frame;
@@ -478,6 +470,8 @@
     
 }
 -(void)CommonEducationTableViewCellDelegateForTextFieldDidBeginEditing:(CommonEducationTableViewCell *)cell withTextField:(UITextField *)textField{
+    [self cancelDateSelection];
+    
     if(textField.tag == 803){
         [UIView animateWithDuration:0.5 animations:^{
             self.topConstraint.constant = -100;
@@ -485,7 +479,7 @@
         }];
        
     }
-    
+    _currentSelectedTextField = textField;
 }
 
 -(void)CommonEducationTableViewCellDelegateForTextFieldDidEndEditing:(CommonEducationTableViewCell *)cell withTextField:(UITextField *)textField{
@@ -506,8 +500,24 @@
         }];
         _institute = trimmedString;
     }
-
 }
 
+- (void)didSelectDate {
+    [UIView animateWithDuration:0.5 animations:^{
+        self.topConstraint.constant = 0;
+        [self.tableView updateConstraintsIfNeeded];
+    }];
+    
+    [_picker setHidden:YES];
+    [self updateLabel];
+}
+
+- (void)cancelDateSelection {
+    [UIView animateWithDuration:0.5 animations:^{
+        self.topConstraint.constant = 0;
+        [self.tableView updateConstraintsIfNeeded];
+    }];
+    [_picker setHidden:YES];
+}
 
 @end

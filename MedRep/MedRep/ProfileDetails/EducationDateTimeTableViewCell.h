@@ -10,8 +10,14 @@
 @protocol EducationDateTimeTableViewCellDelegate;
 
 @interface EducationDateTimeTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UITextField *fromYYYY;
-@property (weak, nonatomic) IBOutlet UITextField *toYYYY;
+
+@property (weak, nonatomic) IBOutlet UILabel *mandatoryItemIcon;
+
+@property (weak, nonatomic) IBOutlet UILabel *itemLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *itemLabelWidthConstraint;
+
+@property (weak, nonatomic) IBOutlet UITextField *dateLabel;
+
 @property (nonatomic,weak) id<EducationDateTimeTableViewCellDelegate> delegate;
 
 @end
