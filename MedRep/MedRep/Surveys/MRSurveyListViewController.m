@@ -28,17 +28,10 @@
 @implementation MRSurveyListViewController
 - (void)getMenuNavigationButtonWithController:(SWRevealViewController *)revealViewCont NavigationItem:(UINavigationItem *)navigationItem1
 {
-    SWRevealViewController *revealController = revealViewCont;
-    revealController.delegate = self;
-    //[NSArray arrayWithObjects:@"pcselect@2x.png",@"pcfedback@2x.png",@"pcplus@2x.png",nil];
-    [revealController panGestureRecognizer];
-    [revealController tapGestureRecognizer];
+    self.navigationItem.title = @"Surveys";
     
-    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon.png"]
-                                                                         style:UIBarButtonItemStylePlain target:revealController action:@selector(revealToggle:)];
-    
-    revealButtonItem.tintColor = [UIColor blackColor];
-    navigationItem1.leftBarButtonItem = revealButtonItem;
+    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonAction:)];
+    self.navigationItem.leftBarButtonItem = revealButtonItem;
     
     UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navView];
     self.navigationItem.rightBarButtonItem = rightButtonItem;
@@ -83,6 +76,12 @@
          }
      }];
     [self getMenuNavigationButtonWithController:[self revealViewController] NavigationItem:self.navigationItem];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [MRCommon applyNavigationBarStyling:self.navigationController];
 }
 
 - (void)didReceiveMemoryWarning {

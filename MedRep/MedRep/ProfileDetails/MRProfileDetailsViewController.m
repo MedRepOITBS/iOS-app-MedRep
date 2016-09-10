@@ -581,7 +581,7 @@
         return 152;
     }
    else if ([valN isEqualToString:@"CONTACT_INFO_DETAIL"]) {
-        return 104;
+        return 124;
     }
     else  if ([valN isEqualToString:@"ABOUT"]){
         return 60;
@@ -706,9 +706,6 @@
          ProfileBasicTableViewCell  *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"ProfileBasicTableViewCell"] forIndexPath:indexPath];
          NSDictionary *userdata = [MRAppControl sharedHelper].userRegData;
          cell.delegate = self;
-         
-         NSInteger userType = [MRAppControl sharedHelper].userType;
-         
          cell.userNameLbl.text         = _profileObj.name;
          cell.userLocation.text = _profileObj.location;
          
@@ -720,23 +717,18 @@
              [cell.imageBtn setUserInteractionEnabled:YES];
          }
          
+         NSURL * imageURL = [NSURL URLWithString:[userdata objectForKey:KProfilePicture]];
          
-//         if (_profileImage!=nil) {
-//             cell.profileimageView.image = _profileImage;
-//         }else{
          
-             NSURL * imageURL = [NSURL URLWithString:[userdata objectForKey:KProfilePicture]];
-             
-             
-             dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
-             dispatch_async(queue, ^{
-                 NSData *data = [NSData dataWithContentsOfURL:imageURL];
-                 UIImage *image = [UIImage imageWithData:data];
-                 dispatch_async(dispatch_get_main_queue(), ^{
-                     
-                     cell.profileimageView.image = image;
-                 });  
-             });
+         dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+         dispatch_async(queue, ^{
+             NSData *data = [NSData dataWithContentsOfURL:imageURL];
+             UIImage *image = [UIImage imageWithData:data];
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 
+                 cell.profileimageView.image = image;
+             });  
+         });
          return cell;
      } else if([valN isEqualToString:@"CONTACT_INFO_DETAIL"]){
          ContactInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"ContactInfoTableViewCell"] forIndexPath:indexPath];

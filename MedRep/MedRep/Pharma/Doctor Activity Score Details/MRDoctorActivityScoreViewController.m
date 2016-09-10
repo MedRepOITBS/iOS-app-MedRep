@@ -39,16 +39,10 @@
 
 - (void)getMenuNavigationButtonWithController:(SWRevealViewController *)revealViewCont NavigationItem:(UINavigationItem *)navigationItem1
 {
-    SWRevealViewController *revealController = revealViewCont;
+    self.navigationItem.title = @"Doctor Score";
     
-    [revealController panGestureRecognizer];
-    [revealController tapGestureRecognizer];
-    
-    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon.png"]
-                                                                         style:UIBarButtonItemStylePlain target:revealController action:@selector(revealToggle:)];
-    
-    revealButtonItem.tintColor = [UIColor blackColor];
-    navigationItem1.leftBarButtonItem = revealButtonItem;
+    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonAction:)];
+    self.navigationItem.leftBarButtonItem = revealButtonItem;
     
     UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navView];
     self.navigationItem.rightBarButtonItem = rightButtonItem;
@@ -69,19 +63,15 @@
     // Do any additional setup after loading the view from its nib.
 }
 
- -(void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    [MRCommon applyNavigationBarStyling:self.navigationController];
 }
+
 - (void)setUpUI
 {
     [self updateTotalScore:[NSNumber numberWithInteger:0]];
-    if ([MRCommon deviceHasThreePointFiveInchScreen])
-    {
-        self.docotorDetailsHeightCostraint.constant = 210;
-        [self.view updateConstraints];
-    }
-//    [self.graphScrollView scrollRectToVisible:CGRectMake(0, self.graphViewHeightConstraint.constant, self.view.frame.size.width, 100) animated:YES];
 }
 
 - (void)updateTotalScore:(NSNumber*)tScore
@@ -180,7 +170,9 @@
     
     if ([self.graphHolderView viewWithTag:1234567890] == nil)
     {
-        graphView = [[GraphView alloc] initWithFrame:self.graphHolderView.frame];
+        CGRect frame = self.graphHolderView.frame;
+        frame.origin.x = frame.origin.x + 40;
+        graphView = [[GraphView alloc] initWithFrame:frame];
     }
     graphView.graphBackgroundColor = [UIColor colorWithRed:241.0/255.0 green:241.0/255.0 blue:241.0/255.0 alpha:1.0];
     graphView.tag = 1234567890;
@@ -192,7 +184,7 @@
     if ([self.graphHolderView viewWithTag:1234567890] == nil)
     {
         [self.graphHolderView addSubview:graphView];
-        [MRCommon addUpdateConstarintsTo:self.graphHolderView withChildView:graphView];
+//        [MRCommon addUpdateConstarintsTo:self.graphHolderView withChildView:graphView];
     }
     [graphView setNeedsDisplay];
     [self.graphScrollView scrollRectToVisible:CGRectMake(0, 0, 100, 600) animated:NO];
