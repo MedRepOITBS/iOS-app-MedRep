@@ -372,7 +372,7 @@
 {
     SWRevealViewController *revealController = self.revealViewController;
 
-    MRDashBoardVC *dashboardViewCont = [[MRDashBoardVC alloc] initWithNibName:[MRCommon nibNameForDevice:@"MRDashBoardVC"] bundle:nil];
+    MRDashBoardVC *dashboardViewCont = [[MRDashBoardVC alloc] initWithNibName:@"MRDashBoardVC" bundle:nil];
     
     UINavigationController *dashboardNavCont = [[UINavigationController alloc] initWithRootViewController:dashboardViewCont];
     [revealController pushFrontViewController:dashboardNavCont animated:YES];
