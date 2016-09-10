@@ -45,9 +45,9 @@
     [revealController panGestureRecognizer];
     [revealController tapGestureRecognizer];
     
+    self.navigationItem.title = @"Notification Details";
     
-    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon.png"]
-                                                                         style:UIBarButtonItemStylePlain target:revealController action:@selector(revealToggle:)];
+    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonAction:)];
     
     self.navigationItem.leftBarButtonItem = revealButtonItem;
     
