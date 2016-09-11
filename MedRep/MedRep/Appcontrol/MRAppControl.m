@@ -744,7 +744,7 @@
 
 + (void)getContactImage:(MRContact*)contact andImageView:(UIImageView*)parentView {
     if (contact.dPicture != nil && contact.dPicture.length > 0) {
-        parentView.image = [UIImage imageNamed:@"person"];
+        parentView.image = [UIImage imageNamed:@"user"];
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:contact.dPicture]];
@@ -777,14 +777,14 @@
             subscriptionTitleLabel.text = imageString.length > 2 ? [imageString substringToIndex:2] : imageString;
             [parentView addSubview:subscriptionTitleLabel];
         } else {
-            parentView.image = [UIImage imageNamed:@"person"];
+            parentView.image = [UIImage imageNamed:@"user"];
         }
     }
 }
 
 + (void)getGroupMemberImage:(MRGroupMembers*)member andImageView:(UIImageView*)parentView {
     if (member.imageUrl != nil && member.imageUrl.length > 0) {
-        parentView.image = [UIImage imageNamed:@"person"];
+        parentView.image = [UIImage imageNamed:@"user"];
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:member.imageUrl]];
@@ -874,7 +874,7 @@
     if (group.group_img_data != nil && group.group_img_data.length > 0) {
         parentView.image = [UIImage imageWithData:group.group_img_data];
     } else if (group.imageUrl != nil && group.imageUrl.length > 0) {
-        parentView.image = [UIImage imageNamed:@"Group"];
+        parentView.image = [UIImage imageNamed:@"group"];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:group.imageUrl]];
             if (imageData != nil) {
@@ -906,7 +906,7 @@
         
         [parentView setImage:nil];
     } else {
-        parentView.image = [UIImage imageNamed:@"Group"];
+        parentView.image = [UIImage imageNamed:@"group"];
     }
 }
 
