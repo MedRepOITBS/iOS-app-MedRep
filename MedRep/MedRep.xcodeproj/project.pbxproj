@@ -614,6 +614,8 @@
 		B421E4641D5D5A1700F15599 /* pencil@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B421E45F1D5D5A1700F15599 /* pencil@2x.png */; };
 		B421E4651D5D5A1700F15599 /* pencil@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B421E4601D5D5A1700F15599 /* pencil@3x.png */; };
 		B421E4661D5D5A1700F15599 /* pencil@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B421E4601D5D5A1700F15599 /* pencil@3x.png */; };
+		B44F06B31D85DFD20003C5FA /* SearchPageBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = B44F06B21D85DFD20003C5FA /* SearchPageBackground.png */; };
+		B44F06B41D85DFD20003C5FA /* SearchPageBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = B44F06B21D85DFD20003C5FA /* SearchPageBackground.png */; };
 		B465658B1D569EA80016CDA8 /* eye.png in Resources */ = {isa = PBXBuildFile; fileRef = B465658A1D569EA80016CDA8 /* eye.png */; };
 		B465658C1D569EA80016CDA8 /* eye.png in Resources */ = {isa = PBXBuildFile; fileRef = B465658A1D569EA80016CDA8 /* eye.png */; };
 		B46565901D56B0E50016CDA8 /* MemberListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B465658E1D56B0E50016CDA8 /* MemberListViewController.m */; };
@@ -2151,6 +2153,7 @@
 		B421E45E1D5D5A1700F15599 /* pencil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pencil.png; sourceTree = "<group>"; };
 		B421E45F1D5D5A1700F15599 /* pencil@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pencil@2x.png"; sourceTree = "<group>"; };
 		B421E4601D5D5A1700F15599 /* pencil@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pencil@3x.png"; sourceTree = "<group>"; };
+		B44F06B21D85DFD20003C5FA /* SearchPageBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SearchPageBackground.png; sourceTree = "<group>"; };
 		B465658A1D569EA80016CDA8 /* eye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eye.png; sourceTree = "<group>"; };
 		B465658D1D56B0E50016CDA8 /* MemberListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberListViewController.h; sourceTree = "<group>"; };
 		B465658E1D56B0E50016CDA8 /* MemberListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberListViewController.m; sourceTree = "<group>"; };
@@ -4133,6 +4136,7 @@
 				CC649F531D0D1BA10012289C /* MRDrugDetailViewController.xib */,
 				CC649F541D0D1BA10012289C /* MRDrugSearchViewController.h */,
 				B4BB249B1D40738A00A3DD73 /* searchScreen.png */,
+				B44F06B21D85DFD20003C5FA /* SearchPageBackground.png */,
 				CC649F551D0D1BA10012289C /* MRDrugSearchViewController.m */,
 				CC649F561D0D1BA10012289C /* MRDrugSearchViewController.xib */,
 			);
@@ -4651,6 +4655,7 @@
 				7929E3871B9C78B5001F1373 /* surveys@3x.png in Resources */,
 				8AFE8CD51D0EFFD30000382E /* MRCreateGroupViewController.xib in Resources */,
 				795366261BA0BFD20021CE4D /* favFilter-checked@2x.png in Resources */,
+				B44F06B31D85DFD20003C5FA /* SearchPageBackground.png in Resources */,
 				795366281BA0BFD20021CE4D /* favFilter-wrong@2x.png in Resources */,
 				79FFD2641BB9DC3100CEE606 /* fbUnSelectedRadio@2x.png in Resources */,
 				79BD27CB1B809A80007CA448 /* HomeLogo@2x~iPad.png in Resources */,
@@ -5104,6 +5109,7 @@
 				CC7DB0A81D0C8BEC007DFE4C /* meetings@3x.png in Resources */,
 				CC7DB0A91D0C8BEC007DFE4C /* bg@3x.png in Resources */,
 				CC7DB0AA1D0C8BEC007DFE4C /* NDcomapny-logo@2x.png in Resources */,
+				B44F06B41D85DFD20003C5FA /* SearchPageBackground.png in Resources */,
 				CC7DB0AB1D0C8BEC007DFE4C /* categoryBG~iPad.jpg in Resources */,
 				CC7DB3B01D0CCA96007DFE4C /* MRGroupTableViewCell.xib in Resources */,
 				CC7DB0AC1D0C8BEC007DFE4C /* MRNotificationInsiderViewController.xib in Resources */,
