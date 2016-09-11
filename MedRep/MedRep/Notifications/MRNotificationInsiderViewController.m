@@ -18,10 +18,8 @@
 #import "MRDatabaseHelper.h"
 #import "MRNotifications.h"
 
-@interface MRNotificationInsiderViewController ()<UIScrollViewDelegate, SWRevealViewControllerDelegate, UIAlertViewDelegate>
-{
-    SWRevealViewController *revealController;
-}
+@interface MRNotificationInsiderViewController ()<UIScrollViewDelegate,UIAlertViewDelegate>
+
 @property (weak, nonatomic) IBOutlet UIView *tiltleView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *backbutton;
@@ -103,16 +101,6 @@
     [self addSwipeGesture];
     [self resetSelection];
     self.rHilightLabel.backgroundColor = kRGBCOLOR(22, 107, 170);
-    revealController = [self revealViewController];
-    revealController.delegate = self;
-    [revealController panGestureRecognizer];
-    [revealController tapGestureRecognizer];
-    
-    
-    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon.png"]
-                                                                         style:UIBarButtonItemStylePlain target:revealController action:@selector(revealToggle:)];
-    
-    self.navigationItem.leftBarButtonItem = revealButtonItem;
     
     self.favoriteImage.image = [UIImage imageNamed:@"favorite.png"];
     self.feedBackImage.image = [UIImage imageNamed:@"feedback.png"];
@@ -132,9 +120,6 @@
         self.favoriteImage.image = [UIImage imageNamed:@"favoriteSelected.png"];
     }
     
-    
-    UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navView];
-    self.navigationItem.rightBarButtonItem = rightButtonItem;
     
     self.selectedNotification = [[MRAppControl sharedHelper] getNotificationByID:[[self.notificationDetails objectForKey:@"notificationId"] integerValue]];
     
@@ -158,13 +143,23 @@
     
     [self hideNavigationButton];
     self.imagesCount = 0;
-    if (self.detailsList.count > 1)
-    {
-        [self showNavigationButton];
-    }
+//    if (self.detailsList.count > 1)
+//    {
+//        [self showNavigationButton];
+//    }
     
     // Do any additional setup after loading the view from its nib.
     
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:NO];
+    [super viewDidDisappear:animated];
 }
 
 - (void)addSwipeGesture
@@ -667,6 +662,8 @@
 {
     self.rightButton.hidden = YES;
     self.leftButton.hidden  = YES;
+    
+    [self.navigationController setNavigationBarHidden:YES];
 }
 
 - (IBAction)leftButtonAction:(id)sender
@@ -736,9 +733,6 @@
     self.drugNamelabel.hidden = NO;
     self.companyNamelabel.hidden = NO;
     self.fullscreenView.hidden = NO;
-    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon.png"]
-                                                                         style:UIBarButtonItemStylePlain target:revealController action:@selector(revealToggle:)];
-    self.navigationItem.leftBarButtonItem = revealButtonItem;
     self.titleLabel.text = [self.selectedNotification objectForKey:@"companyName"];
 }
 
