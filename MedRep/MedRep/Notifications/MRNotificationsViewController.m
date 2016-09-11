@@ -22,7 +22,6 @@
 
 @interface MRNotificationsViewController ()<UITableViewDataSource,UITableViewDelegate, SWRevealViewControllerDelegate>
 
-@property (weak, nonatomic) IBOutlet UIView *titleView;
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
 @property (weak, nonatomic) IBOutlet UIButton *favoritesButton;
 @property (weak, nonatomic) IBOutlet UIButton *readNotifications;
@@ -38,19 +37,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    SWRevealViewController *revealController = [self revealViewController];
-    revealController.delegate = self;
-    [revealController panGestureRecognizer];
-    [revealController tapGestureRecognizer];
+    self.navigationItem.title = @"Notifications";
     
-    
-    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon.png"]
-                                                                         style:UIBarButtonItemStylePlain target:revealController action:@selector(revealToggle:)];
-    
+    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonAction:)];
     self.navigationItem.leftBarButtonItem = revealButtonItem;
     
     UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navView];
     self.navigationItem.rightBarButtonItem = rightButtonItem;
+    
     [MRCommon showActivityIndicator:@"Loading..."];
     
     NSString *notificationsDate = ([MRDatabaseHelper getObjectDataExistance:kNotificationsEntity]) ?  [MRCommon stringFromDate:[MRDefaults objectForKey:kNotificationFetchedDate] withDateFormate:@"YYYYMMdd"] : @"20150101";
