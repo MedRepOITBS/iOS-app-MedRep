@@ -95,7 +95,7 @@
         [_createBtn setTitle:@"Update Group" forState:UIControlStateNormal];
     }else{
         isUpdateMode = NO;
-        groupIconData = UIImagePNGRepresentation([UIImage imageNamed:@"Group"]);
+        groupIconData = UIImagePNGRepresentation([UIImage imageNamed:@"group"]);
     }
 }
 
@@ -193,7 +193,7 @@
                 _txtName.text = @"";
                 _txtLongDesc.text = @"";
                 _txtShortDesc.text = @"";
-                [_imgView setImage:[UIImage imageNamed:@"Group.png"]];
+                [_imgView setImage:[UIImage imageNamed:@"group"]];
                 groupIconData = nil;
             }
             else {
@@ -214,7 +214,7 @@
                                  _txtName.text = @"";
                                  _txtLongDesc.text = @"";
                                  _txtShortDesc.text = @"";
-                                 [_imgView setImage:[UIImage imageNamed:@"Group.png"]];
+                                 [_imgView setImage:[UIImage imageNamed:@"group"]];
                                  groupIconData = nil;
                              }else
                              {
@@ -249,7 +249,7 @@
                 _txtName.text = @"";
                 _txtLongDesc.text = @"";
                 _txtShortDesc.text = @"";
-                [_imgView setImage:[UIImage imageNamed:@"Group.png"]];
+                [_imgView setImage:[UIImage imageNamed:@"group"]];
                 groupIconData = nil;
             }
             else {
@@ -272,7 +272,7 @@
                                  _txtName.text = @"";
                                  _txtLongDesc.text = @"";
                                  _txtShortDesc.text = @"";
-                                 [_imgView setImage:[UIImage imageNamed:@"Group.png"]];
+                                 [_imgView setImage:[UIImage imageNamed:@"group"]];
                                  groupIconData = nil;
                              }else
                              {

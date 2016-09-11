@@ -523,7 +523,6 @@
 		8AFE8CE21D0F21BF0000382E /* compose.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB38A1D0CC8C8007DFE4C /* compose.png */; };
 		8AFE8CE31D0F21BF0000382E /* Contact.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB38B1D0CC8C8007DFE4C /* Contact.png */; };
 		8AFE8CE41D0F21BF0000382E /* Contacts.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB38C1D0CC8C8007DFE4C /* Contacts.png */; };
-		8AFE8CE51D0F21BF0000382E /* Group.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB38D1D0CC8C8007DFE4C /* Group.png */; };
 		8AFE8CE61D0F21BF0000382E /* groups.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB38E1D0CC8C8007DFE4C /* groups.png */; };
 		8AFE8CE81D0F21BF0000382E /* medicine.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3901D0CC8C8007DFE4C /* medicine.jpg */; };
 		8AFE8CE91D0F21BF0000382E /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3911D0CC8C8007DFE4C /* plus.png */; };
@@ -1410,7 +1409,6 @@
 		CC7DB3961D0CC8C8007DFE4C /* compose.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB38A1D0CC8C8007DFE4C /* compose.png */; };
 		CC7DB3981D0CC8C8007DFE4C /* Contact.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB38B1D0CC8C8007DFE4C /* Contact.png */; };
 		CC7DB39A1D0CC8C8007DFE4C /* Contacts.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB38C1D0CC8C8007DFE4C /* Contacts.png */; };
-		CC7DB39C1D0CC8C8007DFE4C /* Group.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB38D1D0CC8C8007DFE4C /* Group.png */; };
 		CC7DB39E1D0CC8C8007DFE4C /* groups.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB38E1D0CC8C8007DFE4C /* groups.png */; };
 		CC7DB3A21D0CC8C8007DFE4C /* medicine.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3901D0CC8C8007DFE4C /* medicine.jpg */; };
 		CC7DB3A41D0CC8C8007DFE4C /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3911D0CC8C8007DFE4C /* plus.png */; };
@@ -2408,7 +2406,6 @@
 		CC7DB38A1D0CC8C8007DFE4C /* compose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = compose.png; path = MedRep/RESOURCES/compose.png; sourceTree = SOURCE_ROOT; };
 		CC7DB38B1D0CC8C8007DFE4C /* Contact.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Contact.png; path = MedRep/RESOURCES/Contact.png; sourceTree = SOURCE_ROOT; };
 		CC7DB38C1D0CC8C8007DFE4C /* Contacts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Contacts.png; path = MedRep/RESOURCES/Contacts.png; sourceTree = SOURCE_ROOT; };
-		CC7DB38D1D0CC8C8007DFE4C /* Group.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Group.png; path = MedRep/RESOURCES/Group.png; sourceTree = SOURCE_ROOT; };
 		CC7DB38E1D0CC8C8007DFE4C /* groups.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = groups.png; path = MedRep/RESOURCES/groups.png; sourceTree = SOURCE_ROOT; };
 		CC7DB3901D0CC8C8007DFE4C /* medicine.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = medicine.jpg; path = MedRep/RESOURCES/medicine.jpg; sourceTree = SOURCE_ROOT; };
 		CC7DB3911D0CC8C8007DFE4C /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = plus.png; path = MedRep/RESOURCES/plus.png; sourceTree = SOURCE_ROOT; };
@@ -4295,7 +4292,6 @@
 				CC7DB38A1D0CC8C8007DFE4C /* compose.png */,
 				CC7DB38B1D0CC8C8007DFE4C /* Contact.png */,
 				CC7DB38C1D0CC8C8007DFE4C /* Contacts.png */,
-				CC7DB38D1D0CC8C8007DFE4C /* Group.png */,
 				CC7DB38E1D0CC8C8007DFE4C /* groups.png */,
 				CC7DB3901D0CC8C8007DFE4C /* medicine.jpg */,
 				CC7DB3911D0CC8C8007DFE4C /* plus.png */,
@@ -4784,7 +4780,6 @@
 				795366041BA09EBF0021CE4D /* feedback@2x.png in Resources */,
 				79BD27A91B80980F007CA448 /* Icon-Small.png in Resources */,
 				79AC945F1B9E0DA000B81452 /* NDcompany2-BG@2x.jpg in Resources */,
-				8AFE8CE51D0F21BF0000382E /* Group.png in Resources */,
 				79F416A61B9F6E560089729B /* cnsort@2x.png in Resources */,
 				79BD279D1B80980F007CA448 /* Icon-40.png in Resources */,
 				7961A97A1B8F4E520035D63A /* MRWelcomeViewController.xib in Resources */,
@@ -5258,7 +5253,6 @@
 				CC7DB11B1D0C8BEC007DFE4C /* full-screen@2x.png in Resources */,
 				CC7DB11C1D0C8BEC007DFE4C /* PHmail@2x.png in Resources */,
 				CC7DB11D1D0C8BEC007DFE4C /* nabar@2x.png in Resources */,
-				CC7DB39C1D0CC8C8007DFE4C /* Group.png in Resources */,
 				CC7DB11E1D0C8BEC007DFE4C /* PHmedrep@3x.png in Resources */,
 				CC7DB11F1D0C8BEC007DFE4C /* PHprescription@3x.png in Resources */,
 				CC7DB1201D0C8BEC007DFE4C /* wallet@3x.png in Resources */,

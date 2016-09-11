@@ -787,14 +787,32 @@
          
         [cell setCommonProfileDataForType:valN withUserProfileData:_profileObj];
          cell.delegate = self;
-         
-         if ([valN isEqualToString:@"EDUCATION_QUAL"]) {
+
+         if ([valN isEqualToString:@"WORK_EXP"]) {
+             
+             [cell.indicatorImageView setImage:[UIImage imageNamed:@"workExp"]];
+
+         }
+     else  if ([valN isEqualToString:@"ADDRESS_INFO"]) {
+             
+             [cell.indicatorImageView setImage:[UIImage imageNamed:@"Address"]];
+             
+         }
+        else  if ([valN isEqualToString:@"PUBLICATION"]) {
+             
+             [cell.indicatorImageView setImage:[UIImage imageNamed:@"Publications"]];
+             
+         }
+         else if ([valN isEqualToString:@"EDUCATION_QUAL"]) {
              [cell.indicatorImageView setImage:[UIImage imageNamed:@"EducationQualifications"]];
              [cell.addButton setImage:[UIImage imageNamed:@"Plus"] forState:UIControlStateNormal];
          } else if ([valN isEqualToString:@"INTEREST_AREA"]) {
              [cell.indicatorImageView setImage:[UIImage imageNamed:@"TherapeuticArea"]];
          } else if ([valN isEqualToString:@"CONTACT_INFO"]) {
-             [cell.addButton setImage:[UIImage imageNamed:@"pencil"] forState:UIControlStateNormal];
+             [cell.indicatorImageView setImage:[UIImage imageNamed:@"ContactDetail"]];
+
+             
+             [cell.addButton setImage:[UIImage imageNamed:@"editIcon"] forState:UIControlStateNormal];
          }
          
          if (self.showAsReadable) {
