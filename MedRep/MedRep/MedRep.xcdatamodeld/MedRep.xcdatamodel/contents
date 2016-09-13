@@ -161,6 +161,7 @@
         <attribute name="message_type" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="parentSharePostId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="post_date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="posted_on" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="postedOn" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="postedReplyId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="receiver_Id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -319,7 +320,7 @@
         <element name="MRNotifications" positionX="-36" positionY="63" width="128" height="420"/>
         <element name="MRNotificationType" positionX="16" positionY="-135" width="128" height="90"/>
         <element name="MRPendingRecordsCount" positionX="153" positionY="9" width="128" height="75"/>
-        <element name="MRPostedReplies" positionX="-27" positionY="531" width="128" height="375"/>
+        <element name="MRPostedReplies" positionX="-27" positionY="531" width="128" height="390"/>
         <element name="MRProfile" positionX="-36" positionY="135" width="128" height="210"/>
         <element name="MRPublications" positionX="0" positionY="171" width="128" height="120"/>
         <element name="MRReplies" positionX="-36" positionY="135" width="128" height="120"/>

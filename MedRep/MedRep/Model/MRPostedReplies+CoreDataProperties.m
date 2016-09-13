@@ -30,6 +30,7 @@
 @dynamic message;
 @dynamic message_type;
 @dynamic post_date;
+@dynamic posted_on;
 @dynamic receiver_Id;
 @dynamic topic_id;
 @dynamic share_date;
@@ -78,6 +79,10 @@
 
 - (void)setPost_date:(NSDate *)post_date {
     self.postedOn = post_date;
+}
+
+- (void)setPosted_on:(NSDate *)posted_on {
+    self.postedOn = posted_on;
 }
 
 - (void)setReceiver_Id:(NSNumber *)receiver_Id {

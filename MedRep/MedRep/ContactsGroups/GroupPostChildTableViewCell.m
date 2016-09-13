@@ -108,7 +108,13 @@
     [self.profilePic addGestureRecognizer:recognizer];
     [MRAppControl getRepliedByProfileImage:post andImageView:self.profilePic];
     
-    self.postedDate.text = [NSString stringWithFormat:@"%@",[post.postedOn stringWithFormat:kIdletimeFormat]];
+    
+    NSString *tempDate = @"";
+    if (post.postedOn != nil) {
+        tempDate = [NSString stringWithFormat:@"%@",[post.postedOn stringWithFormat:kIdletimeFormat]];
+    }
+    
+    self.postedDate.text = tempDate;
 }
 
 - (void)authorImageSelected {

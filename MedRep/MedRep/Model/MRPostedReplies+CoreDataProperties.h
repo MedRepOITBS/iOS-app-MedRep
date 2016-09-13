@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSNumber *parentSharePostId;
 @property (nullable, nonatomic, retain) NSString *doctor_Name;
 @property (nullable, nonatomic, retain) NSDate *postedOn;
+@property (nullable, nonatomic, retain) NSDate *posted_on;
 @property (nullable, nonatomic, retain) NSNumber *postedReplyId;
 @property (nullable, nonatomic, retain) NSString *url;
 
