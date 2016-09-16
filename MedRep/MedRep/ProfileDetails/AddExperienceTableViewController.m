@@ -459,6 +459,17 @@ self.navigationItem.title  = @"Add Experience";
     _currentSelectedTextField = textField;
 //        self.customDatePicker.hidden = NO;
     _picker.hidden = NO;
+    
+    if (textField.tag == 502) {
+        if (_fromMM != nil && _fromMM.length > 0) {
+            [_picker setMinimumDate:_fromDate];
+            [_picker setMaximumDate:[NSDate date]];
+        }
+    } else {
+        if (_toMM != nil && _toMM.length > 0) {
+            [_picker setMaximumDate:_toDate];
+        }
+    }
 }
 
 /*

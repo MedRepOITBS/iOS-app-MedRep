@@ -25,7 +25,8 @@
 @property (nonatomic,strong) NSString *institute;
 @property (nonatomic,strong) NTMonthYearPicker *picker;
 
-
+@property (nonatomic) NSDate *fromDate;
+@property (nonatomic) NSDate *toDate;
 
 @end
 
@@ -109,18 +110,16 @@
     }
     
 }
+
 - (void)updateLabel {
-    
-    
-    
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     NSString *stringFromDate;
     
-    
-    [formatter setDateFormat:@"YYYY"];
+    [formatter setDateFormat:@"MMM YYYY"];
     stringFromDate = [formatter stringFromDate:_picker.date];
     if (_currentSelectedTextField.tag == 1200) {
         _fromYYYY = stringFromDate;
+        _fromDate = _picker.date;
     }
     else if(_currentSelectedTextField.tag == 1201) {
         
@@ -130,10 +129,8 @@
             
         }
         _toYYYY = stringFromDate;
-        
+        _toDate = _picker.date;
     }
-    
-    
     
     NSLog(@"%@",stringFromDate);
     _currentSelectedTextField.text = stringFromDate;
@@ -303,10 +300,12 @@
         if (indexPath.row == 0) {
             [cell.mandatoryItemIcon setHidden:YES];
             cell.textLabel.text = _fromYYYY;
+            cell.dateLabel.tag = 1200;
         } else {
             cell.textLabel.text = _toYYYY;
             [cell.itemLabel setText:@"TO"];
             cell.itemLabelWidthConstraint.constant = 25.0;
+            cell.dateLabel.tag = 1201;
         }
         return cell;
     } else {
@@ -468,7 +467,18 @@
     _currentSelectedTextField = textField;
     self.picker.hidden = NO;
     
+    if (textField.tag == 1201) {
+        if (_fromYYYY != nil && _fromYYYY.length > 0) {
+            [_picker setMinimumDate:_fromDate];
+            [_picker setMaximumDate:[NSDate date]];
+        }
+    } else {
+        if (_toYYYY != nil && _toYYYY.length > 0) {
+            [_picker setMaximumDate:_toDate];
+        }
+    }
 }
+
 -(void)CommonEducationTableViewCellDelegateForTextFieldDidBeginEditing:(CommonEducationTableViewCell *)cell withTextField:(UITextField *)textField{
     [self cancelDateSelection];
     

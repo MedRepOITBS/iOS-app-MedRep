@@ -65,7 +65,7 @@
     NSString *stringFromDate;
     
     
-    [formatter setDateFormat:@"YYYY"];
+    [formatter setDateFormat:@"MMM YYYY"];
     stringFromDate = [formatter stringFromDate:_picker.date];
     
     NSLog(@"%@",stringFromDate);
