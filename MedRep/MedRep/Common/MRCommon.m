@@ -269,21 +269,12 @@
 
 + (NSString*)nibNameForDevice:(NSString*)nibName
 {
-    if ([MRCommon deviceHasThreePointFiveInchScreen])
+    if ([MRCommon deviceHasThreePointFiveInchScreen] ||
+        [MRCommon deviceHasFourInchScreen] ||
+        [MRCommon deviceHasFourPointSevenInchScreen] ||
+        [MRCommon deviceHasFivePointFiveInchScreen])
     {
-        return [NSString stringWithFormat:@"%@_iPhone", nibName];
-    }
-    else if ([MRCommon deviceHasFourInchScreen])
-    {
-        return [NSString stringWithFormat:@"%@_iPhone5", nibName];
-    }
-    else if ([MRCommon deviceHasFourPointSevenInchScreen])
-    {
-        return [NSString stringWithFormat:@"%@_iPhone6", nibName];
-    }
-    else if ([MRCommon deviceHasFivePointFiveInchScreen])
-    {
-        return [NSString stringWithFormat:@"%@_iPhone6Plus", nibName]; 
+        return [NSString stringWithFormat:@"%@_iPhone", nibName]; 
     }
     else if ([MRCommon isHD])
     {

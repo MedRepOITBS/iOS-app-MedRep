@@ -372,7 +372,7 @@ NTMonthYearPickerView *_pickerView;
 
         CGSize pickerSize = [_pickerView sizeThatFits:CGSizeZero];
         _pickerView.frame = CGRectMake( 0, 0, pickerSize.width, pickerSize.height );
-
+        
         [self initCommon];
     }
     return self;
@@ -405,6 +405,7 @@ NTMonthYearPickerView *_pickerView;
                            [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneOnKeyboardPressed:)],
                            nil];
     [numberToolbar sizeToFit];
+    [numberToolbar setBackgroundColor:[UIColor darkGrayColor]];
     [self addSubview:numberToolbar];
 }
 

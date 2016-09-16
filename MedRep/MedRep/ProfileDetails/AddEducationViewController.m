@@ -149,7 +149,7 @@
     //    CGRect pickerFrame = CGRectMake( 0, [[UIScreen mainScreen] bounds].size.height - (pickerSize.height+50), temp, pickerSize.height );
     //    [_picker updateFrame:pickerFrame];
     
-    _picker.backgroundColor = [UIColor lightTextColor];
+    _picker.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [self.view addSubview:_picker];
 }
 -(void)doneButtonTapped:(id)sender{

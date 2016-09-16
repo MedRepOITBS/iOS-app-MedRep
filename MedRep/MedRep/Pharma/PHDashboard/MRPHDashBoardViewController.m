@@ -55,11 +55,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.latestSurveysButton.enabled = NO;
-    self.latestSurveysButton.alpha = 0.5f;
-    self.surveysImage.alpha = 0.5f;
-
-     NSDictionary *userData = [MRAppControl sharedHelper].userRegData;
+    NSDictionary *userData = [MRAppControl sharedHelper].userRegData;
     self.userNameLabel.text = [NSString stringWithFormat:@"Welcome %@. %@ %@",[userData objectForKey:KTitle],[userData objectForKey:KFirstName],[userData objectForKey:KLastName]];
     
     SWRevealViewController *revealController = [self revealViewController];
@@ -87,35 +83,35 @@
 
 - (void)setUPTableView
 {
-    self.appointmentTableview.transform = CGAffineTransformMakeRotation(-M_PI * 0.5);
-    self.appointmentTableview.scrollEnabled = NO;
-    self.appointmentTableview.showsHorizontalScrollIndicator =
-    self.appointmentTableview.showsVerticalScrollIndicator = YES;
-    if ([MRCommon deviceHasThreePointFiveInchScreen])
-    {
-        self.appointmentTableview.frame = CGRectMake(40, 45, 240, 46);
-    }
-    else if ([MRCommon deviceHasFourInchScreen])
-    {
-        self.appointmentTableview.frame = CGRectMake(40, 45, 240, 65);
-    }
-    else if ([MRCommon deviceHasFourPointSevenInchScreen])
-    {
-        self.appointmentTableview.frame = CGRectMake(40, 57, 292, 80);
-    }
-    else if ([MRCommon deviceHasFivePointFiveInchScreen])
-    {
-        CGRect frame = self.appointmentTableview.frame;
-        frame.origin.x = 40;
-        frame.origin.y = 150;
-        frame.size.width = 331;
-        frame.size.height = 90;
-        self.appointmentTableview.frame =  frame;
-    }
-    else if ([MRCommon isHD])
-    {
-        self.appointmentTableview.frame = CGRectMake(70, 64, 628, 210);
-    }
+//    self.appointmentTableview.transform = CGAffineTransformMakeRotation(-M_PI * 0.5);
+//    self.appointmentTableview.scrollEnabled = NO;
+//    self.appointmentTableview.showsHorizontalScrollIndicator =
+//    self.appointmentTableview.showsVerticalScrollIndicator = YES;
+//    if ([MRCommon deviceHasThreePointFiveInchScreen])
+//    {
+//        self.appointmentTableview.frame = CGRectMake(40, 45, 240, 46);
+//    }
+//    else if ([MRCommon deviceHasFourInchScreen])
+//    {
+//        self.appointmentTableview.frame = CGRectMake(40, 45, 240, 65);
+//    }
+//    else if ([MRCommon deviceHasFourPointSevenInchScreen])
+//    {
+//        self.appointmentTableview.frame = CGRectMake(40, 57, 292, 80);
+//    }
+//    else if ([MRCommon deviceHasFivePointFiveInchScreen])
+//    {
+//        CGRect frame = self.appointmentTableview.frame;
+//        frame.origin.x = 40;
+//        frame.origin.y = 150;
+//        frame.size.width = 331;
+//        frame.size.height = 90;
+//        self.appointmentTableview.frame =  frame;
+//    }
+//    else if ([MRCommon isHD])
+//    {
+//        self.appointmentTableview.frame = CGRectMake(70, 64, 628, 210);
+//    }
     
     if ([MRAppControl sharedHelper].userType == 3) //pharma
     {
@@ -124,6 +120,9 @@
     else if ([MRAppControl sharedHelper].userType == 4) //manager
     {
         [self callpendingAppointents];
+    } else {
+        [self enableDisableLeftButton:NO];
+        [self enableDisableRightButton:NO];
     }
 
     
