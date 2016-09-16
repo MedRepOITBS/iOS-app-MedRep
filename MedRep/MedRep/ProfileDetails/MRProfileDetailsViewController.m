@@ -831,8 +831,18 @@
              MRWorkExperience * obj  = [valNDict objectForKey:@"object"];
              
              cell.title.text = obj.designation;
-             cell.dateDesc.text = [NSString stringWithFormat:@"%@ - %@",obj.fromDate,obj.toDate];
+             
+             NSString *toDateString = [NSString stringWithFormat:@"%@ - %@",obj.fromDate,obj.toDate];
+             if (obj.currentJob != nil && obj.currentJob.integerValue == 1) {
+                 toDateString = [NSString stringWithFormat:@"%@ - Present",obj.fromDate];
+             }
+             
+             cell.dateDesc.text = toDateString;
              cell.otherDesc.text = [NSString stringWithFormat:@"%@, %@",obj.hospital,obj.location];
+             
+             if (obj.currentJob != nil) {
+                 NSLog(@"Work Experience : %ld", obj.currentJob.integerValue);
+             }
              
              
          }else if([valN isEqualToString:@"EDUCATION_QUAL_DETAIL"]) {
