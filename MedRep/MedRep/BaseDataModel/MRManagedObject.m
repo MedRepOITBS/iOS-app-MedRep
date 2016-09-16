@@ -12,6 +12,7 @@
 #import "NSData+Base64Additions.h"
 
 NSString* const kServerDateFormat = @"yyyy-MM-dd'T'HH:mm:ss";
+NSString* const kBackupServerDateFormat = @"yyyy-MM-dd HH:mm:ss.SSS";
 
 @implementation MRManagedObject
 
@@ -128,7 +129,12 @@ NSString *const kLastRefreshedDateAttributeName = @"lastRefreshedDate";
         {
             if ([value isKindOfClass:[NSString class]])
             {
-                value = [NSDate convertStringToNSDate:value dateFormat:kServerDateFormat];
+                id tempDatevalue = [NSDate convertStringToNSDate:value dateFormat:kServerDateFormat];
+                if (tempDatevalue == nil) {
+                    tempDatevalue = [NSDate convertStringToNSDate:value dateFormat:kBackupServerDateFormat];
+                }
+                
+                value = tempDatevalue;
             }
             else if ([value isKindOfClass:[NSNumber class]])
             {

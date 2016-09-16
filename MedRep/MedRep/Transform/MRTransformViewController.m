@@ -371,7 +371,7 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
                 source = transformData.source;
             }
                 
-            regCell.sourceLabel.text = [NSString stringWithFormat:@"SOURCE : %@", source];
+            regCell.sourceLabel.text = [NSString stringWithFormat:@"SOURCE : %@, %@", source, [MRCommon stringFromDate:transformData.postedOn withDateFormate:@"YYYY-MM-dd"]];
         }
         
         return regCell;
