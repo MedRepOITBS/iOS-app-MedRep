@@ -320,10 +320,21 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
     //    }
         
         if (transformData != nil) {
+            NSLog(@"Image URL ; %@", transformData.coverImgUrl);
             if (transformData.coverImgUrl != nil && transformData.coverImgUrl.length > 0) {
+                
+                if (transformData.newsId != nil && transformData.newsId.integerValue == 1082) {
+                    NSLog(@"Image URL ; %@", transformData.coverImgUrl);
+                }
+                
                 regCell.img.image = [UIImage imageNamed:@"Default"];
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    regCell.img.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:transformData.coverImgUrl]]];
+                    NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:transformData.coverImgUrl]];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if (imageData != nil) {
+                            regCell.img.image = [UIImage imageWithData:imageData];
+                        }
+                    });
                 });
             } else {
                 if (transformData.url != nil && transformData.url.length > 0) {

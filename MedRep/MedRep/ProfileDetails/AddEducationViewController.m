@@ -298,7 +298,6 @@
         EducationDateTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EducationDateTimeTableViewCell" forIndexPath:indexPath];
         cell.delegate = self;
         if (indexPath.row == 0) {
-            [cell.mandatoryItemIcon setHidden:YES];
             cell.textLabel.text = _fromYYYY;
             cell.dateLabel.tag = 1200;
         } else {
