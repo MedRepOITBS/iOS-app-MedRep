@@ -67,7 +67,7 @@
                         </mask>
                     </variation>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DrugSearchBG" highlightedImage=" " translatesAutoresizingMaskIntoConstraints="NO" id="lId-zk-MlA">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Drug Search White.jpg" highlightedImage=" " translatesAutoresizingMaskIntoConstraints="NO" id="lId-zk-MlA">
                     <rect key="frame" x="0.0" y="60" width="375" height="607"/>
                 </imageView>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o5n-NT-IVK">
@@ -280,7 +280,7 @@
     </objects>
     <resources>
         <image name=" " width="646" height="1100"/>
-        <image name="DrugSearchBG" width="1228" height="1737"/>
+        <image name="Drug Search White.jpg" width="1228" height="1737"/>
         <image name="left-arrow.png" width="10" height="17"/>
         <image name="logo_icon.png" width="35" height="33"/>
         <image name="right-arrow.png" width="10" height="17"/>

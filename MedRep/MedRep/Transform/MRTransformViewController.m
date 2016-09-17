@@ -384,6 +384,7 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
         [self therapeuticAreaListTableViewContainerviewTapped];
         if (indexPath.row == 0) {
             self.filteredData = self.contentData;
+            [self.currentTherapeuticAreaTitleView setText:@"All"];
         } else {
             NSString *category = [self.therapeuticAreasList objectAtIndex:indexPath.row];
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @"subCategory",
