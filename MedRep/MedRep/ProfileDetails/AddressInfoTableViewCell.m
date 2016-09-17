@@ -75,7 +75,6 @@ andParentViewController:(UIViewController*)parentViewController {
 - (IBAction)editAddressButtonTapped:(id)sender {
     EditLocationViewController *editLocationVC = [EditLocationViewController new];
     editLocationVC.addressObject = self.addressInfo;
-    editLocationVC.contactInfo = self.contactInfo;
     [self.parentViewController.navigationController pushViewController:editLocationVC  animated:YES];
 }
 

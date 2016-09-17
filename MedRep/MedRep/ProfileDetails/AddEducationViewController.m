@@ -298,10 +298,10 @@
         EducationDateTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EducationDateTimeTableViewCell" forIndexPath:indexPath];
         cell.delegate = self;
         if (indexPath.row == 0) {
-            cell.textLabel.text = _fromYYYY;
+            cell.dateLabel.text = _fromYYYY;
             cell.dateLabel.tag = 1200;
         } else {
-            cell.textLabel.text = _toYYYY;
+            cell.dateLabel.text = _toYYYY;
             [cell.itemLabel setText:@"TO"];
             cell.itemLabelWidthConstraint.constant = 25.0;
             cell.dateLabel.tag = 1201;
@@ -467,6 +467,12 @@
     self.picker.hidden = NO;
     
     if (textField.tag == 1201) {
+        if (_toDate != nil) {
+            [_picker setDate:_toDate];
+        } else {
+            [_picker setDate:[NSDate date]];
+        }
+        
         if (_fromYYYY != nil && _fromYYYY.length > 0) {
             [_picker setMinimumDate:_fromDate];
             [_picker setMaximumDate:[NSDate date]];
@@ -474,6 +480,16 @@
     } else {
         if (_toYYYY != nil && _toYYYY.length > 0) {
             [_picker setMaximumDate:_toDate];
+            
+            if (_fromDate != nil) {
+                [_picker setDate:_fromDate];
+            } else {
+                [_picker setDate:_toDate];
+            }
+        } else {
+            if (_fromDate != nil) {
+                [_picker setDate:_fromDate];
+            }
         }
     }
 }

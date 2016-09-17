@@ -79,12 +79,7 @@
     [super viewDidLoad];
     
     // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    
-    
-//    self.customDatePicker.hidden = YES;
-self.navigationItem.title  = @"Add Experience";
+    self.navigationItem.title  = @"Add Experience";
     
     UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"]  style:UIBarButtonItemStyleDone target:self action:@selector(backButtonTapped:)];
     self.navigationItem.leftBarButtonItem = leftButtonItem;
@@ -126,11 +121,7 @@ self.navigationItem.title  = @"Add Experience";
             
             [comps setYear:year.intValue];
             _fromDate = [cal dateFromComponents:comps];
-
-            
-            
         }
-        
         
         if (![_toMM isEqualToString:@""]) {
             
@@ -143,9 +134,6 @@ self.navigationItem.title  = @"Add Experience";
             
             [comps setYear:year.intValue];
             _toDate = [cal dateFromComponents:comps];
-            
-            
-            
         }
         [self.tableView reloadData];
         revealButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"UPDATE" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonTapped:)];
@@ -349,6 +337,11 @@ self.navigationItem.title  = @"Add Experience";
         height = 72;
     } else if(indexPath.row == 3 ){
         height = 146;
+        
+        if (self.workExperience != nil && self.workExperience.currentJob != nil &&
+            self.workExperience.currentJob.integerValue == 1) {
+            height -= 55;
+        }
     } else {
         CGRect applicatonFrame = [[UIScreen mainScreen] applicationFrame];
         height = applicatonFrame.size.height - ((72 * 3) + 146 + 44);
@@ -461,6 +454,12 @@ self.navigationItem.title  = @"Add Experience";
     _picker.hidden = NO;
     
     if (textField.tag == 502) {
+        if (_toDate != nil) {
+            [_picker setDate:_toDate];
+        } else {
+            [_picker setDate:[NSDate date]];
+        }
+        
         if (_fromMM != nil && _fromMM.length > 0) {
             [_picker setMinimumDate:_fromDate];
             [_picker setMaximumDate:[NSDate date]];
@@ -468,6 +467,16 @@ self.navigationItem.title  = @"Add Experience";
     } else {
         if (_toMM != nil && _toMM.length > 0) {
             [_picker setMaximumDate:_toDate];
+            
+            if (_fromDate != nil) {
+                [_picker setDate:_fromDate];
+            } else {
+                [_picker setDate:_toDate];
+            }
+        } else {
+            if (_fromDate != nil) {
+                [_picker setDate:_fromDate];
+            }
         }
     }
 }

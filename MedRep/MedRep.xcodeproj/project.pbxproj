@@ -782,6 +782,10 @@
 		CC01BA741D302ACF007E2AEB /* MRCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC01BA711D302ACF007E2AEB /* MRCommentViewController.m */; };
 		CC01BA751D302ACF007E2AEB /* MRCommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC01BA721D302ACF007E2AEB /* MRCommentViewController.xib */; };
 		CC01BA761D302ACF007E2AEB /* MRCommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC01BA721D302ACF007E2AEB /* MRCommentViewController.xib */; };
+		CC0D64E11D8D5D3F0088016F /* MRPublicationsDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0D64DF1D8D5D3F0088016F /* MRPublicationsDetailsViewController.m */; };
+		CC0D64E21D8D5D3F0088016F /* MRPublicationsDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0D64DF1D8D5D3F0088016F /* MRPublicationsDetailsViewController.m */; };
+		CC0D64E31D8D5D3F0088016F /* MRPublicationsDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC0D64E01D8D5D3F0088016F /* MRPublicationsDetailsViewController.xib */; };
+		CC0D64E41D8D5D3F0088016F /* MRPublicationsDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC0D64E01D8D5D3F0088016F /* MRPublicationsDetailsViewController.xib */; };
 		CC463DDE1D279DE7002AE85E /* MRShareOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC463DDC1D279DE7002AE85E /* MRShareOptionsViewController.m */; };
 		CC463DDF1D279DE7002AE85E /* MRShareOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC463DDC1D279DE7002AE85E /* MRShareOptionsViewController.m */; };
 		CC463DE01D279DE7002AE85E /* MRShareOptionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC463DDD1D279DE7002AE85E /* MRShareOptionsViewController.xib */; };
@@ -2281,6 +2285,9 @@
 		CC01BA701D302ACF007E2AEB /* MRCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRCommentViewController.h; path = CommentBox/MRCommentViewController.h; sourceTree = "<group>"; };
 		CC01BA711D302ACF007E2AEB /* MRCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRCommentViewController.m; path = CommentBox/MRCommentViewController.m; sourceTree = "<group>"; };
 		CC01BA721D302ACF007E2AEB /* MRCommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MRCommentViewController.xib; path = CommentBox/MRCommentViewController.xib; sourceTree = "<group>"; };
+		CC0D64DE1D8D5D3F0088016F /* MRPublicationsDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRPublicationsDetailsViewController.h; path = Publications/MRPublicationsDetailsViewController.h; sourceTree = "<group>"; };
+		CC0D64DF1D8D5D3F0088016F /* MRPublicationsDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRPublicationsDetailsViewController.m; path = Publications/MRPublicationsDetailsViewController.m; sourceTree = "<group>"; };
+		CC0D64E01D8D5D3F0088016F /* MRPublicationsDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MRPublicationsDetailsViewController.xib; path = Publications/MRPublicationsDetailsViewController.xib; sourceTree = "<group>"; };
 		CC463DDB1D279DE7002AE85E /* MRShareOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRShareOptionsViewController.h; sourceTree = "<group>"; };
 		CC463DDC1D279DE7002AE85E /* MRShareOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRShareOptionsViewController.m; sourceTree = "<group>"; };
 		CC463DDD1D279DE7002AE85E /* MRShareOptionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRShareOptionsViewController.xib; sourceTree = "<group>"; };
@@ -2555,6 +2562,7 @@
 		7920D6951C1C9A61008D3386 /* ProfileDetails */ = {
 			isa = PBXGroup;
 			children = (
+				CC0D64DD1D8D5D150088016F /* Publications */,
 				CC9DAF9E1D6F9E1F008B2822 /* EditContactInfo */,
 				CC87CD6B1D6E329F0083DB26 /* EditLocation */,
 				B4B4F18C1D3BF7B300EFCC0E /* AddEducation */,
@@ -4103,6 +4111,16 @@
 			name = TabBar;
 			sourceTree = "<group>";
 		};
+		CC0D64DD1D8D5D150088016F /* Publications */ = {
+			isa = PBXGroup;
+			children = (
+				CC0D64DE1D8D5D3F0088016F /* MRPublicationsDetailsViewController.h */,
+				CC0D64DF1D8D5D3F0088016F /* MRPublicationsDetailsViewController.m */,
+				CC0D64E01D8D5D3F0088016F /* MRPublicationsDetailsViewController.xib */,
+			);
+			name = Publications;
+			sourceTree = "<group>";
+		};
 		CC463DE91D27B907002AE85E /* GradientView */ = {
 			isa = PBXGroup;
 			children = (
@@ -4936,6 +4954,7 @@
 				B4746B211D6A877800325F9E /* cancelBtn.png in Resources */,
 				8AFE8D031D0F21BF0000382E /* profile_pic3.jpeg in Resources */,
 				79421F431BB83BAE0055D9B7 /* MRDoctorDetailsViewController.xib in Resources */,
+				CC0D64E31D8D5D3F0088016F /* MRPublicationsDetailsViewController.xib in Resources */,
 				7929E3781B9C78B5001F1373 /* logout@2x.png in Resources */,
 				CC7DB2DF1D0CC433007DFE4C /* MRGroupsListViewController.xib in Resources */,
 				79169E1E1BEBDD6800C11D13 /* pcminus@3x.png in Resources */,
@@ -5341,6 +5360,7 @@
 				CC7DB15E1D0C8BEC007DFE4C /* marketing@2x.png in Resources */,
 				CC7DB2EA1D0CC433007DFE4C /* my_contacts.json in Resources */,
 				8A9FB4B91D2836C70095F690 /* searchMed.jpg in Resources */,
+				CC0D64E41D8D5D3F0088016F /* MRPublicationsDetailsViewController.xib in Resources */,
 				CC7DB15F1D0C8BEC007DFE4C /* picklocation@3x.png in Resources */,
 				CC7DB1601D0C8BEC007DFE4C /* PHphone@2x.png in Resources */,
 				CC7DB1611D0C8BEC007DFE4C /* bg@2x.jpg in Resources */,
@@ -5877,6 +5897,7 @@
 				CC649F5D1D0D1BA10012289C /* MRDrugDetailViewController.m in Sources */,
 				79BD27E31B80A0FB007CA448 /* MROptionsViewController.m in Sources */,
 				7930A38F1BB9151C003112E4 /* MRFeedBackResultViewController.m in Sources */,
+				CC0D64E11D8D5D3F0088016F /* MRPublicationsDetailsViewController.m in Sources */,
 				7975604A1BC02B3A0034D0AC /* MRCompanyDetails.m in Sources */,
 				79C709E41BE7D7F200223562 /* MRMedRepViewController.m in Sources */,
 				CC9BCEC11D0F2A3900702EBC /* MRTransformViewController.m in Sources */,
@@ -6111,6 +6132,7 @@
 				CC7DB0771D0C8BEC007DFE4C /* MRCompanyDetails.m in Sources */,
 				B4B4F0F21D38957000EFCC0E /* AddExperienceTableViewController.m in Sources */,
 				CC7DB2C61D0CC433007DFE4C /* MRCollectionView.m in Sources */,
+				CC0D64E21D8D5D3F0088016F /* MRPublicationsDetailsViewController.m in Sources */,
 				CC7DB0781D0C8BEC007DFE4C /* MRMedRepViewController.m in Sources */,
 				B4B4F11F1D395D9600EFCC0E /* ExperienceDateTimeTableViewCell.m in Sources */,
 				CC7DB0791D0C8BEC007DFE4C /* MROTPVerifiedViewController.m in Sources */,

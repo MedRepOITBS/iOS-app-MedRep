@@ -10,7 +10,6 @@
 #import "MRDatabaseHelper.h"
 #import "MRCommon.h"
 #import "AddressInfo.h"
-#import "ContactInfo.h"
 #import "MRRegTableViewCell.h"
 #import "MRRegHeaderView.h"
 #import "MRLocationManager.h"
@@ -211,9 +210,9 @@
                  }
                  
                  if (placemark.administrativeArea) {
-                     [self.locationDictionary setObject:placemark.administrativeArea forKey:KState];
+                     [self.locationDictionary setObject:placemark.administrativeArea forKey:KStateSmall];
                  } else {
-                     [self.locationDictionary setObject:@"" forKey:KState];
+                     [self.locationDictionary setObject:@"" forKey:KStateSmall];
                  }
                  
                  if (placemark.subAdministrativeArea) {
@@ -276,9 +275,9 @@
                  }
                  
                  if (placemark.administrativeArea) {
-                     [sectDict setObject:placemark.administrativeArea forKey:KState];
+                     [sectDict setObject:placemark.administrativeArea forKey:KStateSmall];
                  } else {
-                     [sectDict setObject:@"" forKey:KState];
+                     [sectDict setObject:@"" forKey:KStateSmall];
                  }
                  
                  if (placemark.subAdministrativeArea) {
@@ -407,7 +406,7 @@
         
         NSString *value = @"";
         
-        value = [self.locationDictionary objectOrNilForKey:KState];
+        value = [self.locationDictionary objectOrNilForKey:KStateSmall];
         
         regCell.mOneTextFiled.text = value;
         
@@ -462,7 +461,7 @@
 - (void)mOneButtonActionDelegate:(MRRegTableViewCell*)cell
 {
     NSString *state = cell.mOneTextFiled.text;
-    [self.locationDictionary setObject:state forKey:@"state"];
+    [self.locationDictionary setObject:state forKey:KStateSmall];
     
     [self  showHideFiltersView:cell withAdjustableValue:NO];
 }
@@ -470,7 +469,7 @@
 - (void)mTwoButtonActionDelegate:(MRRegTableViewCell*)cell
 {
     NSString *city = cell.mTwoTextField.text;
-    [self.locationDictionary setObject:city forKey:@"city"];
+    [self.locationDictionary setObject:city forKey:KCity];
     
     [self  showHideFiltersView:cell withAdjustableValue:NO];
 }
@@ -527,7 +526,7 @@
                 isSuccess = NO;
                 break;
             }
-            if ([MRCommon isStringEmpty:[dict objectForKey:KState]])
+            if ([MRCommon isStringEmpty:[dict objectForKey:KStateSmall]])
             {
                 [MRCommon showAlert:@"State should not be empty." delegate:nil];
                 isSuccess = NO;
@@ -558,7 +557,7 @@
                     isSuccess = NO;
                     break;
                 }
-                if ([MRCommon isStringEmpty:[dict objectForKey:KState]])
+                if ([MRCommon isStringEmpty:[dict objectForKey:KStateSmall]])
                 {
                     [MRCommon showAlert:@"State should not be empty." delegate:nil];
                     isSuccess = NO;

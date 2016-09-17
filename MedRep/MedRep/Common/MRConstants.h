@@ -72,6 +72,7 @@ typedef enum
 #define KAddressOne             @"address1"
 #define KAdresstwo              @"address2"
 #define KState                  @"State"
+#define KStateSmall             @"state"
 #define KCity                   @"city"
 #define KZIPCode                @"ZIPCode"
 #define KZIPCodeSmall           @"zipcode"

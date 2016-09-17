@@ -403,6 +403,10 @@
 
         [self.navigationController pushViewController:profViewController  animated:YES];
         
+    } else if ([valN isEqualToString:@"ADDRESS_INFO_DETAIL"]) {
+        EditLocationViewController *editLocationVC = [EditLocationViewController new];
+        editLocationVC.addressObject = (AddressInfo*)[valNDict objectForKey:@"object"];
+        [self.navigationController pushViewController:editLocationVC  animated:YES];
     }
 }
 
