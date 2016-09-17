@@ -526,7 +526,6 @@
 		8AFE8CE61D0F21BF0000382E /* groups.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB38E1D0CC8C8007DFE4C /* groups.png */; };
 		8AFE8CE81D0F21BF0000382E /* medicine.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3901D0CC8C8007DFE4C /* medicine.jpg */; };
 		8AFE8CE91D0F21BF0000382E /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3911D0CC8C8007DFE4C /* plus.png */; };
-		8AFE8CEA1D0F21BF0000382E /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3921D0CC8C8007DFE4C /* share.png */; };
 		8AFE8CEB1D0F21BF0000382E /* group_pic1.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB32C1D0CC8A6007DFE4C /* group_pic1.png */; };
 		8AFE8CEC1D0F21BF0000382E /* group_pic2.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB32D1D0CC8A6007DFE4C /* group_pic2.jpeg */; };
 		8AFE8CED1D0F21BF0000382E /* group_pic3.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB32E1D0CC8A6007DFE4C /* group_pic3.png */; };
@@ -1414,7 +1413,6 @@
 		CC7DB39E1D0CC8C8007DFE4C /* groups.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB38E1D0CC8C8007DFE4C /* groups.png */; };
 		CC7DB3A21D0CC8C8007DFE4C /* medicine.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3901D0CC8C8007DFE4C /* medicine.jpg */; };
 		CC7DB3A41D0CC8C8007DFE4C /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3911D0CC8C8007DFE4C /* plus.png */; };
-		CC7DB3A61D0CC8C8007DFE4C /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3921D0CC8C8007DFE4C /* share.png */; };
 		CC7DB3A91D0CC994007DFE4C /* MRGroupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB3A81D0CC994007DFE4C /* MRGroupTableViewCell.m */; };
 		CC7DB3AA1D0CC994007DFE4C /* MRGroupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB3A81D0CC994007DFE4C /* MRGroupTableViewCell.m */; };
 		CC7DB3AD1D0CCA0D007DFE4C /* person.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3AB1D0CCA0D007DFE4C /* person.png */; };
@@ -2412,7 +2410,6 @@
 		CC7DB38E1D0CC8C8007DFE4C /* groups.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = groups.png; path = MedRep/RESOURCES/groups.png; sourceTree = SOURCE_ROOT; };
 		CC7DB3901D0CC8C8007DFE4C /* medicine.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = medicine.jpg; path = MedRep/RESOURCES/medicine.jpg; sourceTree = SOURCE_ROOT; };
 		CC7DB3911D0CC8C8007DFE4C /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = plus.png; path = MedRep/RESOURCES/plus.png; sourceTree = SOURCE_ROOT; };
-		CC7DB3921D0CC8C8007DFE4C /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = share.png; path = MedRep/RESOURCES/share.png; sourceTree = SOURCE_ROOT; };
 		CC7DB3A71D0CC994007DFE4C /* MRGroupTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRGroupTableViewCell.h; sourceTree = "<group>"; };
 		CC7DB3A81D0CC994007DFE4C /* MRGroupTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRGroupTableViewCell.m; sourceTree = "<group>"; };
 		CC7DB3AB1D0CCA0D007DFE4C /* person.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = person.png; sourceTree = "<group>"; };
@@ -4299,7 +4296,6 @@
 				CC7DB38E1D0CC8C8007DFE4C /* groups.png */,
 				CC7DB3901D0CC8C8007DFE4C /* medicine.jpg */,
 				CC7DB3911D0CC8C8007DFE4C /* plus.png */,
-				CC7DB3921D0CC8C8007DFE4C /* share.png */,
 				CC7DB32C1D0CC8A6007DFE4C /* group_pic1.png */,
 				CC7DB32D1D0CC8A6007DFE4C /* group_pic2.jpeg */,
 				CC7DB32E1D0CC8A6007DFE4C /* group_pic3.png */,
@@ -4624,7 +4620,6 @@
 				8AFE8CDF1D0F21430000382E /* suggested_contacts.json in Resources */,
 				79FFD2581BB9BAA300CEE606 /* reg@2x.png in Resources */,
 				793602E71BA35D6800BB85E6 /* readnotification3@3x.jpg in Resources */,
-				8AFE8CEA1D0F21BF0000382E /* share.png in Resources */,
 				8AFE8D251D12EB310000382E /* MRAddMembersViewController.xib in Resources */,
 				83B781DD1B79128F0070645C /* ViewController.xib in Resources */,
 				8AFE8CED1D0F21BF0000382E /* group_pic3.png in Resources */,
@@ -5535,7 +5530,6 @@
 				CC7DB1F51D0C8BEC007DFE4C /* PHprescription@2x.png in Resources */,
 				CC7DB1F61D0C8BEC007DFE4C /* notificationback@2x.png in Resources */,
 				CC7DB34E1D0CC8A6007DFE4C /* group_pic2.jpeg in Resources */,
-				CC7DB3A61D0CC8C8007DFE4C /* share.png in Resources */,
 				CC7DB1F71D0C8BEC007DFE4C /* pending_icon@2x.png in Resources */,
 				CC649F4F1D0D181E0012289C /* NotificationUUIDViewController.xib in Resources */,
 				CC9BCECB1D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.xib in Resources */,

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -110,7 +110,7 @@
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cir-4k-2dC">
                             <rect key="frame" x="140" y="0.0" width="70" height="25"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="share.png" translatesAutoresizingMaskIntoConstraints="NO" id="vZB-Kz-b4u">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ShareWith" translatesAutoresizingMaskIntoConstraints="NO" id="vZB-Kz-b4u">
                                     <rect key="frame" x="10" y="0.0" width="20" height="20"/>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="139" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nQP-O8-8zh">
@@ -251,10 +251,10 @@
         </view>
     </objects>
     <resources>
-        <image name="Comment" width="44" height="44"/>
+        <image name="Comment" width="20" height="20"/>
         <image name="Contact.png" width="50" height="50"/>
-        <image name="Like" width="44" height="44"/>
+        <image name="Like" width="20" height="20"/>
+        <image name="ShareWith" width="20" height="20"/>
         <image name="logo_icon.png" width="35" height="33"/>
-        <image name="share.png" width="512" height="512"/>
     </resources>
 </document>
