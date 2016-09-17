@@ -357,6 +357,10 @@
    
     [tableView deselectRowAtIndexPath:indexPath animated:false];
     
+    if (self.showAsReadable) {
+        return;
+    }
+    
     NSDictionary *valNDict = [[self setStructureForTableView] objectAtIndex:indexPath.row];
     
     NSString *valN = [valNDict objectForKey:@"type"];
@@ -713,10 +717,10 @@
          cell.userLocation.text = _profileObj.location;
          
          if (self.showAsReadable) {
-             [cell.pencilBtn setHidden:NO];
+             [cell.pencilBtn setHidden:YES];
              [cell.imageBtn setUserInteractionEnabled:NO];
          } else {
-             [cell.pencilBtn setHidden:YES];
+             [cell.pencilBtn setHidden:NO];
              [cell.imageBtn setUserInteractionEnabled:YES];
          }
          
@@ -923,6 +927,9 @@
     }
 }
 -(void)ProfileBasicTableViewCellDelegateForButtonPressed:(ProfileBasicTableViewCell *)cell withButtonType:(NSString *)buttonType{
+    if (self.showAsReadable) {
+        return;
+    }
     UIActionSheet* popupQuery = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take New Picture", @"Choose From Library", nil];
     
     popupQuery.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
