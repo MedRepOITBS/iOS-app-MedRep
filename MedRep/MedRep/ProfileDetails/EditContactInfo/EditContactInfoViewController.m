@@ -11,7 +11,7 @@
 #import "MRDatabaseHelper.h"
 #import "MRCommon.h"
 
-@interface EditContactInfoViewController () <UITextFieldDelegate>
+@interface EditContactInfoViewController () <UITextFieldDelegate, UIAlertViewDelegate>
 
 @property (nonatomic) NSString *currentText;
 
@@ -142,11 +142,10 @@
                         andHandler:^(id result) {
                             if ([result caseInsensitiveCompare:@"success"] == NSOrderedSame) {
                                 
-                                [MRCommon showAlert:@"Contact Info updated successfully !!!" delegate:nil];
-                                
                                 [self.navigationController popViewControllerAnimated:YES];
-                                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshProfile
-                                                                                    object:nil];
+                                [MRCommon showAlert:@"Contact Info updated successfully !!!"
+                                           delegate:self
+                                            withTag:500];
                             }else{
                                 [MRCommon showAlert:@"Failed to update contact info" delegate:nil];
                             }
@@ -206,6 +205,17 @@
     self.activeTextField = nil;
 }
 
+#pragma mark - UIAlertViewDelegate
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 500) {
+        [MRCommon showActivityIndicator:@"Loading..."];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshProfile
+                                                            object:nil];
+    }
+    //code for opening settings app in iOS 8
+}
 /*
 #pragma mark - Navigation
 

@@ -85,12 +85,25 @@ andParentViewController:(UIViewController*)parentViewController {
 
 #pragma mark - UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 1) {
-        NSDictionary *dataDict = @{@"locationId":self.addressInfo.locationId};
-        NSArray *dataArray = @[dataDict];
-        [MRDatabaseHelper deleteLocation:dataDict andHandler:^(id result) {
-            
-        }];
+    if (alertView.tag == 500) {
+        [MRCommon showActivityIndicator:@"Loading..."];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshProfile
+                                                            object:nil];
+    } else {
+        if (buttonIndex == 1) {
+            NSDictionary *dataDict = @{@"locationId":self.addressInfo.locationId};
+    //        NSArray *dataArray = @[dataDict];
+            [MRDatabaseHelper deleteLocation:dataDict andHandler:^(id result) {
+                if (result != nil &&
+                    [result caseInsensitiveCompare:@"success"] == NSOrderedSame) {
+                    [MRCommon showAlert:@"Location deleted successfully !!!"
+                               delegate:self withTag:500];
+                }else{
+                    [MRCommon showAlert:@"Failed to deleted location" delegate:nil];
+                }
+            }];
+        }
     }
 }
 

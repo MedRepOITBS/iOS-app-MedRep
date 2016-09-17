@@ -189,13 +189,11 @@
         
         [MRDatabaseHelper editLocation:@[self.locationDictionary]
                             andHandler:^(id result) {
-                                if ([result caseInsensitiveCompare:@"success"] == NSOrderedSame) {
-                                    
-                                    [MRCommon showAlert:@"Location updated successfully !!!" delegate:nil];
-                                    
+                                if (result != nil &&
+                                    [result caseInsensitiveCompare:@"success"] == NSOrderedSame) {
                                     [self.navigationController popViewControllerAnimated:YES];
-                                    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshProfile
-                                                                                        object:nil];
+                                    [MRCommon showAlert:@"Location updated successfully !!!"
+                                               delegate:self withTag:500];
                                 }else{
                                     [MRCommon showAlert:@"Failed to update location" delegate:nil];
                                 }
@@ -246,13 +244,24 @@
                     
                     [MRCommon stopActivityIndicator];
                     
+                    BOOL newObject = false;
+                    
+                    NSInteger locationId = [[NSDate date] timeIntervalSince1970];
+                    MRDataManger *dbManager = [MRDataManger sharedManager];
                     NSString *entityName = NSStringFromClass(AddressInfo.class);
                     
-                    MRDataManger *dbManager = [MRDataManger sharedManager];
-                    NSManagedObjectContext *context = [dbManager getNewPrivateManagedObjectContext];
-                    
-                    NSEntityDescription *entityDescription = [[[dbManager managedObjectModel] entitiesByName] objectForKey:entityName];
-                    self.addressObject = (AddressInfo*)[[MRManagedObject alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:context];
+                    NSManagedObjectContext *context = nil;
+                    if (self.addressObject == nil) {
+                        newObject = true;
+                        context = [dbManager getNewPrivateManagedObjectContext];
+                        
+                        NSEntityDescription *entityDescription = [[[dbManager managedObjectModel] entitiesByName] objectForKey:entityName];
+                        self.addressObject = (AddressInfo*)[[MRManagedObject alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:context];
+                        
+                        self.addressObject.locationId = [NSNumber numberWithLong:locationId];
+                    } else {
+                        context = self.addressObject.managedObjectContext;
+                    }
                     
                     self.addressObject.address1 = @"";
                     
@@ -264,6 +273,8 @@
                     
                     if (addressObj.subLocality != nil && addressObj.subLocality.length > 0) {
                         self.addressObject.address2 = addressObj.subLocality;
+                    } else if (addressObj.thoroughfare != nil && addressObj.thoroughfare.length > 0) {
+                        self.addressObject.address2 = addressObj.thoroughfare;
                     }
                     
                     self.addressObject.zipcode = @"";
@@ -281,8 +292,19 @@
                         self.addressObject.city = addressObj.locality;
                     }
                     
-                    [self.regTableView reloadData];
+                    [context save:nil];
                     
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"locationId", locationId];
+                        self.addressObject = [dbManager fetchObject:entityName predicate:predicate];
+                        
+                        if (newObject) {
+                            self.addressObject.locationId = nil;
+                            [self.addressObject.managedObjectContext save:nil];
+                        }
+                        
+                        [self.regTableView reloadData];
+                    });
                 }];
             }
         }
@@ -368,11 +390,13 @@
         }else{
             [[UIApplication sharedApplication] openURL:[NSURL  URLWithString:UIApplicationOpenSettingsURLString]];
         }
-    }
-    
-    if (alertView.tag == 6789 )
-    {
+    } else if (alertView.tag == 6789 ) {
         [self.navigationController popViewControllerAnimated:YES];
+    } else if (alertView.tag == 500) {
+        [MRCommon showActivityIndicator:@"Loading..."];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshProfile
+                                                            object:nil];
     }
     //code for opening settings app in iOS 8
 }
