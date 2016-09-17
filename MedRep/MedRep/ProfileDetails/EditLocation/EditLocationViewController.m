@@ -212,6 +212,7 @@
 */
 
 - (IBAction)pickALocationClicked:(id)sender {
+    self.addressObject = nil;
     [self getCurrentLocation];
 }
 
@@ -241,8 +242,6 @@
                         [MRCommon stopActivityIndicator];
                         return;
                     }
-                    
-                    [MRCommon stopActivityIndicator];
                     
                     BOOL newObject = false;
                     
@@ -302,6 +301,7 @@
                             self.addressObject.locationId = nil;
                             [self.addressObject.managedObjectContext save:nil];
                         }
+                        [MRCommon stopActivityIndicator];
                         
                         [self.regTableView reloadData];
                     });
