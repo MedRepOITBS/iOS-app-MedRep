@@ -323,7 +323,7 @@
                 cell.inputTextField.tag = 800;
 
                 cell.inputTextField.text = _type;
-                cell.inputTextField.keyboardType = UIKeyboardTypeNumberPad;
+                cell.inputTextField.keyboardType = UIKeyboardTypeDecimalPad;
                 cell.hintLabel.hidden = YES;
                 
             }
