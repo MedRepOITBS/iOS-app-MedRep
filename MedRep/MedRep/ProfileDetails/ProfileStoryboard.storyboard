@@ -747,7 +747,7 @@ easier for colleagues to find you.</string>
                                                         <constraint firstAttribute="height" constant="30" id="NOp-8m-2D8"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="URS-6n-fgc" id="Ede-WZ-vr9"/>
                                                     </connections>
@@ -815,7 +815,7 @@ easier for colleagues to find you.</string>
                                                 <textField opaque="NO" clipsSubviews="YES" tag="500" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="MMM - YYYY" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="q4w-4y-R61">
                                                     <rect key="frame" x="90" y="44" width="180" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="5wZ-Ah-GI2" id="bOO-Yu-sh0"/>
                                                     </connections>
@@ -848,7 +848,7 @@ easier for colleagues to find you.</string>
                                                         <textField opaque="NO" clipsSubviews="YES" tag="502" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="MMM - YYYY" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hRA-ye-Ylc">
                                                             <rect key="frame" x="69" y="8" width="179" height="30"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <textInputTraits key="textInputTraits"/>
+                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                             <connections>
                                                                 <outlet property="delegate" destination="5wZ-Ah-GI2" id="VOd-MM-evW"/>
                                                             </connections>
@@ -1003,7 +1003,7 @@ easier for colleagues to find you.</string>
                                                         <constraint firstAttribute="height" constant="30" id="esU-BO-lv3"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="9ZK-lg-4oX" id="Xud-1i-vUd"/>
                                                     </connections>
@@ -1065,7 +1065,7 @@ easier for colleagues to find you.</string>
                                                         <constraint firstAttribute="height" constant="30" id="dDu-er-LBB"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="i4B-BZ-HVY" id="agz-lU-dTu"/>
                                                     </connections>
@@ -1260,7 +1260,7 @@ easier for colleagues to find you.</string>
                                     <constraint firstAttribute="height" constant="30" id="C3d-9j-uB3"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <connections>
                                     <outlet property="delegate" destination="54U-O7-CQf" id="IyQ-Yh-s5E"/>
                                 </connections>
@@ -1291,7 +1291,7 @@ easier for colleagues to find you.</string>
                                     <constraint firstAttribute="height" constant="30" id="UBq-T5-LGG"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <connections>
                                     <outlet property="delegate" destination="54U-O7-CQf" id="ocD-bO-I7A"/>
                                 </connections>
@@ -1322,7 +1322,7 @@ easier for colleagues to find you.</string>
                                     <constraint firstAttribute="height" constant="30" id="8QR-cc-xcw"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <connections>
                                     <outlet property="delegate" destination="54U-O7-CQf" id="x63-vA-7en"/>
                                 </connections>
@@ -1343,7 +1343,7 @@ easier for colleagues to find you.</string>
                                     <constraint firstAttribute="height" constant="30" id="dKc-Sf-L6U"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="URL"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardType="URL"/>
                                 <connections>
                                     <outlet property="delegate" destination="54U-O7-CQf" id="M8Q-Pu-LHY"/>
                                 </connections>
