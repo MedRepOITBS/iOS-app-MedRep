@@ -7,13 +7,17 @@
 //
 
 #import "PublicationsViewController.h"
+#import "MRPublicationsDetailsViewController.h"
 #import "NTMonthYearPicker.h"
 #import "MRConstants.h"
 #import "MRDatabaseHelper.h"
 #import "MRCommon.h"
 #import "MRPublications.h"
+
 @interface PublicationsViewController () <NTMonthYearPickerViewDelegate>
+
 @property (nonatomic,strong) NTMonthYearPicker *picker;
+@property (weak, nonatomic) IBOutlet UIButton *goToDetailsButton;
 
 @end
 
@@ -118,8 +122,15 @@
         self.yearTextField.text = _publications.year;
         self.urlTextField.text = _publications.url;
         revealButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"UPDATE" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonTapped:)];
+        
+        if (_publications.url != nil && _publications.url.length > 0) {
+            [self.goToDetailsButton setHidden:NO];
+        } else {
+            [self.goToDetailsButton setHidden:YES];
+        }
     }else{
         revealButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"DONE" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonTapped:)];
+        [self.goToDetailsButton setHidden:YES];
     }
     self.navigationItem.rightBarButtonItem = revealButtonItem;
     
@@ -181,13 +192,8 @@
             }
         }];
     }
-    
-
-    
-    
-    
-    
 }
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     return NO;
@@ -206,7 +212,11 @@
     return YES;
 }
 
-
+- (IBAction)goToDetailsTapped:(id)sender {
+    MRPublicationsDetailsViewController *detailsView = [MRPublicationsDetailsViewController new];
+    [detailsView setPublication:_publications];
+    [self.navigationController pushViewController:detailsView  animated:YES];
+}
 
 /*
 #pragma mark - Navigation

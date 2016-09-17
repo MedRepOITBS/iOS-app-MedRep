@@ -7,9 +7,12 @@
 //
 
 #import "MRPublicationsDetailsViewController.h"
+#import "MRCommon.h"
 #import "MRPublications.h"
 
-@interface MRPublicationsDetailsViewController ()
+@interface MRPublicationsDetailsViewController () <UIWebViewDelegate>
+
+@property (strong, nonatomic) IBOutlet UIView *navView;
 
 @property (weak, nonatomic) IBOutlet UITextView *publicationsTextView;
 @property (weak, nonatomic) IBOutlet UILabel *publicationsDateLabel;
@@ -23,7 +26,22 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    self.navigationItem.title  = @"Publication Details";
+    
+    UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"]
+                                                                       style:UIBarButtonItemStyleDone
+                                                                      target:self
+                                                                      action:@selector(backButtonTapped:)];
+    self.navigationItem.leftBarButtonItem = leftButtonItem;
+    
+    UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navView];
+    self.navigationItem.rightBarButtonItem = rightButtonItem;
+    
     if (self.publication != nil) {
+        
+        if (self.publication.articleName != nil && self.publication.articleName.length > 0) {
+            self.navigationItem.title = self.publication.articleName;
+        }
         
         NSString *value = @"";
         if (self.publication.publication != nil && self.publication.publication.length > 0) {
@@ -47,6 +65,21 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MRCommon showActivityIndicator:@""];
+}
+
+-(void)backButtonTapped:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - UIWebViewDelegate
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [MRCommon stopActivityIndicator];
+    [self.publicationsURLWebView setBackgroundColor:[UIColor whiteColor]];
 }
 
 /*

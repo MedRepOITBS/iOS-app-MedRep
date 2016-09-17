@@ -1350,6 +1350,21 @@ easier for colleagues to find you.</string>
                                     <outlet property="delegate" destination="54U-O7-CQf" id="M8Q-Pu-LHY"/>
                                 </connections>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pdI-lR-Udr">
+                                <rect key="frame" x="200" y="295" width="200" height="40"/>
+                                <color key="backgroundColor" red="0.078431372550000003" green="0.76470588240000004" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="jxj-PY-3So"/>
+                                    <constraint firstAttribute="width" constant="200" id="tZF-Zl-fHt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                <state key="normal" title="Go To Details">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="goToDetailsTapped:" destination="54U-O7-CQf" eventType="touchUpInside" id="Gzr-zS-NoZ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1363,6 +1378,7 @@ easier for colleagues to find you.</string>
                             <constraint firstAttribute="leadingMargin" secondItem="Nkx-5F-wcV" secondAttribute="leading" id="CRy-kh-1Fx"/>
                             <constraint firstItem="FlR-Fh-fLS" firstAttribute="leading" secondItem="Dlg-We-SnK" secondAttribute="trailing" id="FpM-V3-Mxc"/>
                             <constraint firstAttribute="leadingMargin" secondItem="Dlg-We-SnK" secondAttribute="leading" id="I1J-6q-SzD"/>
+                            <constraint firstItem="pdI-lR-Udr" firstAttribute="top" secondItem="sn0-SJ-Ya5" secondAttribute="bottom" constant="20" id="I3Z-iz-7Rr"/>
                             <constraint firstItem="gID-et-jCI" firstAttribute="centerY" secondItem="T66-rG-2bX" secondAttribute="centerY" id="IVS-L8-WnO"/>
                             <constraint firstItem="XK1-Ke-Chh" firstAttribute="top" secondItem="Dlg-We-SnK" secondAttribute="bottom" id="LRU-De-bJ2"/>
                             <constraint firstAttribute="trailing" secondItem="XK1-Ke-Chh" secondAttribute="trailing" constant="20" id="OgP-3Q-lRm"/>
@@ -1380,6 +1396,7 @@ easier for colleagues to find you.</string>
                             <constraint firstAttribute="leadingMargin" secondItem="Zwj-cw-Xgo" secondAttribute="leading" id="d1H-mQ-qo3"/>
                             <constraint firstItem="gID-et-jCI" firstAttribute="top" secondItem="y6f-cn-8ed" secondAttribute="bottom" constant="11" id="dmZ-yZ-I4u"/>
                             <constraint firstItem="Nkx-5F-wcV" firstAttribute="top" secondItem="XK1-Ke-Chh" secondAttribute="bottom" constant="11" id="fXD-6g-zNa"/>
+                            <constraint firstItem="pdI-lR-Udr" firstAttribute="centerX" secondItem="ggC-ft-vhp" secondAttribute="centerX" id="gqs-Gz-Ksz"/>
                             <constraint firstItem="sn0-SJ-Ya5" firstAttribute="leading" secondItem="ggC-ft-vhp" secondAttribute="leading" constant="20" id="jiO-N4-Twh"/>
                             <constraint firstAttribute="trailing" secondItem="elC-LV-ErD" secondAttribute="trailing" id="lGH-Ps-ELA"/>
                             <constraint firstAttribute="leadingMargin" secondItem="y6f-cn-8ed" secondAttribute="leading" id="mVW-qi-YYf"/>
@@ -1410,6 +1427,7 @@ easier for colleagues to find you.</string>
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="goToDetailsButton" destination="pdI-lR-Udr" id="eD3-LF-7C5"/>
                         <outlet property="publicationArticleTextField" destination="XK1-Ke-Chh" id="np7-sS-yVS"/>
                         <outlet property="pulbicationsTextField" destination="y6f-cn-8ed" id="VSi-pR-eAZ"/>
                         <outlet property="urlTextField" destination="sn0-SJ-Ya5" id="3EG-v1-bxC"/>
