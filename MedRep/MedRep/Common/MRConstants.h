@@ -74,6 +74,7 @@ typedef enum
 #define KState                  @"State"
 #define KCity                   @"city"
 #define KZIPCode                @"ZIPCode"
+#define KZIPCodeSmall           @"zipcode"
 #define KTitle                  @"title"
 #define KType                  @"type"
 //#define kAreaWorkLocation       @"AreaWorkLocation"

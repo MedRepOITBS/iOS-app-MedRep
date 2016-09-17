@@ -50,136 +50,7 @@
 
 @implementation MRRegistationTwoViewController
 
--(void)getCurrentLocation{
-    [MRCommon showActivityIndicator:@""];
-    
-    
-    [_placesClient currentPlaceWithCallback:^(GMSPlaceLikelihoodList *placeLikelihoodList, NSError *error){
-        if (error != nil) {
-            [MRCommon stopActivityIndicator];
-
-            NSLog(@"Pick Place error %@", [error localizedDescription]);
-            return;
-        }
-        
-        //        self.nameLabel.text = @"No current place";
-        //        self.addressLabel.text = @"";
-        
-        if (placeLikelihoodList != nil) {
-            GMSPlace *place = [[[placeLikelihoodList likelihoods] firstObject] place];
-            if (place != nil) {
-                
-                
-                NSLog(@"%@",place.name);
-                NSLog(@"%@",[[place.formattedAddress componentsSeparatedByString:@", "]
-                             componentsJoinedByString:@"\n"]);
-                
-                
-                [[GMSGeocoder geocoder] reverseGeocodeCoordinate:place.coordinate completionHandler:^(GMSReverseGeocodeResponse* response, NSError* error) {
-                    NSLog(@"reverse geocoding results:");
-                    GMSAddress* addressObj =  [response results].firstObject;
-                    if (_isLocationUpdateGet) {
-                       
-                        [MRCommon stopActivityIndicator];
-                        return;
-                    }
-       
-                    
-                    [MRCommon stopActivityIndicator];
-                    
-                    NSMutableDictionary *sectDict = [self getDataByAddressType:[NSIndexPath indexPathForRow:0 inSection:0]];
-                    
-                    if (place.name) {
-                        [sectDict setObject:place.name forKey:KAddressOne];
-                    } else {
-                        [sectDict setObject:@"" forKey:KAddressOne];
-                    }
-                    
-                    if (addressObj.subLocality) {
-                        
-                        [sectDict setObject:addressObj.subLocality forKey:KAdresstwo];
-                    } else {
-                        [sectDict setObject:@"" forKey:KAdresstwo];
-                    }
-                    
-                    
-                    if (addressObj.postalCode) {
-                        [sectDict setObject:addressObj.postalCode forKey:KZIPCode];
-                    } else {
-                        [sectDict setObject:@"" forKey:KZIPCode];
-                    }
-                    
-                    if (addressObj.administrativeArea) {
-                        [sectDict setObject:addressObj.administrativeArea forKey:KState];
-                    } else {
-                        [sectDict setObject:@"" forKey:KState];
-                    }
-                    if (addressObj.locality) {
-                        [sectDict setObject:addressObj.locality forKey:KCity];
-                    } else {
-                        [sectDict setObject:@"" forKey:KCity];
-                    }
-                    
-                    [self.regTableView reloadData];
-                    
-                }];
-                
-                
-                
-                
-                
-                
-                
-                
-            }
-        }
-    }];
-    
-    
-}
-
--(void)isLocationUpdateDone{
-    
-    _isLocationUpdateGet = YES;
-    [MRCommon stopActivityIndicator];
-
-}
-- (void)viewDidLoad {
-    
-    [MRAppControl sharedHelper].addressType = 1;
-    self.selectedAddressType = 1;
-    self.selectedUserType = [MRAppControl sharedHelper].userType;
-    self.userDeatils = [[MRAppControl sharedHelper] userRegData];
-    self.regTableView.contentInset = UIEdgeInsetsMake(-30, 0, 0, -20);
-    [self setUPView];
-    _placesClient = [GMSPlacesClient sharedClient];
-    
-    if (!self.isFromSinUp)
-    {
-        [self.nextButton setTitle:@"UPDATE" forState:UIControlStateNormal];
-    }
-    
-    [super viewDidLoad];
-    [self getCurrentLocation];
-    [self performSelector:@selector(isLocationUpdateGet) withObject:nil afterDelay:.12];
-    // Do any additional setup after loading the view from its nib.
-}
--(IBAction)whyThisBtnTapped:(id)sender{
-    
-    [self setupTutorialView];
-    
-}
--(void)setupTutorialView{
-    
-    NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"TutorialView" owner:self options:nil];
-    
-    _tutorialView = (TutorialView *)[arr objectAtIndex:0];
-    _tutorialView.layer.cornerRadius = 10;
-    _tutorialViewKLCPopView = [KLCPopup popupWithContentView:self.tutorialView];
-    [_tutorialViewKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutCenter)];
-}
-- (void)addLocationInSection:(NSInteger)section
-{
+-(void)getCurrentLocation:(NSInteger)section {
     NSMutableDictionary *sectDict = [self getDataByAddressType:[NSIndexPath indexPathForRow:0 inSection:section]];
     [MRCommon showActivityIndicator:@""];
     [[MRLocationManager sharedManager] getCurrentLocation:^(CLLocation *location)
@@ -187,8 +58,6 @@
          CLGeocoder *geocoder = [[CLGeocoder alloc] init];
          
          [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
-             //NSLog(@"Found placemarks: %@, error: %@", placemarks, error);
-             [MRCommon stopActivityIndicator];
              if (error == nil && [placemarks count] > 0) {
                  CLPlacemark *placemark = [placemarks lastObject];
                  
@@ -222,15 +91,138 @@
                      [sectDict setObject:@"" forKey:KCity];
                  }
                  
+                 [MRCommon stopActivityIndicator];
+                 
                  [self.regTableView reloadData];
                  
              } else {
+                 [MRCommon stopActivityIndicator];
+                 
                  NSLog(@"%@", error.debugDescription);
                  [self showLocationErrorAlert];
              }
          } ];
      }];
+//    [MRCommon showActivityIndicator:@""];
+//    
+//    
+//    [_placesClient currentPlaceWithCallback:^(GMSPlaceLikelihoodList *placeLikelihoodList, NSError *error){
+//        if (error != nil) {
+//            [MRCommon stopActivityIndicator];
+//
+//            NSLog(@"Pick Place error %@", [error localizedDescription]);
+//            return;
+//        }
+//        
+//        //        self.nameLabel.text = @"No current place";
+//        //        self.addressLabel.text = @"";
+//        
+//        if (placeLikelihoodList != nil) {
+//            GMSPlace *place = [[[placeLikelihoodList likelihoods] firstObject] place];
+//            if (place != nil) {
+//                
+//                
+//                NSLog(@"%@",place.name);
+//                NSLog(@"%@",[[place.formattedAddress componentsSeparatedByString:@", "]
+//                             componentsJoinedByString:@"\n"]);
+//                
+//                
+//                [[GMSGeocoder geocoder] reverseGeocodeCoordinate:place.coordinate completionHandler:^(GMSReverseGeocodeResponse* response, NSError* error) {
+//                    NSLog(@"reverse geocoding results:");
+//                    GMSAddress* addressObj =  [response results].firstObject;
+//                    if (_isLocationUpdateGet) {
+//                       
+//                        [MRCommon stopActivityIndicator];
+//                        return;
+//                    }
+//       
+//                    
+//                    [MRCommon stopActivityIndicator];
+//                    
+//                    NSMutableDictionary *sectDict = [self getDataByAddressType:[NSIndexPath indexPathForRow:0 inSection:0]];
+//                    
+//                    if (place.name) {
+//                        [sectDict setObject:place.name forKey:KAddressOne];
+//                    } else {
+//                        [sectDict setObject:@"" forKey:KAddressOne];
+//                    }
+//                    
+//                    if (addressObj.subLocality) {
+//                        
+//                        [sectDict setObject:addressObj.subLocality forKey:KAdresstwo];
+//                    } else {
+//                        [sectDict setObject:@"" forKey:KAdresstwo];
+//                    }
+//                    
+//                    
+//                    if (addressObj.postalCode) {
+//                        [sectDict setObject:addressObj.postalCode forKey:KZIPCode];
+//                    } else {
+//                        [sectDict setObject:@"" forKey:KZIPCode];
+//                    }
+//                    
+//                    if (addressObj.administrativeArea) {
+//                        [sectDict setObject:addressObj.administrativeArea forKey:KState];
+//                    } else {
+//                        [sectDict setObject:@"" forKey:KState];
+//                    }
+//                    if (addressObj.locality) {
+//                        [sectDict setObject:addressObj.locality forKey:KCity];
+//                    } else {
+//                        [sectDict setObject:@"" forKey:KCity];
+//                    }
+//                    
+//                    [self.regTableView reloadData];
+//                    
+//                }];
+//            }
+//        }
+//    }];
+}
+
+-(void)isLocationUpdateDone{
     
+    _isLocationUpdateGet = YES;
+    [MRCommon stopActivityIndicator];
+
+}
+- (void)viewDidLoad {
+    
+    [MRAppControl sharedHelper].addressType = 1;
+    self.selectedAddressType = 1;
+    self.selectedUserType = [MRAppControl sharedHelper].userType;
+    self.userDeatils = [[MRAppControl sharedHelper] userRegData];
+    self.regTableView.contentInset = UIEdgeInsetsMake(-30, 0, 0, -20);
+    [self setUPView];
+    _placesClient = [GMSPlacesClient sharedClient];
+    
+    if (!self.isFromSinUp)
+    {
+        [self.nextButton setTitle:@"UPDATE" forState:UIControlStateNormal];
+    }
+    
+    [super viewDidLoad];
+    [self getCurrentLocation:0];
+    [self performSelector:@selector(isLocationUpdateGet) withObject:nil afterDelay:.12];
+    // Do any additional setup after loading the view from its nib.
+}
+-(IBAction)whyThisBtnTapped:(id)sender{
+    
+    [self setupTutorialView];
+    
+}
+-(void)setupTutorialView{
+    
+    NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"TutorialView" owner:self options:nil];
+    
+    _tutorialView = (TutorialView *)[arr objectAtIndex:0];
+    _tutorialView.layer.cornerRadius = 10;
+    _tutorialViewKLCPopView = [KLCPopup popupWithContentView:self.tutorialView];
+    [_tutorialViewKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutCenter)];
+}
+- (void)addLocationInSection:(NSInteger)section
+{
+    [self getCurrentLocation:0];
 }
 
 -(void)showLocationErrorAlert{

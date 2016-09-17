@@ -70,12 +70,14 @@
                                                                        action:@selector(doneButtonTapped:)];
     self.navigationItem.rightBarButtonItem = rightButtonItem;
     
-    self.locationDictionary = [NSMutableDictionary new];
-    
     _placesClient = [GMSPlacesClient sharedClient];
     
     if (self.addressObject == nil) {
+        self.locationDictionary = [NSMutableDictionary new];
+        
         [self getCurrentLocation];
+    } else {
+        self.locationDictionary = [[self.addressObject toDictionary] mutableCopy];
     }
 }
 
@@ -149,43 +151,7 @@
 
 - (void)doneButtonTapped:(id)sender
 {
-    if ([self validateData]) {
-        NSString *value = self.addressObject.address1;
-        if (value != nil && value.length > 0) {
-            [self.locationDictionary setObject:value forKey:@"address1"];
-        }
-        
-        value = self.addressObject.address2;
-        if (value != nil && value.length > 0) {
-            [self.locationDictionary setObject:value forKey:@"address2"];
-        }
-        
-        value = self.addressObject.city;
-        if (value != nil && value.length > 0) {
-            [self.locationDictionary setObject:value forKey:@"city"];
-        }
-        
-        value = self.addressObject.country;
-        if (value != nil && value.length > 0) {
-            [self.locationDictionary setObject:value forKey:@"country"];
-        } else {
-            [self.locationDictionary setObject:@"India" forKey:@"country"];
-        }
-        
-        value = self.self.addressObject.state;
-        if (value != nil && value.length > 0) {
-            [self.locationDictionary setObject:value forKey:@"state"];
-        }
-        
-        value = self.addressObject.zipcode;
-        if (value != nil && value.length > 0) {
-            [self.locationDictionary setObject:value forKey:@"zipcode"];
-        }
-        
-        if (self.addressObject != nil && self.addressObject.locationId != nil) {
-            [self.locationDictionary setObject:[NSNumber numberWithLong:self.addressObject.locationId.longValue]
-                                   forKey:@"locationId"];
-        }
+    if ( self.locationDictionary != nil && [self validateData]) {
         
         [MRDatabaseHelper editLocation:@[self.locationDictionary]
                             andHandler:^(id result) {
@@ -212,103 +178,62 @@
 */
 
 - (IBAction)pickALocationClicked:(id)sender {
-    self.addressObject = nil;
+    [self.locationDictionary removeAllObjects];
     [self getCurrentLocation];
 }
 
 -(void)getCurrentLocation {
     [MRCommon showActivityIndicator:@""];
-    
-    [_placesClient currentPlaceWithCallback:^(GMSPlaceLikelihoodList *placeLikelihoodList, NSError *error){
-        if (error != nil) {
-            [MRCommon stopActivityIndicator];
-            
-            NSLog(@"Pick Place error %@", [error localizedDescription]);
-            return;
-        }
-        
-        if (placeLikelihoodList != nil) {
-            GMSPlace *place = [[[placeLikelihoodList likelihoods] firstObject] place];
-            if (place != nil) {
-                NSLog(@"%@",place.name);
-                NSLog(@"%@",[[place.formattedAddress componentsSeparatedByString:@", "]
-                             componentsJoinedByString:@"\n"]);
-                
-                [[GMSGeocoder geocoder] reverseGeocodeCoordinate:place.coordinate completionHandler:^(GMSReverseGeocodeResponse* response, NSError* error) {
-                    NSLog(@"reverse geocoding results:");
-                    GMSAddress* addressObj =  [response results].firstObject;
-                    if (_isLocationUpdateGet) {
-                        
-                        [MRCommon stopActivityIndicator];
-                        return;
-                    }
-                    
-                    BOOL newObject = false;
-                    
-                    NSInteger locationId = [[NSDate date] timeIntervalSince1970];
-                    MRDataManger *dbManager = [MRDataManger sharedManager];
-                    NSString *entityName = NSStringFromClass(AddressInfo.class);
-                    
-                    NSManagedObjectContext *context = nil;
-                    if (self.addressObject == nil) {
-                        newObject = true;
-                        context = [dbManager getNewPrivateManagedObjectContext];
-                        
-                        NSEntityDescription *entityDescription = [[[dbManager managedObjectModel] entitiesByName] objectForKey:entityName];
-                        self.addressObject = (AddressInfo*)[[MRManagedObject alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:context];
-                        
-                        self.addressObject.locationId = [NSNumber numberWithLong:locationId];
-                    } else {
-                        context = self.addressObject.managedObjectContext;
-                    }
-                    
-                    self.addressObject.address1 = @"";
-                    
-                    if (place.name != nil && place.name.length > 0) {
-                        self.addressObject.address1 = place.name;
-                    }
-                    
-                    self.addressObject.address2 = @"";
-                    
-                    if (addressObj.subLocality != nil && addressObj.subLocality.length > 0) {
-                        self.addressObject.address2 = addressObj.subLocality;
-                    } else if (addressObj.thoroughfare != nil && addressObj.thoroughfare.length > 0) {
-                        self.addressObject.address2 = addressObj.thoroughfare;
-                    }
-                    
-                    self.addressObject.zipcode = @"";
-                    if (addressObj.postalCode != nil && addressObj.postalCode.length > 0) {
-                        self.addressObject.zipcode = addressObj.postalCode;
-                    }
-                    
-                    self.addressObject.state = @"";
-                    if (addressObj.administrativeArea != nil && addressObj.administrativeArea.length > 0) {
-                        self.addressObject.state = addressObj.administrativeArea;
-                    }
-                    
-                    self.addressObject.city = @"";
-                    if (addressObj.locality != nil && addressObj.locality.length > 0) {
-                        self.addressObject.city = addressObj.locality;
-                    }
-                    
-                    [context save:nil];
-                    
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"locationId", locationId];
-                        self.addressObject = [dbManager fetchObject:entityName predicate:predicate];
-                        
-                        if (newObject) {
-                            self.addressObject.locationId = nil;
-                            [self.addressObject.managedObjectContext save:nil];
-                        }
-                        [MRCommon stopActivityIndicator];
-                        
-                        [self.regTableView reloadData];
-                    });
-                }];
-            }
-        }
-    }];
+    [[MRLocationManager sharedManager] getCurrentLocation:^(CLLocation *location)
+     {
+         CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+         
+         [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+             if (error == nil && [placemarks count] > 0) {
+                 CLPlacemark *placemark = [placemarks lastObject];
+                 
+                 if (placemark.name) {
+                     [self.locationDictionary setObject:placemark.name forKey:KAddressOne];
+                 } else {
+                     [self.locationDictionary setObject:@"" forKey:KAddressOne];
+                 }
+                 
+                 if (placemark.subLocality) {
+                     [self.locationDictionary setObject:placemark.subLocality forKey:KAdresstwo];
+                 } else {
+                     [self.locationDictionary setObject:@"" forKey:KAdresstwo];
+                 }
+                 
+                 if (placemark.postalCode) {
+                     [self.locationDictionary setObject:placemark.postalCode forKey:KZIPCodeSmall];
+                 } else {
+                     [self.locationDictionary setObject:@"" forKey:KZIPCodeSmall];
+                 }
+                 
+                 if (placemark.administrativeArea) {
+                     [self.locationDictionary setObject:placemark.administrativeArea forKey:KState];
+                 } else {
+                     [self.locationDictionary setObject:@"" forKey:KState];
+                 }
+                 
+                 if (placemark.subAdministrativeArea) {
+                     [self.locationDictionary setObject:placemark.subAdministrativeArea forKey:KCity];
+                 } else {
+                     [self.locationDictionary setObject:@"" forKey:KCity];
+                 }
+                 
+                 [MRCommon stopActivityIndicator];
+                 
+                 [self.regTableView reloadData];
+                 
+             } else {
+                 [MRCommon stopActivityIndicator];
+                 
+                 NSLog(@"%@", error.debugDescription);
+                 [self showLocationErrorAlert];
+             }
+         } ];
+     }];
 }
 
 -(void)isLocationUpdateDone{
@@ -345,9 +270,9 @@
                  }
                  
                  if (placemark.postalCode) {
-                     [sectDict setObject:placemark.postalCode forKey:KZIPCode];
+                     [sectDict setObject:placemark.postalCode forKey:KZIPCodeSmall];
                  } else {
-                     [sectDict setObject:@"" forKey:KZIPCode];
+                     [sectDict setObject:@"" forKey:KZIPCodeSmall];
                  }
                  
                  if (placemark.administrativeArea) {
@@ -404,7 +329,9 @@
 - (IBAction)privateButtonAction:(id)sender
 {
     [self.view endEditing:YES];
-    self.addressObject.type = @"Home";
+    NSString *type = @"Home";
+    [self.locationDictionary setObject:type forKey:KType];
+    
     [self.privateClinicButton setBackgroundImage:[UIImage imageNamed:@"privateHospital_selection@2x.png"] forState:UIControlStateNormal];
     [self.hospitalButton setBackgroundImage:[UIImage imageNamed:@"hospital@2x.png"] forState:UIControlStateNormal];
     [self.regTableView reloadData];
@@ -414,7 +341,9 @@
 - (IBAction)hospitalButtonAction:(id)sender
 {
     [self.view endEditing:YES];
-    self.addressObject.type = @"Hospital";
+    NSString *type = @"Hospital";
+    [self.locationDictionary setObject:type forKey:KType];
+    
     [self.privateClinicButton setBackgroundImage:[UIImage imageNamed:@"privateHospital.png"] forState:UIControlStateNormal];
     [self.hospitalButton setBackgroundImage:[UIImage imageNamed:@"hospital_selection.png"] forState:UIControlStateNormal];
     [self.regTableView reloadData];
@@ -460,17 +389,15 @@
     if (indexPath.row == 0) {
         NSString *value = @"";
         
-        if (self.addressObject.address1 != nil && self.addressObject.address1.length > 0) {
-            value = self.addressObject.address1;
-        }
+        value = [self.locationDictionary objectOrNilForKey:KAddressOne];
+        
         regCell.inputTextField.text = value;
         [regCell configureSingleInput:YES];
     } else if (indexPath.row == 1) {
         NSString *value = @"";
         
-        if (self.addressObject.address2 != nil && self.addressObject.address2.length > 0) {
-            value = self.addressObject.address2;
-        }
+        value = [self.locationDictionary objectOrNilForKey:KAdresstwo];
+        
         regCell.inputTextField.text = value;
         [regCell configureSingleInput:YES];
     } else if (indexPath.row == 2) {
@@ -480,16 +407,13 @@
         
         NSString *value = @"";
         
-        if (self.addressObject.state != nil && self.addressObject.state.length > 0) {
-            value = self.addressObject.state;
-        }
+        value = [self.locationDictionary objectOrNilForKey:KState];
+        
         regCell.mOneTextFiled.text = value;
         
         value = @"";
         
-        if (self.addressObject.city != nil && self.addressObject.city.length > 0) {
-            value = self.addressObject.city;
-        }
+        value = [self.locationDictionary objectOrNilForKey:KCity];
         regCell.mTwoTextField.text = value;
     } else if (indexPath.row == 3) {
         regCell.inputTextField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
@@ -497,9 +421,8 @@
         
         NSString *value = @"";
         
-        if (self.addressObject.zipcode != nil && self.addressObject.address1.length > 0) {
-            value = self.addressObject.zipcode;
-        }
+        value = [self.locationDictionary objectOrNilForKey:KZIPCodeSmall];
+        
         regCell.inputTextField.text = value;
         
         [regCell configureSingleInput:YES];
@@ -513,17 +436,23 @@
 {
     switch (cell.rowNumber)
     {
-        case 0:
-            self.addressObject.address1 = cell.inputTextField.text;
+        case 0: {
+            NSString *address1 = cell.inputTextField.text;
+            [self.locationDictionary setObject:address1 forKey:KAddressOne];
             break;
+        }
             
-        case 1:
-            self.addressObject.address2 = cell.inputTextField.text;
+        case 1: {
+            NSString *value = cell.inputTextField.text;
+            [self.locationDictionary setObject:value forKey:KAdresstwo];
             break;
+        }
             
-        case 3:
-            self.addressObject.zipcode = cell.inputTextField.text;
+        case 3: {
+            NSString *value = cell.inputTextField.text;
+            [self.locationDictionary setObject:value forKey:KZIPCodeSmall];
             break;
+        }
             
         default:
             break;
@@ -532,13 +461,17 @@
 
 - (void)mOneButtonActionDelegate:(MRRegTableViewCell*)cell
 {
-    self.addressObject.state = cell.mOneTextFiled.text;
+    NSString *state = cell.mOneTextFiled.text;
+    [self.locationDictionary setObject:state forKey:@"state"];
+    
     [self  showHideFiltersView:cell withAdjustableValue:NO];
 }
 
 - (void)mTwoButtonActionDelegate:(MRRegTableViewCell*)cell
 {
-    self.addressObject.city = cell.mTwoTextField.text;
+    NSString *city = cell.mTwoTextField.text;
+    [self.locationDictionary setObject:city forKey:@"city"];
+    
     [self  showHideFiltersView:cell withAdjustableValue:NO];
 }
 
@@ -601,7 +534,7 @@
                 break;
             }
             
-            if ([MRCommon isStringEmpty:[dict objectForKey:KZIPCode]])
+            if ([MRCommon isStringEmpty:[dict objectForKey:KZIPCodeSmall]])
             {
                 [MRCommon showAlert:@"Zipcode should not be empty." delegate:nil];
                 isSuccess = NO;
@@ -610,7 +543,7 @@
         }
         else
         {
-            if (![MRCommon isStringEmpty:[dict objectForKey:KZIPCode]] || ![MRCommon isStringEmpty:[dict objectForKey:KCity]] || ![MRCommon isStringEmpty:[dict objectForKey:KAddressOne]] || ![MRCommon isStringEmpty:[dict objectForKey:KAdresstwo]] )
+            if (![MRCommon isStringEmpty:[dict objectForKey:KZIPCodeSmall]] || ![MRCommon isStringEmpty:[dict objectForKey:KCity]] || ![MRCommon isStringEmpty:[dict objectForKey:KAddressOne]] || ![MRCommon isStringEmpty:[dict objectForKey:KAdresstwo]] )
             {
                 if ([MRCommon isStringEmpty:[dict objectForKey:KAddressOne]])
                 {
@@ -632,7 +565,7 @@
                     break;
                 }
                 
-                if ([MRCommon isStringEmpty:[dict objectForKey:KZIPCode]])
+                if ([MRCommon isStringEmpty:[dict objectForKey:KZIPCodeSmall]])
                 {
                     [MRCommon showAlert:@"Zipcode should not be empty." delegate:nil];
                     isSuccess = NO;
