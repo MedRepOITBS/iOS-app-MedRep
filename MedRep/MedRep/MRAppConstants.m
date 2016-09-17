@@ -50,7 +50,7 @@ NSString* const kDeleteConnection = @"Delete Connection";
 NSString* const kJoinGroup = @"Join Group";
 NSString* const kLeaveGroup = @"Leave Group";
 
-NSString* const kConnectionAdded = @"Connection Added Successfully !!!";
+NSString* const kConnectionAdded = @"Connection request is sent !!!";
 
 NSString* const kNotificationRefreshContactList = @"RefreshContactList";
 NSString* const kNotificationRefreshProfile = @"RefreshProfile";
