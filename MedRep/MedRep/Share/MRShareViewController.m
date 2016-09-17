@@ -422,7 +422,7 @@ UIImagePickerControllerDelegate>
     NSMutableDictionary *postMessage = [NSMutableDictionary new];
     
     if (_commentBoxView.tag == 1000) {
-        messageIndex = 1;
+        messageIndex = 6;
     }
     [postMessage setObject:[NSNumber numberWithInteger:messageIndex] forKey:@"postType"];
     
