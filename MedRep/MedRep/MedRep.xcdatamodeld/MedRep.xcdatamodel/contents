@@ -148,6 +148,7 @@
         <attribute name="pendingGroups" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="MRPostedReplies" representedClassName="MRPostedReplies" syncable="YES">
+        <attribute name="contact_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="contactId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="contentType" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="displayPicture" optional="YES" attributeType="String" syncable="YES"/>
@@ -320,7 +321,7 @@
         <element name="MRNotifications" positionX="-36" positionY="63" width="128" height="420"/>
         <element name="MRNotificationType" positionX="16" positionY="-135" width="128" height="90"/>
         <element name="MRPendingRecordsCount" positionX="153" positionY="9" width="128" height="75"/>
-        <element name="MRPostedReplies" positionX="-27" positionY="531" width="128" height="390"/>
+        <element name="MRPostedReplies" positionX="-27" positionY="531" width="128" height="405"/>
         <element name="MRProfile" positionX="-36" positionY="135" width="128" height="210"/>
         <element name="MRPublications" positionX="0" positionY="171" width="128" height="120"/>
         <element name="MRReplies" positionX="-36" positionY="135" width="128" height="120"/>

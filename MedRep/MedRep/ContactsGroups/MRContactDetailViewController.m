@@ -289,11 +289,15 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CGFloat rowHeight = 283;
+    CGFloat rowHeight = 240;
     MRPostedReplies *post = [self.posts objectAtIndex:indexPath.row];
     
     if (post.fileUrl == nil || post.fileUrl.length == 0) {
         rowHeight -= 146;
+    }
+    
+    if (post.message == nil && post.message.length == 0) {
+        rowHeight -= 15;
     }
     
     return rowHeight;
@@ -312,6 +316,10 @@
     [cell fillCellWithData:childPost andParentViewController:self];
 
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 - (void)commentButtonTapped:(MRSharePost *)post {

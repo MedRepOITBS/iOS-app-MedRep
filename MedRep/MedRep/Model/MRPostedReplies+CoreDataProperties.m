@@ -14,6 +14,7 @@
 
 @implementation MRPostedReplies (CoreDataProperties)
 
+@dynamic contact_id;
 @dynamic contactId;
 @dynamic contentType;
 @dynamic displayPicture;
@@ -48,6 +49,15 @@
         replyId = message_id.longValue;
     }
     self.postedReplyId = [NSNumber numberWithLong:replyId];
+}
+
+- (void)setContact_id:(NSNumber *)contact_id {
+    NSInteger tempMemberid = 0;
+    if (contact_id != nil) {
+        tempMemberid = contact_id.longValue;
+    }
+    
+    self.contactId = [NSNumber numberWithLong:tempMemberid];
 }
 
 - (void)setMember_id:(NSNumber *)member_id {
