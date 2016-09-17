@@ -18,6 +18,7 @@
 @dynamic contactId;
 @dynamic contentType;
 @dynamic displayPicture;
+@dynamic detail_desc;
 @dynamic fileUrl;
 @dynamic groupId;
 @dynamic parentSharePostId;
@@ -35,6 +36,7 @@
 @dynamic receiver_Id;
 @dynamic topic_id;
 @dynamic share_date;
+@dynamic short_desc;
 @dynamic contactRelationship;
 @dynamic groupRelationship;
 @dynamic sharePostRelationship;
@@ -104,11 +106,18 @@
     self.contactId = [NSNumber numberWithLong:tempReceiverId];
 }
 
+- (void)setDetail_desc:(NSString *)detail_desc {
+    [self setMessage:detail_desc];
+}
+
 - (void)setMessage:(NSString *)message {
-    message = [self stripOutHTMLTags:message];
+    NSString *tempMessage = @"";
+    if (message != nil && message.length > 0) {
+        tempMessage = [self stripOutHTMLTags:message];
+    }
     
     [self willChangeValueForKey:@"message"];
-    [self setPrimitiveValue:message forKey:@"message"];
+    [self setPrimitiveValue:tempMessage forKey:@"message"];
     [self didChangeValueForKey:@"message"];
 }
 

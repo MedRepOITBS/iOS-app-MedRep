@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSNumber *contactId;
 @property (nullable, nonatomic, retain) NSNumber *contentType;
 @property (nullable, nonatomic, retain) NSString *displayPicture;
+@property (nullable, nonatomic, retain) NSString *detail_desc;
 @property (nullable, nonatomic, retain) NSString *fileUrl;
 @property (nullable, nonatomic, retain) NSNumber *groupId;
 @property (nullable, nonatomic, retain) NSNumber *parentSharePostId;
@@ -37,6 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSNumber *receiver_Id;
 @property (nullable, nonatomic, retain) NSNumber *topic_id;
 @property (nullable, nonatomic, retain) NSDate *share_date;
+@property (nullable, nonatomic, retain) NSString *short_desc;
 @property (nullable, nonatomic, retain) MRContact *contactRelationship;
 @property (nullable, nonatomic, retain) MRGroup *groupRelationship;
 @property (nullable, nonatomic, retain) MRSharePost *sharePostRelationship;
