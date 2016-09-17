@@ -186,6 +186,10 @@
                                        }
                                    }
                                    if (self.posts != nil && self.posts.count > 0) {
+                                       NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"postedOn"
+                                                                                                        ascending:NO];
+                                       self.posts = [self.posts sortedArrayUsingDescriptors:@[sortDescriptor]];
+                                       
                                        [self.emptyPostsLabel setHidden:YES];
                                        [self.postsTableView setHidden:NO];
                                        [self.postsTableView reloadData];
