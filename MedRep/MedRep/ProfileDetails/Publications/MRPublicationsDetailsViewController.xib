@@ -23,14 +23,14 @@
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                 </imageView>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="fG5-EP-AiJ">
-                    <rect key="frame" x="20" y="8" width="560" height="128"/>
+                    <rect key="frame" x="20" y="0.0" width="560" height="128"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EOR-d4-yCD">
-                    <rect key="frame" x="222.5" y="131" width="155" height="21"/>
+                    <rect key="frame" x="222" y="123" width="155" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="155" id="iag-Hd-CKR"/>
                         <constraint firstAttribute="height" constant="21" id="lzE-LG-MoS"/>
@@ -40,7 +40,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <webView opaque="NO" contentMode="scaleToFill" misplaced="YES" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AxE-9p-paT">
-                    <rect key="frame" x="5" y="172" width="590" height="426"/>
+                    <rect key="frame" x="5" y="164" width="590" height="434"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="HVV-ei-7Bx"/>
@@ -59,7 +59,7 @@
                 <constraint firstItem="AxE-9p-paT" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="5" id="DMG-Je-W71"/>
                 <constraint firstAttribute="trailing" secondItem="AxE-9p-paT" secondAttribute="trailing" constant="5" id="HCm-Eu-hWv"/>
                 <constraint firstItem="AxE-9p-paT" firstAttribute="top" secondItem="EOR-d4-yCD" secondAttribute="bottom" constant="20" id="Ikc-1h-CQG"/>
-                <constraint firstItem="fG5-EP-AiJ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="8" id="ZFB-FH-6b4"/>
+                <constraint firstItem="fG5-EP-AiJ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ZFB-FH-6b4"/>
                 <constraint firstAttribute="trailing" secondItem="hwu-nj-j5e" secondAttribute="trailing" id="aOt-Qy-0pN"/>
                 <constraint firstItem="fG5-EP-AiJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="g6g-gZ-ZH9"/>
                 <constraint firstItem="EOR-d4-yCD" firstAttribute="top" secondItem="fG5-EP-AiJ" secondAttribute="bottom" constant="-5" id="o55-Ya-Mdd"/>
