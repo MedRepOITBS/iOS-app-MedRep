@@ -7,8 +7,11 @@
 //
 
 #import "ExpericeFillUpTableViewCell.h"
+#import "MRCommon.h"
 
+@interface ExpericeFillUpTableViewCell () <UIAlertViewDelegate>
 
+@end
 
 @implementation ExpericeFillUpTableViewCell
 
@@ -24,9 +27,18 @@
 }
 
 -(IBAction)deleteBtnTapped:(id)sender{
-    if ([self.delegate respondsToSelector:@selector(ExpericeFillUpTableViewCellDelegateForButtonPressed:withButtonType:)]) {
-        [self.delegate ExpericeFillUpTableViewCellDelegateForButtonPressed:self withButtonType:@"ExperienceDetail"];
-    }
-    
+    [MRCommon showConformationOKNoAlert:NSLocalizedString(kDeleteProfileDetailsAlertMessage, "")
+                               delegate:self withTag:11];
 }
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == 11) {
+        if (buttonIndex == 1) {
+            if ([self.delegate respondsToSelector:@selector(ExpericeFillUpTableViewCellDelegateForButtonPressed:withButtonType:)]) {
+                [self.delegate ExpericeFillUpTableViewCellDelegateForButtonPressed:self withButtonType:@"ExperienceDetail"];
+            }
+        }
+    }
+}
+
 @end

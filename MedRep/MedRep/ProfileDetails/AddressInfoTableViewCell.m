@@ -79,7 +79,8 @@ andParentViewController:(UIViewController*)parentViewController {
 }
 
 - (IBAction)deleteAddressButtonTapped:(id)sender {
-    [MRCommon showConformationOKNoAlert:@"Are you sure to delete address?" delegate:self withTag:11];
+    [MRCommon showConformationOKNoAlert:NSLocalizedString(kDeleteProfileDetailsAlertMessage, "")
+                               delegate:self withTag:11];
 }
 
 #pragma mark - UIAlertViewDelegate

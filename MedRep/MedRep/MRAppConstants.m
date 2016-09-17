@@ -59,4 +59,6 @@ NSString* const kNotificationRefreshMenu = @"RefreshMenu";
 NSString* const kPendingGroupMembers = @"Pending Members";
 NSString* const kActiveGroupMembers = @"Active Members";
 
+NSString* const kDeleteProfileDetailsAlertMessage = @"Do you want to delete?";
+
 @end

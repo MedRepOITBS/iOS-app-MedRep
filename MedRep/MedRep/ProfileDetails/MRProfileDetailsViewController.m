@@ -497,9 +497,8 @@
 -(void)ExpericeFillUpTableViewCellDelegateForButtonPressed:(ExpericeFillUpTableViewCell *)cell withButtonType:(NSString *)buttonType{
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     [self deleteProfileData:indexPath];
-    
-
 }
+
 -(void)deleteProfileData:(NSIndexPath *)indexPath{
     
     [MRCommon showActivityIndicator:@""];

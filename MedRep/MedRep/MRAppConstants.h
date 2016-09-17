@@ -58,4 +58,6 @@ FOUNDATION_EXPORT NSString* const kNotificationRefreshMenu;
 FOUNDATION_EXPORT NSString* const kPendingGroupMembers;
 FOUNDATION_EXPORT NSString* const kActiveGroupMembers;
 
+FOUNDATION_EXPORT NSString* const kDeleteProfileDetailsAlertMessage;
+
 @end

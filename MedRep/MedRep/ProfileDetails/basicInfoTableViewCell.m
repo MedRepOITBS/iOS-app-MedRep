@@ -7,6 +7,11 @@
 //
 
 #import "basicInfoTableViewCell.h"
+#import "MRCommon.h"
+
+@interface basicInfoTableViewCell () <UIAlertViewDelegate>
+
+@end
 
 @implementation basicInfoTableViewCell
 
@@ -20,10 +25,20 @@
 
     // Configure the view for the selected state
 }
+
 -(IBAction)deleteBtnTapped:(id)sender{
-    if ([self.delegate respondsToSelector:@selector(basicInfoTableViewCellDelegateForButtonPressed:withButtonType:)]) {
-        [self.delegate basicInfoTableViewCellDelegateForButtonPressed:self withButtonType:@"ExperienceDetail"];
-    }
-    
+    [MRCommon showConformationOKNoAlert:NSLocalizedString(kDeleteProfileDetailsAlertMessage, "")
+                               delegate:self withTag:11];
 }
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == 11) {
+        if (buttonIndex == 1) {
+            if ([self.delegate respondsToSelector:@selector(basicInfoTableViewCellDelegateForButtonPressed:withButtonType:)]) {
+                [self.delegate basicInfoTableViewCellDelegateForButtonPressed:self withButtonType:@"ExperienceDetail"];
+            }
+        }
+    }
+}
+
 @end
