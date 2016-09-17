@@ -66,7 +66,7 @@
                                             <constraint firstAttribute="width" constant="144" id="LYy-aj-qxU"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         <connections>
                                             <outlet property="delegate" destination="KGk-i7-Jjw" id="7Ge-xz-2XT"/>
                                         </connections>
@@ -112,7 +112,7 @@
                                             <constraint firstAttribute="width" constant="144" id="6Qn-JR-ujR"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         <connections>
                                             <outlet property="delegate" destination="KGk-i7-Jjw" id="IJa-5t-ThW"/>
                                         </connections>
@@ -183,7 +183,7 @@
                             <textField opaque="NO" clipsSubviews="YES" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kZp-Nb-2jo">
                                 <rect key="frame" x="20" y="0.0" width="256" height="44"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <connections>
                                     <outlet property="delegate" destination="KGk-i7-Jjw" id="uHl-6k-3Bg"/>
                                 </connections>
