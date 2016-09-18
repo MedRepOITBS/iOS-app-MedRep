@@ -64,7 +64,50 @@
     if ([self.delegate respondsToSelector:@selector(CommonEducationTableViewCellDelegateForTextFieldDidEndEditing:withTextField:)]) {
         [self.delegate CommonEducationTableViewCellDelegateForTextFieldDidEndEditing:self withTextField:textField];
     }
-    
-//    -(void)CommonEducationTableViewCellDelegateForTextFieldDidEndEditing:(CommonEducationTableViewCell *)cell withTextField:(UITextField *)textField;
 }
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    BOOL status = YES;
+    
+    if ([string caseInsensitiveCompare:@""] == NSOrderedSame) {
+        status = YES;
+    } else {
+        NSString *currentText = textField.text;
+        NSInteger length = 0;
+        if (currentText != nil) {
+            length = currentText.length;
+        }
+        
+        if (string != nil) {
+            length += string.length;
+        }
+        
+        if (currentText != nil) {
+            NSString *newString =
+                [currentText stringByReplacingCharactersInRange:range withString:string];
+            
+            NSArray *subStrings = [newString componentsSeparatedByString:@"."];
+            if (subStrings.count > 0) {
+                if (subStrings.count > 2) {
+                    status = NO;
+                } else {
+                    NSString *firstString = subStrings[0];
+                    if (firstString != nil && firstString.length > 2) {
+                        status = NO;
+                    }
+                    
+                    if (subStrings.count == 2) {
+                        NSString *secondString = subStrings[1];
+                        if (secondString != nil && secondString.length > 2) {
+                            status = NO;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    return status;
+}
+
 @end
