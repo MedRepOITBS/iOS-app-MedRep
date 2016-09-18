@@ -60,4 +60,6 @@ FOUNDATION_EXPORT NSString* const kActiveGroupMembers;
 
 FOUNDATION_EXPORT NSString* const kDeleteProfileDetailsAlertMessage;
 
+FOUNDATION_EXPORT NSString* const kJoinedGroup;
+
 @end

@@ -610,7 +610,10 @@
         {
             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
                                                                 object:nil];
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"You joined the group!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
+                                                            message:NSLocalizedString(kJoinedGroup, "")
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
             alert.tag = 11;
             [alert show];
         }
@@ -623,7 +626,10 @@
                      [MRCommon stopActivityIndicator];
                      if (status)
                      {
-                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"You joined the group!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
+                                                                         message:NSLocalizedString(kJoinedGroup, "")
+                                                                        delegate:self
+                                                               cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                          alert.tag = 11;
                          [alert show];
                      } else

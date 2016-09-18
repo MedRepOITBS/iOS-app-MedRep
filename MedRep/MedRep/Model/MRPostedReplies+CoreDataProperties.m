@@ -164,4 +164,17 @@
     self.contentType = [NSNumber numberWithInteger:tempContentType];
 }
 
+- (void)setUrl:(NSString *)url {
+    NSString *tempURL = @"";
+    if (url != nil && url.length > 0) {
+        tempURL = url;
+    }
+    
+    self.fileUrl = tempURL;
+    
+    [self willChangeValueForKey:@"url"];
+    [self setPrimitiveValue:tempURL forKey:@"url"];
+    [self didChangeValueForKey:@"url"];
+}
+
 @end

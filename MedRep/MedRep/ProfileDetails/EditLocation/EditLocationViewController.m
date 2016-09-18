@@ -63,7 +63,12 @@
                                                                       action:@selector(backButtonTapped:)];
     self.navigationItem.leftBarButtonItem = leftButtonItem;
     
-    UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"DONE"
+    NSString *title = @"DONE";
+    if (self.addressObject != nil) {
+        title = @"UPDATE";
+    }
+    
+    UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithTitle:title
                                                                         style:UIBarButtonItemStyleDone
                                                                        target:self
                                                                        action:@selector(doneButtonTapped:)];

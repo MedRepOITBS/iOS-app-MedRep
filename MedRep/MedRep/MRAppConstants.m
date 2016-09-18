@@ -61,4 +61,6 @@ NSString* const kActiveGroupMembers = @"Active Members";
 
 NSString* const kDeleteProfileDetailsAlertMessage = @"Do you want to delete?";
 
+NSString* const kJoinedGroup = @"Request sent successfully, Admin will approve or reject";
+
 @end

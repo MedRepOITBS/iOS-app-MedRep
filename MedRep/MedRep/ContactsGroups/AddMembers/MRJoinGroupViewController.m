@@ -112,7 +112,7 @@
     [[MRWebserviceHelper sharedWebServiceHelper] joinGroup:dictReq withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
         [MRCommon stopActivityIndicator];
         if (status) {
-            [MRCommon showAlert:@"Succuessfully joined the group !!!!" delegate:nil];
+            [MRCommon showAlert:NSLocalizedString(kJoinedGroup, "") delegate:nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
                                                                 object:nil];
             [self.navigationController popViewControllerAnimated:YES];

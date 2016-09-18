@@ -167,10 +167,6 @@
                 [navigationTitle appendFormat:@"%@ ",_profileObj.contactInfo.firstName];
             }
             
-            if (_profileObj.contactInfo.middleName != nil && _profileObj.contactInfo.middleName.length > 0) {
-                [navigationTitle appendFormat:@"%@ ",_profileObj.contactInfo.middleName];
-            }
-            
             if (_profileObj.contactInfo.lastName != nil && _profileObj.contactInfo.lastName.length > 0) {
                 [navigationTitle appendFormat:@"%@ ",_profileObj.contactInfo.lastName];
             }
@@ -725,7 +721,6 @@
          }
          
          NSURL * imageURL = [NSURL URLWithString:[userdata objectForKey:KProfilePicture]];
-         
          
          dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
          dispatch_async(queue, ^{
