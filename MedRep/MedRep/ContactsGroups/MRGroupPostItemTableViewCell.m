@@ -133,11 +133,15 @@ andParentViewController:(UIViewController *)parentViewController {
         image = [UIImage imageWithData:self.post.objectData];
     }
     
-    if (self.post.url != nil && self.post.url.length > 0) {
+    if ((self.post.url != nil && self.post.url.length > 0) ||
+        self.post.objectData != nil) {
+        [self.postImageView setHidden:NO];
         self.postImageView.image = image;
         self.postImageHeightConstraint.constant = 128;
         self.postImageViewTopConstraint.constant = 18;
     } else {
+        [self.postImageView setHidden:YES];
+        self.postImageView.image = nil;
         self.postImageHeightConstraint.constant = 0;
         self.postImageViewTopConstraint.constant = 0;
     }
