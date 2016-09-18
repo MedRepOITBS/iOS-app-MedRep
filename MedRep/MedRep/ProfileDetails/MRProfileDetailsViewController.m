@@ -695,7 +695,14 @@
 
     [_profileObj.publications.array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         MRPublications * workexp = (MRPublications *)obj;
-        [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"PUBLICATION_DETAIL",@"type",workexp,@"object" ,nil]];
+        if (_profileObj.educationlQualification.array.count-1 == idx) {
+            
+            [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"PUBLICATION_DETAIL",@"type",workexp,@"object",@"YES",@"lastObj"  ,nil]];
+            
+        }else{
+            
+            [temp addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"PUBLICATION_DETAIL",@"type",workexp,@"object",@"NO",@"lastObj"  ,nil]];
+        }
     }];
   
     return temp;
@@ -823,7 +830,10 @@
         cell.delegate = self;
         if ([[valNDict objectForKey:@"lastObj"] isEqualToString:@"YES"]) {
             cell.viewLabel.hidden = YES;
+        } else {
+            cell.viewLabel.hidden = NO;
         }
+        
          if ([valN isEqualToString:@"WORK_EXP_DETAIL"]) {
              MRWorkExperience * obj  = [valNDict objectForKey:@"object"];
              
@@ -863,8 +873,13 @@
          if ([valN isEqualToString:@"PUBLICATION_DETAIL"] ) {
              
              MRPublications * obj  = [valNDict objectForKey:@"object"];
-             
              cell.titleOther.text = obj.articleName;
+             
+             if ([[valNDict objectForKey:@"lastObj"] isEqualToString:@"YES"]) {
+                 cell.viewLabel.hidden = YES;
+             } else {
+                 cell.viewLabel.hidden = NO;
+             }
          }else {
              
              MRInterestArea * obj  = [valNDict objectForKey:@"object"];
