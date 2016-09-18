@@ -1296,7 +1296,7 @@ easier for colleagues to find you.</string>
                             <constraint firstItem="gID-et-jCI" firstAttribute="centerY" secondItem="T66-rG-2bX" secondAttribute="centerY" id="IVS-L8-WnO"/>
                             <constraint firstItem="XK1-Ke-Chh" firstAttribute="top" secondItem="Dlg-We-SnK" secondAttribute="bottom" id="LRU-De-bJ2"/>
                             <constraint firstAttribute="trailing" secondItem="XK1-Ke-Chh" secondAttribute="trailing" constant="20" id="OgP-3Q-lRm"/>
-                            <constraint firstItem="Dlg-We-SnK" firstAttribute="top" secondItem="1TH-Of-Sru" secondAttribute="bottom" constant="10" id="OtD-G1-1AZ"/>
+                            <constraint firstItem="Dlg-We-SnK" firstAttribute="top" secondItem="1TH-Of-Sru" secondAttribute="bottom" constant="5" id="OtD-G1-1AZ"/>
                             <constraint firstAttribute="trailing" secondItem="Zwj-cw-Xgo" secondAttribute="trailing" constant="20" id="RCa-fW-GCb"/>
                             <constraint firstItem="Zwj-cw-Xgo" firstAttribute="top" secondItem="T66-rG-2bX" secondAttribute="bottom" id="RtY-Ih-6Qg"/>
                             <constraint firstItem="MSI-7I-HJl" firstAttribute="bottom" secondItem="Nkx-5F-wcV" secondAttribute="bottom" id="RzC-fM-yZ2"/>
