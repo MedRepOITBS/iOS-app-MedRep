@@ -459,7 +459,10 @@
     [UIView animateWithDuration:0.5 animations:^{
 //        CGRect f = self.view.frame;
 //        f.origin.y = -150+50;
-      self.topConstraint.constant = -150+50;
+        self.topConstraint.constant = -150+50;
+        if (textField.tag == 1201) {
+            self.topConstraint.constant = self.topConstraint.constant - 50;
+        }
         [self.tableView updateConstraintsIfNeeded];
     }];
 
