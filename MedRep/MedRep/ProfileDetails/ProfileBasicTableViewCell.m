@@ -13,12 +13,16 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    
-    self.profileimageView.layer.cornerRadius = self.profileimageView.frame.size.width / 2;
-    self.profileimageView.clipsToBounds = YES;
-    self.profileimageView.layer.borderWidth = 3.0f;
-    self.profileimageView.layer.borderColor = [UIColor grayColor].CGColor;
 }
+
+- (void)createRoundedImage {
+
+    self.imageBtn.layer.cornerRadius = self.imageBtn.frame.size.width / 2;
+    self.imageBtn.clipsToBounds = YES;
+    self.imageBtn.layer.borderWidth = 3.0f;
+    self.imageBtn.layer.borderColor = [UIColor grayColor].CGColor;
+}
+
 -(IBAction)imageButtonTapped:(id)sender{
     if ([self.delegate respondsToSelector:@selector(ProfileBasicTableViewCellDelegateForButtonPressed:withButtonType:)]) {
         [self.delegate ProfileBasicTableViewCellDelegateForButtonPressed:self withButtonType:@"ProfilePicButton"];

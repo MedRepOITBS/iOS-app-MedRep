@@ -11,7 +11,6 @@
 
 @interface ProfileBasicTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *userNameLbl;
-@property (weak, nonatomic) IBOutlet UIImageView *profileimageView;
 @property (weak, nonatomic) IBOutlet UILabel *userLocation;
 @property (nonatomic,weak) id<ProfileBasicTableViewCellDelegate> delegate;
 
@@ -20,7 +19,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *pencilBtn;
 
 -(IBAction)imageButtonTapped:(id)sender;
+
+- (void)createRoundedImage;
+
 @end
+
 @protocol ProfileBasicTableViewCellDelegate <NSObject>
 
 @optional

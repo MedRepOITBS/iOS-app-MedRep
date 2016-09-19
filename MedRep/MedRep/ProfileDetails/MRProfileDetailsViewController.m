@@ -719,6 +719,8 @@
          cell.userNameLbl.text         = _profileObj.name;
          cell.userLocation.text = _profileObj.location;
          
+         [cell createRoundedImage];
+         
          if (self.showAsReadable) {
              [cell.pencilBtn setHidden:YES];
              [cell.imageBtn setUserInteractionEnabled:NO];
@@ -735,7 +737,7 @@
              UIImage *image = [UIImage imageWithData:data];
              dispatch_async(dispatch_get_main_queue(), ^{
                  
-                 cell.profileimageView.image = image;
+                 [cell.imageBtn setImage:image forState:UIControlStateNormal];
              });  
          });
          return cell;

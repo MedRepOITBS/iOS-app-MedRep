@@ -56,7 +56,12 @@
         [self.publicationsDateLabel setText:value];
         
         if (self.publication.url != nil && self.publication.url.length > 0) {
-            NSURL *url = [NSURL URLWithString:self.publication.url];
+            NSString *urlString = self.publication.url;
+            if (([self.publication.url containsString:@"http"] ||
+                 [self.publication.url containsString:@"https"]) == false) {
+                urlString = [NSString stringWithFormat:@"http://%@",self.publication.url];
+            }
+            NSURL *url = [NSURL URLWithString:urlString];
             [self.publicationsURLWebView loadRequest:[NSURLRequest requestWithURL:url]];
         }
     }
