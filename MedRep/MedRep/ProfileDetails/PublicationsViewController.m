@@ -101,9 +101,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationItem.title  = @"Add Publications";
-
-    
+    if (self.publications != nil) {
+        self.navigationItem.title  = @"Edit Publications";
+    } else {
+        self.navigationItem.title  = @"Add Publications";
+    }
     
     UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"]  style:UIBarButtonItemStyleDone target:self action:@selector(backButtonTapped:)];
     [self setupPicker];

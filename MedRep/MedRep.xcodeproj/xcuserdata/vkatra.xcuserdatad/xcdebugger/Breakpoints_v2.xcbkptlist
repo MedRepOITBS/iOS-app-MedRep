@@ -58,13 +58,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MedRep/Transform/MRTransformDetailViewController.m"
-            timestampString = "493792861.320811"
+            timestampString = "496007511.184799"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
+            startingLineNumber = "233"
+            endingLineNumber = "233"
             landmarkName = "-shareAction:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

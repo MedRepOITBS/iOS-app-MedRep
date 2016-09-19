@@ -333,7 +333,7 @@
 - (IBAction)privateButtonAction:(id)sender
 {
     [self.view endEditing:YES];
-    NSString *type = @"Home";
+    NSNumber *type = [NSNumber numberWithInt:2];
     [self.locationDictionary setObject:type forKey:KType];
     
     [self.privateClinicButton setBackgroundImage:[UIImage imageNamed:@"privateHospital_selection@2x.png"] forState:UIControlStateNormal];
@@ -345,7 +345,7 @@
 - (IBAction)hospitalButtonAction:(id)sender
 {
     [self.view endEditing:YES];
-    NSString *type = @"Hospital";
+    NSNumber *type = [NSNumber numberWithInt:1];
     [self.locationDictionary setObject:type forKey:KType];
     
     [self.privateClinicButton setBackgroundImage:[UIImage imageNamed:@"privateHospital.png"] forState:UIControlStateNormal];

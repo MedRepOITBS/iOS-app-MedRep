@@ -563,12 +563,6 @@ easier for colleagues to find you.</string>
                                                         <constraint firstAttribute="height" constant="150" id="0r7-9t-tkb"/>
                                                     </constraints>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userProfilePic.png" translatesAutoresizingMaskIntoConstraints="NO" id="hnH-yE-qKB">
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="100" id="cPm-bd-eHR"/>
-                                                        <constraint firstAttribute="width" constant="100" id="rJX-9s-XY0"/>
-                                                    </constraints>
-                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hyderbad, India" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RAu-br-9wf">
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="211" id="JYy-lH-LVA"/>
@@ -583,7 +577,7 @@ easier for colleagues to find you.</string>
                                                         <constraint firstAttribute="height" constant="100" id="1ap-Ok-V9e"/>
                                                         <constraint firstAttribute="width" constant="100" id="eqc-zX-VMD"/>
                                                     </constraints>
-                                                    <state key="normal">
+                                                    <state key="normal" image="userProfilePic.png">
                                                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                     <connections>
@@ -612,19 +606,17 @@ easier for colleagues to find you.</string>
                                             </subviews>
                                             <color key="backgroundColor" red="0.76862745099999996" green="0.94509803920000002" blue="0.90588235289999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
-                                                <constraint firstItem="hnH-yE-qKB" firstAttribute="centerX" secondItem="j0G-ON-st2" secondAttribute="centerX" id="5f3-Go-dc2"/>
                                                 <constraint firstItem="N7P-G2-RDu" firstAttribute="leading" secondItem="j0G-ON-st2" secondAttribute="leading" id="6Ha-4D-9FH"/>
                                                 <constraint firstItem="vFR-eQ-u3j" firstAttribute="leading" secondItem="ACA-wV-x0c" secondAttribute="trailing" constant="-38" id="E4B-BH-MGU"/>
                                                 <constraint firstItem="hy2-lB-yk9" firstAttribute="centerX" secondItem="j0G-ON-st2" secondAttribute="centerX" id="EG7-J6-Ul6"/>
                                                 <constraint firstAttribute="trailing" secondItem="N7P-G2-RDu" secondAttribute="trailing" id="G9l-D2-3wF"/>
-                                                <constraint firstItem="vFR-eQ-u3j" firstAttribute="top" secondItem="j0G-ON-st2" secondAttribute="top" constant="1" id="Tab-eV-Bfa"/>
+                                                <constraint firstItem="vFR-eQ-u3j" firstAttribute="top" secondItem="j0G-ON-st2" secondAttribute="top" constant="3" id="Tab-eV-Bfa"/>
                                                 <constraint firstItem="vFR-eQ-u3j" firstAttribute="centerX" secondItem="j0G-ON-st2" secondAttribute="centerX" id="cGU-X9-jhv"/>
                                                 <constraint firstItem="RAu-br-9wf" firstAttribute="centerX" secondItem="j0G-ON-st2" secondAttribute="centerX" id="g3E-gt-zFR"/>
+                                                <constraint firstItem="hy2-lB-yk9" firstAttribute="top" secondItem="vFR-eQ-u3j" secondAttribute="bottom" constant="-4" id="gyT-5s-VA8"/>
                                                 <constraint firstItem="N7P-G2-RDu" firstAttribute="top" secondItem="j0G-ON-st2" secondAttribute="top" id="kEs-Vg-v6m"/>
                                                 <constraint firstItem="RAu-br-9wf" firstAttribute="top" secondItem="hy2-lB-yk9" secondAttribute="bottom" constant="-10.5" id="rTa-Do-AqV"/>
-                                                <constraint firstItem="hy2-lB-yk9" firstAttribute="top" secondItem="hnH-yE-qKB" secondAttribute="bottom" constant="-4" id="rzG-3F-mf1"/>
                                                 <constraint firstItem="hy2-lB-yk9" firstAttribute="top" secondItem="ACA-wV-x0c" secondAttribute="bottom" constant="-6" id="tqh-3g-6Ob"/>
-                                                <constraint firstItem="hnH-yE-qKB" firstAttribute="top" secondItem="j0G-ON-st2" secondAttribute="top" constant="1" id="zXj-RC-MQF"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -639,7 +631,6 @@ easier for colleagues to find you.</string>
                                 <connections>
                                     <outlet property="imageBtn" destination="vFR-eQ-u3j" id="fgX-dY-oms"/>
                                     <outlet property="pencilBtn" destination="ACA-wV-x0c" id="f0R-Nw-cdO"/>
-                                    <outlet property="profileimageView" destination="hnH-yE-qKB" id="Upb-26-jDM"/>
                                     <outlet property="userLocation" destination="RAu-br-9wf" id="eam-SI-GyY"/>
                                     <outlet property="userNameLbl" destination="hy2-lB-yk9" id="fh4-br-0v3"/>
                                 </connections>

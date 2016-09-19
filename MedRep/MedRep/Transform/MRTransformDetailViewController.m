@@ -60,6 +60,7 @@
         }
         
         if (self.post.detailedDescription != nil) {
+            NSLog(@"VAMSI : %@", self.post.detailedDescription);
             _detailLbl.text = self.post.detailedDescription;
         }
         
@@ -107,7 +108,11 @@
             //            [self setAVPlayerConstraints:av.view];
             
         }else { //if ([self.selectedContent.contentType isEqualToString:@"Image"]) {
-            _contentImage.image = [UIImage imageNamed:@"Default"];
+            _contentImage.image = [UIImage imageNamed:@"Rss"];
+            [_detailLbl setHidden:NO];
+            [webView setHidden:YES];
+            
+            NSLog(@"VAMSI : %@", _detailLbl.text);
             
             if (self.post.innerImgUrl != nil && self.post.innerImgUrl.length > 0) {
                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{

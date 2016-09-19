@@ -196,7 +196,11 @@
                                    } else {
                                        self.posts = [[NSArray alloc] init];
                                        [self.postsTableView setHidden:YES];
-                                       [self.emptyPostsLabel setHidden:NO];
+                                       if (self.launchMode == kContactDetailLaunchModeSuggestedGroup ||
+                                           self.launchMode == kContactDetailLaunchModeSuggestedContact) {
+                                       } else {
+                                           [self.emptyPostsLabel setHidden:NO];
+                                       }
                                    }
                                }];
 }

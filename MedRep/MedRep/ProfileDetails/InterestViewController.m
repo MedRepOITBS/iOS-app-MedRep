@@ -23,9 +23,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationItem.title  = @"Add Therapeutic Area";
-
-    
+    if (_interestAreaObj != nil) {
+        self.navigationItem.title  = @"Edit Therapeutic Area";
+    } else {
+        self.navigationItem.title  = @"Add Therapeutic Area";
+    }
     
     UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"]  style:UIBarButtonItemStyleDone target:self action:@selector(backButtonTapped:)];
     self.navigationItem.leftBarButtonItem = leftButtonItem;

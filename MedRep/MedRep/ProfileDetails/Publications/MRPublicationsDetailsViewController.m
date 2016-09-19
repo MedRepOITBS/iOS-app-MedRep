@@ -82,6 +82,21 @@
     [self.publicationsURLWebView setBackgroundColor:[UIColor whiteColor]];
 }
 
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    if ([error.domain isEqualToString:@"WebKitErrorDomain"] && error.code == 102) {
+        
+        return;
+    }
+    
+    if (error.code == NSURLErrorCancelled) {
+        // ignore rapid repeated clicking (error code -999)
+        return;
+    }
+    
+    [MRCommon stopActivityIndicator];
+    [MRCommon showAlert:@"Failed to load URL !!!" delegate:self];
+}
+
 /*
 #pragma mark - Navigation
 
