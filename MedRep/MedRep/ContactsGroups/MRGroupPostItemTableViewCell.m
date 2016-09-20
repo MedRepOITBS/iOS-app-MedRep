@@ -114,7 +114,8 @@ andParentViewController:(UIViewController *)parentViewController {
     
     self.postLabel.text = post.titleDescription;
     self.postedOnLabel.text = [NSDate convertNSDateToNSString:post.postedOn
-                                                   dateFormatStyle:NSDateFormatterLongStyle];
+                                                   dateFormat:kIdletimeFormat];
+                                                   //dateFormatStyle:NSDateFormatterFullStyle];
     
     UIImage *image = nil;
     

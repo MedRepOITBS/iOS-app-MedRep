@@ -743,6 +743,8 @@
 }
 
 + (void)getContactImage:(MRContact*)contact andImageView:(UIImageView*)parentView {
+    parentView.image = nil;
+    
     if (contact.dPicture != nil && contact.dPicture.length > 0) {
         parentView.image = [UIImage imageNamed:@"user"];
         

@@ -236,4 +236,8 @@
     }];
 }
 
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [self getAllContactsByCity];
+}
+
 @end

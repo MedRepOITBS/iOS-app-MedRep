@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15G31" minimumToolsVersion="Automatic">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="15G31" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="AddressInfo" representedClassName="AddressInfo" syncable="YES">
         <attribute name="address1" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="address2" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="locationId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="locationId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="state" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="zipcode" optional="YES" attributeType="String" syncable="YES"/>
@@ -21,16 +21,16 @@
         <attribute name="phoneNo" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="EducationalQualifications" representedClassName="EducationalQualifications" syncable="YES">
-        <attribute name="aggregate" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="aggregate" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="collegeName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="course" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="degree" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="yearOfPassout" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="MRCompanyDetails" representedClassName="MRCompanyDetails" syncable="YES">
         <attribute name="companyDesc" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="companyId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="companyId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="companyName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="contactName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="contactNo" optional="YES" attributeType="String" syncable="YES"/>
@@ -41,25 +41,25 @@
     <entity name="MRContact" representedClassName="MRContact" syncable="YES">
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="connStatus" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="contactId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="contactId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="doctorDetails" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="doctorId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="doctorId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="dPicture" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="member_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="member_id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="middleName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="roleId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="therapeuticArea" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="therapeuticName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="userId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="comments" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MRPostedReplies" inverseName="contactRelationship" inverseEntity="MRPostedReplies" syncable="YES"/>
         <relationship name="groupPosts" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MRGroupPost" inverseName="contact" inverseEntity="MRGroupPost" syncable="YES"/>
         <relationship name="groups" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MRGroup" syncable="YES"/>
     </entity>
     <entity name="MRGroup" representedClassName="MRGroup" syncable="YES">
-        <attribute name="admin_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="group_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="admin_id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="group_id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="group_img_data" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="group_long_desc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="group_mime_type" optional="YES" attributeType="String" syncable="YES"/>
@@ -79,15 +79,15 @@
         <attribute name="alias" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="doctor" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="group_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="group_id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="groupList" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="imageUrl" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="is_admin" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="is_admin" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="member_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="member_id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="memberList" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="mimeType" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="roleId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="roleId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="roleName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="stateMedCouncil" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
@@ -96,11 +96,11 @@
         <relationship name="groups" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MRGroup" inverseName="members" inverseEntity="MRGroup" syncable="YES"/>
     </entity>
     <entity name="MRGroupPost" representedClassName="MRGroupPost" syncable="YES">
-        <attribute name="groupPostId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="numberOfComments" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="numberOfLikes" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="numberOfShares" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="postedOn" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="groupPostId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="numberOfComments" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="numberOfLikes" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="numberOfShares" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="postedOn" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="postPic" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="postText" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="contact" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="MRContact" inverseName="groupPosts" inverseEntity="MRContact" syncable="YES"/>
@@ -108,68 +108,68 @@
         <relationship name="replyPost" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="MrGroupChildPost" syncable="YES"/>
     </entity>
     <entity name="MRInterestArea" representedClassName="MRInterestArea" syncable="YES">
-        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="MRNotifications" representedClassName="MRNotifications" syncable="YES">
-        <attribute name="companyId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="companyId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="companyName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createdBy" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createdOn" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="externalRef" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="favNotification" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="feedback" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="favNotification" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="feedback" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="fileList" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="notificationDesc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="notificationDetails" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="notificationId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="notificationId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="notificationName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="readNotification" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="readNotification" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="therapeuticDropDownValues" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="therapeuticId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="therapeuticId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="therapeuticName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="totalConvertedToAppointment" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="totalPendingNotifcation" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="totalSentNotification" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="totalViewedNotifcation" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="typeId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="totalConvertedToAppointment" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="totalPendingNotifcation" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="totalSentNotification" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="totalViewedNotifcation" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="typeId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="updatedBy" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updatedOn" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="validUpto" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="MRNotificationType" representedClassName="MRNotificationType" syncable="YES">
         <attribute name="typeDesc" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="typeId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="typeId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="typeName" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="MRPendingRecordsCount" representedClassName="MRPendingRecordsCount" syncable="YES">
-        <attribute name="pendingConnections" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="pendingGroups" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="pendingConnections" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="pendingGroups" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
     </entity>
     <entity name="MRPostedReplies" representedClassName="MRPostedReplies" syncable="YES">
-        <attribute name="contact_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="contactId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="contentType" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="contact_id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="contactId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="contentType" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="detail_desc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="displayPicture" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="doctor_Name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="fileUrl" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="group_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="groupId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="member_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="group_id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="groupId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="member_id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="message" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="message_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="message_id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="message_type" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="parentSharePostId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="post_date" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="posted_on" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="postedOn" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="postedReplyId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="receiver_Id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="share_date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="parentSharePostId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="post_date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="posted_on" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="postedOn" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="postedReplyId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="receiver_Id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="share_date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="short_desc" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="topic_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="topic_id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="contactRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MRContact" inverseName="comments" inverseEntity="MRContact" syncable="YES"/>
         <relationship name="groupRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MRGroup" inverseName="comment" inverseEntity="MRGroup" syncable="YES"/>
@@ -177,8 +177,8 @@
     </entity>
     <entity name="MRProfile" representedClassName="MRProfile" syncable="YES">
         <attribute name="designation" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="doctorId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="doctorId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="addressInfo" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="AddressInfo" syncable="YES"/>
@@ -190,7 +190,7 @@
     </entity>
     <entity name="MRPublications" representedClassName="MRPublications" syncable="YES">
         <attribute name="articleName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="publication" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="year" optional="YES" attributeType="String" syncable="YES"/>
@@ -199,67 +199,67 @@
         <attribute name="contactPic" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="descriptionText" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="otherData" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="parentPostId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="postedDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="parentPostId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="postedDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
     </entity>
     <entity name="MRRole" representedClassName="MRRole" syncable="YES">
         <attribute name="authority" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="roleDescription" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="roleId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="roleId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
     </entity>
     <entity name="MRSharePost" representedClassName="MRSharePost" syncable="YES">
-        <attribute name="comment_count" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="commentsCount" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="contactId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="comment_count" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="commentsCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="contactId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="content_type" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="contentType" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="contentType" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="detail_desc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="detailedText" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="displayPicture" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="doctor_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="doctor_id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="doctor_Name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="group_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="groupId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="like" optional="YES" attributeType="Boolean" defaultValueString="0" syncable="YES"/>
-        <attribute name="likes_count" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="likesCount" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="member_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="message_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="group_id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="groupId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="like" optional="YES" attributeType="Boolean" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="likes_count" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="likesCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="member_id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="message_id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="message_type" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="objectData" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="parent_share_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="parentSharePostId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="parentTransformPostId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="post_date" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="posted_on" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="postedOn" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="receiver_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="share_count" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="share_date" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="shareCount" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="sharedByProfileId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="parent_share_id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="parentSharePostId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="parentTransformPostId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="post_date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="posted_on" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="postedOn" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="receiver_id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="share_count" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="share_date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="shareCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="sharedByProfileId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="sharedByProfileName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="sharePostId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="sharePostId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="short_desc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="shortText" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="source" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title_desc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="titleDescription" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="topic_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="transform_post_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="topic_id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="transform_post_id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="postedReplies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MRPostedReplies" inverseName="sharePostRelationship" inverseEntity="MRPostedReplies" syncable="YES"/>
     </entity>
     <entity name="MRSuggestedContact" representedClassName="MRContact" syncable="YES">
-        <attribute name="contactId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="contactId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="profilePic" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="role" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="MRTherapeuticArea" representedClassName="MRTherapeuticArea" syncable="YES">
         <attribute name="therapeuticDesc" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="therapeuticId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="therapeuticId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="therapeuticName" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="MRTransformPageData" representedClassName="MRTransformPageData" syncable="YES">
@@ -267,20 +267,20 @@
         <attribute name="transforms" optional="YES" attributeType="Binary" syncable="YES"/>
     </entity>
     <entity name="MRTransformPost" representedClassName="MRTransformPost" syncable="YES">
-        <attribute name="contentType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="contentType" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="coverImgFile" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
         <attribute name="coverImgUrl" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
-        <attribute name="createdOn" optional="YES" transient="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="createdOn" optional="YES" transient="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="detailedDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="innerImgFile" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
         <attribute name="innerImgUrl" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
         <attribute name="newsDesc" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
-        <attribute name="newsId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="postedOn" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="newsId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="postedOn" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="postUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="shortArticleDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="source" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="sourceId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="sourceId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="sourceName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="subCategory" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tagDesc" optional="YES" attributeType="String" syncable="YES"/>
@@ -289,7 +289,7 @@
         <attribute name="title" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
         <attribute name="titleDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="transformDesc" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="transformPostId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="transformPostId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userId" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
         <attribute name="videoFile" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
@@ -297,11 +297,11 @@
         <relationship name="childSharePosts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MRSharePost" syncable="YES"/>
     </entity>
     <entity name="MRWorkExperience" representedClassName="MRWorkExperience" syncable="YES">
-        <attribute name="currentJob" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="currentJob" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="designation" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="fromDate" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="hospital" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="toDate" optional="YES" attributeType="String" syncable="YES"/>

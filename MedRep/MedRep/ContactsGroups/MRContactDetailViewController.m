@@ -538,10 +538,16 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
-        if (self.mainGroup != nil && canEditGroup) {
+        if (self.launchMode == kContactDetailLaunchModeContact) {
             MRAddMembersViewController* detailViewController = [[MRAddMembersViewController alloc] init];
-            detailViewController.groupID = self.mainGroup.group_id.longValue;
+            detailViewController.groupID = 0;
             [self.navigationController pushViewController:detailViewController animated:NO];
+        } else {
+            if (self.mainGroup != nil && canEditGroup) {
+                MRAddMembersViewController* detailViewController = [[MRAddMembersViewController alloc] init];
+                detailViewController.groupID = self.mainGroup.group_id.longValue;
+                [self.navigationController pushViewController:detailViewController animated:NO];
+            }
         }
     }else if (buttonIndex == 0) {
         PendingContactsViewController* pendingContactsViewController = [[PendingContactsViewController alloc] init];

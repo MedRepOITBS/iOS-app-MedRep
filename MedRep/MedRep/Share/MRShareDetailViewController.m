@@ -36,6 +36,9 @@ AVPlayerViewControllerDelegate, UIAlertViewDelegate> {
     AVPlayerViewController *av;
 }
 
+@property (weak, nonatomic) IBOutlet UITextView *detailDescriptionTextView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *detailDescriptionHeightConstraint;
+
 @property (weak, nonatomic) IBOutlet UIImageView *likeImageView;
 
 @property (weak, nonatomic) IBOutlet UIButton *takeMeToTransformButton;
@@ -188,6 +191,7 @@ AVPlayerViewControllerDelegate, UIAlertViewDelegate> {
 
 - (void)setupPreview {
     if (self.post.contentType.integerValue == kTransformContentTypePDF) {
+        [self.detailDescriptionTextView setHidden:YES];
         [self.previewImageView setHidden:YES];
         
         if (self.post.url != nil && self.post.url.length > 0) {
@@ -199,10 +203,12 @@ AVPlayerViewControllerDelegate, UIAlertViewDelegate> {
             [self.webView loadRequest:request];
         }
     } else if (self.post.contentType.integerValue == kTransformContentTypeVideo) {
+        [self.detailDescriptionTextView setHidden:YES];
         [self setupVideoPlayer];
         
     }else { //if ([self.selectedContent.contentType isEqualToString:@"Image"]) {
         if (self.post.url != nil && self.post.url.length > 0) {
+            [self.detailDescriptionTextView setHidden:YES];
             self.webView.hidden = YES;
             self.previewImageView.hidden = NO;
             
@@ -218,7 +224,16 @@ AVPlayerViewControllerDelegate, UIAlertViewDelegate> {
             self.webView.hidden = YES;
             self.previewImageView.hidden = YES;
             self.previewImageHeightConstraint.constant = 0;
-            self.webViewHeightConstraint.constant = 0;
+            
+            if (self.post.detail_desc != nil && self.post.detail_desc.length > 0) {
+                [self.detailDescriptionTextView setHidden:NO];
+                self.detailDescriptionHeightConstraint.constant = 140;
+                
+                [self.detailDescriptionTextView setText:self.post.detail_desc];
+            } else {
+                [self.detailDescriptionTextView setHidden:YES];
+                self.detailDescriptionHeightConstraint.constant = 0;
+            }
         }
     }
 }

@@ -98,6 +98,16 @@
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
+    
+    if (self.addressObject != nil && self.addressObject.type != nil && self.addressObject.type.length > 0) {
+        if ([self.addressObject.type caseInsensitiveCompare:@"Hospital"] == NSOrderedSame) {
+            [self hospitalButtonAction:nil];
+        } else {
+            [self privateButtonAction:nil];
+        }
+    } else {
+        [self privateButtonAction:nil];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
