@@ -72,4 +72,6 @@
 
 + (void)invokeInviteContact:(UIViewController*)viewController;
 
++ (void)registerForPushNotification;
+
 @end

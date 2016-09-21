@@ -40,7 +40,6 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     // Override point for customization after application launch.
-    [self registerForNotification];
     [GMSServices provideAPIKey:@"AIzaSyBTgV7M14YRcPONkBYkcY8FLmXhA0ELJJA"];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     self.window.backgroundColor = [MRCommon colorFromHexString:kStatusBarColor];
@@ -50,36 +49,15 @@
     //_launchScreen = @"Survey";
     //_launchScreen = @"Notifications";
     
+    MRAppControl *appController = [MRAppControl sharedHelper];
+    [appController launchWithApplicationMainWindow:self.window];
+    
     return YES;
 }
 -(NSInteger)counterForChildPost{
     
     return _counterChildPost ++;
 
-}
-- (void)registerForNotification
-{
-    BOOL appRegisteredForAPNS = [[UIApplication sharedApplication] isRegisteredForRemoteNotifications];
-    if (appRegisteredForAPNS == false) {
-        
-        if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)])
-        {
-            UIUserNotificationType types = UIUserNotificationTypeSound | UIUserNotificationTypeBadge | UIUserNotificationTypeAlert;
-            UIUserNotificationSettings *notificationSettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
-            [[UIApplication sharedApplication] registerUserNotificationSettings:notificationSettings];
-        }
-        
-        if ([UIApplication instancesRespondToSelector:@selector(registerForRemoteNotifications)])
-        {
-            [[UIApplication sharedApplication] registerForRemoteNotifications];
-        }
-        else
-        {
-            [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
-        }
-    }
-    MRAppControl *appController = [MRAppControl sharedHelper];
-    [appController launchWithApplicationMainWindow:self.window];
 }
 
 - (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
@@ -132,8 +110,18 @@
     
     NSLog(@"The generated device token string is : %@",deviceTokenString);
     _token = deviceTokenString;
-    self.notificationViewController.token = deviceTokenString;
-    [self.notificationViewController refreshScreen];
+    
+    NSDictionary *userdata = [MRAppControl sharedHelper].userRegData;
+    NSDictionary *dataDict = @{@"regDeviceToken" : deviceTokenString,
+                               @"platform" : @"IOS"/*,
+                               @"docId" : [userdata objectOrNilForKey:@"doctorId"]*/};
+    
+    [[MRWebserviceHelper sharedWebServiceHelper] registerDeviceTokenWithPushAPI:dataDict
+                                                                    withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                                        if (status == NO) {
+                                                                            [MRCommon showAlert:@"Failed to register for Push Notifications !!!" delegate:nil];
+                                                                        }
+                                                                    }];
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {

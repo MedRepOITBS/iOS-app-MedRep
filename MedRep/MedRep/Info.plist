@@ -78,5 +78,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Access required for Photo Library to set it in your profile</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Access required for Camera to set it in your profile</string>
 </dict>
 </plist>

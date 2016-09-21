@@ -260,11 +260,13 @@
     [self performSelector:@selector(hideSplashScreen) withObject:nil afterDelay:0.5f ];
 
 }
+
 -(void)hideSplashScreen
 {
     [self.viewController.activityIndicator stopAnimating];
     [self applyFadeAnimation];
     [self loadHomeScreen];
+    
     //[self loadPharmaDashboard];
     /*
     if (nil == [MRDefaults objectForKey:kRefreshToken])
@@ -968,6 +970,34 @@
     
     
     [viewController presentViewController:activityVC animated:YES completion:nil];
+}
+
++ (void)registerForPushNotification
+{
+    BOOL appRegisteredForAPNS = [[UIApplication sharedApplication] isRegisteredForRemoteNotifications];
+    
+    if (appRegisteredForAPNS) {
+        appRegisteredForAPNS = [[UIApplication sharedApplication] isRegisteredForRemoteNotifications];
+    }
+    
+    if (appRegisteredForAPNS == false) {
+        
+        if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)])
+        {
+            UIUserNotificationType types = UIUserNotificationTypeSound | UIUserNotificationTypeBadge | UIUserNotificationTypeAlert;
+            UIUserNotificationSettings *notificationSettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
+            [[UIApplication sharedApplication] registerUserNotificationSettings:notificationSettings];
+        }
+        
+        if ([UIApplication instancesRespondToSelector:@selector(registerForRemoteNotifications)])
+        {
+            [[UIApplication sharedApplication] registerForRemoteNotifications];
+        }
+        else
+        {
+            [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
+        }
+    }
 }
 
 @end

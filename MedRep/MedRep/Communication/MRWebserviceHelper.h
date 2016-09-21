@@ -280,6 +280,8 @@ withComplitionHandler:(completionHandler)responceHandler;
 - (void)deleteLocation:(id)reqDict withHandler:(completionHandler)responceHandler;
 - (void)editContactInfo:(id)reqDict withHandler:(completionHandler)responceHandler;
 
+- (void)registerDeviceTokenWithPushAPI:(id)reqDict withHandler:(completionHandler)responceHandler;
+
 @end
 
 @interface NSDictionary (CategoryName)

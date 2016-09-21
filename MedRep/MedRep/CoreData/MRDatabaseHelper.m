@@ -1959,21 +1959,33 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
                              }
                          }else
                          {
-                             NSArray *erros =  [details componentsSeparatedByString:@"-"];
-                             if (erros.count > 0)
-                                 [MRCommon showAlert:[erros lastObject] delegate:nil];
+                             [[MRDatabaseHelper sharedHelper] showErrorMessageForAddConnection:responce andString:details];
                          }
                      }];
                  }];
             }
             else
             {
-                NSArray *erros =  [details componentsSeparatedByString:@"-"];
-                if (erros.count > 0)
-                    [MRCommon showAlert:[erros lastObject] delegate:nil];
+                [[MRDatabaseHelper sharedHelper] showErrorMessageForAddConnection:responce andString:details];
             }
         }
     }];
+}
+
+- (void)showErrorMessageForAddConnection:(id)responce andString:(NSString*)details {
+    if ([responce isKindOfClass:[NSDictionary class]]) {
+        id message = [responce objectOrNilForKey:@"message"];
+        if (message != nil && [message isKindOfClass:[NSString class]]) {
+            NSString *tempMessage = message;
+            if (tempMessage.length > 0) {
+                [MRCommon showAlert:tempMessage delegate:nil];
+            }
+        }
+    } else {
+        NSArray *erros =  [details componentsSeparatedByString:@"-"];
+        if (erros.count > 0)
+            [MRCommon showAlert:[erros lastObject] delegate:nil];
+    }
 }
 
 + (void)postANewTopic:(NSDictionary*)reqDict withHandler:(WebServiceResponseHandler)responseHandler {

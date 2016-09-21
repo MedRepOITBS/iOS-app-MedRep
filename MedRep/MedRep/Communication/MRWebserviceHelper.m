@@ -95,10 +95,11 @@
             {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                     [MRCommon stopActivityIndicator];
+                    /* VAMSI Commented
                     if (self.serviceType != kMRWebServiceTypeRefreshToken)
                     {
                         [MRCommon showAlert:@"Failed to get a response from the server. Please try later." delegate:nil];
-                    }
+                    }*/
                     responceHandler(NO, theResponse, responceDict);
                 }];
             }
@@ -2674,6 +2675,26 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
 
 - (void)editContactInfo:(id)reqDict withHandler:(completionHandler)responceHandler {
     NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/doctorinfo/contactInfo/update?token=%@",kHostName,[MRDefaults objectForKey:kAuthenticationToken]];
+    
+    stringFormOfUrl = [[stringFormOfUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]] mutableCopy];
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:reqDict
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:nil];
+    NSURL *url = [NSURL URLWithString:stringFormOfUrl];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [urlRequest setTimeoutInterval:120];
+    [urlRequest setHTTPMethod:@"POST"];
+    [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [urlRequest setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[jsonData length]] forHTTPHeaderField:@"Content-Length"];
+    [urlRequest setHTTPBody: jsonData];
+    self.serviceType = kMRWebServiceTypeUpdateGroup;
+    [self sendServiceRequest:urlRequest withHandler:responceHandler];
+}
+
+- (void)registerDeviceTokenWithPushAPI:(id)reqDict withHandler:(completionHandler)responceHandler {
+    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/registerDeviceToken?token=%@",kHostName,[MRDefaults objectForKey:kAuthenticationToken]];
     
     stringFormOfUrl = [[stringFormOfUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]] mutableCopy];
     

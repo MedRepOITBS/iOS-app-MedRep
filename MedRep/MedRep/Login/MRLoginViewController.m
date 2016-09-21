@@ -141,9 +141,13 @@
                                      {
                                          [[MRAppControl sharedHelper] setUserDetails:responce];
                                          [[MRAppControl sharedHelper] loadDashboardScreen];
+                                         [MRAppControl registerForPushNotification];
+                                         
+                                         /*
                                          if (APP_DELEGATE.token.length) {
                                              [[MRAppControl sharedHelper] registerDeviceToken];
                                          }
+                                          */
                                      }
                                  }];
                             }

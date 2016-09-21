@@ -2481,6 +2481,8 @@
 		CCA383EE1D342D3500BCF5A9 /* MRGroupMembers+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MRGroupMembers+CoreDataProperties.m"; sourceTree = "<group>"; };
 		CCA383EF1D342D3500BCF5A9 /* MRGroupMembers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRGroupMembers.h; sourceTree = "<group>"; };
 		CCA383F01D342D3500BCF5A9 /* MRGroupMembers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRGroupMembers.m; sourceTree = "<group>"; };
+		CCA8CA831D9320BC00300A0C /* MedRepDev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MedRepDev.entitlements; sourceTree = "<group>"; };
+		CCA8CA841D9320BF00300A0C /* MedRep.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MedRep.entitlements; sourceTree = "<group>"; };
 		CCE29B221D26E6C4006DED8E /* MRCustomTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRCustomTabBar.h; path = TabBar/MRCustomTabBar.h; sourceTree = "<group>"; };
 		CCE29B231D26E6C4006DED8E /* MRCustomTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRCustomTabBar.m; path = TabBar/MRCustomTabBar.m; sourceTree = "<group>"; };
 		CCE29B261D26E870006DED8E /* MRCustomTabBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MRCustomTabBar.xib; path = TabBar/MRCustomTabBar.xib; sourceTree = "<group>"; };
@@ -3789,6 +3791,7 @@
 		83C127E41B77C88B00D2F08E = {
 			isa = PBXGroup;
 			children = (
+				CCA8CA831D9320BC00300A0C /* MedRepDev.entitlements */,
 				83C127EF1B77C88B00D2F08E /* MedRep */,
 				83C1280C1B77C88B00D2F08E /* MedRepTests */,
 				83C127EE1B77C88B00D2F08E /* Products */,
@@ -3810,6 +3813,7 @@
 		83C127EF1B77C88B00D2F08E /* MedRep */ = {
 			isa = PBXGroup;
 			children = (
+				CCA8CA841D9320BF00300A0C /* MedRep.entitlements */,
 				CC9857F21D2E51B300C74438 /* BaseDataModel */,
 				CC463DE91D27B907002AE85E /* GradientView */,
 				CC0123B41D259161001134F3 /* TabBar */,
@@ -4496,6 +4500,9 @@
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
+							com.apple.Push = {
+								enabled = 1;
+							};
 						};
 					};
 					83C128081B77C88B00D2F08E = {
@@ -4504,6 +4511,11 @@
 					};
 					CC7DB0201D0C8BEC007DFE4C = {
 						DevelopmentTeam = 9Y7Y82N227;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -6249,6 +6261,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = MedRep/MedRep.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Ramesh Meesala (PR3BTD2UVE)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ramesh Meesala (PR3BTD2UVE)";
 				INFOPLIST_FILE = MedRep/Info.plist;
@@ -6266,6 +6279,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = MedRep/MedRep.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Ramesh Meesala (PR3BTD2UVE)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ramesh Meesala (PR3BTD2UVE)";
 				INFOPLIST_FILE = MedRep/Info.plist;
@@ -6318,9 +6332,10 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = MedRepDev.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Ramesh Meesala (PR3BTD2UVE)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ramesh Meesala (PR3BTD2UVE)";
-				INFOPLIST_FILE = "MedRep copy-Info.plist";
+				INFOPLIST_FILE = MedRep/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -6336,9 +6351,10 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = MedRepDev.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Ramesh Meesala (PR3BTD2UVE)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ramesh Meesala (PR3BTD2UVE)";
-				INFOPLIST_FILE = "MedRep copy-Info.plist";
+				INFOPLIST_FILE = MedRep/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
