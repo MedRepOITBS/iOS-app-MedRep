@@ -6,15 +6,21 @@ PODS:
     - GoogleMaps/Base (= 2.0.1)
   - GooglePlaces (2.0.1):
     - GoogleMaps/Base (= 2.0.1)
+  - PNChart (0.8.9):
+    - UICountingLabel (~> 1.2.0)
+  - UICountingLabel (1.2.0)
 
 DEPENDENCIES:
   - GoogleMaps (= 2.0.1)
   - GooglePlaces (= 2.0.1)
+  - PNChart
 
 SPEC CHECKSUMS:
   GoogleMaps: f09da64fc987c1aa29394567c3cab5a3df83c402
   GooglePlaces: 72fab1d1651c6df0322f2aad245ffb15b80d3c56
+  PNChart: 84774d225c2126ded6c93d4dbe6ae98c3a73c2d2
+  UICountingLabel: 1db4e7d023e1762171eb226d6dff47a7a84f27aa
 
-PODFILE CHECKSUM: 3e4d2402d087848fbe3766f04bd15840b2c993a1
+PODFILE CHECKSUM: 9ee4f0fada35d07a1232497a81f3cdcaa1c2ac5c
 
 COCOAPODS: 1.0.1
