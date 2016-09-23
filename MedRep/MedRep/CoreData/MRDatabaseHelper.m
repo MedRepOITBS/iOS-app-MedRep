@@ -1911,12 +1911,12 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
                  andResponseHandler:(WebServiceResponseHandler) responseHandler {
     
     id result;
-    if (category != nil && [category caseInsensitiveCompare:@"TherapeuticArea"] == NSOrderedSame) {
-        result = [MRWebserviceHelper parseNetworkResponse:NSClassFromString(kMRTransformPageData)
-                                                  andData:@[response]];
-    } else {
+    if (category == nil) {
         result = [MRWebserviceHelper parseNetworkResponse:NSClassFromString(kMRTransformPost)
-                                                 andData:[response valueForKey:@"Responce"]];
+                                                  andData:[response valueForKey:@"Responce"]];
+    } else if (category != nil && category.length > 0) {
+        result = [MRWebserviceHelper parseNetworkResponse:NSClassFromString(kMRTransformPageData)
+                                              andData:@[response]];
     }
     if (responseHandler != nil) {
         NSArray *tempResults = [[MRDataManger sharedManager] fetchObjectList:kMRTransformPost];
