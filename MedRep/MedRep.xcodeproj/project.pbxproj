@@ -6359,7 +6359,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Ramesh Meesala (PR3BTD2UVE)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ramesh Meesala (PR3BTD2UVE)";
 				INFOPLIST_FILE = MedRep/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "c4d46433-dea4-407d-8f95-f9f1a3d92b26";
@@ -6378,7 +6378,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Ramesh Meesala (PR3BTD2UVE)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ramesh Meesala (PR3BTD2UVE)";
 				INFOPLIST_FILE = MedRep/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "c4d46433-dea4-407d-8f95-f9f1a3d92b26";
