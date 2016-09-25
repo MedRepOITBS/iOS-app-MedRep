@@ -752,6 +752,12 @@
 		B4BB24D71D45CDF400A3DD73 /* gallery_pic.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24D51D45CDF400A3DD73 /* gallery_pic.png */; };
 		B4BB24DF1D45E03A00A3DD73 /* previewImage.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24DE1D45E03A00A3DD73 /* previewImage.png */; };
 		B4BB24E01D45E03A00A3DD73 /* previewImage.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24DE1D45E03A00A3DD73 /* previewImage.png */; };
+		B4C1D7171D97833E0037EBF6 /* UINotificationChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C1D7151D97833E0037EBF6 /* UINotificationChartViewController.m */; };
+		B4C1D7181D97833E0037EBF6 /* UINotificationChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C1D7151D97833E0037EBF6 /* UINotificationChartViewController.m */; };
+		B4C1D7191D97833E0037EBF6 /* UINotificationChartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4C1D7161D97833E0037EBF6 /* UINotificationChartViewController.xib */; };
+		B4C1D71A1D97833E0037EBF6 /* UINotificationChartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4C1D7161D97833E0037EBF6 /* UINotificationChartViewController.xib */; };
+		B4C1D71C1D9783CC0037EBF6 /* MRNotificationChartStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4C1D71B1D9783CC0037EBF6 /* MRNotificationChartStoryboard.storyboard */; };
+		B4C1D71D1D9783CC0037EBF6 /* MRNotificationChartStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4C1D71B1D9783CC0037EBF6 /* MRNotificationChartStoryboard.storyboard */; };
 		B4E02C581D4706E7003A1859 /* logo_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E02C551D4706E7003A1859 /* logo_icon@3x.png */; };
 		B4E02C591D4706E7003A1859 /* logo_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E02C551D4706E7003A1859 /* logo_icon@3x.png */; };
 		B4E02C5A1D4706E7003A1859 /* logo_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E02C561D4706E7003A1859 /* logo_icon.png */; };
@@ -2266,6 +2272,10 @@
 		B4BB24D21D45CD4C00A3DD73 /* CameraClick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CameraClick.png; sourceTree = "<group>"; };
 		B4BB24D51D45CDF400A3DD73 /* gallery_pic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gallery_pic.png; sourceTree = "<group>"; };
 		B4BB24DE1D45E03A00A3DD73 /* previewImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = previewImage.png; sourceTree = "<group>"; };
+		B4C1D7141D97833E0037EBF6 /* UINotificationChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINotificationChartViewController.h; sourceTree = "<group>"; };
+		B4C1D7151D97833E0037EBF6 /* UINotificationChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UINotificationChartViewController.m; sourceTree = "<group>"; };
+		B4C1D7161D97833E0037EBF6 /* UINotificationChartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UINotificationChartViewController.xib; sourceTree = "<group>"; };
+		B4C1D71B1D9783CC0037EBF6 /* MRNotificationChartStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MRNotificationChartStoryboard.storyboard; sourceTree = "<group>"; };
 		B4E02C551D4706E7003A1859 /* logo_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo_icon@3x.png"; sourceTree = "<group>"; };
 		B4E02C561D4706E7003A1859 /* logo_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_icon.png; sourceTree = "<group>"; };
 		B4E02C571D4706E7003A1859 /* logo_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo_icon@2x.png"; sourceTree = "<group>"; };
@@ -3266,6 +3276,10 @@
 				79314AD21BD2773E00EB3A48 /* MRNotificationInsiderViewController.h */,
 				79314AD01BD2773E00EB3A48 /* MRNotificationInsiderViewController.m */,
 				79314AD11BD2773E00EB3A48 /* MRNotificationInsiderViewController.xib */,
+				B4C1D7141D97833E0037EBF6 /* UINotificationChartViewController.h */,
+				B4C1D7151D97833E0037EBF6 /* UINotificationChartViewController.m */,
+				B4C1D7161D97833E0037EBF6 /* UINotificationChartViewController.xib */,
+				B4C1D71B1D9783CC0037EBF6 /* MRNotificationChartStoryboard.storyboard */,
 			);
 			name = Notifications;
 			path = ../Notifications;
@@ -4711,6 +4725,7 @@
 				7920D6A41C1CB236008D3386 /* MRDoctorActivityScoreDetailsViewController.xib in Resources */,
 				79FFD2691BB9DC3100CEE606 /* starunselected@3x.png in Resources */,
 				7920D68F1C1C874C008D3386 /* MRForgotPasswordViewController.xib in Resources */,
+				B4C1D71C1D9783CC0037EBF6 /* MRNotificationChartStoryboard.storyboard in Resources */,
 				79A5DC7B1BA2092E001D872C /* crup-arrow@2x.png in Resources */,
 				CC7DB2851D0C9E75007DFE4C /* NotificationWebViewController.xib in Resources */,
 				796E93A01BB880C20031EA34 /* dddoctor-analysis-hover@2x.png in Resources */,
@@ -4855,6 +4870,7 @@
 				79DE1BE51B826245005289D6 /* input@2x.png in Resources */,
 				7929E3DB1B9CC674001F1373 /* news_dash@3x.png in Resources */,
 				791432AC1C32EF9D0031FB91 /* wallet@2x.png in Resources */,
+				B4C1D7191D97833E0037EBF6 /* UINotificationChartViewController.xib in Resources */,
 				79421EF11BB7EF950055D9B7 /* PHmarketingMenu@3x.png in Resources */,
 				B4BB24D61D45CDF400A3DD73 /* gallery_pic.png in Resources */,
 				8AFE8CEC1D0F21BF0000382E /* group_pic2.jpeg in Resources */,
@@ -5246,6 +5262,7 @@
 				CC7DB2871D0C9E7B007DFE4C /* NotificationWebViewController.xib in Resources */,
 				CC7DB1011D0C8BEC007DFE4C /* dddoctor-analysis-hover@2x.png in Resources */,
 				B4746B221D6A877800325F9E /* cancelBtn.png in Resources */,
+				B4C1D71D1D9783CC0037EBF6 /* MRNotificationChartStoryboard.storyboard in Resources */,
 				CC7DB1021D0C8BEC007DFE4C /* navLogo@2x.png in Resources */,
 				CC7DB1031D0C8BEC007DFE4C /* notification@3x.png in Resources */,
 				CC7DB3801D0CC8A6007DFE4C /* profile_pic5.jpeg in Resources */,
@@ -5390,6 +5407,7 @@
 				CC7DB1711D0C8BEC007DFE4C /* MRDoctorScoreViewController.xib in Resources */,
 				CC7DB1721D0C8BEC007DFE4C /* privateHospital@2x.png in Resources */,
 				CC7DB1731D0C8BEC007DFE4C /* favFilter-unchecked@3x.png in Resources */,
+				B4C1D71A1D97833E0037EBF6 /* UINotificationChartViewController.xib in Resources */,
 				CC7DB1741D0C8BEC007DFE4C /* PHactivity@2x.png in Resources */,
 				CC7DB1751D0C8BEC007DFE4C /* MRNewProductCompaignsViewController.xib in Resources */,
 				CC7DB1761D0C8BEC007DFE4C /* dddoctor-analysis-normal@2x.png in Resources */,
@@ -5806,6 +5824,7 @@
 				7969CFC91BAF2AF6004C2009 /* WYStoryboardPopoverSegue.m in Sources */,
 				B4B4F17E1D39E53E00EFCC0E /* NSBaseDateComponent+Private.m in Sources */,
 				7961A9791B8F4E520035D63A /* MRWelcomeViewController.m in Sources */,
+				B4C1D7171D97833E0037EBF6 /* UINotificationChartViewController.m in Sources */,
 				79DC370D1BE7DC5F0027F7DB /* MRMedRepTableCell.m in Sources */,
 				B4B4F1601D39E4F200EFCC0E /* UICustomDatePicker.m in Sources */,
 				83B7820F1B7919EA0070645C /* NSDate+Utilities.m in Sources */,
@@ -6041,6 +6060,7 @@
 				CC7DB04C1D0C8BEC007DFE4C /* MRAppointmentCell.m in Sources */,
 				B4B4F17D1D39E53E00EFCC0E /* NSBaseDateComponent.m in Sources */,
 				CC7DB04D1D0C8BEC007DFE4C /* WYStoryboardPopoverSegue.m in Sources */,
+				B4C1D7181D97833E0037EBF6 /* UINotificationChartViewController.m in Sources */,
 				CC86FE421D29B34D0030B23D /* MRShareDetailTableViewCell.m in Sources */,
 				CC7DB28E1D0C9ECA007DFE4C /* MRShareViewController.m in Sources */,
 				CC7DB3AA1D0CC994007DFE4C /* MRGroupTableViewCell.m in Sources */,
@@ -6246,6 +6266,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "766c2c59-fcea-4eab-8a31-70ee452a1ed5";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -6265,6 +6286,8 @@
 				INFOPLIST_FILE = MedRep/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MACH_O_TYPE = mh_execute;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "c4d46433-dea4-407d-8f95-f9f1a3d92b26";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -6283,6 +6306,8 @@
 				INFOPLIST_FILE = MedRep/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MACH_O_TYPE = mh_execute;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "c4d46433-dea4-407d-8f95-f9f1a3d92b26";
 				TARGETED_DEVICE_FAMILY = 1;
