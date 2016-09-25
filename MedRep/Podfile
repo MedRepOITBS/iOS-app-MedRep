@@ -10,11 +10,11 @@ def google_pods
 end
  
 def pan_charts
-pod 'PNChart'
+pod 'PNChart’
 end
 target 'MedRepDev' do
     google_pods
-	pan_charts
+    pan_charts
 end
  
 target 'MedRep' do

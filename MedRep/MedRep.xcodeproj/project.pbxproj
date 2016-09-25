@@ -1425,7 +1425,6 @@
 		CC86FE3A1D29A7780030B23D /* MRShareDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC86FE381D29A7780030B23D /* MRShareDetailViewController.m */; };
 		CC86FE3B1D29A7780030B23D /* MRShareDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC86FE381D29A7780030B23D /* MRShareDetailViewController.m */; };
 		CC86FE3C1D29A7780030B23D /* MRShareDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC86FE391D29A7780030B23D /* MRShareDetailViewController.xib */; };
-		CC86FE3D1D29A7780030B23D /* MRShareDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC86FE391D29A7780030B23D /* MRShareDetailViewController.xib */; };
 		CC86FE411D29B34D0030B23D /* MRShareDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC86FE3F1D29B34D0030B23D /* MRShareDetailTableViewCell.m */; };
 		CC86FE421D29B34D0030B23D /* MRShareDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC86FE3F1D29B34D0030B23D /* MRShareDetailTableViewCell.m */; };
 		CC86FE431D29B34D0030B23D /* MRShareDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC86FE401D29B34D0030B23D /* MRShareDetailTableViewCell.xib */; };
@@ -5141,7 +5140,6 @@
 				CC7DB0AC1D0C8BEC007DFE4C /* MRNotificationInsiderViewController.xib in Resources */,
 				CC7DB0AD1D0C8BEC007DFE4C /* cathera@2x.png in Resources */,
 				CC7DB0AE1D0C8BEC007DFE4C /* addressPinIcon@2x.png in Resources */,
-				CC86FE3D1D29A7780030B23D /* MRShareDetailViewController.xib in Resources */,
 				CC7DB0AF1D0C8BEC007DFE4C /* time-icon@2x.png in Resources */,
 				CC7DB0B01D0C8BEC007DFE4C /* search@2x.png in Resources */,
 				CC7DB0B11D0C8BEC007DFE4C /* medrep@3x.png in Resources */,
@@ -6208,7 +6206,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "766c2c59-fcea-4eab-8a31-70ee452a1ed5";
@@ -6246,7 +6244,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "766c2c59-fcea-4eab-8a31-70ee452a1ed5";
 				SDKROOT = iphoneos;
@@ -6265,7 +6263,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Ramesh Meesala (PR3BTD2UVE)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ramesh Meesala (PR3BTD2UVE)";
 				INFOPLIST_FILE = MedRep/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "c4d46433-dea4-407d-8f95-f9f1a3d92b26";
@@ -6283,7 +6281,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Ramesh Meesala (PR3BTD2UVE)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ramesh Meesala (PR3BTD2UVE)";
 				INFOPLIST_FILE = MedRep/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "c4d46433-dea4-407d-8f95-f9f1a3d92b26";
