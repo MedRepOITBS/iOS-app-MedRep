@@ -19,6 +19,8 @@
 @property (nonatomic,strong) NTMonthYearPicker *picker;
 @property (weak, nonatomic) IBOutlet UIButton *goToDetailsButton;
 
+@property (nonatomic) UITextField *currentTextField;
+
 @end
 
 @implementation PublicationsViewController
@@ -200,16 +202,23 @@
     [textField resignFirstResponder];
     return NO;
 }
+
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     
     NSLog(@"textfield %@",textField.text);
-    
 }
+
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     
     if (textField.tag == 202) {
+        if (self.currentTextField != nil) {
+            [self.currentTextField resignFirstResponder];
+        }
         self.picker.hidden = NO;
         return NO;
+    } else {
+        self.currentTextField = textField;
+        self.picker.hidden = YES;
     }
     return YES;
 }
