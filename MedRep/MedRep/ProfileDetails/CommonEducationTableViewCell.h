@@ -26,4 +26,9 @@
 
 -(void)CommonEducationTableViewCellDelegateForTextFieldDidEndEditing:(CommonEducationTableViewCell *)cell withTextField:(UITextField *)textField;
 
+@optional
+-(BOOL)CommonEducationTableViewCellDelegateForTextFieldShouldChangeCharacetersInRange:(CommonEducationTableViewCell *)cell withTextField:(UITextField *)textField
+                                                                                range:(NSRange)range
+                                                                    replacementString:(NSString *)string;
+
 @end

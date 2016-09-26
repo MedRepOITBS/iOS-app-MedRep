@@ -76,7 +76,11 @@
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
    
-    self.navigationItem.title  = @"Add Education Details";
+    NSString *title = @"Add Education Details";
+    if (self.educationQualObj != nil) {
+        title = @"Edit Education Details";
+    }
+    self.navigationItem.title = title;
 
 //    [self initCustomDatePicker:self.customYearPicker withOption:NSCustomDatePickerOptionYear andOrder:NSCustomDatePickerOrderMonthDayAndYear];
     UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"]  style:UIBarButtonItemStyleDone target:self action:@selector(backButtonTapped:)];
@@ -84,7 +88,6 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [self setupPicker];
-    [self updateLabel];
     [self setUpdata];
 }
 -(void)setUpdata{
@@ -103,6 +106,13 @@
         _fromYYYY = [[_educationQualObj.yearOfPassout componentsSeparatedByString:@"-"] objectAtIndex:0];
         _toYYYY = [[_educationQualObj.yearOfPassout componentsSeparatedByString:@"-"] objectAtIndex:1];
         
+        if (_fromYYYY != nil && _fromYYYY.length > 0) {
+            _fromDate = [MRCommon dateFromstring:_fromYYYY withDateFormate:@"yyyy"];
+        }
+        
+        if (_toYYYY != nil && _toYYYY.length > 0) {
+            _toDate = [MRCommon dateFromstring:_toYYYY withDateFormate:@"yyyy"];
+        }
         
     }else{
         revealButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"DONE" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonTapped:)];
@@ -497,7 +507,55 @@
     }
 }
 
--(void)CommonEducationTableViewCellDelegateForTextFieldDidBeginEditing:(CommonEducationTableViewCell *)cell withTextField:(UITextField *)textField{
+-(BOOL)CommonEducationTableViewCellDelegateForTextFieldShouldChangeCharacetersInRange:(CommonEducationTableViewCell *)cell withTextField:(UITextField *)textField
+                                                                                range:(NSRange)range
+                                                                    replacementString:(NSString *)string {
+    BOOL status = YES;
+    
+    if (textField.tag == 800) {
+        if ([string caseInsensitiveCompare:@""] == NSOrderedSame) {
+            status = YES;
+        } else {
+            NSString *currentText = textField.text;
+            NSInteger length = 0;
+            if (currentText != nil) {
+                length = currentText.length;
+            }
+            
+            if (string != nil) {
+                length += string.length;
+            }
+            
+            if (currentText != nil) {
+                NSString *newString =
+                [currentText stringByReplacingCharactersInRange:range withString:string];
+                
+                NSArray *subStrings = [newString componentsSeparatedByString:@"."];
+                if (subStrings.count > 0) {
+                    if (subStrings.count > 2) {
+                        status = NO;
+                    } else {
+                        NSString *firstString = subStrings[0];
+                        if (firstString != nil && firstString.length > 2) {
+                            status = NO;
+                        }
+                        
+                        if (subStrings.count == 2) {
+                            NSString *secondString = subStrings[1];
+                            if (secondString != nil && secondString.length > 2) {
+                                status = NO;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    return status;
+}
+
+-(void)CommonEducationTableViewCellDelegateForTextFieldDidBeginEditing:(CommonEducationTableViewCell *)cell withTextField:(UITextField *)textField {
     [self cancelDateSelection];
     
     if(textField.tag == 803){

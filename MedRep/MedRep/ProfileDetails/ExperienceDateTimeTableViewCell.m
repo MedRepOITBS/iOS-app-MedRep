@@ -81,7 +81,6 @@
     if ([self.delegate respondsToSelector:@selector(getCurrentCheckButtonVal:)]) {
         [self.delegate getCurrentCheckButtonVal:_isChecked];
     }
-    
 }
 
 @end

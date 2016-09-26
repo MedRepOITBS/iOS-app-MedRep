@@ -79,7 +79,12 @@
     [super viewDidLoad];
     
     // Uncomment the following line to preserve selection between presentations.
-    self.navigationItem.title  = @"Add Experience";
+    NSString *title = @"Add Experience";
+    if (self.workExperience != nil) {
+        title = @"Edit Experience";
+    }
+    
+    self.navigationItem.title  = title;
     
     UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"]  style:UIBarButtonItemStyleDone target:self action:@selector(backButtonTapped:)];
     self.navigationItem.leftBarButtonItem = leftButtonItem;
@@ -339,7 +344,7 @@
         height = 146;
         
         if (self.workExperience != nil && self.workExperience.currentJob != nil &&
-            self.workExperience.currentJob.integerValue == 1) {
+            self.isCurrentChecked == 1) {
             height -= 55;
         }
     } else {
@@ -518,6 +523,7 @@
 
 -(void)getCurrentCheckButtonVal:(BOOL)isCurrentCheck{
     _isCurrentChecked = isCurrentCheck;
+    [self.tableView reloadData];
 }
 #pragma mark - Table view delegate
 
