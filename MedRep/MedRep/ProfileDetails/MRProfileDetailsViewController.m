@@ -178,61 +178,7 @@
 
     }];
     
-    NSDictionary *userdata = [MRAppControl sharedHelper].userRegData;
-    
-    NSInteger userType = [MRAppControl sharedHelper].userType;
-    
-//    self.profileImageView.image = [MRCommon getImageFromBase64Data:[userdata objectForKey:KProfilePicture]];
-    
-    NSMutableArray *mArray = [userdata objectForKey:KMobileNumber];
-
-//    self.profileNameLabel.text              = (userType == 2 || userType == 1) ? [NSString stringWithFormat:@"Dr. %@ %@", [userdata objectForKey:KFirstName],[userdata objectForKey:KLastName]] : [NSString stringWithFormat:@"Mr. %@ %@", [userdata objectForKey:KFirstName],[userdata objectForKey:KLastName]];
-//    self.mobileNumberLabel.text             = (mArray.count >= 1) ? [mArray objectAtIndex:0] : @"";
-//    self.AlternateMobileNumberLabel.text    = (mArray.count >= 2) ? [mArray objectAtIndex:1] : @"";
-//    
-    if(mArray.count >= 2 && ![[mArray objectAtIndex:1] isEqualToString:@""])
-    {
-//        self.AlternateMobileNumberLabel.text    =  [mArray objectAtIndex:1];
-//        self.mobileNumberViewHeightConstraint.constant = 60;
-//        self.alternateMobileTitleLabel.hidden = NO;
-        [self updateViewConstraints];
-    }
-    else
-    {
-//        self.AlternateMobileNumberLabel.text    =  @"";
-//        self.mobileNumberViewHeightConstraint.constant = 30;
-//        self.alternateMobileTitleLabel.hidden = YES;
-//        [self updateViewConstraints];
-    }
-    NSMutableArray *eArray = [userdata objectForKey:KEmail];
-
-//    self.emailLabel.text                    = (eArray.count >= 1) ? [eArray objectAtIndex:0] : @"";
-//    self.alternateEmailLabel.text           = (eArray.count >= 2) ? [eArray objectAtIndex:1] : @"";
-    
-    if(eArray.count >= 2 && ![[eArray objectAtIndex:1] isEqualToString:@""])
-    {
-//        self.alternateEmailLabel.text           = [eArray objectAtIndex:1];
-//        self.alterNateEmailTitleLabel.hidden = NO;
-//        self.alternateEmailViewHeightConstratint.constant = 60;
-        [self updateViewConstraints];
-    }
-    else
-    {
-//        self.alterNateEmailTitleLabel.hidden = YES;
-//        self.alternateEmailLabel.text           =  @"";
-//        self.alternateEmailViewHeightConstratint.constant = 30;
-        [self updateViewConstraints];
-    }
-
-    
-//    self.addressOneLabel.text               = [[[userdata  objectForKey:KRegistarionStageTwo] objectAtIndex:0] objectForKey:KAddressOne];
-    
-    /*
-     City = Hyded;
-     State = telanganat;
-     ZIPCode = 506559;
-     */
-//    self.addressTwoLabel.text               = [NSString stringWithFormat:@"%@, %@, %@, %@",[[[userdata  objectForKey:KRegistarionStageTwo] objectAtIndex:0] objectForKey:KAdresstwo], [[[userdata  objectForKey:KRegistarionStageTwo] objectAtIndex:0] objectForKey:@"city"],[[[userdata  objectForKey:KRegistarionStageTwo] objectAtIndex:0] objectForKey:@"State"],[[[userdata  objectForKey:KRegistarionStageTwo] objectAtIndex:0] objectForKey:@"ZIPCode"]];
+    [self updateViewConstraints];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -360,13 +306,10 @@
     NSDictionary *valNDict = [[self setStructureForTableView] objectAtIndex:indexPath.row];
     
     NSString *valN = [valNDict objectForKey:@"type"];
-    NSLog(@"NAMIT %@",valN);
+  
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"ProfileStoryboard" bundle:nil];
     if ([valN isEqualToString:@"WORK_EXP_DETAIL"]) {
         AddExperienceTableViewController *profViewController = [sb instantiateViewControllerWithIdentifier:@"AddExperienceTableViewController"];
-        
-        //                MRProfileDetailsViewController *profViewController = [[MRProfileDetailsViewController alloc] initWithNibName:@"AddExperienceTableViewController" bundle:nil];
-        
         
         profViewController.fromScreen = @"UPDATE";
         profViewController.workExperience = (MRWorkExperience *)[valNDict objectForKey:@"object"];
@@ -729,7 +672,12 @@
              [cell.imageBtn setUserInteractionEnabled:YES];
          }
          
-         NSURL * imageURL = [NSURL URLWithString:[userdata objectForKey:KProfilePicture]];
+         NSString *urlString = [userdata objectForKey:KProfilePicture];
+         if (self.profileObj != nil && self.profileObj.dPicture != nil &&
+             self.profileObj.dPicture.length > 0) {
+             urlString = self.profileObj.dPicture;
+         }
+         NSURL * imageURL = [NSURL URLWithString:urlString];
          
          dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
          dispatch_async(queue, ^{

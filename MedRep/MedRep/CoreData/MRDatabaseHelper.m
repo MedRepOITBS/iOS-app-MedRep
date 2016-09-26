@@ -1654,6 +1654,7 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
         NSDictionary *aboutDict = [result objectForKey:@"about"];
         MRProfile * profile = (MRProfile *)[[MRDataManger sharedManager] createObjectForEntity:@"MRProfile"];
         profile.name = [aboutDict objectForKey:@"name"];
+        profile.dPicture = [result objectOrNilForKey:@"dPicture"];
         profile.location = [aboutDict objectForKey:@"location"];
         profile.designation = [aboutDict objectForKey:@"designation"];
         profile.id = [NSNumber numberWithInteger:[[aboutDict  objectForKey:@"id"] integerValue]];

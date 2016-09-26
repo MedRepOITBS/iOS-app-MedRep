@@ -178,6 +178,7 @@
     <entity name="MRProfile" representedClassName="MRProfile" syncable="YES">
         <attribute name="designation" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="doctorId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="dPicture" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -324,7 +325,7 @@
         <element name="MRNotificationType" positionX="16" positionY="-135" width="128" height="90"/>
         <element name="MRPendingRecordsCount" positionX="153" positionY="9" width="128" height="75"/>
         <element name="MRPostedReplies" positionX="-27" positionY="531" width="128" height="435"/>
-        <element name="MRProfile" positionX="-36" positionY="135" width="128" height="210"/>
+        <element name="MRProfile" positionX="-36" positionY="135" width="128" height="225"/>
         <element name="MRPublications" positionX="0" positionY="171" width="128" height="120"/>
         <element name="MRReplies" positionX="-36" positionY="135" width="128" height="120"/>
         <element name="MRRole" positionX="178" positionY="-72" width="128" height="105"/>

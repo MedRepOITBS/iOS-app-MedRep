@@ -15,6 +15,7 @@
 
 @dynamic designation;
 @dynamic doctorId;
+@dynamic dPicture;
 @dynamic id;
 @dynamic location;
 @dynamic name;
