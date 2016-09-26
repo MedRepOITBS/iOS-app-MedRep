@@ -433,6 +433,7 @@
             cell.userName.text = groupName;
             
             cell.phoneNo.text = @"";
+            [cell.profilePic setImage:nil];
             [MRAppControl getGroupImage:group andImageView:cell.profilePic];
             cell.acceptConnectionView.hidden = YES;
             cell.rejectConnectionView.hidden = YES;

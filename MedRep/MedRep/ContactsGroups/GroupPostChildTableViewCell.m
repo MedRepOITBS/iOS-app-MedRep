@@ -71,6 +71,8 @@
         [self.commentPic addSubview:activityIndicator];
         [activityIndicator startAnimating];
         
+        self.commentPic.image = nil;
+        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:post.fileUrl]];
             if (imageData != nil) {

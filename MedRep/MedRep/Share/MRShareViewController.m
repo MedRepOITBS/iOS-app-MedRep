@@ -53,7 +53,7 @@ UIImagePickerControllerDelegate>
 @property (strong, nonatomic) UIView *tabBarView;
 @property (nonatomic) MRShareOptionsViewController *shareOptionsVC;
 
-
+@property (nonatomic) BOOL fromCommentPickerView;
 @property (strong,nonatomic) KLCPopup *commentBoxKLCPopView;
 @property (strong,nonatomic) CommonBoxView *commentBoxView;
 @property (strong, nonatomic) NSMutableArray *serachResults;
@@ -85,6 +85,8 @@ UIImagePickerControllerDelegate>
     self.tapGesture.cancelsTouchesInView = YES;
     self.tapGesture.enabled = NO;
     [self.view addGestureRecognizer:self.tapGesture];
+    
+    self.fromCommentPickerView = NO;
         
 //    [self fetchPosts];
     
@@ -124,7 +126,11 @@ UIImagePickerControllerDelegate>
         [self reloadView];
     }
     
-    [self fetchPostsFromServer];
+    if (self.fromCommentPickerView == NO) {
+        [self fetchPostsFromServer];
+    }
+    
+    self.fromCommentPickerView = NO;
 }
 
 - (void)fetchPostsFromServer {
@@ -248,10 +254,6 @@ UIImagePickerControllerDelegate>
     [self.navigationController pushViewController:notiFicationViewController animated:NO];
 }
 
-
-
-
-
 - (void)likeButtonTapped:(NSInteger)index {
     MRSharePost *currentPost;
     if (self.posts != nil && self.posts.count > 0) {
@@ -310,6 +312,8 @@ UIImagePickerControllerDelegate>
 }
 
 - (void)setupCommentBox {
+    self.fromCommentPickerView = YES;
+
     _commentBoxKLCPopView = [MRAppControl setupCommentBox:self];
     _commentBoxView = (CommonBoxView*)(_commentBoxKLCPopView.contentView);
 }

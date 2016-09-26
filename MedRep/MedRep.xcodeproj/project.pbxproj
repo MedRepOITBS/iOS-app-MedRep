@@ -802,6 +802,7 @@
 		CC463DE81D27B37B002AE85E /* MRAppConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CC463DE61D27B37B002AE85E /* MRAppConstants.m */; };
 		CC463DEC1D27B921002AE85E /* MRGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC463DEB1D27B921002AE85E /* MRGradientView.m */; };
 		CC463DED1D27B921002AE85E /* MRGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC463DEB1D27B921002AE85E /* MRGradientView.m */; };
+		CC5DE8761D99DA0600B719A3 /* MRShareDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC86FE391D29A7780030B23D /* MRShareDetailViewController.xib */; };
 		CC649F4E1D0D181E0012289C /* NotificationUUIDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC649F4C1D0D181E0012289C /* NotificationUUIDViewController.m */; };
 		CC649F4F1D0D181E0012289C /* NotificationUUIDViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC649F4D1D0D181E0012289C /* NotificationUUIDViewController.xib */; };
 		CC649F5D1D0D1BA10012289C /* MRDrugDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC649F521D0D1BA10012289C /* MRDrugDetailViewController.m */; };
@@ -5178,6 +5179,7 @@
 				B4B4F1101D394F4100EFCC0E /* unselected.png in Resources */,
 				CC7DB0C01D0C8BEC007DFE4C /* password@2x.png in Resources */,
 				CC7DB0C11D0C8BEC007DFE4C /* NDcompany1@2x.jpg in Resources */,
+				CC5DE8761D99DA0600B719A3 /* MRShareDetailViewController.xib in Resources */,
 				CC7DB0C21D0C8BEC007DFE4C /* reveal-icon.png in Resources */,
 				CC7DB0C31D0C8BEC007DFE4C /* readnotification3@2x.jpg in Resources */,
 				B421E4641D5D5A1700F15599 /* pencil@2x.png in Resources */,

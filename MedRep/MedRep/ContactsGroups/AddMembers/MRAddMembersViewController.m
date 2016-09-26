@@ -185,6 +185,7 @@
     MRContact *contact = [_fileredContacts objectAtIndex:indexPath.row];
     
     cell.userName.text = [MRAppControl getContactName:contact];
+    [cell.profilePic setImage:nil];
     [MRAppControl getContactImage:contact andImageView:cell.profilePic];
     
     cell.phoneNo.text = contact.therapeuticName;

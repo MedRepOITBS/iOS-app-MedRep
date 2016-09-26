@@ -24,6 +24,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    [super awakeFromNib];
 }
 
 - (void)setGroupData:(MRGroup*)group{
@@ -37,6 +38,7 @@
     self.name.text = group.group_name;
     self.detail.text = group.group_short_desc;
     
+    [self.picture setImage:nil];
     [MRAppControl getGroupImage:group andImageView:self.picture];
 }
 
