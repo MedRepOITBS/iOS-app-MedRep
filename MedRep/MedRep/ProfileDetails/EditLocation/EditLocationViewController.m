@@ -55,6 +55,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.activeTextField = nil;
     self.navigationItem.title  = @"Edit Location";
     
     UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"]
@@ -165,6 +166,10 @@
 
 - (void)doneButtonTapped:(id)sender
 {
+    if (self.activeTextField != nil) {
+        [self.activeTextField resignFirstResponder];
+    }
+    
     if ( self.locationDictionary != nil && [self validateData]) {
         
         [MRDatabaseHelper editLocation:@[self.locationDictionary]
@@ -471,6 +476,16 @@
         default:
             break;
     }
+}
+
+#pragma mark - MRRegTableViewCellDelegate methods
+
+- (void)activateTextField:(UITextField*)textField {
+    self.activeTextField = textField;
+}
+
+- (void)deActivateTextField {
+    self.activeTextField = nil;
 }
 
 - (void)mOneButtonActionDelegate:(MRRegTableViewCell*)cell
