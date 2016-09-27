@@ -217,6 +217,10 @@
     
     _tutorialView = (TutorialView *)[arr objectAtIndex:0];
     _tutorialView.layer.cornerRadius = 10;
+    
+    [_tutorialView.titleLabel setText:@"Address Capture"];
+    [_tutorialView.descriptionTextView setText:@"MedRep has an easy address capture process. You can use the \"Pick a Location\" button to let GPS automatically capture the address of your \"Private Clinic\" and/or \"Hospital\"."];
+    
     _tutorialViewKLCPopView = [KLCPopup popupWithContentView:self.tutorialView];
     [_tutorialViewKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutCenter)];
 }

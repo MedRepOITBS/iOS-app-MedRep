@@ -60,9 +60,12 @@ typedef void(^selectedComapany)(NSString *companyName);
     
     _tutorialView = (TutorialView *)[arr objectAtIndex:0];
     _tutorialView.layer.cornerRadius = 10;
+    [_tutorialView.titleLabel setText:@"Doctor Details"];
+    [_tutorialView.descriptionTextView setText:@"We request all users to mention accurate information within this field as our Background Verification team thoroughly checks the validity of this data. Once verified, the user can receive information on this application."];
     _tutorialViewKLCPopView = [KLCPopup popupWithContentView:self.tutorialView];
     [_tutorialViewKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutCenter)];
 }
+
 - (void)viewDidLoad {
     
     self.userDeatils = [[MRAppControl sharedHelper] userRegData];

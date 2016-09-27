@@ -65,6 +65,10 @@
     
     _tutorialView = (TutorialView *)[arr objectAtIndex:0];
     _tutorialView.layer.cornerRadius = 10;
+    
+    [_tutorialView.titleLabel setText:@"MCI Details"];
+    [_tutorialView.descriptionTextView setText:@"These fields help us further validate your account. We ONLY activate Doctors that are registered with the Medical Council of India. This helps us allow seamless and rich user experience to Doctors on MedRep."];
+    
     _tutorialViewKLCPopView = [KLCPopup popupWithContentView:self.tutorialView];
     [_tutorialViewKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutCenter)];
 }
