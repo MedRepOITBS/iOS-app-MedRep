@@ -224,12 +224,12 @@
     NSArray *selectedGroups = nil;
     
     if (self.selectedContactsName.count > 0) {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K IN %@", @"contactId", self.selectedContactsName];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K IN %@", @"doctorId", self.selectedContactsName];
         selectedContacts = [MRDatabaseHelper getObjectsForType:kContactEntity
                                                            andPredicate:predicate];
         
         if (selectedContacts != nil && selectedContacts.count > 0) {
-            [postMessage setValue:[selectedContacts valueForKey:@"contactId"] forKey:@"receiverId"];
+            [postMessage setValue:[selectedContacts valueForKey:@"doctorId"] forKey:@"receiverId"];
         }
     }
     
