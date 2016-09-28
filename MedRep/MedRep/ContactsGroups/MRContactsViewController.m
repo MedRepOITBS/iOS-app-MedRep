@@ -397,8 +397,10 @@
         detailViewController.groupID = 0;
         [self.navigationController pushViewController:detailViewController animated:NO];
     } else {
-        MRJoinGroupViewController *joinGroupViewController = [MRJoinGroupViewController new];
-        [self.navigationController pushViewController:joinGroupViewController animated:NO];
+//        MRJoinGroupViewController *joinGroupViewController = [MRJoinGroupViewController new];
+//        [self.navigationController pushViewController:joinGroupViewController animated:NO];
+        [self collectionView:self.titlesCollectionView
+    didSelectItemAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
     }
 }
 

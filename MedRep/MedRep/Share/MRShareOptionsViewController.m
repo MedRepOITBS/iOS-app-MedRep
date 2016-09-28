@@ -314,7 +314,7 @@
 - (NSInteger)getContactId:(NSArray*)dataArray andIndex:(NSInteger)index {
     
     MRContact *contact = [self.contacts objectAtIndex:index];
-    return contact.contactId.longValue;
+    return contact.doctorId.longValue;
 }
 
 - (NSInteger)getGroupId:(NSArray*)dataArray andIndex:(NSInteger)index {
