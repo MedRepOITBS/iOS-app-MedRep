@@ -120,9 +120,9 @@
 
 #pragma mark - UITableView Delegate
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//    return UITableViewAutomaticDimension;
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return UITableViewAutomaticDimension;
+}
 
 //- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
 //    return 250;
@@ -160,23 +160,23 @@
     return rows;
 }
 
-//- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//    CGRect frame = CGRectMake(0, 0, self.view.frame.size.width - 70, 200);
-//    UIView *view = [[UIView alloc] initWithFrame:frame];
-//    [view setTag:section];
-//    [view setBackgroundColor:[UIColor redColor]];
-//    
-//    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
-//    UITableViewCell *cell = [self createCell:tableView subLevel:NO andIndexPath:indexPath];
-//    [view addSubview:cell];
-//    
-//    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
-//                                                                                 action:@selector(sectionTapped:)];
-//    [tapGesture setNumberOfTapsRequired:1];
-//    [view addGestureRecognizer:tapGesture];
-//    
-//    return view;
-//}
+- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    CGRect frame = CGRectMake(0, 0, self.view.frame.size.width - 70, 200);
+    UIView *view = [[UIView alloc] initWithFrame:frame];
+    [view setTag:section];
+    [view setBackgroundColor:[UIColor redColor]];
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
+    UITableViewCell *cell = [self createCell:tableView subLevel:NO andIndexPath:indexPath];
+    [view addSubview:cell];
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                 action:@selector(sectionTapped:)];
+    [tapGesture setNumberOfTapsRequired:1];
+    [view addGestureRecognizer:tapGesture];
+    
+    return view;
+}
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     BOOL subLevel = NO;
@@ -185,7 +185,6 @@
     }
     
     UITableViewCell* cell = [self createCell:tableView subLevel:subLevel andIndexPath:indexPath];
-    [cell setBackgroundColor:[UIColor greenColor]];
     [cell layoutIfNeeded];
     return cell;
 }

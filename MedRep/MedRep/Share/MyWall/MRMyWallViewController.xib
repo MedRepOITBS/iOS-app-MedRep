@@ -41,29 +41,16 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y96-jb-uRj">
-                    <constraints>
-                        <constraint firstAttribute="width" constant="30" id="hFF-xQ-aet"/>
-                        <constraint firstAttribute="height" constant="30" id="ooB-3M-Haf"/>
-                    </constraints>
-                    <state key="normal" image="compose.png"/>
-                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="y96-jb-uRj" firstAttribute="centerY" secondItem="ilA-Wu-6qS" secondAttribute="centerY" id="4Hp-Qw-vRC"/>
                 <constraint firstAttribute="trailing" secondItem="WLR-QZ-ZRs" secondAttribute="trailing" constant="8" id="5GJ-jf-ehl"/>
-                <constraint firstAttribute="trailing" secondItem="y96-jb-uRj" secondAttribute="trailing" constant="5" id="7ug-AG-6cP"/>
                 <constraint firstAttribute="bottom" secondItem="WLR-QZ-ZRs" secondAttribute="bottom" constant="50" id="CCm-91-TVg"/>
-                <constraint firstItem="y96-jb-uRj" firstAttribute="bottom" secondItem="ilA-Wu-6qS" secondAttribute="bottom" id="Cl1-M1-dAW"/>
-                <constraint firstAttribute="trailing" secondItem="ilA-Wu-6qS" secondAttribute="trailing" constant="35" id="Eex-xn-xhO"/>
+                <constraint firstAttribute="trailing" secondItem="ilA-Wu-6qS" secondAttribute="trailing" id="Eex-xn-xhO"/>
                 <constraint firstItem="s9C-uY-lfu" firstAttribute="centerY" secondItem="WDb-iI-Mtw" secondAttribute="centerY" id="H9h-in-cPO"/>
-                <constraint firstItem="y96-jb-uRj" firstAttribute="top" secondItem="ilA-Wu-6qS" secondAttribute="top" id="J3H-7Y-3dG"/>
                 <constraint firstItem="WLR-QZ-ZRs" firstAttribute="top" secondItem="ilA-Wu-6qS" secondAttribute="bottom" id="Pnl-uG-Wx2"/>
-                <constraint firstItem="y96-jb-uRj" firstAttribute="centerX" secondItem="ilA-Wu-6qS" secondAttribute="centerX" id="WD1-He-4Fx"/>
                 <constraint firstItem="WLR-QZ-ZRs" firstAttribute="top" secondItem="ilA-Wu-6qS" secondAttribute="bottom" id="WxM-fu-naj"/>
                 <constraint firstItem="WLR-QZ-ZRs" firstAttribute="leading" secondItem="WDb-iI-Mtw" secondAttribute="leading" constant="8" id="dFI-WR-XhS"/>
-                <constraint firstItem="y96-jb-uRj" firstAttribute="centerY" secondItem="ilA-Wu-6qS" secondAttribute="centerY" id="dzN-Vf-wbE"/>
                 <constraint firstItem="s9C-uY-lfu" firstAttribute="centerX" secondItem="WDb-iI-Mtw" secondAttribute="centerX" id="fEw-jJ-G2r"/>
                 <constraint firstItem="ilA-Wu-6qS" firstAttribute="top" secondItem="WDb-iI-Mtw" secondAttribute="top" id="qQf-zp-uoD"/>
                 <constraint firstItem="ilA-Wu-6qS" firstAttribute="leading" secondItem="WDb-iI-Mtw" secondAttribute="leading" id="uzs-xi-GHt"/>
@@ -73,10 +60,6 @@
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="H9h-in-cPO"/>
-                    <exclude reference="4Hp-Qw-vRC"/>
-                    <exclude reference="Cl1-M1-dAW"/>
-                    <exclude reference="J3H-7Y-3dG"/>
-                    <exclude reference="WD1-He-4Fx"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="227.5" y="216.5"/>
@@ -98,7 +81,6 @@
         </view>
     </objects>
     <resources>
-        <image name="compose.png" width="128" height="128"/>
         <image name="logo_icon.png" width="34" height="33"/>
     </resources>
 </document>

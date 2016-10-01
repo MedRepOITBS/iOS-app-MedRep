@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -13,7 +14,7 @@
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <frame key="frameInset" width="401" height="219"/>
-                <autoresizingMask key="autoresizingMask"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Contact.png" translatesAutoresizingMaskIntoConstraints="NO" id="a73-kz-f15">
                         <constraints>
@@ -58,6 +59,7 @@
                     <constraint firstAttribute="trailing" secondItem="vje-fL-WVv" secondAttribute="trailing" constant="8" id="Ncz-LU-m6H"/>
                     <constraint firstAttribute="trailing" secondItem="eOX-Om-FaU" secondAttribute="trailing" constant="6" id="OCp-mc-D4y"/>
                     <constraint firstItem="jhR-Qo-e9G" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="d0b-Ot-Kj5"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="eOX-Om-FaU" secondAttribute="bottom" constant="-3" id="eKM-SC-Qeu"/>
                     <constraint firstItem="a73-kz-f15" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="hcq-xF-c9o"/>
                     <constraint firstItem="vje-fL-WVv" firstAttribute="leading" secondItem="jhR-Qo-e9G" secondAttribute="leading" id="jxg-CG-nFh"/>
                     <constraint firstAttribute="trailing" secondItem="rNP-m8-iBC" secondAttribute="trailing" constant="8" id="mhP-H0-JU7"/>
