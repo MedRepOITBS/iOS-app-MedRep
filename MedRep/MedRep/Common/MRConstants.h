@@ -77,7 +77,8 @@ typedef enum
 #define KZIPCode                @"ZIPCode"
 #define KZIPCodeSmall           @"zipcode"
 #define KTitle                  @"title"
-#define KType                  @"type"
+#define KType                   @"type"
+#define KCountry               @"country"
 //#define kAreaWorkLocation       @"AreaWorkLocation"
 
 #define KAreasCovered           @"coveredArea"

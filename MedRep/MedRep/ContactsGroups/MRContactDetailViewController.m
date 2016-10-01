@@ -221,6 +221,7 @@
     _city.hidden = NO;
     
     [MRAppControl getContactImage:self.mainContact andImageView:self.mainImageView];
+    [self addTapGestureToProfileView:self.mainImageView];
     self.mainLabel.text = [MRAppControl getContactName:self.mainContact];
     
     NSString *therapauticArea = @"";
@@ -979,6 +980,15 @@
     [MRDatabaseHelper addGroupChildPost:post withPostDict:saveData];
 }
 
+#pragma mark - Profile pic clicked
+
+- (void)addTapGestureToProfileView:(UIView*)parentView {
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                 action:@selector(authorImageSelected)];
+    [recognizer setNumberOfTapsRequired:1];
+    [parentView addGestureRecognizer:recognizer];
+}
+
 - (void)viewAllGroupMembersTapped {
     MRGroupMembersViewController *groupMembersViewController = [MRGroupMembersViewController new];
     [groupMembersViewController setGroup:self.mainGroup];
@@ -993,8 +1003,8 @@
         UIStoryboard *sb = [UIStoryboard storyboardWithName:@"ProfileStoryboard" bundle:nil];
         MRProfileDetailsViewController *profViewController = [sb instantiateInitialViewController];
         
-        if (self.mainContact.contactId != nil) {
-            profViewController.doctorId = self.mainContact.contactId.longValue;
+        if (self.mainContact.doctorId != nil) {
+            profViewController.doctorId = self.mainContact.doctorId.longValue;
         }
         
         profViewController.isFromSinUp = NO;

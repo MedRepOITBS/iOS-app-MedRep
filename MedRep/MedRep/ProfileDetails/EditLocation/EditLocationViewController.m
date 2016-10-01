@@ -102,9 +102,9 @@
     
     if (self.addressObject != nil && self.addressObject.type != nil && self.addressObject.type.length > 0) {
         if ([self.addressObject.type caseInsensitiveCompare:@"Hospital"] == NSOrderedSame) {
-            [self hospitalButtonAction:nil];
+            [self setHospitalData];
         } else {
-            [self privateButtonAction:nil];
+            [self setPrivateClinicData];
         }
     } else {
         [self privateButtonAction:nil];
@@ -170,7 +170,7 @@
         [self.activeTextField resignFirstResponder];
     }
     
-    if ( self.locationDictionary != nil && [self validateData]) {
+    if ([self validateData]) {
         
         [MRDatabaseHelper editLocation:@[self.locationDictionary]
                             andHandler:^(id result) {
@@ -195,6 +195,8 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - Location delegate methods
 
 - (IBAction)pickALocationClicked:(id)sender {
     [self.locationDictionary removeAllObjects];
@@ -345,9 +347,18 @@
     //code for opening settings app in iOS 8
 }
 
+#pragma mark - IBActions
+
 - (IBAction)privateButtonAction:(id)sender
 {
     [self.view endEditing:YES];
+    
+    [self resetAddressFields];
+    [self setPrivateClinicData];
+}
+
+- (void)setPrivateClinicData {
+
     NSNumber *type = [NSNumber numberWithInt:2];
     [self.locationDictionary setObject:type forKey:KType];
     
@@ -360,6 +371,13 @@
 - (IBAction)hospitalButtonAction:(id)sender
 {
     [self.view endEditing:YES];
+    
+    [self resetAddressFields];
+    [self setHospitalData];
+}
+
+- (void)setHospitalData {
+
     NSNumber *type = [NSNumber numberWithInt:1];
     [self.locationDictionary setObject:type forKey:KType];
     
@@ -367,6 +385,17 @@
     [self.hospitalButton setBackgroundImage:[UIImage imageNamed:@"hospital_selection.png"] forState:UIControlStateNormal];
     [self.regTableView reloadData];
 }
+
+- (void)resetAddressFields {
+    [self.locationDictionary removeObjectForKey:KAddressOne];
+    [self.locationDictionary removeObjectForKey:KAdresstwo];
+    [self.locationDictionary removeObjectForKey:KCity];
+    [self.locationDictionary removeObjectForKey:KStateSmall];
+    [self.locationDictionary removeObjectForKey:KCountry];
+    [self.locationDictionary removeObjectForKey:KZIPCodeSmall];
+}
+
+#pragma mark - UITableView delegate methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -478,7 +507,7 @@
     }
 }
 
-#pragma mark - MRRegTableViewCellDelegate methods
+#pragma mark - Text Field & Other Delegate methods
 
 - (void)activateTextField:(UITextField*)textField {
     self.activeTextField = textField;
@@ -537,71 +566,33 @@
 {
     BOOL isSuccess = YES;
     
-    NSArray *regDetails = [self.userDeatils objectForKey:KRegistarionStageTwo];
-    
-    for (NSDictionary *dict in  regDetails)
-    {
-        if ([[dict objectForKey:KType] intValue] == 1)
+    if (self.locationDictionary != nil) {
+        NSDictionary *dict = self.locationDictionary;
+        if ([MRCommon isStringEmpty:[dict objectOrNilForKey:KAddressOne]])
         {
-            if ([MRCommon isStringEmpty:[dict objectForKey:KAddressOne]])
-            {
-                [MRCommon showAlert:@"Address line 1 should not be empty." delegate:nil];
-                isSuccess = NO;
-                break;
-                
-            }
-            if ([MRCommon isStringEmpty:[dict objectForKey:KCity]])
-            {
-                [MRCommon showAlert:@"City should not be empty." delegate:nil];
-                isSuccess = NO;
-                break;
-            }
-            if ([MRCommon isStringEmpty:[dict objectForKey:KStateSmall]])
-            {
-                [MRCommon showAlert:@"State should not be empty." delegate:nil];
-                isSuccess = NO;
-                break;
-            }
-            
-            if ([MRCommon isStringEmpty:[dict objectForKey:KZIPCodeSmall]])
-            {
-                [MRCommon showAlert:@"Zipcode should not be empty." delegate:nil];
-                isSuccess = NO;
-                break;
-            }
+            [MRCommon showAlert:@"Address line 1 should not be empty." delegate:nil];
+            isSuccess = NO;
         }
-        else
+        
+        if (isSuccess && [MRCommon isStringEmpty:[dict objectOrNilForKey:KCity]])
         {
-            if (![MRCommon isStringEmpty:[dict objectForKey:KZIPCodeSmall]] || ![MRCommon isStringEmpty:[dict objectForKey:KCity]] || ![MRCommon isStringEmpty:[dict objectForKey:KAddressOne]] || ![MRCommon isStringEmpty:[dict objectForKey:KAdresstwo]] )
-            {
-                if ([MRCommon isStringEmpty:[dict objectForKey:KAddressOne]])
-                {
-                    [MRCommon showAlert:@"Address line 1 should not be empty." delegate:nil];
-                    isSuccess = NO;
-                    break;
-                    
-                }
-                if ([MRCommon isStringEmpty:[dict objectForKey:KCity]])
-                {
-                    [MRCommon showAlert:@"City should not be empty." delegate:nil];
-                    isSuccess = NO;
-                    break;
-                }
-                if ([MRCommon isStringEmpty:[dict objectForKey:KStateSmall]])
-                {
-                    [MRCommon showAlert:@"State should not be empty." delegate:nil];
-                    isSuccess = NO;
-                    break;
-                }
-                
-                if ([MRCommon isStringEmpty:[dict objectForKey:KZIPCodeSmall]])
-                {
-                    [MRCommon showAlert:@"Zipcode should not be empty." delegate:nil];
-                    isSuccess = NO;
-                    break;
-                }
-            }
+            [MRCommon showAlert:@"City should not be empty." delegate:nil];
+            isSuccess = NO;
         }
+        
+        if (isSuccess && [MRCommon isStringEmpty:[dict objectOrNilForKey:KStateSmall]])
+        {
+            [MRCommon showAlert:@"State should not be empty." delegate:nil];
+            isSuccess = NO;
+        }
+        
+        if (isSuccess && [MRCommon isStringEmpty:[dict objectOrNilForKey:KZIPCodeSmall]])
+        {
+            [MRCommon showAlert:@"Zipcode should not be empty." delegate:nil];
+            isSuccess = NO;
+        }
+    } else {
+        isSuccess = NO;
     }
     
     return isSuccess;

@@ -151,7 +151,7 @@
                         <constraint firstAttribute="width" constant="150" id="vDS-lg-JZD"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                    <state key="normal" title="Take me to &quot;Tramsform&quot;"/>
+                    <state key="normal" title="Take me to &quot;Transform&quot;"/>
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="gbJ-Hk-xL0"/>
@@ -236,14 +236,14 @@
             </constraints>
             <variation key="default">
                 <mask key="constraints">
-                    <exclude reference="g4p-mx-VhZ"/>
-                    <exclude reference="TL4-yT-hv9"/>
-                    <exclude reference="zB0-Vd-dxf"/>
                     <exclude reference="AYE-gV-YKQ"/>
-                    <exclude reference="6X6-2x-chs"/>
-                    <exclude reference="OZN-pS-00P"/>
                     <exclude reference="bDu-xX-9Sf"/>
                     <exclude reference="kgM-Y2-sCu"/>
+                    <exclude reference="6X6-2x-chs"/>
+                    <exclude reference="OZN-pS-00P"/>
+                    <exclude reference="TL4-yT-hv9"/>
+                    <exclude reference="zB0-Vd-dxf"/>
+                    <exclude reference="g4p-mx-VhZ"/>
                 </mask>
             </variation>
         </view>
