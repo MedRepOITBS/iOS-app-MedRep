@@ -8,7 +8,7 @@
 
 #import "MRTransformDetailViewController.h"
 #import "NotificationWebViewController.h"
-#import "MRShareViewController.h"
+#import "MRMyWallViewController.h"
 #import "AppDelegate.h"
 #import "MRConstants.h"
 #import "MRTransformPost.h"
@@ -240,9 +240,6 @@
             }
         }
     }];
-    
-//    MRShareViewController* contactsViewCont = [[MRShareViewController alloc] initWithNibName:@"MRShareViewController" bundle:nil];
-//    [self.navigationController pushViewController:contactsViewCont animated:true];
 }
 
 - (IBAction)gotoWebAction:(id)sender {

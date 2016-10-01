@@ -11,6 +11,7 @@
 
 #import "MRSharePost+CoreDataProperties.h"
 #import "MRConstants.h"
+#import "MRPostedReplies.h"
 
 @implementation MRSharePost (CoreDataProperties)
 
@@ -27,6 +28,7 @@
 @dynamic member_id;
 @dynamic message_id;
 @dynamic message_type;
+@dynamic messages;
 @dynamic objectData;
 @dynamic parentSharePostId;
 @dynamic parentTransformPostId;
@@ -130,6 +132,33 @@
     [self willChangeValueForKey:@"message_type"];
     [self setPrimitiveValue:message_type forKey:@"message_type"];
     [self didChangeValueForKey:@"message_type"];
+}
+
+- (void)setMessages:(NSData *)messages {
+    if (self.postedReplies.count > 0) {
+        [self removePostedReplies:self.postedReplies];
+    }
+    
+    NSArray *messagesList = nil;
+    if ([messages isKindOfClass:[NSDictionary class]]) {
+        messagesList = @[messages];
+    } else if ([messages isKindOfClass:[NSArray class]]) {
+        messagesList = (NSArray*)messages;
+    }
+    
+    for (NSDictionary *message in messagesList) {
+        id messageAttribute = [message objectOrNilForKey:@"message"];
+        if ([messageAttribute isKindOfClass:[NSString class]]) {
+            continue;
+        }
+        NSArray *messageRelationship = [MRWebserviceHelper parseRecords:[MRPostedReplies class]
+                                                             allRecords:nil
+                                                                context:self.managedObjectContext
+                                                                andData:@[messageAttribute]];
+        if (messageRelationship != nil && messageRelationship.count > 0) {
+            [self addPostedReplies:[NSSet setWithArray:messageRelationship]];
+        }
+    }
 }
 
 - (void)setContent_type:(NSString *)content_type {

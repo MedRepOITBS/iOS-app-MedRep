@@ -11,7 +11,7 @@
 #import "MRContactsViewController.h"
 #import "MRGroupsListViewController.h"
 #import "PendingContactsViewController.h"
-#import "MRShareViewController.h"
+#import "MRMyWallViewController.h"
 #import "MRTransformViewController.h"
 #import "MRCommon.h"
 #import "MRCustomTabBar.h"
@@ -99,7 +99,7 @@
 }
 
 - (void)shareButtonTapped {
-    MRShareViewController* contactsViewCont = [[MRShareViewController alloc] initWithNibName:@"MRShareViewController" bundle:nil];
+    MRMyWallViewController* contactsViewCont = [[MRMyWallViewController alloc] initWithNibName:@"MRMyWallViewController" bundle:nil];
     [self.navigationController pushViewController:contactsViewCont animated:NO];
 }
 

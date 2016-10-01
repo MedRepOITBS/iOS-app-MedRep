@@ -126,7 +126,7 @@ FOUNDATION_EXPORT NSString* const kNewsAndTransformAPIMethodName;
 +(void)addProfileData:(NSInteger)doctorId responseHandler:(WebServiceResponseHandler)responseHandler;
 +(NSArray *)getProfileData;
 
-
++(void)fetchMyWallPosts:(WebServiceResponseHandler)responseHandler;
 +(void)fetchShare:(WebServiceResponseHandler)responseHandler;
 + (void)fetchNewsAndUpdates:(NSString*)category
                  methodName:(NSString*)methodName

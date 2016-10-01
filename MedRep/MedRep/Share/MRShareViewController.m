@@ -45,18 +45,19 @@ UIImagePickerControllerDelegate>
 @property (strong, nonatomic) NSArray* contactsUnderGroup;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomHeight;
 @property (strong, nonatomic) NSArray* groupsUnderContact;
-@property (strong, nonatomic) NSArray* posts;
 @property (strong, nonatomic) IBOutlet UIView *navView;
 
 @property (strong, nonatomic) UITapGestureRecognizer* tapGesture;
 
-@property (strong, nonatomic) UIView *tabBarView;
 @property (nonatomic) MRShareOptionsViewController *shareOptionsVC;
 
 @property (nonatomic) BOOL fromCommentPickerView;
 @property (strong,nonatomic) KLCPopup *commentBoxKLCPopView;
 @property (strong,nonatomic) CommonBoxView *commentBoxView;
-@property (strong, nonatomic) NSMutableArray *serachResults;
+
+@property (strong, nonatomic) NSArray *searchResults;
+@property (strong, nonatomic) NSArray *posts;
+
 @end
 
 @implementation MRShareViewController
@@ -87,15 +88,6 @@ UIImagePickerControllerDelegate>
     [self.view addGestureRecognizer:self.tapGesture];
     
     self.fromCommentPickerView = NO;
-        
-//    [self fetchPosts];
-    
-    MRCustomTabBar *tabBarView = (MRCustomTabBar*)[MRCommon createTabBarView:self.view];
-    [tabBarView setNavigationController:self.navigationController];
-    [tabBarView setShareViewController:self];
-    [tabBarView updateActiveViewController:self andTabIndex:DoctorPlusTabShare];
-    
-    self.tabBarView = (UIView*)tabBarView;
     
     NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:self.postsTableView
                                                                         attribute:NSLayoutAttributeBottomMargin
@@ -134,7 +126,7 @@ UIImagePickerControllerDelegate>
 }
 
 - (void)fetchPostsFromServer {
-    [MRDatabaseHelper fetchShare:^(id result) {
+    [MRDatabaseHelper fetchMyWallPosts:^(id result) {
         [MRCommon stopActivityIndicator];
 
         [self fetchPosts];
@@ -144,7 +136,7 @@ UIImagePickerControllerDelegate>
 }
 
 - (void)setEmptyMessage {
-    if (self.posts.count == 0) {
+    if (self.searchResults.count == 0) {
         [self.emptyMessage setHidden:false];
         [self.postsTableView setHidden:true];
     } else {
@@ -161,7 +153,7 @@ UIImagePickerControllerDelegate>
     NSSortDescriptor *sortNameDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"sharedByProfileName" ascending:true];
     self.posts = [self.posts sortedArrayUsingDescriptors:@[sortDescriptor, sortTitleDescriptor, sortNameDescriptor]];
     
-    self.serachResults = [self.posts mutableCopy];
+    self.searchResults = self.posts;
     [self setEmptyMessage];
 }
 
@@ -179,7 +171,7 @@ UIImagePickerControllerDelegate>
     
     
     
-    return self.serachResults.count;
+    return self.searchResults.count;
 }
 - (void)viewTapped:(UITapGestureRecognizer*)tapGesture {
     [self.searchBar resignFirstResponder];
@@ -202,7 +194,7 @@ UIImagePickerControllerDelegate>
     }
     
     
-    [cell setPostContent:[self.serachResults objectAtIndex:indexPath.row] tagIndex:tagIndex
+    [cell setPostContent:[self.searchResults objectAtIndex:indexPath.row] tagIndex:tagIndex
  andParentViewController:self];
 
     return cell;
@@ -218,7 +210,7 @@ UIImagePickerControllerDelegate>
     [shareDetailViewController setDelegate:self];
     [shareDetailViewController setIndexPath:indexPath];
     
-    [shareDetailViewController setPost:self.serachResults[indexPath.row]];
+    [shareDetailViewController setPost:self.searchResults[indexPath.row]];
     
     [self.navigationController pushViewController:shareDetailViewController animated:true];
 }
@@ -256,8 +248,8 @@ UIImagePickerControllerDelegate>
 
 - (void)likeButtonTapped:(NSInteger)index {
     MRSharePost *currentPost;
-    if (self.posts != nil && self.posts.count > 0) {
-        currentPost = [self.posts objectAtIndex:index];
+    if (self.searchResults != nil && self.searchResults.count > 0) {
+        currentPost = [self.searchResults objectAtIndex:index];
     }
     
     BOOL like = true;
@@ -359,26 +351,17 @@ UIImagePickerControllerDelegate>
     [self fetchPosts];
     [self.postsTableView reloadRowsAtIndexPaths:@[self.reloadIndexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
+
 #pragma mark - SearchBar Delegate Methods
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    
-    
     if ([searchText isEqualToString:@""]) {
-        self.serachResults = [self.posts  mutableCopy];
-        //        [self.contentTableView reloadData];
-        
+        self.searchResults = self.posts;
     }else{
-        
-        self.serachResults  =  [[self.posts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(%K contains[cd] %@)",@"titleDescription",searchText]] mutableCopy];
-        
-           }
-  [self. postsTableView reloadData];
-    
-    
+        self.searchResults  =  [[self.posts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(%K contains[cd] %@)",@"titleDescription",searchText]] mutableCopy];
+    }
+    [self. postsTableView reloadData];
 }
-
-
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     [searchBar resignFirstResponder];
@@ -478,7 +461,7 @@ UIImagePickerControllerDelegate>
     
     [_commentBoxKLCPopView dismiss:YES];
     
-    MRGroupPost *post = [self.serachResults objectAtIndex:indexPath.row];
+    MRGroupPost *post = [self.searchResults objectAtIndex:indexPath.row];
     //obtaining saving path
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];

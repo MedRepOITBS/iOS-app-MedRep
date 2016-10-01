@@ -11,7 +11,7 @@
 #import "MRCommon.h"
 #import "MRTransformViewController.h"
 #import "MRContactsViewController.h"
-#import "MRShareViewController.h"
+#import "MRMyWallViewController.h"
 #import "MRServeViewController.h"
 
 @interface MRCustomTabBar () {
@@ -55,7 +55,7 @@
 - (IBAction)shareButtonTapped:(id)sender {
     if (self.shareViewController == nil || self.activeViewController != self.shareViewController) {
         if (self.shareViewController == nil) {
-            self.shareViewController = [[MRShareViewController alloc] initWithNibName:@"MRShareViewController" bundle:nil];
+            self.shareViewController = [[MRMyWallViewController alloc] initWithNibName:@"MRMyWallViewController" bundle:nil];
         }
         [self.navigationController pushViewController:self.shareViewController animated:NO];
     }

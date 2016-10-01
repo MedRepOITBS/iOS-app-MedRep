@@ -16,7 +16,7 @@
 #import "MRContactsViewController.h"
 #import "MRGroupsListViewController.h"
 #import "PendingContactsViewController.h"
-#import "MRShareViewController.h"
+#import "MRMyWallViewController.h"
 #import <AVFoundation/AVFoundation.h>
 #import "MRServeViewController.h"
 #import "MRConstants.h"

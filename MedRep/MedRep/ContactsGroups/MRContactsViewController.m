@@ -16,7 +16,7 @@
 #import "PieMenu.h"
 #import "MRConstants.h"
 #import "MRServeViewController.h"
-#import "MRShareViewController.h"
+#import "MRMyWallViewController.h"
 #import "MRTransformViewController.h"
 #import "SWRevealViewController.h"
 #import "MRTransformTitleCollectionViewCell.h"
@@ -558,7 +558,7 @@
 }
 
 - (void)shareButtonTapped {
-    MRShareViewController* contactsViewCont = [[MRShareViewController alloc] initWithNibName:@"MRShareViewController" bundle:nil];
+    MRMyWallViewController* contactsViewCont = [[MRMyWallViewController alloc] initWithNibName:@"MRMyWallViewController" bundle:nil];
     [self.navigationController pushViewController:contactsViewCont animated:NO];
 }
 

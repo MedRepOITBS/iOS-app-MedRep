@@ -28,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSNumber *member_id;
 @property (nullable, nonatomic, retain) NSNumber *message_id;
 @property (nullable, nonatomic, retain) NSString *message_type;
+@property (nullable, nonatomic, retain) NSData *messages;
 @property (nullable, nonatomic, retain) NSData *objectData;
 @property (nullable, nonatomic, retain) NSNumber *parentSharePostId;
 @property (nullable, nonatomic, retain) NSNumber *parentTransformPostId;

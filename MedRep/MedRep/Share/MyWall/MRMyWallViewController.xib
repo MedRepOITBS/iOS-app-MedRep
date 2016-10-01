@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MRMyWallViewController">
+            <connections>
+                <outlet property="emptyMessage" destination="s9C-uY-lfu" id="iy1-us-KXT"/>
+                <outlet property="navView" destination="UPk-Hc-5pi" id="6or-O4-7ON"/>
+                <outlet property="postsTableView" destination="WLR-QZ-ZRs" id="1VI-b1-u93"/>
+                <outlet property="searchBar" destination="ilA-Wu-6qS" id="vSj-qD-zgT"/>
+                <outlet property="view" destination="WDb-iI-Mtw" id="fTe-Ee-C63"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="WDb-iI-Mtw">
+            <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="ilA-Wu-6qS">
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="xo4-Ke-Cfr"/>
+                    </constraints>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="QPF-gp-VAg"/>
+                    </connections>
+                </searchBar>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="250" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WLR-QZ-ZRs">
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="L8c-sP-gmP"/>
+                        <outlet property="delegate" destination="-1" id="CPZ-6g-D6n"/>
+                    </connections>
+                </tableView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No new messages !!!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s9C-uY-lfu">
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y96-jb-uRj">
+                    <constraints>
+                        <constraint firstAttribute="width" constant="30" id="hFF-xQ-aet"/>
+                        <constraint firstAttribute="height" constant="30" id="ooB-3M-Haf"/>
+                    </constraints>
+                    <state key="normal" image="compose.png"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="y96-jb-uRj" firstAttribute="centerY" secondItem="ilA-Wu-6qS" secondAttribute="centerY" id="4Hp-Qw-vRC"/>
+                <constraint firstAttribute="trailing" secondItem="WLR-QZ-ZRs" secondAttribute="trailing" constant="8" id="5GJ-jf-ehl"/>
+                <constraint firstAttribute="trailing" secondItem="y96-jb-uRj" secondAttribute="trailing" constant="5" id="7ug-AG-6cP"/>
+                <constraint firstAttribute="bottom" secondItem="WLR-QZ-ZRs" secondAttribute="bottom" constant="50" id="CCm-91-TVg"/>
+                <constraint firstItem="y96-jb-uRj" firstAttribute="bottom" secondItem="ilA-Wu-6qS" secondAttribute="bottom" id="Cl1-M1-dAW"/>
+                <constraint firstAttribute="trailing" secondItem="ilA-Wu-6qS" secondAttribute="trailing" constant="35" id="Eex-xn-xhO"/>
+                <constraint firstItem="s9C-uY-lfu" firstAttribute="centerY" secondItem="WDb-iI-Mtw" secondAttribute="centerY" id="H9h-in-cPO"/>
+                <constraint firstItem="y96-jb-uRj" firstAttribute="top" secondItem="ilA-Wu-6qS" secondAttribute="top" id="J3H-7Y-3dG"/>
+                <constraint firstItem="WLR-QZ-ZRs" firstAttribute="top" secondItem="ilA-Wu-6qS" secondAttribute="bottom" id="Pnl-uG-Wx2"/>
+                <constraint firstItem="y96-jb-uRj" firstAttribute="centerX" secondItem="ilA-Wu-6qS" secondAttribute="centerX" id="WD1-He-4Fx"/>
+                <constraint firstItem="WLR-QZ-ZRs" firstAttribute="top" secondItem="ilA-Wu-6qS" secondAttribute="bottom" id="WxM-fu-naj"/>
+                <constraint firstItem="WLR-QZ-ZRs" firstAttribute="leading" secondItem="WDb-iI-Mtw" secondAttribute="leading" constant="8" id="dFI-WR-XhS"/>
+                <constraint firstItem="y96-jb-uRj" firstAttribute="centerY" secondItem="ilA-Wu-6qS" secondAttribute="centerY" id="dzN-Vf-wbE"/>
+                <constraint firstItem="s9C-uY-lfu" firstAttribute="centerX" secondItem="WDb-iI-Mtw" secondAttribute="centerX" id="fEw-jJ-G2r"/>
+                <constraint firstItem="ilA-Wu-6qS" firstAttribute="top" secondItem="WDb-iI-Mtw" secondAttribute="top" id="qQf-zp-uoD"/>
+                <constraint firstItem="ilA-Wu-6qS" firstAttribute="leading" secondItem="WDb-iI-Mtw" secondAttribute="leading" id="uzs-xi-GHt"/>
+                <constraint firstItem="s9C-uY-lfu" firstAttribute="top" secondItem="WDb-iI-Mtw" secondAttribute="top" constant="66" id="xAS-Jf-1QU"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="H9h-in-cPO"/>
+                    <exclude reference="4Hp-Qw-vRC"/>
+                    <exclude reference="Cl1-M1-dAW"/>
+                    <exclude reference="J3H-7Y-3dG"/>
+                    <exclude reference="WD1-He-4Fx"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="227.5" y="216.5"/>
+        </view>
+        <view contentMode="scaleToFill" id="UPk-Hc-5pi">
+            <rect key="frame" x="0.0" y="0.0" width="40" height="33"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="logo_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="qXh-s2-lrv">
+                    <frame key="frameInset" width="40" height="33"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-29" y="-100.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="compose.png" width="128" height="128"/>
+        <image name="logo_icon.png" width="34" height="33"/>
+    </resources>
+</document>

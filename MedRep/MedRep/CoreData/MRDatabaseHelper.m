@@ -1818,6 +1818,24 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
     }
     [[MRDataManger sharedManager] saveContext];
 }
+
++(void)fetchMyWallPosts:(WebServiceResponseHandler)responseHandler{
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    
+    [[MRWebserviceHelper sharedWebServiceHelper] getMyWallPosts:nil
+                                              withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                  [[MRDataManger sharedManager] removeAllObjects:kMRSharePost withPredicate:nil];
+                                                  
+                                                  id result = [MRWebserviceHelper parseNetworkResponse:NSClassFromString(kMRSharePost)
+                                                               
+                                                                                               andData:[responce valueForKey:@"result"]];
+                                                  responseHandler(result);
+                                                  
+                                              }];
+    
+    
+}
+
 +(void)fetchShare:(WebServiceResponseHandler)responseHandler{
     [MRCommon showActivityIndicator:@"Requesting..."];
 

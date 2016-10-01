@@ -1497,6 +1497,14 @@
 		CCA383F21D342D3500BCF5A9 /* MRGroupMembers+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA383EE1D342D3500BCF5A9 /* MRGroupMembers+CoreDataProperties.m */; };
 		CCA383F31D342D3500BCF5A9 /* MRGroupMembers.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA383F01D342D3500BCF5A9 /* MRGroupMembers.m */; };
 		CCA383F41D342D3500BCF5A9 /* MRGroupMembers.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA383F01D342D3500BCF5A9 /* MRGroupMembers.m */; };
+		CCD1FD941D9FEFA800A12ED0 /* MRMyWallItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD1FD8F1D9FEFA800A12ED0 /* MRMyWallItemTableViewCell.m */; };
+		CCD1FD951D9FEFA800A12ED0 /* MRMyWallItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD1FD8F1D9FEFA800A12ED0 /* MRMyWallItemTableViewCell.m */; };
+		CCD1FD961D9FEFA800A12ED0 /* MRMyWallItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCD1FD901D9FEFA800A12ED0 /* MRMyWallItemTableViewCell.xib */; };
+		CCD1FD971D9FEFA800A12ED0 /* MRMyWallItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCD1FD901D9FEFA800A12ED0 /* MRMyWallItemTableViewCell.xib */; };
+		CCD1FD981D9FEFA800A12ED0 /* MRMyWallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD1FD921D9FEFA800A12ED0 /* MRMyWallViewController.m */; };
+		CCD1FD9A1D9FEFA800A12ED0 /* MRMyWallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCD1FD931D9FEFA800A12ED0 /* MRMyWallViewController.xib */; };
+		CCD1FD9B1D9FEFA800A12ED0 /* MRMyWallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCD1FD931D9FEFA800A12ED0 /* MRMyWallViewController.xib */; };
+		CCD1FD9C1D9FF27300A12ED0 /* MRMyWallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD1FD921D9FEFA800A12ED0 /* MRMyWallViewController.m */; };
 		CCE29B241D26E6C4006DED8E /* MRCustomTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = CCE29B231D26E6C4006DED8E /* MRCustomTabBar.m */; };
 		CCE29B251D26E6C4006DED8E /* MRCustomTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = CCE29B231D26E6C4006DED8E /* MRCustomTabBar.m */; };
 		CCE29B271D26E870006DED8E /* MRCustomTabBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCE29B261D26E870006DED8E /* MRCustomTabBar.xib */; };
@@ -2493,6 +2501,12 @@
 		CCA383F01D342D3500BCF5A9 /* MRGroupMembers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRGroupMembers.m; sourceTree = "<group>"; };
 		CCA8CA831D9320BC00300A0C /* MedRepDev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MedRepDev.entitlements; sourceTree = "<group>"; };
 		CCA8CA841D9320BF00300A0C /* MedRep.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MedRep.entitlements; sourceTree = "<group>"; };
+		CCD1FD8E1D9FEFA800A12ED0 /* MRMyWallItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRMyWallItemTableViewCell.h; path = MyWall/MRMyWallItemTableViewCell.h; sourceTree = "<group>"; };
+		CCD1FD8F1D9FEFA800A12ED0 /* MRMyWallItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRMyWallItemTableViewCell.m; path = MyWall/MRMyWallItemTableViewCell.m; sourceTree = "<group>"; };
+		CCD1FD901D9FEFA800A12ED0 /* MRMyWallItemTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MRMyWallItemTableViewCell.xib; path = MyWall/MRMyWallItemTableViewCell.xib; sourceTree = "<group>"; };
+		CCD1FD911D9FEFA800A12ED0 /* MRMyWallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRMyWallViewController.h; path = MyWall/MRMyWallViewController.h; sourceTree = "<group>"; };
+		CCD1FD921D9FEFA800A12ED0 /* MRMyWallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRMyWallViewController.m; path = MyWall/MRMyWallViewController.m; sourceTree = "<group>"; };
+		CCD1FD931D9FEFA800A12ED0 /* MRMyWallViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MRMyWallViewController.xib; path = MyWall/MRMyWallViewController.xib; sourceTree = "<group>"; };
 		CCE29B221D26E6C4006DED8E /* MRCustomTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRCustomTabBar.h; path = TabBar/MRCustomTabBar.h; sourceTree = "<group>"; };
 		CCE29B231D26E6C4006DED8E /* MRCustomTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRCustomTabBar.m; path = TabBar/MRCustomTabBar.m; sourceTree = "<group>"; };
 		CCE29B261D26E870006DED8E /* MRCustomTabBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MRCustomTabBar.xib; path = TabBar/MRCustomTabBar.xib; sourceTree = "<group>"; };
@@ -4217,6 +4231,7 @@
 		CC7DB2881D0C9EC2007DFE4C /* Share */ = {
 			isa = PBXGroup;
 			children = (
+				CCD1FD8D1D9FEF9100A12ED0 /* MyWall */,
 				B4945C561D7B686F00E8BBB7 /* commentIcon.png */,
 				CC86FE451D29BA4F0030B23D /* MRReplies+CoreDataProperties.h */,
 				CC86FE461D29BA4F0030B23D /* MRReplies+CoreDataProperties.m */,
@@ -4415,6 +4430,19 @@
 				CC9DAFA11D6F9E46008B2822 /* EditContactInfoViewController.xib */,
 			);
 			name = EditContactInfo;
+			sourceTree = "<group>";
+		};
+		CCD1FD8D1D9FEF9100A12ED0 /* MyWall */ = {
+			isa = PBXGroup;
+			children = (
+				CCD1FD8E1D9FEFA800A12ED0 /* MRMyWallItemTableViewCell.h */,
+				CCD1FD8F1D9FEFA800A12ED0 /* MRMyWallItemTableViewCell.m */,
+				CCD1FD901D9FEFA800A12ED0 /* MRMyWallItemTableViewCell.xib */,
+				CCD1FD911D9FEFA800A12ED0 /* MRMyWallViewController.h */,
+				CCD1FD921D9FEFA800A12ED0 /* MRMyWallViewController.m */,
+				CCD1FD931D9FEFA800A12ED0 /* MRMyWallViewController.xib */,
+			);
+			name = MyWall;
 			sourceTree = "<group>";
 		};
 		CEE2F1A4AA4B2FB2CD0887DA /* Pods */ = {
@@ -4947,6 +4975,7 @@
 				79708AA01BB73C67007CE81D /* PHdoctor@2x.png in Resources */,
 				B46565921D56B0E50016CDA8 /* MemberListViewController.xib in Resources */,
 				7929E3DA1B9CC674001F1373 /* news_dash@2x.png in Resources */,
+				CCD1FD961D9FEFA800A12ED0 /* MRMyWallItemTableViewCell.xib in Resources */,
 				79F0749A1BBF16970049FDE7 /* favoriteSelected@2x.png in Resources */,
 				79F416A51B9F6E560089729B /* cncompany3@3x.jpg in Resources */,
 				CC7DB2771D0C9E15007DFE4C /* MRTransformDetailViewController.xib in Resources */,
@@ -5066,6 +5095,7 @@
 				79708AA51BB73C67007CE81D /* PHlocations@2x.png in Resources */,
 				79BD27AC1B80980F007CA448 /* Icon.png in Resources */,
 				8AFE8CEE1D0F21BF0000382E /* group_pic4.jpeg in Resources */,
+				CCD1FD9A1D9FEFA800A12ED0 /* MRMyWallViewController.xib in Resources */,
 				79421F331BB83ABE0055D9B7 /* MRPHDashBoardViewController_iPad.xib in Resources */,
 				7920D6941C1C87C9008D3386 /* MRForgotPasswordTwoViewController.xib in Resources */,
 				79FFD2551BB9BA7D00CEE606 /* MRRegistrationRoleCellTableViewCell.xib in Resources */,
@@ -5298,6 +5328,7 @@
 				CC9DAFA51D6F9E46008B2822 /* EditContactInfoViewController.xib in Resources */,
 				B4E02C671D4B0BB0003A1859 /* Dashboard.jpg in Resources */,
 				CC7DB1191D0C8BEC007DFE4C /* transperent-bg@2x.png in Resources */,
+				CCD1FD971D9FEFA800A12ED0 /* MRMyWallItemTableViewCell.xib in Resources */,
 				CC7DB11A1D0C8BEC007DFE4C /* PHactivity@3x.png in Resources */,
 				CC7DB11B1D0C8BEC007DFE4C /* full-screen@2x.png in Resources */,
 				CC7DB11C1D0C8BEC007DFE4C /* PHmail@2x.png in Resources */,
@@ -5319,6 +5350,7 @@
 				CC7DB3781D0CC8A6007DFE4C /* profile_pic15.jpeg in Resources */,
 				CC7DB12B1D0C8BEC007DFE4C /* pcselect@2x.png in Resources */,
 				CC7DB3721D0CC8A6007DFE4C /* profile_pic12.jpeg in Resources */,
+				CCD1FD9B1D9FEFA800A12ED0 /* MRMyWallViewController.xib in Resources */,
 				8AFF27AB1D21BE7B00080DF0 /* MRJoinGroupViewController.xib in Resources */,
 				CC7DB3861D0CC8A6007DFE4C /* profile_pic8.jpeg in Resources */,
 				B4E02C5D1D4706E7003A1859 /* logo_icon@2x.png in Resources */,
@@ -5877,6 +5909,7 @@
 				8AFF27B01D21C3DE00080DF0 /* MRInviteViewController.m in Sources */,
 				B4B4F11E1D395D9600EFCC0E /* ExperienceDateTimeTableViewCell.m in Sources */,
 				CC7DB2EF1D0CC433007DFE4C /* UIPopoverController+iPhone.m in Sources */,
+				CCD1FD981D9FEFA800A12ED0 /* MRMyWallViewController.m in Sources */,
 				CC9858061D2E726300C74438 /* MRShareOptionTableViewCell.m in Sources */,
 				CC7DB2CD1D0CC433007DFE4C /* MRContactDetailViewController.m in Sources */,
 				B4B4F18A1D39E53E00EFCC0E /* NSYearComponent.m in Sources */,
@@ -5901,6 +5934,7 @@
 				CC7DB2BF1D0CC433007DFE4C /* PieMenu.m in Sources */,
 				CC7DB3051D0CC4E2007DFE4C /* MRGroup.m in Sources */,
 				CC7DB2D51D0CC433007DFE4C /* MRContactWithinGroupCollectionCellCollectionViewCell.m in Sources */,
+				CCD1FD941D9FEFA800A12ED0 /* MRMyWallItemTableViewCell.m in Sources */,
 				B4E02C6E1D4B2992003A1859 /* UIImage+Helpers.m in Sources */,
 				CC9BCEC81D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.m in Sources */,
 				79AC942A1B9DFAF000B81452 /* MRNotificationsViewController.m in Sources */,
@@ -6113,6 +6147,7 @@
 				CC9857E91D2DAA6B00C74438 /* MRTransformPost.m in Sources */,
 				CC7DB0621D0C8BEC007DFE4C /* main.m in Sources */,
 				CC7DB0631D0C8BEC007DFE4C /* MRMenuTableViewCell.m in Sources */,
+				CCD1FD9C1D9FF27300A12ED0 /* MRMyWallViewController.m in Sources */,
 				CC7DB0641D0C8BEC007DFE4C /* ViewController.m in Sources */,
 				CC7DB0651D0C8BEC007DFE4C /* MRWebserviceHelper.m in Sources */,
 				B4B4F1891D39E53E00EFCC0E /* NSShortMonthComponent.m in Sources */,
@@ -6137,6 +6172,7 @@
 				CC7DB06C1D0C8BEC007DFE4C /* UILabel+WhiteUIDatePickerLabels.m in Sources */,
 				CC7DB3181D0CC530007DFE4C /* PendingContactsViewController.m in Sources */,
 				B4E02C6F1D4B2992003A1859 /* UIImage+Helpers.m in Sources */,
+				CCD1FD951D9FEFA800A12ED0 /* MRMyWallItemTableViewCell.m in Sources */,
 				CC7DB06D1D0C8BEC007DFE4C /* MRRegistationViewController.m in Sources */,
 				CC7DB06E1D0C8BEC007DFE4C /* MROTPViewController.m in Sources */,
 				CC7DB06F1D0C8BEC007DFE4C /* MRAppointmentListCell.m in Sources */,

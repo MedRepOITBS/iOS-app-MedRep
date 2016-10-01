@@ -238,6 +238,8 @@ withComplitionHandler:(completionHandler)responceHandler;
 
 -(void)getContactsAndGroups:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler;
 
+-(void)getMyWallPosts:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler;
+
 -(void)getShare:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler;
 
 -(void)updateComment:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler;
