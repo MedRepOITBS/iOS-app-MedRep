@@ -66,7 +66,7 @@
     [[MRWebserviceHelper sharedWebServiceHelper] getDoctorProfileForPharma:[NSString stringWithFormat:@"%lld",[doctorId longLongValue]] withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
         if (status)
         {
-            self.appointmentName.text = [NSString stringWithFormat:@"Dr. %@ %@",[responce objectForKey:@"firstName"],[responce objectForKey:@"lastName"]];
+            self.appointmentName.text = [NSString stringWithFormat:@"%@ %@",[responce objectForKey:@"firstName"],[responce objectForKey:@"lastName"]];
         }
         else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
         {
@@ -78,7 +78,7 @@
                       [MRCommon stopActivityIndicator];
                       if (status)
                       {
-                          self.appointmentName.text = [NSString stringWithFormat:@"Dr. %@ %@",[responce objectForKey:@"firstName"],[responce objectForKey:@"lastName"]];
+                          self.appointmentName.text = [NSString stringWithFormat:@"%@ %@",[responce objectForKey:@"firstName"],[responce objectForKey:@"lastName"]];
                       }
                   }];
              }];

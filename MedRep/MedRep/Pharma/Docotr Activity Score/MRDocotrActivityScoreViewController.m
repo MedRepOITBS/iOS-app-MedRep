@@ -157,7 +157,7 @@
     }
     NSDictionary *dict =[self.convertAppointments objectAtIndex:indexPath.row];
     productCell.profileImage.image = [UIImage imageNamed:@"profileIcon.png"];
-    productCell.profileName.text = [NSString stringWithFormat:@"Dr. %@ %@",[dict objectForKey:@"firstName"],[dict objectForKey:@"lastName"]];
+    productCell.profileName.text = [NSString stringWithFormat:@"%@ %@",[dict objectForKey:@"firstName"],[dict objectForKey:@"lastName"]];
     productCell.appointmnetTime.text = @"";[self getAppointmnetDateTime:[dict objectForKey:@"startDate"]];
     productCell.timeIcon.hidden = YES;
     productCell.toplabelConstraint.constant = 25.0;

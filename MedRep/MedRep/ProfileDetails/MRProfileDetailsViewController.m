@@ -66,7 +66,7 @@
         
         NSInteger userType = [MRAppControl sharedHelper].userType;
         
-        self.navigationItem.title = (userType == 2 || userType == 1) ? [NSString stringWithFormat:@"Dr. %@ %@", [userdata objectForKey:KFirstName],[userdata objectForKey:KLastName]] : [NSString stringWithFormat:@"Mr. %@ %@", [userdata objectForKey:KFirstName],[userdata objectForKey:KLastName]];
+        self.navigationItem.title = (userType == 2 || userType == 1) ? [NSString stringWithFormat:@"%@ %@", [userdata objectForKey:KFirstName],[userdata objectForKey:KLastName]] : [NSString stringWithFormat:@"Mr. %@ %@", [userdata objectForKey:KFirstName],[userdata objectForKey:KLastName]];
     }
     
     
@@ -159,7 +159,7 @@
         
         _profileObj  = [result objectAtIndex:0];
         
-        NSMutableString *navigationTitle = [NSMutableString stringWithString:@"Dr. "];
+        NSMutableString *navigationTitle = [NSMutableString stringWithString:@""];
         if (_profileObj.name != nil && _profileObj.name.length > 0) {
             [navigationTitle appendString:_profileObj.name];
         } else {

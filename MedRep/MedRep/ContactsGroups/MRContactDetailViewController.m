@@ -28,6 +28,7 @@
 #import "MRContactsViewController.h"
 #import "MemberListViewController.h"
 #import "MRGroupMembersViewController.h"
+#import "MRProfileDetailsViewController.h"
 
 @interface MRContactDetailViewController () <MRGroupPostItemTableViewCellDelegate, CommonBoxViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MRUpdateMemberProtocol> {
     NSMutableArray *groupsArrayObj;
@@ -983,6 +984,23 @@
     [groupMembersViewController setGroup:self.mainGroup];
     [self.navigationController pushViewController:groupMembersViewController
                                          animated:YES];
+}
+
+- (void)authorImageSelected {
+    if (self.launchMode == kContactDetailLaunchModeSuggestedContact ||
+        self.launchMode == kContactDetailLaunchModeContact) {
+        
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"ProfileStoryboard" bundle:nil];
+        MRProfileDetailsViewController *profViewController = [sb instantiateInitialViewController];
+        
+        if (self.mainContact.contactId != nil) {
+            profViewController.doctorId = self.mainContact.contactId.longValue;
+        }
+        
+        profViewController.isFromSinUp = NO;
+        [profViewController setShowAsReadable:YES];
+        [self.navigationController pushViewController:profViewController animated:YES];
+    }
 }
 
 @end

@@ -961,7 +961,7 @@
 }
 
 + (void)invokeInviteContact:(UIViewController*)viewController {
-    NSString *textToShare = [NSString stringWithFormat:@"Dr. %@ %@ has invited you to join 'MedRep', a digital collboration platform for doctors. Please Download from iTunes and Google Playstore. iTunes link https://itunes.apple.com/in/app/medrep/id1087940083?mt=8 ", [MRAppControl sharedHelper].userRegData[@"FirstName"],[MRAppControl sharedHelper].userRegData[@"LastName"]];
+    NSString *textToShare = [NSString stringWithFormat:@"%@ %@ has invited you to join 'MedRep', a digital collboration platform for doctors. Please Download from iTunes and Google Playstore. iTunes link https://itunes.apple.com/in/app/medrep/id1087940083?mt=8 ", [MRAppControl sharedHelper].userRegData[@"FirstName"],[MRAppControl sharedHelper].userRegData[@"LastName"]];
     NSURL *myWebsite = [NSURL URLWithString:@"http://www.erfolglifesciences.com/"];
     
     NSArray *objectsToShare = @[textToShare, myWebsite];

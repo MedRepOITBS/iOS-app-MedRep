@@ -65,7 +65,7 @@
     [[MRWebserviceHelper sharedWebServiceHelper] getDoctorProfileForPharma:[NSString stringWithFormat:@"%lld",[doctorId longLongValue]] withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
         if (status)
         {
-            self.profileName.text = [NSString stringWithFormat:@"Dr. %@ %@",[responce objectForKey:@"firstName"],[responce objectForKey:@"lastName"]];
+            self.profileName.text = [NSString stringWithFormat:@"%@ %@",[responce objectForKey:@"firstName"],[responce objectForKey:@"lastName"]];
             if ([[responce objectForKey:KProfilePicture] isKindOfClass:[NSDictionary class]])
             {
                 self.profileImage.image = [MRCommon getImageFromBase64Data:[[responce objectForKey:KProfilePicture] objectForKey:@"data"]];
@@ -81,7 +81,7 @@
                       [MRCommon stopActivityIndicator];
                       if (status)
                       {
-                          self.profileName.text = [NSString stringWithFormat:@"Dr. %@ %@",[responce objectForKey:@"firstName"],[responce objectForKey:@"lastName"]];
+                          self.profileName.text = [NSString stringWithFormat:@"%@ %@",[responce objectForKey:@"firstName"],[responce objectForKey:@"lastName"]];
                           if ([[responce objectForKey:KProfilePicture] isKindOfClass:[NSDictionary class]])
                           {
                               

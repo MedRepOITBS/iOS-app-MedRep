@@ -40,7 +40,7 @@
     self.profileImage.layer.borderColor = [UIColor whiteColor].CGColor;
     self.profileImage.layer.borderWidth = 2.0;
     self.profileImage.clipsToBounds = YES;
-    self.userNameLable.text = [NSString stringWithFormat:@"Dr. %@",[[MRAppControl sharedHelper].userRegData objectForKey:KFirstName]];
+    self.userNameLable.text = [NSString stringWithFormat:@"%@",[[MRAppControl sharedHelper].userRegData objectForKey:KFirstName]];
     if ([MRCommon isIPad])
     {
         self.logoTopConstraint.constant = 100;
