@@ -17,6 +17,7 @@
 @dynamic contact_id;
 @dynamic contactId;
 @dynamic contentType;
+@dynamic doctor_id;
 @dynamic displayPicture;
 @dynamic detail_desc;
 @dynamic fileUrl;
@@ -63,10 +64,15 @@
 }
 
 - (void)setMember_id:(NSNumber *)member_id {
+    
     NSInteger tempMemberid = 0;
     if (member_id != nil) {
         tempMemberid = member_id.longValue;
     }
+    
+    [self willChangeValueForKey:@"member_id"];
+    [self setPrimitiveValue:[NSNumber numberWithLong:tempMemberid] forKey:@"member_id"];
+    [self didChangeValueForKey:@"member_id"];
     
     self.contactId = [NSNumber numberWithLong:tempMemberid];
 }

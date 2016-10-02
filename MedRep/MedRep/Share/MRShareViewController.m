@@ -29,6 +29,7 @@
 #import "MRCommentViewController.h"
 #import "MRWebserviceHelper.h"
 #import "MRSharePost.h"
+#import "MRMyWallViewController.h"
 
 @interface MRShareViewController () <UISearchBarDelegate, SWRevealViewControllerDelegate, MRGroupPostItemTableViewCellDelegate, MRShareOptionsSelectionDelegate,
     CommonBoxViewDelegate,
@@ -55,6 +56,8 @@ UIImagePickerControllerDelegate>
 @property (strong,nonatomic) KLCPopup *commentBoxKLCPopView;
 @property (strong,nonatomic) CommonBoxView *commentBoxView;
 
+@property (weak, nonatomic) IBOutlet UIButton *takeMeToMyShareView;
+
 @property (strong, nonatomic) NSArray *searchResults;
 @property (strong, nonatomic) NSArray *posts;
 
@@ -72,12 +75,8 @@ UIImagePickerControllerDelegate>
     [revealController panGestureRecognizer];
     [revealController tapGestureRecognizer];
     
-    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon.png"]
-                                                                         style:UIBarButtonItemStylePlain target:revealController
-                                                                        action:@selector(revealToggle:)];
-    
+    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonAction)];
     self.navigationItem.leftBarButtonItem = revealButtonItem;
-    
     UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navView];
     self.navigationItem.rightBarButtonItem = rightButtonItem;
     
@@ -89,19 +88,14 @@ UIImagePickerControllerDelegate>
     
     self.fromCommentPickerView = NO;
     
-    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:self.postsTableView
-                                                                        attribute:NSLayoutAttributeBottomMargin
-                                                                        relatedBy:NSLayoutRelationEqual
-                                                                           toItem:self.view
-                                                                        attribute:NSLayoutAttributeBottom
-                                                                       multiplier:1.0 constant:0];
-    
-    [self.view addConstraint:bottomConstraint];
-    
     // Do any additional setup after loading the view from its nib.
     [self.postsTableView registerNib:[UINib nibWithNibName:@"MRGroupPostItemTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"groupCell"];
     self.postsTableView.estimatedRowHeight = 250;
     self.postsTableView.rowHeight = UITableViewAutomaticDimension;
+    
+    [self.takeMeToMyShareView.layer setCornerRadius:5.0];
+    [self.takeMeToMyShareView.layer setBorderColor:[UIColor lightGrayColor].CGColor];
+    [self.takeMeToMyShareView.layer setBorderWidth:1.0f];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -125,8 +119,13 @@ UIImagePickerControllerDelegate>
     self.fromCommentPickerView = NO;
 }
 
+- (void)backButtonAction
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)fetchPostsFromServer {
-    [MRDatabaseHelper fetchMyWallPosts:^(id result) {
+    [MRDatabaseHelper fetchShare:^(id result) {
         [MRCommon stopActivityIndicator];
 
         [self fetchPosts];
@@ -215,19 +214,6 @@ UIImagePickerControllerDelegate>
     [self.navigationController pushViewController:shareDetailViewController animated:true];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-- (void)backButtonAction{
-    [self.navigationController popViewControllerAnimated:YES];
-}
 - (void)connectButtonTapped {
     MRContactsViewController* contactsViewCont = [[MRContactsViewController alloc] initWithNibName:@"MRContactsViewController" bundle:nil];
     MRGroupsListViewController* groupsListViewController = [[MRGroupsListViewController alloc] initWithNibName:@"MRGroupsListViewController" bundle:[NSBundle mainBundle]];
@@ -498,6 +484,13 @@ UIImagePickerControllerDelegate>
     [_commentBoxView setData:nil group:nil andSharedPost:nil];
     
     [_commentBoxView setTag:1000];
+}
+
+- (IBAction)takeMeToMyShareViewTapped:(id)sender {
+//    MRMyWallViewController *myWallViewController = [[MRMyWallViewController alloc] initWithNibName:@"MRMyWallViewController" bundle:nil];
+//    
+//    [self.navigationController pushViewController:myWallViewController animated:YES];
+    [self backButtonAction];
 }
 
 @end

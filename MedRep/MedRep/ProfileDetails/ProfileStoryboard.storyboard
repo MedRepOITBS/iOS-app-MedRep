@@ -233,11 +233,11 @@
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
-                                            <exclude reference="EYm-6m-U4O"/>
                                             <exclude reference="eQZ-ux-oNy"/>
                                             <exclude reference="sJd-4F-Niq"/>
                                             <exclude reference="u0N-CC-tSJ"/>
                                             <exclude reference="u5W-PC-4Cq"/>
+                                            <exclude reference="EYm-6m-U4O"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -377,11 +377,11 @@ easier for colleagues to find you.</string>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
-                                            <exclude reference="YTm-t3-dBF"/>
                                             <exclude reference="6nB-G4-0dI"/>
                                             <exclude reference="MFL-xZ-pva"/>
                                             <exclude reference="NU5-3g-iZk"/>
                                             <exclude reference="kaB-sR-zN5"/>
+                                            <exclude reference="YTm-t3-dBF"/>
                                             <exclude reference="6LF-1Y-Sqf"/>
                                             <exclude reference="pBz-kv-Aj9"/>
                                         </mask>
@@ -464,8 +464,8 @@ easier for colleagues to find you.</string>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
-                                            <exclude reference="cqj-uM-vDt"/>
                                             <exclude reference="bp5-qN-rWH"/>
+                                            <exclude reference="cqj-uM-vDt"/>
                                             <exclude reference="aCX-pZ-jND"/>
                                             <exclude reference="NBU-cN-gDZ"/>
                                             <exclude reference="w9O-8W-bjd"/>

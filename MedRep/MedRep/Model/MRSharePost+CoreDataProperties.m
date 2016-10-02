@@ -16,6 +16,7 @@
 @implementation MRSharePost (CoreDataProperties)
 
 @dynamic commentsCount;
+@dynamic contact_id;
 @dynamic contactId;
 @dynamic contentType;
 @dynamic detailedText;
@@ -119,6 +120,10 @@
         tempMessageId = message_id.longLongValue;
     }
     self.sharePostId  = [NSNumber numberWithLongLong:tempMessageId];
+}
+
+- (void)setContact_id:(NSNumber *)contact_Id {
+    self.contactId = contact_Id;
 }
 
 -(void)setGroup_id:(NSNumber *)group_id{

@@ -62,4 +62,7 @@ FOUNDATION_EXPORT NSString* const kDeleteProfileDetailsAlertMessage;
 
 FOUNDATION_EXPORT NSString* const kJoinedGroup;
 
+FOUNDATION_EXPORT NSString* const kLastLoginTime;
+FOUNDATION_EXPORT NSString* const kLastSyncTimeForMyWall;
+
 @end

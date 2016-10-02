@@ -48,17 +48,26 @@
                         <color key="textColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zM1-Dk-KlF">
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="zNq-2w-wOe"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="vje-fL-WVv" firstAttribute="top" secondItem="rNP-m8-iBC" secondAttribute="bottom" constant="18" id="2yR-Zr-8to"/>
                     <constraint firstItem="rNP-m8-iBC" firstAttribute="leading" secondItem="jhR-Qo-e9G" secondAttribute="leading" id="3WW-i2-Jus"/>
-                    <constraint firstItem="a73-kz-f15" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="3vv-sp-PSq"/>
+                    <constraint firstItem="zM1-Dk-KlF" firstAttribute="top" secondItem="eOX-Om-FaU" secondAttribute="bottom" constant="0.5" id="5Ik-pq-cy6"/>
+                    <constraint firstItem="zM1-Dk-KlF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="62W-J9-fBt"/>
                     <constraint firstItem="eOX-Om-FaU" firstAttribute="leading" secondItem="a73-kz-f15" secondAttribute="leading" id="7Qe-7A-UUA"/>
+                    <constraint firstItem="jhR-Qo-e9G" firstAttribute="top" secondItem="a73-kz-f15" secondAttribute="top" id="AAc-pw-Rjy"/>
                     <constraint firstItem="jhR-Qo-e9G" firstAttribute="leading" secondItem="a73-kz-f15" secondAttribute="trailing" constant="11" id="EE5-DM-gYK"/>
                     <constraint firstItem="eOX-Om-FaU" firstAttribute="top" secondItem="vje-fL-WVv" secondAttribute="bottom" constant="6" id="HPc-Na-njF"/>
+                    <constraint firstAttribute="topMargin" secondItem="a73-kz-f15" secondAttribute="top" id="IKq-WW-Obi"/>
                     <constraint firstAttribute="trailing" secondItem="vje-fL-WVv" secondAttribute="trailing" constant="8" id="Ncz-LU-m6H"/>
                     <constraint firstAttribute="trailing" secondItem="eOX-Om-FaU" secondAttribute="trailing" constant="6" id="OCp-mc-D4y"/>
-                    <constraint firstItem="jhR-Qo-e9G" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="d0b-Ot-Kj5"/>
+                    <constraint firstAttribute="trailing" secondItem="zM1-Dk-KlF" secondAttribute="trailing" constant="6" id="c2T-ti-UyJ"/>
                     <constraint firstAttribute="bottomMargin" secondItem="eOX-Om-FaU" secondAttribute="bottom" constant="-3" id="eKM-SC-Qeu"/>
                     <constraint firstItem="a73-kz-f15" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="hcq-xF-c9o"/>
                     <constraint firstItem="vje-fL-WVv" firstAttribute="leading" secondItem="jhR-Qo-e9G" secondAttribute="leading" id="jxg-CG-nFh"/>
@@ -75,6 +84,7 @@
                 <outlet property="postImageViewTopConstraint" destination="2yR-Zr-8to" id="DVW-S9-ka0"/>
                 <outlet property="postLabel" destination="rNP-m8-iBC" id="p8p-Jh-kWf"/>
                 <outlet property="postedOnLabel" destination="eOX-Om-FaU" id="Zbd-xo-aSP"/>
+                <outlet property="postedOnLabelHeightConstraint" destination="svD-f3-kSC" id="1Qh-vO-V7C"/>
                 <outlet property="profilePicImageView" destination="a73-kz-f15" id="OAD-qC-l88"/>
                 <outlet property="profilePicLeadingConstant" destination="hcq-xF-c9o" id="a82-XW-Med"/>
                 <outlet property="profilePicWidthConstraint" destination="FDH-4E-Gnc" id="eMk-3y-n8f"/>

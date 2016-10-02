@@ -124,8 +124,11 @@
     if (self.parentViewController != nil) {
         UIStoryboard *sb = [UIStoryboard storyboardWithName:@"ProfileStoryboard" bundle:nil];
         MRProfileDetailsViewController *profViewController = [sb instantiateInitialViewController];
-        
-        if (self.post.contactId != nil) {
+        if (self.post.member_id != nil && self.post.member_id.longValue > 0) {
+            profViewController.doctorId = self.post.member_id.longValue;
+        } else if (self.post.doctor_id != nil && self.post.doctor_id.longValue > 0) {
+            profViewController.doctorId = self.post.doctor_id.longValue;
+        } else if (self.post.contactId != nil && self.post.contactId.longValue > 0) {
             profViewController.doctorId = self.post.contactId.longValue;
         }
         

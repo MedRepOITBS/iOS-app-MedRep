@@ -33,6 +33,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *postImageViewTopConstraint;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *profilePicLeadingConstant;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *postedOnLabelHeightConstraint;
 
 @property (nonatomic) MRSharePost *post;
 @property (nonatomic) MRPostedReplies *postedReply;
@@ -116,9 +117,12 @@
     }
     
     UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                 action:@selector(authorImageSelected)];
+                                                                                 action:@selector(repliedBySelected)];
     [recognizer setNumberOfTapsRequired:1];
     [self.profilePicImageView addGestureRecognizer:recognizer];
+    
+    [self.postedOnLabel setHidden:NO];
+    self.postedOnLabelHeightConstraint.constant = 14;
 }
 
 - (void)setPostContent:(MRSharePost *)post tagIndex:(NSInteger)tagIndex
@@ -130,38 +134,10 @@
     NSLog(@"Post : %ld",post.sharePostId.longValue);
     
     self.postLabel.text = post.titleDescription;
-    self.postedOnLabel.text = [NSDate convertNSDateToNSString:post.postedOn
-                                                   dateFormat:kIdletimeFormat];
-    
-    UIImage *image = nil;
-    
-    if (self.post.url != nil && self.post.url.length > 0) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.post.url]];
-            if (imageData != nil) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    self.postImageView.image = [UIImage imageWithData:imageData];
-                    self.postImageHeightConstraint.constant = 128;
-                    self.postImageViewTopConstraint.constant = 18;
-                });
-            }
-        });
-    } else if (self.post.objectData != nil) {
-        image = [UIImage imageWithData:self.post.objectData];
-    }
-    
-    if ((self.post.url != nil && self.post.url.length > 0) ||
-        self.post.objectData != nil) {
-        [self.postImageView setHidden:NO];
-        self.postImageView.image = image;
-        self.postImageHeightConstraint.constant = 128;
-        self.postImageViewTopConstraint.constant = 18;
-    } else {
-        [self.postImageView setHidden:YES];
-        self.postImageView.image = nil;
-        self.postImageHeightConstraint.constant = 0;
-        self.postImageViewTopConstraint.constant = 0;
-    }
+    [self.postImageView setHidden:YES];
+    self.postImageView.image = nil;
+    self.postImageHeightConstraint.constant = 0;
+    self.postImageViewTopConstraint.constant = 0;
     
     NSString *name = @"No Name";
     if (self.post.sharedByProfileName != nil && self.post.sharedByProfileName.length > 0) {
@@ -187,16 +163,29 @@
                                                                                  action:@selector(authorImageSelected)];
     [recognizer setNumberOfTapsRequired:1];
     [self.profilePicImageView addGestureRecognizer:recognizer];
+    
+    [self.postedOnLabel setHidden:YES];
+    self.postedOnLabelHeightConstraint.constant = 0;
+}
+
+- (void)repliedBySelected {
+    if (self.postedReply != nil && self.postedReply.member_id != nil) {
+        [self launchProfileImage:self.postedReply.member_id.longValue];
+    }
 }
 
 - (void)authorImageSelected {
+    if (self.post != nil && self.post.doctor_id != nil) {
+        [self launchProfileImage:self.post.doctor_id.longValue];
+    }
+}
+
+- (void)launchProfileImage:(NSInteger)doctorId {
     if (self.parentViewController != nil) {
         UIStoryboard *sb = [UIStoryboard storyboardWithName:@"ProfileStoryboard" bundle:nil];
         MRProfileDetailsViewController *profViewController = [sb instantiateInitialViewController];
         
-        if (self.post.doctor_id != nil) {
-            profViewController.doctorId = self.post.doctor_id.longValue;
-        }
+        profViewController.doctorId = doctorId;
         
         profViewController.isFromSinUp = NO;
         [profViewController setShowAsReadable:YES];

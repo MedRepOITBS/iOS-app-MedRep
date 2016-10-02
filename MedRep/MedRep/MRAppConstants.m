@@ -63,4 +63,7 @@ NSString* const kDeleteProfileDetailsAlertMessage = @"Do you want to delete?";
 
 NSString* const kJoinedGroup = @"Request sent successfully, Admin will approve or reject";
 
+NSString* const kLastLoginTime = @"lastLoginTime";
+NSString* const kLastSyncTimeForMyWall = @"lastSynchTimeForMyWall";
+
 @end

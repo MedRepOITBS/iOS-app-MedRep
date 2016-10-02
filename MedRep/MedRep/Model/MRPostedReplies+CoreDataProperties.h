@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSNumber *contact_id;
 @property (nullable, nonatomic, retain) NSNumber *contactId;
 @property (nullable, nonatomic, retain) NSNumber *contentType;
+@property (nullable, nonatomic, retain) NSNumber *doctor_id;
 @property (nullable, nonatomic, retain) NSString *displayPicture;
 @property (nullable, nonatomic, retain) NSString *detail_desc;
 @property (nullable, nonatomic, retain) NSString *fileUrl;

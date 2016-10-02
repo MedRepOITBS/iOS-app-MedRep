@@ -13,7 +13,13 @@
 #import "MRDatabaseHelper.h"
 #import "SWRevealViewController.h"
 #import "MRMyWallItemTableViewCell.h"
+#import "MRShareViewController.h"
+#import "MRShareDetailViewController.h"
+#import "MRContactDetailViewController.h"
 #import "MRSharePost.h"
+#import "MRPostedReplies.h"
+#import "MRGroup.h"
+#import "MRContact.h"
 
 @interface MRMyWallViewController () <UITableViewDelegate, UITableViewDataSource,
                                       SWRevealViewControllerDelegate>
@@ -22,6 +28,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *emptyMessage;
 @property (weak, nonatomic) IBOutlet UITableView* postsTableView;
 @property (weak,nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UIButton *takeMeToGlobalShare;
+
+@property (strong, nonatomic) UITapGestureRecognizer* tapGesture;
 
 @property (strong, nonatomic) NSArray* searchResults;
 @property (strong, nonatomic) NSArray* posts;
@@ -33,7 +42,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.navigationItem.title = @"Share";
+    self.navigationItem.title = @"My Share";
     
     SWRevealViewController *revealController = [self revealViewController];
     revealController.delegate = self;
@@ -54,7 +63,7 @@
     [tabBarView setShareViewController:self];
     [tabBarView updateActiveViewController:self andTabIndex:DoctorPlusTabShare];
     
-    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:self.postsTableView
+    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:self.takeMeToGlobalShare
                                                                         attribute:NSLayoutAttributeBottomMargin
                                                                         relatedBy:NSLayoutRelationEqual
                                                                            toItem:self.view
@@ -68,6 +77,16 @@
     
     self.postsTableView.estimatedRowHeight = 250;
     self.postsTableView.rowHeight = UITableViewAutomaticDimension;
+    
+    [self.takeMeToGlobalShare.layer setCornerRadius:5.0];
+    [self.takeMeToGlobalShare.layer setBorderColor:[UIColor lightGrayColor].CGColor];
+    [self.takeMeToGlobalShare.layer setBorderWidth:1.0f];
+    
+    self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
+    self.tapGesture.numberOfTapsRequired = 1;
+    self.tapGesture.cancelsTouchesInView = YES;
+    self.tapGesture.enabled = NO;
+    [self.view addGestureRecognizer:self.tapGesture];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -84,6 +103,10 @@
 
 - (void)fetchPostsFromServer {
     [MRDatabaseHelper fetchMyWallPosts:^(id result) {
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        [userDefaults setObject:[NSDate date] forKey:kLastSyncTimeForMyWall];
+        [userDefaults synchronize];
+        
         [MRCommon stopActivityIndicator];
         
         [self fetchPosts];
@@ -121,12 +144,12 @@
 #pragma mark - UITableView Delegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return UITableViewAutomaticDimension;
+    return 80;
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    return 250;
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 0;
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == self.searchDisplayController.searchResultsTableView) {
@@ -155,36 +178,30 @@
             rows = sharePost.postedReplies.count;
         }
     }
-    rows++;
     
     return rows;
 }
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    CGRect frame = CGRectMake(0, 0, self.view.frame.size.width - 70, 200);
-    UIView *view = [[UIView alloc] initWithFrame:frame];
-    [view setTag:section];
-    [view setBackgroundColor:[UIColor redColor]];
-    
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
     UITableViewCell *cell = [self createCell:tableView subLevel:NO andIndexPath:indexPath];
-    [view addSubview:cell];
+    [cell setTag:section];
+//    [cell.contentView setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
+//    [cell.contentView.layer setBorderColor:[UIColor cyanColor].CGColor];
+//    [cell.contentView.layer setCornerRadius:5.0];
+//    [cell.contentView.layer setBorderWidth:1.0f];
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                  action:@selector(sectionTapped:)];
     [tapGesture setNumberOfTapsRequired:1];
-    [view addGestureRecognizer:tapGesture];
+    [cell.contentView addGestureRecognizer:tapGesture];
+    [cell layoutIfNeeded];
     
-    return view;
+    return cell.contentView;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    BOOL subLevel = NO;
-    if (indexPath.row > 0) {
-        subLevel = YES;
-    }
-    
-    UITableViewCell* cell = [self createCell:tableView subLevel:subLevel andIndexPath:indexPath];
+    UITableViewCell* cell = [self createCell:tableView subLevel:YES andIndexPath:indexPath];
     [cell layoutIfNeeded];
     return cell;
 }
@@ -207,12 +224,12 @@
         MRSharePost *sharePost =  [self.searchResults objectAtIndex:indexPath.section];
         if (sharePost != nil && sharePost.postedReplies.count > 0) {
             NSArray *postedReplies = sharePost.postedReplies.allObjects;
-            [cell setPostedReplyContent:[postedReplies objectAtIndex:indexPath.row - 1]
+            [cell setPostedReplyContent:[postedReplies objectAtIndex:indexPath.row]
                                tagIndex:tagIndex
                 andParentViewController:self];
         }
     } else {
-        [cell setPostContent:[self.searchResults objectAtIndex:indexPath.row]
+        [cell setPostContent:[self.searchResults objectAtIndex:indexPath.section]
                     tagIndex:tagIndex
                         andParentViewController:self];
     }
@@ -220,8 +237,82 @@
     return cell;
 }
 
-- (void)sectionTapped:(id)selector {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self launchShareDetailPage:indexPath.section];
+}
+
+- (void)sectionTapped:(id)sender {
+    NSInteger section = [(UIGestureRecognizer *)sender view].tag;
+    [self launchShareDetailPage:section];
+}
+
+- (void)launchShareDetailPage:(NSInteger)section {
+    MRSharePost *post = [self.searchResults objectAtIndex:section];
+    if (post != nil) {
+        if (post.parentSharePostId != nil && post.parentSharePostId.longValue > 0) {
+            MRShareDetailViewController *shareDetailViewController =
+            [[MRShareDetailViewController alloc] initWithNibName:@"MRShareDetailViewController"
+                                                          bundle:nil];
+            
+            [shareDetailViewController setPost:post];
+            
+            [self.navigationController pushViewController:shareDetailViewController animated:true];
+        } else {
+            ContactDetailLaunchMode launchMode = kContactDetailLaunchModeNone;
+            MRContactDetailViewController* detailViewController = [[MRContactDetailViewController alloc] init];
+            
+            if (post.groupId != nil && post.groupId.longValue > 0) {
+                launchMode = kContactDetailLaunchModeGroup;
+                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"group_id",post.groupId.longValue];
+                id object = [[MRDataManger sharedManager] fetchObject:kGroupEntity predicate:predicate];
+                [detailViewController setGroup:object];
+            } else {
+                launchMode = kContactDetailLaunchModeContact;
+                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"contactId",post.contactId.longValue];
+                id object = [[MRDataManger sharedManager] fetchObject:kContactEntity predicate:predicate];
+                [detailViewController setContact:object];
+            }
+            
+            [detailViewController setLaunchMode:launchMode];
+            [self.navigationController pushViewController:detailViewController animated:YES];
+        }
+    }
+}
+
+- (IBAction)takeMeToGlobalShareButtonTapped:(id)sender {
+    MRShareViewController *shareViewController = [[MRShareViewController alloc] initWithNibName:@"MRShareViewController" bundle:nil];
+
+    [self.navigationController pushViewController:shareViewController animated:YES];
+}
+
+#pragma mark - SearchBar Delegate methods
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    if ([searchText isEqualToString:@""]) {
+        self.searchResults = self.posts;
+    }else{
+        self.searchResults  =  [[self.posts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(%K contains[cd] %@)",@"titleDescription",searchText]] mutableCopy];
+    }
+    [self. postsTableView reloadData];
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+    [searchBar resignFirstResponder];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
     
+    searchBar.text=@"";
+    
+    [searchBar setShowsCancelButton:NO animated:YES];
+    [searchBar resignFirstResponder];
+    self.postsTableView.allowsSelection = YES;
+    self.postsTableView.scrollEnabled = YES;
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    self.tapGesture.enabled = YES;
 }
 
 @end

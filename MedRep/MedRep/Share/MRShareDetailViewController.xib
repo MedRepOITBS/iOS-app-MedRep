@@ -37,7 +37,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Contact.png" translatesAutoresizingMaskIntoConstraints="NO" id="q0w-3n-12f">
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Contact.png" translatesAutoresizingMaskIntoConstraints="NO" id="q0w-3n-12f">
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="BU5-09-nkr"/>
                         <constraint firstAttribute="width" constant="30" id="XuA-JZ-b1d"/>

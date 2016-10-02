@@ -1468,8 +1468,29 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
      3. http://183.82.106.234:8080/medrep-web/getContactsAndGroups?token=
      
      */
-    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/myWall?token=%@&timeStamp=6",kHostName,[MRDefaults objectForKey:kAuthenticationToken]];
     
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    NSDate *currentLoginDate = [userDefaults valueForKey:kLastLoginTime];
+    NSDate *lastSyncDate = [userDefaults valueForKey:kLastSyncTimeForMyWall];
+    
+    double date = 0;
+    if (lastSyncDate != nil) {
+        date = lastSyncDate.timeIntervalSince1970;
+    }
+    
+    double tempCurrentLoginDate = 0;
+    if (currentLoginDate != nil) {
+        tempCurrentLoginDate = currentLoginDate.timeIntervalSince1970;
+    }
+    
+    if (date > tempCurrentLoginDate) {
+        date = tempCurrentLoginDate;
+    }
+    
+    NSNumber *tempLastSyncDate = [NSNumber numberWithDouble:date];
+    
+    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/myWall?token=%@&timeStamp=%ld",kHostName,[MRDefaults objectForKey:kAuthenticationToken], tempLastSyncDate.longValue];
     
     NSURL *url = [NSURL URLWithString:stringFormOfUrl];
     NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];

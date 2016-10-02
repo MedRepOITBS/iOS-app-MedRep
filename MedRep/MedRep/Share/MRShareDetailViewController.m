@@ -26,6 +26,7 @@
 #import "NSDate+Utilities.h"
 #import "MRDatabaseHelper.h"
 #import "MRTransformViewController.h"
+#import "MRProfileDetailsViewController.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
@@ -156,6 +157,11 @@ AVPlayerViewControllerDelegate, UIAlertViewDelegate> {
     } else {
         self.profilePicImageView.image = [UIImage imageNamed:@"person"];
     }
+    
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                              action:@selector(authorImageSelected)];
+    [gesture setNumberOfTapsRequired:1];
+    [self.profilePicImageView addGestureRecognizer:gesture];
     
     [self setupPreview];
     [self setCountInLabels];
@@ -656,6 +662,22 @@ AVPlayerViewControllerDelegate, UIAlertViewDelegate> {
 - (IBAction)takeMeToTransformButtonClicked:(id)sender {
     MRTransformViewController *notiFicationViewController = [[MRTransformViewController alloc] initWithNibName:@"MRTransformViewController" bundle:nil];
     [self.navigationController pushViewController:notiFicationViewController animated:NO];
+}
+
+- (void)authorImageSelected {
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"ProfileStoryboard" bundle:nil];
+    MRProfileDetailsViewController *profViewController = [sb instantiateInitialViewController];
+    if (self.post.member_id != nil && self.post.member_id.longValue > 0) {
+        profViewController.doctorId = self.post.member_id.longValue;
+    } else if (self.post.doctor_id != nil && self.post.doctor_id.longValue > 0) {
+        profViewController.doctorId = self.post.doctor_id.longValue;
+    } else if (self.post.contactId != nil && self.post.contactId.longValue > 0) {
+        profViewController.doctorId = self.post.contactId.longValue;
+    }
+    
+    profViewController.isFromSinUp = NO;
+    [profViewController setShowAsReadable:YES];
+    [self.navigationController pushViewController:profViewController animated:YES];
 }
 
 @end

@@ -139,6 +139,9 @@
                                      [MRCommon stopActivityIndicator];
                                      if (status)
                                      {
+                                         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                                         [userDefaults setObject:[NSDate date] forKey:kLastLoginTime];
+                                         
                                          [[MRAppControl sharedHelper] setUserDetails:responce];
                                          [[MRAppControl sharedHelper] loadDashboardScreen];
                                          [MRAppControl registerForPushNotification];

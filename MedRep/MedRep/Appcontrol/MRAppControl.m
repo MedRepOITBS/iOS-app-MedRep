@@ -976,10 +976,6 @@
 {
     BOOL appRegisteredForAPNS = [[UIApplication sharedApplication] isRegisteredForRemoteNotifications];
     
-    if (appRegisteredForAPNS) {
-        appRegisteredForAPNS = [[UIApplication sharedApplication] isRegisteredForRemoteNotifications];
-    }
-    
     if (appRegisteredForAPNS == false) {
         
         if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)])

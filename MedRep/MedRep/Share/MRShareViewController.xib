@@ -8,11 +8,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MRShareViewController">
             <connections>
-                <outlet property="bottomHeight" destination="Fyh-Ph-hg1" id="oe1-UF-nIn"/>
                 <outlet property="emptyMessage" destination="dpb-O7-ImQ" id="Dtl-e1-oeU"/>
                 <outlet property="navView" destination="YeC-pW-rN6" id="h4M-nH-KG0"/>
                 <outlet property="postsTableView" destination="FjW-Hl-Vrd" id="kNs-2m-JxQ"/>
                 <outlet property="searchBar" destination="toD-2Y-nCn" id="PQy-lV-Gv8"/>
+                <outlet property="takeMeToMyShareView" destination="wn4-mn-La2" id="qNT-8r-M6K"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -52,24 +52,39 @@
                         <action selector="postANewTopicButtonClicked:" destination="-1" eventType="touchUpInside" id="RTt-ZE-dEL"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wn4-mn-La2">
+                    <color key="backgroundColor" red="0.12549019610000001" green="0.69411764710000001" blue="0.54117647059999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="JbE-3f-9jh"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                    <state key="normal" title="Take me to &quot;My Share&quot;">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="takeMeToMyShareViewTapped:" destination="-1" eventType="touchUpInside" id="htH-dM-mXL"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="lds-OU-f6b" firstAttribute="top" secondItem="toD-2Y-nCn" secondAttribute="top" id="2MZ-nh-hn6"/>
                 <constraint firstItem="toD-2Y-nCn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="C71-mZ-fxz"/>
                 <constraint firstItem="toD-2Y-nCn" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="CEy-zj-mfE"/>
-                <constraint firstAttribute="bottom" secondItem="FjW-Hl-Vrd" secondAttribute="bottom" constant="50" id="Fyh-Ph-hg1"/>
                 <constraint firstItem="dpb-O7-ImQ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="K2m-ur-BSx"/>
                 <constraint firstAttribute="trailing" secondItem="toD-2Y-nCn" secondAttribute="trailing" constant="35" id="Oh8-7x-nqg"/>
                 <constraint firstAttribute="trailing" secondItem="lds-OU-f6b" secondAttribute="trailing" constant="5" id="QD0-pl-qhU"/>
                 <constraint firstItem="dpb-O7-ImQ" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="RpP-Ge-dC8"/>
                 <constraint firstItem="FjW-Hl-Vrd" firstAttribute="top" secondItem="toD-2Y-nCn" secondAttribute="bottom" id="WGc-iJ-goz"/>
                 <constraint firstAttribute="trailing" secondItem="FjW-Hl-Vrd" secondAttribute="trailing" constant="8" id="WlQ-NI-gNa"/>
+                <constraint firstItem="wn4-mn-La2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="Wnk-eQ-DJP"/>
                 <constraint firstItem="lds-OU-f6b" firstAttribute="centerY" secondItem="toD-2Y-nCn" secondAttribute="centerY" id="cSg-LS-6C7"/>
                 <constraint firstItem="lds-OU-f6b" firstAttribute="bottom" secondItem="toD-2Y-nCn" secondAttribute="bottom" id="dDE-si-hTl"/>
                 <constraint firstItem="lds-OU-f6b" firstAttribute="centerX" secondItem="toD-2Y-nCn" secondAttribute="centerX" id="eDL-yD-zAB"/>
+                <constraint firstAttribute="bottom" secondItem="wn4-mn-La2" secondAttribute="bottom" constant="5" id="jK7-8V-7mK"/>
+                <constraint firstItem="wn4-mn-La2" firstAttribute="top" secondItem="FjW-Hl-Vrd" secondAttribute="bottom" constant="10" id="kOd-VR-caZ"/>
                 <constraint firstItem="dpb-O7-ImQ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="66" id="kao-bh-cet"/>
-                <constraint firstItem="FjW-Hl-Vrd" firstAttribute="top" secondItem="toD-2Y-nCn" secondAttribute="bottom" id="pog-Mo-3gO"/>
+                <constraint firstAttribute="trailing" secondItem="wn4-mn-La2" secondAttribute="trailing" constant="10" id="ovm-Mw-9u5"/>
                 <constraint firstItem="FjW-Hl-Vrd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="s90-Ei-imQ"/>
                 <constraint firstItem="lds-OU-f6b" firstAttribute="centerY" secondItem="toD-2Y-nCn" secondAttribute="centerY" id="vQw-kW-OPr"/>
             </constraints>
