@@ -77,6 +77,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="borderView" destination="zM1-Dk-KlF" id="SXs-4e-B3o"/>
                 <outlet property="contactLabelHeightConstraint" destination="N7R-FG-kX6" id="P7f-wY-xlp"/>
                 <outlet property="contactNameLabel" destination="jhR-Qo-e9G" id="ECg-Rl-quR"/>
                 <outlet property="postImageHeightConstraint" destination="Xjp-iu-BvE" id="tBW-if-Z9B"/>

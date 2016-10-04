@@ -144,11 +144,11 @@
 #pragma mark - UITableView Delegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 80;
+    return 60;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 0;
+    return 5;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -182,14 +182,29 @@
     return rows;
 }
 
+- (UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    UIView *view = [UIView new];
+    [view setBackgroundColor:[UIColor whiteColor]];
+    return view;
+}
+
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
-    UITableViewCell *cell = [self createCell:tableView subLevel:NO andIndexPath:indexPath];
+    MRMyWallItemTableViewCell *cell = [self createCell:tableView subLevel:NO andIndexPath:indexPath];
     [cell setTag:section];
-//    [cell.contentView setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
-//    [cell.contentView.layer setBorderColor:[UIColor cyanColor].CGColor];
-//    [cell.contentView.layer setCornerRadius:5.0];
-//    [cell.contentView.layer setBorderWidth:1.0f];
+    [cell.contentView setTag:section];
+    
+    NSInteger rows = 0;
+//    if (self.searchResults != nil && self.searchResults.count > 0) {
+//        MRSharePost *sharePost = [self.searchResults objectAtIndex:section];
+//        if (sharePost != nil && sharePost.postedReplies != nil) {
+//            rows = sharePost.postedReplies.count;
+//        }
+//    }
+    
+    if (rows == 0) {
+        [cell.borderView setHidden:YES];
+    }
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                  action:@selector(sectionTapped:)];
@@ -201,12 +216,25 @@
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell* cell = [self createCell:tableView subLevel:YES andIndexPath:indexPath];
+    MRMyWallItemTableViewCell* cell = [self createCell:tableView subLevel:YES andIndexPath:indexPath];
+    
+    NSInteger rows = 0;
+    if (self.searchResults != nil && self.searchResults.count > 0) {
+        MRSharePost *sharePost = [self.searchResults objectAtIndex:indexPath.section];
+        if (sharePost != nil && sharePost.postedReplies != nil) {
+            rows = sharePost.postedReplies.count;
+        }
+    }
+    
+    if (rows == 0 || indexPath.row == rows - 1) {
+        [cell.borderView setHidden:YES];
+    }
+    
     [cell layoutIfNeeded];
     return cell;
 }
 
-- (UITableViewCell*)createCell:(UITableView*)tableView subLevel:(BOOL)subLevel
+- (MRMyWallItemTableViewCell*)createCell:(UITableView*)tableView subLevel:(BOOL)subLevel
                   andIndexPath:(NSIndexPath*)indexPath {
     MRMyWallItemTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"wallCell"];
     
@@ -260,22 +288,44 @@
             [self.navigationController pushViewController:shareDetailViewController animated:true];
         } else {
             ContactDetailLaunchMode launchMode = kContactDetailLaunchModeNone;
-            MRContactDetailViewController* detailViewController = [[MRContactDetailViewController alloc] init];
             
             if (post.groupId != nil && post.groupId.longValue > 0) {
                 launchMode = kContactDetailLaunchModeGroup;
-                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"group_id",post.groupId.longValue];
-                id object = [[MRDataManger sharedManager] fetchObject:kGroupEntity predicate:predicate];
-                [detailViewController setGroup:object];
-            } else {
+                [MRDatabaseHelper getGroupDetail:post.groupId.longValue
+                                       withHandler:^(id result) {
+                                           if (result != nil) {
+                                               NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"group_id",post.groupId.longValue];
+                                               id object = [[MRDataManger sharedManager] fetchObject:kGroupEntity predicate:predicate];
+                                               
+                                               MRContactDetailViewController* detailViewController = [[MRContactDetailViewController alloc] init];
+                                               [detailViewController setGroup:object];
+                                               [detailViewController setLaunchMode:launchMode];
+                                               [self.navigationController pushViewController:detailViewController animated:YES];
+                                           } else {
+                                               [MRCommon stopActivityIndicator];
+                                               [MRCommon showAlert:@"Failed to fetch group !!!" delegate:nil];
+                                           }
+                                       }];
+            } else if (post.contactId != nil && post.contactId.longValue > 0) {
                 launchMode = kContactDetailLaunchModeContact;
-                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"contactId",post.contactId.longValue];
-                id object = [[MRDataManger sharedManager] fetchObject:kContactEntity predicate:predicate];
-                [detailViewController setContact:object];
+                [MRDatabaseHelper getContactDetail:post.contactId.longValue
+                                       withHandler:^(id result) {
+                                           if (result != nil) {
+                                               NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"contactId",post.contactId.longValue];
+                                               id object = [[MRDataManger sharedManager] fetchObject:kContactEntity predicate:predicate];
+                                               
+                                               MRContactDetailViewController* detailViewController = [[MRContactDetailViewController alloc] init];
+                                               [detailViewController setContact:object];
+                                               [detailViewController setLaunchMode:launchMode];
+                                               [self.navigationController pushViewController:detailViewController animated:YES];
+                                           } else {
+                                               [MRCommon stopActivityIndicator];
+                                               [MRCommon showAlert:@"Failed to fetch contact !!!" delegate:nil];
+                                           }
+                                       }];
+            } else {
+                
             }
-            
-            [detailViewController setLaunchMode:launchMode];
-            [self.navigationController pushViewController:detailViewController animated:YES];
         }
     }
 }

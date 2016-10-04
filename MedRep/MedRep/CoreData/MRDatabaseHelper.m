@@ -296,6 +296,32 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
     }];
 }
 
++ (void)getGroupDetail:(NSInteger)groupId withHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] getGroupDetail:groupId
+                                                      withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                          if (responce != nil) {
+                                                              id result = [responce objectOrNilForKey:@"result"];
+                                                              if (result != nil && [result isKindOfClass:[NSDictionary class]]) {
+                                                                  NSDictionary *tempResult = result;
+                                                                  id group = [tempResult objectOrNilForKey:@"group"];
+                                                                  if (group != nil && [group isKindOfClass:[NSDictionary class]]) {
+                                                                      [[MRDataManger sharedManager] removeAllObjects:kGroupEntity withPredicate:nil];
+                                                                      [MRDatabaseHelper makeServiceCallForGroupsFetch:status details:details
+                                                                                                             response:@{@"Responce": @[group]}
+                                                                                                   andResponseHandler:responseHandler];
+                                                                  } else {
+                                                                      responseHandler(nil);
+                                                                  }
+                                                              } else {
+                                                                  responseHandler(nil);
+                                                              }
+                                                          } else {
+                                                              responseHandler(nil);
+                                                          }
+                                                      }];
+}
+
 + (void)getPendingGroups:(WebServiceResponseHandler)responseHandler {
     [MRCommon showActivityIndicator:@"Requesting..."];
     [[MRWebserviceHelper sharedWebServiceHelper] fetchPendingGroupsListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
@@ -483,6 +509,33 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
         [MRDatabaseHelper makeServiceCallForContactsFetch:status details:details
                                                  response:responce
                                        andResponseHandler:responseHandler];
+    }];
+}
+
++ (void)getContactDetail:(NSInteger)contactId withHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] getContactDetail:contactId
+                                                      withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                          if (responce != nil) {
+                                                              id result = [responce objectOrNilForKey:@"result"];
+                                                              if (result != nil && [result isKindOfClass:[NSDictionary class]]) {
+                                                                  NSDictionary *tempResult = result;
+                                                                  id group = [tempResult objectOrNilForKey:@"group"];
+                                                                  if (group != nil && [group isKindOfClass:[NSDictionary class]]) {
+                                                                      [[MRDataManger sharedManager] removeAllObjects:kContactEntity withPredicate:nil];
+                                                                      
+                                                                      [MRDatabaseHelper makeServiceCallForContactsFetch:status details:details
+                                                                                                             response:@{@"Responce": @[group]}
+                                                                                                   andResponseHandler:responseHandler];
+                                                                  } else {
+                                                                      responseHandler(nil);
+                                                                  }
+                                                              } else {
+                                                                  responseHandler(nil);
+                                                              }
+                                                          } else {
+                                                              responseHandler(nil);
+                                                          }
     }];
 }
 
@@ -2133,6 +2186,8 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
     [[MRWebserviceHelper sharedWebServiceHelper] getPostsForAMember:memberId
                                                             groupId:groupId
                                                          withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                             [[MRDataManger sharedManager] removeAllObjects:kMRPostedReplies withPredicate:nil];
+                                                             
                                                              [MRDatabaseHelper makeServiceCallForGetMessagesOfAMember:memberId
                                                                                                               groupId:groupId
                                                                                                               status:status

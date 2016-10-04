@@ -178,6 +178,8 @@ withComplitionHandler:(completionHandler)responceHandler;
 
 - (void)getGroupListwithHandler:(completionHandler)responceHandler;
 
+- (void)getGroupDetail:(NSInteger)groupId withHandler:(completionHandler)responseHandler;
+
 - (void)getSuggestedGroupListwithHandler:(completionHandler)responceHandler;
 
 - (void)getContactListwithHandler:(completionHandler)responceHandler;
@@ -195,6 +197,8 @@ withComplitionHandler:(completionHandler)responceHandler;
 - (void)removeGroupMember:(NSDictionary *)dict withHandler:(completionHandler)responceHandler;
 
 - (void)getUserPreferences:(completionHandler)responceHandler;
+
+- (void)getContactDetail:(NSInteger)contactId withHandler:(completionHandler)responseHandler;
 
 - (void)fetchPendingConnectionsListwithHandler:(completionHandler)responceHandler;
 

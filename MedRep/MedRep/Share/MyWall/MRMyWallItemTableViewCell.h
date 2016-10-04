@@ -13,6 +13,8 @@
 
 @interface MRMyWallItemTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIView *borderView;
+
 @property (nonatomic,weak) UITableView *parentTableView;
 
 - (void)setPostedReplyContent:(MRPostedReplies *)post

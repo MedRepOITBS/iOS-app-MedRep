@@ -95,6 +95,7 @@
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
+    NSLog(@"Vamsi MedRep Local:%@",notification);
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [[UIApplication sharedApplication] cancelLocalNotification:notification];
     [MRCommon showAlert:notification.alertBody delegate:self];
@@ -133,6 +134,20 @@
 }
 
 - (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    /*
+    NSLog(@"Vamsi MedRep userInfo:%@",userInfo);
+    
+    NSInteger badge_value = [UIApplication sharedApplication].applicationIconBadgeNumber;
+    NSLog(@"Vamsi MedRep : Current badge = %d", badge_value);
+    
+    badge_value+= [[[userInfo objectForKey:@"aps"] objectForKey:@"badge"]intValue];
+    NSLog(@"Vamsi MedRep : Totoal badge Value:%d",badge_value);
+    
+    for (id key in userInfo) {
+        NSLog(@"Vamsi MedRep key: %@, value: %@", key, [userInfo objectForKey:key]);
+    }
+    [UIApplication sharedApplication].applicationIconBadgeNumber = badge_value;
+    */
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
                                                         object:nil];
 }
