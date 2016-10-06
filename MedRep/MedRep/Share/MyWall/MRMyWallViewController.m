@@ -204,6 +204,8 @@
     
     if (rows == 0) {
         [cell.borderView setHidden:YES];
+    } else {
+        [cell.borderView setHidden:NO];
     }
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
@@ -228,6 +230,8 @@
     
     if (rows == 0 || indexPath.row == rows - 1) {
         [cell.borderView setHidden:YES];
+    } else {
+        [cell.borderView setHidden:NO];
     }
     
     [cell layoutIfNeeded];
@@ -311,7 +315,7 @@
                 [MRDatabaseHelper getContactDetail:post.contactId.longValue
                                        withHandler:^(id result) {
                                            if (result != nil) {
-                                               NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"contactId",post.contactId.longValue];
+                                               NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"doctorId",post.contactId.longValue];
                                                id object = [[MRDataManger sharedManager] fetchObject:kContactEntity predicate:predicate];
                                                
                                                MRContactDetailViewController* detailViewController = [[MRContactDetailViewController alloc] init];

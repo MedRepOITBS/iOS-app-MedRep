@@ -520,12 +520,12 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
                                                               id result = [responce objectOrNilForKey:@"result"];
                                                               if (result != nil && [result isKindOfClass:[NSDictionary class]]) {
                                                                   NSDictionary *tempResult = result;
-                                                                  id group = [tempResult objectOrNilForKey:@"group"];
-                                                                  if (group != nil && [group isKindOfClass:[NSDictionary class]]) {
+                                                                  id contact = [tempResult objectOrNilForKey:@"userDetails"];
+                                                                  if (contact != nil && [contact isKindOfClass:[NSDictionary class]]) {
                                                                       [[MRDataManger sharedManager] removeAllObjects:kContactEntity withPredicate:nil];
                                                                       
                                                                       [MRDatabaseHelper makeServiceCallForContactsFetch:status details:details
-                                                                                                             response:@{@"Responce": @[group]}
+                                                                                                             response:@{@"Responce": @[contact]}
                                                                                                    andResponseHandler:responseHandler];
                                                                   } else {
                                                                       responseHandler(nil);
@@ -1696,6 +1696,7 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
     [[MRWebserviceHelper sharedWebServiceHelper] fetchDoctorInfoWithHandler:doctorId
                                                             responseHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
         NSLog(@"%@",responce);
+                                                                
         MRDataManger *dbManager = [MRDataManger sharedManager];
 
          NSManagedObjectContext *context = [dbManager getNewPrivateManagedObjectContext];
@@ -1739,16 +1740,9 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
             NSDictionary *addressDict = (NSDictionary *)obj;
             [addressInfo updateFromDictionary:addressDict];
             
-//            addressInfo.address1 = [addressDict objectForKey:@"address1"];
-//            addressInfo.address2 = [addressDict objectForKey:@"address2"];
-//            addressInfo.city  =[addressDict objectForKey:@"city"];
-//            addressInfo.state = [addressDict objectForKey:@"state"];
-//            addressInfo.country = [addressDict objectForKey:@"country"];
-//            addressInfo.zipcode = [addressDict objectForKey:@"zipcode"];
-//            addressInfo.type = [NSNumber numberWithInteger:[[addressDict objectForKey:@"type"] integerValue]];
             [profile addAddressInfoObject:addressInfo];
         }];
-        
+                                                                
         NSDictionary *contactInfoDict = [result objectForKey:@"contactInfo"];
         if (contactInfoDict!=nil) {
             
@@ -1756,14 +1750,6 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
                                   allRecords:nil
                                      context:profile.managedObjectContext
                                      andData:@[contactInfoDict]];
-            
-//            ContactInfo *contactInfo = (ContactInfo *)[[MRDataManger sharedManager] createObjectForEntity:@"ContactInfo"];
-//            
-//            
-//            contactInfo.phoneNo = [contactInfoDict objectForKey:@"phoneNo"];
-//            contactInfo.alternateEmail = [contactInfoDict objectForKey:@"alternateEmail"];
-//            contactInfo.email = [contactInfoDict objectForKey:@"email"];
-//            contactInfo.mobileNo = [contactInfoDict objectForKey:@"mobileNo"];
             
             if (records != nil && records.count > 0) {
                 profile.contactInfo = records.firstObject;
@@ -1788,18 +1774,6 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
             [profile addEducationlQualificationObject:educationQualification];
         
         }];
-        
-        /* 
-         EducationalQualifications * educationQualification = (EducationalQualifications *)[[MRDataManger sharedManager] createObjectForEntity:@"EducationalQualifications"];
-         
-         educationQualification.degree = [dictonary objectForKey:@"degree"];
-         educationQualification.yearOfPassout = [dictonary objectForKey:@"yearOfPassout"];
-         educationQualification.collegeName = [dictonary objectForKey:@"collegeName"];
-         educationQualification.course = [dictonary objectForKey:@"course"];
-         educationQualification.aggregate = [dictonary objectForKey:@"aggregate"];
-         
-         
-         [profile addEducationlQualificationObject:educationQualification];*/
         
         NSArray *interestArra = [result objectForKey:@"interests"];
         [interestArra enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -1833,21 +1807,18 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
         
         responseHandler(profileAra);
         
-        
+        NSDictionary *data = @{@"locations" : addressInfoArra,
+                               @"profilePicture" : [result objectOrNilForKey:@"dPicture"],
+                               @"mobileNo" : [contactInfoDict objectOrNilForKey:@"mobileNo"],
+                               @"phoneNo" : [contactInfoDict objectOrNilForKey:@"phoneNo"],
+                               @"emailId" : [contactInfoDict objectOrNilForKey:@"emailId"],
+                               @"alternateEmailId" : [contactInfoDict objectOrNilForKey:@"alternateEmailId"]};
+        [[MRAppControl sharedHelper] setUserDetails:data];
         
     }];
     
-    
-    
-    
-    
- 
-    
-   
-
-    
-    
 }
+
 + (void)addTransformArticles:(NSArray*)posts {
     for (NSDictionary *myDict in posts) {
         MRTransformPost *post  = (MRTransformPost*)[[MRDataManger sharedManager] createObjectForEntity:kMRTransformPost];

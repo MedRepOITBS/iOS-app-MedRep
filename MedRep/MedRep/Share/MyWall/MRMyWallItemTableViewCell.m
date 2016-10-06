@@ -67,10 +67,11 @@
                                                    dateFormat:kIdletimeFormat];
     
     UIImage *image = nil;
+    self.postImageView.image = nil;
     
-    if (self.post.url != nil && self.post.url.length > 0) {
+    if (post.url != nil && post.url.length > 0) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.post.url]];
+            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:post.url]];
             if (imageData != nil) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     self.postImageView.image = [UIImage imageWithData:imageData];
@@ -79,12 +80,9 @@
                 });
             }
         });
-    } else if (self.post.objectData != nil) {
-        image = [UIImage imageWithData:self.post.objectData];
     }
     
-    if ((self.post.url != nil && self.post.url.length > 0) ||
-        self.post.objectData != nil) {
+    if (post.url != nil && post.url.length > 0) {
         [self.postImageView setHidden:NO];
         self.postImageView.image = image;
         self.postImageHeightConstraint.constant = 128;
@@ -97,8 +95,8 @@
     }
     
     NSString *name = @"No Name";
-    if (self.post.sharedByProfileName != nil && self.post.sharedByProfileName.length > 0) {
-        name = self.post.sharedByProfileName;
+    if (post.doctor_Name != nil && post.doctor_Name.length > 0) {
+        name = post.doctor_Name;
     }
     self.contactNameLabel.text = name;
     

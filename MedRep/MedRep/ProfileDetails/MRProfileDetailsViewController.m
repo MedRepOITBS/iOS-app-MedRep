@@ -657,7 +657,6 @@
      NSString *valN = [valNDict objectForKey:@"type"];
      if ([valN isEqualToString:@"PROFILE_BASIC"]) {
          ProfileBasicTableViewCell  *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"ProfileBasicTableViewCell"] forIndexPath:indexPath];
-         NSDictionary *userdata = [MRAppControl sharedHelper].userRegData;
          cell.delegate = self;
          cell.userNameLbl.text         = _profileObj.name;
          cell.userLocation.text = _profileObj.location;
@@ -672,22 +671,33 @@
              [cell.imageBtn setUserInteractionEnabled:YES];
          }
          
-         NSString *urlString = [userdata objectForKey:KProfilePicture];
+         NSString *urlString = nil;
+         if (self.doctorId == 0) {
+             NSDictionary *userdata = [MRAppControl sharedHelper].userRegData;
+             urlString = [userdata objectForKey:KProfilePicture];
+         }
+         
          if (self.profileObj != nil && self.profileObj.dPicture != nil &&
              self.profileObj.dPicture.length > 0) {
              urlString = self.profileObj.dPicture;
          }
-         NSURL * imageURL = [NSURL URLWithString:urlString];
          
-         dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
-         dispatch_async(queue, ^{
-             NSData *data = [NSData dataWithContentsOfURL:imageURL];
-             UIImage *image = [UIImage imageWithData:data];
-             dispatch_async(dispatch_get_main_queue(), ^{
-                 
-                 [cell.imageBtn setImage:image forState:UIControlStateNormal];
-             });  
-         });
+         if (urlString != nil && urlString.length > 0) {
+             NSLog(@"VAMSI %s : %@", __PRETTY_FUNCTION__, urlString);
+             
+             [cell.imageBtn setImage:[UIImage imageNamed:@"userProfilePic.png"] forState:UIControlStateNormal];
+             NSURL * imageURL = [NSURL URLWithString:urlString];
+             
+             dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+             dispatch_async(queue, ^{
+                 NSData *data = [NSData dataWithContentsOfURL:imageURL];
+                 UIImage *image = [UIImage imageWithData:data];
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                     
+                     [cell.imageBtn setImage:image forState:UIControlStateNormal];
+                 });  
+             });
+         }
          return cell;
      } else if([valN isEqualToString:@"CONTACT_INFO_DETAIL"]){
          ContactInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"ContactInfoTableViewCell"] forIndexPath:indexPath];
