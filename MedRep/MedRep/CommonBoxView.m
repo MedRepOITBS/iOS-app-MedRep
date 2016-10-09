@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *noPreviewMessage;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *profilePicWidthConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *profilePicPreviewConstant;
+@property (weak, nonatomic) IBOutlet UIButton *okButton;
 
 @property (weak, nonatomic) IBOutlet UIImageView *personImageView;
 @property (weak, nonatomic) IBOutlet UILabel *personNameLbl;
@@ -88,6 +89,8 @@
                            nil];
     [numberToolbar sizeToFit];
     self.commentTextView.inputAccessoryView = numberToolbar;
+    
+    [self.okButton setEnabled:NO];
 }
 
 - (void)closeOnKeyboardPressed:(id)sender {
@@ -108,6 +111,15 @@
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
+    if (textView.text != nil && textView.text.length > 0) {
+        [self.okButton setEnabled:YES];
+        [self.okButton setBackgroundColor:[MRCommon colorFromHexString:@"#14C39C"]];
+    } else {
+        if (_isPhotoSelected == false) {
+            [self.okButton setEnabled:NO];
+            [self.okButton setBackgroundColor:[UIColor lightGrayColor]];
+        }
+    }
     [self.superview setFrame:CGRectMake(self.superview.frame.origin.x,
                                         self.superview.frame.origin.y + 200,
                                         self.superview.frame.size.width,
@@ -209,6 +221,8 @@
     _noPreviewMessage.hidden = YES;
     _shareImageView.hidden = NO;
     self.shareImageView.image = image;
+    [self.okButton setEnabled:YES];
+    [self.okButton setBackgroundColor:[MRCommon colorFromHexString:@"#14C39C"]];
 }
 
 @end

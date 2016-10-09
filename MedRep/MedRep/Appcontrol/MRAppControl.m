@@ -855,7 +855,8 @@
 }
 
 + (UIImage*)getRepliedByProfileImage:(MRPostedReplies*)replies andImageView:(UIImageView*)parentView {
-    UIImage *image = [UIImage imageNamed:@"person"];;
+    UIImage *image = [UIImage imageNamed:@"person"];
+    [parentView setImage:image];
     
     if (replies != nil) {
         if (replies.displayPicture != nil && replies.displayPicture.length > 0) {
