@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditLocationViewController">
             <connections>
                 <outlet property="addressViewHeader" destination="ENg-2K-16P" id="NHb-7C-wWi"/>
                 <outlet property="hospitalButton" destination="nuK-6c-Rze" id="0Ag-Az-BYA"/>
+                <outlet property="hospitalClinicButton" destination="b2D-pB-sQF" id="4Xi-Oi-eZm"/>
                 <outlet property="privateClinicButton" destination="ZWc-Rw-Qey" id="eIM-gl-0Rr"/>
+                <outlet property="privateClinicRadioButton" destination="pWb-zJ-dwp" id="weO-BX-8ol"/>
                 <outlet property="regTableView" destination="dc1-yz-wgu" id="Ihq-MT-X7r"/>
                 <outlet property="scrollView" destination="quH-rQ-AMb" id="pzs-IG-wSE"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -22,44 +25,63 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="quH-rQ-AMb">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
-                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="categoryBG-667h.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="dJj-r0-clg">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        </imageView>
+                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="categoryBG-667h.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="dJj-r0-clg"/>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ENg-2K-16P">
-                            <rect key="frame" x="20" y="10" width="335" height="60"/>
                             <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b2D-pB-sQF">
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="20" id="O2U-fa-73w"/>
+                                        <constraint firstAttribute="height" constant="20" id="qLg-A8-TZA"/>
+                                    </constraints>
+                                    <state key="normal" image="radioSelection.png"/>
+                                    <connections>
+                                        <action selector="hospitalButtonAction:" destination="-1" eventType="touchUpInside" id="W6k-L1-hIb"/>
+                                    </connections>
+                                </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nuK-6c-Rze">
-                                    <rect key="frame" x="3" y="0.0" width="161" height="58"/>
                                     <state key="normal" backgroundImage="hospital_selection.png">
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
                                         <action selector="hospitalButtonAction:" destination="-1" eventType="touchUpInside" id="LhY-DV-lfi"/>
                                     </connections>
                                 </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pWb-zJ-dwp">
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="20" id="CbH-RJ-LI6"/>
+                                        <constraint firstAttribute="width" constant="20" id="fNb-QC-Jvz"/>
+                                    </constraints>
+                                    <state key="normal" image="radioUnSelection.png"/>
+                                    <connections>
+                                        <action selector="privateButtonAction:" destination="-1" eventType="touchUpInside" id="f8x-50-tWW"/>
+                                    </connections>
+                                </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZWc-Rw-Qey">
-                                    <rect key="frame" x="171" y="0.0" width="161" height="58"/>
                                     <state key="normal" backgroundImage="privateHospital.png">
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
                                         <action selector="privateButtonAction:" destination="-1" eventType="touchUpInside" id="uve-Ta-6rQ"/>
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
+                                <constraint firstItem="nuK-6c-Rze" firstAttribute="leading" secondItem="b2D-pB-sQF" secondAttribute="trailing" constant="5" id="7gT-AW-MqT"/>
                                 <constraint firstItem="ZWc-Rw-Qey" firstAttribute="top" secondItem="nuK-6c-Rze" secondAttribute="top" id="927-Ac-NL5"/>
                                 <constraint firstAttribute="height" constant="60" id="IyU-V0-KlU"/>
-                                <constraint firstItem="ZWc-Rw-Qey" firstAttribute="width" secondItem="ENg-2K-16P" secondAttribute="width" multiplier="0.48" id="Nt4-qj-nNt"/>
+                                <constraint firstItem="ZWc-Rw-Qey" firstAttribute="width" secondItem="ENg-2K-16P" secondAttribute="width" multiplier="0.41" id="Nt4-qj-nNt"/>
                                 <constraint firstItem="nuK-6c-Rze" firstAttribute="leading" secondItem="ENg-2K-16P" secondAttribute="leading" multiplier="5" id="RiR-Xu-C5r"/>
+                                <constraint firstItem="b2D-pB-sQF" firstAttribute="centerY" secondItem="ENg-2K-16P" secondAttribute="centerY" id="WZe-q4-xd4"/>
                                 <constraint firstItem="ZWc-Rw-Qey" firstAttribute="bottom" secondItem="nuK-6c-Rze" secondAttribute="bottom" id="bt7-VO-jaA"/>
-                                <constraint firstItem="nuK-6c-Rze" firstAttribute="leading" secondItem="ENg-2K-16P" secondAttribute="leading" constant="3" id="cqD-CW-pj2"/>
-                                <constraint firstItem="ZWc-Rw-Qey" firstAttribute="leading" secondItem="nuK-6c-Rze" secondAttribute="trailing" constant="7" id="d9f-gf-oZM"/>
+                                <constraint firstItem="ZWc-Rw-Qey" firstAttribute="leading" secondItem="pWb-zJ-dwp" secondAttribute="trailing" constant="5" id="byv-jQ-9Ya"/>
+                                <constraint firstItem="nuK-6c-Rze" firstAttribute="leading" secondItem="ENg-2K-16P" secondAttribute="leading" constant="25" id="cqD-CW-pj2"/>
+                                <constraint firstItem="pWb-zJ-dwp" firstAttribute="leading" secondItem="nuK-6c-Rze" secondAttribute="trailing" constant="8" id="gAg-Lh-lVQ"/>
                                 <constraint firstItem="nuK-6c-Rze" firstAttribute="top" secondItem="ENg-2K-16P" secondAttribute="top" id="hdq-a1-FfG"/>
-                                <constraint firstItem="nuK-6c-Rze" firstAttribute="width" secondItem="ENg-2K-16P" secondAttribute="width" multiplier="0.48" id="mTI-uV-IDz"/>
+                                <constraint firstItem="nuK-6c-Rze" firstAttribute="width" secondItem="ENg-2K-16P" secondAttribute="width" multiplier="0.41" id="mTI-uV-IDz"/>
+                                <constraint firstItem="b2D-pB-sQF" firstAttribute="leading" secondItem="ENg-2K-16P" secondAttribute="leading" id="oIv-jY-QRb"/>
+                                <constraint firstItem="pWb-zJ-dwp" firstAttribute="centerY" secondItem="ENg-2K-16P" secondAttribute="centerY" id="wrK-JL-IS4"/>
                             </constraints>
                             <variation key="default">
                                 <mask key="constraints">
@@ -68,28 +90,26 @@
                             </variation>
                         </view>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dc1-yz-wgu">
-                            <rect key="frame" x="20" y="80" width="335" height="180"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="180" id="7TK-5X-03v"/>
                             </constraints>
-                            <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="separatorColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="sectionIndexBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="sectionIndexTrackingBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <outlet property="dataSource" destination="-1" id="xHG-bb-HwX"/>
                                 <outlet property="delegate" destination="-1" id="cia-DX-gpg"/>
                             </connections>
                         </tableView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q3d-JD-HRB">
-                            <rect key="frame" x="255" y="260" width="100" height="30"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="ExN-UF-MCV"/>
                                 <constraint firstAttribute="width" constant="100" id="kCD-BT-0lD"/>
                             </constraints>
                             <state key="normal" image="picklocation.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
                                 <action selector="pickALocationClicked:" destination="-1" eventType="touchUpInside" id="AuX-zL-voU"/>
@@ -110,7 +130,7 @@
                     </constraints>
                 </scrollView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="quH-rQ-AMb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="L7d-wo-Zbp"/>
                 <constraint firstItem="quH-rQ-AMb" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="PYe-uu-el2"/>
@@ -123,7 +143,6 @@
                 <constraint firstItem="dJj-r0-clg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="jou-V5-5Bb"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
         </view>
     </objects>
     <resources>
@@ -131,5 +150,7 @@
         <image name="hospital_selection.png" width="135" height="58"/>
         <image name="picklocation.png" width="90" height="30"/>
         <image name="privateHospital.png" width="150" height="58"/>
+        <image name="radioSelection.png" width="18" height="18"/>
+        <image name="radioUnSelection.png" width="18" height="18"/>
     </resources>
 </document>

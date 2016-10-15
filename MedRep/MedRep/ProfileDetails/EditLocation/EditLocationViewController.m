@@ -47,6 +47,8 @@
 @property (assign, nonatomic) NSInteger selectedUserType;
 @property (strong,nonatomic)  GMSPlacesClient *placesClient;
 @property (nonatomic) BOOL isLocationUpdateGet;
+@property (weak, nonatomic) IBOutlet UIButton *privateClinicRadioButton;
+@property (weak, nonatomic) IBOutlet UIButton *hospitalClinicButton;
 
 @end
 
@@ -363,7 +365,11 @@
     [self.locationDictionary setObject:type forKey:KType];
     
     [self.privateClinicButton setBackgroundImage:[UIImage imageNamed:@"privateHospital_selection@2x.png"] forState:UIControlStateNormal];
+    [self.privateClinicRadioButton setImage:[UIImage imageNamed:@"radioSelection@2x.png"] forState:UIControlStateNormal];
+    
     [self.hospitalButton setBackgroundImage:[UIImage imageNamed:@"hospital@2x.png"] forState:UIControlStateNormal];
+    [self.hospitalClinicButton setImage:[UIImage imageNamed:@"radioUnSelection@2x.png"] forState:UIControlStateNormal];
+    
     [self.regTableView reloadData];
     
 }
@@ -382,17 +388,21 @@
     [self.locationDictionary setObject:type forKey:KType];
     
     [self.privateClinicButton setBackgroundImage:[UIImage imageNamed:@"privateHospital.png"] forState:UIControlStateNormal];
+    [self.privateClinicRadioButton setImage:[UIImage imageNamed:@"radioUnSelection@2x.png"] forState:UIControlStateNormal];
+    
     [self.hospitalButton setBackgroundImage:[UIImage imageNamed:@"hospital_selection.png"] forState:UIControlStateNormal];
+    [self.hospitalClinicButton setImage:[UIImage imageNamed:@"radioSelection@2x.png"] forState:UIControlStateNormal];
+    
     [self.regTableView reloadData];
 }
 
 - (void)resetAddressFields {
-    [self.locationDictionary removeObjectForKey:KAddressOne];
-    [self.locationDictionary removeObjectForKey:KAdresstwo];
-    [self.locationDictionary removeObjectForKey:KCity];
-    [self.locationDictionary removeObjectForKey:KStateSmall];
-    [self.locationDictionary removeObjectForKey:KCountry];
-    [self.locationDictionary removeObjectForKey:KZIPCodeSmall];
+//    [self.locationDictionary removeObjectForKey:KAddressOne];
+//    [self.locationDictionary removeObjectForKey:KAdresstwo];
+//    [self.locationDictionary removeObjectForKey:KCity];
+//    [self.locationDictionary removeObjectForKey:KStateSmall];
+//    [self.locationDictionary removeObjectForKey:KCountry];
+//    [self.locationDictionary removeObjectForKey:KZIPCodeSmall];
 }
 
 #pragma mark - UITableView delegate methods
