@@ -47,6 +47,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *emptyPostsLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *groupMembersHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *groupDescHeightConstraint;
+@property (weak, nonatomic) IBOutlet UIButton *dotView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *dotViewWidthConstraint;
 
 @property (weak, nonatomic) IBOutlet UIButton *deleteConnectionButton;
 
@@ -105,7 +107,11 @@
     }
     
     self.postsTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    [self fetchPosts];
+    
+    if (self.launchMode == kContactDetailLaunchModeGroup ||
+        self.launchMode == kContactDetailLaunchModeContact) {
+        [self fetchPosts];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -268,8 +274,12 @@
     
     if (self.mainGroup.members != nil && self.mainGroup.members.count > 0) {
         self.contactsUnderGroup = [self.mainGroup.members allObjects];
+        [self.dotView setHidden:NO];
+        self.dotViewWidthConstraint.constant = 42;
     } else {
         self.contactsUnderGroup = [NSArray new];
+        [self.dotView setHidden:YES];
+        self.dotViewWidthConstraint.constant = 0;
     }
     
     [self getGroupMembersStatusWithGroupId];

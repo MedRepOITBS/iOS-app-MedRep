@@ -915,6 +915,21 @@
     }
 }
 
++ (void)getNotificationImage:(NSString*)path andImageView:(UIImageView*)parentView {
+    parentView.image = nil;
+    
+    if (path != nil && path.length > 0) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:path]];
+            if (imageData != nil) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    parentView.image = [UIImage imageWithData:imageData];
+                });
+            }
+        });
+    }
+}
+
 +(NSString*)getFileName {
     
     NSMutableString *fileName = [NSMutableString new];

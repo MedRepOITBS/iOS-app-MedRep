@@ -449,15 +449,7 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
             self.therapeuticAreasList = orderedSet.array;
         }
                                   
-                                  [self.contentTableView reloadData];
-                                  
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [self.contentTableView reloadData];
-//        });
-                                  
-//                                  dispatch_async(dispatch_get_main_queue(), ^{
-//                                      NSLog(@"");
-//                                  });
+        [self.contentTableView reloadData];
     }];
 }
 

@@ -66,6 +66,7 @@
 + (UIImage*)getRepliedByProfileImage:(MRPostedReplies*)replies andImageView:(UIImageView*)parentView;
 
 + (void)getGroupImage:(MRGroup*)group andImageView:(UIImageView*)parentView;
++ (void)getNotificationImage:(NSString*)path andImageView:(UIImageView*)parentView;
 
 + (NSString*)getFileName;
 + (KLCPopup*)setupCommentBox:(id)delegate;

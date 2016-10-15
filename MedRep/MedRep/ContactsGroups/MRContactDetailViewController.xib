@@ -12,6 +12,8 @@
                 <outlet property="collectionView" destination="Lro-Ao-ngq" id="gZ1-0Z-hFh"/>
                 <outlet property="deleteBtnHeight" destination="AuR-i6-3sH" id="ka2-9s-bdL"/>
                 <outlet property="deleteConnectionButton" destination="9kR-sQ-lYy" id="S6z-wR-w1G"/>
+                <outlet property="dotView" destination="b22-rm-nz4" id="2OE-25-3wv"/>
+                <outlet property="dotViewWidthConstraint" destination="j2B-T7-jyL" id="um6-Ny-Q5b"/>
                 <outlet property="emptyPostsLabel" destination="kFF-4C-4YL" id="Scs-Xw-3B3"/>
                 <outlet property="groupDesc" destination="bGB-nN-iTd" id="rbM-Oc-mh1"/>
                 <outlet property="groupDescHeightConstraint" destination="GMb-GL-U9e" id="7lr-Z0-Z7A"/>
@@ -104,9 +106,6 @@
                         </label>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Lro-Ao-ngq">
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="30" id="bYc-Kh-NOy"/>
-                            </constraints>
                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="sQc-Ne-4nV">
                                 <size key="itemSize" width="50" height="30"/>
                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -161,17 +160,32 @@
                                 <constraint firstItem="eNe-h4-tpg" firstAttribute="centerX" secondItem="Sme-IT-0vj" secondAttribute="centerX" id="tQC-7j-Ugh"/>
                             </constraints>
                         </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b22-rm-nz4">
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="46" id="OfS-dB-20s"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
+                            <state key="normal" title=". . ."/>
+                            <connections>
+                                <action selector="viewMoreOption:" destination="-1" eventType="touchUpInside" id="Kmf-CG-7kY"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="Lro-Ao-ngq" secondAttribute="trailing" constant="10" id="1gp-bU-45Z"/>
+                        <constraint firstAttribute="bottom" secondItem="Lro-Ao-ngq" secondAttribute="bottom" constant="10" id="5o3-s3-kck"/>
                         <constraint firstAttribute="trailing" secondItem="wCc-Pg-FEt" secondAttribute="trailing" constant="8" id="BBk-Pc-PML"/>
                         <constraint firstItem="Lro-Ao-ngq" firstAttribute="top" secondItem="hz0-WJ-hRl" secondAttribute="top" constant="50" id="BRb-qf-a7K"/>
                         <constraint firstItem="Lro-Ao-ngq" firstAttribute="leading" secondItem="hz0-WJ-hRl" secondAttribute="leading" constant="10" id="K00-0R-Yod"/>
                         <constraint firstItem="wCc-Pg-FEt" firstAttribute="top" secondItem="hz0-WJ-hRl" secondAttribute="top" constant="5" id="Wqo-gQ-9N7"/>
                         <constraint firstItem="Sme-IT-0vj" firstAttribute="top" secondItem="hz0-WJ-hRl" secondAttribute="top" constant="5" id="b3h-qe-RRA"/>
-                        <constraint firstAttribute="height" constant="85" id="d2b-86-cRk"/>
+                        <constraint firstAttribute="height" constant="95" id="d2b-86-cRk"/>
+                        <constraint firstItem="b22-rm-nz4" firstAttribute="top" secondItem="Sme-IT-0vj" secondAttribute="bottom" id="hSh-Xy-iYb"/>
+                        <constraint firstItem="b22-rm-nz4" firstAttribute="leading" secondItem="Lro-Ao-ngq" secondAttribute="trailing" id="t3F-Kt-jbM"/>
                         <constraint firstAttribute="trailing" secondItem="Sme-IT-0vj" secondAttribute="trailing" constant="8" id="wWz-Wk-m9J"/>
+                        <constraint firstAttribute="trailing" secondItem="b22-rm-nz4" secondAttribute="trailing" id="yR6-5n-d3n"/>
+                        <constraint firstAttribute="bottom" secondItem="b22-rm-nz4" secondAttribute="bottom" id="zxx-RS-L4z"/>
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Posted Messages" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nqB-1F-QA0">
@@ -248,7 +262,7 @@
                 <constraint firstAttribute="trailing" secondItem="QPq-Rs-Vv5" secondAttribute="trailing" constant="10" id="vyJ-B0-KtC"/>
                 <constraint firstItem="bGB-nN-iTd" firstAttribute="top" secondItem="nck-Fx-AtI" secondAttribute="bottom" constant="5" id="w41-mC-aGS"/>
                 <constraint firstItem="Chz-XP-Hgb" firstAttribute="leading" secondItem="5E6-ZK-RBQ" secondAttribute="leading" id="xEN-De-mvL"/>
-                <constraint firstItem="nqB-1F-QA0" firstAttribute="top" secondItem="hz0-WJ-hRl" secondAttribute="bottom" constant="10" id="xkW-zJ-twO"/>
+                <constraint firstItem="nqB-1F-QA0" firstAttribute="top" secondItem="hz0-WJ-hRl" secondAttribute="bottom" id="xkW-zJ-twO"/>
                 <constraint firstItem="Cil-I9-ph5" firstAttribute="leading" secondItem="5E6-ZK-RBQ" secondAttribute="trailing" constant="8" id="zbV-nm-7WQ"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>

@@ -142,7 +142,7 @@
 
     
     NSDictionary *userData = [MRAppControl sharedHelper].userRegData;
-    self.titleLabel.text = [NSString stringWithFormat:@"Welcome %@. %@ %@", [userData objectForKey:KTitle],[userData objectForKey:KFirstName],[userData objectForKey:KLastName]];
+    self.titleLabel.text = [NSString stringWithFormat:@"Welcome %@ %@", [userData objectForKey:KFirstName],[userData objectForKey:KLastName]];
 }
 
 - (void)getAppointmnets
