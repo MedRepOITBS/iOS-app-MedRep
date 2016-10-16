@@ -18,7 +18,7 @@
 #import "MRDrugTableViewCell.h"
 #import "SWRevealViewController.h"
 
-@interface MRDrugSearchViewController () <UIScrollViewDelegate, UITextFieldDelegate, MRListViewControllerDelegate, WYPopoverControllerDelegate> {
+@interface MRDrugSearchViewController () <UIScrollViewDelegate, UISearchBarDelegate, MRListViewControllerDelegate, WYPopoverControllerDelegate> {
     NSMutableArray *resultarray;
     NSDictionary *selectedDrug;
     
@@ -30,6 +30,7 @@
     
     MRDrugDetailModel *drugDetail;
 }
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @property (weak, nonatomic) IBOutlet UIView *titleView;
 
@@ -43,7 +44,6 @@
 @property (weak, nonatomic) IBOutlet UIView *detailView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UILabel *selectedQty;
-@property (weak, nonatomic) IBOutlet UITextField *searchTxt;
 @property (strong, nonatomic) WYPopoverController *myPopoverController;
 
 - (IBAction)rightMove:(id)sender;
@@ -105,9 +105,6 @@
     _detailView.hidden = YES;
     _suggestionView.hidden = YES;
     
-    _searchTxt.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 30)];
-    _searchTxt.leftViewMode = UITextFieldViewModeAlways;
-    
     [self.titleView setBackgroundColor:[MRCommon colorFromHexString:kStatusBarColor]];
 }
 
@@ -116,9 +113,25 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void) viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     [MRCommon applyNavigationBarStyling:self.navigationController];
+    
+    for (UIView* subview in self.searchBar.subviews) {
+        for (UIView *view in subview.subviews) {
+            if ([view isKindOfClass:[UITextField class]])
+            {
+                for (UIView *view1 in view.subviews) {
+                    [view1 setBackgroundColor:[UIColor whiteColor]];
+                    [view1.layer setBackgroundColor:[UIColor whiteColor].CGColor];
+                }
+            }
+      }
+        
+        [subview setBackgroundColor:[MRCommon colorFromHexString:kStatusBarColor]];
+        [subview.layer setBackgroundColor:[MRCommon colorFromHexString:kStatusBarColor].CGColor];
+    }
 }
 
 /*
@@ -149,9 +162,16 @@
     notiFicationViewController.selectedDict = selectedDrug;
     [self.navigationController pushViewController:notiFicationViewController animated:YES];
 }
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if (textField.text.length>3) {
-        searchString = [textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+
+#pragma mark - UISearchBar Delegate methods
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+    [searchBar resignFirstResponder];
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    if (searchText.length>3) {
+        searchString = [searchText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         [self getMedicineSuggestions];
     }else{
         if (self.myPopoverController) {
@@ -162,16 +182,6 @@
             self.myPopoverController = nil;
         }
     }
-    
-    return YES;
-}
--(BOOL) textFieldShouldReturn:(UITextField *)textField{
-    [textField resignFirstResponder];
-    //    if (textField.text.length) {
-    //        searchString = [textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    //        [self getMedicineSuggestions];
-    //    }
-    return YES;
 }
 
 -(void)imgTapped:(UITapGestureRecognizer *)img{
@@ -204,7 +214,7 @@
     return str.length > 3 ? [str substringToIndex:str.length - 3] : @"";
 }
 
-- (void)showPopoverInView:(UITextField*)button
+- (void)showPopoverInView:(UISearchBar*)button
 {
     if (self.myPopoverController) {
         UIView *overlayView = [self.view viewWithTag:2000];
@@ -265,7 +275,7 @@
     UIView *overlayView = [self.view viewWithTag:2000];
     [overlayView removeFromSuperview];
     
-    [self.searchTxt resignFirstResponder];
+    [self.searchBar resignFirstResponder];
     self.myPopoverController.delegate = nil;
     self.myPopoverController = nil;
 }
@@ -282,7 +292,7 @@
     NSDictionary *item = (NSDictionary*)listItem;
     if ([item objectForKey:@"selectedMedicine"]) {
         selectedMedicine = [item objectForKey:@"selectedMedicine"];
-        _searchTxt.text = selectedMedicine;
+        self.searchBar.text = selectedMedicine;
         
         [self getMedicineDetails];
         [self getMedicineAlternatives];
@@ -337,7 +347,7 @@
                     }
                     
                     if (medicineSuggestions.count) {
-                        [self showPopoverInView:_searchTxt];
+                        [self showPopoverInView:self.searchBar];
                     }else{
                         [[[UIAlertView alloc] initWithTitle:@"" message:@"No drugs found!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
                         if (self.myPopoverController) {
