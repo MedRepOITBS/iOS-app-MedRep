@@ -327,7 +327,7 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
                     NSLog(@"Image URL ; %@", transformData.coverImgUrl);
                 }
                 
-                regCell.img.image = [UIImage imageNamed:@"Rss"];
+                regCell.img.image = [UIImage imageNamed:@"RssNew"];
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                     NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:transformData.coverImgUrl]];
                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -345,10 +345,10 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
                     } else if (transformData.contentType.integerValue == kTransformContentTypePDF) {
                         regCell.img.image = [UIImage imageNamed:@"pdf"];
                     } else {
-                        regCell.img.image = [UIImage imageNamed:@"Rss"];
+                        regCell.img.image = [UIImage imageNamed:@"RssNew"];
                     }
                 } else {
-                    regCell.img.image = [UIImage imageNamed:@"Rss"];
+                    regCell.img.image = [UIImage imageNamed:@"RssNew"];
                 }
             }
             

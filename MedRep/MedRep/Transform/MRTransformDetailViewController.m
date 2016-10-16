@@ -108,7 +108,7 @@
             //            [self setAVPlayerConstraints:av.view];
             
         }else { //if ([self.selectedContent.contentType isEqualToString:@"Image"]) {
-            _contentImage.image = [UIImage imageNamed:@"Rss"];
+            _contentImage.image = [UIImage imageNamed:@"RssNew"];
             [_detailLbl setHidden:NO];
             [webView setHidden:YES];
             

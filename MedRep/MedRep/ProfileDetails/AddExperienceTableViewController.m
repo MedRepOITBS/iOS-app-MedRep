@@ -113,6 +113,9 @@
         _fromMM = _workExperience.fromDate;
         _toMM = _workExperience.toDate;
         _isCurrentChecked = [_workExperience.currentJob boolValue];
+        if (_isCurrentChecked) {
+            _toMM = [MRCommon stringFromDate:[NSDate date] withDateFormate:@"MMM YYYY"];
+        }
         _summaryText = _workExperience.summary;
        
         if (![_fromMM isEqualToString:@""]) {
@@ -343,8 +346,7 @@
     } else if(indexPath.row == 3 ){
         height = 146;
         
-        if (self.workExperience != nil && self.workExperience.currentJob != nil &&
-            self.isCurrentChecked == 1) {
+        if (self.isCurrentChecked) {
             height -= 55;
         }
     } else {
@@ -468,6 +470,10 @@
         if (_fromMM != nil && _fromMM.length > 0) {
             [_picker setMinimumDate:_fromDate];
             [_picker setMaximumDate:[NSDate date]];
+        } else {
+            if (_toDate == nil) {
+                [_picker setMaximumDate:[NSDate date]];
+            }
         }
     } else {
         if (_toMM != nil && _toMM.length > 0) {
@@ -477,10 +483,14 @@
                 [_picker setDate:_fromDate];
             } else {
                 [_picker setDate:_toDate];
+                [_picker setMinimumDate:nil];
             }
         } else {
+            [_picker setMaximumDate:[NSDate date]];
             if (_fromDate != nil) {
                 [_picker setDate:_fromDate];
+            } else {
+                [_picker setMinimumDate:nil];
             }
         }
     }
@@ -523,6 +533,12 @@
 
 -(void)getCurrentCheckButtonVal:(BOOL)isCurrentCheck{
     _isCurrentChecked = isCurrentCheck;
+    
+    if (isCurrentCheck) {
+        _toDate = [NSDate date];
+        _toMM = [MRCommon stringFromDate:_toDate withDateFormate:@"MMM YYYY"];
+    }
+    
     [self.tableView reloadData];
 }
 #pragma mark - Table view delegate
