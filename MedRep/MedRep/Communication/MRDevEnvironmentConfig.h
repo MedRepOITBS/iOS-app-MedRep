@@ -10,6 +10,7 @@
 #define MRDevEnvironmentConfig_h
 
 FOUNDATION_EXPORT NSString *const kBaseURL;
+FOUNDATION_EXPORT NSString *const kBaseWebURL;
 FOUNDATION_EXPORT NSString *const kHostName;
 
 FOUNDATION_EXPORT NSString *const kDrugSearchAPIKey;
