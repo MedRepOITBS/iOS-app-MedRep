@@ -522,7 +522,11 @@
 
 - (NSArray*)getNotificationByCompanyID:(NSInteger)companyID
 {
-    NSArray *filteredArray          = [self.notifications filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"companyId == %d", companyID]];
+    NSPredicate *companyPredicate = [NSPredicate predicateWithFormat:@"companyId == %d", companyID];
+    NSPredicate *favPredicate = [NSPredicate predicateWithFormat:@"favNotification == %d", NO];
+    
+    NSCompoundPredicate *predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[companyPredicate, favPredicate]];
+    NSArray *filteredArray          = [self.notifications filteredArrayUsingPredicate:predicate];
     
     return filteredArray;
 }

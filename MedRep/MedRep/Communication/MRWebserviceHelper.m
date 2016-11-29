@@ -1178,51 +1178,9 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
 - (void)updateNotification:(NSDictionary*)notificationDetails
                          withHandler:(completionHandler)responceHandler
 {
-    //(http://183.82.106.234:8080/MedRepApplication/api/doctor/updateMyNotification?access_token=ab04ac82-6b19-492d-9e17-3e4fab387062) favour click
-    /*
-     {
-     "notificationId": 9,
-     "doctorId": 25,
-     "viewStatus": "Pending",
-     "favourite": "Y",
-     "rating": "4.5",
-     "prescribe":"Y",
-     "recomend":"N",
-     "viewedOn": "20150905011030",
-     "userNotificationId": 1
-     }
-     */
+    NSString *stringFormOfUrl =  [NSString stringWithFormat:@"%@/doctor/updateMyNotification?token=%@",kBaseWebURL,[MRDefaults objectForKey:kAuthenticationToken]];
     
-    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-    
-    
-    [dict setObject:[notificationDetails objectForKey:@"notificationId"] forKey:@"notificationId"];
-    //[dict setObject:[[[MRAppControl sharedHelper] userRegData] objectForKey:KDoctorRegID] forKey:@"doctorId"];
-    [dict setObject:[notificationDetails objectForKey:@"viewStatus"]  forKey:@"viewStatus"];
-    
-    if ([notificationDetails objectForKey:@"favourite"])
-    {
-        [dict setObject:[notificationDetails objectForKey:@"favourite"]  forKey:@"favourite"];
-    }
-    
-    if ([notificationDetails objectForKey:@"rating"]) {
-        [dict setObject:[notificationDetails objectForKey:@"rating"]  forKey:@"rating"];
-    }
-    
-    if ([notificationDetails objectForKey:@"prescribe"]) {
-        [dict setObject:[notificationDetails objectForKey:@"prescribe"]  forKey:@"prescribe"];
-    }
-    
-    if ([notificationDetails objectForKey:@"recomend"]) {
-        [dict setObject:[notificationDetails objectForKey:@"recomend"]  forKey:@"recomend"];
-    }
-    
-    [dict setObject:[notificationDetails objectForKey:@"viewedOn"]  forKey:@"viewedOn"];
-    //[dict setObject:[notificationDetails objectForKey:@"userNotificationId"]  forKey:@"userNotificationId"];
-    
-    NSString *stringFormOfUrl =  [NSString stringWithFormat:@"%@/api/doctor/updateMyNotification?access_token=%@",kBaseURL,[MRDefaults objectForKey:kAuthenticationToken]];
-    
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:notificationDetails
                                                        options:NSJSONWritingPrettyPrinted
                                                          error:nil];
     NSURL *url = [NSURL URLWithString:stringFormOfUrl];
@@ -1254,6 +1212,28 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
     self.serviceType = kMRWebServiceTypeGetMyNotificationContent;
     [self sendServiceRequest:urlRequest withHandler:responceHandler];
 
+}
+
+- (void)getPendingCount:(BOOL)reset andHandler:(completionHandler)responceHandler
+{
+    NSMutableDictionary *dict = [NSMutableDictionary new];
+    [dict setValue:[NSNumber numberWithBool:reset] forKey:@"reset"];
+    
+    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/getPendingItems?token=%@",kBaseWebURL,[MRDefaults objectForKey:kAuthenticationToken]];
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:nil];
+    NSURL *url = [NSURL URLWithString:stringFormOfUrl];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [urlRequest setTimeoutInterval:120];
+    [urlRequest setHTTPMethod:@"POST"];
+    [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [urlRequest setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[jsonData length]] forHTTPHeaderField:@"Content-Length"];
+    [urlRequest setHTTPBody: jsonData];
+    self.serviceType = kMRWebServiceTypeUpdateGroupMemberStatus;
+    [self sendServiceRequest:urlRequest withHandler:responceHandler];
 }
 
 - (void)getMyAppointments:(NSString*)appointmentDate

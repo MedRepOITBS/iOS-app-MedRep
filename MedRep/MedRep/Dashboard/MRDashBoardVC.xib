@@ -11,18 +11,21 @@
             <connections>
                 <outlet property="activityScoreSuperView" destination="OS2-r5-Bs1" id="6NW-5Q-RCY"/>
                 <outlet property="appointmentsTableView" destination="h30-fu-A3i" id="aAH-PV-XiA"/>
+                <outlet property="doctorPlusPendingCountLabel" destination="lP1-lF-Ki6" id="vmd-ai-U2n"/>
                 <outlet property="doctorPlusSuperView" destination="zTM-lu-Knz" id="e5b-BZ-t2w"/>
                 <outlet property="leftButton" destination="hnz-cN-Bbx" id="dpg-SH-vod"/>
                 <outlet property="marketingCampImage" destination="fjv-TO-MRM" id="KAK-18-XNV"/>
                 <outlet property="marketingCampaignSuperView" destination="lBa-GI-nAL" id="f0u-vj-NWB"/>
                 <outlet property="navView" destination="z41-Vp-DLX" id="nDq-WE-vec"/>
                 <outlet property="newsImage" destination="GqB-99-Ngz" id="x1c-B4-qOx"/>
+                <outlet property="notificationPendingCountLabel" destination="pkT-h6-fKU" id="Neu-CX-bth"/>
                 <outlet property="notificationsSuperView" destination="0oj-4J-1eF" id="SSc-3t-jWC"/>
                 <outlet property="notificationsView" destination="OGe-Q2-yfm" id="iBV-L4-nMZ"/>
                 <outlet property="optionsView" destination="N0n-eD-GVd" id="VjC-bs-jax"/>
                 <outlet property="rightButton" destination="WUq-gi-ch0" id="0qF-ao-2hj"/>
                 <outlet property="searchForDrugsSuperView" destination="UX0-CN-kl7" id="bP4-yo-WBZ"/>
                 <outlet property="searchImage" destination="uA9-RD-5xO" id="sLH-N1-Bg7"/>
+                <outlet property="surveysPendingCountLabel" destination="ZBX-pk-RZl" id="qaM-8Z-Gdm"/>
                 <outlet property="surveysSuperView" destination="ivx-kO-bnL" id="Czy-Qs-oyR"/>
                 <outlet property="titleLabel" destination="y8N-3H-yzu" id="2b4-je-Zch"/>
                 <outlet property="titleView" destination="Khm-1K-ixJ" id="50L-GA-rB4"/>
@@ -43,7 +46,7 @@
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="87.5" y="291.5"/>
+            <point key="canvasLocation" x="-73" y="475"/>
         </view>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -105,6 +108,14 @@
                                             <frame key="frameInset" minX="23" minY="12" width="80" height="70"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pkT-h6-fKU">
+                                            <frame key="frameInset" minX="76" minY="12" width="16" height="16"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="0.74765625000000002" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 </view>
@@ -138,6 +149,14 @@
                                             <frame key="frameInset" minX="23" minY="12" width="80" height="70"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZBX-pk-RZl">
+                                            <frame key="frameInset" minX="76" minY="12" width="16" height="16"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="0.74765625000000002" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 </view>
@@ -180,6 +199,14 @@
                                             <frame key="frameInset" minX="23" minY="12" width="80" height="70"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lP1-lF-Ki6">
+                                            <frame key="frameInset" minX="76" minY="12" width="16" height="16"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="0.74765625000000002" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 </view>

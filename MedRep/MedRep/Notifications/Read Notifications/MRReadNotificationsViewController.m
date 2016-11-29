@@ -34,20 +34,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    SWRevealViewController *revealController = [self revealViewController];
-    revealController.delegate = self;
-    [revealController panGestureRecognizer];
-    [revealController tapGestureRecognizer];
+    self.navigationItem.title = @"Read Notifications";
     
-    
-    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon.png"]
-                                                                         style:UIBarButtonItemStylePlain target:revealController action:@selector(revealToggle:)];
-    
+    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonAction:)];
     self.navigationItem.leftBarButtonItem = revealButtonItem;
     
     UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navView];
-    self.navigationItem.rightBarButtonItem = rightButtonItem;
-
+    UIBarButtonItem *sortButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"cnsort.png"] style:UIBarButtonItemStylePlain target:self action:@selector(sortByButtonAction:)];
+    
+    [self.navigationItem setRightBarButtonItems:@[rightButtonItem, sortButtonItem]];
+    
     [MRDatabaseHelper getNotifications:YES withFavourite:NO withNotificationsList:^(NSArray *fetchList) {
         self.notificationDetailsList = fetchList;
         [self.notificationsTableView reloadData];

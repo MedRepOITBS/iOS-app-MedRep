@@ -47,11 +47,12 @@ NSString *const kLastRefreshedDateAttributeName = @"lastRefreshedDate";
 
 - (NSDictionary *)toDictionary
 {
-	NSArray *attributes = [[[self entity] attributesByName] allKeys];
+	NSDictionary *attributes = [[self entity] attributesByName];
 	NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:[attributes count] + 1];
 
 	for (NSString *attr in attributes)
 	{
+        NSLog(@"%@", attr);
 		NSObject *value = [self valueForKey:attr];
 
 		/*if ([value isKindOfClass:[NSDate class]])
@@ -59,15 +60,21 @@ NSString *const kLastRefreshedDateAttributeName = @"lastRefreshedDate";
 			NSDate *dateValue = (NSDate *)value;
 			value = [dateValue dotNetStringValue];
 		}
-        else */if ([value isKindOfClass:[NSData class]] || [value isKindOfClass:[NSMutableData class]])
+        else if ([value isKindOfClass:[NSData class]] || [value isKindOfClass:[NSMutableData class]])
         {
             value = [NSKeyedUnarchiver unarchiveObjectWithData:(NSData*)value];
-        }
+        }*/
 
 		if (value)
 		{
 			[dict setObject:value forKey:attr];
-		}
+        } else {
+            NSAttributeType attributeType = [[attributes objectForKey:attr] attributeType];
+            if ((attributeType == NSFloatAttributeType || attributeType == NSDoubleAttributeType || attributeType == NSDecimalAttributeType || attributeType == NSBooleanAttributeType))
+            {
+                [dict setObject:[NSNumber numberWithInteger:0] forKey:attr];
+            }
+        }
 	}
 
 	return dict;

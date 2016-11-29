@@ -32,7 +32,9 @@
 @property (strong, nonatomic) NSArray *roles;
 @property (strong, nonatomic) NSArray *companyDetails;
 
-
+@property (assign, nonatomic) NSInteger pendingNotificationCount;
+@property (assign, nonatomic) NSInteger pendingSurveysCount;
+@property (assign, nonatomic) NSInteger pendingDashboardCount;
 
 + (MRAppControl*)sharedHelper;
 - (void)launchWithApplicationMainWindow:(UIWindow *)mainWindow;

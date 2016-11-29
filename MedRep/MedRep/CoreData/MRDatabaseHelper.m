@@ -802,6 +802,11 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
 
 + (void)addNotifications:(NSArray*)notificationsList
 {
+    [[MRDataManger sharedManager] removeAllObjects:kNotificationsEntity withPredicate:nil];
+    
+    [MRWebserviceHelper parseNetworkResponse:NSClassFromString(kNotificationsEntity) andData:notificationsList];
+    
+    /*
     for (NSDictionary *myNotificationDict in notificationsList)
     {
         
@@ -857,8 +862,9 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
             notification.validUpto      = [myNotificationDict objectForKey:@"validUpto"];
         }
     }
-    
+    */
     [[MRDataManger sharedManager] saveContext];
+     
     [MRDefaults setObject:[NSDate date] forKey:kNotificationFetchedDate];
 }
 
@@ -946,37 +952,54 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
    withNotificationsList:(void (^)(NSArray *fetchList))objectsList
 {
     NSArray *notificationTypeList   = nil;
+    NSPredicate *predicate = nil;
     
     if (isFav)
     {
-        notificationTypeList   = [[MRDataManger sharedManager] fetchObjectList:kNotificationsEntity predicate:[NSPredicate predicateWithFormat:@"favNotification == %@", [NSNumber numberWithBool:isFav]]];
+        predicate = [NSPredicate predicateWithFormat:@"favourite == %d", isFav];
+//        notificationTypeList   = [[MRDataManger sharedManager] fetchObjectList:kNotificationsEntity predicate:predicate];
     }
     else if (isRead)
     {
-        notificationTypeList   = [[MRDataManger sharedManager] fetchObjectList:kNotificationsEntity predicate:[NSPredicate predicateWithFormat:@"readNotification == %@", [NSNumber numberWithBool:isRead]]];
+        predicate = [NSPredicate predicateWithFormat:@"readNotification == %d", isRead];
+//        notificationTypeList   = [[MRDataManger sharedManager] fetchObjectList:kNotificationsEntity predicate:predicate];
     }
     else
     {
         notificationTypeList   = [[MRDataManger sharedManager] fetchObjectList:kNotificationsEntity];
     }
     
+    if (predicate != nil) {
+        notificationTypeList = [[MRDataManger sharedManager] fetchObjectList:kNotificationsEntity
+                                                               attributeName:@"updatedOn"
+                                                                   predicate:predicate sortOrder:SORT_ORDER_DESCENDING];
+    }
+    
     NSMutableArray *array           = [NSMutableArray array];
     for (MRNotifications *notification in notificationTypeList)
     {
-          NSMutableDictionary *myNotificationDict = [NSMutableDictionary dictionary];
-        
+        NSDictionary *myNotificationDict = [notification toDictionary];
+        /*
          [myNotificationDict setObject:notification.companyId   forKey:@"companyId"];
          [myNotificationDict setObject:notification.companyName forKey:@"companyName"];
          [myNotificationDict setObject:notification.createdBy   forKey:@"createdBy"];
          [myNotificationDict setObject:notification.createdOn   forKey:@"createdOn"];
          [myNotificationDict setObject:notification.externalRef forKey:@"externalRef"];
+         
          [myNotificationDict setObject:notification.favNotification forKey:@"favNotification"];
+         
          //[myNotificationDict setObject:notification.fileList    forKey:@"fileList"];
          [myNotificationDict setObject:notification.notificationDesc    forKey:@"notificationDesc"];
+         
+         vamsi
          [myNotificationDict setObject:[MRCommon unArchiveDataToDictionary:notification.notificationDetails forKey:@"notificationDetails"] forKey:@"notificationDetails"];
+         
          [myNotificationDict setObject:notification.notificationId  forKey:@"notificationId"];
          [myNotificationDict setObject:notification.notificationName    forKey:@"notificationName"];
+         
+         vamsi
          [myNotificationDict setObject:notification.readNotification    forKey:@"readNotification"];;
+         
          [myNotificationDict setObject:notification.status  forKey:@"status"];
        //  [myNotificationDict setObject:notification.therapeuticDropDownValues   forKey:@"therapeuticDropDownValues"];
          [myNotificationDict setObject:notification.therapeuticId   forKey:@"therapeuticId"];
@@ -989,6 +1012,7 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
          [myNotificationDict setObject:notification.updatedBy   forKey:@"updatedBy"];
          [myNotificationDict setObject:notification.updatedOn   forKey:@"updatedOn"];
          [myNotificationDict setObject:notification.validUpto   forKey:@"validUpto"];
+         */
          [array addObject:myNotificationDict];
     }
     
@@ -1064,6 +1088,7 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
     if (isFav)
     {
         notification.favNotification = [NSNumber numberWithBool:isFav];
+        notification.favourite = [NSNumber numberWithBool:isFav];
     }
     else if (isRead)
     {

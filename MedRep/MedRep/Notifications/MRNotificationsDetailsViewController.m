@@ -47,7 +47,11 @@
     self.navigationItem.rightBarButtonItem = rightButtonItem;
     
     NSDictionary *comapnyDetails = [[MRAppControl sharedHelper] getCompanyDetailsByID:[[self.selectedNotification objectForKey:@"companyId"] intValue]];
-    self.companyLogoImage.image =  [MRCommon getImageFromBase64Data:[[comapnyDetails objectForKey:@"displayPicture"] objectForKey:@"data"]];
+    
+    id displayPicture = [comapnyDetails objectForKey:@"dPicture"];
+    if (displayPicture != nil && [displayPicture isKindOfClass:[NSDictionary class]]) {
+        [MRAppControl getNotificationImage:[displayPicture objectForKey:@"dPicture"] andImageView:self.companyLogoImage];
+    }
     
     [self loadNotificationDetails];
     

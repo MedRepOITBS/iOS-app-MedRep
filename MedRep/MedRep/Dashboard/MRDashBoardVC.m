@@ -48,6 +48,10 @@
 @property (weak, nonatomic) IBOutlet UIView *activityScoreSuperView;
 @property (weak, nonatomic) IBOutlet UIView *doctorPlusSuperView;
 
+@property (weak, nonatomic) IBOutlet UILabel *notificationPendingCountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *surveysPendingCountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *doctorPlusPendingCountLabel;
+
 @end
 
 @implementation MRDashBoardVC
@@ -84,6 +88,8 @@
 {
     [super viewWillAppear:animated];
     
+    [self getPendingCounts];
+    
     [self.titleView setBackgroundColor:[MRCommon colorFromHexString:kStatusBarColor]];
     [MRCommon applyNavigationBarStyling:self.navigationController];
     
@@ -100,6 +106,7 @@
       [self getAppointmnets];
     }
 }
+
 - (void)enableDisableLeftButton:(BOOL)isEnable
 {
     self.leftButton.enabled = isEnable;
@@ -121,27 +128,6 @@
 }
 - (void)setUpUI
 {
-//    self.appointmentsTableView.transform = CGAffineTransformMakeRotation(-M_PI * 0.5);
-//    
-//    if([MRCommon deviceHasThreePointFiveInchScreen])
-//    {
-//        [self.appointmentsTableView setFrame:CGRectMake(0 , 50, 234 , 50)];
-//    }
-//    else if([MRCommon deviceHasFourInchScreen])
-//    {
-//        [self.appointmentsTableView setFrame:CGRectMake(0 , 65, 234 , 50)];
-//    }
-//    else if([MRCommon deviceHasFourPointSevenInchScreen])
-//    {
-//        [self.appointmentsTableView setFrame:CGRectMake(0 , 70, 270 , 90)];
-//
-//    }
-//    else if([MRCommon deviceHasFivePointFiveInchScreen])
-//    {
-//        [self.appointmentsTableView setFrame:CGRectMake(0 , 80, 300 , 90)];
-//    }
-
-    
     NSDictionary *userData = [MRAppControl sharedHelper].userRegData;
     self.titleLabel.text = [NSString stringWithFormat:@"Welcome %@ %@", [userData objectForKey:KFirstName],[userData objectForKey:KLastName]];
     
@@ -174,6 +160,91 @@
                                                                                  action:@selector(newsButtonAction:)];
     [doctorPlusSuperViewTapRecognizer setNumberOfTapsRequired:1];
     [self.doctorPlusSuperView addGestureRecognizer:doctorPlusSuperViewTapRecognizer];
+    
+    [self.notificationPendingCountLabel.layer setMasksToBounds:YES];
+    self.notificationPendingCountLabel.layer.cornerRadius = 8.0f;
+    [self.notificationPendingCountLabel setHidden:YES];
+    
+    [self.surveysPendingCountLabel.layer setMasksToBounds:YES];
+    self.surveysPendingCountLabel.layer.cornerRadius = 8.0f;
+    [self.surveysPendingCountLabel setHidden:YES];
+    
+    [self.doctorPlusPendingCountLabel.layer setMasksToBounds:YES];
+    self.doctorPlusPendingCountLabel.layer.cornerRadius = 8.0f;
+    [self.doctorPlusPendingCountLabel setHidden:YES];
+}
+
+- (void)setPendingCountValuesInRespectiveLables:(NSDictionary*)data {
+    NSInteger notificationsCount = 0;
+    NSInteger surveysCount = 0;
+    NSInteger dashboardCount = 0;
+    
+    if (data != nil) {
+        id value = [data objectForCaseInsensitiveKey:@"notifications"];
+        if (value != nil && [value isKindOfClass:[NSNumber class]]) {
+            notificationsCount = ((NSNumber*)value).integerValue;
+        }
+        
+        value = [data objectForCaseInsensitiveKey:@"surveys"];
+        if (value != nil && [value isKindOfClass:[NSNumber class]]) {
+            surveysCount = ((NSNumber*)value).integerValue;
+        }
+        
+        value = [data objectForCaseInsensitiveKey:@"dashbaord"];
+        if (value != nil && [value isKindOfClass:[NSNumber class]]) {
+            dashboardCount = ((NSNumber*)value).integerValue;
+        }
+    }
+    
+    [MRAppControl sharedHelper].pendingNotificationCount = notificationsCount;
+    [MRAppControl sharedHelper].pendingSurveysCount = surveysCount;
+    [MRAppControl sharedHelper].pendingDashboardCount = dashboardCount;
+    
+    if (notificationsCount > 0) {
+        [self.notificationPendingCountLabel setHidden:NO];
+        [self.notificationPendingCountLabel setText:[NSString stringWithFormat:@"%ld", (long)notificationsCount]];
+    } else {
+        [self.notificationPendingCountLabel setHidden:YES];
+    }
+    
+    if (surveysCount > 0) {
+        [self.surveysPendingCountLabel setHidden:NO];
+        [self.surveysPendingCountLabel setText:[NSString stringWithFormat:@"%ld", (long)surveysCount]];
+    } else {
+        [self.surveysPendingCountLabel setHidden:YES];
+    }
+    
+    if (dashboardCount > 0) {
+        [self.doctorPlusPendingCountLabel setHidden:NO];
+        [self.doctorPlusPendingCountLabel setText:[NSString stringWithFormat:@"%ld", (long)dashboardCount]];
+    } else {
+        [self.doctorPlusPendingCountLabel setHidden:YES];
+    }
+}
+
+- (void)getPendingCounts {
+    [[MRWebserviceHelper sharedWebServiceHelper] getPendingCount:false andHandler:^(BOOL status, NSString *details, NSDictionary *responce)
+     {
+         if (status)
+         {
+             [self setPendingCountValuesInRespectiveLables:[responce objectForCaseInsensitiveKey:kResult]];
+         }
+         else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+         {
+             [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+              {
+                  [MRCommon savetokens:responce];
+                  [[MRWebserviceHelper sharedWebServiceHelper] getPendingCount:false andHandler:^(BOOL status, NSString *details, NSDictionary *responce)
+                   {
+                       if (status)
+                       {
+                           [self setPendingCountValuesInRespectiveLables:[responce objectForCaseInsensitiveKey:kResult]];
+                       }
+                   }];
+                  
+              }];
+         }
+     }];
 }
 
 - (void)getAppointmnets

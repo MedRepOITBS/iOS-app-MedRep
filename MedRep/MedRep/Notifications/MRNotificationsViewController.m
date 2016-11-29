@@ -49,6 +49,7 @@
     [MRCommon showActivityIndicator:@"Loading..."];
     
     NSString *notificationsDate = ([MRDatabaseHelper getObjectDataExistance:kNotificationsEntity]) ?  [MRCommon stringFromDate:[MRDefaults objectForKey:kNotificationFetchedDate] withDateFormate:@"YYYYMMdd"] : @"20150101";
+    notificationsDate = @"20160101";
     [[MRWebserviceHelper sharedWebServiceHelper] getMyNotifications:notificationsDate withHandler:^(BOOL status, NSString *details, NSDictionary *responce)
      {
          if (status)
@@ -131,12 +132,15 @@
     [MRDatabaseHelper getNotifications:NO withFavourite:NO withNotificationsList:^(NSArray *fetchList)
     {
         [MRAppControl sharedHelper].notifications = fetchList;
-        for (NSDictionary *dict in fetchList)
+        
+        NSArray *uniqueCompanies = [fetchList valueForKeyPath:@"@distinctUnionOfObjects.companyId"];
+        
+        for (NSString *companyId in uniqueCompanies)
         {
-            NSArray *filteredArray          = [self.notifications filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"companyId == %@", [dict objectForKey:@"companyId"]]];
+            NSArray *filteredArray          = [fetchList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"companyId == %@", companyId]];
             
-            if (filteredArray && filteredArray.count == 0) {
-                [self.notifications addObject:[NSMutableDictionary dictionaryWithDictionary:dict]];
+            if (filteredArray && filteredArray.count > 0) {
+                [self.notifications addObject:filteredArray.firstObject];
             }
         }
     }];
@@ -226,7 +230,7 @@
     regCell.indicationNewLabel.hidden           = ([[[dict objectForKey:@"status"] uppercaseString] isEqualToString:[@"New" uppercaseString]]) ? NO : YES;
     regCell.companyLabel.hidden             = NO;
     regCell.companyLabel.text               = [comapnyDetails objectForKey:@"companyName"];
-    id displayPicture = [comapnyDetails objectForKey:@"displayPicture"];
+    id displayPicture = [comapnyDetails objectForKey:@"dPicture"];
     if (displayPicture != nil && [displayPicture isKindOfClass:[NSDictionary class]]) {
         [MRAppControl getNotificationImage:[displayPicture objectForKey:@"dPicture"] andImageView:regCell.companyLogo];
     }

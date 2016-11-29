@@ -20,13 +20,7 @@
 
 @interface MRNotificationInsiderViewController ()<UIScrollViewDelegate,UIAlertViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIView *tiltleView;
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UIButton *backbutton;
 @property (weak, nonatomic) IBOutlet UIView *topView;
-@property (weak, nonatomic) IBOutlet UILabel *drugNamelabel;
-@property (weak, nonatomic) IBOutlet UILabel *companyNamelabel;
-@property (weak, nonatomic) IBOutlet UIImageView *notifcationImage;
 @property (weak, nonatomic) IBOutlet UILabel *contentHeaderLabel;
 @property (weak, nonatomic) IBOutlet UITextView *contentTextView;
 @property (weak, nonatomic) IBOutlet UILabel *rHilightLabel;
@@ -34,7 +28,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *fedHilightLabel;
 @property (weak, nonatomic) IBOutlet UIScrollView *contentScrollView;
 
+@property (weak, nonatomic) IBOutlet UILabel *drugNameLabel;
+
 @property (strong, nonatomic) IBOutlet UIView *navView;
+@property (strong, nonatomic) IBOutlet UIView *navViewExitFullScreen;
+
 @property (weak, nonatomic) IBOutlet UIView *footerView;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *buttonImageHorizontalSpace;
@@ -43,7 +41,6 @@
 @property (assign, nonatomic) NSTimer *loopTimer;
 @property (weak, nonatomic) IBOutlet UIImageView *feedBackImage;
 @property (weak, nonatomic) IBOutlet UIImageView *favoriteImage;
-@property (weak, nonatomic) IBOutlet UIView *fullscreenView;
 @property (weak, nonatomic) IBOutlet UILabel *favoriteThisLabel;
 @property (weak, nonatomic) IBOutlet UILabel *feedbackLabel;
 @property (nonatomic, assign) BOOL favourite;
@@ -53,7 +50,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *leftButton;
 @property (weak, nonatomic) IBOutlet UIButton *rightButton;
 @property (nonatomic, retain) NSMutableDictionary *noticationImages;
-@property (nonatomic, retain) NSArray *detailsList;
+@property (nonatomic, retain) NSDictionary *detailsList;
 @property (nonatomic, assign) NSInteger imagesCount;
 @property (nonatomic, assign) NSInteger currentImageIndex;
 @property (weak, nonatomic) IBOutlet UIImageView *reminderIcon;
@@ -67,9 +64,16 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *fullScreenImageViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *fullScreenImageViewWidth;
-@property (weak, nonatomic) IBOutlet UIImageView *fullScreenNotificationImage;
+//@property (weak, nonatomic) IBOutlet UIImageView *fullScreenNotificationImage;
+//@property (weak, nonatomic) IBOutlet UIImageView *notifcationImage;
+
+@property (weak, nonatomic) IBOutlet UIWebView *notifcationImage;
+@property (weak, nonatomic) IBOutlet UIWebView *fullScreenNotificationImage;
+
 @property (weak, nonatomic) IBOutlet UIScrollView *fullScreenScrollView;
 @property (weak, nonatomic) IBOutlet UILabel *contentTitleLabel;
+
+@property (nonatomic, strong) NSString *remindMeValue;
 
 @end
 
@@ -77,6 +81,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.remindMeValue = @"";
+    
+    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonAction:)];
+    self.navigationItem.leftBarButtonItem = revealButtonItem;
+    
+    UITapGestureRecognizer *recoginzer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fullScreenButtonAction:)];
+    [recoginzer setNumberOfTapsRequired:1];
+    [self.navView addGestureRecognizer:recoginzer];
+    
+    UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navView];
+    self.navigationItem.rightBarButtonItem = rightButtonItem;
     
     [self.contentScrollView setZoomScale:1.0];
     [self.contentScrollView setMinimumZoomScale:0.5];
@@ -120,46 +136,24 @@
         self.favoriteImage.image = [UIImage imageNamed:@"favoriteSelected.png"];
     }
     
+    self.selectedNotification = [self.notificationDetails objectForKey:@"notificationDetails"];
     
-    self.selectedNotification = [[MRAppControl sharedHelper] getNotificationByID:[[self.notificationDetails objectForKey:@"notificationId"] integerValue]];
-    
-    [MRDatabaseHelper updateNotifiction:[self.notificationDetails objectForKey:@"notificationId"] userFavouriteSatus:NO userReadStatus:YES withSavedStatus:^(BOOL isScuccess) {
-        
-    }];
-
     if (self.selectedNotification)
     {
-        self.contentHeaderLabel.text = [self.selectedNotification objectForKey:@"notificationDesc"];
-        self.contentTextView.text = [self.notificationDetails objectForKey:@"detailDesc"];
-        self.companyNamelabel.text = [self.selectedNotification objectForKey:@"companyName"];
-        self.drugNamelabel.text = [self.notificationDetails objectForKey:@"detailTitle"];
+        self.contentHeaderLabel.text = [self.notificationDetails objectForKey:@"notificationDesc"];
+        self.contentTextView.text = [self.selectedNotification objectForKey:@"detailDesc"];
+        self.drugNameLabel.text = [NSString stringWithFormat:@"\t%@",[self.selectedNotification objectForKey:@"detailTitle"]];
         
-        self.titleLabel.text = [self.selectedNotification objectForKey:@"companyName"];
+        self.navigationItem.title = [self.notificationDetails objectForKey:@"companyName"];
         [MRCommon showActivityIndicator:@"Loading..."];
         self.detailsList = [self.notificationDetails objectForKey:@"notificationDetails"];
         [self loadImages];
     }
     self.loopTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTimerLabel) userInfo:nil repeats:YES];
     
-    [self hideNavigationButton];
     self.imagesCount = 0;
-//    if (self.detailsList.count > 1)
-//    {
-//        [self showNavigationButton];
-//    }
     
-    // Do any additional setup after loading the view from its nib.
-    
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [self.navigationController setNavigationBarHidden:NO];
-    [super viewDidDisappear:animated];
+    // Do any additional setup after loading the view from its nib.    
 }
 
 - (void)addSwipeGesture
@@ -189,49 +183,44 @@
 
 - (void)loadImages
 {
-    [MRCommon getNotificationImageByID:[[[self.detailsList objectAtIndex:self.imagesCount] objectForKey:@"detailId"] integerValue] forImage:^(UIImage *image)
+    [MRCommon getNotificationImageByID:[[self.detailsList objectForKey:@"detailId"] integerValue]
+                              forImage:^(UIImage *image)
      {
          if (image)
          {
-             [self.noticationImages setObject:image forKey:[[self.detailsList objectAtIndex:self.imagesCount] objectForKey:@"detailId"]];
-             NSLog(@"%@",NSStringFromCGRect(self.contentScrollView.frame));
-             self.contentViewHeight.constant = self.contentScrollView.frame.size.height + 130;
-             self.contentViewWidth.constant =  self.contentScrollView.frame.size.width;
-             [self updateViewConstraints];
-             
-             if (self.imagesCount == 0)
-             {
-                 [self updateNotification:[[self.detailsList objectAtIndex:self.imagesCount] objectForKey:@"detailId"]];
-                 self.currentImageIndex = 0;
-             }
-             
-             self.imagesCount++;
-             
-             if (self.imagesCount < self.detailsList.count)
-             {
-                 [self loadImages];
-             }
-             else if (self.imagesCount == self.detailsList.count)
-             {
-                 [MRCommon stopActivityIndicator];
+             id value = [self.detailsList objectForKey:@"detailId"];
+             if (value != nil) {
+                 NSNumber *tempValue = (NSNumber*)value;
+                 [self.noticationImages setObject:image forKey:[NSString stringWithFormat:@"%ld",tempValue.integerValue]];
+                 
+                 self.contentViewHeight.constant = self.contentScrollView.frame.size.height + 130;
+                 self.contentViewWidth.constant =  self.contentScrollView.frame.size.width;
+                 [self updateViewConstraints];
+              
+                 [self updateNotification:[self.detailsList objectForKey:@"detailId"]];
              }
          }
          else
          {
              [MRCommon stopActivityIndicator];
-             self.notifcationImage.image = [UIImage imageNamed:@""];
-             self.fullScreenNotificationImage.image = image;
+//             self.notifcationImage.image = [UIImage imageNamed:@""];
+//             self.fullScreenNotificationImage.image = image;
          }
      }];
 }
 
 - (void)updateNotification:(NSNumber*)imageId
 {
-    UIImage *image = [self.noticationImages objectForKey:imageId];
-    self.fullScreenNotificationImage.image = image;
-    self.notifcationImage.image = image;
+    if (imageId != nil) {
+        NSString *key = [NSString stringWithFormat:@"%ld",imageId.integerValue];
+        UIImage *image = [self.noticationImages objectForKey:key];
+//        self.fullScreenNotificationImage.image = image;
+//        self.notifcationImage.image = image;
+    }
+    /*
     self.contentTitleLabel.text = [[self.detailsList objectAtIndex:self.currentImageIndex] objectForKey:@"detailTitle"];
     self.contentHeaderLabel.text = [[self.detailsList objectAtIndex:self.currentImageIndex] objectForKey:@"detailDesc"];
+    */
 }
 
 - (UIView*)viewForZoomingInScrollView:(UIScrollView *)scrollView
@@ -443,18 +432,28 @@
     
     switch (notificationType) {
         case 1:
-            localNotif.fireDate = [NSDate dateTomorrow];
+            self.remindMeValue = @"1h";
+            localNotif.fireDate = [NSDate dateWithHoursFromNow:1];
             break;
         case 2:
-            localNotif.fireDate = [NSDate nextWeek];
+            self.remindMeValue = @"1d";
+            localNotif.fireDate = [NSDate dateTomorrow];
             break;
         case 3:
+            self.remindMeValue = @"1w";
+            localNotif.fireDate = [NSDate nextWeek];
+            break;
+        case 4:
+            self.remindMeValue = @"1m";
             localNotif.fireDate = [NSDate nextMonh];
             break;
      
         default:
+            self.remindMeValue = @"";
             break;
     }
+//    localNotif.fireDate = [NSDate dateWithMinutesFromNow:notificationType];
+    
     localNotif.timeZone = [NSTimeZone defaultTimeZone];
     localNotif.alertBody = @"scdeule remider"; // add notification discription
     localNotif.alertAction = @"View";
@@ -482,8 +481,6 @@
     [MRDatabaseHelper updateNotifiction:[self.notificationDetails objectForKey:@"notificationId"] userFavouriteSatus:YES userReadStatus:YES withSavedStatus:^(BOOL isScuccess) {
         
     }];
-
-
 }
 
 - (void)submitFeedBack
@@ -544,8 +541,16 @@
     
     if (self.favourite == YES)
     {
-            NSString *fav = @"Y";
-            [notificationdict setObject:fav  forKey:@"favourite"];
+        [notificationdict setObject:[NSNumber numberWithBool:YES] forKey:@"favourite"];
+    }
+    
+    if (self.remindMeValue != nil && self.remindMeValue.length > 0) {
+        [notificationdict setObject:self.remindMeValue forKey:@"remindMe"];
+    }
+    
+    NSNumber *loggedInDoctorId = [MRAppControl sharedHelper].userRegData[@"doctorId"];
+    if (loggedInDoctorId != nil) {
+        [notificationdict setObject:loggedInDoctorId forKey:@"doctorId"];
     }
     
     //[notificationdict setObject:[NSNumber numberWithFloat:self.rating]  forKey:@"rating"];
@@ -558,6 +563,12 @@
     [notificationdict setObject:[MRCommon stringFromDate:[NSDate date] withDateFormate:@"YYYYMMddHHmmss"]  forKey:@"viewedOn"];
     
     [notificationdict setObject:[self.notificationDetails objectForKey:@"notificationId"]  forKey:@"userNotificationId"];
+    
+    [notificationdict setObject:@"1h" forKey:@"remindMe"];
+    
+    [notificationdict setObject:@"4.5" forKey:@"rating"];
+    [notificationdict setObject:@"Y" forKey:@"prescribe"];
+    [notificationdict setObject:@"N" forKey:@"recomend"];
     
     [[MRWebserviceHelper sharedWebServiceHelper] updateNotification:notificationdict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
         if (status)
@@ -674,7 +685,7 @@
     }
     
     self.currentImageIndex++;
-    [self updateNotification:[[self.detailsList objectAtIndex:self.currentImageIndex] objectForKey:@"detailId"]];
+//    [self updateNotification:[[self.detailsList objectAtIndex:self.currentImageIndex] objectForKey:@"detailId"]];
 }
 
 - (IBAction)rightButtonAction:(id)sender
@@ -684,7 +695,7 @@
         self.currentImageIndex = self.detailsList.count;
     }
     self.currentImageIndex--;
-    [self updateNotification:[[self.detailsList objectAtIndex:self.currentImageIndex] objectForKey:@"detailId"]];
+//    [self updateNotification:[[self.detailsList objectAtIndex:self.currentImageIndex] objectForKey:@"detailId"]];
 
 }
 
@@ -703,6 +714,13 @@
 
 - (void)showFullScreen
 {
+    UITapGestureRecognizer *recoginzer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fullScreenButtonAction:)];
+    [recoginzer setNumberOfTapsRequired:1];
+    [self.navViewExitFullScreen addGestureRecognizer:recoginzer];
+    
+    UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navViewExitFullScreen];
+    self.navigationItem.rightBarButtonItem = rightButtonItem;
+    
     [self.fullScreenScrollView setZoomScale:1.0];
     [self.fullScreenScrollView setMinimumZoomScale:0.5];
     [self.fullScreenScrollView setMaximumZoomScale:5.0];
@@ -712,28 +730,28 @@
     self.isFullScreen = YES;
     self.contentView.hidden = YES;
     self.footerView.hidden = YES;
-    self.drugNamelabel.hidden = YES;
-    self.companyNamelabel.hidden = YES;
-    self.fullscreenView.hidden = YES;
-    self.navigationItem.leftBarButtonItem = nil;
+    self.drugNameLabel.hidden = YES;
     self.navigationItem.hidesBackButton = YES;
     self.fullScreenImageViewHeight.constant = self.fullScreenContentView.frame.size.height;
     self.fullScreenImageViewWidth.constant = self.fullScreenContentView.frame.size.width;
-    self.titleLabel.text = @"Notification details";
     [self updateViewConstraints];
 }
 
 - (void)hideFullScreen
 {
+    UITapGestureRecognizer *recoginzer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fullScreenButtonAction:)];
+    [recoginzer setNumberOfTapsRequired:1];
+    [self.navView addGestureRecognizer:recoginzer];
+    
+    UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navView];
+    self.navigationItem.rightBarButtonItem = rightButtonItem;
+    
     self.fullScreenContentView.hidden = YES;
     [self.view sendSubviewToBack:self.fullScreenContentView];
     self.isFullScreen = NO;
     self.contentView.hidden = NO;
     self.footerView.hidden = NO;
-    self.drugNamelabel.hidden = NO;
-    self.companyNamelabel.hidden = NO;
-    self.fullscreenView.hidden = NO;
-    self.titleLabel.text = [self.selectedNotification objectForKey:@"companyName"];
+    self.drugNameLabel.hidden = NO;
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

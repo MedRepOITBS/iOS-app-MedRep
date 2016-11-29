@@ -86,6 +86,7 @@ withComplitionHandler:(completionHandler)responceHandler;
 - (void)getRecreateOTP:(NSString*)str
  withComplitionHandler:(completionHandler)responceHandler;
 
+- (void)getPendingCount:(BOOL)reset andHandler:(completionHandler)responceHandler;
 
 - (void)getMyAppointments:(NSString*)appointmentDetails
                  withHandler:(completionHandler)responceHandler;

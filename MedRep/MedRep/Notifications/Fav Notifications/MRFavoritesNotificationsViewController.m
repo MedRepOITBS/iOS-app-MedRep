@@ -15,10 +15,6 @@
 #import "MRCommon.h"
 #import "MRConstants.h"
 
-#define kImagesArray [NSArray arrayWithObjects:@"img1@2x.jpg",@"NDcompany4@2x.jpg",@"readnotification3@2x.jpg", nil]
-#define kDrugNameArray [NSArray arrayWithObjects:@"Test 1",@"Test 2",@"Test 3", nil]
-#define kCompanyNamesArray [NSArray arrayWithObjects:@"Description 1",@"Description 2",@"Description 3", nil]
-
 @interface MRFavoritesNotificationsViewController ()<UITableViewDataSource, UITableViewDelegate, MRFavoriteFilterViewControllerDelegate, SWRevealViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *navView;
@@ -34,19 +30,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    SWRevealViewController *revealController = [self revealViewController];
-    revealController.delegate = self;
-    [revealController panGestureRecognizer];
-    [revealController tapGestureRecognizer];
+    self.navigationItem.title = @"Favorites";
     
-    
-    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon.png"]
-                                                                         style:UIBarButtonItemStylePlain target:revealController action:@selector(revealToggle:)];
-    
+    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonAction:)];
     self.navigationItem.leftBarButtonItem = revealButtonItem;
     
     UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navView];
-    self.navigationItem.rightBarButtonItem = rightButtonItem;
+    UIBarButtonItem *sortButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"cnsort.png"] style:UIBarButtonItemStylePlain target:self action:@selector(sortByButtonAction:)];
+    
+    [self.navigationItem setRightBarButtonItems:@[rightButtonItem, sortButtonItem]];
     
     [MRDatabaseHelper getNotifications:NO withFavourite:YES withNotificationsList:^(NSArray *fetchList) {
         self.notificationDetailsList = fetchList;

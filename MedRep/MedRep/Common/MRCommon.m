@@ -556,9 +556,93 @@
     return selectedColor;
 }
 
++ (void)parseNotificationMessage:(NSDictionary*)responce
+                        forImage:(void (^)(UIImage *image))donloadedImage{
+    if (responce != nil) {
+        NSString *contentLocation = [responce objectOrNilForKey:@"contentLocation"];
+        if (contentLocation != nil && contentLocation.length > 0) {
+            dispatch_queue_t queue = dispatch_queue_create("com.medrep", 0);
+            
+            dispatch_async(queue,
+                           ^{
+                               if ([[MRAppControl sharedHelper] internetCheck])
+                               {
+                                    NSURL *url = [[NSURL alloc] initWithString:contentLocation];
+                                    NSData *mydata = [[NSData alloc] initWithContentsOfURL:url];
+                                    
+                                    if (mydata != nil)
+                                    {
+                                        UIImage *tempImg = [[UIImage alloc] initWithData:mydata];
+                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                            [MRCommon stopActivityIndicator];
+                                            donloadedImage (tempImg);
+                                        });
+                                    }
+                                    else
+                                    {
+                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                            [MRCommon stopActivityIndicator];
+                                            donloadedImage (nil);
+                                        });
+                                    }
+                               } else {
+                                   dispatch_async(dispatch_get_main_queue(), ^{
+                                       [MRCommon stopActivityIndicator];
+                                       donloadedImage(nil);
+                                   });
+                               }
+                           });
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MRCommon stopActivityIndicator];
+                donloadedImage(nil);
+            });
+        }
+    } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [MRCommon stopActivityIndicator];
+            donloadedImage(nil);
+        });
+    }
+}
+
++ (void)parseNotificationContent:(NSInteger)notificationID
+                          status:(BOOL)status responce:(NSDictionary*)responce
+                        forImage:(void (^)(UIImage *image))donloadedImage {
+    if (status)
+    {
+        [MRCommon parseNotificationMessage:responce forImage:donloadedImage];
+    }
+    else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+    {
+        [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+         {
+             [MRCommon savetokens:responce];
+             [[MRWebserviceHelper sharedWebServiceHelper] getMyNotificationContent:notificationID
+                                                                       withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                                           [MRCommon parseNotificationContent:notificationID
+                                                                                                       status:status responce:responce
+                                                                                                     forImage:donloadedImage];
+                                                                       }];
+         }];
+    }
+    else
+    {
+        [MRCommon stopActivityIndicator];
+        donloadedImage(nil);
+    }
+}
+
 + (void)getNotificationImageByID:(NSInteger)notificationID forImage:(void (^)(UIImage *image))donloadedImage
 {
-     NSString *imageurl  = [NSString stringWithFormat:@"%@/api/doctor/getMyNotificationContent/%ld?access_token=%@",kBaseURL,notificationID,[MRDefaults objectForKey:kAuthenticationToken]];
+    [[MRWebserviceHelper sharedWebServiceHelper] getMyNotificationContent:notificationID
+                                                              withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                                  [MRCommon parseNotificationContent:notificationID
+                                                                                              status:status responce:responce
+                                                                   forImage:donloadedImage];
+                                                              }];
+    /*
+     NSString *imageurl  = [NSString stringWithFormat:@"%@/doctor/getMyNotificationContent/%ld?token=%@",kBaseWebURL,notificationID,[MRDefaults objectForKey:kAuthenticationToken]];
     
     dispatch_queue_t queue = dispatch_queue_create("com.medrep", 0);
     dispatch_queue_t main = dispatch_get_main_queue();
@@ -598,6 +682,7 @@
                            donloadedImage (nil);
                        }
                    });
+     */
 }
 
 + (void)getPharmaNotificationImageByID:(NSInteger)notificationID forImage:(void (^)(UIImage *image))donloadedImage
