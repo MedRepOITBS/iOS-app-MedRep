@@ -557,10 +557,11 @@
 }
 
 + (void)parseNotificationMessage:(NSDictionary*)responce
-                        forImage:(void (^)(UIImage *image))donloadedImage{
+                        forImage:(void (^)(NSString *image))donloadedImage{
     if (responce != nil) {
         NSString *contentLocation = [responce objectOrNilForKey:@"contentLocation"];
         if (contentLocation != nil && contentLocation.length > 0) {
+            /*
             dispatch_queue_t queue = dispatch_queue_create("com.medrep", 0);
             
             dispatch_async(queue,
@@ -592,6 +593,9 @@
                                    });
                                }
                            });
+             */
+            [MRCommon stopActivityIndicator];
+            donloadedImage(contentLocation);
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [MRCommon stopActivityIndicator];
@@ -608,7 +612,7 @@
 
 + (void)parseNotificationContent:(NSInteger)notificationID
                           status:(BOOL)status responce:(NSDictionary*)responce
-                        forImage:(void (^)(UIImage *image))donloadedImage {
+                        forImage:(void (^)(NSString *image))donloadedImage {
     if (status)
     {
         [MRCommon parseNotificationMessage:responce forImage:donloadedImage];
@@ -633,7 +637,7 @@
     }
 }
 
-+ (void)getNotificationImageByID:(NSInteger)notificationID forImage:(void (^)(UIImage *image))donloadedImage
++ (void)getNotificationImageByID:(NSInteger)notificationID forImage:(void (^)(NSString *image))donloadedImage
 {
     [[MRWebserviceHelper sharedWebServiceHelper] getMyNotificationContent:notificationID
                                                               withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {

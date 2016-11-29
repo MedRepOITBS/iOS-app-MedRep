@@ -100,7 +100,7 @@
 + (UIColor*)getColorForIndex:(NSInteger)index;
 
 + (void)getNotificationImageByID:(NSInteger)notificationID
-                       forImage:(void (^)(UIImage *image))donloadedImage;
+                       forImage:(void (^)(NSString *image))donloadedImage;
 
 + (NSString*)getUpperCaseLetter:(NSString*)notificationName;
 

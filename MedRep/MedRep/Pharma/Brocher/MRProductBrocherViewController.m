@@ -117,7 +117,7 @@
 
 - (void)loadImages
 {
-    [MRCommon getNotificationImageByID:[[[self.detailsList objectAtIndex:self.imagesCount] objectForKey:@"detailId"] integerValue] forImage:^(UIImage *image)
+    [MRCommon getNotificationImageByID:[[[self.detailsList objectAtIndex:self.imagesCount] objectForKey:@"detailId"] integerValue] forImage:^(NSString *image)
      {
          if (image)
          {

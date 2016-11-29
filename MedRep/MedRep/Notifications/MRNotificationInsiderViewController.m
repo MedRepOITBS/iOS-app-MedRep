@@ -184,7 +184,7 @@
 - (void)loadImages
 {
     [MRCommon getNotificationImageByID:[[self.detailsList objectForKey:@"detailId"] integerValue]
-                              forImage:^(UIImage *image)
+                              forImage:^(NSString *image)
      {
          if (image)
          {
@@ -213,7 +213,9 @@
 {
     if (imageId != nil) {
         NSString *key = [NSString stringWithFormat:@"%ld",imageId.integerValue];
-        UIImage *image = [self.noticationImages objectForKey:key];
+        NSString *image = [self.noticationImages objectForKey:key];
+
+        [self.notifcationImage loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:image]]];
 //        self.fullScreenNotificationImage.image = image;
 //        self.notifcationImage.image = image;
     }
@@ -714,6 +716,14 @@
 
 - (void)showFullScreen
 {
+    NSNumber *imageId = [self.detailsList objectForKey:@"detailId"];
+    if (imageId != nil) {
+        NSString *key = [NSString stringWithFormat:@"%ld",(long)imageId.integerValue];
+        NSString *image = [self.noticationImages objectForKey:key];
+        
+        [self.fullScreenNotificationImage loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:image]]];
+    }
+    
     UITapGestureRecognizer *recoginzer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fullScreenButtonAction:)];
     [recoginzer setNumberOfTapsRequired:1];
     [self.navViewExitFullScreen addGestureRecognizer:recoginzer];
