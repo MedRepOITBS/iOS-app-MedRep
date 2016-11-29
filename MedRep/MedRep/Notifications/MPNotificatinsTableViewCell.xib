@@ -12,7 +12,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <frame key="frameInset" width="320" height="99.5"/>
+                <frame key="frameInset" width="320" height="99"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="78Q-Tf-Q43">
@@ -77,6 +77,16 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P2g-ib-cYt">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="4ho-1K-hCJ"/>
+                                    <constraint firstAttribute="height" constant="20" id="f6g-M0-oD2"/>
+                                </constraints>
+                                <state key="normal" image="eye.png"/>
+                                <connections>
+                                    <action selector="downloadReportButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="0Qr-ge-wC2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -96,11 +106,13 @@
                             <constraint firstAttribute="trailing" secondItem="uQA-0O-7CA" secondAttribute="trailing" id="VKt-J0-VXQ"/>
                             <constraint firstAttribute="trailing" secondItem="VQW-2U-c3E" secondAttribute="trailing" constant="20" id="YKO-Kc-XeK"/>
                             <constraint firstAttribute="trailing" secondItem="oKz-CZ-0Yn" secondAttribute="trailing" constant="40" id="YoE-iE-h21"/>
+                            <constraint firstItem="P2g-ib-cYt" firstAttribute="top" secondItem="VQW-2U-c3E" secondAttribute="top" id="abc-Sg-ppl"/>
                             <constraint firstItem="73e-fK-31c" firstAttribute="leading" secondItem="78Q-Tf-Q43" secondAttribute="leading" constant="30" id="cml-xh-gdO"/>
                             <constraint firstItem="BHR-VU-KK7" firstAttribute="top" secondItem="78Q-Tf-Q43" secondAttribute="top" constant="19" id="dui-2e-DZp"/>
                             <constraint firstItem="BHR-VU-KK7" firstAttribute="leading" secondItem="78Q-Tf-Q43" secondAttribute="leading" constant="20" id="jwe-qr-Elu"/>
                             <constraint firstItem="U5X-Vv-EsD" firstAttribute="leading" secondItem="78Q-Tf-Q43" secondAttribute="leading" constant="105" id="mlT-va-FbL"/>
                             <constraint firstItem="O2E-GV-PAb" firstAttribute="leading" secondItem="78Q-Tf-Q43" secondAttribute="leading" id="w2Q-Vg-oOP"/>
+                            <constraint firstItem="VQW-2U-c3E" firstAttribute="leading" secondItem="P2g-ib-cYt" secondAttribute="trailing" constant="5" id="zD4-IK-NxQ"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -121,6 +133,7 @@
                 <outlet property="cellimageTopConstarint" destination="6FY-20-h2W" id="EOE-pZ-dYt"/>
                 <outlet property="companyLabel" destination="oKz-CZ-0Yn" id="9ZV-Q9-lsu"/>
                 <outlet property="companyLogo" destination="BHR-VU-KK7" id="cGq-1d-r3C"/>
+                <outlet property="downloadSurveyReportButton" destination="P2g-ib-cYt" id="0vT-KL-IWX"/>
                 <outlet property="indicationNewLabel" destination="O2E-GV-PAb" id="EDz-pX-uNq"/>
                 <outlet property="indicatorNewXCoordinate" destination="w2Q-Vg-oOP" id="xA9-lT-fs0"/>
                 <outlet property="medicineLabel" destination="U5X-Vv-EsD" id="j5w-fB-lFc"/>
@@ -134,6 +147,7 @@
     </objects>
     <resources>
         <image name="comapny-logo.png" width="115" height="76"/>
+        <image name="eye.png" width="128" height="128"/>
         <image name="right-arrow.png" width="10" height="17"/>
         <image name="transperent-bg.png" width="292" height="90"/>
     </resources>

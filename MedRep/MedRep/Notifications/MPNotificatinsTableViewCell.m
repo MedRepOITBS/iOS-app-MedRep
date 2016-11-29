@@ -7,15 +7,28 @@
 //
 
 #import "MPNotificatinsTableViewCell.h"
+#import "MRCommon.h"
+#import "MRWebserviceHelper.h"
+
+@interface MPNotificatinsTableViewCell ()
+
+@property (assign, nonatomic) NSInteger surveyId;
+
+@property (weak, nonatomic) IBOutlet UIButton *downloadSurveyReportButton;
+
+@end
 
 @implementation MPNotificatinsTableViewCell
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     // Initialization code
     self.notificationLetter.layer.cornerRadius = 30;
     self.notificationLetter.layer.borderWidth = 2.0;
     self.notificationLetter.layer.borderColor = [UIColor whiteColor].CGColor;
     self.notificationLetter.clipsToBounds = YES;
+    
+    [self.downloadSurveyReportButton setHidden:YES];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -48,6 +61,45 @@
 //    {
 //        self.indicationNewLabel.hidden = YES;
 //    }
+}
+
+- (void)enableDownloadReportButton:(BOOL)enable {
+    [self.downloadSurveyReportButton setHidden:enable];
+}
+
+- (IBAction)downloadReportButtonAction:(id)sender {
+    [MRCommon showActivityIndicator:@"Loading..."];
+    
+    [[MRWebserviceHelper sharedWebServiceHelper] getSurveyReports:self.surveyId withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        if (status)
+        {
+            [MRCommon stopActivityIndicator];
+        }
+        else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+        {
+            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+             {
+                 [MRCommon stopActivityIndicator];
+                 [MRCommon savetokens:responce];
+                 [[MRWebserviceHelper sharedWebServiceHelper] getSurveyReports:0 withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                     if (status)
+                     {
+                         [MRCommon stopActivityIndicator];
+                     }
+                 }];
+             }];
+        }
+        else
+        {
+            [MRCommon stopActivityIndicator];
+        }
+    }];
+}
+
+- (void)setSurveyReport:(NSNumber*)surveyId {
+    if (surveyId != nil) {
+        self.surveyId = surveyId.longValue;
+    }
 }
 
 @end

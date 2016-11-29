@@ -142,7 +142,10 @@
         regCell                             = (MPNotificatinsTableViewCell *)[nibViews lastObject];
         
     }
+    [regCell enableDownloadReportButton:NO];
+    
     NSDictionary *survey              = [self.surveysListArray objectAtIndex:indexPath.row];
+    [regCell setSurveyReport:[survey valueForKey:@"surveyId"]];
     
     regCell.notificationLetter.hidden       = NO;
     regCell.notificationLetter.backgroundColor = [MRCommon getColorForIndex:indexPath.row];

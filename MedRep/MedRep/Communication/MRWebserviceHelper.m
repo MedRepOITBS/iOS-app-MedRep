@@ -2764,4 +2764,27 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
     [self sendServiceRequest:urlRequest withHandler:responceHandler];
 }
 
+-(void)getSurveyReports:(NSInteger)surveyId withHandler:(completionHandler)responseHandler {
+    
+    NSInteger doctorId = 0;
+    
+    NSNumber *loggedInDoctorId = [MRAppControl sharedHelper].userRegData[@"doctorId"];
+    if (loggedInDoctorId != nil) {
+        doctorId = loggedInDoctorId.longValue;
+    }
+    
+    NSString *stringFormOfUrl =  [NSString stringWithFormat:@"%@/survey/getReport?repId=0&doctorId=%ld&surveyId=%ld&token=%@",kBaseWebURL, doctorId, surveyId, [MRDefaults objectForKey:kAuthenticationToken]];
+    
+    NSURL *url = [NSURL URLWithString:stringFormOfUrl];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [urlRequest setTimeoutInterval:120];
+    
+    // Setting post
+    [urlRequest setHTTPMethod:@"GET"];
+    [urlRequest setValue:@"text/plain" forHTTPHeaderField:@"Content-Type"];
+    self.serviceType = kMRWebServiceTypeLogin;
+    [self sendServiceRequest:urlRequest withHandler:responseHandler];
+}
+
 @end

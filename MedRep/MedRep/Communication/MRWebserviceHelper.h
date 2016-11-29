@@ -289,6 +289,8 @@ withComplitionHandler:(completionHandler)responceHandler;
 
 - (void)registerDeviceTokenWithPushAPI:(id)reqDict withHandler:(completionHandler)responceHandler;
 
+-(void)getSurveyReports:(NSInteger)surveyId withHandler:(completionHandler)responseHandler;
+
 @end
 
 @interface NSDictionary (CategoryName)

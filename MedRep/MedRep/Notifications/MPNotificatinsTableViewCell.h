@@ -25,4 +25,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *notificationLetterLeadingConstratint;
 
 - (void)configureCompanyNotifcationcell:(NSIndexPath*)indexpath;
+
+- (void)enableDownloadReportButton:(BOOL)enable;
+- (void)setSurveyReport:(NSNumber*)surveyId;
+
 @end
