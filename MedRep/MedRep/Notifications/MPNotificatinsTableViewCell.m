@@ -74,6 +74,7 @@
         if (status)
         {
             [MRCommon stopActivityIndicator];
+            [MRCommon showAlert:[responce objectOrNilForKey:@"result"] delegate:nil];
         }
         else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
         {
@@ -85,6 +86,7 @@
                      if (status)
                      {
                          [MRCommon stopActivityIndicator];
+                         [MRCommon showAlert:[responce objectOrNilForKey:@"result"] delegate:nil];
                      }
                  }];
              }];

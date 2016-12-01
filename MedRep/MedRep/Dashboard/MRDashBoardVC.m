@@ -223,7 +223,7 @@
 }
 
 - (void)getPendingCounts {
-    [[MRWebserviceHelper sharedWebServiceHelper] getPendingCount:false andHandler:^(BOOL status, NSString *details, NSDictionary *responce)
+    [[MRWebserviceHelper sharedWebServiceHelper] getPendingCount:nil andHandler:^(BOOL status, NSString *details, NSDictionary *responce)
      {
          if (status)
          {
@@ -234,7 +234,7 @@
              [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
               {
                   [MRCommon savetokens:responce];
-                  [[MRWebserviceHelper sharedWebServiceHelper] getPendingCount:false andHandler:^(BOOL status, NSString *details, NSDictionary *responce)
+                  [[MRWebserviceHelper sharedWebServiceHelper] getPendingCount:nil andHandler:^(BOOL status, NSString *details, NSDictionary *responce)
                    {
                        if (status)
                        {
@@ -368,6 +368,10 @@
 
 - (IBAction)newsButtonAction:(id)sender
 {
+    [[MRWebserviceHelper sharedWebServiceHelper] getPendingCount:@{@"resetDashboard" : [NSNumber numberWithBool:YES]} andHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        
+    }];
+    
     MRTransformViewController *notiFicationViewController = [[MRTransformViewController alloc] initWithNibName:@"MRTransformViewController" bundle:nil];
     [self.navigationController pushViewController:notiFicationViewController animated:YES];
 }

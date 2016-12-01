@@ -1214,14 +1214,16 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
 
 }
 
-- (void)getPendingCount:(BOOL)reset andHandler:(completionHandler)responceHandler
+- (void)getPendingCount:(NSDictionary*)dict andHandler:(completionHandler)responceHandler
 {
-    NSMutableDictionary *dict = [NSMutableDictionary new];
-    [dict setValue:[NSNumber numberWithBool:reset] forKey:@"reset"];
-    
     NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/getPendingItems?token=%@",kBaseWebURL,[MRDefaults objectForKey:kAuthenticationToken]];
     
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict
+    NSDictionary *tempDict = @{};
+    if (dict != nil) {
+        tempDict = dict;
+    }
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:tempDict
                                                        options:NSJSONWritingPrettyPrinted
                                                          error:nil];
     NSURL *url = [NSURL URLWithString:stringFormOfUrl];
