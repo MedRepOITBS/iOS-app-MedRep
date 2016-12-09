@@ -92,7 +92,7 @@
 }
 
 - (void)resetPendingSurveyCount {
-    [[MRWebserviceHelper sharedWebServiceHelper] getPendingCount:@{@"resetSurveys" : [NSNumber numberWithBool:YES]} andHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+    [[MRWebserviceHelper sharedWebServiceHelper] getPendingCount:@{@"resetSurveyCount" : [NSNumber numberWithBool:YES]} andHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
         
     }];
 }

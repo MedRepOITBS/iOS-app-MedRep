@@ -112,7 +112,7 @@
 
     }];
     
-    [[MRWebserviceHelper sharedWebServiceHelper] getPendingCount:@{@"resetNotifications" : [NSNumber numberWithBool:YES]} andHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+    [[MRWebserviceHelper sharedWebServiceHelper] getPendingCount:@{@"resetNotificationCount" : [NSNumber numberWithBool:YES]} andHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
         
     }];
 

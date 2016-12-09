@@ -56,7 +56,7 @@
     [super viewDidLoad];
     
     NSDictionary *userData = [MRAppControl sharedHelper].userRegData;
-    self.userNameLabel.text = [NSString stringWithFormat:@"Welcome %@. %@ %@",[userData objectForKey:KTitle],[userData objectForKey:KFirstName],[userData objectForKey:KLastName]];
+    self.userNameLabel.text = [NSString stringWithFormat:@"Welcome %@ %@",[userData objectForKey:KFirstName],[userData objectForKey:KLastName]];
     
     SWRevealViewController *revealController = [self revealViewController];
     revealController.delegate = self;
