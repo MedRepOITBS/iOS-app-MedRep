@@ -258,7 +258,9 @@ UIImagePickerControllerDelegate>
                                                      if (like) {
                                                          likeCount++;
                                                      } else {
-                                                         likeCount--;
+                                                         if (likeCount > 0) {
+                                                             likeCount--;
+                                                         }
                                                      }
                                                      
                                                      currentPost.likesCount = [NSNumber numberWithLong:likeCount];
