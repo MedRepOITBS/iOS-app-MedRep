@@ -74,6 +74,10 @@
         self.commentPic.image = nil;
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            
+            NSString *key = [NSString stringWithFormat:@"%@_fileUrl", post.topic_id];
+            [[MRAppControl sharedHelper].globalCache objectForKey:key];
+            
             NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:post.fileUrl]];
             if (imageData != nil) {
                 dispatch_async(dispatch_get_main_queue(), ^{

@@ -755,7 +755,12 @@
         parentView.image = [UIImage imageNamed:@"user"];
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:contact.dPicture]];
+            NSString *key = [NSString stringWithFormat:@"%ld_contactImage", contact.contactId.longValue];
+            id imageData = [[MRAppControl sharedHelper].globalCache objectForKey:key];
+            if (imageData == nil) {
+                imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:contact.dPicture]];
+                [[MRAppControl sharedHelper].globalCache setObject:imageData forKey:key];
+            }
             if (imageData != nil) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     parentView.image = [UIImage imageWithData:imageData];
@@ -885,7 +890,13 @@
     } else if (group.imageUrl != nil && group.imageUrl.length > 0) {
         parentView.image = [UIImage imageNamed:@"group"];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:group.imageUrl]];
+            NSString *key = [NSString stringWithFormat:@"%ld_groupImage", group.group_id.longValue];
+            id imageData = [[MRAppControl sharedHelper].globalCache objectForKey:key];
+            if (imageData == nil) {
+                imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:group.imageUrl]];
+                [[MRAppControl sharedHelper].globalCache setObject:imageData forKey:key];
+            }
+
             if (imageData != nil) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     parentView.image = [UIImage imageWithData:imageData];
@@ -919,12 +930,18 @@
     }
 }
 
-+ (void)getNotificationImage:(NSString*)path andImageView:(UIImageView*)parentView {
++ (void)getNotificationImage:notificationId displayPicture:(NSString*)path andImageView:(UIImageView*)parentView {
     parentView.image = nil;
     
     if (path != nil && path.length > 0) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:path]];
+            NSString *key = [NSString stringWithFormat:@"%@_companyImage", notificationId];
+            id imageData = [[MRAppControl sharedHelper].globalCache objectForKey:key];
+            if (imageData == nil) {
+                imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:path]];
+                [[MRAppControl sharedHelper].globalCache setObject:imageData forKey:key];
+            }
+            
             if (imageData != nil) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     parentView.image = [UIImage imageWithData:imageData];

@@ -49,6 +49,9 @@
     //_launchScreen = @"Survey";
     //_launchScreen = @"Notifications";
     
+    [MRAppControl sharedHelper].globalCache = [NSCache new];
+    
+    
     MRAppControl *appController = [MRAppControl sharedHelper];
     [appController launchWithApplicationMainWindow:self.window];
     

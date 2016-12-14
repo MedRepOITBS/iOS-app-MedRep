@@ -50,7 +50,8 @@
     
     id displayPicture = [comapnyDetails objectForKey:@"dPicture"];
     if (displayPicture != nil && [displayPicture isKindOfClass:[NSDictionary class]]) {
-        [MRAppControl getNotificationImage:[displayPicture objectForKey:@"dPicture"] andImageView:self.companyLogoImage];
+        [MRAppControl getNotificationImage:[comapnyDetails objectForKey:@"companyId"]
+                            displayPicture:[displayPicture objectForKey:@"dPicture"] andImageView:self.companyLogoImage];
     }
     
     [self loadNotificationDetails];

@@ -123,7 +123,13 @@ andParentViewController:(UIViewController *)parentViewController {
     
     if (self.post.url != nil && self.post.url.length > 0) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.post.url]];
+            NSLog(@"%@",post);
+            NSString *key = [NSString stringWithFormat:@"%ld_url", self.post.sharePostId.longValue];
+            id imageData = [[MRAppControl sharedHelper].globalCache objectForKey:key];
+            if (imageData == nil) {
+                imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.post.url]];
+                [[MRAppControl sharedHelper].globalCache setObject:imageData forKey:key];
+            }
             if (imageData != nil) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     self.postImageView.image = [UIImage imageWithData:imageData];
@@ -158,7 +164,13 @@ andParentViewController:(UIViewController *)parentViewController {
     if (post.displayPicture != nil && post.displayPicture.length > 0) {
         self.profilePicImageView.image = [UIImage imageNamed:@"person"];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:post.displayPicture]];
+            NSString *key = [NSString stringWithFormat:@"%ld_displayPicture", post.sharePostId.longValue];
+            id imageData = [[MRAppControl sharedHelper].globalCache objectForKey:key];
+            if (imageData == nil) {
+                imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:post.displayPicture]];
+                [[MRAppControl sharedHelper].globalCache setObject:imageData forKey:key];
+            }
+
             if (imageData != nil) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     self.profilePicImageView.image = [UIImage imageWithData:imageData];

@@ -230,9 +230,12 @@
     regCell.indicationNewLabel.hidden           = ([[[dict objectForKey:@"status"] uppercaseString] isEqualToString:[@"New" uppercaseString]]) ? NO : YES;
     regCell.companyLabel.hidden             = NO;
     regCell.companyLabel.text               = [comapnyDetails objectForKey:@"companyName"];
-    id displayPicture = [comapnyDetails objectForKey:@"dPicture"];
-    if (displayPicture != nil && [displayPicture isKindOfClass:[NSDictionary class]]) {
-        [MRAppControl getNotificationImage:[displayPicture objectForKey:@"dPicture"] andImageView:regCell.companyLogo];
+    id displayPicture = [dict objectForKey:@"dPicture"];
+    if (displayPicture != nil) {
+        [MRAppControl getNotificationImage:[comapnyDetails objectForKey:@"companyId"]
+                             displayPicture:displayPicture andImageView:regCell.companyLogo];
+    } else {
+        regCell.companyLogo.image = nil;
     }
     
     return regCell;

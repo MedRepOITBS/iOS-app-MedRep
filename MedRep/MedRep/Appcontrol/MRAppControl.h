@@ -18,6 +18,7 @@
     BOOL                   isInternetAvailable;
 }
 
+@property (strong, atomic) NSCache *globalCache;
 @property (strong, nonatomic) UIWindow *appMainWindow;
 @property (strong, nonatomic) ViewController *viewController;
 @property (assign, nonatomic) NSInteger userType;
@@ -68,7 +69,8 @@
 + (UIImage*)getRepliedByProfileImage:(MRPostedReplies*)replies andImageView:(UIImageView*)parentView;
 
 + (void)getGroupImage:(MRGroup*)group andImageView:(UIImageView*)parentView;
-+ (void)getNotificationImage:(NSString*)path andImageView:(UIImageView*)parentView;
++ (void)getNotificationImage:(NSString*)notificationId displayPicture:(NSString*)path
+                andImageView:(UIImageView*)parentView;
 
 + (NSString*)getFileName;
 + (KLCPopup*)setupCommentBox:(id)delegate;

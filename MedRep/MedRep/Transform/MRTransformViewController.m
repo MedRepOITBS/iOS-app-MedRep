@@ -329,6 +329,9 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
                 
                 regCell.img.image = [UIImage imageNamed:@"RssNew"];
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    NSString *key = [NSString stringWithFormat:@"%ld_fileUrl", transformData.newsId.longValue];
+                    [[MRAppControl sharedHelper].globalCache objectForKey:key];
+                    
                     NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:transformData.coverImgUrl]];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         if (imageData != nil) {

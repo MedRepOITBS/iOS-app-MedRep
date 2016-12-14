@@ -71,6 +71,10 @@
     
     if (post.url != nil && post.url.length > 0) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            
+            NSString *key = [NSString stringWithFormat:@"%ld_fileUrl", post.message_id.longValue];
+            [[MRAppControl sharedHelper].globalCache objectForKey:key];
+            
             NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:post.url]];
             if (imageData != nil) {
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -103,7 +107,15 @@
     if (post.displayPicture != nil && post.displayPicture.length > 0) {
         self.profilePicImageView.image = [UIImage imageNamed:@"person"];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:post.displayPicture]];
+            
+            NSLog(@"%@", post);
+            
+            NSString *key = [NSString stringWithFormat:@"%ld_displayPicture", post.message_id.longValue];
+            id imageData = [[MRAppControl sharedHelper].globalCache objectForKey:key];
+            if (imageData == nil) {
+                imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:post.displayPicture]];
+                [[MRAppControl sharedHelper].globalCache setObject:imageData forKey:key];
+            }
             if (imageData != nil) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     self.profilePicImageView.image = [UIImage imageWithData:imageData];
