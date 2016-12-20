@@ -14,6 +14,7 @@
 #import "MRWebserviceHelper.h"
 #import "MPNotificatinsTableViewCell.h"
 #import "MRPHSurveyDetailsViewController.h"
+#import "MRPHDownloadSurveyReportsViewController.h"
 
 @interface MRPHSurveyListViewController ()<UITableViewDataSource, UITableViewDelegate, SWRevealViewControllerDelegate>
 
@@ -162,15 +163,18 @@
     
     NSNumber *downloadStatus = [survey valueForKey:@"reportsAvailable"];
     if (downloadStatus != nil && downloadStatus.boolValue) {
-        [regCell.downloadSurveyReportButton setImage:[UIImage imageNamed:@"transperent-bg"]
-                                                      forState:UIControlStateNormal];
-        [regCell.downloadSurveyReportButton setUserInteractionEnabled:NO];
-    } else {
         [regCell.downloadSurveyReportButton setImage:[UIImage imageNamed:@"eye"]
                                             forState:UIControlStateNormal];
         [regCell.downloadSurveyReportButton setUserInteractionEnabled:YES];
+    } else {
+        [regCell.downloadSurveyReportButton setImage:[UIImage imageNamed:@"transperent-bg"]
+                                            forState:UIControlStateNormal];
+        [regCell.downloadSurveyReportButton setUserInteractionEnabled:NO];
     }
     
+    [regCell removeDownloadReportAction];
+    
+    [regCell.downloadSurveyReportButton setTag:indexPath.row];
     [regCell.downloadSurveyReportButton addTarget:self
                                            action:@selector(downloadSurveyReportButtonClicked:)
                                  forControlEvents:UIControlEventTouchUpInside];
@@ -179,7 +183,14 @@
 }
 
 - (void)downloadSurveyReportButtonClicked:(id)sender {
+    MRPHDownloadSurveyReportsViewController *downloadSurveyViewController = [[MRPHDownloadSurveyReportsViewController alloc] initWithNibName:@"MRPHDownloadSurveyReportsViewController" bundle:nil];
     
+    UIButton *button = (UIButton*)sender;
+    
+    NSDictionary *survey = [self.surveysListArray objectAtIndex:button.tag];
+    [downloadSurveyViewController setSurvey:survey];
+    
+    [self.navigationController pushViewController:downloadSurveyViewController animated:YES];
 }
 
 /*

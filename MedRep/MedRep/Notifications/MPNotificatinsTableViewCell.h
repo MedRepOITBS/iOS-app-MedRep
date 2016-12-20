@@ -30,4 +30,6 @@
 - (void)enableDownloadReportButton:(BOOL)enable;
 - (void)setSurveyReport:(NSNumber*)surveyId;
 
+- (void)removeDownloadReportAction;
+
 @end

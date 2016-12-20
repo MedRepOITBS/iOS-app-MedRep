@@ -65,6 +65,10 @@
     [self.downloadSurveyReportButton setHidden:enable];
 }
 
+- (void)removeDownloadReportAction {
+    [self.downloadSurveyReportButton removeTarget:self action:@selector(downloadReportButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+}
+
 - (IBAction)downloadReportButtonAction:(id)sender {
     [MRCommon showActivityIndicator:@"Loading..."];
     

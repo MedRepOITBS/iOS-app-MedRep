@@ -16,4 +16,6 @@
 @property (nonatomic, retain) NSString *surveyName;
 @property (nonatomic, retain) NSString *surveyId;
 
+- (void)downloadPendingDoctorsList;
+
 @end

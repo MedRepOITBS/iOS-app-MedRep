@@ -10,13 +10,16 @@
 #import "MRPHSurveyPendingList+CoreDataClass.h"
 #import "MRWebserviceHelper.h"
 #import "MRCommon.h"
+#import "MRPHSurveyDetailsViewController.h"
 
-@interface MRPHSurveyDetailsPendingDoctorTableViewCell ()
+@interface MRPHSurveyDetailsPendingDoctorTableViewCell () <UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *statusButton;
 @property (weak, nonatomic) IBOutlet UILabel *doctorName;
 
 @property (nonatomic) MRPHSurveyPendingList *doctorDetail;
+
+@property (nonatomic) MRPHSurveyDetailsViewController *parentViewController;
 
 @end
 
@@ -33,10 +36,11 @@
     // Configure the view for the selected state
 }
 
-- (void)setData:(MRPHSurveyPendingList*)doctorDetails {
-    NSLog(@"VAMSI - %@", doctorDetails.doctorName);
+- (void)setData:(MRPHSurveyPendingList*)doctorDetails
+andParentViewController:(MRPHSurveyDetailsViewController*)viewController {
     
     self.doctorDetail = doctorDetails;
+    self.parentViewController = viewController;
     
     if (doctorDetails != nil) {
         [self.doctorName setText:doctorDetails.doctorName];
@@ -83,15 +87,19 @@
 
 - (void)parseRemindResponse:(NSDictionary*)response {
     NSString *status = [response objectOrNilForKey:@"status"];
-    if (status != nil && status.length > 0 && [status caseInsensitiveCompare:@"success"]) {
+    if (status != nil && status.length > 0 && [status caseInsensitiveCompare:@"success"] == NSOrderedSame) {
         NSString *message = [response objectOrNilForKey:@"message"];
         if (message == nil || message.length == 0) {
             message = @"Reminder is sent to the doctor";
         }
-        [MRCommon showAlert:message delegate:nil];
+        [MRCommon showAlert:message delegate:self];
     } else {
         [MRCommon showAlert:@"Failed to send reminder !!!" delegate:nil];
     }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    [self.parentViewController downloadPendingDoctorsList];
 }
 
 @end

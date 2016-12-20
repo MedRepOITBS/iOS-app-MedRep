@@ -806,6 +806,10 @@
 		CC2025441E0842AA0042018E /* MRPHSurveyDetailsPendingDoctorTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC2025401E0842AA0042018E /* MRPHSurveyDetailsPendingDoctorTableViewCell.xib */; };
 		CC20254B1E0847DE0042018E /* MRPHSurveyStatistics+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CC20254A1E0847DE0042018E /* MRPHSurveyStatistics+CoreDataProperties.m */; };
 		CC20254C1E0847DE0042018E /* MRPHSurveyStatistics+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CC20254A1E0847DE0042018E /* MRPHSurveyStatistics+CoreDataProperties.m */; };
+		CC2025541E08D75B0042018E /* MRPHDownloadSurveyReportsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2025521E08D75B0042018E /* MRPHDownloadSurveyReportsViewController.m */; };
+		CC2025551E08D75B0042018E /* MRPHDownloadSurveyReportsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2025521E08D75B0042018E /* MRPHDownloadSurveyReportsViewController.m */; };
+		CC2025561E08D75B0042018E /* MRPHDownloadSurveyReportsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC2025531E08D75B0042018E /* MRPHDownloadSurveyReportsViewController.xib */; };
+		CC2025571E08D75B0042018E /* MRPHDownloadSurveyReportsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC2025531E08D75B0042018E /* MRPHDownloadSurveyReportsViewController.xib */; };
 		CC463DDE1D279DE7002AE85E /* MRShareOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC463DDC1D279DE7002AE85E /* MRShareOptionsViewController.m */; };
 		CC463DDF1D279DE7002AE85E /* MRShareOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC463DDC1D279DE7002AE85E /* MRShareOptionsViewController.m */; };
 		CC463DE01D279DE7002AE85E /* MRShareOptionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC463DDD1D279DE7002AE85E /* MRShareOptionsViewController.xib */; };
@@ -2337,6 +2341,9 @@
 		CC2025401E0842AA0042018E /* MRPHSurveyDetailsPendingDoctorTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MRPHSurveyDetailsPendingDoctorTableViewCell.xib; path = Pharma/MRPHSurveyDetailsPendingDoctorTableViewCell.xib; sourceTree = "<group>"; };
 		CC2025491E0847DE0042018E /* MRPHSurveyStatistics+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MRPHSurveyStatistics+CoreDataProperties.h"; sourceTree = "<group>"; };
 		CC20254A1E0847DE0042018E /* MRPHSurveyStatistics+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MRPHSurveyStatistics+CoreDataProperties.m"; sourceTree = "<group>"; };
+		CC2025511E08D75B0042018E /* MRPHDownloadSurveyReportsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRPHDownloadSurveyReportsViewController.h; path = Pharma/MRPHDownloadSurveyReportsViewController.h; sourceTree = "<group>"; };
+		CC2025521E08D75B0042018E /* MRPHDownloadSurveyReportsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRPHDownloadSurveyReportsViewController.m; path = Pharma/MRPHDownloadSurveyReportsViewController.m; sourceTree = "<group>"; };
+		CC2025531E08D75B0042018E /* MRPHDownloadSurveyReportsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MRPHDownloadSurveyReportsViewController.xib; path = Pharma/MRPHDownloadSurveyReportsViewController.xib; sourceTree = "<group>"; };
 		CC463DDB1D279DE7002AE85E /* MRShareOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRShareOptionsViewController.h; sourceTree = "<group>"; };
 		CC463DDC1D279DE7002AE85E /* MRShareOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRShareOptionsViewController.m; sourceTree = "<group>"; };
 		CC463DDD1D279DE7002AE85E /* MRShareOptionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRShareOptionsViewController.xib; sourceTree = "<group>"; };
@@ -4204,6 +4211,9 @@
 				CC20253E1E0842AA0042018E /* MRPHSurveyDetailsPendingDoctorTableViewCell.h */,
 				CC20253F1E0842AA0042018E /* MRPHSurveyDetailsPendingDoctorTableViewCell.m */,
 				CC2025401E0842AA0042018E /* MRPHSurveyDetailsPendingDoctorTableViewCell.xib */,
+				CC2025511E08D75B0042018E /* MRPHDownloadSurveyReportsViewController.h */,
+				CC2025521E08D75B0042018E /* MRPHDownloadSurveyReportsViewController.m */,
+				CC2025531E08D75B0042018E /* MRPHDownloadSurveyReportsViewController.xib */,
 			);
 			name = Pharma;
 			sourceTree = "<group>";
@@ -5157,6 +5167,7 @@
 				79DE1BE81B826245005289D6 /* upArrow@2x~iPad.png in Resources */,
 				79F4168B1B9F5CDB0089729B /* drug-icon@2x.png in Resources */,
 				B4BB24BD1D417E8000A3DD73 /* userLocal.png in Resources */,
+				CC2025561E08D75B0042018E /* MRPHDownloadSurveyReportsViewController.xib in Resources */,
 				791C37EE1C50256E00914728 /* upcoming_icon@2x.png in Resources */,
 				79F4168D1B9F5CDB0089729B /* navigation-icon@2x.png in Resources */,
 				7929E3AB1B9C8979001F1373 /* right-arrow@2x.png in Resources */,
@@ -5428,6 +5439,7 @@
 				CC7DB3721D0CC8A6007DFE4C /* profile_pic12.jpeg in Resources */,
 				CCD1FD9B1D9FEFA800A12ED0 /* MRMyWallViewController.xib in Resources */,
 				8AFF27AB1D21BE7B00080DF0 /* MRJoinGroupViewController.xib in Resources */,
+				CC2025571E08D75B0042018E /* MRPHDownloadSurveyReportsViewController.xib in Resources */,
 				CC7DB3861D0CC8A6007DFE4C /* profile_pic8.jpeg in Resources */,
 				B4E02C5D1D4706E7003A1859 /* logo_icon@2x.png in Resources */,
 				B4B4F0FE1D38AEDF00EFCC0E /* addProfileItemsTableViewCell.xib in Resources */,
@@ -6039,6 +6051,7 @@
 				79A4F8AE1BC186B200E58DC7 /* GraphPoint.m in Sources */,
 				B40E139E1D3F1268005830DA /* InterestViewController.m in Sources */,
 				8AFE8CDB1D0F20DC0000382E /* MRDevEnvironmentConfig.m in Sources */,
+				CC2025541E08D75B0042018E /* MRPHDownloadSurveyReportsViewController.m in Sources */,
 				83C127F91B77C88B00D2F08E /* MedRep.xcdatamodeld in Sources */,
 				B4B4F0E81D382E7300EFCC0E /* AddExperienceTableViewController.m in Sources */,
 				CC9857E61D2DAA6B00C74438 /* MRTransformPost+CoreDataProperties.m in Sources */,
@@ -6284,6 +6297,7 @@
 				CC7DB0731D0C8BEC007DFE4C /* MedRep.xcdatamodeld in Sources */,
 				CC7DB0741D0C8BEC007DFE4C /* MRPharmaMenuCell.m in Sources */,
 				CC7DB0751D0C8BEC007DFE4C /* MROptionsViewController.m in Sources */,
+				CC2025551E08D75B0042018E /* MRPHDownloadSurveyReportsViewController.m in Sources */,
 				CC9857E71D2DAA6B00C74438 /* MRTransformPost+CoreDataProperties.m in Sources */,
 				CC7DB0761D0C8BEC007DFE4C /* MRFeedBackResultViewController.m in Sources */,
 				CC7DB3061D0CC4E2007DFE4C /* MRGroup.m in Sources */,

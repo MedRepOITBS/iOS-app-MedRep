@@ -17,7 +17,6 @@
 
 @interface MRPHSurveyDetailsViewController ()<SWRevealViewControllerDelegate,
                                               UITableViewDelegate, UITableViewDataSource>
-@property (weak, nonatomic) IBOutlet UIButton *backButton;
 @property (strong, nonatomic) IBOutlet UIView *navView;
 @property (weak, nonatomic) IBOutlet UIView *bgView;
 
@@ -39,7 +38,7 @@
 
 @implementation MRPHSurveyDetailsViewController
 
-- (void)getMenuNavigationButtonWithController:(SWRevealViewController *)revealViewCont NavigationItem:(UINavigationItem *)navigationItem1
+- (void)getMenuNavigationButtonWithController
 {
     self.navigationItem.title = @"Survey Details";
     
@@ -243,7 +242,8 @@
          }
      }];
     
-    [self getMenuNavigationButtonWithController:[self revealViewController] NavigationItem:self.navigationItem];
+    [self getMenuNavigationButtonWithController];
+      //]:[self revealViewController] NavigationItem:self.navigationItem];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -299,7 +299,7 @@
     }
     
     [cell setBackgroundColor:[UIColor clearColor]];
-    [cell setData:[self.doctorList objectAtIndex:indexPath.row]];
+    [cell setData:[self.doctorList objectAtIndex:indexPath.row] andParentViewController:self];
     
     return cell;
 }
