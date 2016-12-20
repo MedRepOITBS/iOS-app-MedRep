@@ -118,8 +118,11 @@ displayCountingLabel:(BOOL)displayCountingLabel
     return self;
 }
 
+- (void)strokeChart {
+    [self strokeChart:nil];
+}
 
-- (void)strokeChart
+- (void)strokeChart:(UICountingLabelAttributedFormatBlock)block
 {
     // Add counting label
 
@@ -127,7 +130,7 @@ displayCountingLabel:(BOOL)displayCountingLabel
         NSString *format;
         switch (self.chartType) {
             case PNChartFormatTypePercent:
-                format = @"%d%%";
+                format = @"%@";
                 break;
             case PNChartFormatTypeDollar:
                 format = @"$%d";
@@ -143,6 +146,13 @@ displayCountingLabel:(BOOL)displayCountingLabel
                 format = @"%d";
                 break;
         }
+        
+        if (block != nil) {
+            [self.countingLabel setNumberOfLines:2];
+            [self.countingLabel setAttributedFormatBlock:block];
+        }
+        
+        self.countingLabel.message = self.message;
         self.countingLabel.format = format;
         [self addSubview:self.countingLabel];
     }

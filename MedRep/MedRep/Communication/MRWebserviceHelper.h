@@ -45,6 +45,11 @@ typedef void(^completionHandler)(BOOL status, NSString *details, NSDictionary *r
 
 - (void)getPharmaProfileDetails:(completionHandler)responceHandler;
 
+- (void)getSurveysListByPharma:(completionHandler)responceHandler;
+- (void)getSurveyStatistics:(NSString*)surveyId andHandler:(completionHandler)responceHandler;
+- (void)sendReminderToDoctorForSurvey:(NSInteger)surveyId doctorId:(NSInteger)doctorId
+                           andHandler:(completionHandler)responceHandler;
+- (void)getPendingDoctorsListInSurvey:(NSString*)surveyId andHandler:(completionHandler)responceHandler;
 - (void)getMyPendingSurveysDetails:(completionHandler)responceHandler;
 
 - (void)getMyRepsDetails:(completionHandler)responceHandler;

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MRNewProductCompaignsViewController">
@@ -16,33 +17,26 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="xgL-PD-SR4">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+            <rect key="frame" x="0.0" y="64" width="375" height="603"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V0Q-pU-Tt8" userLabel="Title View">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Product Compaigns" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hX4-DO-Us6">
-                            <rect key="frame" x="44" y="0.0" width="546" height="44"/>
-                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="q99-cX-kN9"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="notificationback.png" translatesAutoresizingMaskIntoConstraints="NO" id="glj-v9-kcX">
-                            <rect key="frame" x="5" y="5" width="30" height="30"/>
-                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="30" id="DHu-yq-J6J"/>
                                 <constraint firstAttribute="height" constant="30" id="GZo-jh-ktI"/>
                             </constraints>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7dF-D6-kxI">
-                            <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="44" id="OGV-m8-uu9"/>
                                 <constraint firstAttribute="height" constant="44" id="nw4-cO-0VN"/>
@@ -52,8 +46,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <animations/>
-                    <color key="backgroundColor" red="0.1843137255" green="0.1843137255" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.1843137255" green="0.1843137255" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="glj-v9-kcX" firstAttribute="top" secondItem="V0Q-pU-Tt8" secondAttribute="top" constant="5" id="GZl-ud-rCc"/>
                         <constraint firstItem="glj-v9-kcX" firstAttribute="leading" secondItem="V0Q-pU-Tt8" secondAttribute="leading" constant="5" id="LYK-F1-z55"/>
@@ -68,19 +61,11 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h8N-Df-qoM" userLabel="Company View">
-                    <rect key="frame" x="0.0" y="44" width="600" height="126"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NDcompany1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="L5P-FG-97L">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="126"/>
-                            <animations/>
-                        </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1ND-jS-2zr">
-                            <rect key="frame" x="75" y="0.0" width="450" height="126"/>
-                            <animations/>
-                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NDcompany1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="L5P-FG-97L"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1ND-jS-2zr"/>
                     </subviews>
-                    <animations/>
-                    <color key="backgroundColor" red="0.96078431369999995" green="0.19215686269999999" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.96078431369999995" green="0.19215686269999999" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="L5P-FG-97L" secondAttribute="trailing" id="1ch-Ny-xwe"/>
                         <constraint firstItem="1ND-jS-2zr" firstAttribute="top" secondItem="h8N-Df-qoM" secondAttribute="top" id="EOB-Qe-zR9"/>
@@ -94,17 +79,14 @@
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="50" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="PUQ-TD-Rff">
-                    <rect key="frame" x="0.0" y="176" width="600" height="360"/>
-                    <animations/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="2D0-yO-dVe"/>
                         <outlet property="delegate" destination="-1" id="7s5-vN-9ZG"/>
                     </connections>
                 </tableView>
             </subviews>
-            <animations/>
-            <color key="backgroundColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="V0Q-pU-Tt8" firstAttribute="leading" secondItem="xgL-PD-SR4" secondAttribute="leading" id="0xY-YN-oBT"/>
                 <constraint firstItem="V0Q-pU-Tt8" firstAttribute="top" secondItem="xgL-PD-SR4" secondAttribute="top" id="2XG-mE-9oM"/>
@@ -125,12 +107,11 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="navLogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="v8a-m0-4nz">
-                    <rect key="frame" x="0.0" y="0.0" width="123" height="33"/>
-                    <animations/>
+                    <frame key="frameInset" width="123" height="33"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
             </subviews>
-            <animations/>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -139,7 +120,7 @@
     </objects>
     <resources>
         <image name="NDcompany1.jpg" width="320" height="106"/>
-        <image name="navLogo.png" width="123" height="33"/>
+        <image name="navLogo.png" width="122" height="33"/>
         <image name="notificationback.png" width="44" height="47"/>
     </resources>
 </document>

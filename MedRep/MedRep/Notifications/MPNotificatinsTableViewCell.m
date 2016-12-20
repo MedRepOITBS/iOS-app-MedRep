@@ -14,8 +14,6 @@
 
 @property (assign, nonatomic) NSInteger surveyId;
 
-@property (weak, nonatomic) IBOutlet UIButton *downloadSurveyReportButton;
-
 @end
 
 @implementation MPNotificatinsTableViewCell

@@ -102,7 +102,7 @@ NSString *const kLastRefreshedDateAttributeName = @"lastRefreshedDate";
 	NSDictionary *attributes = [[self entity] attributesByName];
     for (NSString *attribute in attributes)
 	{
-        NSLog(@"%@", attribute);
+//        NSLog(@"%@", attribute);
 		id value = [keyedValues objectForCaseInsensitiveKey:attribute];
 
 		if (!value)

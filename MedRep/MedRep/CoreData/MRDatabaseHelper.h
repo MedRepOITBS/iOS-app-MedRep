@@ -29,6 +29,9 @@
 
 #define kPendingRecordsCountEntity  @"MRPendingRecordsCount"
 
+#define kSurveyStatisticsEntity  @"MRPHSurveyStatistics"
+#define kSurveyStatisticsPendingListEntity  @"MRPHSurveyPendingList"
+
 @class MRGroupPost;
 @class MRTransformPost, MRSharePost;
 

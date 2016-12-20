@@ -22,6 +22,7 @@ typedef NS_ENUM (NSUInteger, PNChartFormatType) {
 
 @interface PNCircleChart : UIView
 
+- (void)strokeChart:(UICountingLabelAttributedFormatBlock)block;
 - (void)strokeChart;
 - (void)growChartByAmount:(NSNumber *)growAmount;
 - (void)updateChartByCurrent:(NSNumber *)current;
@@ -63,6 +64,7 @@ displayCountingLabel:(BOOL)displayCountingLabel
 @property (nonatomic) NSNumber *lineWidth;
 @property (nonatomic) NSTimeInterval duration;
 @property (nonatomic) PNChartFormatType chartType;
+@property (nonatomic) NSString *message;
 
 @property (nonatomic) CAShapeLayer *circle;
 @property (nonatomic) CAShapeLayer *gradientMask;

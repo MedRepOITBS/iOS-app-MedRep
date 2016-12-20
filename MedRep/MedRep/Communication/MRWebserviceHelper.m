@@ -755,6 +755,64 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
     [self sendServiceRequest:urlRequest withHandler:responceHandler];
 }
 
+- (void)getSurveysListByPharma:(completionHandler)responceHandler
+{
+    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/survey/getCompanySurveys?token=%@",kBaseWebURL,[MRDefaults objectForKey:kAuthenticationToken]];
+    
+    NSURL *url = [NSURL URLWithString:stringFormOfUrl];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [urlRequest setTimeoutInterval:120];
+    [urlRequest setHTTPMethod:@"GET"];
+    [urlRequest setValue:@"text/plain" forHTTPHeaderField:@"Content-Type"];
+    self.serviceType = kMRWebServiceTypeGetMyPendingSurveys;
+    [self sendServiceRequest:urlRequest withHandler:responceHandler];
+}
+
+- (void)getSurveyStatistics:(NSString*)surveyId andHandler:(completionHandler)responceHandler
+{
+    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/survey/getSurveyStatistics/%@?token=%@",kBaseWebURL, surveyId, [MRDefaults objectForKey:kAuthenticationToken]];
+    
+    NSURL *url = [NSURL URLWithString:stringFormOfUrl];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [urlRequest setTimeoutInterval:120];
+    [urlRequest setHTTPMethod:@"GET"];
+    [urlRequest setValue:@"text/plain" forHTTPHeaderField:@"Content-Type"];
+    self.serviceType = kMRWebServiceTypeGetMyPendingSurveys;
+    [self sendServiceRequest:urlRequest withHandler:responceHandler];
+}
+
+- (void)getPendingDoctorsListInSurvey:(NSString*)surveyId andHandler:(completionHandler)responceHandler
+{
+    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/survey/getSurveyPendingDoctors/%@?token=%@",kBaseWebURL, surveyId, [MRDefaults objectForKey:kAuthenticationToken]];
+    
+    NSURL *url = [NSURL URLWithString:stringFormOfUrl];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [urlRequest setTimeoutInterval:120];
+    [urlRequest setHTTPMethod:@"GET"];
+    [urlRequest setValue:@"text/plain" forHTTPHeaderField:@"Content-Type"];
+    self.serviceType = kMRWebServiceTypeGetMyPendingSurveys;
+    [self sendServiceRequest:urlRequest withHandler:responceHandler];
+}
+
+- (void)sendReminderToDoctorForSurvey:(NSInteger)surveyId doctorId:(NSInteger)doctorId
+                           andHandler:(completionHandler)responceHandler
+{
+    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/pharmarep/sendReminder/%ld/%ld?token=%@",kBaseWebURL, (long)surveyId, (long)doctorId, [MRDefaults objectForKey:kAuthenticationToken]];
+    
+    NSURL *url = [NSURL URLWithString:stringFormOfUrl];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [urlRequest setTimeoutInterval:120];
+    [urlRequest setHTTPMethod:@"GET"];
+    [urlRequest setValue:@"text/plain" forHTTPHeaderField:@"Content-Type"];
+    self.serviceType = kMRWebServiceTypeGetMyPendingSurveys;
+    [self sendServiceRequest:urlRequest withHandler:responceHandler];
+}
+
+
 - (void)getMyPendingSurveysDetails:(completionHandler)responceHandler
 {
     //http://183.82.106.234:8080/MedRepApplication/api/doctor/getMyPendingSurveys?access_token=6ac9da4d

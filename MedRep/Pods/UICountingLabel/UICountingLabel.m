@@ -205,15 +205,10 @@
     }
     else
     {
-        // check if counting with ints - cast to int
-        if([self.format rangeOfString:@"%(.*)d" options:NSRegularExpressionSearch].location != NSNotFound || [self.format rangeOfString:@"%(.*)i"].location != NSNotFound )
-        {
-            self.text = [NSString stringWithFormat:self.format,(int)value];
+        if (self.message == nil || self.message.length == 0) {
+            self.message = @"";
         }
-        else
-        {
-            self.text = [NSString stringWithFormat:self.format,value];
-        }
+        self.text = [NSString stringWithFormat:self.format,self.message];
     }
 }
 

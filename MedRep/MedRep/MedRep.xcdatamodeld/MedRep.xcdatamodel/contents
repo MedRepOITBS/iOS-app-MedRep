@@ -151,6 +151,41 @@
         <attribute name="pendingConnections" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="pendingGroups" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
     </entity>
+    <entity name="MRPHSurveyPendingList" representedClassName="MRPHSurveyPendingList" syncable="YES">
+        <attribute name="companyId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companyName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdOn" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="doctorId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="doctorName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="doctorSurveyId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="publishDocsIds" optional="YES" transient="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="publishSurveyId" optional="YES" transient="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="publishTareaIds" optional="YES" transient="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="reminder_sent" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="repId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="reportsAvailable" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="reportsStatus" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="reportUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="repSurveyId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="scheduledFinish" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="scheduledStart" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="surveyDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="surveyId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="surveyTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="surveyUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="therapeuticDropDownValues" optional="YES" transient="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="therapeuticId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="therapeuticName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="MRPHSurveyStatistics" representedClassName="MRPHSurveyStatistics" syncable="YES">
+        <attribute name="pending" optional="YES" transient="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="surveyId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="totalCompleted" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="totalPending" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="totalSent" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="doctorList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MRPHSurveyPendingList" syncable="YES"/>
+    </entity>
     <entity name="MRPostedReplies" representedClassName="MRPostedReplies" syncable="YES">
         <attribute name="contact_id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="contactId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
@@ -331,6 +366,8 @@
         <element name="MRNotifications" positionX="-36" positionY="63" width="128" height="480"/>
         <element name="MRNotificationType" positionX="16" positionY="-135" width="128" height="90"/>
         <element name="MRPendingRecordsCount" positionX="153" positionY="9" width="128" height="75"/>
+        <element name="MRPHSurveyPendingList" positionX="162" positionY="18" width="128" height="420"/>
+        <element name="MRPHSurveyStatistics" positionX="153" positionY="9" width="128" height="135"/>
         <element name="MRPostedReplies" positionX="-27" positionY="531" width="128" height="450"/>
         <element name="MRProfile" positionX="-36" positionY="135" width="128" height="225"/>
         <element name="MRPublications" positionX="0" positionY="171" width="128" height="120"/>

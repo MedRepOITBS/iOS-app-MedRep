@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PendingDoctorList" id="KGk-i7-Jjw" customClass="MRPHSurveyDetailsPendingDoctorTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <frame key="frameInset" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z84-g4-ePe">
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="transperent-bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="Co9-CS-Rh8"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTh-TB-lq0" userLabel="TopSeparator">
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="4" id="BAm-Gi-xOv"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="4" id="LaQ-0n-zah"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="mwF-sd-A3i" userLabel="companyName">
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cdt-SB-5cK">
+                                <color key="backgroundColor" red="0.1137254902" green="0.87058823529999996" blue="0.5450980392" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="pwv-9X-5bx"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <state key="normal" title="Remind"/>
+                                <connections>
+                                    <action selector="remindMeButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="YAl-QK-K0D"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="tTh-TB-lq0" firstAttribute="top" secondItem="Z84-g4-ePe" secondAttribute="top" id="Cr7-Pv-Ily"/>
+                            <constraint firstAttribute="bottom" secondItem="mwF-sd-A3i" secondAttribute="bottom" id="EMr-fB-om4"/>
+                            <constraint firstItem="Cdt-SB-5cK" firstAttribute="trailing" secondItem="Co9-CS-Rh8" secondAttribute="trailing" id="N2B-Cn-OMZ"/>
+                            <constraint firstAttribute="trailing" secondItem="Co9-CS-Rh8" secondAttribute="trailing" constant="20" id="P0J-AZ-DKd"/>
+                            <constraint firstItem="Cdt-SB-5cK" firstAttribute="leading" secondItem="mwF-sd-A3i" secondAttribute="trailing" id="SvE-c4-ESL"/>
+                            <constraint firstItem="mwF-sd-A3i" firstAttribute="top" secondItem="tTh-TB-lq0" secondAttribute="bottom" id="T1p-si-BSs"/>
+                            <constraint firstItem="Co9-CS-Rh8" firstAttribute="leading" secondItem="Z84-g4-ePe" secondAttribute="leading" constant="20" id="V5r-ZW-0tk"/>
+                            <constraint firstItem="tTh-TB-lq0" firstAttribute="leading" secondItem="Z84-g4-ePe" secondAttribute="leading" id="aQr-id-qt3"/>
+                            <constraint firstItem="Cdt-SB-5cK" firstAttribute="bottom" secondItem="mwF-sd-A3i" secondAttribute="bottom" id="cd7-xn-HIR"/>
+                            <constraint firstItem="Cdt-SB-5cK" firstAttribute="top" secondItem="mwF-sd-A3i" secondAttribute="top" constant="4" id="cyR-hg-IpL"/>
+                            <constraint firstAttribute="trailing" secondItem="tTh-TB-lq0" secondAttribute="trailing" id="egA-CS-HLt"/>
+                            <constraint firstItem="mwF-sd-A3i" firstAttribute="leading" secondItem="Co9-CS-Rh8" secondAttribute="leading" constant="10" id="ha3-Rh-7Mj"/>
+                            <constraint firstItem="Co9-CS-Rh8" firstAttribute="top" secondItem="tTh-TB-lq0" secondAttribute="bottom" constant="4" id="hw8-qO-Sqs"/>
+                            <constraint firstAttribute="bottom" secondItem="Co9-CS-Rh8" secondAttribute="bottom" id="jLc-ga-NFL"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Z84-g4-ePe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="EzS-xm-37Z"/>
+                    <constraint firstAttribute="trailing" secondItem="Z84-g4-ePe" secondAttribute="trailing" id="FSd-cT-GIT"/>
+                    <constraint firstAttribute="bottom" secondItem="Z84-g4-ePe" secondAttribute="bottom" id="OeN-3h-Lrw"/>
+                    <constraint firstItem="Z84-g4-ePe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="vQZ-Cw-oCX"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="doctorName" destination="mwF-sd-A3i" id="3Fi-dP-9IM"/>
+                <outlet property="statusButton" destination="Cdt-SB-5cK" id="BaF-B6-S3m"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="transperent-bg.png" width="292" height="90"/>
+    </resources>
+</document>
