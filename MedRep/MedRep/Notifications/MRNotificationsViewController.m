@@ -115,6 +115,10 @@
          }
 
     }];
+    
+    [[MRWebserviceHelper sharedWebServiceHelper] getPendingCount:@{@"resetNotificationCount" : [NSNumber numberWithBool:YES]} andHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        
+    }];
 
     // Do any additional setup after loading the view from its nib.
 }

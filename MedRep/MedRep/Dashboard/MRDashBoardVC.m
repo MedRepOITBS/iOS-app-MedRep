@@ -180,17 +180,17 @@
     NSInteger dashboardCount = 0;
     
     if (data != nil) {
-        id value = [data objectForCaseInsensitiveKey:@"notifications"];
+        id value = [data objectForCaseInsensitiveKey:@"notificationsCount"];
         if (value != nil && [value isKindOfClass:[NSNumber class]]) {
             notificationsCount = ((NSNumber*)value).integerValue;
         }
         
-        value = [data objectForCaseInsensitiveKey:@"surveys"];
+        value = [data objectForCaseInsensitiveKey:@"surveyCount"];
         if (value != nil && [value isKindOfClass:[NSNumber class]]) {
             surveysCount = ((NSNumber*)value).integerValue;
         }
         
-        value = [data objectForCaseInsensitiveKey:@"dashbaord"];
+        value = [data objectForCaseInsensitiveKey:@"doctorPlusCount"];
         if (value != nil && [value isKindOfClass:[NSNumber class]]) {
             dashboardCount = ((NSNumber*)value).integerValue;
         }

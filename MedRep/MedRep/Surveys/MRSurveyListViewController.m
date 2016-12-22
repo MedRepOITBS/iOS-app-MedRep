@@ -81,6 +81,8 @@
          }
      }];
     [self getMenuNavigationButtonWithController:[self revealViewController] NavigationItem:self.navigationItem];
+    
+    [self resetPendingSurveyCount];
 }
 
 - (void)resetSurveyCounter {
@@ -114,6 +116,13 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)resetPendingSurveyCount {
+    [[MRWebserviceHelper sharedWebServiceHelper] getPendingCount:@{@"resetSurveyCount" : [NSNumber numberWithBool:YES]} andHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        
+    }];
+}
+
 - (IBAction)backButtonAction:(id)sender
 {
     if (self.isFromMenu)
