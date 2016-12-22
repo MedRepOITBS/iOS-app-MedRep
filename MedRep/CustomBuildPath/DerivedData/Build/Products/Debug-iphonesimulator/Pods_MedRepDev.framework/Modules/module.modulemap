@@ -1,0 +1,6 @@
+framework module Pods_MedRepDev {
+  umbrella header "Pods-MedRepDev-umbrella.h"
+
+  export *
+  module * { export * }
+}

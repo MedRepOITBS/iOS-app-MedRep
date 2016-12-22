@@ -1,0 +1,182 @@
+{
+  'version': 0,
+  'case-sensitive': 'false',
+  'roots': [
+    {
+      'type': 'directory',
+      'name': "/Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/CustomBuildPath/DerivedData/Build/Products/Debug-iphonesimulator/PNChart/PNChart.framework/Headers",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "PNBar.h",
+          'external-contents': "/Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/Pods/PNChart/PNChart/PNBar.h"
+        },
+        {
+          'type': 'file',
+          'name': "PNBarChart.h",
+          'external-contents': "/Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/Pods/PNChart/PNChart/PNBarChart.h"
+        },
+        {
+          'type': 'file',
+          'name': "PNChart-Swift.h",
+          'external-contents': "/Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/CustomBuildPath/DerivedData/Build/Products/Debug-iphonesimulator/PNChart/PNChart.framework/Headers/PNChart-Swift.h"
+        },
+        {
+          'type': 'file',
+          'name': "PNChart-umbrella.h",
+          'external-contents': "/Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/Pods/Target Support Files/PNChart/PNChart-umbrella.h"
+        },
+        {
+          'type': 'file',
+          'name': "PNChart.h",
+          'external-contents': "/Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/Pods/PNChart/PNChart/PNChart.h"
+        },
+        {
+          'type': 'file',
+          'name': "PNChartDelegate.h",
+          'external-contents': "/Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/Pods/PNChart/PNChart/PNChartDelegate.h"
+        },
+        {
+          'type': 'file',
+          'name': "PNChartLabel.h",
+          'external-contents': "/Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/Pods/PNChart/PNChart/PNChartLabel.h"
+        },
+        {
+          'type': 'file',
+          'name': "PNCircleChart.h",
+          'external-contents': "/Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/Pods/PNChart/PNChart/PNCircleChart.h"
+        },
+        {
+          'type': 'file',
+          'name': "PNColor.h",
+          'external-contents': "/Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/Pods/PNChart/PNChart/PNColor.h"
+        },
+        {
+          'type': 'file',
+          'name': "PNGenericChart.h",
+          'external-contents': "/Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/Pods/PNChart/PNChart/PNGenericChart.h"
+        },
+        {
+          'type': 'file',
+          'name': "PNLineChart.h",
+          'external-contents': "/Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/Pods/PNChart/PNChart/PNLineChart.h"
+        },
+        {
+          'type': 'file',
+          'name': "PNLineChartData.h",
+          'external-contents': "/Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/Pods/PNChart/PNChart/PNLineChartData.h"
+        },
+        {
+          'type': 'file',
+          'name': "PNLineChartDataItem.h",
+          'external-contents': "/Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/Pods/PNChart/PNChart/PNLineChartDataItem.h"
+        },
+        {
+          'type': 'file',
+          'name': "PNPieChart.h",
+          'external-contents': "/Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/Pods/PNChart/PNChart/PNPieChart.h"
+        },
+        {
+          'type': 'file',
+          'name': "PNPieChartDataItem.h",
+          'external-contents': "/Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/Pods/PNChart/PNChart/PNPieChartDataItem.h"
+        },
+        {
+          'type': 'file',
+          'name': "PNRadarChart.h",
+          'external-contents': "/Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/Pods/PNChart/PNChart/PNRadarChart.h"
+        },
+        {
+          'type': 'file',
+          'name': "PNRadarChartDataItem.h",
+          'external-contents': "/Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/Pods/PNChart/PNChart/PNRadarChartDataItem.h"
+        },
+        {
+          'type': 'file',
+          'name': "PNScatterChart.h",
+          'external-contents': "/Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/Pods/PNChart/PNChart/PNScatterChart.h"
+        },
+        {
+          'type': 'file',
+          'name': "PNScatterChartData.h",
+          'external-contents': "/Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/Pods/PNChart/PNChart/PNScatterChartData.h"
+        },
+        {
+          'type': 'file',
+          'name': "PNScatterChartDataItem.h",
+          'external-contents': "/Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/Pods/PNChart/PNChart/PNScatterChartDataItem.h"
+        }
+      ]
+    },
+    {
+      'type': 'directory',
+      'name': "/Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/CustomBuildPath/DerivedData/Build/Products/Debug-iphonesimulator/PNChart/PNChart.framework/Modules",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "module.modulemap",
+          'external-contents': "/Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/CustomBuildPath/DerivedData/Build/Intermediates/Pods.build/Debug-iphonesimulator/PNChart.build/module.modulemap"
+        }
+      ]
+    },
+    {
+      'type': 'directory',
+      'name': "/Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/CustomBuildPath/DerivedData/Build/Products/Debug-iphonesimulator/Pods_MedRepDev.framework/Headers",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "Pods-MedRepDev-umbrella.h",
+          'external-contents': "/Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/Pods/Target Support Files/Pods-MedRepDev/Pods-MedRepDev-umbrella.h"
+        },
+        {
+          'type': 'file',
+          'name': "Pods_MedRepDev-Swift.h",
+          'external-contents': "/Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/CustomBuildPath/DerivedData/Build/Products/Debug-iphonesimulator/Pods_MedRepDev.framework/Headers/Pods_MedRepDev-Swift.h"
+        }
+      ]
+    },
+    {
+      'type': 'directory',
+      'name': "/Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/CustomBuildPath/DerivedData/Build/Products/Debug-iphonesimulator/Pods_MedRepDev.framework/Modules",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "module.modulemap",
+          'external-contents': "/Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/CustomBuildPath/DerivedData/Build/Intermediates/Pods.build/Debug-iphonesimulator/Pods-MedRepDev.build/module.modulemap"
+        }
+      ]
+    },
+    {
+      'type': 'directory',
+      'name': "/Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/CustomBuildPath/DerivedData/Build/Products/Debug-iphonesimulator/UICountingLabel/UICountingLabel.framework/Headers",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "UICountingLabel-Swift.h",
+          'external-contents': "/Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/CustomBuildPath/DerivedData/Build/Products/Debug-iphonesimulator/UICountingLabel/UICountingLabel.framework/Headers/UICountingLabel-Swift.h"
+        },
+        {
+          'type': 'file',
+          'name': "UICountingLabel-umbrella.h",
+          'external-contents': "/Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/Pods/Target Support Files/UICountingLabel/UICountingLabel-umbrella.h"
+        },
+        {
+          'type': 'file',
+          'name': "UICountingLabel.h",
+          'external-contents': "/Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/Pods/UICountingLabel/UICountingLabel.h"
+        }
+      ]
+    },
+    {
+      'type': 'directory',
+      'name': "/Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/CustomBuildPath/DerivedData/Build/Products/Debug-iphonesimulator/UICountingLabel/UICountingLabel.framework/Modules",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "module.modulemap",
+          'external-contents': "/Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/CustomBuildPath/DerivedData/Build/Intermediates/Pods.build/Debug-iphonesimulator/UICountingLabel.build/module.modulemap"
+        }
+      ]
+    }
+  ]
+}
