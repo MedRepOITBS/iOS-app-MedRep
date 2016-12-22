@@ -133,7 +133,7 @@
         self.feedBackImage.image = [UIImage imageNamed:@"feedbackSelected.png"];
     }
     
-    if ([self.notification.favNotification boolValue])
+    if ([self.notification.favourite boolValue])
     {
         self.favoriteImage.image = [UIImage imageNamed:@"favoriteSelected.png"];
     }

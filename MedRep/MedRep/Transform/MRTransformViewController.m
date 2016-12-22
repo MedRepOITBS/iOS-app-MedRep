@@ -131,6 +131,8 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
                                                                        multiplier:1.0 constant:0];
     
     [self.view addConstraint:bottomConstraint];
+    
+    [self resetDashboardCounter];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -150,6 +152,27 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
     
     i = 0;
     [timer invalidate];
+}
+
+- (void)resetDashboardCounter {
+    NSDictionary *dict = @{@"resetDoctorPlusCount":[NSNumber numberWithBool:false],
+                           @"resetNotificationCount":[NSNumber numberWithBool:false],
+                           @"resetSurveyCount": [NSNumber numberWithBool:true]};
+    [[MRWebserviceHelper sharedWebServiceHelper] getPendingCount:dict andHandler:^(BOOL status, NSString *details, NSDictionary *responce)
+     {
+         if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+         {
+             [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+              {
+                  [MRCommon savetokens:responce];
+                  [[MRWebserviceHelper sharedWebServiceHelper] getPendingCount:dict andHandler:^(BOOL status, NSString *details, NSDictionary *responce)
+                   {
+                       
+                   }];
+                  
+              }];
+         }
+     }];
 }
 
 -(void)AutoScroll

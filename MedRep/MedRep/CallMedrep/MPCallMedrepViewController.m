@@ -203,12 +203,14 @@
         [appointmentDetails setObject:duration forKey:@"duration"];
     }
     
+    [MRCommon showActivityIndicator:@"Rescheduling..."];
     
     [[MRWebserviceHelper sharedWebServiceHelper] createNewAppointment:appointmentDetails
                                                          isFromUpdate:!self.isFromReschedule
                                                           withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
         if (status)
         {
+            [MRCommon stopActivityIndicator];
             [self showConformationAlert];
 
            // [self moveBackOnEventSync];
@@ -223,13 +225,16 @@
                                                                        withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
                      if (status)
                      {
+                         [MRCommon stopActivityIndicator];
                          [self showConformationAlert];
                      } else if (status == NO) {
+                         [MRCommon stopActivityIndicator];
                          [self showConflictMessage:responce];
                      }
                  }];
              }];
         } else {
+            [MRCommon stopActivityIndicator];
             if (status == NO) {
                 [self showConflictMessage:responce];
             }

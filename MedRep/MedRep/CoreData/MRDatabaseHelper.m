@@ -976,57 +976,46 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
 
 + (void)getNotificationsByFilter:(NSString*)companyName
            withTherapeuticName:(NSString*)therapeuticName
+                          isRead:(BOOL)isRead
+                     isFavourite:(BOOL)isFavourite
    withNotificationsList:(void (^)(NSArray *fetchList))objectsList
 {
     NSArray *notificationsList   = nil;
     
-    if (![MRCommon isStringEmpty:companyName] && ![MRCommon isStringEmpty:therapeuticName])
-    {
-        notificationsList   = [[MRDataManger sharedManager] fetchObjectList:kNotificationsEntity predicate:[NSPredicate predicateWithFormat:@"companyName == %@ AND therapeuticName == %@", companyName,therapeuticName]];
-    }
-    else if (![MRCommon isStringEmpty:companyName])
-    {
-        notificationsList   = [[MRDataManger sharedManager] fetchObjectList:kNotificationsEntity predicate:[NSPredicate predicateWithFormat:@"companyName == %@", companyName]];
-    }
-    else if (![MRCommon isStringEmpty:therapeuticName])
-    {
-        notificationsList   = [[MRDataManger sharedManager] fetchObjectList:kNotificationsEntity predicate:[NSPredicate predicateWithFormat:@"therapeuticName == %@", therapeuticName]];
+    NSPredicate *companyNamePredicate = nil;
+    NSPredicate *therapeuticAreaPredicate = nil;
+    NSPredicate *readPredicate = nil;
+    NSPredicate *favouritePredicate = nil;
+    
+    NSMutableArray *predicatesArray = [NSMutableArray new];
+    
+    if (![MRCommon isStringEmpty:companyName]) {
+        companyNamePredicate = [NSPredicate predicateWithFormat:@"companyName == [cd]%@", companyName];
+        [predicatesArray addObject:companyNamePredicate];
+
     }
     
-    NSMutableArray *array           = [NSMutableArray array];
-    
-    for (MRNotifications *notification in notificationsList)
-    {
-        NSMutableDictionary *myNotificationDict = [NSMutableDictionary dictionary];
-        
-        [myNotificationDict setObject:notification.companyId   forKey:@"companyId"];
-        [myNotificationDict setObject:notification.companyName forKey:@"companyName"];
-        [myNotificationDict setObject:notification.createdBy   forKey:@"createdBy"];
-        [myNotificationDict setObject:notification.createdOn   forKey:@"createdOn"];
-        [myNotificationDict setObject:notification.externalRef forKey:@"externalRef"];
-        [myNotificationDict setObject:notification.favNotification forKey:@"favNotification"];
-//        [myNotificationDict setObject:notification.fileList    forKey:@"fileList"];
-        [myNotificationDict setObject:notification.notificationDesc    forKey:@"notificationDesc"];
-        [myNotificationDict setObject:[MRCommon unArchiveDataToDictionary:notification.notificationDetails forKey:@"notificationDetails"] forKey:@"notificationDetails"];
-        [myNotificationDict setObject:notification.notificationId  forKey:@"notificationId"];
-        [myNotificationDict setObject:notification.notificationName    forKey:@"notificationName"];
-        [myNotificationDict setObject:notification.readNotification    forKey:@"readNotification"];;
-        [myNotificationDict setObject:notification.status  forKey:@"status"];
-//        [myNotificationDict setObject:notification.therapeuticDropDownValues   forKey:@"therapeuticDropDownValues"];
-        [myNotificationDict setObject:notification.therapeuticId   forKey:@"therapeuticId"];
-        [myNotificationDict setObject:notification.therapeuticName forKey:@"therapeuticName"];
-//        [myNotificationDict setObject:notification.totalConvertedToAppointment forKey:@"totalConvertedToAppointment"];
-//        [myNotificationDict setObject:notification.totalPendingNotifcation forKey:@"totalPendingNotifcation"];
-//        [myNotificationDict setObject:notification.totalSentNotification   forKey:@"totalSentNotification"];
-//        [myNotificationDict setObject:notification.totalViewedNotifcation  forKey:@"totalViewedNotifcation"];
-        [myNotificationDict setObject:notification.typeId  forKey:@"typeId"];
-        [myNotificationDict setObject:notification.updatedBy   forKey:@"updatedBy"];
-        [myNotificationDict setObject:notification.updatedOn   forKey:@"updatedOn"];
-        [myNotificationDict setObject:notification.validUpto   forKey:@"validUpto"];
-        [array addObject:myNotificationDict];
+    if (![MRCommon isStringEmpty:therapeuticName]) {
+        therapeuticAreaPredicate = [NSPredicate predicateWithFormat:@"therapeuticName == [cd]%@", therapeuticName];
+        [predicatesArray addObject:therapeuticAreaPredicate];
     }
     
-    objectsList(array);
+    if (isRead) {
+        readPredicate = [NSPredicate predicateWithFormat:@"readNotification == %d", isRead];
+        [predicatesArray addObject:readPredicate];
+    }
+    
+    if (isFavourite) {
+        favouritePredicate = [NSPredicate predicateWithFormat:@"favourite == %d", isFavourite];
+        [predicatesArray addObject:favouritePredicate];
+    }
+    
+    NSPredicate *predicate = [NSCompoundPredicate andPredicateWithSubpredicates:predicatesArray];
+    
+    notificationsList   = [[MRDataManger sharedManager] fetchObjectList:kNotificationsEntity
+                                                                  attributeName:@"updatedOn"predicate:predicate
+                               sortOrder:SORT_ORDER_DESCENDING];
+    objectsList(notificationsList);
 }
 
 + (void)updateNotifiction:(NSNumber*)notificationID

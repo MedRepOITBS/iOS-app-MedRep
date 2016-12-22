@@ -237,7 +237,7 @@
              [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
               {
                   [MRCommon savetokens:responce];
-                  [[MRWebserviceHelper sharedWebServiceHelper] getPendingCount:false andHandler:^(BOOL status, NSString *details, NSDictionary *responce)
+                  [[MRWebserviceHelper sharedWebServiceHelper] getPendingCount:dict andHandler:^(BOOL status, NSString *details, NSDictionary *responce)
                    {
                        if (status)
                        {

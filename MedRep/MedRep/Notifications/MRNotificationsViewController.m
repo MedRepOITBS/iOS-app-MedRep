@@ -69,6 +69,7 @@
                  [MRCommon showAlert:@"No Notifications found." delegate:nil];
              }
              
+             [self resetNotificationsCounter];
              [self.notificationTableview reloadData];
             // NSLog(@"%@",self.notifications);
          }
@@ -80,6 +81,7 @@
                   [[MRWebserviceHelper sharedWebServiceHelper] getMyNotifications:[MRCommon stringFromDate:[NSDate date] withDateFormate:@"YYYYMMdd"] withHandler:^(BOOL status, NSString *details, NSDictionary *responce)
                    {
                        [MRCommon stopActivityIndicator];
+                       [self resetNotificationsCounter];
                        if (status)
                        {
                            [MRAppControl sharedHelper].notifications = [responce objectForKey:kResponce];
@@ -104,6 +106,7 @@
          else
          {
              [MRCommon stopActivityIndicator];
+             [self resetNotificationsCounter];
              [MRCommon showAlert:@"No New Notifications found." delegate:nil];
              if (nil == self.notifications)
                  self.notifications = [[NSMutableArray alloc] init];
@@ -119,6 +122,27 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [MRCommon applyNavigationBarStyling:self.navigationController];
+}
+
+- (void)resetNotificationsCounter {
+    NSDictionary *dict = @{@"resetDoctorPlusCount":[NSNumber numberWithBool:false],
+                           @"resetNotificationCount":[NSNumber numberWithBool:false],
+                           @"resetSurveyCount": [NSNumber numberWithBool:true]};
+    [[MRWebserviceHelper sharedWebServiceHelper] getPendingCount:dict andHandler:^(BOOL status, NSString *details, NSDictionary *responce)
+     {
+         if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+         {
+             [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+              {
+                  [MRCommon savetokens:responce];
+                  [[MRWebserviceHelper sharedWebServiceHelper] getPendingCount:dict andHandler:^(BOOL status, NSString *details, NSDictionary *responce)
+                   {
+                       
+                   }];
+                  
+              }];
+         }
+     }];
 }
 
 - (void)getMutableNotifications:(NSArray*)notifictions

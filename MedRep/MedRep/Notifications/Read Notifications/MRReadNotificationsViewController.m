@@ -142,20 +142,14 @@
 - (void)loadNotificationsOnFilter:(NSString*)companyName
                withTherapiticName:(NSString*)therapeuticName
 {
-    [MRDatabaseHelper getNotificationsByFilter:companyName withTherapeuticName:therapeuticName withNotificationsList:^(NSArray *fetchList) {
-        if ([MRCommon isStringEmpty:companyName] && [MRCommon isStringEmpty:therapeuticName])
-        {
-            [MRDatabaseHelper getNotifications:YES withFavourite:NO withNotificationsList:^(NSArray *fetchList) {
-                self.notificationDetailsList = fetchList;
-                [self.notificationsTableView reloadData];
-            }];
-        }
-        else
-        {
-            self.notificationDetailsList = fetchList;
-            [self.notificationsTableView reloadData];
-        }
-    }];
+    [MRDatabaseHelper getNotificationsByFilter:companyName withTherapeuticName:therapeuticName
+                                        isRead:YES
+                                   isFavourite:NO
+                         withNotificationsList:^(NSArray *fetchList) {
+                             
+                             self.notificationDetailsList = fetchList;
+                             [self.notificationsTableView reloadData];
+                         }];
 }
 
 - (void)revealController:(SWRevealViewController *)revealController didMoveToPosition:(FrontViewPosition)position

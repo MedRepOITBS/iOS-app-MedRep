@@ -52,6 +52,9 @@
                  [MRCommon showAlert:@"No pending surveys found." delegate:nil];
              }
              [self.surveysList reloadData];
+             
+             // Reset Survey Count
+             [self resetSurveyCounter];
          }
          else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
          {
@@ -61,6 +64,7 @@
                   [[MRWebserviceHelper sharedWebServiceHelper] getMyPendingSurveysDetails:^(BOOL status, NSString *details, NSDictionary *responce)
                    {
                        [MRCommon stopActivityIndicator];
+                       [self resetSurveyCounter];
                        if (status)
                        {
                            self.surveysListArray = [responce objectForKey:kResponce];
@@ -72,10 +76,32 @@
          else
          {
              [MRCommon stopActivityIndicator];
+             [self resetSurveyCounter];
              [MRCommon showAlert:@"No pending surveys found." delegate:nil];
          }
      }];
     [self getMenuNavigationButtonWithController:[self revealViewController] NavigationItem:self.navigationItem];
+}
+
+- (void)resetSurveyCounter {
+    NSDictionary *dict = @{@"resetDoctorPlusCount":[NSNumber numberWithBool:false],
+                           @"resetNotificationCount":[NSNumber numberWithBool:false],
+                           @"resetSurveyCount": [NSNumber numberWithBool:true]};
+    [[MRWebserviceHelper sharedWebServiceHelper] getPendingCount:dict andHandler:^(BOOL status, NSString *details, NSDictionary *responce)
+     {
+         if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+         {
+             [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+              {
+                  [MRCommon savetokens:responce];
+                  [[MRWebserviceHelper sharedWebServiceHelper] getPendingCount:dict andHandler:^(BOOL status, NSString *details, NSDictionary *responce)
+                   {
+
+                   }];
+                  
+              }];
+         }
+     }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

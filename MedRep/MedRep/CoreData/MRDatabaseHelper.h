@@ -103,6 +103,8 @@ FOUNDATION_EXPORT NSString* const kNewsAndTransformAPIMethodName;
 
 + (void)getNotificationsByFilter:(NSString*)companyName
              withTherapeuticName:(NSString*)therapeuticName
+                          isRead:(BOOL)isRead
+                     isFavourite:(BOOL)isFavourite
            withNotificationsList:(void (^)(NSArray *fetchList))objectsListt;
 
 + (void)cleanDatabaseOnLogout;

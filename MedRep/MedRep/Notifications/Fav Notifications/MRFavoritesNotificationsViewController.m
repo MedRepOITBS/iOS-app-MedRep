@@ -41,17 +41,24 @@
     
     [self.navigationItem setRightBarButtonItems:@[rightButtonItem, sortButtonItem]];
     
-    [MRDatabaseHelper getNotifications:NO withFavourite:YES withNotificationsList:^(NSArray *fetchList) {
-        self.notificationDetailsList = fetchList;
-        [self.notificationsTableView reloadData];
-    }];
-
     // Do any additional setup after loading the view from its nib.
+    [self fetchData];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
+
+- (void)fetchData {
+    [MRDatabaseHelper getNotifications:NO withFavourite:YES withNotificationsList:^(NSArray *fetchList) {
+        self.notificationDetailsList = fetchList;
+        [self.notificationsTableView reloadData];
+    }];
 }
 
 - (IBAction)backButtonAction:(id)sender
@@ -107,7 +114,8 @@
         regCell                             = (MPNotificatinsTableViewCell *)[nibViews lastObject];
         
     }
-    NSDictionary *notification              = [self.notificationDetailsList objectAtIndex:indexPath.row];
+    MRNotifications *currentNotification = [self.notificationDetailsList objectAtIndex:indexPath.row];
+    NSDictionary *notification = [currentNotification toDictionary];
     
     regCell.notificationLetter.hidden       = NO;
     regCell.notificationLetter.backgroundColor = [MRCommon getColorForIndex:indexPath.row];
@@ -138,23 +146,14 @@
 - (void)loadNotificationsOnFilter:(NSString*)companyName
                withTherapiticName:(NSString*)therapeuticName
 {
-    [MRDatabaseHelper getNotificationsByFilter:companyName withTherapeuticName:therapeuticName withNotificationsList:^(NSArray *fetchList) {
-        if ([MRCommon isStringEmpty:companyName] && [MRCommon isStringEmpty:therapeuticName])
-        {
-            [MRDatabaseHelper getNotifications:NO
-                                 withFavourite:YES
-                         withNotificationsList:^(NSArray *fetchList)
-            {
-                self.notificationDetailsList = fetchList;
-                [self.notificationsTableView reloadData];
-            }];
-        }
-        else
-        {
-            self.notificationDetailsList = fetchList;
-            [self.notificationsTableView reloadData];
-        }
-    }];
+    [MRDatabaseHelper getNotificationsByFilter:companyName withTherapeuticName:therapeuticName
+                                                isRead:NO
+             isFavourite:YES
+                                  withNotificationsList:^(NSArray *fetchList) {
+                             
+                             self.notificationDetailsList = fetchList;
+                            [self.notificationsTableView reloadData];
+                         }];
 }
 
 - (void)revealController:(SWRevealViewController *)revealController didMoveToPosition:(FrontViewPosition)position
