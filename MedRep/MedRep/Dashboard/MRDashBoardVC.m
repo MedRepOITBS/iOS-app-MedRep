@@ -223,7 +223,10 @@
 }
 
 - (void)getPendingCounts {
-    [[MRWebserviceHelper sharedWebServiceHelper] getPendingCount:false andHandler:^(BOOL status, NSString *details, NSDictionary *responce)
+    NSDictionary *dict = @{@"resetDoctorPlusCount":[NSNumber numberWithBool:false],
+                           @"resetNotificationCount":[NSNumber numberWithBool:false],
+                           @"resetSurveyCount": [NSNumber numberWithBool:false]};
+    [[MRWebserviceHelper sharedWebServiceHelper] getPendingCount:dict andHandler:^(BOOL status, NSString *details, NSDictionary *responce)
      {
          if (status)
          {

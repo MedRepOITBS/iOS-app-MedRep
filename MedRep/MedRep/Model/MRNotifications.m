@@ -48,7 +48,7 @@
 - (void)setNotificationId:(NSNumber *)notificationId {
     NSInteger tempNotificationId = 0;
     if (notificationId != nil) {
-        tempNotificationId = notificationId.longLongValue;
+        tempNotificationId = notificationId.integerValue;
     }
     
     [self willChangeValueForKey:@"notificationId"];
@@ -100,8 +100,8 @@
     }
 }
 
-- (NSData*)getNotificationDetails {
-    NSData *value = nil;
+- (NSDictionary*)getNotificationDetails {
+    NSDictionary *value = nil;
     
     if (self.notificationDetails != nil) {
         value = [MRCommon unArchiveDataToDictionary:self.notificationDetails forKey:@"notificationDetails"];

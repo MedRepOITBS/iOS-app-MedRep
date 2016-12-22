@@ -18,7 +18,7 @@
 #import "MRDrugTableViewCell.h"
 #import "SWRevealViewController.h"
 
-@interface MRDrugSearchViewController () <UIScrollViewDelegate, UISearchBarDelegate, MRListViewControllerDelegate, WYPopoverControllerDelegate> {
+@interface MRDrugSearchViewController () <UIScrollViewDelegate, UISearchBarDelegate, MRListViewControllerDelegate, WYPopoverControllerDelegate, SWRevealViewControllerDelegate> {
     NSMutableArray *resultarray;
     NSDictionary *selectedDrug;
     
@@ -442,4 +442,9 @@
     }];
 }
 
+#pragma mark - SWRevealViewControllerDelegate
+
+- (void)revealController:(SWRevealViewController *)revealController willMoveToPosition:(FrontViewPosition)position {
+    [self.searchBar resignFirstResponder];
+}
 @end

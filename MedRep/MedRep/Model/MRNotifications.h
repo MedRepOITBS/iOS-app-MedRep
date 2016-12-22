@@ -43,4 +43,6 @@
 @property (nonatomic, retain) NSString * viewStatus;
 @property (nonatomic, retain) NSNumber *feedback;
 
+- (NSDictionary*)getNotificationDetails;
+
 @end

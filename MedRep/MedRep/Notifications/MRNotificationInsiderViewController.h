@@ -9,13 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @class MPNotificationAlertViewController;
+@class MRNotifications;
 
 @interface MRNotificationInsiderViewController : UIViewController
 {
     MPNotificationAlertViewController *viewController;
 }
 
-@property (nonatomic, retain) NSDictionary *notificationDetails;
-@property (nonatomic, retain) NSDictionary *selectedNotification;
+@property (nonatomic, retain) NSNumber *notificationId;
 @property (nonatomic, assign) BOOL isFullScreen;
+
 @end

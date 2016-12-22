@@ -16,6 +16,7 @@
 #import "MRAppControl.h"
 #import "MRCommon.h"
 #import "MRConstants.h"
+#import "MRNotifications.h"
 
 #define kImagesArray [NSArray arrayWithObjects:@"ndcompany3@2x.jpg",@"NDcompany4@2x.jpg", nil]
 
@@ -31,6 +32,10 @@
 @property (strong, nonatomic) IBOutlet UIView *navView;
 @property (strong, nonatomic) WYPopoverController *myPopoverController;
 @property (weak, nonatomic) IBOutlet UIButton *therapeuticButton;
+
+@property (nonatomic, retain) NSArray *notificationDetailsList;
+@property (nonatomic, retain) NSArray *therapeuticNamesList;
+
 @end
 
 @implementation MRNotificationsDetailsViewController
@@ -38,7 +43,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title = [self.selectedNotification objectForKey:@"companyName"];
+    self.navigationItem.title = self.selectedNotification.companyName;
     
     UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonAction:)];
     self.navigationItem.leftBarButtonItem = revealButtonItem;
@@ -46,15 +51,13 @@
     UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navView];
     self.navigationItem.rightBarButtonItem = rightButtonItem;
     
-    NSDictionary *comapnyDetails = [[MRAppControl sharedHelper] getCompanyDetailsByID:[[self.selectedNotification objectForKey:@"companyId"] intValue]];
+    NSDictionary *comapnyDetails = [[MRAppControl sharedHelper] getCompanyDetailsByID:[self.selectedNotification.companyId integerValue]];
     
     id displayPicture = [comapnyDetails objectForKey:@"dPicture"];
     if (displayPicture != nil && [displayPicture isKindOfClass:[NSDictionary class]]) {
         [MRAppControl getNotificationImage:[comapnyDetails objectForKey:@"companyId"]
                             displayPicture:[displayPicture objectForKey:@"dPicture"] andImageView:self.companyLogoImage];
     }
-    
-    [self loadNotificationDetails];
     
     // Do any additional setup after loading the view from its nib.
 }
@@ -63,13 +66,14 @@
     [super viewWillAppear:animated];
     
     [self.navigationController setNavigationBarHidden:NO];
+    [self loadNotificationDetails];
 }
 
 - (void)loadNotificationDetails
 {
-    self.notificationDetailsList = [[MRAppControl sharedHelper] getNotificationByCompanyID:[[self.selectedNotification objectForKey:@"companyId"] integerValue]];
+    self.notificationDetailsList = [[MRAppControl sharedHelper] getNotificationByCompanyID:[self.selectedNotification.companyId integerValue]];
     
-    self.detailsTextView.text = [self.selectedNotification objectForKey:@"therapeuticName"];
+    self.detailsTextView.text = self.selectedNotification.therapeuticName;
     
     [self.notificationDetailsTableView reloadData];
     
@@ -153,7 +157,9 @@
         regCell                             = (MPNotificatinsTableViewCell *)[nibViews lastObject];
         
     }
-    NSDictionary *notification              = [self.notificationDetailsList objectAtIndex:indexPath.row];
+    MRNotifications *currentNotification = [self.notificationDetailsList objectAtIndex:indexPath.row];
+    
+    NSDictionary *notification = [currentNotification toDictionary];
 
     regCell.notificationLetter.hidden       = NO;
     regCell.notificationLetter.backgroundColor = [MRCommon getColorForIndex:indexPath.row];
@@ -172,7 +178,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MRNotificationInsiderViewController *notificationInsiderVc =[[MRNotificationInsiderViewController alloc] initWithNibName:@"MRNotificationInsiderViewController" bundle:nil];
-    notificationInsiderVc.notificationDetails = [self.notificationDetailsList objectAtIndex:indexPath.row];
+    MRNotifications *selectedNotification = [self.notificationDetailsList objectAtIndex:indexPath.row];
+    notificationInsiderVc.notificationId = [NSNumber numberWithLong:selectedNotification.notificationId.longValue];
     [self.navigationController pushViewController:notificationInsiderVc animated:YES];
 }
 
@@ -229,10 +236,12 @@
 - (NSArray*)getNotificationTherapeuticAreas
 {
     NSMutableArray *therapeutic = [[NSMutableArray alloc] init];
-    for (NSDictionary *dict in self.notificationDetailsList) {
-        if (NO == [therapeutic containsObject:[dict objectForKey:@"therapeuticName"]]) {
-            [therapeutic addObject:[dict objectForKey:@"therapeuticName"]];
+    for (MRNotifications *notification in self.notificationDetailsList) {
+        NSString *therapeuticName = @"";
+        if (notification.therapeuticName != nil && notification.therapeuticName.length > 0) {
+            therapeuticName = notification.therapeuticName;
         }
+        [therapeutic addObject:therapeuticName];
     }
     return therapeutic;
     
@@ -274,9 +283,9 @@
     self.detailsTextView.text = therapueticName;
     
     if ([therapueticName caseInsensitiveCompare:@"All"] == NSOrderedSame) {
-        self.notificationDetailsList = [[MRAppControl sharedHelper] getNotificationByCompanyID:[[self.selectedNotification objectForKey:@"companyId"] integerValue]];
+        self.notificationDetailsList = [[MRAppControl sharedHelper] getNotificationByCompanyID:[self.selectedNotification.companyId integerValue]];
     } else {
-        self.notificationDetailsList = [[MRAppControl sharedHelper] getNotificationByTherapeuticName:[item objectForKey:@"therapeuticName"] withCompanyID:[[self.selectedNotification objectForKey:@"companyId"] intValue]];
+        self.notificationDetailsList = [[MRAppControl sharedHelper] getNotificationByTherapeuticName:[item objectForKey:@"therapeuticName"] withCompanyID:[self.selectedNotification.companyId integerValue]];
     }
     
     [self.notificationDetailsTableView reloadData];

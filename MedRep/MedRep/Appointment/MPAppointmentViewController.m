@@ -173,7 +173,9 @@
 {
     MRNotificationInsiderViewController *prodcutDetails = [[MRNotificationInsiderViewController alloc] initWithNibName:@"MRNotificationInsiderViewController" bundle:nil];
     
-    prodcutDetails.notificationDetails = [[MRAppControl sharedHelper] getNotificationByID:[[self.selectedAppointment objectForKey:@"notificationId"] integerValue]];
+    // vamsi
+//    prodcutDetails.notificationDetails = [[MRAppControl sharedHelper] getNotificationByID:[[self.selectedAppointment objectForKey:@"notificationId"] integerValue]];
+    
     [self.navigationController pushViewController:prodcutDetails animated:YES];
 }
 

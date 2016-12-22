@@ -14,6 +14,7 @@
 #import "MRDatabaseHelper.h"
 #import "MRCommon.h"
 #import "MRConstants.h"
+#import "MRNotifications.h"
 
 @interface MRFavoritesNotificationsViewController ()<UITableViewDataSource, UITableViewDelegate, MRFavoriteFilterViewControllerDelegate, SWRevealViewControllerDelegate>
 
@@ -126,7 +127,10 @@
 {
     //[MRCommon showAlert:kComingsoonMSG delegate:nil];
     MRNotificationInsiderViewController *notificationInsiderVc =[[MRNotificationInsiderViewController alloc] initWithNibName:@"MRNotificationInsiderViewController" bundle:nil];
-    notificationInsiderVc.notificationDetails = [self.notificationDetailsList objectAtIndex:indexPath.row];
+    
+    MRNotifications *selectedNotification = [self.notificationDetailsList objectAtIndex:indexPath.row];
+    notificationInsiderVc.notificationId = [NSNumber numberWithLong:selectedNotification.notificationId.longValue];
+    
     [self.navigationController pushViewController:notificationInsiderVc animated:YES];
 }
 

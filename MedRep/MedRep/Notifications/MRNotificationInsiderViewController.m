@@ -50,11 +50,13 @@
 @property (weak, nonatomic) IBOutlet UIButton *leftButton;
 @property (weak, nonatomic) IBOutlet UIButton *rightButton;
 @property (nonatomic, retain) NSMutableDictionary *noticationImages;
-@property (nonatomic, retain) NSDictionary *detailsList;
+@property (nonatomic, retain) NSArray *detailsList;
 @property (nonatomic, assign) NSInteger imagesCount;
 @property (nonatomic, assign) NSInteger currentImageIndex;
 @property (weak, nonatomic) IBOutlet UIImageView *reminderIcon;
+
 @property (nonatomic, retain) MRNotifications *notification;
+@property (nonatomic) NSDictionary *notificationDetails;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewHeight;
@@ -122,7 +124,7 @@
     self.feedBackImage.image = [UIImage imageNamed:@"feedback.png"];
     self.reminderIcon.image = [UIImage imageNamed:@"reminder.png"];
     
-    NSArray *notificationTypeList = [[MRDataManger sharedManager] fetchObjectList:kNotificationsEntity predicate:[NSPredicate predicateWithFormat:@"notificationId == %@", [self.notificationDetails objectForKey:@"notificationId"]]];
+    NSArray *notificationTypeList = [[MRDataManger sharedManager] fetchObjectList:kNotificationsEntity predicate:[NSPredicate predicateWithFormat:@"notificationId == %ld", self.notificationId.integerValue]];
     
     self.notification = notificationTypeList.firstObject;
     
@@ -136,17 +138,17 @@
         self.favoriteImage.image = [UIImage imageNamed:@"favoriteSelected.png"];
     }
     
-    self.selectedNotification = [self.notificationDetails objectForKey:@"notificationDetails"];
+    self.notificationDetails = [self.notification getNotificationDetails];
     
-    if (self.selectedNotification)
+    if (self.notificationDetails)
     {
-        self.contentHeaderLabel.text = [self.notificationDetails objectForKey:@"notificationDesc"];
-        self.contentTextView.text = [self.selectedNotification objectForKey:@"detailDesc"];
-        self.drugNameLabel.text = [NSString stringWithFormat:@"\t%@",[self.selectedNotification objectForKey:@"detailTitle"]];
+        self.contentHeaderLabel.text = self.notification.notificationDesc;
+        self.contentTextView.text = [self.notificationDetails objectForKey:@"detailDesc"];
+        self.drugNameLabel.text = [NSString stringWithFormat:@"\t%@",[self.notificationDetails objectForKey:@"detailTitle"]];
         
-        self.navigationItem.title = [self.notificationDetails objectForKey:@"companyName"];
+        self.navigationItem.title = self.notification.companyName;
         [MRCommon showActivityIndicator:@"Loading..."];
-        self.detailsList = [self.notificationDetails objectForKey:@"notificationDetails"];
+        self.detailsList = @[self.notificationDetails];
         [self loadImages];
     }
     self.loopTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTimerLabel) userInfo:nil repeats:YES];
@@ -183,21 +185,22 @@
 
 - (void)loadImages
 {
-    [MRCommon getNotificationImageByID:[[self.detailsList objectForKey:@"detailId"] integerValue]
+    NSDictionary *firstDetailObject = self.detailsList.firstObject;
+    [MRCommon getNotificationImageByID:[[firstDetailObject objectForKey:@"detailId"] integerValue]
                               forImage:^(NSString *image)
      {
          if (image)
          {
-             id value = [self.detailsList objectForKey:@"detailId"];
+             id value = [firstDetailObject objectForKey:@"detailId"];
              if (value != nil) {
                  NSNumber *tempValue = (NSNumber*)value;
-                 [self.noticationImages setObject:image forKey:[NSString stringWithFormat:@"%ld",tempValue.integerValue]];
+                 [self.noticationImages setObject:image forKey:[NSString stringWithFormat:@"%ld",(long)tempValue.integerValue]];
                  
                  self.contentViewHeight.constant = self.contentScrollView.frame.size.height + 130;
                  self.contentViewWidth.constant =  self.contentScrollView.frame.size.width;
                  [self updateViewConstraints];
               
-                 [self updateNotification:[self.detailsList objectForKey:@"detailId"]];
+                 [self updateNotification:[firstDetailObject objectForKey:@"detailId"]];
              }
          }
          else
@@ -212,17 +215,15 @@
 - (void)updateNotification:(NSNumber*)imageId
 {
     if (imageId != nil) {
-        NSString *key = [NSString stringWithFormat:@"%ld",imageId.integerValue];
+        NSString *key = [NSString stringWithFormat:@"%ld",(long)imageId.integerValue];
         NSString *image = [self.noticationImages objectForKey:key];
 
         [self.notifcationImage loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:image]]];
 //        self.fullScreenNotificationImage.image = image;
 //        self.notifcationImage.image = image;
     }
-    /*
     self.contentTitleLabel.text = [[self.detailsList objectAtIndex:self.currentImageIndex] objectForKey:@"detailTitle"];
     self.contentHeaderLabel.text = [[self.detailsList objectAtIndex:self.currentImageIndex] objectForKey:@"detailDesc"];
-    */
 }
 
 - (UIView*)viewForZoomingInScrollView:(UIScrollView *)scrollView
@@ -377,8 +378,7 @@
 {
     MPCallMedrepViewController *callMedrep = [[MPCallMedrepViewController alloc] initWithNibName:[MRCommon deviceHasThreePointFiveInchScreen] ? @"MPCallMedrepViewController_iPhone" : @"MPCallMedrepViewController" bundle:nil];
     callMedrep.isFromReschedule = NO;
-    callMedrep.selectedNotification = self.selectedNotification;
-    callMedrep.notificationDetails = self.notificationDetails;
+    callMedrep.notificationDetails = [self.notification toDictionary];
     [self.navigationController pushViewController:callMedrep animated:YES];
 }
 
@@ -492,7 +492,8 @@
     [notificationdict setObject:[self.notificationDetails objectForKey:@"notificationId"] forKey:@"notificationId"];
     [notificationdict setObject:@"Viewed"  forKey:@"viewStatus"];
     NSString *fav = (self.favourite == YES) ? @"Y" : @"N";
-    [notificationdict setObject:fav  forKey:@"favourite"];
+    
+    [notificationdict setObject:[NSNumber numberWithBool:self.favourite] forKey:@"favourite"];
     
     [notificationdict setObject:[NSNumber numberWithFloat:self.rating]  forKey:@"rating"];
     
@@ -504,6 +505,7 @@
     [notificationdict setObject:[MRCommon stringFromDate:[NSDate date] withDateFormate:@"YYYYMMddHHmmss"]  forKey:@"viewedOn"];
     
     [notificationdict setObject:[self.notificationDetails objectForKey:@"notificationId"]  forKey:@"userNotificationId"];
+    [notificationdict setObject:[self.notificationDetails objectForKey:@"notificationId"]  forKey:@"notificationId"];
     
     [MRCommon showActivityIndicator:@"Sending..."];
     [[MRWebserviceHelper sharedWebServiceHelper] updateNotification:notificationdict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
@@ -541,10 +543,7 @@
     [notificationdict setObject:[self.notificationDetails objectForKey:@"notificationId"] forKey:@"notificationId"];
     [notificationdict setObject:@"Viewed"  forKey:@"viewStatus"];
     
-    if (self.favourite == YES)
-    {
-        [notificationdict setObject:[NSNumber numberWithBool:YES] forKey:@"favourite"];
-    }
+    [notificationdict setObject:[NSNumber numberWithBool:self.favourite] forKey:@"favourite"];
     
     if (self.remindMeValue != nil && self.remindMeValue.length > 0) {
         [notificationdict setObject:self.remindMeValue forKey:@"remindMe"];
@@ -555,7 +554,7 @@
         [notificationdict setObject:loggedInDoctorId forKey:@"doctorId"];
     }
     
-    //[notificationdict setObject:[NSNumber numberWithFloat:self.rating]  forKey:@"rating"];
+    [notificationdict setObject:[NSNumber numberWithFloat:self.rating]  forKey:@"rating"];
     
 //    fav = @"";
 //    [notificationdict setObject:fav  forKey:@"prescribe"];
@@ -566,8 +565,6 @@
     
     [notificationdict setObject:[self.notificationDetails objectForKey:@"notificationId"]  forKey:@"userNotificationId"];
     
-    [notificationdict setObject:@"1h" forKey:@"remindMe"];
-    
     [notificationdict setObject:@"4.5" forKey:@"rating"];
     [notificationdict setObject:@"Y" forKey:@"prescribe"];
     [notificationdict setObject:@"N" forKey:@"recomend"];
@@ -575,6 +572,7 @@
     [[MRWebserviceHelper sharedWebServiceHelper] updateNotification:notificationdict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
         if (status)
         {
+            [self updateNotificationInStorage:notificationdict];
         }
         else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
         {
@@ -584,6 +582,7 @@
                 [[MRWebserviceHelper sharedWebServiceHelper] updateNotification:notificationdict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
                     if (status)
                     {
+                        [self updateNotificationInStorage:notificationdict];
                     }
                 }];
             }];
@@ -594,6 +593,16 @@
             [MRCommon showAlert:@"Faild to update the notification." delegate:nil];
         }
     }];
+}
+
+- (void)updateNotificationInStorage:(NSDictionary*)notification {
+   MRNotifications *currentNotification = [[MRDataManger sharedManager] fetchObject:kNotificationsEntity
+                                    predicate:[NSPredicate predicateWithFormat:@"notificationId == %@", [notification objectOrNilForKey:@"notificationId"]]];
+    
+    currentNotification.viewStatus = [notification objectOrNilForKey:@"viewStatus"];
+    currentNotification.favourite = [NSNumber numberWithBool:self.favourite];
+    
+    [currentNotification.managedObjectContext save:nil];
 }
 
 - (IBAction)feedbackButtonAction:(id)sender
@@ -716,7 +725,8 @@
 
 - (void)showFullScreen
 {
-    NSNumber *imageId = [self.detailsList objectForKey:@"detailId"];
+    NSDictionary *currentNotificationDetails = [self.detailsList objectAtIndex:self.currentImageIndex];
+    NSNumber *imageId = [currentNotificationDetails objectForKey:@"detailId"];
     if (imageId != nil) {
         NSString *key = [NSString stringWithFormat:@"%ld",(long)imageId.integerValue];
         NSString *image = [self.noticationImages objectForKey:key];

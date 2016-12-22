@@ -957,66 +957,21 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
     if (isFav)
     {
         predicate = [NSPredicate predicateWithFormat:@"favourite == %d", isFav];
-//        notificationTypeList   = [[MRDataManger sharedManager] fetchObjectList:kNotificationsEntity predicate:predicate];
     }
     else if (isRead)
     {
         predicate = [NSPredicate predicateWithFormat:@"readNotification == %d", isRead];
-//        notificationTypeList   = [[MRDataManger sharedManager] fetchObjectList:kNotificationsEntity predicate:predicate];
     }
     else
     {
         notificationTypeList   = [[MRDataManger sharedManager] fetchObjectList:kNotificationsEntity];
     }
     
-    if (predicate != nil) {
-        notificationTypeList = [[MRDataManger sharedManager] fetchObjectList:kNotificationsEntity
+    notificationTypeList = [[MRDataManger sharedManager] fetchObjectList:kNotificationsEntity
                                                                attributeName:@"updatedOn"
                                                                    predicate:predicate sortOrder:SORT_ORDER_DESCENDING];
-    }
     
-    NSMutableArray *array           = [NSMutableArray array];
-    for (MRNotifications *notification in notificationTypeList)
-    {
-        NSDictionary *myNotificationDict = [notification toDictionary];
-        /*
-         [myNotificationDict setObject:notification.companyId   forKey:@"companyId"];
-         [myNotificationDict setObject:notification.companyName forKey:@"companyName"];
-         [myNotificationDict setObject:notification.createdBy   forKey:@"createdBy"];
-         [myNotificationDict setObject:notification.createdOn   forKey:@"createdOn"];
-         [myNotificationDict setObject:notification.externalRef forKey:@"externalRef"];
-         
-         [myNotificationDict setObject:notification.favNotification forKey:@"favNotification"];
-         
-         //[myNotificationDict setObject:notification.fileList    forKey:@"fileList"];
-         [myNotificationDict setObject:notification.notificationDesc    forKey:@"notificationDesc"];
-         
-         vamsi
-         [myNotificationDict setObject:[MRCommon unArchiveDataToDictionary:notification.notificationDetails forKey:@"notificationDetails"] forKey:@"notificationDetails"];
-         
-         [myNotificationDict setObject:notification.notificationId  forKey:@"notificationId"];
-         [myNotificationDict setObject:notification.notificationName    forKey:@"notificationName"];
-         
-         vamsi
-         [myNotificationDict setObject:notification.readNotification    forKey:@"readNotification"];;
-         
-         [myNotificationDict setObject:notification.status  forKey:@"status"];
-       //  [myNotificationDict setObject:notification.therapeuticDropDownValues   forKey:@"therapeuticDropDownValues"];
-         [myNotificationDict setObject:notification.therapeuticId   forKey:@"therapeuticId"];
-         [myNotificationDict setObject:notification.therapeuticName forKey:@"therapeuticName"];
-//         [myNotificationDict setObject:notification.totalConvertedToAppointment forKey:@"totalConvertedToAppointment"];
-//         [myNotificationDict setObject:notification.totalPendingNotifcation forKey:@"totalPendingNotifcation"];
-//         [myNotificationDict setObject:notification.totalSentNotification   forKey:@"totalSentNotification"];
-//         [myNotificationDict setObject:notification.totalViewedNotifcation  forKey:@"totalViewedNotifcation"];
-         [myNotificationDict setObject:notification.typeId  forKey:@"typeId"];
-         [myNotificationDict setObject:notification.updatedBy   forKey:@"updatedBy"];
-         [myNotificationDict setObject:notification.updatedOn   forKey:@"updatedOn"];
-         [myNotificationDict setObject:notification.validUpto   forKey:@"validUpto"];
-         */
-         [array addObject:myNotificationDict];
-    }
-    
-    objectsList(array);
+    objectsList(notificationTypeList);
 }
 
 + (void)getNotificationsByFilter:(NSString*)companyName

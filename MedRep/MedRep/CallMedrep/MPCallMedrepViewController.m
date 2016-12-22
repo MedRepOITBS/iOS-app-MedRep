@@ -164,9 +164,9 @@
     
     if (!self.isFromReschedule)
     {
-        [appointmentDetails setObject:[self.selectedNotification objectForKey:@"notificationName"] forKey:@"notificationName"];
-        [appointmentDetails setObject:[self.selectedNotification objectForKey:@"notificationDesc"] forKey:@"notificationDesc"];
-        [appointmentDetails setObject:[self.selectedNotification objectForKey:@"notificationId"] forKey:@"notificationId"];
+        [appointmentDetails setObject:[self.notificationDetails objectForKey:@"notificationName"] forKey:@"notificationName"];
+        [appointmentDetails setObject:[self.notificationDetails objectForKey:@"notificationDesc"] forKey:@"notificationDesc"];
+        [appointmentDetails setObject:[self.notificationDetails objectForKey:@"notificationId"] forKey:@"notificationId"];
         [appointmentDetails setObject:[MRCommon stringFromDate:self.cellRepDatePicker.date withDateFormate:@"YYYYMMddHHmmss"] forKey:@"startDate"];
         
        // [MRCommon stringFromDate:self.cellRepDatePicker.date withDateFormate:@"YYYYMMddHHmmss"];
@@ -224,11 +224,25 @@
                      if (status)
                      {
                          [self showConformationAlert];
+                     } else if (status == NO) {
+                         [self showConflictMessage:responce];
                      }
                  }];
              }];
+        } else {
+            if (status == NO) {
+                [self showConflictMessage:responce];
+            }
         }
     }];
+}
+
+- (void)showConflictMessage:(NSDictionary *)response {
+    NSString *error = [response objectOrNilForKey:@"status"];
+    if (error != nil && error.length > 0 &&
+        [error caseInsensitiveCompare:@"Error"] == NSOrderedSame) {
+        [MRCommon showAlert:[response objectOrNilForKey:@"message"] delegate:self];
+    }
 }
 
 - (void)showConformationAlert

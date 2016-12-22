@@ -526,14 +526,26 @@
     NSPredicate *favPredicate = [NSPredicate predicateWithFormat:@"favNotification == %d", NO];
     
     NSCompoundPredicate *predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[companyPredicate, favPredicate]];
-    NSArray *filteredArray          = [self.notifications filteredArrayUsingPredicate:predicate];
+    NSArray *filteredArray = [[MRDataManger sharedManager] fetchObjectList:kNotificationsEntity attributeName:@"notificationName"
+                                                                 predicate:predicate
+                                                                 sortOrder:SORT_ORDER_ASCENDING];
+    
+//    NSArray *filteredArray          = [self.notifications filteredArrayUsingPredicate:predicate];
     
     return filteredArray;
 }
 
 - (NSArray*)getNotificationByTherapeuticName:(NSString*)therapeuticName withCompanyID:(NSInteger)companyID
 {
-    NSArray *filteredArray          = [self.notifications filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"companyId == %d AND therapeuticName == %@", companyID,therapeuticName]];
+    NSPredicate *therapueticAreaPredicate = [NSPredicate predicateWithFormat:@"therapeuticName == %@", therapeuticName];
+    
+    NSPredicate *companyPredicate = [NSPredicate predicateWithFormat:@"companyId == %d", companyID];
+    NSPredicate *favPredicate = [NSPredicate predicateWithFormat:@"favNotification == %d", NO];
+    
+    NSCompoundPredicate *predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[companyPredicate, favPredicate, therapueticAreaPredicate]];
+    NSArray *filteredArray = [[MRDataManger sharedManager] fetchObjectList:kNotificationsEntity attributeName:@"notificationName"
+                                                                 predicate:predicate
+                                                                 sortOrder:SORT_ORDER_ASCENDING];
     
     return filteredArray;
 }

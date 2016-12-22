@@ -17,6 +17,7 @@
 #import "MRConstants.h"
 #import "MRCommon.h"
 #import "MRAppControl.h"
+#import "MRNotifications.h"
 
 #define kImagesArray [NSArray arrayWithObjects:@"comapny-logo@2x.png",@"comapny-logo2@2x.png",@"", nil]
 
@@ -219,7 +220,8 @@
         
     }
     
-    NSDictionary *dict                          = [self.notifications objectAtIndex:indexPath.row];
+    MRNotifications *notification = [self.notifications objectAtIndex:indexPath.row];
+    NSDictionary *dict = [notification toDictionary];
     
     NSDictionary *comapnyDetails                = [[MRAppControl sharedHelper] getCompanyDetailsByID:[[dict objectForKey:@"companyId"] intValue]];
     
@@ -251,11 +253,11 @@
 - (NSInteger)getCompanyCount
 {
     NSMutableArray * array= [[NSMutableArray alloc] init];
-    for (NSDictionary *notification in self.notifications)
+    for (MRNotifications *notification in self.notifications)
     {
-        if (NO == [array containsObject:[notification objectForKey:@"companyId"]])
+        if (NO == [array containsObject:notification.companyId])
         {
-            [array addObject:[notification objectForKey:@"companyId"]];
+            [array addObject:notification.companyId];
         }
     }
     return array.count;

@@ -14,6 +14,7 @@
 #import "MRDatabaseHelper.h"
 #import "MRCommon.h"
 #import "MRConstants.h"
+#import "MRNotifications.h"
 
 #define kImagesArray [NSArray arrayWithObjects:@"img1@2x.jpg",@"NDcompany4@2x.jpg",@"readnotification3@2x.jpg", nil]
 #define kDrugNameArray [NSArray arrayWithObjects:@"Test 1",@"Test 2",@"Test 3", nil]
@@ -110,7 +111,8 @@
         regCell                             = (MPNotificatinsTableViewCell *)[nibViews lastObject];
         
     }
-    NSDictionary *notification              = [self.notificationDetailsList objectAtIndex:indexPath.row];
+    MRNotifications *currentNotification              = [self.notificationDetailsList objectAtIndex:indexPath.row];
+    NSDictionary *notification = [currentNotification toDictionary];
     
     regCell.notificationLetter.hidden       = NO;
     regCell.notificationLetter.backgroundColor = [MRCommon getColorForIndex:indexPath.row];
@@ -130,7 +132,10 @@
 {
     //[MRCommon showAlert:kComingsoonMSG delegate:nil];
     MRNotificationInsiderViewController *notificationInsiderVc =[[MRNotificationInsiderViewController alloc] initWithNibName:@"MRNotificationInsiderViewController" bundle:nil];
-    notificationInsiderVc.notificationDetails = [self.notificationDetailsList objectAtIndex:indexPath.row];
+    
+    MRNotifications *selectedNotification = [self.notificationDetailsList objectAtIndex:indexPath.row];
+    notificationInsiderVc.notificationId = [NSNumber numberWithLong:selectedNotification.notificationId.longValue];
+    
     [self.navigationController pushViewController:notificationInsiderVc animated:YES];
 }
 
