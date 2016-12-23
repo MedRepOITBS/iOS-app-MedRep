@@ -115,10 +115,6 @@
          }
 
     }];
-    
-    [[MRWebserviceHelper sharedWebServiceHelper] getPendingCount:@{@"resetNotificationCount" : [NSNumber numberWithBool:YES]} andHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-        
-    }];
 
     // Do any additional setup after loading the view from its nib.
 }
@@ -130,8 +126,8 @@
 
 - (void)resetNotificationsCounter {
     NSDictionary *dict = @{@"resetDoctorPlusCount":[NSNumber numberWithBool:false],
-                           @"resetNotificationCount":[NSNumber numberWithBool:false],
-                           @"resetSurveyCount": [NSNumber numberWithBool:true]};
+                           @"resetNotificationCount":[NSNumber numberWithBool:true],
+                           @"resetSurveyCount": [NSNumber numberWithBool:false]};
     [[MRWebserviceHelper sharedWebServiceHelper] getPendingCount:dict andHandler:^(BOOL status, NSString *details, NSDictionary *responce)
      {
          if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])

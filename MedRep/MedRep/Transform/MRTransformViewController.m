@@ -155,9 +155,9 @@ SWRevealViewControllerDelegate, UISearchBarDelegate>{
 }
 
 - (void)resetDashboardCounter {
-    NSDictionary *dict = @{@"resetDoctorPlusCount":[NSNumber numberWithBool:false],
+    NSDictionary *dict = @{@"resetDoctorPlusCount":[NSNumber numberWithBool:true],
                            @"resetNotificationCount":[NSNumber numberWithBool:false],
-                           @"resetSurveyCount": [NSNumber numberWithBool:true]};
+                           @"resetSurveyCount": [NSNumber numberWithBool:false]};
     [[MRWebserviceHelper sharedWebServiceHelper] getPendingCount:dict andHandler:^(BOOL status, NSString *details, NSDictionary *responce)
      {
          if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
