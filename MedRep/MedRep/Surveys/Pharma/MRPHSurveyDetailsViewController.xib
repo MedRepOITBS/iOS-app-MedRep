@@ -20,13 +20,10 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="YDm-oG-Sqm">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="notificationbody-bg.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="P7Y-Cr-tqw">
-                    <frame key="frameInset" width="320" height="568"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="notificationbody-bg.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="P7Y-Cr-tqw"/>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EFk-yl-2jc">
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ELs-4W-xMr">
@@ -124,10 +121,14 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="P7Y-Cr-tqw" firstAttribute="leading" secondItem="YDm-oG-Sqm" secondAttribute="leading" id="BmV-u5-ddX"/>
+                <constraint firstAttribute="trailing" secondItem="P7Y-Cr-tqw" secondAttribute="trailing" id="IsE-C8-vWt"/>
                 <constraint firstAttribute="bottom" secondItem="EFk-yl-2jc" secondAttribute="bottom" id="VbO-Hh-YJY"/>
                 <constraint firstItem="EFk-yl-2jc" firstAttribute="leading" secondItem="YDm-oG-Sqm" secondAttribute="leading" id="XKz-qL-CeS"/>
+                <constraint firstAttribute="bottom" secondItem="P7Y-Cr-tqw" secondAttribute="bottom" id="e08-6V-Jh1"/>
                 <constraint firstAttribute="trailing" secondItem="EFk-yl-2jc" secondAttribute="trailing" id="oui-7U-iic"/>
                 <constraint firstItem="EFk-yl-2jc" firstAttribute="top" secondItem="YDm-oG-Sqm" secondAttribute="top" id="u8f-Lf-eme"/>
+                <constraint firstItem="P7Y-Cr-tqw" firstAttribute="top" secondItem="YDm-oG-Sqm" secondAttribute="top" id="uzC-9K-2Yg"/>
             </constraints>
             <point key="canvasLocation" x="56" y="373"/>
         </view>

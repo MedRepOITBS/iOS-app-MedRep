@@ -32,6 +32,7 @@ typedef void(^alertCompletionHandler)(MPNotificationAlertViewController* alertVi
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *alertWidthConstraint;
 
 @property (assign, nonatomic) NSInteger locatlNotificationType;
+
 - (void)configureAlertWithAlertType:(MRAlertType)alertType
                         withMessage:(NSString*)message
                           withTitle:(NSString*)title

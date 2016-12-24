@@ -389,6 +389,9 @@
     self.rHilightLabel.backgroundColor = kRGBCOLOR(22, 107, 170);
 
     viewController = [[MPNotificationAlertViewController alloc] initWithNibName:@"MPNotificationAlertViewController" bundle:nil];
+    
+    viewController.locatlNotificationType = [self reverseLocalNotification:self.remindMeValue];
+    
     [self.view addSubview:viewController.view];
     
     [MRCommon addUpdateConstarintsTo:self.view withChildView:viewController.view];
@@ -424,6 +427,23 @@
     [UIView animateWithDuration:0.25f animations:^{
         viewController.view.alpha = 1.0f;
     }];
+}
+
+- (NSInteger)reverseLocalNotification:(NSString*)remindMeValue
+{
+    NSInteger notificationType = 2;
+    
+    if (remindMeValue != nil && remindMeValue.length > 0) {
+        if ([remindMeValue caseInsensitiveCompare:@"1h"] == NSOrderedSame) {
+            notificationType = 1;
+        } else if ([remindMeValue caseInsensitiveCompare:@"1w"] == NSOrderedSame) {
+            notificationType = 3;
+        } else if ([remindMeValue caseInsensitiveCompare:@"1m"] == NSOrderedSame) {
+            notificationType = 4;
+        }
+    }
+    
+    return notificationType;
 }
 
 - (void)configureLocalNotification:(NSInteger)notificationType

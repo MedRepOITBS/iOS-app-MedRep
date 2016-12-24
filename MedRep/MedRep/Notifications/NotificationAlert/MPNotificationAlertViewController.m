@@ -50,9 +50,45 @@
 
 @implementation MPNotificationAlertViewController
 
+- (id)init {
+    if (self = [super init]) {
+        self.locatlNotificationType = 2;
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        self.locatlNotificationType = 2;
+    }
+    return self;
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil] ) {
+        self.locatlNotificationType = 2;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
-    self.dayButton.selected = YES;
-    self.locatlNotificationType = 1;
+    switch (self.locatlNotificationType) {
+        case 1:
+            self.hourButton.selected = YES;
+            break;
+            
+        case 3:
+            self.weekButton.selected = YES;
+            break;
+            
+        case 4:
+            self.monthButton.selected = YES;
+            break;
+            
+        default:
+            self.dayButton.selected = YES;
+            break;
+    }
     self.yesButtonOne.selected = NO;
     self.yesButtonTwo.selected = NO;
     
