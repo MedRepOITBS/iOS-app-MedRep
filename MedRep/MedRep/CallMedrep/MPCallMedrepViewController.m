@@ -87,8 +87,8 @@
     else
     {
         self.drugSubTitle.text = [self.notificationDetails objectForKey:@"notificationName"];
-        self.TherapeuticSubTitle.text = [self.selectedNotification objectForKey:@"therapeuticName"];
-        self.companySubTitle.text = [self.selectedNotification objectForKey:@"companyName"];
+        self.TherapeuticSubTitle.text = [self.notificationDetails objectForKey:@"therapeuticName"];
+        self.companySubTitle.text = [self.notificationDetails objectForKey:@"companyName"];
         NSArray *items = [[MRAppControl sharedHelper].userRegData objectForKey:KRegistarionStageTwo];
         NSDictionary *item = [items objectAtIndex:0];
          self.locationTextField.text = [NSString stringWithFormat:@"%@,%@,%@",[item objectForKey:KAddressOne],[item objectForKey:KAdresstwo],[item objectForKey:KCity]];

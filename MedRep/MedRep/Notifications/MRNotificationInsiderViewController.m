@@ -77,6 +77,10 @@
 
 @property (nonatomic, strong) NSString *remindMeValue;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentHeaderLabelHeightConstraint;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentTitleHeightConstraint;
+
 @end
 
 @implementation MRNotificationInsiderViewController
@@ -142,13 +146,12 @@
     
     if (self.notificationDetails)
     {
-        self.contentHeaderLabel.text = self.notification.notificationDesc;
-        self.contentTextView.text = [self.notificationDetails objectForKey:@"detailDesc"];
         self.drugNameLabel.text = [NSString stringWithFormat:@"\t%@",[self.notificationDetails objectForKey:@"detailTitle"]];
         
-        self.navigationItem.title = self.notification.companyName;
+        self.navigationItem.title = self.notification.notificationName;
         [MRCommon showActivityIndicator:@"Loading..."];
         self.detailsList = @[self.notificationDetails];
+        [self adjustHeightsWithContent];
         [self loadImages];
     }
     self.loopTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTimerLabel) userInfo:nil repeats:YES];
@@ -222,8 +225,53 @@
 //        self.fullScreenNotificationImage.image = image;
 //        self.notifcationImage.image = image;
     }
-    self.contentTitleLabel.text = [[self.detailsList objectAtIndex:self.currentImageIndex] objectForKey:@"detailTitle"];
-    self.contentHeaderLabel.text = [[self.detailsList objectAtIndex:self.currentImageIndex] objectForKey:@"detailDesc"];
+}
+
+- (void)adjustHeightsWithContent {
+    
+    NSString *text = [[self.detailsList objectAtIndex:self.currentImageIndex] objectForKey:@"detailDesc"];
+    
+    if (text != nil && text.length > 0) {
+        self.contentHeaderLabel.text = text;
+        
+        NSAttributedString *attributedText =
+            [[NSAttributedString alloc] initWithString:self.contentHeaderLabel.text
+                                        attributes:@{NSFontAttributeName: self.contentHeaderLabel.font}];
+        
+        CGRect rect = [attributedText boundingRectWithSize:(CGSize){self.contentHeaderLabel.frame.size.width, CGFLOAT_MAX}
+                                                   options:NSStringDrawingUsesLineFragmentOrigin
+                                                   context:nil];
+        
+        CGFloat labelHeight = rect.size.height;
+        
+        if (labelHeight > 72) {
+            labelHeight = 72;
+        }
+        
+        self.contentHeaderLabelHeightConstraint.constant = labelHeight;
+    }
+    
+    NSString *contentTitle = [[self.detailsList objectAtIndex:self.currentImageIndex] objectForKey:@"detailTitle"];
+    
+    if (contentTitle != nil && contentTitle.length > 0) {
+        self.contentTitleLabel.text = contentTitle;
+        
+        NSAttributedString *contentTitleAttributedText =
+                [[NSAttributedString alloc] initWithString:contentTitle
+                                        attributes:@{NSFontAttributeName: self.contentTitleLabel.font}];
+        
+        CGRect contentTitleRect = [contentTitleAttributedText boundingRectWithSize:(CGSize){self.contentTitleLabel.frame.size.width, CGFLOAT_MAX}
+                                                   options:NSStringDrawingUsesLineFragmentOrigin
+                                                   context:nil];
+        
+        CGFloat contentTitleLabelHeight = contentTitleRect.size.height;
+        
+        if (contentTitleLabelHeight > 72) {
+            contentTitleLabelHeight = 72;
+        }
+        
+        self.contentTitleHeightConstraint.constant = contentTitleLabelHeight;
+    }
 }
 
 - (UIView*)viewForZoomingInScrollView:(UIScrollView *)scrollView
