@@ -57,11 +57,26 @@
     
     BOOL favouriteNotification = false;
     
-    if (self.favNotification != nil && self.favNotification.boolValue) {
+    if ((self.favNotification != nil && self.favNotification.boolValue) ||
+        (self.favourite != nil && self.favourite.boolValue)) {
         favouriteNotification = self.favNotification.boolValue;
     }
     
     self.favNotification = [NSNumber numberWithBool:favouriteNotification];
+    self.favourite = [NSNumber numberWithBool:favouriteNotification];
+}
+
+- (void)setFavourite:(NSNumber *)favourite {
+    BOOL tempFav = NO;
+    if (favourite != nil) {
+        tempFav = favourite.boolValue;
+    }
+    
+    [self willChangeValueForKey:@"favourite"];
+    [self setPrimitiveValue:[NSNumber numberWithBool:tempFav] forKey:@"favourite"];
+    [self didChangeValueForKey:@"favourite"];
+    
+    self.favNotification = [NSNumber numberWithBool:tempFav];
 }
 
 - (void)setViewStatus:(NSString *)viewStatus {

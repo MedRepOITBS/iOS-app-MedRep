@@ -523,7 +523,7 @@
 - (NSArray*)getNotificationByCompanyID:(NSInteger)companyID
 {
     NSPredicate *companyPredicate = [NSPredicate predicateWithFormat:@"companyId == %d", companyID];
-    NSPredicate *favPredicate = [NSPredicate predicateWithFormat:@"favNotification == %d", NO];
+    NSPredicate *favPredicate = [NSPredicate predicateWithFormat:@"favourite == %d", NO];
     
     NSCompoundPredicate *predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[companyPredicate, favPredicate]];
     NSArray *filteredArray = [[MRDataManger sharedManager] fetchObjectList:kNotificationsEntity attributeName:@"notificationName"
@@ -540,7 +540,7 @@
     NSPredicate *therapueticAreaPredicate = [NSPredicate predicateWithFormat:@"therapeuticName == %@", therapeuticName];
     
     NSPredicate *companyPredicate = [NSPredicate predicateWithFormat:@"companyId == %d", companyID];
-    NSPredicate *favPredicate = [NSPredicate predicateWithFormat:@"favNotification == %d", NO];
+    NSPredicate *favPredicate = [NSPredicate predicateWithFormat:@"favourite == %d", NO];
     
     NSCompoundPredicate *predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[companyPredicate, favPredicate, therapueticAreaPredicate]];
     NSArray *filteredArray = [[MRDataManger sharedManager] fetchObjectList:kNotificationsEntity attributeName:@"notificationName"
