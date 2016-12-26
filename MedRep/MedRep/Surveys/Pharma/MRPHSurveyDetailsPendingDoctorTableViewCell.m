@@ -48,6 +48,7 @@ andParentViewController:(MRPHSurveyDetailsViewController*)viewController {
         if (doctorDetails.reminder_sent.boolValue) {
             [self.statusButton setUserInteractionEnabled:NO];
             [self.statusButton setTitle:@"Reminder Sent" forState:UIControlStateNormal];
+            [self.statusButton setBackgroundColor:[MRCommon colorFromHexString:@"#E887A3"]];
         } else {
             [self.statusButton setUserInteractionEnabled:YES];
             [self.statusButton setTitle:@"Remind" forState:UIControlStateNormal];

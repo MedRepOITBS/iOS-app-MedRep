@@ -39,7 +39,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="pwv-9X-5bx"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                 <state key="normal" title="Remind"/>
                                 <connections>
                                     <action selector="remindMeButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="YAl-QK-K0D"/>

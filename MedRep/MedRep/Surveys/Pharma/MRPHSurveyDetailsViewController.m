@@ -16,7 +16,7 @@
 #import "MRPHSurveyDetailsPendingDoctorTableViewCell.h"
 
 @interface MRPHSurveyDetailsViewController ()<SWRevealViewControllerDelegate,
-                                              UITableViewDelegate, UITableViewDataSource>
+                                              UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate>
 @property (strong, nonatomic) IBOutlet UIView *navView;
 @property (weak, nonatomic) IBOutlet UIView *bgView;
 
@@ -151,7 +151,8 @@
         [self.doctorListTableView reloadData];
     } else {
         self.doctorList = nil;
-        [self.doctorListTableView setHidden:YES];
+        [self.bgView setHidden:YES];
+        [MRCommon showAlert:@"Unable to retrieve survey details" delegate:self withTag:1];
     }
 }
 
@@ -183,7 +184,7 @@
          else
          {
              [MRCommon stopActivityIndicator];
-             [MRCommon showAlert:@"No pending surveys found." delegate:nil];
+             [MRCommon showAlert:@"Unable to retrieve survey details" delegate:nil];
          }
      }];
 }
@@ -302,6 +303,13 @@
     [cell setData:[self.doctorList objectAtIndex:indexPath.row] andParentViewController:self];
     
     return cell;
+}
+
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == 1) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 /*
