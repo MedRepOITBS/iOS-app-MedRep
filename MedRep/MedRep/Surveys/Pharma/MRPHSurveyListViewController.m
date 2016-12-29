@@ -163,11 +163,11 @@
     
     NSNumber *downloadStatus = [survey valueForKey:@"reportsAvailable"];
     if (downloadStatus != nil && downloadStatus.boolValue) {
-        [regCell.downloadSurveyReportButton setImage:[UIImage imageNamed:@"eye"]
+        [regCell.downloadSurveyReportButton setImage:[UIImage imageNamed:@"downloadIcon"]
                                             forState:UIControlStateNormal];
         [regCell.downloadSurveyReportButton setUserInteractionEnabled:YES];
     } else {
-        [regCell.downloadSurveyReportButton setImage:[UIImage imageNamed:@"transperent-bg"]
+        [regCell.downloadSurveyReportButton setImage:[UIImage imageNamed:@"disabeDownloadIcon"]
                                             forState:UIControlStateNormal];
         [regCell.downloadSurveyReportButton setUserInteractionEnabled:NO];
     }

@@ -63,6 +63,14 @@
 
 - (void)enableDownloadReportButton:(BOOL)enable {
     [self.downloadSurveyReportButton setHidden:enable];
+    
+    if (enable) {
+        [self.downloadSurveyReportButton setImage:[UIImage imageNamed:@"downloadIcon"]
+                                         forState:UIControlStateNormal];
+    } else {
+        [self.downloadSurveyReportButton setImage:[UIImage imageNamed:@"disabeDownloadIcon"]
+                                         forState:UIControlStateNormal];
+    }
 }
 
 - (void)removeDownloadReportAction {

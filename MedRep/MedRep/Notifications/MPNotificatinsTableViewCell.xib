@@ -82,7 +82,7 @@
                                     <constraint firstAttribute="width" constant="20" id="4ho-1K-hCJ"/>
                                     <constraint firstAttribute="height" constant="20" id="f6g-M0-oD2"/>
                                 </constraints>
-                                <state key="normal" image="eye.png"/>
+                                <state key="normal" image="downloadIcon"/>
                                 <connections>
                                     <action selector="downloadReportButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="0Qr-ge-wC2"/>
                                 </connections>
@@ -147,7 +147,7 @@
     </objects>
     <resources>
         <image name="comapny-logo.png" width="115" height="76"/>
-        <image name="eye.png" width="128" height="128"/>
+        <image name="downloadIcon" width="25" height="25"/>
         <image name="right-arrow.png" width="10" height="17"/>
         <image name="transperent-bg.png" width="292" height="90"/>
     </resources>
