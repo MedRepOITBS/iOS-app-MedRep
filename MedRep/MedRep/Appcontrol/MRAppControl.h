@@ -64,6 +64,9 @@
 + (NSString*)getContactName:(MRContact*)contact;
 + (NSString*)getGroupMemberName:(MRGroupMembers*)members;
 
++ (void)getPharmaRepImage:(NSString*)repId repURL:(NSString*)repURL
+             andImageView:(UIImageView*)parentView;
+
 + (void)getContactImage:(MRContact*)contact andImageView:(UIImageView*)parentView;
 + (void)getGroupMemberImage:(MRGroupMembers*)member andImageView:(UIImageView*)parentView;
 + (UIImage*)getRepliedByProfileImage:(MRPostedReplies*)replies andImageView:(UIImageView*)parentView;

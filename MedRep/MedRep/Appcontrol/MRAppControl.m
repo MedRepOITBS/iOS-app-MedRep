@@ -760,6 +760,30 @@
     return name;
 }
 
++ (void)getPharmaRepImage:(NSString*)repId repURL:(NSString*)repURL andImageView:(UIImageView*)parentView {
+    parentView.image = nil;
+    
+    if (repURL != nil && repURL.length > 0) {
+        parentView.image = [UIImage imageNamed:@"Icon-60.png"];
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            NSString *key = [NSString stringWithFormat:@"%@_contactImage", repId];
+            id imageData = [[MRAppControl sharedHelper].globalCache objectForKey:key];
+            if (imageData == nil) {
+                imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:repURL]];
+                [[MRAppControl sharedHelper].globalCache setObject:imageData forKey:key];
+            }
+            if (imageData != nil) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    parentView.image = [UIImage imageWithData:imageData];
+                });
+            }
+        });
+    } else {
+        parentView.image = [UIImage imageNamed:@"Icon-60.png"];
+    }
+}
+
 + (void)getContactImage:(MRContact*)contact andImageView:(UIImageView*)parentView {
     parentView.image = nil;
     

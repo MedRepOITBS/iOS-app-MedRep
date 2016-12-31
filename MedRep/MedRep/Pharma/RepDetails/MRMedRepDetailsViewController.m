@@ -73,7 +73,9 @@
      {
          if (status)
          {
-             self.profileImage.image = [MRCommon getImageFromBase64Data:[[responce objectForKey:@"profilePicture"] objectForKey:@"data"]];
+             [MRAppControl getPharmaRepImage:[self.doctorDetalsDictionlay objectForKey:@"repId"]
+                                      repURL:[responce objectForKey:@"dPicture"]
+                                andImageView:self.profileImage];
          }
          else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
          {
@@ -83,7 +85,9 @@
                    {
                        if (status)
                        {
-                           self.profileImage.image = [MRCommon getImageFromBase64Data:[[responce objectForKey:@"profilePicture"] objectForKey:@"data"]];
+                           [MRAppControl getPharmaRepImage:[responce objectForKey:@"userId"]
+                                                    repURL:[responce objectForKey:@"dPicture"]
+                                              andImageView:self.profileImage];
                        }
                    }];
               }];
