@@ -76,6 +76,9 @@
     self.currentIndex = 0;
     [self enableDisableLeftButton:NO];
     [self enableDisableRightButton:YES];
+    
+    [self.appointmentTableview registerNib:[UINib nibWithNibName:@"MRAppointmentCell"
+                                                          bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"MRAppointmentCell"];
 
     [self setUPTableView];
 
@@ -148,10 +151,10 @@
     return self.myAppointments.count;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return self.appointmentTableview.frame.size.width;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return self.appointmentTableview.frame.size.height;
+//}
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -271,7 +274,7 @@
     
     [self.appointmentTableview scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.currentIndex inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     
-    [self enableDisableRightButton:(self.myAppointments.count == self.currentIndex + 1) ? NO : YES];
+    [self enableDisableRightButton:(self.myAppointments.count <= self.currentIndex + 1) ? NO : YES];
 }
 
 - (void)revealController:(SWRevealViewController *)revealController didMoveToPosition:(FrontViewPosition)position
@@ -364,12 +367,24 @@
     }];
 }
 
+- (NSArray*)filterPendingAppointments:(NSArray*)pendingAppointments {
+    NSArray *filteredList = nil;
+    
+    if (pendingAppointments != nil && pendingAppointments.count > 0) {
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"startDate"
+                                                                         ascending:NO];
+        filteredList = [pendingAppointments sortedArrayUsingDescriptors:@[sortDescriptor]];
+    }
+    
+    return filteredList;
+}
+
 - (void)callpendingAppointents
 {
     [[MRWebserviceHelper sharedWebServiceHelper] getMyTeamPendingAppointments:^(BOOL status, NSString *details, NSDictionary *responce) {
         if (status)
         {
-            self.myAppointments = [responce objectForKey:kResponce];
+            self.myAppointments = [self filterPendingAppointments:[responce objectForKey:kResponce]];
             
             [[MRAppControl sharedHelper] setMyAppointmentDetails:[responce objectForKey:kResponce]];
             
@@ -399,7 +414,7 @@
                   {
                       if (status)
                       {
-                          self.myAppointments = [responce objectForKey:kResponce];
+                          self.myAppointments = [self filterPendingAppointments:[responce objectForKey:kResponce]];
                           
                           [[MRAppControl sharedHelper] setMyAppointmentDetails:[responce objectForKey:kResponce]];
                           

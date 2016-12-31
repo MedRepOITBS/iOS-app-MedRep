@@ -37,6 +37,7 @@
 
 - (void)configureAppointmentCellForPharma:(NSDictionary*)appointment
 {
+    self.appointmentName.text = @"";
     [self loadProfileImage:[appointment objectForKey:@"doctorId"]];
     self.appointmentDescription.text = [appointment objectForKey:@"title"];
     //self.appointmentName.text = [appointment objectForKey:@"doctorName"];
@@ -66,7 +67,7 @@
     [[MRWebserviceHelper sharedWebServiceHelper] getDoctorProfileForPharma:[NSString stringWithFormat:@"%lld",[doctorId longLongValue]] withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
         if (status)
         {
-            self.appointmentName.text = [NSString stringWithFormat:@"%@ %@",[responce objectForKey:@"firstName"],[responce objectForKey:@"lastName"]];
+            self.appointmentName.text = [NSString stringWithFormat:@"%@",[responce objectOrNilForKey:@"displayName"]];
         }
         else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
         {
@@ -78,7 +79,7 @@
                       [MRCommon stopActivityIndicator];
                       if (status)
                       {
-                          self.appointmentName.text = [NSString stringWithFormat:@"%@ %@",[responce objectForKey:@"firstName"],[responce objectForKey:@"lastName"]];
+                          self.appointmentName.text = [NSString stringWithFormat:@"%@",[responce objectOrNilForKey:@"displayName"]];
                       }
                   }];
              }];
