@@ -9,9 +9,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MRNotificationInsiderViewController">
             <connections>
                 <outlet property="buttonImageHorizontalSpace" destination="TRH-dw-3zd" id="tQw-SP-6fU"/>
-                <outlet property="contentHeaderLabel" destination="6uk-jk-8EH" id="T0Q-Xt-5dX"/>
-                <outlet property="contentHeaderLabelHeightConstraint" destination="JLU-a3-Uwg" id="M6O-Se-s2F"/>
-                <outlet property="contentTextView" destination="Dwu-7e-zoF" id="uRv-KI-zlW"/>
+                <outlet property="contentHeaderLabel" destination="Z5E-fp-uIq" id="h3J-Vm-vVB"/>
+                <outlet property="contentHeaderLabelHeightConstraint" destination="yh5-5r-H2y" id="CNo-7J-Ljx"/>
                 <outlet property="contentTitleHeightConstraint" destination="7hK-0m-btf" id="Hjd-1O-xEv"/>
                 <outlet property="contentTitleLabel" destination="Z9t-sP-XrG" id="7ME-r2-oNF"/>
                 <outlet property="contentView" destination="5Ow-bq-TEe" id="qYW-ot-Wg2"/>
@@ -44,7 +43,7 @@
             <subviews>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5FE-db-8BY">
                     <subviews>
-                        <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dmq-Zc-J6L">
+                        <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dmq-Zc-J6L">
                             <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </webView>
                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sNa-oR-HFa" userLabel="LeftButton">
@@ -90,7 +89,7 @@
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9wG-Oe-JQ5">
                             <subviews>
-                                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jrl-Gt-4RE">
+                                <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jrl-Gt-4RE">
                                     <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </webView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z9t-sP-XrG">
@@ -103,28 +102,27 @@
                                     <color key="shadowColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <size key="shadowOffset" width="0.0" height="0.0"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6uk-jk-8EH">
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Z5E-fp-uIq">
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="24" id="JLU-a3-Uwg"/>
+                                        <constraint firstAttribute="height" constant="24" id="yh5-5r-H2y"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                    <nil key="highlightedColor"/>
-                                    <color key="shadowColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <size key="shadowOffset" width="0.0" height="0.0"/>
-                                </label>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                </textView>
                             </subviews>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="Jrl-Gt-4RE" secondAttribute="trailing" id="482-eO-asH"/>
-                                <constraint firstAttribute="bottom" secondItem="6uk-jk-8EH" secondAttribute="bottom" id="EI4-3E-0qN"/>
+                                <constraint firstAttribute="bottom" secondItem="Z5E-fp-uIq" secondAttribute="bottom" id="5sS-nV-4hq"/>
                                 <constraint firstItem="Z9t-sP-XrG" firstAttribute="leading" secondItem="9wG-Oe-JQ5" secondAttribute="leading" id="Fbj-gM-eUA"/>
                                 <constraint firstItem="Jrl-Gt-4RE" firstAttribute="top" secondItem="9wG-Oe-JQ5" secondAttribute="top" id="Hbn-Vv-oK4"/>
+                                <constraint firstItem="Z5E-fp-uIq" firstAttribute="top" secondItem="Z9t-sP-XrG" secondAttribute="bottom" id="MRk-BE-Q8K"/>
+                                <constraint firstItem="Z5E-fp-uIq" firstAttribute="leading" secondItem="9wG-Oe-JQ5" secondAttribute="leading" id="PbI-Fv-88h"/>
                                 <constraint firstItem="Z9t-sP-XrG" firstAttribute="top" secondItem="Jrl-Gt-4RE" secondAttribute="bottom" id="a7y-BE-e76"/>
                                 <constraint firstItem="Jrl-Gt-4RE" firstAttribute="leading" secondItem="9wG-Oe-JQ5" secondAttribute="leading" id="fCs-be-vuC"/>
-                                <constraint firstAttribute="trailing" secondItem="6uk-jk-8EH" secondAttribute="trailing" id="oEU-EL-sBc"/>
-                                <constraint firstItem="6uk-jk-8EH" firstAttribute="leading" secondItem="9wG-Oe-JQ5" secondAttribute="leading" id="qNH-gx-CpT"/>
+                                <constraint firstAttribute="trailing" secondItem="Z5E-fp-uIq" secondAttribute="trailing" id="ls9-ZR-UQl"/>
                                 <constraint firstAttribute="trailing" secondItem="Z9t-sP-XrG" secondAttribute="trailing" id="rPG-2h-ueT"/>
-                                <constraint firstItem="6uk-jk-8EH" firstAttribute="top" secondItem="Z9t-sP-XrG" secondAttribute="bottom" id="wsZ-bL-Gan"/>
                             </constraints>
                         </view>
                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5yy-lu-2PC">

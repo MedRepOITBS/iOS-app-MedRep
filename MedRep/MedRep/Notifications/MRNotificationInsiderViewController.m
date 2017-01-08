@@ -21,8 +21,7 @@
 @interface MRNotificationInsiderViewController ()<UIScrollViewDelegate,UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *topView;
-@property (weak, nonatomic) IBOutlet UILabel *contentHeaderLabel;
-@property (weak, nonatomic) IBOutlet UITextView *contentTextView;
+@property (weak, nonatomic) IBOutlet UITextView *contentHeaderLabel;
 @property (weak, nonatomic) IBOutlet UILabel *rHilightLabel;
 @property (weak, nonatomic) IBOutlet UILabel *favHilightLabel;
 @property (weak, nonatomic) IBOutlet UILabel *fedHilightLabel;
@@ -157,6 +156,12 @@
     self.loopTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTimerLabel) userInfo:nil repeats:YES];
     
     self.imagesCount = 0;
+    
+    [self.notifcationImage setAllowsInlineMediaPlayback:YES];
+    self.notifcationImage.mediaPlaybackRequiresUserAction = NO;
+    
+    [self.fullScreenNotificationImage setAllowsInlineMediaPlayback:YES];
+    self.fullScreenNotificationImage.mediaPlaybackRequiresUserAction = NO;
     
     // Do any additional setup after loading the view from its nib.    
 }

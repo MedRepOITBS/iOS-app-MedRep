@@ -27,7 +27,7 @@
 
 - (void)configureCompanyNotifcationcell:(NSIndexPath*)indexpath;
 
-- (void)enableDownloadReportButton:(BOOL)enable;
+- (void)enableDownloadReportButton:(BOOL)hidden;
 - (void)setSurveyReport:(NSNumber*)surveyId;
 
 - (void)removeDownloadReportAction;

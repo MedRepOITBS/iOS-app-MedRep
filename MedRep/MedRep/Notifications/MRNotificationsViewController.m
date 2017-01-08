@@ -50,7 +50,7 @@
     [MRCommon showActivityIndicator:@"Loading..."];
     
     NSString *notificationsDate = ([MRDatabaseHelper getObjectDataExistance:kNotificationsEntity]) ?  [MRCommon stringFromDate:[MRDefaults objectForKey:kNotificationFetchedDate] withDateFormate:@"YYYYMMdd"] : @"20150101";
-    notificationsDate = @"20160101";
+//    notificationsDate = @"20160101";
     [[MRWebserviceHelper sharedWebServiceHelper] getMyNotifications:notificationsDate withHandler:^(BOOL status, NSString *details, NSDictionary *responce)
      {
          if (status)

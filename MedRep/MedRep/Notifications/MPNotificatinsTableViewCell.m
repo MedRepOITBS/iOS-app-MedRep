@@ -61,14 +61,14 @@
 //    }
 }
 
-- (void)enableDownloadReportButton:(BOOL)enable {
-    [self.downloadSurveyReportButton setHidden:enable];
+- (void)enableDownloadReportButton:(BOOL)hidden {
+    [self.downloadSurveyReportButton setHidden:hidden];
     
-    if (enable) {
-        [self.downloadSurveyReportButton setImage:[UIImage imageNamed:@"downloadIcon"]
+    if (hidden) {
+        [self.downloadSurveyReportButton setImage:[UIImage imageNamed:@"disabeDownloadIcon"]
                                          forState:UIControlStateNormal];
     } else {
-        [self.downloadSurveyReportButton setImage:[UIImage imageNamed:@"disabeDownloadIcon"]
+        [self.downloadSurveyReportButton setImage:[UIImage imageNamed:@"downloadIcon"]
                                          forState:UIControlStateNormal];
     }
 }
