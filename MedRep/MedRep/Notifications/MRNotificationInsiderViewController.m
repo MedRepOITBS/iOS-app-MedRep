@@ -676,6 +676,9 @@
     currentNotification.favourite = [NSNumber numberWithBool:self.favourite];
     
     [currentNotification.managedObjectContext save:nil];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRefreshNotificationsDetails
+                                                        object:nil];
 }
 
 - (IBAction)feedbackButtonAction:(id)sender

@@ -524,8 +524,9 @@
 {
     NSPredicate *companyPredicate = [NSPredicate predicateWithFormat:@"companyId == %d", companyID];
     NSPredicate *favPredicate = [NSPredicate predicateWithFormat:@"favourite == %d", NO];
+    NSPredicate *viewedStatus = [NSPredicate predicateWithFormat:@"readNotification = %d", NO];
     
-    NSCompoundPredicate *predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[companyPredicate, favPredicate]];
+    NSCompoundPredicate *predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[companyPredicate, favPredicate, viewedStatus]];
     NSArray *filteredArray = [[MRDataManger sharedManager] fetchObjectList:kNotificationsEntity attributeName:@"notificationName"
                                                                  predicate:predicate
                                                                  sortOrder:SORT_ORDER_ASCENDING];
@@ -586,6 +587,8 @@
         }];
 
     }
+    
+    [[MRDataManger sharedManager] removeAllObjects:kCompanyDetailsEntity withPredicate:nil];
 
     if ([MRDatabaseHelper  getObjectDataExistance:kCompanyDetailsEntity] == NO)
     {

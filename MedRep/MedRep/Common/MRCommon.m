@@ -437,6 +437,7 @@
     // NSLog(@"%@ === %@",[MRCommon stringFromDate:[NSDate date] withDateFormate:@"YYYYMMdd"],[MRCommon stringFromDate:[NSDate date] withDateFormate:@"YYYYMMddhhmmss"]);
     NSDateFormatter *dateformat    = [[NSDateFormatter alloc]init];
     [dateformat setDateFormat:formatter];
+    [dateformat setLocale:[NSLocale currentLocale]];
     NSString *resultantDate        = [dateformat stringFromDate:date];
     return  resultantDate;
 }
@@ -450,6 +451,7 @@
     // NSLog(@"%@ === %@",[MRCommon stringFromDate:[NSDate date] withDateFormate:@"YYYYMMdd"],[MRCommon stringFromDate:[NSDate date] withDateFormate:@"YYYYMMddhhmmss"]);
     NSDateFormatter *dateformat    = [[NSDateFormatter alloc]init];
     [dateformat setDateFormat:formatter];
+    [dateformat setLocale:[NSLocale currentLocale]];
     NSDate *resultantDate        = [dateformat dateFromString:strdate];
     return  resultantDate;
 }

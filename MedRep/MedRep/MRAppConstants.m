@@ -66,4 +66,6 @@ NSString* const kJoinedGroup = @"Request sent successfully, Admin will approve o
 NSString* const kLastLoginTime = @"lastLoginTime";
 NSString* const kLastSyncTimeForMyWall = @"lastSynchTimeForMyWall";
 
+NSString* const kRefreshNotificationsDetails = @"refreshNotificationDetails";
+
 @end

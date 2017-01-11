@@ -870,7 +870,10 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
 
 + (BOOL)getObjectDataExistance:(NSString*)managedObject
 {
-    return ([[MRDataManger sharedManager] countOfObjects:managedObject] == 0) ? NO : YES;
+    NSInteger numberOfObjects = 0;
+    numberOfObjects = [[MRDataManger sharedManager] countOfObjects:managedObject];
+    
+    return (numberOfObjects == 0) ? NO : YES;
 }
 
 + (void)getRoles:(void (^)(NSArray *fetchList))objectsList

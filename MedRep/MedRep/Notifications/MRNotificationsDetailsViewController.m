@@ -51,12 +51,12 @@
     UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navView];
     self.navigationItem.rightBarButtonItem = rightButtonItem;
     
-    NSDictionary *comapnyDetails = [[MRAppControl sharedHelper] getCompanyDetailsByID:[self.selectedNotification.companyId integerValue]];
+    NSDictionary *comapnyDetails = [self.selectedNotification toDictionary];
     
     id displayPicture = [comapnyDetails objectForKey:@"dPicture"];
-    if (displayPicture != nil && [displayPicture isKindOfClass:[NSDictionary class]]) {
+    if (displayPicture != nil) {
         [MRAppControl getNotificationImage:[comapnyDetails objectForKey:@"companyId"]
-                            displayPicture:[displayPicture objectForKey:@"dPicture"] andImageView:self.companyLogoImage];
+                            displayPicture:displayPicture andImageView:self.companyLogoImage];
     }
     
     // Do any additional setup after loading the view from its nib.
@@ -65,7 +65,24 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refreshData:)
+                                                 name:kRefreshNotificationsDetails object:nil];
+    
     [self.navigationController setNavigationBarHidden:NO];
+    [self loadNotificationDetails];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:kRefreshNotificationsDetails
+                                                  object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)refreshData:(id)sender {
     [self loadNotificationDetails];
 }
 

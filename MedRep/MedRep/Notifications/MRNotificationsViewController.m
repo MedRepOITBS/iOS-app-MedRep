@@ -50,7 +50,10 @@
     [MRCommon showActivityIndicator:@"Loading..."];
     
     NSString *notificationsDate = ([MRDatabaseHelper getObjectDataExistance:kNotificationsEntity]) ?  [MRCommon stringFromDate:[MRDefaults objectForKey:kNotificationFetchedDate] withDateFormate:@"YYYYMMdd"] : @"20150101";
-//    notificationsDate = @"20160101";
+    notificationsDate = @"20160101";
+    
+    self.notifications = nil;
+    
     [[MRWebserviceHelper sharedWebServiceHelper] getMyNotifications:notificationsDate withHandler:^(BOOL status, NSString *details, NSDictionary *responce)
      {
          if (status)
@@ -247,18 +250,17 @@
     MRNotifications *notification = [self.notifications objectAtIndex:indexPath.row];
     NSDictionary *dict = [notification toDictionary];
     
-    NSDictionary *comapnyDetails                = [[MRAppControl sharedHelper] getCompanyDetailsByID:[[dict objectForKey:@"companyId"] intValue]];
-    
     regCell.notificationLetter.hidden           = YES;
     
     regCell.indicatorNewXCoordinate.constant    = 10;
     
     regCell.indicationNewLabel.hidden           = ([[[dict objectForKey:@"status"] uppercaseString] isEqualToString:[@"New" uppercaseString]]) ? NO : YES;
     regCell.companyLabel.hidden             = NO;
-    regCell.companyLabel.text               = [comapnyDetails objectForKey:@"companyName"];
+    regCell.companyLabel.text               = [dict objectForKey:@"companyName"];
     id displayPicture = [dict objectForKey:@"dPicture"];
     if (displayPicture != nil) {
-        [MRAppControl getNotificationImage:[comapnyDetails objectForKey:@"companyId"]
+//        NSDictionary *comapnyDetails                = [[MRAppControl sharedHelper] getCompanyDetailsByID:[[dict objectForKey:@"companyId"] intValue]];
+        [MRAppControl getNotificationImage:[dict objectForKey:@"companyId"]
                              displayPicture:displayPicture andImageView:regCell.companyLogo];
     } else {
         regCell.companyLogo.image = nil;

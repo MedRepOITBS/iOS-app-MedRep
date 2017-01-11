@@ -65,4 +65,6 @@ FOUNDATION_EXPORT NSString* const kJoinedGroup;
 FOUNDATION_EXPORT NSString* const kLastLoginTime;
 FOUNDATION_EXPORT NSString* const kLastSyncTimeForMyWall;
 
+FOUNDATION_EXPORT NSString* const kRefreshNotificationsDetails;
+
 @end

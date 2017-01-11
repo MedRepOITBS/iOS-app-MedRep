@@ -135,7 +135,7 @@
         self.answeredStatusChart.backgroundColor = [UIColor clearColor];
         [self.answeredStatusChart setStrokeColor:PNGreen];
         [self.answeredStatusChart strokeChart:^NSAttributedString *(float value) {
-            NSString *completeString = [NSString stringWithFormat:@"%d", self.survey.totalCompleted.integerValue];
+            NSString *completeString = [NSString stringWithFormat:@"%ld", self.survey.totalCompleted.integerValue];
             
             NSMutableAttributedString *sentString = [[NSMutableAttributedString alloc] initWithString:completeString];
             
@@ -152,7 +152,7 @@
     } else {
         self.doctorList = nil;
         [self.bgView setHidden:YES];
-        [MRCommon showAlert:@"Unable to retrieve survey details" delegate:self withTag:1];
+        [MRCommon showAlert:@"All the doctors have taken the survey !!!" delegate:self withTag:1];
     }
 }
 

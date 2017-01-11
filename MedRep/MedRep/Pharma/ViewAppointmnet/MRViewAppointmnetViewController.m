@@ -117,6 +117,7 @@
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         NSDate *date = [MRCommon dateFromstring:[self.appointmnetDetails objectForKey:@"startDate"] withDateFormate:@"YYYYMMddHHmmss"];
         dateFormatter.dateFormat = @"hh:mm a";
+        [dateFormatter setLocale:[NSLocale currentLocale]];
         NSString *strDate = [dateFormatter stringFromDate:date];
         
         dateFormatter.dateFormat = @"dd-MM-YYYY";
@@ -284,6 +285,7 @@
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
             NSDate *date = [MRCommon dateFromstring:[self.appointmnetDetails objectForKey:@"startDate"] withDateFormate:@"YYYYMMddHHmmss"];
             dateFormatter.dateFormat = @"hh:mm a";
+            [dateFormatter setLocale:[NSLocale currentLocale]];
             NSString *strDate = [dateFormatter stringFromDate:date];
             return strDate;
         }
