@@ -322,32 +322,7 @@
                               alertView.view.alpha = 0.0f;
                           } completion:^(BOOL finished) {
                               
-                              NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-                              [dict setObject:[self.appointmnetDetails objectForKey:@"appointmentId"] forKey:@"appointmentId"];
-                              [dict setObject:@"Accepted" forKey:@"status"];
-                              
-                              
-                              [[MRWebserviceHelper sharedWebServiceHelper] acceptAppointments:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce)
-                               {
-                                   if (status)
-                                   {
-                                       [MRCommon showAlert:@"Appointment accepted successfully." delegate:self withTag:123456789];
-                                   }
-                                   else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
-                                   {
-                                       [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
-                                        {
-                                            [MRCommon savetokens:responce];
-                                            [[MRWebserviceHelper sharedWebServiceHelper] acceptAppointments:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce)
-                                             {
-                                                 if (status)
-                                                 {
-                                                     [MRCommon showAlert:@"Appointment accepted successfully." delegate:self withTag:123456789];
-                                                 }
-                                             }];
-                                        }];
-                                   }
-                               }];
+                              [self acceptAppointment:NO];
                               
                               [alertView.view removeFromSuperview];
                               [alertView removeFromParentViewController];
@@ -373,11 +348,73 @@
 
 }
 
+- (void)acceptAppointment:(BOOL)forceAccept {
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+    [dict setObject:[self.appointmnetDetails objectForKey:@"appointmentId"] forKey:@"appointmentId"];
+    [dict setObject:@"Accepted" forKey:@"status"];
+    
+    if (forceAccept) {
+        [dict setObject:[NSNumber numberWithBool:YES] forKey:@"forceAccept"];
+    }
+    
+    [MRCommon showActivityIndicator:@"Saving...."];
+    
+    [[MRWebserviceHelper sharedWebServiceHelper] acceptAppointments:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce)
+     {
+         if (status)
+         {
+             [MRCommon stopActivityIndicator];
+             [MRCommon showAlert:@"Appointment accepted successfully." delegate:self withTag:123456789];
+         }
+         else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+         {
+             [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+              {
+                  [MRCommon savetokens:responce];
+                  [[MRWebserviceHelper sharedWebServiceHelper] acceptAppointments:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce)
+                   {
+                       if (status)
+                       {
+                           [MRCommon stopActivityIndicator];
+                           
+                           [MRCommon showAlert:@"Appointment accepted successfully." delegate:self withTag:123456789];
+                       } else {
+                           [self showConflictMessage:responce];
+                       }
+                   }];
+              }];
+         } else {
+             [self showConflictMessage:responce];
+         }
+     }];
+}
+
+- (void)showConflictMessage:(NSDictionary*)response {
+    [MRCommon stopActivityIndicator];
+    
+    if (response != nil) {
+        NSString *status = [response objectOrNilForKey:@"status"];
+        if (status != nil && status.length > 0 &&
+            [status caseInsensitiveCompare:@"Fail"] == NSOrderedSame) {
+            NSString *message = @"You already had an appointment at the stipulated time. Do you still want to accept?";
+            [MRCommon showConformationOKNoAlert:message delegate:self withTag:500];
+        } else {
+            [MRCommon showAlert:@"Unknown Error !!!" delegate:nil];
+        }
+    } else {
+        [MRCommon showAlert:@"Unknown Error !!!" delegate:nil];
+    }
+}
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (alertView.tag == 123456789)
     {
         [self backButtonAction:nil];
+    } else if (alertView.tag == 500) {
+        if (buttonIndex == 1) {
+            [self acceptAppointment:YES];
+        }
     }
 }
 /*

@@ -109,7 +109,15 @@
                     if ([[NSString stringWithFormat:@"%@",[responceDict objectForKey:@"status"]] isEqualToString:@"Fail"])
                     {
                         [MRCommon stopActivityIndicator];
-                        [MRCommon showAlert:[responceDict objectForKey:@"message"] delegate:nil];
+                        
+                        BOOL displayMessage = true;
+                        NSString *message = [responceDict objectOrNilForKey:@"message"];
+                        if (message != nil && message.length > 0 && [message containsString:@"You already had an appointment at the stipulated time"]) {
+                            displayMessage = false;
+                        }
+                        if (displayMessage) {
+                            [MRCommon showAlert:[responceDict objectForKey:@"message"] delegate:nil];
+                        }
                         responceHandler(NO, theResponse,responceDict);
                     }
                     else

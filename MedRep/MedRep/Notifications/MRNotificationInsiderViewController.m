@@ -18,7 +18,12 @@
 #import "MRDatabaseHelper.h"
 #import "MRNotifications.h"
 
-@interface MRNotificationInsiderViewController ()<UIScrollViewDelegate,UIAlertViewDelegate>
+#import <AVFoundation/AVFoundation.h>
+#import <AVKit/AVKit.h>
+
+@interface MRNotificationInsiderViewController ()<UIScrollViewDelegate,UIAlertViewDelegate, UIWebViewDelegate>
+
+@property (nonatomic) AVPlayerViewController *av;
 
 @property (weak, nonatomic) IBOutlet UIView *topView;
 @property (weak, nonatomic) IBOutlet UITextView *contentHeaderLabel;
@@ -163,7 +168,14 @@
     [self.fullScreenNotificationImage setAllowsInlineMediaPlayback:YES];
     self.fullScreenNotificationImage.mediaPlaybackRequiresUserAction = NO;
     
-    // Do any additional setup after loading the view from its nib.    
+    // Do any additional setup after loading the view from its nib.
+    [self.notifcationImage setDelegate:self];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    [self.av.player pause];
 }
 
 - (void)addSwipeGesture
@@ -208,7 +220,7 @@
                  self.contentViewWidth.constant =  self.contentScrollView.frame.size.width;
                  [self updateViewConstraints];
               
-                 [self updateNotification:[firstDetailObject objectForKey:@"detailId"]];
+                 [self updateNotification:[firstDetailObject objectForKey:@"detailId"] andContentType:[firstDetailObject objectForKey:@"contentType"]];
              }
          }
          else
@@ -220,13 +232,37 @@
      }];
 }
 
-- (void)updateNotification:(NSNumber*)imageId
+- (void)updateNotification:(NSNumber*)imageId andContentType:(NSString*)contentType
 {
     if (imageId != nil) {
         NSString *key = [NSString stringWithFormat:@"%ld",(long)imageId.integerValue];
         NSString *image = [self.noticationImages objectForKey:key];
 
-        [self.notifcationImage loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:image]]];
+        if (contentType != nil &&
+            ([contentType caseInsensitiveCompare:@"MP4"] == NSOrderedSame ||
+            [contentType caseInsensitiveCompare:@"WMV"] == NSOrderedSame ||
+             [contentType caseInsensitiveCompare:@"MP3"] == NSOrderedSame)) {
+            [self.notifcationImage setHidden:YES];
+            
+            self.av = [[AVPlayerViewController alloc] init];
+            
+            self.av.view.frame = self.notifcationImage.frame;
+//            [self.av setShowsPlaybackControls:NO];
+            
+            AVPlayer *avPlayer = [AVPlayer playerWithURL:[NSURL URLWithString:image]];
+            self.av.player = avPlayer;
+            [avPlayer seekToTime:kCMTimeZero];
+            [avPlayer pause];
+            
+            [self addChildViewController:self.av];
+            [self.view addSubview:self.av.view];
+            [self.av didMoveToParentViewController:self];
+            [self.av.contentOverlayView addObserver:self forKeyPath:@"bounds" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+            
+        } else {
+            [self.notifcationImage setHidden:NO];
+            [self.notifcationImage loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:image]]];
+        }
 //        self.fullScreenNotificationImage.image = image;
 //        self.notifcationImage.image = image;
     }
@@ -309,6 +345,7 @@
     if (!self.isFullScreen)
     {
         [self updateNotification];
+        [self.av.contentOverlayView removeObserver:self forKeyPath:@"bounds" context:NULL];
         [self.navigationController popViewControllerAnimated:YES];
     }
     else
@@ -831,6 +868,16 @@
     self.fullScreenImageViewHeight.constant = self.fullScreenContentView.frame.size.height;
     self.fullScreenImageViewWidth.constant = self.fullScreenContentView.frame.size.width;
     [self updateViewConstraints];
+    
+    NSString *contentType = [self.notificationDetails objectOrNilForKey:@"contentType"];
+    if (contentType != nil &&
+        ([contentType caseInsensitiveCompare:@"MP4"] == NSOrderedSame ||
+         [contentType caseInsensitiveCompare:@"WMV"] == NSOrderedSame ||
+         [contentType caseInsensitiveCompare:@"MP3"] == NSOrderedSame)) {
+        [self.fullScreenNotificationImage setHidden:YES];
+    } else {
+        [self.fullScreenNotificationImage setHidden:NO];
+    }
 }
 
 - (void)hideFullScreen
@@ -855,6 +902,46 @@
     if (buttonIndex == 1 && alertView.tag == 999888) {
         [self sendfeedback];
     }
+}
+
+#pragma mark - UIWebViewDelegate
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    NSLog(@"%@", error.localizedDescription);
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *, id> *)change context:(void *)context {
+    if (object == self.av.contentOverlayView) {
+        if ([keyPath isEqualToString:@"bounds"]) {
+            CGRect oldBounds = [change[NSKeyValueChangeOldKey] CGRectValue], newBounds = [change[NSKeyValueChangeNewKey] CGRectValue];
+            BOOL wasFullscreen = CGRectEqualToRect(oldBounds, [UIScreen mainScreen].bounds), isFullscreen = CGRectEqualToRect(newBounds, [UIScreen mainScreen].bounds);
+            if (isFullscreen && !wasFullscreen) {
+                if (CGRectEqualToRect(oldBounds, CGRectMake(0, 0, newBounds.size.height, newBounds.size.width))) {
+                    NSLog(@"rotated fullscreen");
+                }
+                else {
+                    NSLog(@"entered fullscreen");
+                    [self showFullScreen];
+                }
+            }
+            else if (!isFullscreen && wasFullscreen) {
+                NSLog(@"exited fullscreen");
+                [self hideFullScreen];
+            }
+        }
+    }
+}
+
+#pragma mark - AVPlayerViewControllerDelegate
+- (void)playerViewController:(AVPlayerViewController *)playerViewController failedToStartPictureInPictureWithError:(NSError *)error {
+    NSLog(@"%@",error.localizedDescription);
+}
+
+- (void)playerViewControllerDidStartPictureInPicture:(AVPlayerViewController *)playerViewController {
+    NSLog(@"%s",__PRETTY_FUNCTION__);
+}
+
+- (void)playerViewControllerWillStartPictureInPicture:(AVPlayerViewController *)playerViewController {
+    NSLog(@"%s",__PRETTY_FUNCTION__);
 }
 
 @end
