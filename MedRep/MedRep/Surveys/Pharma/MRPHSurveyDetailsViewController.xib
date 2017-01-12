@@ -14,6 +14,7 @@
                 <outlet property="doctorListTableView" destination="dr3-gf-c2X" id="8yQ-jc-iz1"/>
                 <outlet property="fullStatusView" destination="ELs-4W-xMr" id="jK7-9A-gF5"/>
                 <outlet property="navView" destination="Au4-55-Eib" id="i7i-jV-Bvz"/>
+                <outlet property="noMessageLabel" destination="BeZ-L7-Cb8" id="K2B-pj-MEq"/>
                 <outlet property="pendingStatusView" destination="vAI-Fm-vmR" id="Jue-dT-y7s"/>
                 <outlet property="view" destination="YDm-oG-Sqm" id="g1x-7J-h7Y"/>
             </connections>
@@ -85,6 +86,11 @@
                                 <outlet property="delegate" destination="-1" id="6fP-Ox-Kht"/>
                             </connections>
                         </tableView>
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All the doctors have taken the survey !!!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BeZ-L7-Cb8">
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -93,6 +99,7 @@
                         <constraint firstItem="Y1R-CM-48o" firstAttribute="top" secondItem="vAI-Fm-vmR" secondAttribute="top" id="1r1-Zd-vIt"/>
                         <constraint firstItem="Gnp-6e-Jy1" firstAttribute="leading" secondItem="EFk-yl-2jc" secondAttribute="leading" constant="5" id="BCB-3I-wbz"/>
                         <constraint firstAttribute="trailing" secondItem="dr3-gf-c2X" secondAttribute="trailing" id="E8Y-Y2-RWR"/>
+                        <constraint firstAttribute="trailing" secondItem="BeZ-L7-Cb8" secondAttribute="trailing" constant="20" id="Fqb-Cg-ady"/>
                         <constraint firstItem="ELs-4W-xMr" firstAttribute="top" secondItem="EFk-yl-2jc" secondAttribute="top" constant="10" id="IxT-Se-I4O"/>
                         <constraint firstItem="qU6-yJ-PTc" firstAttribute="top" secondItem="Y1R-CM-48o" secondAttribute="bottom" constant="5" id="KEY-kB-lUF"/>
                         <constraint firstItem="Y1R-CM-48o" firstAttribute="width" secondItem="EFk-yl-2jc" secondAttribute="width" multiplier="0.45" id="LgM-qC-Xqh"/>
@@ -102,6 +109,7 @@
                         <constraint firstItem="9uO-E7-bpT" firstAttribute="leading" secondItem="vAI-Fm-vmR" secondAttribute="leading" id="Obs-c9-Ilc"/>
                         <constraint firstAttribute="trailing" secondItem="Gnp-6e-Jy1" secondAttribute="trailing" constant="5" id="Vb0-ND-MtE"/>
                         <constraint firstItem="dr3-gf-c2X" firstAttribute="top" secondItem="prn-rP-ZcM" secondAttribute="bottom" id="VkH-X0-4rB"/>
+                        <constraint firstItem="BeZ-L7-Cb8" firstAttribute="leading" secondItem="EFk-yl-2jc" secondAttribute="leading" constant="20" id="Wfg-3R-w6a"/>
                         <constraint firstItem="a5O-UD-pEX" firstAttribute="leading" secondItem="EFk-yl-2jc" secondAttribute="leading" constant="5" id="aAq-fv-MXq"/>
                         <constraint firstItem="vAI-Fm-vmR" firstAttribute="width" secondItem="EFk-yl-2jc" secondAttribute="width" multiplier="0.45" id="biY-d5-Rw0"/>
                         <constraint firstAttribute="bottom" secondItem="dr3-gf-c2X" secondAttribute="bottom" constant="5" id="dDm-I2-1iV"/>
@@ -110,6 +118,7 @@
                         <constraint firstItem="Y1R-CM-48o" firstAttribute="bottom" secondItem="vAI-Fm-vmR" secondAttribute="bottom" id="kbi-35-fuF"/>
                         <constraint firstItem="9uO-E7-bpT" firstAttribute="trailing" secondItem="vAI-Fm-vmR" secondAttribute="trailing" id="kwb-QC-keZ"/>
                         <constraint firstItem="prn-rP-ZcM" firstAttribute="leading" secondItem="EFk-yl-2jc" secondAttribute="leading" constant="5" id="mME-eA-0mA"/>
+                        <constraint firstItem="BeZ-L7-Cb8" firstAttribute="top" secondItem="prn-rP-ZcM" secondAttribute="bottom" constant="10" id="mOn-xt-yvt"/>
                         <constraint firstItem="dr3-gf-c2X" firstAttribute="leading" secondItem="EFk-yl-2jc" secondAttribute="leading" id="omu-7I-CyI"/>
                         <constraint firstItem="qU6-yJ-PTc" firstAttribute="leading" secondItem="Y1R-CM-48o" secondAttribute="leading" id="phs-6b-KnI"/>
                         <constraint firstItem="a5O-UD-pEX" firstAttribute="top" secondItem="ELs-4W-xMr" secondAttribute="bottom" constant="10" id="rmK-62-wXE"/>

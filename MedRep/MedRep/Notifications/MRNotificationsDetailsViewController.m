@@ -189,6 +189,7 @@
     regCell.medicineLabel.text              = [notification objectForKey:@"notificationDesc"];
     
     regCell.arrowImage.image                = [UIImage imageNamed:@"White-right-arrow@2x.png"];
+    
     return regCell;
 }
 

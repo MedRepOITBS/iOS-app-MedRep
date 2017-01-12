@@ -33,6 +33,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *doctorListTableView;
 
 @property (nonatomic) NSArray *doctorList;
+@property (weak, nonatomic) IBOutlet UILabel *noMessageLabel;
 
 @end
 
@@ -72,7 +73,7 @@
     [self.bgView setHidden:NO];
     
     NSArray *tempResult = (NSArray*)result;
-    if (tempResult != nil && tempResult.count > 0) {
+    if (tempResult != nil) {
         self.doctorList = [[MRDataManger sharedManager] fetchObjectList:kSurveyStatisticsPendingListEntity
                                                           attributeName:@"doctorName"
                                                               sortOrder:SORT_ORDER_ASCENDING];
@@ -113,7 +114,7 @@
         self.pendingStatusChart.backgroundColor = [UIColor clearColor];
         [self.pendingStatusChart setStrokeColor:PNGreen];
         [self.pendingStatusChart strokeChart:^NSAttributedString *(float value) {
-            NSString *completeString = [NSString stringWithFormat:@"%d", self.survey.totalPending.integerValue];
+            NSString *completeString = [NSString stringWithFormat:@"%ld", self.survey.totalPending.integerValue];
             
             NSMutableAttributedString *sentString = [[NSMutableAttributedString alloc] initWithString:completeString];
             
@@ -147,8 +148,16 @@
         }];
         
         [self.answeredStatusView addSubview:self.answeredStatusChart];
-        [self.doctorListTableView setHidden:NO];
-        [self.doctorListTableView reloadData];
+        
+        if (tempResult.count > 0) {
+            [self.doctorListTableView setHidden:NO];
+            [self.doctorListTableView reloadData];
+            
+            [self.noMessageLabel setHidden:YES];
+        } else {
+            [self.doctorListTableView setHidden:YES];
+            [self.noMessageLabel setHidden:NO];
+        }
     } else {
         self.doctorList = nil;
         [self.bgView setHidden:YES];

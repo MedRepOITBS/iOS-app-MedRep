@@ -185,6 +185,9 @@
     regCell.medicineLabel.text              = [survey objectForKey:@"surveyDescription"];
     
     regCell.arrowImage.image                = [UIImage imageNamed:@"White-right-arrow@2x.png"];
+    
+    [regCell.downloadSurveyReportButton setImage:[UIImage imageNamed:@"RequestReport"] forState:UIControlStateNormal];
+    
     return regCell;
 }
 
