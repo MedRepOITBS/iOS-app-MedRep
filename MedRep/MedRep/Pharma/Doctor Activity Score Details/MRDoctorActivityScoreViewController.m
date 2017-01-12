@@ -171,7 +171,6 @@
     if ([self.graphHolderView viewWithTag:1234567890] == nil)
     {
         CGRect frame = self.graphHolderView.frame;
-        frame.origin.x = frame.origin.x + 40;
         graphView = [[GraphView alloc] initWithFrame:frame];
     }
     graphView.graphBackgroundColor = [UIColor colorWithRed:241.0/255.0 green:241.0/255.0 blue:241.0/255.0 alpha:1.0];
