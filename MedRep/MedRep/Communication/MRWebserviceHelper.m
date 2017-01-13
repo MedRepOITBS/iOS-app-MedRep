@@ -2393,6 +2393,11 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
     [dict setObject:[appointmentDetails objectForKey:@"appointmentId"] forKey:@"appointmentId"];
     [dict setObject:[appointmentDetails objectForKey:@"status"] forKey:@"status"];
     
+    id value = [appointmentDetails objectForKey:@"forceAccept"];
+    if (value != nil) {
+        [dict setObject:value forKey:@"forceAccept"];
+    }
+    
     
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict
                                                        options:NSJSONWritingPrettyPrinted
