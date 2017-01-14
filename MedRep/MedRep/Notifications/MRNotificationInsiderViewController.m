@@ -231,17 +231,28 @@
          }
      }];
 }
+    
+- (BOOL)shouldLaunchAVPlayer:(NSString*)contentType {
+    BOOL status = NO;
+    
+    if(contentType != nil &&
+       ([contentType caseInsensitiveCompare:@"MP4"] == NSOrderedSame ||
+        [contentType caseInsensitiveCompare:@"WMV"] == NSOrderedSame ||
+        [contentType caseInsensitiveCompare:@"MP3"] == NSOrderedSame ||
+        [contentType caseInsensitiveCompare:@"3GP"] == NSOrderedSame)) {
+           status = NO;
+       }
+    
+    return status;
+}
 
 - (void)updateNotification:(NSNumber*)imageId andContentType:(NSString*)contentType
 {
     if (imageId != nil) {
         NSString *key = [NSString stringWithFormat:@"%ld",(long)imageId.integerValue];
         NSString *image = [self.noticationImages objectForKey:key];
-
-        if (contentType != nil &&
-            ([contentType caseInsensitiveCompare:@"MP4"] == NSOrderedSame ||
-            [contentType caseInsensitiveCompare:@"WMV"] == NSOrderedSame ||
-             [contentType caseInsensitiveCompare:@"MP3"] == NSOrderedSame)) {
+        
+        if ([self shouldLaunchAVPlayer:contentType]) {
             [self.notifcationImage setHidden:YES];
             
             self.av = [[AVPlayerViewController alloc] init];
@@ -256,6 +267,7 @@
             
             [self addChildViewController:self.av];
             [self.view addSubview:self.av.view];
+            [self.av.player addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
             [self.av didMoveToParentViewController:self];
             [self.av.contentOverlayView addObserver:self forKeyPath:@"bounds" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
             
@@ -345,6 +357,7 @@
     if (!self.isFullScreen)
     {
         [self updateNotification];
+        [self.av.player removeObserver:self forKeyPath:@"status" context:NULL];
         [self.av.contentOverlayView removeObserver:self forKeyPath:@"bounds" context:NULL];
         [self.navigationController popViewControllerAnimated:YES];
     }
@@ -650,7 +663,7 @@
 {
     NSMutableDictionary *notificationdict = [[NSMutableDictionary alloc] init];
     
-    [notificationdict setObject:[self.notificationDetails objectForKey:@"notificationId"] forKey:@"notificationId"];
+    [notificationdict setObject:[self.notificationDetails objectOrNilForKey:@"notificationId"] forKey:@"notificationId"];
     [notificationdict setObject:@"Viewed"  forKey:@"viewStatus"];
     
     [notificationdict setObject:[NSNumber numberWithBool:self.favourite] forKey:@"favourite"];
@@ -870,10 +883,7 @@
     [self updateViewConstraints];
     
     NSString *contentType = [self.notificationDetails objectOrNilForKey:@"contentType"];
-    if (contentType != nil &&
-        ([contentType caseInsensitiveCompare:@"MP4"] == NSOrderedSame ||
-         [contentType caseInsensitiveCompare:@"WMV"] == NSOrderedSame ||
-         [contentType caseInsensitiveCompare:@"MP3"] == NSOrderedSame)) {
+    if ([self shouldLaunchAVPlayer:contentType]) {
         [self.fullScreenNotificationImage setHidden:YES];
     } else {
         [self.fullScreenNotificationImage setHidden:NO];
@@ -926,6 +936,17 @@
             else if (!isFullscreen && wasFullscreen) {
                 NSLog(@"exited fullscreen");
                 [self hideFullScreen];
+            }
+        }
+    } else if (object == self.av.player) {
+        if ([keyPath isEqualToString:@"status"]) {
+            if ([object isKindOfClass:[AVPlayer class]]) {
+                AVPlayer *player = (AVPlayer*)object;
+                if (player != nil) {
+                    AVPlayerItem *playerItem = player.currentItem;
+                    NSLog(@"%ld",(long)playerItem.status);
+                    [player play];
+                }
             }
         }
     }
