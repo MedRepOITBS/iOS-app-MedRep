@@ -90,7 +90,7 @@
         
         [self.fullStatusChart strokeChart:^NSAttributedString *(float value) {
             
-            NSString *completeString = [NSString stringWithFormat:@"%d\rSENT", self.survey.totalSent.integerValue];
+            NSString *completeString = [NSString stringWithFormat:@"%ld\rSENT", self.survey.totalSent.integerValue];
             
             NSMutableAttributedString *sentString = [[NSMutableAttributedString alloc] initWithString:completeString];
             
@@ -199,12 +199,14 @@
 }
 
 - (void)parseSurveyStatisticsResponse:(NSDictionary*)response {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%@ == %@", @"surveyId", self.surveyId];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"surveyId == %@", [response objectOrNilForKey:@"surveyId"]];
     [[MRDataManger sharedManager] removeAllObjects:kSurveyStatisticsEntity withPredicate:predicate];
     
     id result = [MRWebserviceHelper parseNetworkResponse:NSClassFromString(kSurveyStatisticsEntity)
                                                  andData:@[response]];
     
+    result = [[MRDataManger sharedManager] fetchObjectList:kSurveyStatisticsEntity
+                 predicate:predicate];
     NSArray *tempResult = (NSArray*)result;
     if (tempResult != nil && tempResult.count > 0) {
         self.survey = (MRPHSurveyStatistics*)tempResult.firstObject;
