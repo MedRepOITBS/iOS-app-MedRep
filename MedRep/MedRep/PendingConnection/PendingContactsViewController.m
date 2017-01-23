@@ -317,7 +317,7 @@
     
     if (_isFromGroup) {
         [self getPendingGroups];
-        self.navigationItem.title = @"Pending Groups";
+        self.navigationItem.title = @"Waiting for Approval";
     }else if (_isFromMember) {
         [self getPendingMembers];
         self.navigationItem.title = @"Pending Members";

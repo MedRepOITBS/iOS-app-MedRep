@@ -44,6 +44,8 @@
 
 
 - (void)likeButtonTapped:(UIGestureRecognizer*)gesture {
+    [self.likeView setUserInteractionEnabled:NO];
+    
     UIView *sender = gesture.view;
     
     NSInteger tagIndex = sender.tag - 1;
@@ -59,9 +61,10 @@
     
     if (self.delegate != nil && [self.delegate respondsToSelector:@selector(likeButtonTapped:)]) {
         [self.delegate likeButtonTapped:tagIndex];
-    }
-    [self.parentTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:tagIndex inSection:0]]
+    } else {
+        [self.parentTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:tagIndex inSection:0]]
                                 withRowAnimation:UITableViewRowAnimationNone];
+    }
 }
 
 - (void)shareButtonTapped:(UIGestureRecognizer*)gesture {
@@ -118,6 +121,8 @@ andParentViewController:(UIViewController *)parentViewController {
     self.postedOnLabel.text = [NSDate convertNSDateToNSString:post.postedOn
                                                    dateFormat:kIdletimeFormat];
                                                    //dateFormatStyle:NSDateFormatterFullStyle];
+    
+    [self.likeView setUserInteractionEnabled:YES];
     
     UIImage *image = nil;
     

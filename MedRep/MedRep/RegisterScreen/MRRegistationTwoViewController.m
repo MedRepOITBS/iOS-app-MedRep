@@ -226,7 +226,7 @@
 }
 - (void)addLocationInSection:(NSInteger)section
 {
-    [self getCurrentLocation:0];
+    [self getCurrentLocation:section];
 }
 
 -(void)showLocationErrorAlert{

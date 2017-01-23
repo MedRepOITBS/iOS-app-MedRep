@@ -1515,6 +1515,10 @@
 		CCA383F21D342D3500BCF5A9 /* MRGroupMembers+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA383EE1D342D3500BCF5A9 /* MRGroupMembers+CoreDataProperties.m */; };
 		CCA383F31D342D3500BCF5A9 /* MRGroupMembers.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA383F01D342D3500BCF5A9 /* MRGroupMembers.m */; };
 		CCA383F41D342D3500BCF5A9 /* MRGroupMembers.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA383F01D342D3500BCF5A9 /* MRGroupMembers.m */; };
+		CCBA484F1E369A64002548BF /* MRPHProfileDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBA484D1E369A64002548BF /* MRPHProfileDetailsViewController.m */; };
+		CCBA48501E369A64002548BF /* MRPHProfileDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBA484D1E369A64002548BF /* MRPHProfileDetailsViewController.m */; };
+		CCBA48511E369A64002548BF /* MRPHProfileDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCBA484E1E369A64002548BF /* MRPHProfileDetailsViewController.xib */; };
+		CCBA48521E369A64002548BF /* MRPHProfileDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCBA484E1E369A64002548BF /* MRPHProfileDetailsViewController.xib */; };
 		CCD1FD941D9FEFA800A12ED0 /* MRMyWallItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD1FD8F1D9FEFA800A12ED0 /* MRMyWallItemTableViewCell.m */; };
 		CCD1FD951D9FEFA800A12ED0 /* MRMyWallItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD1FD8F1D9FEFA800A12ED0 /* MRMyWallItemTableViewCell.m */; };
 		CCD1FD961D9FEFA800A12ED0 /* MRMyWallItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCD1FD901D9FEFA800A12ED0 /* MRMyWallItemTableViewCell.xib */; };
@@ -2539,6 +2543,9 @@
 		CCA383F01D342D3500BCF5A9 /* MRGroupMembers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRGroupMembers.m; sourceTree = "<group>"; };
 		CCA8CA831D9320BC00300A0C /* MedRepDev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MedRepDev.entitlements; sourceTree = "<group>"; };
 		CCA8CA841D9320BF00300A0C /* MedRep.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MedRep.entitlements; sourceTree = "<group>"; };
+		CCBA484C1E369A64002548BF /* MRPHProfileDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRPHProfileDetailsViewController.h; path = Rep/MRPHProfileDetailsViewController.h; sourceTree = "<group>"; };
+		CCBA484D1E369A64002548BF /* MRPHProfileDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRPHProfileDetailsViewController.m; path = Rep/MRPHProfileDetailsViewController.m; sourceTree = "<group>"; };
+		CCBA484E1E369A64002548BF /* MRPHProfileDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MRPHProfileDetailsViewController.xib; path = Rep/MRPHProfileDetailsViewController.xib; sourceTree = "<group>"; };
 		CCD1FD8E1D9FEFA800A12ED0 /* MRMyWallItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRMyWallItemTableViewCell.h; path = MyWall/MRMyWallItemTableViewCell.h; sourceTree = "<group>"; };
 		CCD1FD8F1D9FEFA800A12ED0 /* MRMyWallItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRMyWallItemTableViewCell.m; path = MyWall/MRMyWallItemTableViewCell.m; sourceTree = "<group>"; };
 		CCD1FD901D9FEFA800A12ED0 /* MRMyWallItemTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MRMyWallItemTableViewCell.xib; path = MyWall/MRMyWallItemTableViewCell.xib; sourceTree = "<group>"; };
@@ -2632,6 +2639,7 @@
 		7920D6951C1C9A61008D3386 /* ProfileDetails */ = {
 			isa = PBXGroup;
 			children = (
+				CCBA484B1E369A57002548BF /* MRPHRep */,
 				CC0D64DD1D8D5D150088016F /* Publications */,
 				CC9DAF9E1D6F9E1F008B2822 /* EditContactInfo */,
 				CC87CD6B1D6E329F0083DB26 /* EditLocation */,
@@ -4497,6 +4505,16 @@
 			name = EditContactInfo;
 			sourceTree = "<group>";
 		};
+		CCBA484B1E369A57002548BF /* MRPHRep */ = {
+			isa = PBXGroup;
+			children = (
+				CCBA484C1E369A64002548BF /* MRPHProfileDetailsViewController.h */,
+				CCBA484D1E369A64002548BF /* MRPHProfileDetailsViewController.m */,
+				CCBA484E1E369A64002548BF /* MRPHProfileDetailsViewController.xib */,
+			);
+			name = MRPHRep;
+			sourceTree = "<group>";
+		};
 		CCD1FD8D1D9FEF9100A12ED0 /* MyWall */ = {
 			isa = PBXGroup;
 			children = (
@@ -5109,6 +5127,7 @@
 				8AFE8CFA1D0F21BF0000382E /* post_image9.jpeg in Resources */,
 				79BD27CC1B809A80007CA448 /* HomeLogo~iPad.png in Resources */,
 				79BD27D71B809A80007CA448 /* Signup_plain@3x.png in Resources */,
+				CCBA48511E369A64002548BF /* MRPHProfileDetailsViewController.xib in Resources */,
 				79F416881B9F5CDB0089729B /* building-icon@3x.png in Resources */,
 				7961A96F1B8F25DA0035D63A /* stepTwo@2x.png in Resources */,
 				B465658B1D569EA80016CDA8 /* eye.png in Resources */,
@@ -5707,6 +5726,7 @@
 				CC01BA761D302ACF007E2AEB /* MRCommentViewController.xib in Resources */,
 				CC7DB3641D0CC8A6007DFE4C /* post_image6.jpeg in Resources */,
 				CC7DB27B1D0C9E20007DFE4C /* MPTransformTableViewCell.xib in Resources */,
+				CCBA48521E369A64002548BF /* MRPHProfileDetailsViewController.xib in Resources */,
 				CC7DB1F81D0C8BEC007DFE4C /* MRLoginViewController.xib in Resources */,
 				CC7DB1F91D0C8BEC007DFE4C /* crgreydown-arrow@2x.png in Resources */,
 				CC9857F11D2E0B4D00C74438 /* TransformPosts.json in Resources */,
@@ -6069,6 +6089,7 @@
 				83B782051B7917010070645C /* MRDataManger.m in Sources */,
 				796E93761BB862530031EA34 /* MRNewProductCell.m in Sources */,
 				B4746B2B1D6DFBB200325F9E /* ContactInfoTableViewCell.m in Sources */,
+				CCBA484F1E369A64002548BF /* MRPHProfileDetailsViewController.m in Sources */,
 				79F84B1A1BE9354B0081613A /* MRProductBrocherViewController.m in Sources */,
 				798A11871B8AEAD2003FF457 /* MRRegTableViewCell.m in Sources */,
 				79FFD2541BB9BA7D00CEE606 /* MRRegistrationRoleCellTableViewCell.m in Sources */,
@@ -6315,6 +6336,7 @@
 				CC7DB07C1D0C8BEC007DFE4C /* MRNewProductCell.m in Sources */,
 				B4B4F10A1D38B5FD00EFCC0E /* CommonProfileSectionTableViewCell.m in Sources */,
 				B4746B2C1D6DFBB200325F9E /* ContactInfoTableViewCell.m in Sources */,
+				CCBA48501E369A64002548BF /* MRPHProfileDetailsViewController.m in Sources */,
 				CC7DB07D1D0C8BEC007DFE4C /* MRProductBrocherViewController.m in Sources */,
 				CCA383F21D342D3500BCF5A9 /* MRGroupMembers+CoreDataProperties.m in Sources */,
 				CC7DB07E1D0C8BEC007DFE4C /* MRRegTableViewCell.m in Sources */,

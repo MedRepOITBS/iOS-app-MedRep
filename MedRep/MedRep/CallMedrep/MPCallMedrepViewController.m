@@ -160,6 +160,7 @@
              [MRCommon showAlert:@"Select future time" delegate:nil];
              return;
     }
+    
     NSMutableDictionary *appointmentDetails = [[NSMutableDictionary alloc] init];
     
     if (!self.isFromReschedule)
@@ -203,7 +204,8 @@
         [appointmentDetails setObject:duration forKey:@"duration"];
     }
     
-    [MRCommon showActivityIndicator:@"Rescheduling..."];
+    NSString *activityIndicator = self.isFromReschedule ? @"Rescheduling..." : @"Scheduling...";
+    [MRCommon showActivityIndicator:activityIndicator];
     
     [[MRWebserviceHelper sharedWebServiceHelper] createNewAppointment:appointmentDetails
                                                          isFromUpdate:!self.isFromReschedule

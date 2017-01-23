@@ -184,12 +184,13 @@
          }
          else
          {
-             [MRCommon stopActivityIndicator];
-             self.notificationImageHeightConstraint.constant = 0;
-             self.notificationImageWidthConstraint.constant = 0;
-             self.notifcationImage.image = [UIImage imageNamed:@""];
-             self.topNotificationImage.image = [UIImage imageNamed:@""];
-
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 [MRCommon stopActivityIndicator];
+                 self.notificationImageHeightConstraint.constant = 0;
+                 self.notificationImageWidthConstraint.constant = 0;
+                 self.notifcationImage.image = [UIImage imageNamed:@""];
+                 self.topNotificationImage.image = [UIImage imageNamed:@""]; 
+             });
          }
      }];
 }

@@ -24,6 +24,8 @@
 @property (strong, nonatomic) UITapGestureRecognizer* tapGesture;
 @property (strong, nonatomic) NSMutableArray* fileredContacts;
 
+@property (strong, nonatomic) NSMutableArray* initialContacts;
+
 - (IBAction)addMembers:(id)sender;
 
 @end
@@ -79,6 +81,7 @@
     [MRDatabaseHelper getContactsByCity:[MRAppControl sharedHelper].userRegData[KCity]
                         responseHandler:^(id results) {
         _fileredContacts = results;
+        self.initialContacts = [NSMutableArray arrayWithArray:_fileredContacts];
         [self.tableViewMembers reloadData];
     }];
 }
@@ -228,6 +231,13 @@
     self.tapGesture.enabled = YES;
 }
 
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    if (searchBar.text == nil || searchBar.text.length == 0) {
+        _fileredContacts = self.initialContacts;
+        [self.tableViewMembers reloadData];
+    }
+}
+
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     [searchBar resignFirstResponder];
     
@@ -238,7 +248,8 @@
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    [self getAllContactsByCity];
+    _fileredContacts = self.initialContacts;
+    [self.tableViewMembers reloadData];
 }
 
 @end

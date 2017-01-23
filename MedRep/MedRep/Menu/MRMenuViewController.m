@@ -24,7 +24,7 @@
 #import "MRTransformViewController.h"
 #import "MRDrugSearchViewController.h"
 
-#define kMenuList [NSArray arrayWithObjects:@"My Profile", @"Dashboard", @"Notifications", @"Surveys", @"Activity Score", @"Marketing Campaigns", @"MedRep Meeting", @"Discussion Forum", @"Search For Drugs", @"News & Updates", @"Invite Contacts",  @"Settings", @"Logout", nil]
+#define kMenuList [NSArray arrayWithObjects:@"My Profile", @"Dashboard", @"Notifications", @"Surveys", @"Activities", @"Marketing Campaigns", @"MedRep Meeting", @"Discussion Forum", @"Search For Drugs", @"News & Updates", @"Invite Contacts",  @"Settings", @"Logout", nil]
 
 #define kMenuListImages [NSArray arrayWithObjects:@"dashboard_menu@2x.png", @"Appointment", @"Survey", @"activity-score@2x.png", @"Advertising", @"meetings@2x.png", @"discussion-forum@2x.png", @"searc--for-drugs@2x.png", @"news@2x.png", @"Invite", @"setting@2x.png", @"logout@2x.png", nil]
 

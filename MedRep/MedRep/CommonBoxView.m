@@ -179,6 +179,8 @@
 }
 
 - (void)galleryBtnTapped {
+    [self.commentTextView resignFirstResponder];
+    
     if (self.delegate != nil  && [self.delegate respondsToSelector:@selector(commonBoxCameraGalleryButtonTapped)]) {
         
         [self.delegate commonBoxCameraGalleryButtonTapped];
@@ -187,6 +189,8 @@
 }
 
 - (void)cameraBtnTapped {
+    [self.commentTextView resignFirstResponder];
+    
     if (self.delegate != nil  && [self.delegate respondsToSelector:@selector(commonBoxCameraButtonTapped)]) {
         [self.delegate commonBoxCameraButtonTapped];
     }

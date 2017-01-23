@@ -19,9 +19,9 @@
 #import "MRMedRepViewController.h"
 #import "MRDocotrActivityScoreViewController.h"
 #import "MRNewProductCompaignsViewController.h"
-#import "MRProfileDetailsViewController.h"
+#import "MRPHProfileDetailsViewController.h"
 
-#define kMenuList [NSArray arrayWithObjects:@"My Profile", @"Dashboard", @"Product Campaigns", @"Doctor Activity Score", @"Surveys", @"MedRep", @"Other Marketing Campaigns", @"Drug Sales", @"Prescription Activites", @"News & Updates", @"Settings & Preferences", @"Logout", nil]
+#define kMenuList [NSArray arrayWithObjects:@"My Profile", @"Dashboard", @"Product Campaigns", @" Activities", @"Surveys", @"MedRep", @"Other Marketing Campaigns", @"Drug Sales", @"Prescription Activites", @"News & Updates", @"Settings & Preferences", @"Logout", nil]
 
 #define kMenuListImages [NSArray arrayWithObjects:@"dashboard_menu@2x.png", @"PHproductcampaigns@2x.png", @"activity-score@2x.png", @"surveys@2x.png", @"PHmedrep@2x.png", @"marketing@2x.png", @"PHdrugsales@2x.png", @"PHprescription@2x.png", @"news@2x.png", @"setting@2x.png", @"logout@2x.png", nil]
 
@@ -164,7 +164,7 @@
         {
             if (![frontNavigationController.topViewController isKindOfClass:[MRRegistationViewController class]])
             {                
-                MRProfileDetailsViewController *profViewController = [[MRProfileDetailsViewController alloc] initWithNibName:@"MRProfileDetailsViewController" bundle:nil];
+                MRPHProfileDetailsViewController *profViewController = [[MRPHProfileDetailsViewController alloc] initWithNibName:@"MRPHProfileDetailsViewController" bundle:nil];
                 profViewController.isFromSinUp = NO;
                 
                 UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:profViewController];

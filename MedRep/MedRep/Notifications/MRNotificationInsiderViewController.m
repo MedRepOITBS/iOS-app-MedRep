@@ -163,10 +163,10 @@
     self.imagesCount = 0;
     
     [self.notifcationImage setAllowsInlineMediaPlayback:YES];
-    self.notifcationImage.mediaPlaybackRequiresUserAction = NO;
+    self.notifcationImage.mediaPlaybackRequiresUserAction = YES;
     
     [self.fullScreenNotificationImage setAllowsInlineMediaPlayback:YES];
-    self.fullScreenNotificationImage.mediaPlaybackRequiresUserAction = NO;
+    self.fullScreenNotificationImage.mediaPlaybackRequiresUserAction = YES;
     
     // Do any additional setup after loading the view from its nib.
     [self.notifcationImage setDelegate:self];
