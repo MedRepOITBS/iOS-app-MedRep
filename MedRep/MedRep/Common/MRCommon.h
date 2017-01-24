@@ -99,6 +99,8 @@
 
 + (UIColor*)getColorForIndex:(NSInteger)index;
 
++ (void)getProductBroucher:(NSInteger)notificationID forImage:(void (^)(NSString *image))donloadedImage;
+
 + (void)getNotificationImageByID:(NSInteger)notificationID
                        forImage:(void (^)(NSString *image))donloadedImage;
 

@@ -492,9 +492,10 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
     }];
 }
 
-+ (void)getContactsByCity:(NSString*)city responseHandler:(WebServiceResponseHandler)responseHandler {
++ (void)getContactsByCity:(NSString*)city groupId:(NSString*)groupId
+          responseHandler:(WebServiceResponseHandler)responseHandler {
     [MRCommon showActivityIndicator:@"Requesting..."];
-    [[MRWebserviceHelper sharedWebServiceHelper] getAllContactsByCityListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+    [[MRWebserviceHelper sharedWebServiceHelper] getAllContactsByCityListwithHandler:groupId andCompletionHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
         [[MRDataManger sharedManager] removeAllObjects:kContactEntity withPredicate:nil];
         [MRDatabaseHelper makeServiceCallForContactsFetch:status details:details
                                                  response:responce
@@ -564,9 +565,12 @@ NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
 }
 
 + (void)getContactsBySearchString:(NSString*)searchText
+                          groupId:(NSString*)groupId
                andResponseHandler:(WebServiceResponseHandler)responseHandler {
     [MRCommon showActivityIndicator:@"searching..."];
-    [[MRWebserviceHelper sharedWebServiceHelper] getSearchContactList:searchText withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+    [[MRWebserviceHelper sharedWebServiceHelper] getSearchContactList:searchText
+                                                              groupId:groupId
+                                                          withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
         [[MRDataManger sharedManager] removeAllObjects:kContactEntity withPredicate:nil];
         [MRDatabaseHelper makeServiceCallForContactsFetch:status details:details
                                                  response:responce

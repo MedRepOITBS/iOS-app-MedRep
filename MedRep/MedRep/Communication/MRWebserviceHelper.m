@@ -1262,6 +1262,24 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
 
 }
 
+- (void)getProductBroucher:(NSInteger)detailNotificationId
+                     withHandler:(completionHandler)responceHandler
+{
+    //http://183.82.106.234:8080/MedRepApplication/api/doctor/getMyNotificationContent/{detailNotificationId}?access_token=ab04ac82-6b19-492d-9e17-3e4fab387062
+    
+    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/api/pharmarep/getMyNotificationContent/%ld?access_token=%@",kBaseURL,detailNotificationId,[MRDefaults objectForKey:kAuthenticationToken]];
+    
+    NSURL *url = [NSURL URLWithString:stringFormOfUrl];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [urlRequest setTimeoutInterval:120];
+    [urlRequest setHTTPMethod:@"GET"];
+    [urlRequest setValue:@"text/plain" forHTTPHeaderField:@"Content-Type"];
+    self.serviceType = kMRWebServiceTypeGetMyNotificationContent;
+    [self sendServiceRequest:urlRequest withHandler:responceHandler];
+    
+}
+
 - (void)getMyNotificationContent:(NSInteger)detailNotificationId
               withHandler:(completionHandler)responceHandler
 {
@@ -1431,8 +1449,13 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
     [self sendServiceRequest:urlRequest withHandler:responceHandler];
 }
 
-- (void)getSearchContactList:(NSString *)str withHandler:(completionHandler)responceHandler{
-    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/searchContact?token=%@&name=%@",kHostName, [MRDefaults objectForKey:kAuthenticationToken], str];
+- (void)getSearchContactList:(NSString *)str groupId:(NSString*)groupId withHandler:(completionHandler)responceHandler{
+    NSString *stringFormOfUrl;
+    if (groupId != nil && groupId.length > 0) {
+        stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/searchContact?token=%@&name=%@&groupId=%@",kHostName, [MRDefaults objectForKey:kAuthenticationToken], str, groupId];
+    } else {
+        stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/searchContact?token=%@&name=%@",kHostName, [MRDefaults objectForKey:kAuthenticationToken], str];
+    }
     //[NSString stringWithFormat:@"%@/medrep-web/getDoctorContacts/%@?token=%@",kHostName, str, [MRDefaults objectForKey:kAuthenticationToken]];
     stringFormOfUrl = [stringFormOfUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     
@@ -1459,9 +1482,13 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
     [self sendServiceRequest:urlRequest withHandler:responceHandler];
 }
 
-- (void)getAllContactsByCityListwithHandler:(completionHandler)responceHandler{
-    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/getAllContactsByCity?token=%@",kHostName,[MRDefaults objectForKey:kAuthenticationToken]];
-    
+- (void)getAllContactsByCityListwithHandler:(NSString*)groupId andCompletionHandler:(completionHandler)responceHandler{
+    NSString *stringFormOfUrl;
+    if (groupId != nil && groupId.length > 0) {
+        stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/getAllContactsByCity?token=%@&groupId=%@",kHostName,[MRDefaults objectForKey:kAuthenticationToken], groupId];
+    } else {
+        stringFormOfUrl = [NSString stringWithFormat:@"%@/medrep-web/getAllContactsByCity?token=%@",kHostName,[MRDefaults objectForKey:kAuthenticationToken]];
+    }
     NSURL *url = [NSURL URLWithString:stringFormOfUrl];
     NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
     [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];

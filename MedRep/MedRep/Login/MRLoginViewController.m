@@ -163,6 +163,7 @@
                                      {
                                          [[MRAppControl sharedHelper] setUserDetails:responce];
                                          [[MRAppControl sharedHelper] loadDashboardScreen];
+                                         [MRAppControl registerForPushNotification];
                                      }
                                  }];
                                 

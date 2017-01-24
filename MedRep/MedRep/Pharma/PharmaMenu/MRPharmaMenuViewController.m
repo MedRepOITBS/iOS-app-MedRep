@@ -110,25 +110,29 @@
         if ([self.userData objectForKey:KProfilePicture])
         {
             
+            id imageData = [self.userData objectForKey:KProfilePicture];
+            if ([imageData isKindOfClass:[NSData class]]) {
+                UIImage *image = [UIImage imageWithData:imageData];
+                regCell.cellIcon.image = image;
+            } else {
             
-            
-            NSURL * imageURL = [NSURL URLWithString:[self.userData objectForKey:KProfilePicture]];
-            
-            
-            
-            if (indexPath.row>0) {
-                regCell.cellIcon.image = [UIImage imageNamed:[kMenuListImages objectAtIndex:indexPath.row -1]];
-            }else {
-                dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
-                dispatch_async(queue, ^{
-                    NSData *data = [NSData dataWithContentsOfURL:imageURL];
-                    UIImage *image = [UIImage imageWithData:data];
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        regCell.cellIcon.image = image;
+                NSURL * imageURL = [NSURL URLWithString:[self.userData objectForKey:KProfilePicture]];
+                
+                
+                
+                if (indexPath.row>0) {
+                    regCell.cellIcon.image = [UIImage imageNamed:[kMenuListImages objectAtIndex:indexPath.row -1]];
+                }else {
+                    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+                    dispatch_async(queue, ^{
+                        NSData *data = [NSData dataWithContentsOfURL:imageURL];
+                        UIImage *image = [UIImage imageWithData:data];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            regCell.cellIcon.image = image;
+                        });
                     });
-                });
+                }
             }
-            
         
         }
         else

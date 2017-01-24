@@ -639,6 +639,16 @@
     }
 }
 
++ (void)getProductBroucher:(NSInteger)notificationID forImage:(void (^)(NSString *image))donloadedImage
+{
+    [[MRWebserviceHelper sharedWebServiceHelper] getProductBroucher:notificationID
+                                                              withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                                  [MRCommon parseNotificationContent:notificationID
+                                                                                              status:status responce:responce
+                                                                                            forImage:donloadedImage];
+                                                              }];
+}
+
 + (void)getNotificationImageByID:(NSInteger)notificationID forImage:(void (^)(NSString *image))donloadedImage
 {
     [[MRWebserviceHelper sharedWebServiceHelper] getMyNotificationContent:notificationID

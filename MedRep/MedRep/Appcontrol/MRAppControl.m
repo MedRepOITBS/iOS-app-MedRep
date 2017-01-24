@@ -793,14 +793,19 @@
     if (contact.dPicture != nil && contact.dPicture.length > 0) {
         parentView.image = [UIImage imageNamed:@"user"];
         
+        NSString *key = [NSString stringWithFormat:@"%ld_contactImage", contact.contactId.longValue];
+        id imageData = [[MRAppControl sharedHelper].globalCache objectForKey:key];
+        if (imageData != nil) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                parentView.image = [UIImage imageWithData:imageData];
+            });
+        }
+        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             NSString *key = [NSString stringWithFormat:@"%ld_contactImage", contact.contactId.longValue];
-            id imageData = [[MRAppControl sharedHelper].globalCache objectForKey:key];
-            if (imageData == nil) {
-                imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:contact.dPicture]];
-                [[MRAppControl sharedHelper].globalCache setObject:imageData forKey:key];
-            }
+            id imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:contact.dPicture]];
             if (imageData != nil) {
+                [[MRAppControl sharedHelper].globalCache setObject:imageData forKey:key];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     parentView.image = [UIImage imageWithData:imageData];
                 });
@@ -928,17 +933,19 @@
         parentView.image = [UIImage imageWithData:group.group_img_data];
     } else if (group.imageUrl != nil && group.imageUrl.length > 0) {
         parentView.image = [UIImage imageNamed:@"group"];
+        NSString *key = [NSString stringWithFormat:@"%ld_groupImage", group.group_id.longValue];
+        id imageData = [[MRAppControl sharedHelper].globalCache objectForKey:key];
+        if (imageData != nil) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                parentView.image = [UIImage imageWithData:imageData];
+            });
+        }
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             NSString *key = [NSString stringWithFormat:@"%ld_groupImage", group.group_id.longValue];
-            id imageData = [[MRAppControl sharedHelper].globalCache objectForKey:key];
-            if (imageData == nil) {
-                imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:group.imageUrl]];
-                if (imageData != nil) {
-                    [[MRAppControl sharedHelper].globalCache setObject:imageData forKey:key];
-                }
-            }
-
+            id imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:group.imageUrl]];
             if (imageData != nil) {
+                [[MRAppControl sharedHelper].globalCache setObject:imageData forKey:key];
+                
                 dispatch_async(dispatch_get_main_queue(), ^{
                     parentView.image = [UIImage imageWithData:imageData];
                 });

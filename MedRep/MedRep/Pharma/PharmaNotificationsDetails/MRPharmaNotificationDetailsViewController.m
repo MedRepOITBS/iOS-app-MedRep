@@ -110,9 +110,12 @@
         self.drugNamelabel.text = [self.notificationDetails objectForKey:@"detailTitle"];
         
         self.titleLabel.text = [self.selectedNotification objectForKey:@"companyName"];
-        [MRCommon showActivityIndicator:@"Loading..."];
+//        [MRCommon showActivityIndicator:@"Loading..."];
         self.detailsList = [self.notificationDetails objectForKey:@"notificationDetails"];
-        [self loadImages];
+        [MRCommon showActivityIndicator:@"Loading..."];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self loadImages];
+        });
     }
     self.loopTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTimerLabel) userInfo:nil repeats:YES];
     
@@ -154,8 +157,18 @@
 
 - (void)loadImages
 {
-    [MRCommon getPharmaNotificationImageByID:[[[self.detailsList objectAtIndex:self.imagesCount] objectForKey:@"detailId"] integerValue] forImage:^(UIImage *image)
-     {
+     id notificationDetailsArray = [self.selectedNotification objectForKey:@"notificationDetails"];
+     if (notificationDetailsArray != nil) {
+         
+         NSDictionary *notificationDetails;
+         if ([notificationDetailsArray isKindOfClass:[NSArray class]]) {
+             NSArray *tempNotificationDetailsArray = (NSArray*)notificationDetailsArray;
+             notificationDetails = tempNotificationDetailsArray.firstObject;
+         } else if ([notificationDetailsArray isKindOfClass:[NSDictionary class]]) {
+             notificationDetails = notificationDetailsArray;
+         }
+         
+         NSString *image = [notificationDetails objectOrNilForKey:@"contentLocation"];
          if (image)
          {
              [self.noticationImages setObject:image forKey:[[self.detailsList objectAtIndex:self.imagesCount] objectForKey:@"detailId"]];
@@ -182,31 +195,31 @@
                  [MRCommon stopActivityIndicator];
              }
          }
-         else
-         {
-             dispatch_async(dispatch_get_main_queue(), ^{
-                 [MRCommon stopActivityIndicator];
-                 self.notificationImageHeightConstraint.constant = 0;
-                 self.notificationImageWidthConstraint.constant = 0;
-                 self.notifcationImage.image = [UIImage imageNamed:@""];
-                 self.topNotificationImage.image = [UIImage imageNamed:@""]; 
-             });
-         }
-     }];
+     }
+     else
+     {
+         dispatch_async(dispatch_get_main_queue(), ^{
+             [MRCommon stopActivityIndicator];
+             self.notificationImageHeightConstraint.constant = 0;
+             self.notificationImageWidthConstraint.constant = 0;
+             self.notifcationImage.image = [UIImage imageNamed:@""];
+             self.topNotificationImage.image = [UIImage imageNamed:@""]; 
+         });
+     }
 }
 
 
 - (void)updateNotification:(NSNumber*)imageId
 {
-    UIImage *image = [self.noticationImages objectForKey:imageId];
+    NSString *image = [self.noticationImages objectForKey:imageId];
     self.notificationImageHeightConstraint.constant = self.contentScrollView.frame.size.height;
     self.notificationImageWidthConstraint.constant = self.contentScrollView.frame.size.width;
-    self.notifcationImage.image = image;
-    self.topNotificationImage.image = image;
+    self.notifcationImage.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:image]] scale:1.0];
+    self.topNotificationImage.image = self.notifcationImage.image;
     self.contentTitleLabel.text = [[self.detailsList objectAtIndex:self.currentImageIndex] objectForKey:@"detailTitle"];
     self.contentHeaderLabel.text = [[self.detailsList objectAtIndex:self.currentImageIndex] objectForKey:@"detailDesc"];
 
-    self.contentScrollView.contentSize = image.size;
+    self.contentScrollView.contentSize = self.notifcationImage.image.size;
     [self.view updateConstraints];
 }
 

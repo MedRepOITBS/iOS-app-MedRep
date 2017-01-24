@@ -79,6 +79,9 @@ typedef void(^completionHandler)(BOOL status, NSString *details, NSDictionary *r
                 isFromUpdate:(BOOL)isFromCreate
                  withHandler:(completionHandler)responceHandler;
 
+- (void)getProductBroucher:(NSInteger)detailNotificationId
+               withHandler:(completionHandler)responceHandler;
+
 - (void)getMyNotificationContent:(NSInteger)detailNotificationId
                      withHandler:(completionHandler)responceHandler;
 
@@ -190,7 +193,7 @@ withComplitionHandler:(completionHandler)responceHandler;
 
 - (void)getContactListwithHandler:(completionHandler)responceHandler;
 
-- (void)getSearchContactList:(NSString *)str withHandler:(completionHandler)responceHandler;
+- (void)getSearchContactList:(NSString *)str groupId:(NSString*)groupId withHandler:(completionHandler)responceHandler;
 
 - (void)getSuggestedContactListwithHandler:(completionHandler)responceHandler;
 
@@ -208,7 +211,7 @@ withComplitionHandler:(completionHandler)responceHandler;
 
 - (void)fetchPendingConnectionsListwithHandler:(completionHandler)responceHandler;
 
-- (void)getAllContactsByCityListwithHandler:(completionHandler)responceHandler;
+- (void)getAllContactsByCityListwithHandler:(NSString*)groupId andCompletionHandler:(completionHandler)responceHandler;
 
 - (void)getDoctorContactsListwithHandler:(completionHandler)responceHandler;
 

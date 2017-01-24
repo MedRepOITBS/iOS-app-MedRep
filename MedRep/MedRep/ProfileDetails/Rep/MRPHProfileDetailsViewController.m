@@ -105,11 +105,11 @@
     
     NSInteger userType = [MRAppControl sharedHelper].userType;
     
-    self.profileImageView.image = [MRCommon getImageFromBase64Data:[userdata objectForKey:KProfilePicture]];
-    
+    [MRAppControl getNotificationImage:[userdata objectOrNilForKey:KDoctorRegID] displayPicture:[userdata objectOrNilForKey:KProfilePicture] andImageView:self.profileImageView];
+     
     NSMutableArray *mArray = [userdata objectForKey:KMobileNumber];
 
-    self.profileNameLabel.text              = (userType == 2 || userType == 1) ? [NSString stringWithFormat:@"Dr. %@ %@", [userdata objectForKey:KFirstName],[userdata objectForKey:KLastName]] : [NSString stringWithFormat:@"Mr. %@ %@", [userdata objectForKey:KFirstName],[userdata objectForKey:KLastName]];
+    self.profileNameLabel.text              = [NSString stringWithFormat:@"%@", [userdata objectForKey:kDisplayName]];
     self.mobileNumberLabel.text             = (mArray.count >= 1) ? [mArray objectAtIndex:0] : @"";
     self.AlternateMobileNumberLabel.text    = (mArray.count >= 2) ? [mArray objectAtIndex:1] : @"";
     

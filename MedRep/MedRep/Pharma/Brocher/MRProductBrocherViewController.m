@@ -53,6 +53,9 @@
     self.noticationImages = [[NSMutableDictionary alloc] init];
 
     [self getMenuNavigationButtonWithController:[self revealViewController] NavigationItem:self.navigationItem];
+    
+    [MRCommon showActivityIndicator:@"Loading..."];
+    
     [[MRWebserviceHelper sharedWebServiceHelper] getNotificationById:[NSString stringWithFormat:@"%ld",(long)self.notificationID] withHandler:^(BOOL status, NSString *details, NSDictionary *responce)
     {
         if (status)
@@ -117,11 +120,11 @@
 
 - (void)loadImages
 {
-    [MRCommon getNotificationImageByID:[[[self.detailsList objectAtIndex:self.imagesCount] objectForKey:@"detailId"] integerValue] forImage:^(NSString *image)
+    [MRCommon getProductBroucher:[[[self.detailsList objectAtIndex:self.imagesCount] objectForKey:@"detailId"] integerValue] forImage:^(NSString *imagePath)
      {
-         if (image)
+         if (imagePath != nil && imagePath.length > 0)
          {
-             [self.noticationImages setObject:image forKey:[[self.detailsList objectAtIndex:self.imagesCount] objectForKey:@"detailId"]];
+             [self.noticationImages setObject:imagePath forKey:[[self.detailsList objectAtIndex:self.imagesCount] objectForKey:@"detailId"]];
              
              if (self.imagesCount == 0)
              {
@@ -170,12 +173,12 @@
 
 - (void)updateNotification:(NSNumber*)imageId
 {
-    UIImage *image = [self.noticationImages objectForKey:imageId];
-    self.notificationImageHeightConstraint.constant = self.scrollView.frame.size.height;
-    self.notificationImageWidthConstraint.constant = self.scrollView.frame.size.width;
-    self.productImageView.image = image;
-    self.scrollView.contentSize = image.size;
-    [self.view updateConstraints];    [self.view updateConstraints];
+    NSString *image = [self.noticationImages objectOrNilForKey:imageId];
+//    self.notificationImageHeightConstraint.constant = self.scrollView.frame.size.height;
+//    self.notificationImageWidthConstraint.constant = self.scrollView.frame.size.width;
+    self.productImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:image]] scale:1.0];
+//    self.scrollView.contentSize = self.productImageView.image.size;
+//    [self.view updateConstraints];    [self.view updateConstraints];
 }
 
 - (void)didReceiveMemoryWarning {

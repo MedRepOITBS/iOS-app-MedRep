@@ -67,7 +67,11 @@
     [super viewWillAppear:animated];
         
     [self.searchBar resignFirstResponder];
-    [self getAllContactsByCity];
+    NSString *groupId = nil;
+    if (self.groupID > 0) {
+        groupId = [NSString stringWithFormat:@"%ld", self.groupID];
+    }
+    [self getAllContactsByCity:groupId];
 }
 
 - (void)viewTapped:(UITapGestureRecognizer*)tapGesture {
@@ -75,8 +79,9 @@
     self.tapGesture.enabled = NO;
 }
 
-- (void)getAllContactsByCity {
+- (void)getAllContactsByCity:(NSString*)groupId {
     [MRDatabaseHelper getContactsByCity:[MRAppControl sharedHelper].userRegData[KCity]
+                                groupId:groupId
                         responseHandler:^(id results) {
         _fileredContacts = results;
         [self.tableViewMembers reloadData];
@@ -230,21 +235,35 @@
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
     if (searchBar.text == nil || searchBar.text.length == 0) {
-        [self getAllContactsByCity];
+        NSString *groupId = nil;
+        if (self.groupID > 0) {
+            groupId = [NSString stringWithFormat:@"%ld", self.groupID];
+        }
+        [self getAllContactsByCity:groupId];
     }
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     [searchBar resignFirstResponder];
     
-    [MRDatabaseHelper getContactsBySearchString:searchBar.text andResponseHandler:^(id results) {
+    NSString *groupId = nil;
+    if (self.groupID > 0) {
+        groupId = [NSString stringWithFormat:@"%ld", self.groupID];
+    }
+    
+    [MRDatabaseHelper getContactsBySearchString:searchBar.text groupId:groupId
+                             andResponseHandler:^(id results) {
         _fileredContacts = results;
         [_tableViewMembers reloadData];
     }];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    [self getAllContactsByCity];
+    NSString *groupId = nil;
+    if (self.groupID > 0) {
+        groupId = [NSString stringWithFormat:@"%ld", self.groupID];
+    }
+    [self getAllContactsByCity:groupId];
 }
 
 @end

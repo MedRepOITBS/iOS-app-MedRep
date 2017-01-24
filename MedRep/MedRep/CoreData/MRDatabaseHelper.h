@@ -60,11 +60,13 @@ FOUNDATION_EXPORT NSString* const kNewsAndTransformAPIMethodName;
 + (void)getPendingGroupMembers:(NSNumber*)gid andResponseHandler:(WebServiceResponseHandler)responseHandler;
 
 + (void)getContacts:(WebServiceResponseHandler)responseHandler;
-+ (void)getContactsByCity:(NSString*)city responseHandler:(WebServiceResponseHandler)responseHandler;
++ (void)getContactsByCity:(NSString*)city groupId:(NSString*)groupId responseHandler:(WebServiceResponseHandler)responseHandler;
 + (void)getContactDetail:(NSInteger)contactId withHandler:(WebServiceResponseHandler)responseHandler;
 + (void)getSuggestedContacts:(WebServiceResponseHandler)responseHandler;
 + (void)getPendingContacts:(WebServiceResponseHandler)responseHandler;
+
 + (void)getContactsBySearchString:(NSString*)searchText
+                          groupId:(NSString*)groupId
                andResponseHandler:(WebServiceResponseHandler)responseHandler;
 
 + (void)getGroupMemberStatusWithId:(NSInteger)groupId
