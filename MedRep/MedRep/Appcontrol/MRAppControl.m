@@ -933,7 +933,9 @@
             id imageData = [[MRAppControl sharedHelper].globalCache objectForKey:key];
             if (imageData == nil) {
                 imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:group.imageUrl]];
-                [[MRAppControl sharedHelper].globalCache setObject:imageData forKey:key];
+                if (imageData != nil) {
+                    [[MRAppControl sharedHelper].globalCache setObject:imageData forKey:key];
+                }
             }
 
             if (imageData != nil) {

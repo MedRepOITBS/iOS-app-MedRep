@@ -500,7 +500,11 @@
     if (searchText.length == 0) {
         fileredContacts = _pendingContactListArra;
     } else {
-        fileredContacts = [[_pendingContactListArra filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(%K contains[cd] %@) OR (%K contains[cd] %@)",@"firstName",searchText,@"lastName",searchText]] mutableCopy];
+        if (_isFromGroup) {
+            fileredContacts = [[_pendingContactListArra filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K contains[cd] %@", @"group_name", searchText]] mutableCopy];
+        } else {
+            fileredContacts = [[_pendingContactListArra filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(%K contains[cd] %@) OR (%K contains[cd] %@)",@"firstName",searchText,@"lastName",searchText]] mutableCopy];
+        }
     }
     [_pendingTableView reloadData];
 }

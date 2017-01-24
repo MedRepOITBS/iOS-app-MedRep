@@ -10,7 +10,7 @@
 #import "MRCommon.h"
 #import "MRWebserviceHelper.h"
 
-@interface MPNotificatinsTableViewCell ()
+@interface MPNotificatinsTableViewCell () <UIAlertViewDelegate>
 
 @property (assign, nonatomic) NSInteger surveyId;
 
@@ -78,34 +78,42 @@
 }
 
 - (IBAction)downloadReportButtonAction:(id)sender {
-    [MRCommon showActivityIndicator:@"Loading..."];
+    [MRCommon showConformationOKNoAlert:@"Proceed with request for receiving the Survey reports?"
+                               delegate:self withTag:999];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     
-    [[MRWebserviceHelper sharedWebServiceHelper] getSurveyReports:self.surveyId withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-        if (status)
-        {
-            [MRCommon stopActivityIndicator];
-            [MRCommon showAlert:[responce objectOrNilForKey:@"result"] delegate:nil];
-        }
-        else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
-        {
-            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
-             {
-                 [MRCommon stopActivityIndicator];
-                 [MRCommon savetokens:responce];
-                 [[MRWebserviceHelper sharedWebServiceHelper] getSurveyReports:0 withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-                     if (status)
-                     {
-                         [MRCommon stopActivityIndicator];
-                         [MRCommon showAlert:[responce objectOrNilForKey:@"result"] delegate:nil];
-                     }
+    if (alertView.tag == 999 && buttonIndex == 1) {
+        [MRCommon showActivityIndicator:@"Sendingm..."];
+        
+        [[MRWebserviceHelper sharedWebServiceHelper] getSurveyReports:self.surveyId withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+            if (status)
+            {
+                [MRCommon stopActivityIndicator];
+                [MRCommon showAlert:[responce objectOrNilForKey:@"result"] delegate:nil];
+            }
+            else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+            {
+                [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+                 {
+                     [MRCommon stopActivityIndicator];
+                     [MRCommon savetokens:responce];
+                     [[MRWebserviceHelper sharedWebServiceHelper] getSurveyReports:0 withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                         if (status)
+                         {
+                             [MRCommon stopActivityIndicator];
+                             [MRCommon showAlert:[responce objectOrNilForKey:@"result"] delegate:nil];
+                         }
+                     }];
                  }];
-             }];
-        }
-        else
-        {
-            [MRCommon stopActivityIndicator];
-        }
-    }];
+            }
+            else
+            {
+                [MRCommon stopActivityIndicator];
+            }
+        }];
+    }
 }
 
 - (void)setSurveyReport:(NSNumber*)surveyId {

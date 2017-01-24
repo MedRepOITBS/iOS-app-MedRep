@@ -580,7 +580,7 @@
 //    localNotif.fireDate = [NSDate dateWithMinutesFromNow:notificationType];
     
     localNotif.timeZone = [NSTimeZone defaultTimeZone];
-    localNotif.alertBody = @"scdeule remider"; // add notification discription
+    localNotif.alertBody = [NSString stringWithFormat:@"Reminder: %@", [self.notificationDetails objectOrNilForKey:@"detailTitle"]]; // add notification discription
     localNotif.alertAction = @"View";
     localNotif.soundName = UILocalNotificationDefaultSoundName;
     
@@ -677,20 +677,9 @@
         [notificationdict setObject:loggedInDoctorId forKey:@"doctorId"];
     }
     
-    [notificationdict setObject:[NSNumber numberWithFloat:self.rating]  forKey:@"rating"];
-    
-//    fav = @"";
-//    [notificationdict setObject:fav  forKey:@"prescribe"];
-//    fav = @"";
-//    [notificationdict setObject:fav  forKey:@"recomend"];
-    
     [notificationdict setObject:[MRCommon stringFromDate:[NSDate date] withDateFormate:@"YYYYMMddHHmmss"]  forKey:@"viewedOn"];
     
     [notificationdict setObject:[self.notificationDetails objectForKey:@"notificationId"]  forKey:@"userNotificationId"];
-    
-    [notificationdict setObject:@"4.5" forKey:@"rating"];
-    [notificationdict setObject:@"Y" forKey:@"prescribe"];
-    [notificationdict setObject:@"N" forKey:@"recomend"];
     
     [[MRWebserviceHelper sharedWebServiceHelper] updateNotification:notificationdict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
         if (status)
