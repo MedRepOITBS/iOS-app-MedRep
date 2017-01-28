@@ -577,10 +577,10 @@
             self.remindMeValue = @"";
             break;
     }
-//    localNotif.fireDate = [NSDate dateWithMinutesFromNow:notificationType];
+    localNotif.fireDate = [NSDate dateWithMinutesFromNow:notificationType];
     
     localNotif.timeZone = [NSTimeZone defaultTimeZone];
-    localNotif.alertBody = [NSString stringWithFormat:@"Reminder: %@", [self.notificationDetails objectOrNilForKey:@"detailTitle"]]; // add notification discription
+    localNotif.alertBody = [NSString stringWithFormat:@"Reminder: %@ - %@", self.notification.companyName, [self.notificationDetails objectOrNilForKey:@"detailTitle"]]; // add notification discription
     localNotif.alertAction = @"View";
     localNotif.soundName = UILocalNotificationDefaultSoundName;
     

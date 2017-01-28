@@ -78,14 +78,14 @@
 }
 
 - (IBAction)downloadReportButtonAction:(id)sender {
-    [MRCommon showConformationOKNoAlert:@"Proceed with request for receiving the Survey reports?"
+    [MRCommon showConformationOKNoAlert:@"Do you want to request a Report for this Survey?"
                                delegate:self withTag:999];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     
     if (alertView.tag == 999 && buttonIndex == 1) {
-        [MRCommon showActivityIndicator:@"Sendingm..."];
+        [MRCommon showActivityIndicator:@"Sending..."];
         
         [[MRWebserviceHelper sharedWebServiceHelper] getSurveyReports:self.surveyId withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
             if (status)
@@ -103,7 +103,7 @@
                          if (status)
                          {
                              [MRCommon stopActivityIndicator];
-                             [MRCommon showAlert:[responce objectOrNilForKey:@"result"] delegate:nil];
+                             [MRCommon showAlert:@"Your request has been submitted. You will receive the report as soon as the Survey has been completed" delegate:nil];
                          }
                      }];
                  }];

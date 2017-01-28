@@ -1057,9 +1057,26 @@
     [viewController presentViewController:activityVC animated:YES completion:nil];
 }
 
++ (BOOL)isRegisteredForPush {
+    BOOL status = NO;
+    
+//    status = [[UIApplication sharedApplication] isRegisteredForRemoteNotifications];
+    UIUserNotificationSettings *notificationSettings = [[UIApplication sharedApplication] currentUserNotificationSettings];
+    
+    if (notificationSettings != nil) {
+        if (notificationSettings.types == UIUserNotificationTypeAlert ||
+            notificationSettings.types == UIUserNotificationTypeSound ||
+            notificationSettings.types == UIUserNotificationTypeBadge) {
+            status = YES;
+        }
+    }
+    
+    return status;
+}
+
 + (void)registerForPushNotification
 {
-    BOOL appRegisteredForAPNS = [[UIApplication sharedApplication] isRegisteredForRemoteNotifications];
+    BOOL appRegisteredForAPNS = [MRAppControl isRegisteredForPush];
     
     if (appRegisteredForAPNS == false) {
         

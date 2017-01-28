@@ -11,11 +11,10 @@
                 <outlet property="backButton" destination="KML-fu-5Cm" id="JM0-8g-ek6"/>
                 <outlet property="leftButton" destination="rOf-yn-g1A" id="vkf-r6-ASv"/>
                 <outlet property="navView" destination="VZn-F1-Ykk" id="YJZ-Fl-q0Y"/>
-                <outlet property="productImageView" destination="ea9-ub-GAE" id="w7x-Ob-ihX"/>
                 <outlet property="rightButton" destination="qFr-c3-OsV" id="Qky-FB-JX2"/>
-                <outlet property="scrollView" destination="qnd-Bl-jBj" id="fxI-88-EC8"/>
                 <outlet property="titlelabel" destination="Sji-j4-l9s" id="L9Q-hk-5Yq"/>
                 <outlet property="view" destination="yJi-Y1-nOa" id="xgu-e7-18k"/>
+                <outlet property="webView" destination="sCI-4H-U7W" id="CoK-bO-tJL"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -62,22 +61,9 @@
                         <constraint firstItem="KML-fu-5Cm" firstAttribute="leading" secondItem="S8t-Vb-qUf" secondAttribute="leading" id="pLL-KJ-dAC"/>
                     </constraints>
                 </view>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qnd-Bl-jBj">
-                    <subviews>
-                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ea9-ub-GAE">
-                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                        </imageView>
-                    </subviews>
-                    <color key="backgroundColor" red="0.95564913749694824" green="0.95562052726745605" blue="0.95563679933547974" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstItem="ea9-ub-GAE" firstAttribute="leading" secondItem="qnd-Bl-jBj" secondAttribute="leading" id="3M7-GG-T0U"/>
-                        <constraint firstItem="ea9-ub-GAE" firstAttribute="top" secondItem="qnd-Bl-jBj" secondAttribute="top" id="Nw0-Xw-AbQ"/>
-                        <constraint firstItem="ea9-ub-GAE" firstAttribute="centerX" secondItem="qnd-Bl-jBj" secondAttribute="centerX" id="UZy-Is-iF1"/>
-                        <constraint firstAttribute="trailing" secondItem="ea9-ub-GAE" secondAttribute="trailing" id="l49-WF-Ifd"/>
-                        <constraint firstAttribute="bottom" secondItem="ea9-ub-GAE" secondAttribute="bottom" id="u3U-tN-Nnd"/>
-                        <constraint firstItem="ea9-ub-GAE" firstAttribute="centerY" secondItem="qnd-Bl-jBj" secondAttribute="centerY" id="ynF-xE-nQh"/>
-                    </constraints>
-                </scrollView>
+                <webView contentMode="scaleAspectFit" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sCI-4H-U7W">
+                    <color key="backgroundColor" red="0.95564913750000002" green="0.95562052730000002" blue="0.95563679930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </webView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rOf-yn-g1A" userLabel="LeftButton">
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
@@ -107,17 +93,17 @@
             </subviews>
             <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="sCI-4H-U7W" secondAttribute="trailing" id="59i-gh-wPZ"/>
                 <constraint firstItem="S8t-Vb-qUf" firstAttribute="leading" secondItem="yJi-Y1-nOa" secondAttribute="leading" id="8RT-Jg-dqC"/>
-                <constraint firstItem="qnd-Bl-jBj" firstAttribute="top" secondItem="S8t-Vb-qUf" secondAttribute="bottom" id="AnF-AT-KkQ"/>
                 <constraint firstItem="rOf-yn-g1A" firstAttribute="leading" secondItem="yJi-Y1-nOa" secondAttribute="leading" id="La2-mO-qkK"/>
-                <constraint firstAttribute="trailing" secondItem="qnd-Bl-jBj" secondAttribute="trailing" id="VXj-7k-whK"/>
-                <constraint firstAttribute="bottom" secondItem="qnd-Bl-jBj" secondAttribute="bottom" id="ZeC-sg-CbF"/>
+                <constraint firstItem="sCI-4H-U7W" firstAttribute="top" secondItem="S8t-Vb-qUf" secondAttribute="bottom" id="VsP-mY-O4b"/>
                 <constraint firstAttribute="centerY" secondItem="rOf-yn-g1A" secondAttribute="centerY" id="Zom-bP-WcG"/>
                 <constraint firstAttribute="trailing" secondItem="S8t-Vb-qUf" secondAttribute="trailing" id="ghd-OK-prC"/>
-                <constraint firstItem="qnd-Bl-jBj" firstAttribute="leading" secondItem="yJi-Y1-nOa" secondAttribute="leading" id="h3J-3t-KWD"/>
+                <constraint firstAttribute="bottom" secondItem="sCI-4H-U7W" secondAttribute="bottom" id="gps-pM-zsq"/>
                 <constraint firstAttribute="centerY" secondItem="qFr-c3-OsV" secondAttribute="centerY" id="hKA-yD-Bfx"/>
                 <constraint firstItem="S8t-Vb-qUf" firstAttribute="top" secondItem="yJi-Y1-nOa" secondAttribute="top" id="jPl-vA-3D7"/>
                 <constraint firstAttribute="trailing" secondItem="qFr-c3-OsV" secondAttribute="trailing" id="qqC-aR-Per"/>
+                <constraint firstItem="sCI-4H-U7W" firstAttribute="leading" secondItem="yJi-Y1-nOa" secondAttribute="leading" id="wfj-4r-z8q"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
         </view>

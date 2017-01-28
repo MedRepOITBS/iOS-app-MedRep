@@ -15,8 +15,7 @@
 @interface MRProductBrocherViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *titlelabel;
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet UIImageView *productImageView;
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (strong, nonatomic) IBOutlet UIView *navView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *notificationImageHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *notificationImageWidthConstraint;
@@ -63,6 +62,11 @@
             self.detailsList = [responce objectForKey:@"notificationDetails"];
             if (self.detailsList.count > 0)
             {
+                NSDictionary *details = self.detailsList.firstObject;
+                if (details != nil) {
+                    [self.titlelabel setText:[details objectOrNilForKey:@"notificationDesc"]];
+                }
+                
                 [self loadImages];
                 
                 if(self.detailsList.count == 1)
@@ -124,6 +128,8 @@
      {
          if (imagePath != nil && imagePath.length > 0)
          {
+             [self.webView setHidden:NO];
+             
              [self.noticationImages setObject:imagePath forKey:[[self.detailsList objectAtIndex:self.imagesCount] objectForKey:@"detailId"]];
              
              if (self.imagesCount == 0)
@@ -148,7 +154,8 @@
              [MRCommon stopActivityIndicator];
              self.notificationImageHeightConstraint.constant = 0;
              self.notificationImageWidthConstraint.constant = 0;
-             self.productImageView.image = [UIImage imageNamed:@""];
+             //self.productImageView.image = [UIImage imageNamed:@""];
+             [self.webView setHidden:YES];
          }
      }];
 
@@ -176,7 +183,7 @@
     NSString *image = [self.noticationImages objectOrNilForKey:imageId];
 //    self.notificationImageHeightConstraint.constant = self.scrollView.frame.size.height;
 //    self.notificationImageWidthConstraint.constant = self.scrollView.frame.size.width;
-    self.productImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:image]] scale:1.0];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:image]]];
 //    self.scrollView.contentSize = self.productImageView.image.size;
 //    [self.view updateConstraints];    [self.view updateConstraints];
 }
