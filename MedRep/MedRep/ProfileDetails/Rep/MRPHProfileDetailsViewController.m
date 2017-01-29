@@ -49,6 +49,7 @@
              if (status)
              {
                  [[MRAppControl sharedHelper] setUserDetails:responce];
+                 [self setupProfileData];
              }
              else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
              {
@@ -59,6 +60,7 @@
                       if (status)
                       {
                           [[MRAppControl sharedHelper] setUserDetails:responce];
+                          [self setupProfileData];
                       }
                   }];
              }
@@ -72,6 +74,7 @@
              if (status)
              {
                  [[MRAppControl sharedHelper] setUserDetails:responce];
+                 [self setupProfileData];
              }
              else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
              {
@@ -82,6 +85,7 @@
                       if (status)
                       {
                           [[MRAppControl sharedHelper] setUserDetails:responce];
+                          [self setupProfileData];
                       }
                   }];
              }

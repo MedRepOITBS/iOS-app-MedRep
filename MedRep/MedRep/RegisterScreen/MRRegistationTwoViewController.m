@@ -202,7 +202,16 @@
     }
     
     [super viewDidLoad];
-    [self getCurrentLocation:0];
+    
+    BOOL skipFetchLocationNow = NO;
+    
+    if (self.isFromEditing && (self.selectedUserType == 3 || self.selectedUserType == 4)) {
+        skipFetchLocationNow = YES;
+    }
+    
+    if (skipFetchLocationNow == NO) {
+        [self getCurrentLocation:0];
+    }
     [self performSelector:@selector(isLocationUpdateGet) withObject:nil afterDelay:.12];
     // Do any additional setup after loading the view from its nib.
 }

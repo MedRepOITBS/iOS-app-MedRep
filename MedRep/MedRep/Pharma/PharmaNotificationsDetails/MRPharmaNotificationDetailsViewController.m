@@ -58,6 +58,8 @@
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraintForTopImage;
 
+@property (nonatomic, assign) BOOL loadImagesNow;
+
 @end
 
 @implementation MRPharmaNotificationDetailsViewController
@@ -65,6 +67,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.loadImagesNow = NO;
     self.noticationImages = [[NSMutableDictionary alloc] init];
     
     self.timer = 5;
@@ -108,9 +111,7 @@
 //        [MRCommon showActivityIndicator:@"Loading..."];
         self.detailsList = [self.notificationDetails objectForKey:@"notificationDetails"];
         [MRCommon showActivityIndicator:@"Loading..."];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self loadImages];
-        });
+        self.loadImagesNow = YES;
     }
     self.loopTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTimerLabel) userInfo:nil repeats:YES];
     
@@ -123,6 +124,17 @@
     
     // Do any additional setup after loading the view from its nib.
     
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if (self.loadImagesNow) {
+        self.loadImagesNow = NO;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self loadImages];
+        });
+    }
 }
 
 - (void)addSwipeGesture
@@ -168,8 +180,6 @@
          {
              [self.noticationImages setObject:image forKey:[[self.detailsList objectAtIndex:self.imagesCount] objectForKey:@"detailId"]];
              
-             [self updateViewConstraints];
-
              if (self.imagesCount == 0)
              {
                  [self updateNotification:[[self.detailsList objectAtIndex:self.imagesCount] objectForKey:@"detailId"]];

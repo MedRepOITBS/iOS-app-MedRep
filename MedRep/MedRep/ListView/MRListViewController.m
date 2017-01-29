@@ -62,6 +62,7 @@
     switch (self.listType)
     {
         case MRListVIewTypeTherapetic:
+            NSLog(@"Vamsi : %@", [[self.listItems objectAtIndex:indexPath.row] objectForKey:@"therapeuticName"]);
            appointmentCell.textLabel.text = [[self.listItems objectAtIndex:indexPath.row] objectForKey:@"therapeuticName"];
             break;
             

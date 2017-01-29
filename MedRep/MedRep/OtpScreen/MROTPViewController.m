@@ -405,7 +405,7 @@
         moreViewController.listItems = [[[self stateMedicalCouncilList] allValues]  sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     }else if (button.tag == 3){
         moreViewController.listType = MRListVIewTypeTherapetic;
-        moreViewController.listItems = [MRAppControl sharedHelper].therapeuticAreaDetails;
+        moreViewController.listItems = [[MRAppControl sharedHelper].therapeuticAreaDetails mutableCopy];
     }
     
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
