@@ -577,7 +577,7 @@
             self.remindMeValue = @"";
             break;
     }
-    localNotif.fireDate = [NSDate dateWithMinutesFromNow:notificationType];
+    //localNotif.fireDate = [NSDate dateWithMinutesFromNow:notificationType];
     
     localNotif.timeZone = [NSTimeZone defaultTimeZone];
     localNotif.alertBody = [NSString stringWithFormat:@"Reminder: %@ - %@", self.notification.companyName, [self.notificationDetails objectOrNilForKey:@"detailTitle"]]; // add notification discription

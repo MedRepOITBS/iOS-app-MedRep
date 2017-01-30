@@ -103,7 +103,8 @@
                          if (status)
                          {
                              [MRCommon stopActivityIndicator];
-                             [MRCommon showAlert:@"Your request has been submitted. You will receive the report as soon as the Survey has been completed" delegate:nil];
+                             [MRCommon showAlert:[responce objectOrNilForKey:@"result"]
+                              /*@"Your request has been submitted. You will receive the report as soon as the Survey has been completed"*/ delegate:nil];
                          }
                      }];
                  }];

@@ -30,6 +30,7 @@
 - (void)dbSaveOnPrivateContext;
 - (NSManagedObject *)createObjectForEntity:(NSString *)entity;
 - (NSManagedObject *)createObjectForEntityOnPrivateContext:(NSString *)entity;
+- (NSArray *)fetchUniqueObjectListAsDictionary:(NSString *)entity sortColumn:(NSString*)sortColumn;
 - (NSArray *)fetchObjectList:(NSString *)entity;
 - (NSArray *)fetchObjectList:(NSString *)entity attributeName:(NSString *)attributeName attributeValue:(id)attributeValue;
 - (NSArray *)fetchObjectList:(NSString *)entity predicate:(NSPredicate *)predicate;

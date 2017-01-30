@@ -556,6 +556,9 @@
 {
     if ([self internetCheck] == NO) return;
     
+    [[MRDataManger sharedManager] removeAllObjects:kTherapeuticAreaEntity
+                                     withPredicate:nil];
+    
     if ([MRDatabaseHelper  getObjectDataExistance:kTherapeuticAreaEntity] == NO)
     {
         [[MRWebserviceHelper sharedWebServiceHelper] getTherapeuticAreaDetails:^(BOOL status, NSString *details, NSDictionary *responce)
@@ -983,14 +986,23 @@
     
     if (path != nil && path.length > 0) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            NSString *key = [NSString stringWithFormat:@"%@_companyImage", notificationId];
-            id imageData = [[MRAppControl sharedHelper].globalCache objectForKey:key];
-            if (imageData == nil) {
-                imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:path]];
-                [[MRAppControl sharedHelper].globalCache setObject:imageData forKey:key];
+            NSString *tempString = @"temp";
+            NSArray *subStrings = [path componentsSeparatedByString:@"/"];
+            if (subStrings != nil && subStrings.count > 0) {
+                tempString = [subStrings objectAtIndex:subStrings.count - 1];
             }
             
+            NSString *key = [NSString stringWithFormat:@"%@_%@_companyImage", notificationId, tempString];
+            id imageData = [[MRAppControl sharedHelper].globalCache objectForKey:key];
             if (imageData != nil) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    parentView.image = [UIImage imageWithData:imageData];
+                });
+            }
+            
+            imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:path]];
+            if (imageData != nil) {
+                [[MRAppControl sharedHelper].globalCache setObject:imageData forKey:key];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     parentView.image = [UIImage imageWithData:imageData];
                 });

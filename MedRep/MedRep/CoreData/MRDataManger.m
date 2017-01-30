@@ -312,6 +312,36 @@ static MRDataManger *sharedDataManager = nil;
     return [NSEntityDescription insertNewObjectForEntityForName:entity inManagedObjectContext:context];
 }
 
+- (NSArray *)fetchUniqueObjectListAsDictionary:(NSString *)entity sortColumn:(NSString*)sortColumn {
+    NSManagedObjectContext *context = self.managedObjectContext;
+    [self assertConditionForContext:context];
+    
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:entity inManagedObjectContext:context];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:entityDescription];
+    [fetchRequest setReturnsDistinctResults:YES];
+    [fetchRequest setResultType:NSDictionaryResultType];
+    
+    if (sortColumn != nil && sortColumn.length > 0) {
+        [fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:sortColumn
+                                                                     ascending:YES]]];
+    }
+    
+    __block NSArray *result = nil;
+    
+    [context performBlockAndWait:^{
+        
+        NSError *error = nil;
+        result = [context executeFetchRequest:fetchRequest error:&error];
+        if (nil != error)
+        {
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        }
+    }];
+    
+    return (0 == result.count) ? nil : result;
+}
+
 - (NSArray *)fetchObjectList:(NSString *)entity inContext:(NSManagedObjectContext *)context{
     return [self performFetch:entity inContext:context sortColumn:nil andSortOrder:false];
 }

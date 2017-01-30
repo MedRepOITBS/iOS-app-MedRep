@@ -87,7 +87,7 @@
             break;
         case   MRListVIewTypeNotificationTherapetic:
             appointmentCell.textLabel.text = [self.listItems objectAtIndex:indexPath.row];
-\
+
             break;
             
         case MRListVIewTypeMedicineList:

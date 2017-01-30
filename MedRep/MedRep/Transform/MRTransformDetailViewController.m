@@ -64,7 +64,8 @@
             _detailLbl.text = self.post.detailedDescription;
         }
         
-        if (self.post.contentType.integerValue == kTransformContentTypePDF) {
+        if (self.post.contentType.integerValue == kTransformContentTypePDF ||
+            self.post.contentType.integerValue == kTransformContentTypeVideo) {
             [thumbnailImage setHidden:YES];
             [separatorView setHidden:YES];
             [_detailLbl setHidden:YES];
@@ -72,7 +73,11 @@
             [webView setDelegate:self];
             [webView setHidden:NO];
             
-            if (self.post.innerImgUrl != nil && self.post.innerImgUrl.length > 0) {
+            if (self.post.videoUrl != nil && self.post.videoUrl.length > 0) {
+                NSURL *targetURL = [NSURL URLWithString:self.post.videoUrl];
+                NSURLRequest *request = [NSURLRequest requestWithURL:targetURL];
+                [webView loadRequest:request];
+            } else if (self.post.innerImgUrl != nil && self.post.innerImgUrl.length > 0) {
                 NSURL *targetURL = [NSURL URLWithString:self.post.innerImgUrl];
                 NSURLRequest *request = [NSURLRequest requestWithURL:targetURL];
                 [webView loadRequest:request];
