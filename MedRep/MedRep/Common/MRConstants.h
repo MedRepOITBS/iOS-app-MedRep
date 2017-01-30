@@ -69,6 +69,7 @@ typedef enum
 
 #define KRegistarionStageTwo    @"RegistarionStageTwo"
 
+#define KLocationId             @"locationId"
 #define KAddressOne             @"address1"
 #define KAdresstwo              @"address2"
 #define KState                  @"State"

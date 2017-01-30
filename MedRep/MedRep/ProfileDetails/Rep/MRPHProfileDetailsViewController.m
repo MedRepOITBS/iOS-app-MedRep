@@ -40,7 +40,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [MRCommon showActivityIndicator:@""];
+    [MRCommon showActivityIndicator:@"Loading..."];
     if ([MRAppControl sharedHelper].userType == 1 || [MRAppControl sharedHelper].userType == 2)
     {
         [[MRWebserviceHelper sharedWebServiceHelper] getDoctorProfileDetails:^(BOOL status, NSString *details, NSDictionary *responce)

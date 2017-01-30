@@ -1962,7 +1962,7 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
     
     for (NSDictionary *dict in  regDetails)
     {
-        NSDictionary *dictObj = [NSDictionary dictionaryWithObjectsAndKeys:@"",@"locationId",
+        NSDictionary *dictObj = [NSDictionary dictionaryWithObjectsAndKeys:[dict objectOrNilForKey:KLocationId],@"locationId",
                                  [dict objectForKey:KAddressOne], @"address1",
                                  [dict objectForKey:KAdresstwo], @"address2",
                                  [dict objectForKey:KCity],@"city",

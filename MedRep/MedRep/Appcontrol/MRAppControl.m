@@ -226,7 +226,8 @@
         
         for (NSDictionary *dataDict in location)
         {
-            [array addObject:[NSMutableDictionary dictionaryWithObjectsAndKeys:[dataDict objectOrNilForKey:@"address1"],KAddressOne, [dataDict objectOrNilForKey:@"address2"],KAdresstwo, [dataDict objectOrNilForKey:@"zipcode"],KZIPCode, [dataDict objectOrNilForKey:@"state"],KState, [dataDict objectOrNilForKey:@"city"],KCity, [dataDict objectOrNilForKey:KType],KType, nil]];
+            [array addObject:[NSMutableDictionary dictionaryWithObjectsAndKeys:[dataDict objectOrNilForKey:@"locationId"],KLocationId,
+                              [dataDict objectOrNilForKey:@"address1"],KAddressOne, [dataDict objectOrNilForKey:@"address2"],KAdresstwo, [dataDict objectOrNilForKey:@"zipcode"],KZIPCode, [dataDict objectOrNilForKey:@"state"],KState, [dataDict objectOrNilForKey:@"city"],KCity, [dataDict objectOrNilForKey:KType],KType, nil]];
         }
         
         [self.userRegData setObject:array forKey:KRegistarionStageTwo];
