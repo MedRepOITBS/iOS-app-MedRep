@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *addressOneLabel;
 @property (weak, nonatomic) IBOutlet UILabel *addressTwoLabel;
 @property (assign, nonatomic) BOOL isImageUploaded;
+@property (assign, nonatomic) BOOL bIgnoreAlert;
 
 @end
 
@@ -40,6 +41,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    if (self.bIgnoreAlert == NO) {
+        [self getProfileDetail];
+    }
+}
+
+- (void)getProfileDetail {
     [MRCommon showActivityIndicator:@"Loading..."];
     if ([MRAppControl sharedHelper].userType == 1 || [MRAppControl sharedHelper].userType == 2)
     {
@@ -257,23 +264,29 @@
     [MRCommon showActivityIndicator:@"Uploading Profile Image..."];
     [[MRWebserviceHelper sharedWebServiceHelper] uploadDP:[NSDictionary dictionaryWithObjectsAndKeys:[imageData base64EncodedStringWithOptions:0],@"ImageData", nil] withHandler:^(BOOL status, NSString *details, NSDictionary *responce)
      {
+         self.bIgnoreAlert = NO;
          [MRCommon stopActivityIndicator];
          
          if (status)
          {
              self.isImageUploaded = YES;
-             [[MRAppControl sharedHelper].userRegData setObject:[imageData base64EncodedDataWithOptions:0] forKey:KProfilePicture];
-             self.profileImageView.image = [MRCommon imageWithImage:chosenImage scaledToSize:CGSizeMake(200, 200)];
-             [MRCommon showAlert:@"Profile Picture Updated Sucessfully" delegate:nil];
+             NSString *path = [responce objectOrNilForKey:@"result"];
+             [[MRAppControl sharedHelper].userRegData setObject:path forKey:KProfilePicture];
+//             [[MRAppControl sharedHelper].userRegData setObject:[imageData base64EncodedDataWithOptions:0] forKey:KProfilePicture];
+//             self.profileImageView.image = [MRCommon imageWithImage:chosenImage scaledToSize:CGSizeMake(200, 200)];
+             [MRCommon showAlert:@"Profile Picture Updated Sucessfully" delegate:self];
              
          }
          else
          {
              self.isImageUploaded = NO;
-             [MRCommon showAlert:@"Failed to Update Profile Picture" delegate:nil];
+             [MRCommon showAlert:@"Failed to Update Profile Picture" delegate:self];
          }
+         
+         [self setupProfileData];
      }];
     
+    self.bIgnoreAlert = YES;
     [picker dismissViewControllerAnimated:NO completion:NULL];
 }
 

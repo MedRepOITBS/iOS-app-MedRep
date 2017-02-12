@@ -294,7 +294,8 @@
 
 - (void)moveBackOnEventSync
 {
-    [MRCommon syncEventInCalenderAlongWithEventTitle:[self.selectedNotification objectForKey:@"notificationName"]
+    NSString *calendarEvent = [NSString stringWithFormat:@"%@ : %@", self.companySubTitle.text, self.drugSubTitle.text];
+    [MRCommon syncEventInCalenderAlongWithEventTitle:calendarEvent
                                      withDescription:[self.selectedNotification objectForKey:@"location"]
                                         withDuration:[[self.selectedNotification objectForKey:@"duration"] integerValue]
                                            eventDate:self.cellRepDatePicker.date
