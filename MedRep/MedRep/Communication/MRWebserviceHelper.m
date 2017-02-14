@@ -2646,19 +2646,22 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
 
 + (id)parseNetworkResponse:(Class)inEntityClass andData:(NSArray*)data {
     
+    NSArray *arrayList = nil;
     
-    Class<MRManagedObject>entityClass = inEntityClass;
-    
-    
-    MRDataManger *dbManager = [MRDataManger sharedManager];
-    
-    NSString *entityName = NSStringFromClass(entityClass);
-    NSArray *currentRecords = [dbManager fetchObjectList:entityName];
-    
-    NSManagedObjectContext *context = [dbManager getNewPrivateManagedObjectContext];
-    
-    NSArray *arrayList = [self parseRecords:inEntityClass allRecords:currentRecords context:context
-                                    andData:data];
+    if ([data isKindOfClass:[NSArray class]]) {
+        Class<MRManagedObject>entityClass = inEntityClass;
+        
+        
+        MRDataManger *dbManager = [MRDataManger sharedManager];
+        
+        NSString *entityName = NSStringFromClass(entityClass);
+        NSArray *currentRecords = [dbManager fetchObjectList:entityName];
+        
+        NSManagedObjectContext *context = [dbManager getNewPrivateManagedObjectContext];
+        
+        arrayList = [self parseRecords:inEntityClass allRecords:currentRecords context:context
+                                        andData:data];
+    }
     
     return arrayList;
 }
