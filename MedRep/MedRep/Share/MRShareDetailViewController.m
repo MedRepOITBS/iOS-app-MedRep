@@ -184,9 +184,12 @@ AVPlayerViewControllerDelegate, UIAlertViewDelegate> {
     self.sharesCount.text = [NSString stringWithFormat:@"%ld",self.post.shareCount.longValue];
     self.commentsCount.text = [NSString stringWithFormat:@"%ld",self.post.commentsCount.longValue];
     
+    [self.takeMeToTransformButton setHidden:YES];
+    
     if (self.post.source != nil && self.post.source.length > 0) {
         self.postedBY.text = [NSString stringWithFormat:@"Posted By:%@", self.post.source];
         if (self.post.parentTransformPostId != nil && self.post.parentTransformPostId.longValue > 0) {
+            NSLog(@"VAMSI : %ld", self.post.parentTransformPostId.longValue);
             [self.takeMeToTransformButton setHidden:NO];
         }
     } else {

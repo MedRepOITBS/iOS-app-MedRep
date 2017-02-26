@@ -1537,6 +1537,10 @@
 		CCFF72491E06203A0001BF0E /* MRPHSurveyPendingList+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFF72411E06203A0001BF0E /* MRPHSurveyPendingList+CoreDataClass.m */; };
 		CCFF724A1E06203A0001BF0E /* MRPHSurveyPendingList+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFF72431E06203A0001BF0E /* MRPHSurveyPendingList+CoreDataProperties.m */; };
 		CCFF724B1E06203A0001BF0E /* MRPHSurveyPendingList+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFF72431E06203A0001BF0E /* MRPHSurveyPendingList+CoreDataProperties.m */; };
+		CCFFE2B91E62CF600051CC7E /* MRMarketingCampaignController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFFE2B71E62CF600051CC7E /* MRMarketingCampaignController.m */; };
+		CCFFE2BA1E62CF600051CC7E /* MRMarketingCampaignController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCFFE2B81E62CF600051CC7E /* MRMarketingCampaignController.xib */; };
+		CCFFE2BB1E62CF660051CC7E /* MRMarketingCampaignController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFFE2B71E62CF600051CC7E /* MRMarketingCampaignController.m */; };
+		CCFFE2BC1E62CF700051CC7E /* MRMarketingCampaignController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCFFE2B81E62CF600051CC7E /* MRMarketingCampaignController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -2561,6 +2565,9 @@
 		CCFF72411E06203A0001BF0E /* MRPHSurveyPendingList+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MRPHSurveyPendingList+CoreDataClass.m"; sourceTree = "<group>"; };
 		CCFF72421E06203A0001BF0E /* MRPHSurveyPendingList+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MRPHSurveyPendingList+CoreDataProperties.h"; sourceTree = "<group>"; };
 		CCFF72431E06203A0001BF0E /* MRPHSurveyPendingList+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MRPHSurveyPendingList+CoreDataProperties.m"; sourceTree = "<group>"; };
+		CCFFE2B61E62CF600051CC7E /* MRMarketingCampaignController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRMarketingCampaignController.h; path = MarketingCampaign/MRMarketingCampaignController.h; sourceTree = "<group>"; };
+		CCFFE2B71E62CF600051CC7E /* MRMarketingCampaignController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRMarketingCampaignController.m; path = MarketingCampaign/MRMarketingCampaignController.m; sourceTree = "<group>"; };
+		CCFFE2B81E62CF600051CC7E /* MRMarketingCampaignController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MRMarketingCampaignController.xib; path = MarketingCampaign/MRMarketingCampaignController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3895,6 +3902,7 @@
 		83C127EF1B77C88B00D2F08E /* MedRep */ = {
 			isa = PBXGroup;
 			children = (
+				CCFFE2B51E62CF4E0051CC7E /* MarketingCampaign */,
 				CCA8CA841D9320BF00300A0C /* MedRep.entitlements */,
 				CC9857F21D2E51B300C74438 /* BaseDataModel */,
 				CC463DE91D27B907002AE85E /* GradientView */,
@@ -4543,6 +4551,16 @@
 			name = PharmaSurveys;
 			sourceTree = "<group>";
 		};
+		CCFFE2B51E62CF4E0051CC7E /* MarketingCampaign */ = {
+			isa = PBXGroup;
+			children = (
+				CCFFE2B61E62CF600051CC7E /* MRMarketingCampaignController.h */,
+				CCFFE2B71E62CF600051CC7E /* MRMarketingCampaignController.m */,
+				CCFFE2B81E62CF600051CC7E /* MRMarketingCampaignController.xib */,
+			);
+			name = MarketingCampaign;
+			sourceTree = "<group>";
+		};
 		CEE2F1A4AA4B2FB2CD0887DA /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -5180,6 +5198,7 @@
 				8AFE8CDE1D0F21400000382E /* my_contacts.json in Resources */,
 				791C37EA1C50256E00914728 /* pending_icon@2x.png in Resources */,
 				CC7DB2751D0C9E15007DFE4C /* MPTransformTableViewCell.xib in Resources */,
+				CCFFE2BA1E62CF600051CC7E /* MRMarketingCampaignController.xib in Resources */,
 				B4BB249C1D40738A00A3DD73 /* searchScreen.png in Resources */,
 				79BD27DD1B809FD1007CA448 /* MRLoginViewController.xib in Resources */,
 				79A5DC751BA2092E001D872C /* crgreydown-arrow@2x.png in Resources */,
@@ -5482,6 +5501,7 @@
 				CC7DB2E81D0CC433007DFE4C /* MRPopoverControllerViewController.xib in Resources */,
 				CC7DB1381D0C8BEC007DFE4C /* frsnooze@2x.png in Resources */,
 				CC7DB3561D0CC8A6007DFE4C /* post_image1.jpeg in Resources */,
+				CCFFE2BC1E62CF700051CC7E /* MRMarketingCampaignController.xib in Resources */,
 				CC7DB1391D0C8BEC007DFE4C /* ndchecked@3x.png in Resources */,
 				CC7DB3701D0CC8A6007DFE4C /* profile_pic11.jpeg in Resources */,
 				CC7DB13A1D0C8BEC007DFE4C /* ActivityScore@2x.png in Resources */,
@@ -5949,6 +5969,7 @@
 				B4F635061D53D039008CE7C7 /* TutorialView.m in Sources */,
 				CC649F5F1D0D1BA10012289C /* MRDrugSearchViewController.m in Sources */,
 				79F29A701BE6330300063DC2 /* MRDoctorActivityScoreViewController.m in Sources */,
+				CCFFE2B91E62CF600051CC7E /* MRMarketingCampaignController.m in Sources */,
 				B4B4F1931D3BFA6200EFCC0E /* EducationDateTimeTableViewCell.m in Sources */,
 				79FFD24F1BB9B83700CEE606 /* MRRegistrationRoleViewController.m in Sources */,
 				B4BB24C91D41BDF600A3DD73 /* NTMonthYearPicker.m in Sources */,
@@ -6196,6 +6217,7 @@
 				B46565971D56B3040016CDA8 /* AddMemberTableViewCell.m in Sources */,
 				B4F635071D53D039008CE7C7 /* TutorialView.m in Sources */,
 				CC7DB0431D0C8BEC007DFE4C /* MRMedRepDetailsViewController.m in Sources */,
+				CCFFE2BB1E62CF660051CC7E /* MRMarketingCampaignController.m in Sources */,
 				CC7DB0441D0C8BEC007DFE4C /* MRLoginViewController.m in Sources */,
 				CC7DB0451D0C8BEC007DFE4C /* MRDoctorActivityScoreViewController.m in Sources */,
 				B4B4F1441D39857E00EFCC0E /* MRInterestArea+CoreDataProperties.m in Sources */,

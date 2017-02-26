@@ -22,6 +22,7 @@
 #import "MRDrugSearchViewController.h"
 #import "AppDelegate.h"
 #import "MRCustomTabBar.h"
+#import "MRMarketingCampaignController.h"
 
 @interface MRDashBoardVC () <UITableViewDataSource, UITableViewDelegate, SWRevealViewControllerDelegate>
 
@@ -59,9 +60,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.marketingCampaignSuperView.alpha = 0.5;
-    self.marketingCampaignSuperView.userInteractionEnabled = NO;
-    self.marketingCampaignSuperView.alpha = 0.4f;
+//    self.marketingCampaignSuperView.alpha = 0.5;
+//    self.marketingCampaignSuperView.userInteractionEnabled = NO;
+//    self.marketingCampaignSuperView.alpha = 0.4f;
     
     SWRevealViewController *revealController = [self revealViewController];
     revealController.delegate = self;
@@ -361,6 +362,10 @@
 - (IBAction)marketingCompaginsButtonAction:(id)sender
 {
     //[MRCommon showAlert:kComingsoonMSG delegate:nil];
+    
+    MRMarketingCampaignController *marketingCampignViewController = [[MRMarketingCampaignController alloc] initWithNibName:@"MRMarketingCampaignController" bundle:nil];
+    
+    [self.navigationController pushViewController:marketingCampignViewController animated:YES];
 }
 
 - (IBAction)searchButtonAction:(id)sender

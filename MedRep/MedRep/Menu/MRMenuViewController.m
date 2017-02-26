@@ -23,6 +23,7 @@
 #import "MRInviteViewController.h"
 #import "MRTransformViewController.h"
 #import "MRDrugSearchViewController.h"
+#import "MRMarketingCampaignController.h"
 
 #define kMenuList [NSArray arrayWithObjects:@"My Profile", @"Dashboard", @"Notifications", @"Surveys", @"Activities", @"Marketing Campaigns", @"MedRep Meeting", @"Discussion Forum", @"Search For Drugs", @"News & Updates", @"Invite Contacts",  @"Settings", @"Logout", nil]
 
@@ -171,7 +172,7 @@
     
     regCell.menuTitle.text = [kMenuList objectAtIndex:indexPath.row];
     
-    if (indexPath.row == 5 || indexPath.row ==7 || indexPath.row ==11) {
+    if (indexPath.row ==7 || indexPath.row ==11) {
         regCell.menuTitle.alpha = 0.5f;
     }
     else {
@@ -273,7 +274,17 @@
             break;
         case 5:
         {
-            //[MRCommon showAlert:kComingsoonMSG delegate:nil];
+            if ( ![frontNavigationController.topViewController isKindOfClass:[MRMarketingCampaignController class]] )
+            {
+                MRMarketingCampaignController *marketingCampignViewController = [[MRMarketingCampaignController alloc] initWithNibName:@"MRMarketingCampaignController" bundle:nil];
+                
+                UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:marketingCampignViewController];
+                [revealController pushFrontViewController:navigationController animated:YES];
+            }
+            else
+            {
+                [revealController revealToggle:self];
+            }
         }
             break;
         case 6:

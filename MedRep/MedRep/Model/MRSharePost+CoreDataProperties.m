@@ -205,7 +205,7 @@
 
 - (void)setTransform_post_id:(NSNumber *)transform_post_id {
     NSInteger postId = 0;
-    if (transform_post_id != nil) {
+    if (transform_post_id != nil && transform_post_id.longValue > 0) {
         postId = transform_post_id.longLongValue;
         self.source = @"Transform";
     }
