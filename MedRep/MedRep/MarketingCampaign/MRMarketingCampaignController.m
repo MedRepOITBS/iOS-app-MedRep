@@ -31,7 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.navigationItem.title = @"Serve";
+    self.navigationItem.title = @"Marketing Campaign";
     //[self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
     
     SWRevealViewController *revealController = [self revealViewController];
@@ -48,6 +48,7 @@
     UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navView];
     self.navigationItem.rightBarButtonItem = rightButtonItem;
     
+    /*
     MRCustomTabBar *tabBarView = (MRCustomTabBar*)[MRCommon createTabBarView:self.view];
     [tabBarView setNavigationController:self.navigationController];
     [tabBarView setServeViewController:self];
@@ -63,6 +64,7 @@
                                                                        multiplier:1.0 constant:0];
     
     [self.view addConstraint:bottomConstraint];
+    */
 }
 
 - (void)didReceiveMemoryWarning {
