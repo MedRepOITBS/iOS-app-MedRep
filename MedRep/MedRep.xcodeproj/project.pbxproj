@@ -820,6 +820,773 @@
 		CC463DE81D27B37B002AE85E /* MRAppConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CC463DE61D27B37B002AE85E /* MRAppConstants.m */; };
 		CC463DEC1D27B921002AE85E /* MRGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC463DEB1D27B921002AE85E /* MRGradientView.m */; };
 		CC463DED1D27B921002AE85E /* MRGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC463DEB1D27B921002AE85E /* MRGradientView.m */; };
+		CC5A59F91E6AEE5200BF60C2 /* MRAppointmentListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79169E241BEBE70500C11D13 /* MRAppointmentListViewController.m */; };
+		CC5A59FA1E6AEE5200BF60C2 /* MRReplies+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CC86FE461D29BA4F0030B23D /* MRReplies+CoreDataProperties.m */; };
+		CC5A59FB1E6AEE5200BF60C2 /* MRCompaignsDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7930A3921BB9153A003112E4 /* MRCompaignsDetailsViewController.m */; };
+		CC5A59FC1E6AEE5200BF60C2 /* CommonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1191D395C7B00EFCC0E /* CommonTableViewCell.m */; };
+		CC5A59FD1E6AEE5200BF60C2 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B7820E1B7919EA0070645C /* Reachability.m */; };
+		CC5A59FE1E6AEE5200BF60C2 /* TransformSubCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9F60571D7B5DA90036513F /* TransformSubCategories.m */; };
+		CC5A59FF1E6AEE5200BF60C2 /* ExperienceSummaryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1211D395DF300EFCC0E /* ExperienceSummaryTableViewCell.m */; };
+		CC5A5A001E6AEE5200BF60C2 /* EducationalQualifications.m in Sources */ = {isa = PBXBuildFile; fileRef = B40E13971D3F059C005830DA /* EducationalQualifications.m */; };
+		CC5A5A011E6AEE5200BF60C2 /* NotificationWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB2821D0C9E75007DFE4C /* NotificationWebViewController.m */; };
+		CC5A5A021E6AEE5200BF60C2 /* MRCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC01BA711D302ACF007E2AEB /* MRCommentViewController.m */; };
+		CC5A5A031E6AEE5200BF60C2 /* MRNotificationsDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79AC942D1B9DFB0300B81452 /* MRNotificationsDetailsViewController.m */; };
+		CC5A5A041E6AEE5200BF60C2 /* MRGroupPostItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB2AD1D0CC433007DFE4C /* MRGroupPostItemTableViewCell.m */; };
+		CC5A5A051E6AEE5200BF60C2 /* MRSuggestedContact+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB3001D0CC4E2007DFE4C /* MRSuggestedContact+CoreDataProperties.m */; };
+		CC5A5A061E6AEE5200BF60C2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C127F51B77C88B00D2F08E /* AppDelegate.m */; };
+		CC5A5A071E6AEE5200BF60C2 /* NTMonthYearPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = B4BB24C81D41BDF600A3DD73 /* NTMonthYearPicker.m */; };
+		CC5A5A081E6AEE5200BF60C2 /* MRPHSurveyStatistics+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFF723D1E06203A0001BF0E /* MRPHSurveyStatistics+CoreDataClass.m */; };
+		CC5A5A091E6AEE5200BF60C2 /* InterestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B40E139D1D3F1268005830DA /* InterestViewController.m */; };
+		CC5A5A0A1E6AEE5200BF60C2 /* WYPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7969CFC41BAF2AF6004C2009 /* WYPopoverController.m */; };
+		CC5A5A0B1E6AEE5200BF60C2 /* MRViewRepAppointmnetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 792230E21BF271F800084891 /* MRViewRepAppointmnetViewController.m */; };
+		CC5A5A0C1E6AEE5200BF60C2 /* ProfileBasicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1001D38B4DF00EFCC0E /* ProfileBasicTableViewCell.m */; };
+		CC5A5A0D1E6AEE5200BF60C2 /* PublicationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B40E13A11D3F137E005830DA /* PublicationsViewController.m */; };
+		CC5A5A0E1E6AEE5200BF60C2 /* MRForgotPasswordTwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7920D6911C1C87C9008D3386 /* MRForgotPasswordTwoViewController.m */; };
+		CC5A5A0F1E6AEE5200BF60C2 /* MRCreateGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFE8CD11D0EFFD30000382E /* MRCreateGroupViewController.m */; };
+		CC5A5A101E6AEE5200BF60C2 /* MRDoctorDetailsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79421F3B1BB83BAE0055D9B7 /* MRDoctorDetailsTableViewCell.m */; };
+		CC5A5A111E6AEE5200BF60C2 /* MRFeedBackResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7930A3971BB91629003112E4 /* MRFeedBackResultCell.m */; };
+		CC5A5A121E6AEE5200BF60C2 /* MPAppointmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F416781B9F596B0089729B /* MPAppointmentViewController.m */; };
+		CC5A5A131E6AEE5200BF60C2 /* ContactInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B4746B3E1D6E8F3700325F9E /* ContactInfo.m */; };
+		CC5A5A141E6AEE5200BF60C2 /* PieView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB29C1D0CC433007DFE4C /* PieView.m */; };
+		CC5A5A151E6AEE5200BF60C2 /* GroupPostChildTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B41746E21D0CE628009B7E7E /* GroupPostChildTableViewCell.m */; };
+		CC5A5A161E6AEE5200BF60C2 /* MRMedRepListTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DC37161BE7DEA90027F7DB /* MRMedRepListTableCell.m */; };
+		CC5A5A171E6AEE5200BF60C2 /* MRProfileDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7920D6971C1C9B69008D3386 /* MRProfileDetailsViewController.m */; };
+		CC5A5A181E6AEE5200BF60C2 /* MRShareOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC463DDC1D279DE7002AE85E /* MRShareOptionsViewController.m */; };
+		CC5A5A191E6AEE5200BF60C2 /* KLCPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = B41746CE1D0CD5CE009B7E7E /* KLCPopup.m */; };
+		CC5A5A1A1E6AEE5200BF60C2 /* MRPostedReplies.m in Sources */ = {isa = PBXBuildFile; fileRef = CC98580D1D2FE43400C74438 /* MRPostedReplies.m */; };
+		CC5A5A1B1E6AEE5200BF60C2 /* MRMedRepMeetingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F5C9EF1BB0586100435B6C /* MRMedRepMeetingsViewController.m */; };
+		CC5A5A1C1E6AEE5200BF60C2 /* MRSuggestedContact.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB2FE1D0CC4E2007DFE4C /* MRSuggestedContact.m */; };
+		CC5A5A1D1E6AEE5200BF60C2 /* MRNotificationType.m in Sources */ = {isa = PBXBuildFile; fileRef = 797560401BBFE3AA0034D0AC /* MRNotificationType.m */; };
+		CC5A5A1F1E6AEE5200BF60C2 /* MRDrugTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A7169D51D27E23D00533A6D /* MRDrugTableViewCell.m */; };
+		CC5A5A201E6AEE5200BF60C2 /* ExpericeFillUpTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1501D39A80C00EFCC0E /* ExpericeFillUpTableViewCell.m */; };
+		CC5A5A211E6AEE5200BF60C2 /* Base64Transcoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 79708A6E1BB71D68007CE81D /* Base64Transcoder.m */; };
+		CC5A5A221E6AEE5200BF60C2 /* MemberListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B465658E1D56B0E50016CDA8 /* MemberListViewController.m */; };
+		CC5A5A231E6AEE5200BF60C2 /* MRCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B781F81B7916900070645C /* MRCommon.m */; };
+		CC5A5A241E6AEE5200BF60C2 /* MRSharePost.m in Sources */ = {isa = PBXBuildFile; fileRef = B47E338C1D2F65540051724C /* MRSharePost.m */; };
+		CC5A5A251E6AEE5200BF60C2 /* MRPharmaNotificationDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79314AD61BD2776A00EB3A48 /* MRPharmaNotificationDetailsViewController.m */; };
+		CC5A5A261E6AEE5200BF60C2 /* MRCompetitorAnalasysCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 796E93961BB8790A0031EA34 /* MRCompetitorAnalasysCell.m */; };
+		CC5A5A271E6AEE5200BF60C2 /* MRDrugSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC649F551D0D1BA10012289C /* MRDrugSearchViewController.m */; };
+		CC5A5A281E6AEE5200BF60C2 /* MRMedRepListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DC37111BE7DDCF0027F7DB /* MRMedRepListViewController.m */; };
+		CC5A5A291E6AEE5200BF60C2 /* MRNotificationInsiderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79314AD01BD2773E00EB3A48 /* MRNotificationInsiderViewController.m */; };
+		CC5A5A2A1E6AEE5200BF60C2 /* MRRole.m in Sources */ = {isa = PBXBuildFile; fileRef = 7975603D1BBFE3AA0034D0AC /* MRRole.m */; };
+		CC5A5A2B1E6AEE5200BF60C2 /* MRCompetitorAnalasysViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 796E93911BB8784D0031EA34 /* MRCompetitorAnalasysViewController.m */; };
+		CC5A5A2C1E6AEE5200BF60C2 /* AddressInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B4746B3A1D6E8F3700325F9E /* AddressInfo.m */; };
+		CC5A5A2D1E6AEE5200BF60C2 /* MRAppointmentCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7929E3B21B9C8E5F001F1373 /* MRAppointmentCollectionViewCell.m */; };
+		CC5A5A2E1E6AEE5200BF60C2 /* MRViewAppointmnetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F84B1E1BE938310081613A /* MRViewAppointmnetViewController.m */; };
+		CC5A5A2F1E6AEE5200BF60C2 /* NotificationUUIDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC649F4C1D0D181E0012289C /* NotificationUUIDViewController.m */; };
+		CC5A5A301E6AEE5200BF60C2 /* MRTherapeuticArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 797560431BBFE3AA0034D0AC /* MRTherapeuticArea.m */; };
+		CC5A5A311E6AEE5200BF60C2 /* MRGroupMembers.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA383F01D342D3500BCF5A9 /* MRGroupMembers.m */; };
+		CC5A5A321E6AEE5200BF60C2 /* CommonBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = B41746C91D0CD455009B7E7E /* CommonBoxView.m */; };
+		CC5A5A331E6AEE5200BF60C2 /* MRPHSurveyListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC1B0D991E04503D00278C58 /* MRPHSurveyListViewController.m */; };
+		CC5A5A341E6AEE5200BF60C2 /* MrGroupChildPost+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B41746D21D0CD6E1009B7E7E /* MrGroupChildPost+CoreDataProperties.m */; };
+		CC5A5A351E6AEE5200BF60C2 /* MRInterestArea.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1321D39857E00EFCC0E /* MRInterestArea.m */; };
+		CC5A5A361E6AEE5200BF60C2 /* MRDrugDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A7169D01D27B07D00533A6D /* MRDrugDetailModel.m */; };
+		CC5A5A371E6AEE5200BF60C2 /* ContactInfo+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4746B3C1D6E8F3700325F9E /* ContactInfo+CoreDataProperties.m */; };
+		CC5A5A381E6AEE5200BF60C2 /* MRAddMembersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFE8D211D12EB310000382E /* MRAddMembersViewController.m */; };
+		CC5A5A391E6AEE5200BF60C2 /* MRManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9857F41D2E51B300C74438 /* MRManagedObject.m */; };
+		CC5A5A3A1E6AEE5200BF60C2 /* MRPendingRecordsCount+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7527CA1D68D2A8001189F0 /* MRPendingRecordsCount+CoreDataProperties.m */; };
+		CC5A5A3B1E6AEE5200BF60C2 /* MRContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB2A71D0CC433007DFE4C /* MRContactsViewController.m */; };
+		CC5A5A3C1E6AEE5200BF60C2 /* MRListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7969CFCC1BAF2E38004C2009 /* MRListViewController.m */; };
+		CC5A5A3D1E6AEE5200BF60C2 /* MRGroupsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB2B31D0CC433007DFE4C /* MRGroupsViewController.m */; };
+		CC5A5A3E1E6AEE5200BF60C2 /* MRTransformTitleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9BCEC61D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.m */; };
+		CC5A5A3F1E6AEE5200BF60C2 /* MRDRActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D5EA9E1C1E00D50037CE23 /* MRDRActivityTableViewCell.m */; };
+		CC5A5A401E6AEE5200BF60C2 /* MRGroup+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB2F81D0CC4E2007DFE4C /* MRGroup+CoreDataProperties.m */; };
+		CC5A5A411E6AEE5200BF60C2 /* MRShareDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC86FE381D29A7780030B23D /* MRShareDetailViewController.m */; };
+		CC5A5A421E6AEE5200BF60C2 /* MRPendingRecordsCount.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7527CC1D68D2A8001189F0 /* MRPendingRecordsCount.m */; };
+		CC5A5A431E6AEE5200BF60C2 /* MRMedrepMeetingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F5C9F41BB061BE00435B6C /* MRMedrepMeetingsCell.m */; };
+		CC5A5A441E6AEE5200BF60C2 /* MRGroupPost+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9857D31D2D82CC00C74438 /* MRGroupPost+CoreDataProperties.m */; };
+		CC5A5A451E6AEE5200BF60C2 /* ProfileAboutTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1041D38B52B00EFCC0E /* ProfileAboutTableViewCell.m */; };
+		CC5A5A461E6AEE5200BF60C2 /* MRGroupMembersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9037351D5D11F000FD15A7 /* MRGroupMembersViewController.m */; };
+		CC5A5A471E6AEE5200BF60C2 /* GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79A4F8A91BC186B200E58DC7 /* GraphView.m */; };
+		CC5A5A481E6AEE5200BF60C2 /* MRAppControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B781F21B7916670070645C /* MRAppControl.m */; };
+		CC5A5A491E6AEE5200BF60C2 /* MPNotificatinsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79AC94471B9E011D00B81452 /* MPNotificatinsTableViewCell.m */; };
+		CC5A5A4A1E6AEE5200BF60C2 /* MRProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = B4746B4C1D6E929100325F9E /* MRProfile.m */; };
+		CC5A5A4B1E6AEE5200BF60C2 /* MRSurveyDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7950AF221BBF91D700A93106 /* MRSurveyDetailsViewController.m */; };
+		CC5A5A4C1E6AEE5200BF60C2 /* AddMemberTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B46565951D56B3040016CDA8 /* AddMemberTableViewCell.m */; };
+		CC5A5A4D1E6AEE5200BF60C2 /* TutorialView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F635051D53D039008CE7C7 /* TutorialView.m */; };
+		CC5A5A4E1E6AEE5200BF60C2 /* MRMedRepDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F84B121BE92CB70081613A /* MRMedRepDetailsViewController.m */; };
+		CC5A5A4F1E6AEE5200BF60C2 /* MRMarketingCampaignController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFFE2B71E62CF600051CC7E /* MRMarketingCampaignController.m */; };
+		CC5A5A501E6AEE5200BF60C2 /* MRLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BD27DA1B809FD1007CA448 /* MRLoginViewController.m */; };
+		CC5A5A511E6AEE5200BF60C2 /* MRDoctorActivityScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F29A6E1BE6330300063DC2 /* MRDoctorActivityScoreViewController.m */; };
+		CC5A5A521E6AEE5200BF60C2 /* MRInterestArea+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1301D39857E00EFCC0E /* MRInterestArea+CoreDataProperties.m */; };
+		CC5A5A531E6AEE5200BF60C2 /* MRPHSurveyStatistics+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CC20254A1E0847DE0042018E /* MRPHSurveyStatistics+CoreDataProperties.m */; };
+		CC5A5A541E6AEE5200BF60C2 /* MRRegistrationRoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FFD24D1BB9B83700CEE606 /* MRRegistrationRoleViewController.m */; };
+		CC5A5A551E6AEE5200BF60C2 /* MRDoctorActivityScoreDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7920D6A11C1CB236008D3386 /* MRDoctorActivityScoreDetailsViewController.m */; };
+		CC5A5A561E6AEE5200BF60C2 /* NSLongMonthComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1751D39E53E00EFCC0E /* NSLongMonthComponent.m */; };
+		CC5A5A571E6AEE5200BF60C2 /* MRWorkExperience.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F12E1D39857E00EFCC0E /* MRWorkExperience.m */; };
+		CC5A5A581E6AEE5200BF60C2 /* MRForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7920D68C1C1C874C008D3386 /* MRForgotPasswordViewController.m */; };
+		CC5A5A591E6AEE5200BF60C2 /* MRParserHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B782011B7916E10070645C /* MRParserHelper.m */; };
+		CC5A5A5A1E6AEE5200BF60C2 /* MRReplies.m in Sources */ = {isa = PBXBuildFile; fileRef = CC86FE481D29BA4F0030B23D /* MRReplies.m */; };
+		CC5A5A5B1E6AEE5200BF60C2 /* MRServeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC93CE01D183CCF00C2A864 /* MRServeViewController.m */; };
+		CC5A5A5C1E6AEE5200BF60C2 /* basicInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1541D39A8D600EFCC0E /* basicInfoTableViewCell.m */; };
+		CC5A5A5D1E6AEE5200BF60C2 /* MRConvertAppointmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 796E938B1BB869FA0031EA34 /* MRConvertAppointmentCell.m */; };
+		CC5A5A5E1E6AEE5200BF60C2 /* MRCustomTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = CCE29B231D26E6C4006DED8E /* MRCustomTabBar.m */; };
+		CC5A5A5F1E6AEE5200BF60C2 /* MRAppConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CC463DE61D27B37B002AE85E /* MRAppConstants.m */; };
+		CC5A5A601E6AEE5200BF60C2 /* MRDoctorScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F29A681BE632D500063DC2 /* MRDoctorScoreViewController.m */; };
+		CC5A5A611E6AEE5200BF60C2 /* NSBaseDateComponent+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F16F1D39E53E00EFCC0E /* NSBaseDateComponent+Private.m */; };
+		CC5A5A621E6AEE5200BF60C2 /* MRAppointmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79A360B71BA5821400F286E0 /* MRAppointmentCell.m */; };
+		CC5A5A631E6AEE5200BF60C2 /* NSBaseDateComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F16D1D39E53E00EFCC0E /* NSBaseDateComponent.m */; };
+		CC5A5A641E6AEE5200BF60C2 /* WYStoryboardPopoverSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7969CFC71BAF2AF6004C2009 /* WYStoryboardPopoverSegue.m */; };
+		CC5A5A651E6AEE5200BF60C2 /* UINotificationChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C1D7151D97833E0037EBF6 /* UINotificationChartViewController.m */; };
+		CC5A5A661E6AEE5200BF60C2 /* MRShareDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC86FE3F1D29B34D0030B23D /* MRShareDetailTableViewCell.m */; };
+		CC5A5A671E6AEE5200BF60C2 /* MRShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB28A1D0C9EC2007DFE4C /* MRShareViewController.m */; };
+		CC5A5A681E6AEE5200BF60C2 /* MRGroupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB3A81D0CC994007DFE4C /* MRGroupTableViewCell.m */; };
+		CC5A5A691E6AEE5200BF60C2 /* MRWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7961A9771B8F4E520035D63A /* MRWelcomeViewController.m */; };
+		CC5A5A6A1E6AEE5200BF60C2 /* MRMedRepTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DC370B1BE7DC5F0027F7DB /* MRMedRepTableCell.m */; };
+		CC5A5A6B1E6AEE5200BF60C2 /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B782081B7919EA0070645C /* NSDate+Utilities.m */; };
+		CC5A5A6C1E6AEE5200BF60C2 /* MRContactWithinGroupCollectionCellCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB2AA1D0CC433007DFE4C /* MRContactWithinGroupCollectionCellCollectionViewCell.m */; };
+		CC5A5A6D1E6AEE5200BF60C2 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B7820C1B7919EA0070645C /* SVProgressHUD.m */; };
+		CC5A5A6E1E6AEE5200BF60C2 /* MPTransformTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB26C1D0C9E15007DFE4C /* MPTransformTableViewCell.m */; };
+		CC5A5A6F1E6AEE5200BF60C2 /* MRPublications.m in Sources */ = {isa = PBXBuildFile; fileRef = B40E13A71D3F251C005830DA /* MRPublications.m */; };
+		CC5A5A701E6AEE5200BF60C2 /* MRPublications+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B40E13A51D3F251C005830DA /* MRPublications+CoreDataProperties.m */; };
+		CC5A5A711E6AEE5200BF60C2 /* MPNotificationAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79A5DC5A1BA1EBBF001D872C /* MPNotificationAlertViewController.m */; };
+		CC5A5A721E6AEE5200BF60C2 /* EditLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC87CD6D1D6E32E40083DB26 /* EditLocationViewController.m */; };
+		CC5A5A731E6AEE5200BF60C2 /* MRFavoritesNotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 795366191BA0B7E40021CE4D /* MRFavoritesNotificationsViewController.m */; };
+		CC5A5A741E6AEE5200BF60C2 /* MRAddressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D8CD8A1B83A59B0089F770 /* MRAddressView.m */; };
+		CC5A5A751E6AEE5200BF60C2 /* PieMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB29A1D0CC433007DFE4C /* PieMenuItem.m */; };
+		CC5A5A761E6AEE5200BF60C2 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B782171B7920BB0070645C /* SWRevealViewController.m */; };
+		CC5A5A771E6AEE5200BF60C2 /* MRPharmaMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79421F481BB83BBB0055D9B7 /* MRPharmaMenuViewController.m */; };
+		CC5A5A781E6AEE5200BF60C2 /* MRPHDashBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79421F321BB83ABE0055D9B7 /* MRPHDashBoardViewController.m */; };
+		CC5A5A791E6AEE5200BF60C2 /* MRPHSurveyPendingList+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFF72411E06203A0001BF0E /* MRPHSurveyPendingList+CoreDataClass.m */; };
+		CC5A5A7A1E6AEE5200BF60C2 /* MRJoinGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF27A61D21BE7B00080DF0 /* MRJoinGroupViewController.m */; };
+		CC5A5A7B1E6AEE5200BF60C2 /* MrGroupChildPost.m in Sources */ = {isa = PBXBuildFile; fileRef = B41746D41D0CD6E1009B7E7E /* MrGroupChildPost.m */; };
+		CC5A5A7C1E6AEE5200BF60C2 /* MRSurveyListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7950AF1D1BBF8B1600A93106 /* MRSurveyListViewController.m */; };
+		CC5A5A7D1E6AEE5200BF60C2 /* MRContact+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9857FC1D2E53EA00C74438 /* MRContact+CoreDataProperties.m */; };
+		CC5A5A7E1E6AEE5200BF60C2 /* MRDoctorDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79421F3E1BB83BAE0055D9B7 /* MRDoctorDetailsViewController.m */; };
+		CC5A5A7F1E6AEE5200BF60C2 /* MRMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79539E981B90941D001516C3 /* MRMenuViewController.m */; };
+		CC5A5A801E6AEE5200BF60C2 /* MRPHSurveyDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC1B0D961E04503D00278C58 /* MRPHSurveyDetailsViewController.m */; };
+		CC5A5A811E6AEE5200BF60C2 /* NSMediumMonthComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1771D39E53E00EFCC0E /* NSMediumMonthComponent.m */; };
+		CC5A5A821E6AEE5200BF60C2 /* MRPopoverControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB2B61D0CC433007DFE4C /* MRPopoverControllerViewController.m */; };
+		CC5A5A831E6AEE5200BF60C2 /* MRRegHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 798A118A1B8AEBF6003FF457 /* MRRegHeaderView.m */; };
+		CC5A5A841E6AEE5200BF60C2 /* MRGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC463DEB1D27B921002AE85E /* MRGradientView.m */; };
+		CC5A5A851E6AEE5200BF60C2 /* MRLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 795881A91C63CF8600462868 /* MRLocationManager.m */; };
+		CC5A5A861E6AEE5200BF60C2 /* NSString+Date.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1661D39E52600EFCC0E /* NSString+Date.m */; };
+		CC5A5A871E6AEE5200BF60C2 /* MRDashBoardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 799820931BA4D01C0069128A /* MRDashBoardVC.m */; };
+		CC5A5A881E6AEE5200BF60C2 /* MRAddMemberTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFE8D281D12F6A70000382E /* MRAddMemberTableViewCell.m */; };
+		CC5A5A891E6AEE5200BF60C2 /* MRInviteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF27AE1D21C3DE00080DF0 /* MRInviteViewController.m */; };
+		CC5A5A8A1E6AEE5200BF60C2 /* MRFavoriteFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7953662C1BA0C0300021CE4D /* MRFavoriteFilterViewController.m */; };
+		CC5A5A8B1E6AEE5200BF60C2 /* addProfileItemsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F0F91D38AEDF00EFCC0E /* addProfileItemsTableViewCell.m */; };
+		CC5A5A8C1E6AEE5200BF60C2 /* MRTransformPageData.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9F605F1D7B62840036513F /* MRTransformPageData.m */; };
+		CC5A5A8D1E6AEE5200BF60C2 /* MPCallMedrepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79A5DC601BA1ED21001D872C /* MPCallMedrepViewController.m */; };
+		CC5A5A8E1E6AEE5200BF60C2 /* AddressInfo+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4746B381D6E8F3700325F9E /* AddressInfo+CoreDataProperties.m */; };
+		CC5A5A8F1E6AEE5200BF60C2 /* MRShareOptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9858041D2E726300C74438 /* MRShareOptionTableViewCell.m */; };
+		CC5A5A901E6AEE5200BF60C2 /* AddressInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4746B261D6DFB9200325F9E /* AddressInfoTableViewCell.m */; };
+		CC5A5A911E6AEE5200BF60C2 /* EditContactInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9DAFA01D6F9E46008B2822 /* EditContactInfoViewController.m */; };
+		CC5A5A921E6AEE5200BF60C2 /* UICustomDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F15D1D39E4F200EFCC0E /* UICustomDatePicker.m */; };
+		CC5A5A931E6AEE5200BF60C2 /* MRTransformPageData+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9F605D1D7B62840036513F /* MRTransformPageData+CoreDataProperties.m */; };
+		CC5A5A941E6AEE5200BF60C2 /* MRNewProductCompaignsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 796E936F1BB861E10031EA34 /* MRNewProductCompaignsViewController.m */; };
+		CC5A5A951E6AEE5200BF60C2 /* MRNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 79115CEA1BCD872900151806 /* MRNotifications.m */; };
+		CC5A5A961E6AEE5200BF60C2 /* NSDictionary+CaseInsensitive.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9857F81D2E523E00C74438 /* NSDictionary+CaseInsensitive.m */; };
+		CC5A5A971E6AEE5200BF60C2 /* MRTransformPost.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9857DD1D2DAA6B00C74438 /* MRTransformPost.m */; };
+		CC5A5A981E6AEE5200BF60C2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C127F21B77C88B00D2F08E /* main.m */; };
+		CC5A5A991E6AEE5200BF60C2 /* MRMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F066901B94E13C00D113F0 /* MRMenuTableViewCell.m */; };
+		CC5A5A9A1E6AEE5200BF60C2 /* MRMyWallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD1FD921D9FEFA800A12ED0 /* MRMyWallViewController.m */; };
+		CC5A5A9B1E6AEE5200BF60C2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C127FB1B77C88B00D2F08E /* ViewController.m */; };
+		CC5A5A9C1E6AEE5200BF60C2 /* MRWebserviceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B781FB1B7916B40070645C /* MRWebserviceHelper.m */; };
+		CC5A5A9D1E6AEE5200BF60C2 /* NSShortMonthComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1791D39E53E00EFCC0E /* NSShortMonthComponent.m */; };
+		CC5A5A9E1E6AEE5200BF60C2 /* NSObject+Array.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1641D39E52600EFCC0E /* NSObject+Array.m */; };
+		CC5A5A9F1E6AEE5200BF60C2 /* NSDayComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1731D39E53E00EFCC0E /* NSDayComponent.m */; };
+		CC5A5AA01E6AEE5200BF60C2 /* MRSharePost+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E02C5F1D491760003A1859 /* MRSharePost+CoreDataProperties.m */; };
+		CC5A5AA11E6AEE5200BF60C2 /* MRReadNotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 795366141BA0B7A90021CE4D /* MRReadNotificationsViewController.m */; };
+		CC5A5AA21E6AEE5200BF60C2 /* PendingContactCustomFilterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB31F1D0CC5F8007DFE4C /* PendingContactCustomFilterTableViewCell.m */; };
+		CC5A5AA31E6AEE5200BF60C2 /* MRDoctorScoreTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79421F181BB83A4B0055D9B7 /* MRDoctorScoreTableCell.m */; };
+		CC5A5AA41E6AEE5200BF60C2 /* MRConvertAppointmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 796E937A1BB867FF0031EA34 /* MRConvertAppointmentViewController.m */; };
+		CC5A5AA51E6AEE5200BF60C2 /* NSYearComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F17B1D39E53E00EFCC0E /* NSYearComponent.m */; };
+		CC5A5AA61E6AEE5200BF60C2 /* NSDateElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1711D39E53E00EFCC0E /* NSDateElement.m */; };
+		CC5A5AA71E6AEE5200BF60C2 /* MRTransformDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB26F1D0C9E15007DFE4C /* MRTransformDetailViewController.m */; };
+		CC5A5AA81E6AEE5200BF60C2 /* UIPopoverController+iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB2BC1D0CC433007DFE4C /* UIPopoverController+iPhone.m */; };
+		CC5A5AA91E6AEE5200BF60C2 /* MRGroupsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB2B01D0CC433007DFE4C /* MRGroupsListViewController.m */; };
+		CC5A5AAA1E6AEE5200BF60C2 /* MRPHSurveyPendingList+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CCFF72431E06203A0001BF0E /* MRPHSurveyPendingList+CoreDataProperties.m */; };
+		CC5A5AAB1E6AEE5200BF60C2 /* EducationDateTimeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1921D3BFA6200EFCC0E /* EducationDateTimeTableViewCell.m */; };
+		CC5A5AAC1E6AEE5200BF60C2 /* MRContactDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB2A41D0CC433007DFE4C /* MRContactDetailViewController.m */; };
+		CC5A5AAD1E6AEE5200BF60C2 /* MRPostedReplies+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CC98580B1D2FE43300C74438 /* MRPostedReplies+CoreDataProperties.m */; };
+		CC5A5AAE1E6AEE5200BF60C2 /* MRNotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79AC94281B9DFAF000B81452 /* MRNotificationsViewController.m */; };
+		CC5A5AAF1E6AEE5200BF60C2 /* MRRegistationTwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7961A9711B8F26160035D63A /* MRRegistationTwoViewController.m */; };
+		CC5A5AB01E6AEE5200BF60C2 /* MRPHSurveyDetailsPendingDoctorTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC20253F1E0842AA0042018E /* MRPHSurveyDetailsPendingDoctorTableViewCell.m */; };
+		CC5A5AB11E6AEE5200BF60C2 /* MRContactCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB2A11D0CC433007DFE4C /* MRContactCollectionCell.m */; };
+		CC5A5AB21E6AEE5200BF60C2 /* UILabel+WhiteUIDatePickerLabels.m in Sources */ = {isa = PBXBuildFile; fileRef = 79A4AA721BA75850004F6E1E /* UILabel+WhiteUIDatePickerLabels.m */; };
+		CC5A5AB31E6AEE5200BF60C2 /* PendingContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB3131D0CC530007DFE4C /* PendingContactsViewController.m */; };
+		CC5A5AB41E6AEE5200BF60C2 /* UIImage+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E02C6D1D4B2992003A1859 /* UIImage+Helpers.m */; };
+		CC5A5AB51E6AEE5200BF60C2 /* MRMyWallItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD1FD8F1D9FEFA800A12ED0 /* MRMyWallItemTableViewCell.m */; };
+		CC5A5AB61E6AEE5200BF60C2 /* MRRegistationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BD27E61B80A11D007CA448 /* MRRegistationViewController.m */; };
+		CC5A5AB71E6AEE5200BF60C2 /* MROTPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BD28101B80C6A5007CA448 /* MROTPViewController.m */; };
+		CC5A5AB81E6AEE5200BF60C2 /* MRAppointmentListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79169E251BEBE70500C11D13 /* MRAppointmentListCell.m */; };
+		CC5A5AB91E6AEE5200BF60C2 /* MRDocotrActivityScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7940000F1BE61BAC0066151A /* MRDocotrActivityScoreViewController.m */; };
+		CC5A5ABA1E6AEE5200BF60C2 /* MRProfile+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4746B481D6E926000325F9E /* MRProfile+CoreDataProperties.m */; };
+		CC5A5ABB1E6AEE5200BF60C2 /* MRTransformViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9BCEBF1D0F2A3900702EBC /* MRTransformViewController.m */; };
+		CC5A5ABC1E6AEE5200BF60C2 /* MRHomeViewContoller.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BD27B21B809982007CA448 /* MRHomeViewContoller.m */; };
+		CC5A5ABD1E6AEE5200BF60C2 /* MRDatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 797560461BBFE4940034D0AC /* MRDatabaseHelper.m */; };
+		CC5A5ABE1E6AEE5200BF60C2 /* CommonEducationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F18E1D3BF7CE00EFCC0E /* CommonEducationTableViewCell.m */; };
+		CC5A5ABF1E6AEE5200BF60C2 /* AddEducationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F0EB1D3842C500EFCC0E /* AddEducationViewController.m */; };
+		CC5A5AC01E6AEE5200BF60C2 /* PieMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB2981D0CC433007DFE4C /* PieMenu.m */; };
+		CC5A5AC11E6AEE5200BF60C2 /* MRWorkExperience+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F12C1D39857E00EFCC0E /* MRWorkExperience+CoreDataProperties.m */; };
+		CC5A5AC21E6AEE5200BF60C2 /* EducationalQualifications+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B40E13951D3F059C005830DA /* EducationalQualifications+CoreDataProperties.m */; };
+		CC5A5AC31E6AEE5200BF60C2 /* MRContact.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9857FE1D2E53EA00C74438 /* MRContact.m */; };
+		CC5A5AC41E6AEE5200BF60C2 /* TransformSubCategories+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9F60551D7B5DA90036513F /* TransformSubCategories+CoreDataProperties.m */; };
+		CC5A5AC51E6AEE5200BF60C2 /* MRGroupPost.m in Sources */ = {isa = PBXBuildFile; fileRef = B41746DC1D0CD740009B7E7E /* MRGroupPost.m */; };
+		CC5A5AC61E6AEE5200BF60C2 /* GraphPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 79A4F8AB1BC186B200E58DC7 /* GraphPoint.m */; };
+		CC5A5AC71E6AEE5200BF60C2 /* MedRep.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 83C127F71B77C88B00D2F08E /* MedRep.xcdatamodeld */; };
+		CC5A5AC81E6AEE5200BF60C2 /* MRPharmaMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79421F451BB83BBB0055D9B7 /* MRPharmaMenuCell.m */; };
+		CC5A5AC91E6AEE5200BF60C2 /* MROptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BD27E11B80A0FB007CA448 /* MROptionsViewController.m */; };
+		CC5A5ACA1E6AEE5200BF60C2 /* MRPHDownloadSurveyReportsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2025521E08D75B0042018E /* MRPHDownloadSurveyReportsViewController.m */; };
+		CC5A5ACB1E6AEE5200BF60C2 /* MRTransformPost+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9857DB1D2DAA6B00C74438 /* MRTransformPost+CoreDataProperties.m */; };
+		CC5A5ACC1E6AEE5200BF60C2 /* MRFeedBackResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7930A38D1BB9151C003112E4 /* MRFeedBackResultViewController.m */; };
+		CC5A5ACD1E6AEE5200BF60C2 /* MRGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB2F61D0CC4E2007DFE4C /* MRGroup.m */; };
+		CC5A5ACE1E6AEE5200BF60C2 /* PendingContactTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB3161D0CC530007DFE4C /* PendingContactTableViewCell.m */; };
+		CC5A5ACF1E6AEE5200BF60C2 /* MRCompanyDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 797560491BC02B3A0034D0AC /* MRCompanyDetails.m */; };
+		CC5A5AD01E6AEE5200BF60C2 /* AddExperienceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F0E61D382E7300EFCC0E /* AddExperienceTableViewController.m */; };
+		CC5A5AD11E6AEE5200BF60C2 /* MRCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7DB29E1D0CC433007DFE4C /* MRCollectionView.m */; };
+		CC5A5AD21E6AEE5200BF60C2 /* MRPublicationsDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC0D64DF1D8D5D3F0088016F /* MRPublicationsDetailsViewController.m */; };
+		CC5A5AD31E6AEE5200BF60C2 /* MRMedRepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79C709DE1BE7D7F200223562 /* MRMedRepViewController.m */; };
+		CC5A5AD41E6AEE5200BF60C2 /* ExperienceDateTimeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F11D1D395D9600EFCC0E /* ExperienceDateTimeTableViewCell.m */; };
+		CC5A5AD51E6AEE5200BF60C2 /* MROTPVerifiedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79841DD61B989B5B00535916 /* MROTPVerifiedViewController.m */; };
+		CC5A5AD61E6AEE5200BF60C2 /* NSData+Base64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 79708A6C1BB71D67007CE81D /* NSData+Base64Additions.m */; };
+		CC5A5AD71E6AEE5200BF60C2 /* MRDrugDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC649F521D0D1BA10012289C /* MRDrugDetailViewController.m */; };
+		CC5A5AD81E6AEE5200BF60C2 /* MRDataManger.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B782041B7917010070645C /* MRDataManger.m */; };
+		CC5A5AD91E6AEE5200BF60C2 /* MRNewProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 796E93741BB862530031EA34 /* MRNewProductCell.m */; };
+		CC5A5ADA1E6AEE5200BF60C2 /* CommonProfileSectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F1081D38B5FD00EFCC0E /* CommonProfileSectionTableViewCell.m */; };
+		CC5A5ADB1E6AEE5200BF60C2 /* ContactInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4746B2A1D6DFBB200325F9E /* ContactInfoTableViewCell.m */; };
+		CC5A5ADC1E6AEE5200BF60C2 /* MRPHProfileDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBA484D1E369A64002548BF /* MRPHProfileDetailsViewController.m */; };
+		CC5A5ADD1E6AEE5200BF60C2 /* MRProductBrocherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F84B181BE9354B0081613A /* MRProductBrocherViewController.m */; };
+		CC5A5ADE1E6AEE5200BF60C2 /* MRGroupMembers+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA383EE1D342D3500BCF5A9 /* MRGroupMembers+CoreDataProperties.m */; };
+		CC5A5ADF1E6AEE5200BF60C2 /* MRRegTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 798A11851B8AEAD2003FF457 /* MRRegTableViewCell.m */; };
+		CC5A5AE01E6AEE5200BF60C2 /* MRRegistrationRoleCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FFD2521BB9BA7D00CEE606 /* MRRegistrationRoleCellTableViewCell.m */; };
+		CC5A5AE11E6AEE5200BF60C2 /* MRContactWithinGroupCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFE8D191D11A4290000382E /* MRContactWithinGroupCollectionViewCell.m */; };
+		CC5A5AE31E6AEE5200BF60C2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0123C01D25A66B001134F3 /* CoreGraphics.framework */; };
+		CC5A5AE41E6AEE5200BF60C2 /* Pods_MedRepDev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4297BBDCA398A0B5502B64DF /* Pods_MedRepDev.framework */; };
+		CC5A5AE61E6AEE5200BF60C2 /* logout@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3651B9C78B5001F1373 /* logout@3x.png */; };
+		CC5A5AE71E6AEE5200BF60C2 /* commentBox.xib in Resources */ = {isa = PBXBuildFile; fileRef = B41746C61D0CD434009B7E7E /* commentBox.xib */; };
+		CC5A5AE81E6AEE5200BF60C2 /* MRPharmaMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79421F461BB83BBB0055D9B7 /* MRPharmaMenuCell.xib */; };
+		CC5A5AE91E6AEE5200BF60C2 /* news@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E36B1B9C78B5001F1373 /* news@3x.png */; };
+		CC5A5AEA1E6AEE5200BF60C2 /* dsbg@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 796E93B01BB881E90031EA34 /* dsbg@3x.jpg */; };
+		CC5A5AEB1E6AEE5200BF60C2 /* feedback@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 795365F71BA09EBF0021CE4D /* feedback@3x.png */; };
+		CC5A5AEC1E6AEE5200BF60C2 /* Icon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD278F1B80980F007CA448 /* Icon-60@3x.png */; };
+		CC5A5AED1E6AEE5200BF60C2 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27901B80980F007CA448 /* Icon-72.png */; };
+		CC5A5AEE1E6AEE5200BF60C2 /* email@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27ED1B80A8C3007CA448 /* email@3x.png */; };
+		CC5A5AEF1E6AEE5200BF60C2 /* calender-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F4167F1B9F5CDB0089729B /* calender-icon@2x.png */; };
+		CC5A5AF01E6AEE5200BF60C2 /* PHsurveys@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79173C591BB48EE100842E4C /* PHsurveys@3x.png */; };
+		CC5A5AF11E6AEE5200BF60C2 /* PendingContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3201D0CC5F8007DFE4C /* PendingContactTableViewCell.xib */; };
+		CC5A5AF21E6AEE5200BF60C2 /* reminderSelected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 791C37F11C502D6D00914728 /* reminderSelected@3x.png */; };
+		CC5A5AF31E6AEE5200BF60C2 /* profile_pic3.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3441D0CC8A6007DFE4C /* profile_pic3.jpeg */; };
+		CC5A5AF41E6AEE5200BF60C2 /* MRHomeViewContoller.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27B41B80999E007CA448 /* MRHomeViewContoller.xib */; };
+		CC5A5AF51E6AEE5200BF60C2 /* Layer_1.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24A71D4167AD00A3DD73 /* Layer_1.png */; };
+		CC5A5AF61E6AEE5200BF60C2 /* otptic@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79841DDB1B98A02A00535916 /* otptic@3x.png */; };
+		CC5A5AF71E6AEE5200BF60C2 /* call-medrep@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 795365F11BA09EBF0021CE4D /* call-medrep@3x.png */; };
+		CC5A5AF81E6AEE5200BF60C2 /* MRContactWithinGroupCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AFE8D1A1D11A4290000382E /* MRContactWithinGroupCollectionViewCell.xib */; };
+		CC5A5AF91E6AEE5200BF60C2 /* categoryBG@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27FD1B80B37F007CA448 /* categoryBG@2x.jpg */; };
+		CC5A5AFA1E6AEE5200BF60C2 /* categoryBG-568h@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27FA1B80B37F007CA448 /* categoryBG-568h@2x.jpg */; };
+		CC5A5AFB1E6AEE5200BF60C2 /* pageviewdots@2x~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27BD1B809A80007CA448 /* pageviewdots@2x~iPad.png */; };
+		CC5A5AFC1E6AEE5200BF60C2 /* MROTPVerifiedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79841DD71B989B5B00535916 /* MROTPVerifiedViewController.xib */; };
+		CC5A5AFD1E6AEE5200BF60C2 /* selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4B4F10E1D394F4100EFCC0E /* selected@2x.png */; };
+		CC5A5AFE1E6AEE5200BF60C2 /* pencil.png in Resources */ = {isa = PBXBuildFile; fileRef = B421E45E1D5D5A1700F15599 /* pencil.png */; };
+		CC5A5AFF1E6AEE5200BF60C2 /* MRMedRepViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79C709E01BE7D7F200223562 /* MRMedRepViewController.xib */; };
+		CC5A5B001E6AEE5200BF60C2 /* pcminus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79169E1B1BEBDD6800C11D13 /* pcminus@2x.png */; };
+		CC5A5B011E6AEE5200BF60C2 /* pageviewdots~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27BF1B809A80007CA448 /* pageviewdots~iPad.png */; };
+		CC5A5B021E6AEE5200BF60C2 /* PendingContactCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB31D1D0CC5F8007DFE4C /* PendingContactCustomCell.xib */; };
+		CC5A5B031E6AEE5200BF60C2 /* Drug_Search.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B4E02C651D4B0BB0003A1859 /* Drug_Search.jpg */; };
+		CC5A5B041E6AEE5200BF60C2 /* compose.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB38A1D0CC8C8007DFE4C /* compose.png */; };
+		CC5A5B051E6AEE5200BF60C2 /* MRPHSurveyDetailsPendingDoctorTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC2025401E0842AA0042018E /* MRPHSurveyDetailsPendingDoctorTableViewCell.xib */; };
+		CC5A5B061E6AEE5200BF60C2 /* userProfilePic.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24B91D416DF000A3DD73 /* userProfilePic.png */; };
+		CC5A5B071E6AEE5200BF60C2 /* navLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F066981B94E7AD00D113F0 /* navLogo.png */; };
+		CC5A5B081E6AEE5200BF60C2 /* pcselect@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E93641BB8528B0031EA34 /* pcselect@3x.png */; };
+		CC5A5B091E6AEE5200BF60C2 /* logo_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E02C551D4706E7003A1859 /* logo_icon@3x.png */; };
+		CC5A5B0A1E6AEE5200BF60C2 /* otptic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79841DDA1B98A02A00535916 /* otptic@2x.png */; };
+		CC5A5B0B1E6AEE5200BF60C2 /* password@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27F01B80A8C3007CA448 /* password@3x.png */; };
+		CC5A5B0C1E6AEE5200BF60C2 /* AddMemberTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B465659A1D56B9E20016CDA8 /* AddMemberTableViewCell.xib */; };
+		CC5A5B0D1E6AEE5200BF60C2 /* profileBG1.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24B01D416CA000A3DD73 /* profileBG1.png */; };
+		CC5A5B0E1E6AEE5200BF60C2 /* MRMedRepListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79DC37121BE7DDCF0027F7DB /* MRMedRepListViewController.xib */; };
+		CC5A5B0F1E6AEE5200BF60C2 /* PHdashboard-banner@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79173C4E1BB48EE100842E4C /* PHdashboard-banner@2x.png */; };
+		CC5A5B101E6AEE5200BF60C2 /* pcright-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E93611BB8528B0031EA34 /* pcright-arrow@2x.png */; };
+		CC5A5B111E6AEE5200BF60C2 /* MRMedRepTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79DC370C1BE7DC5F0027F7DB /* MRMedRepTableCell.xib */; };
+		CC5A5B121E6AEE5200BF60C2 /* privateHospital_selection@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7961A9631B8F25DA0035D63A /* privateHospital_selection@2x.png */; };
+		CC5A5B131E6AEE5200BF60C2 /* telephone.png in Resources */ = {isa = PBXBuildFile; fileRef = B4746B341D6E7A0F00325F9E /* telephone.png */; };
+		CC5A5B141E6AEE5200BF60C2 /* otpTiccMark@2x~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 7991FABE1B810AB100516DDF /* otpTiccMark@2x~iPad.png */; };
+		CC5A5B151E6AEE5200BF60C2 /* ndcompany3@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94531B9E0DA000B81452 /* ndcompany3@2x.jpg */; };
+		CC5A5B161E6AEE5200BF60C2 /* comapny-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94321B9DFDB800B81452 /* comapny-logo@2x.png */; };
+		CC5A5B171E6AEE5200BF60C2 /* MRMedRepListTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79DC37171BE7DEA90027F7DB /* MRMedRepListTableCell.xib */; };
+		CC5A5B181E6AEE5200BF60C2 /* MRConvertAppointmentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 796E938C1BB869FA0031EA34 /* MRConvertAppointmentCell.xib */; };
+		CC5A5B191E6AEE5200BF60C2 /* notificationbody-bg@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94371B9DFDB800B81452 /* notificationbody-bg@3x.jpg */; };
+		CC5A5B1A1E6AEE5200BF60C2 /* splashLogo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27851B8096D6007CA448 /* splashLogo@3x.png */; };
+		CC5A5B1B1E6AEE5200BF60C2 /* MRRegTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 798A11861B8AEAD2003FF457 /* MRRegTableViewCell.xib */; };
+		CC5A5B1C1E6AEE5200BF60C2 /* meetings@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3691B9C78B5001F1373 /* meetings@3x.png */; };
+		CC5A5B1D1E6AEE5200BF60C2 /* bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27B81B809A80007CA448 /* bg@3x.png */; };
+		CC5A5B1E1E6AEE5200BF60C2 /* NDcomapny-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79AC944D1B9E0DA000B81452 /* NDcomapny-logo@2x.png */; };
+		CC5A5B1F1E6AEE5200BF60C2 /* SearchPageBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = B44F06B21D85DFD20003C5FA /* SearchPageBackground.png */; };
+		CC5A5B201E6AEE5200BF60C2 /* categoryBG~iPad.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27F81B80B37F007CA448 /* categoryBG~iPad.jpg */; };
+		CC5A5B211E6AEE5200BF60C2 /* MRGroupTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3AE1D0CCA96007DFE4C /* MRGroupTableViewCell.xib */; };
+		CC5A5B221E6AEE5200BF60C2 /* MRNotificationInsiderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79314AD11BD2773E00EB3A48 /* MRNotificationInsiderViewController.xib */; };
+		CC5A5B231E6AEE5200BF60C2 /* cathera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E93801BB869120031EA34 /* cathera@2x.png */; };
+		CC5A5B241E6AEE5200BF60C2 /* addressPinIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7961A9601B8F25DA0035D63A /* addressPinIcon@2x.png */; };
+		CC5A5B251E6AEE5200BF60C2 /* time-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F416851B9F5CDB0089729B /* time-icon@2x.png */; };
+		CC5A5B261E6AEE5200BF60C2 /* search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3D21B9CC674001F1373 /* search@2x.png */; };
+		CC5A5B271E6AEE5200BF60C2 /* medrep@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27831B8096D6007CA448 /* medrep@3x.png */; };
+		CC5A5B281E6AEE5200BF60C2 /* NDcomapny-logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79AC944E1B9E0DA000B81452 /* NDcomapny-logo@3x.png */; };
+		CC5A5B291E6AEE5200BF60C2 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83B781E91B7915C10070645C /* Default@2x.png */; };
+		CC5A5B2A1E6AEE5200BF60C2 /* comapny-logo2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94351B9DFDB800B81452 /* comapny-logo2@3x.png */; };
+		CC5A5B2B1E6AEE5200BF60C2 /* search@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3D31B9CC674001F1373 /* search@3x.png */; };
+		CC5A5B2C1E6AEE5200BF60C2 /* Signup_plain@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27C51B809A80007CA448 /* Signup_plain@2x.png */; };
+		CC5A5B2D1E6AEE5200BF60C2 /* addicon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 798A11801B8AE17B003FF457 /* addicon@3x.png */; };
+		CC5A5B2E1E6AEE5200BF60C2 /* unselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4B4F10C1D394F4100EFCC0E /* unselected@2x.png */; };
+		CC5A5B2F1E6AEE5200BF60C2 /* MRCustomTabBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCE29B261D26E870006DED8E /* MRCustomTabBar.xib */; };
+		CC5A5B301E6AEE5200BF60C2 /* ndcompany3@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94541B9E0DA000B81452 /* ndcompany3@3x.jpg */; };
+		CC5A5B311E6AEE5200BF60C2 /* dashboard-bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3C71B9CBE4C001F1373 /* dashboard-bg@3x.png */; };
+		CC5A5B321E6AEE5200BF60C2 /* crgreyup-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79A5DC6B1BA2092E001D872C /* crgreyup-arrow@2x.png */; };
+		CC5A5B331E6AEE5200BF60C2 /* MROptionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27E21B80A0FB007CA448 /* MROptionsViewController.xib */; };
+		CC5A5B341E6AEE5200BF60C2 /* pageviewdots@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27BE1B809A80007CA448 /* pageviewdots@3x.png */; };
+		CC5A5B351E6AEE5200BF60C2 /* MPCallMedrepViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 799820901BA471FB0069128A /* MPCallMedrepViewController_iPhone.xib */; };
+		CC5A5B361E6AEE5200BF60C2 /* crgreyup-arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79A5DC6C1BA2092E001D872C /* crgreyup-arrow@3x.png */; };
+		CC5A5B371E6AEE5200BF60C2 /* PHdoctor@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79708A941BB73C67007CE81D /* PHdoctor@3x.png */; };
+		CC5A5B381E6AEE5200BF60C2 /* unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = B4B4F10B1D394F4100EFCC0E /* unselected.png */; };
+		CC5A5B391E6AEE5200BF60C2 /* password@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27EF1B80A8C3007CA448 /* password@2x.png */; };
+		CC5A5B3A1E6AEE5200BF60C2 /* NDcompany1@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79AC944F1B9E0DA000B81452 /* NDcompany1@2x.jpg */; };
+		CC5A5B3B1E6AEE5200BF60C2 /* MRShareDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC86FE391D29A7780030B23D /* MRShareDetailViewController.xib */; };
+		CC5A5B3C1E6AEE5200BF60C2 /* reveal-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 79539E9C1B90C6AE001516C3 /* reveal-icon.png */; };
+		CC5A5B3D1E6AEE5200BF60C2 /* readnotification3@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 793602E41BA35D6800BB85E6 /* readnotification3@2x.jpg */; };
+		CC5A5B3E1E6AEE5200BF60C2 /* pencil@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B421E45F1D5D5A1700F15599 /* pencil@2x.png */; };
+		CC5A5B3F1E6AEE5200BF60C2 /* profile_pic6.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3471D0CC8A6007DFE4C /* profile_pic6.jpeg */; };
+		CC5A5B401E6AEE5200BF60C2 /* tips.png in Resources */ = {isa = PBXBuildFile; fileRef = B4F6350E1D541E6E008CE7C7 /* tips.png */; };
+		CC5A5B411E6AEE5200BF60C2 /* reminder@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 795365FD1BA09EBF0021CE4D /* reminder@3x.png */; };
+		CC5A5B421E6AEE5200BF60C2 /* PendingContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3141D0CC530007DFE4C /* PendingContactsViewController.xib */; };
+		CC5A5B431E6AEE5200BF60C2 /* PHlocations@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79708A991BB73C67007CE81D /* PHlocations@3x.png */; };
+		CC5A5B441E6AEE5200BF60C2 /* downArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79DE1BDD1B826245005289D6 /* downArrow@2x.png */; };
+		CC5A5B451E6AEE5200BF60C2 /* medrep@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27821B8096D6007CA448 /* medrep@2x.png */; };
+		CC5A5B461E6AEE5200BF60C2 /* dddoctor-analysis-normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E93A61BB8816D0031EA34 /* dddoctor-analysis-normal@3x.png */; };
+		CC5A5B471E6AEE5200BF60C2 /* MRDRActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79D5EA9F1C1E00D50037CE23 /* MRDRActivityTableViewCell.xib */; };
+		CC5A5B481E6AEE5200BF60C2 /* group_pic4.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB32F1D0CC8A6007DFE4C /* group_pic4.jpeg */; };
+		CC5A5B491E6AEE5200BF60C2 /* btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7991FABC1B810AB100516DDF /* btn@2x.png */; };
+		CC5A5B4A1E6AEE5200BF60C2 /* pcplus@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E93601BB8528B0031EA34 /* pcplus@3x.png */; };
+		CC5A5B4B1E6AEE5200BF60C2 /* post_image9.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB33B1D0CC8A6007DFE4C /* post_image9.jpeg */; };
+		CC5A5B4C1E6AEE5200BF60C2 /* White-right-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94571B9E0DA000B81452 /* White-right-arrow@2x.png */; };
+		CC5A5B4D1E6AEE5200BF60C2 /* MRShareOptionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC9858051D2E726300C74438 /* MRShareOptionTableViewCell.xib */; };
+		CC5A5B4E1E6AEE5200BF60C2 /* call-medrep@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 795365F01BA09EBF0021CE4D /* call-medrep@2x.png */; };
+		CC5A5B4F1E6AEE5200BF60C2 /* reg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79FFD2561BB9BAA300CEE606 /* reg@2x.png */; };
+		CC5A5B501E6AEE5200BF60C2 /* readnotification3@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 793602E51BA35D6800BB85E6 /* readnotification3@3x.jpg */; };
+		CC5A5B511E6AEE5200BF60C2 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83B781DC1B79128F0070645C /* ViewController.xib */; };
+		CC5A5B521E6AEE5200BF60C2 /* crthera@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79A5DC6E1BA2092E001D872C /* crthera@3x.png */; };
+		CC5A5B531E6AEE5200BF60C2 /* GroupPostChildTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B41746E31D0CE628009B7E7E /* GroupPostChildTableViewCell.xib */; };
+		CC5A5B541E6AEE5200BF60C2 /* surveys_dashboard@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3D51B9CC674001F1373 /* surveys_dashboard@3x.png */; };
+		CC5A5B551E6AEE5200BF60C2 /* profile_pic9.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB34A1D0CC8A6007DFE4C /* profile_pic9.jpeg */; };
+		CC5A5B561E6AEE5200BF60C2 /* PHdrugsales@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79421EE51BB7EF950055D9B7 /* PHdrugsales@3x.png */; };
+		CC5A5B571E6AEE5200BF60C2 /* cnsort@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F4169F1B9F6E560089729B /* cnsort@3x.png */; };
+		CC5A5B581E6AEE5200BF60C2 /* Doctor_Profile_Page.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B4E02C641D4B0BB0003A1859 /* Doctor_Profile_Page.jpg */; };
+		CC5A5B591E6AEE5200BF60C2 /* email@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27EC1B80A8C3007CA448 /* email@2x.png */; };
+		CC5A5B5A1E6AEE5200BF60C2 /* input@2x~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 79DE1BD81B826245005289D6 /* input@2x~iPad.png */; };
+		CC5A5B5B1E6AEE5200BF60C2 /* minus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 791C37DB1C4FF96400914728 /* minus@2x.png */; };
+		CC5A5B5C1E6AEE5200BF60C2 /* dashboard_menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 791432A61C32EB7D0031FB91 /* dashboard_menu@2x.png */; };
+		CC5A5B5D1E6AEE5200BF60C2 /* MRCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB29F1D0CC433007DFE4C /* MRCollectionView.xib */; };
+		CC5A5B5E1E6AEE5200BF60C2 /* MRAppointmentListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79169E201BEBE70500C11D13 /* MRAppointmentListViewController.xib */; };
+		CC5A5B5F1E6AEE5200BF60C2 /* PHthera@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79708A9F1BB73C67007CE81D /* PHthera@3x.png */; };
+		CC5A5B601E6AEE5200BF60C2 /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD278E1B80980F007CA448 /* Icon-60@2x.png */; };
+		CC5A5B611E6AEE5200BF60C2 /* drug-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F416821B9F5CDB0089729B /* drug-icon@3x.png */; };
+		CC5A5B621E6AEE5200BF60C2 /* favFilter-checked@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 795366211BA0BFD20021CE4D /* favFilter-checked@3x.png */; };
+		CC5A5B631E6AEE5200BF60C2 /* navLogo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F0669A1B94E7AD00D113F0 /* navLogo@3x.png */; };
+		CC5A5B641E6AEE5200BF60C2 /* MRPHSurveyListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC1B0D9A1E04503D00278C58 /* MRPHSurveyListViewController.xib */; };
+		CC5A5B651E6AEE5200BF60C2 /* reminder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 795365FC1BA09EBF0021CE4D /* reminder@2x.png */; };
+		CC5A5B661E6AEE5200BF60C2 /* profile_pic13.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3401D0CC8A6007DFE4C /* profile_pic13.jpeg */; };
+		CC5A5B671E6AEE5200BF60C2 /* surveys@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3731B9C78B5001F1373 /* surveys@3x.png */; };
+		CC5A5B681E6AEE5200BF60C2 /* favFilter-checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 795366201BA0BFD20021CE4D /* favFilter-checked@2x.png */; };
+		CC5A5B691E6AEE5200BF60C2 /* MRTransformViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC9BCEC01D0F2A3900702EBC /* MRTransformViewController.xib */; };
+		CC5A5B6A1E6AEE5200BF60C2 /* favFilter-wrong@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 795366221BA0BFD20021CE4D /* favFilter-wrong@2x.png */; };
+		CC5A5B6B1E6AEE5200BF60C2 /* fbUnSelectedRadio@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79FFD25C1BB9DC3100CEE606 /* fbUnSelectedRadio@2x.png */; };
+		CC5A5B6C1E6AEE5200BF60C2 /* HomeLogo@2x~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27BA1B809A80007CA448 /* HomeLogo@2x~iPad.png */; };
+		CC5A5B6D1E6AEE5200BF60C2 /* addicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 798A117E1B8AE17B003FF457 /* addicon.png */; };
+		CC5A5B6E1E6AEE5200BF60C2 /* pageviewdots@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27C41B809A80007CA448 /* pageviewdots@2x.png */; };
+		CC5A5B6F1E6AEE5200BF60C2 /* upArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79DE1BD91B826245005289D6 /* upArrow@2x.png */; };
+		CC5A5B701E6AEE5200BF60C2 /* left-arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3901B9C8979001F1373 /* left-arrow@3x.png */; };
+		CC5A5B711E6AEE5200BF60C2 /* profile_pic10.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB33D1D0CC8A6007DFE4C /* profile_pic10.jpeg */; };
+		CC5A5B721E6AEE5200BF60C2 /* img1@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 795365FB1BA09EBF0021CE4D /* img1@3x.jpg */; };
+		CC5A5B731E6AEE5200BF60C2 /* MRShareDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC86FE401D29B34D0030B23D /* MRShareDetailTableViewCell.xib */; };
+		CC5A5B741E6AEE5200BF60C2 /* building-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F4167D1B9F5CDB0089729B /* building-icon@2x.png */; };
+		CC5A5B751E6AEE5200BF60C2 /* crdown-arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79A5DC661BA2092E001D872C /* crdown-arrow@3x.png */; };
+		CC5A5B761E6AEE5200BF60C2 /* fbUnSelectedRadio@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79FFD25D1BB9DC3100CEE606 /* fbUnSelectedRadio@3x.png */; };
+		CC5A5B771E6AEE5200BF60C2 /* search-for-drugs@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E36F1B9C78B5001F1373 /* search-for-drugs@3x.png */; };
+		CC5A5B781E6AEE5200BF60C2 /* profileIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7977C47F1C63ED8F00A7C49A /* profileIcon@3x.png */; };
+		CC5A5B791E6AEE5200BF60C2 /* MRViewRepAppointmnetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 792230E31BF271F800084891 /* MRViewRepAppointmnetViewController.xib */; };
+		CC5A5B7A1E6AEE5200BF60C2 /* Default-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83B781E71B7915C10070645C /* Default-667h@2x.png */; };
+		CC5A5B7B1E6AEE5200BF60C2 /* reveal-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79539E9D1B90C6AE001516C3 /* reveal-icon@2x.png */; };
+		CC5A5B7C1E6AEE5200BF60C2 /* left-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E38F1B9C8979001F1373 /* left-arrow@2x.png */; };
+		CC5A5B7D1E6AEE5200BF60C2 /* PHdashboard-bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79173C511BB48EE100842E4C /* PHdashboard-bg@3x.png */; };
+		CC5A5B7E1E6AEE5200BF60C2 /* Contact.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB38B1D0CC8C8007DFE4C /* Contact.png */; };
+		CC5A5B7F1E6AEE5200BF60C2 /* otpTiccMark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7991FABD1B810AB100516DDF /* otpTiccMark@2x.png */; };
+		CC5A5B801E6AEE5200BF60C2 /* MRAddMemberTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AFE8D291D12F6A70000382E /* MRAddMemberTableViewCell.xib */; };
+		CC5A5B811E6AEE5200BF60C2 /* catransparent@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 796E93821BB869120031EA34 /* catransparent@2x.jpg */; };
+		CC5A5B821E6AEE5200BF60C2 /* pencil@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B421E4601D5D5A1700F15599 /* pencil@3x.png */; };
+		CC5A5B831E6AEE5200BF60C2 /* post_image10.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3321D0CC8A6007DFE4C /* post_image10.jpeg */; };
+		CC5A5B841E6AEE5200BF60C2 /* smallTickmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79DE1BE11B826245005289D6 /* smallTickmark@2x.png */; };
+		CC5A5B851E6AEE5200BF60C2 /* MRCompetitorAnalasysCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 796E93971BB8790A0031EA34 /* MRCompetitorAnalasysCell.xib */; };
+		CC5A5B861E6AEE5200BF60C2 /* froverdue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7930A39B1BB91ECF003112E4 /* froverdue@2x.png */; };
+		CC5A5B871E6AEE5200BF60C2 /* ddpresent-activity-normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E939E1BB880C20031EA34 /* ddpresent-activity-normal@2x.png */; };
+		CC5A5B881E6AEE5200BF60C2 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3911D0CC8C8007DFE4C /* plus.png */; };
+		CC5A5B891E6AEE5200BF60C2 /* team@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 791C37E51C50256E00914728 /* team@3x.png */; };
+		CC5A5B8A1E6AEE5200BF60C2 /* MRDoctorActivityScoreDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7920D6A21C1CB236008D3386 /* MRDoctorActivityScoreDetailsViewController.xib */; };
+		CC5A5B8B1E6AEE5200BF60C2 /* starunselected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79FFD2611BB9DC3100CEE606 /* starunselected@3x.png */; };
+		CC5A5B8C1E6AEE5200BF60C2 /* MRForgotPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7920D68D1C1C874C008D3386 /* MRForgotPasswordViewController.xib */; };
+		CC5A5B8D1E6AEE5200BF60C2 /* crup-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79A5DC6F1BA2092E001D872C /* crup-arrow@2x.png */; };
+		CC5A5B8E1E6AEE5200BF60C2 /* NotificationWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB2831D0C9E75007DFE4C /* NotificationWebViewController.xib */; };
+		CC5A5B8F1E6AEE5200BF60C2 /* dddoctor-analysis-hover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E939B1BB880C20031EA34 /* dddoctor-analysis-hover@2x.png */; };
+		CC5A5B901E6AEE5200BF60C2 /* cancelBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = B4746B1F1D6A877800325F9E /* cancelBtn.png */; };
+		CC5A5B911E6AEE5200BF60C2 /* MRNotificationChartStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4C1D71B1D9783CC0037EBF6 /* MRNotificationChartStoryboard.storyboard */; };
+		CC5A5B921E6AEE5200BF60C2 /* navLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F066991B94E7AD00D113F0 /* navLogo@2x.png */; };
+		CC5A5B931E6AEE5200BF60C2 /* notification@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E36D1B9C78B5001F1373 /* notification@3x.png */; };
+		CC5A5B941E6AEE5200BF60C2 /* profile_pic5.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3461D0CC8A6007DFE4C /* profile_pic5.jpeg */; };
+		CC5A5B951E6AEE5200BF60C2 /* star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79FFD25E1BB9DC3100CEE606 /* star@2x.png */; };
+		CC5A5B961E6AEE5200BF60C2 /* crdown-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79A5DC651BA2092E001D872C /* crdown-arrow@2x.png */; };
+		CC5A5B971E6AEE5200BF60C2 /* otpTiccMark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7991FABF1B810AB100516DDF /* otpTiccMark@3x.png */; };
+		CC5A5B981E6AEE5200BF60C2 /* MRMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79F066911B94E13C00D113F0 /* MRMenuTableViewCell.xib */; };
+		CC5A5B991E6AEE5200BF60C2 /* userProfilePic1.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24BF1D418D6B00A3DD73 /* userProfilePic1.png */; };
+		CC5A5B9A1E6AEE5200BF60C2 /* full-screen@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 795365F91BA09EBF0021CE4D /* full-screen@3x.png */; };
+		CC5A5B9B1E6AEE5200BF60C2 /* post_image11.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3331D0CC8A6007DFE4C /* post_image11.jpeg */; };
+		CC5A5B9C1E6AEE5200BF60C2 /* previewImage.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24DE1D45E03A00A3DD73 /* previewImage.png */; };
+		CC5A5B9D1E6AEE5200BF60C2 /* Icon-40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD278C1B80980F007CA448 /* Icon-40@3x.png */; };
+		CC5A5B9E1E6AEE5200BF60C2 /* completed_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 791C37E11C50256E00914728 /* completed_icon@3x.png */; };
+		CC5A5B9F1E6AEE5200BF60C2 /* dddoctor-analysis-hover@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E93A51BB8816D0031EA34 /* dddoctor-analysis-hover@3x.png */; };
+		CC5A5BA01E6AEE5200BF60C2 /* MRDoctorScoreTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79421F191BB83A4B0055D9B7 /* MRDoctorScoreTableCell.xib */; };
+		CC5A5BA11E6AEE5200BF60C2 /* MRConvertAppointmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 796E937B1BB867FF0031EA34 /* MRConvertAppointmentViewController.xib */; };
+		CC5A5BA21E6AEE5200BF60C2 /* commentIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = B4945C561D7B686F00E8BBB7 /* commentIcon.png */; };
+		CC5A5BA31E6AEE5200BF60C2 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 83B7820A1B7919EA0070645C /* SVProgressHUD.bundle */; };
+		CC5A5BA41E6AEE5200BF60C2 /* MROTPViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79BD28111B80C6A5007CA448 /* MROTPViewController.xib */; };
+		CC5A5BA51E6AEE5200BF60C2 /* favorite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 795365F41BA09EBF0021CE4D /* favorite@2x.png */; };
+		CC5A5BA61E6AEE5200BF60C2 /* MRDoctorDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79421F3C1BB83BAE0055D9B7 /* MRDoctorDetailsTableViewCell.xib */; };
+		CC5A5BA71E6AEE5200BF60C2 /* reg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79FFD2571BB9BAA300CEE606 /* reg@3x.png */; };
+		CC5A5BA81E6AEE5200BF60C2 /* frpie@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7930A3A01BB91ECF003112E4 /* frpie@3x.png */; };
+		CC5A5BA91E6AEE5200BF60C2 /* reminderSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 791C37F01C502D6D00914728 /* reminderSelected@2x.png */; };
+		CC5A5BAA1E6AEE5200BF60C2 /* Signup_plain~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27C11B809A80007CA448 /* Signup_plain~iPad.png */; };
+		CC5A5BAB1E6AEE5200BF60C2 /* radioSelection@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD28071B80B991007CA448 /* radioSelection@3x.png */; };
+		CC5A5BAC1E6AEE5200BF60C2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83C128001B77C88B00D2F08E /* Images.xcassets */; };
+		CC5A5BAD1E6AEE5200BF60C2 /* Profile.json in Resources */ = {isa = PBXBuildFile; fileRef = B4B4F1241D3983D300EFCC0E /* Profile.json */; };
+		CC5A5BAE1E6AEE5200BF60C2 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27971B80980F007CA448 /* Icon-Small@2x.png */; };
+		CC5A5BAF1E6AEE5200BF60C2 /* MRContactWithinGroupCollectionCellCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB2AB1D0CC433007DFE4C /* MRContactWithinGroupCollectionCellCollectionViewCell.xib */; };
+		CC5A5BB01E6AEE5200BF60C2 /* EditContactInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC9DAFA11D6F9E46008B2822 /* EditContactInfoViewController.xib */; };
+		CC5A5BB11E6AEE5200BF60C2 /* Dashboard.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B4E02C631D4B0BB0003A1859 /* Dashboard.jpg */; };
+		CC5A5BB21E6AEE5200BF60C2 /* transperent-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94381B9DFDB800B81452 /* transperent-bg@2x.png */; };
+		CC5A5BB31E6AEE5200BF60C2 /* MRMyWallItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCD1FD901D9FEFA800A12ED0 /* MRMyWallItemTableViewCell.xib */; };
+		CC5A5BB41E6AEE5200BF60C2 /* PHactivity@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79173C4D1BB48EE100842E4C /* PHactivity@3x.png */; };
+		CC5A5BB51E6AEE5200BF60C2 /* full-screen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 795365F81BA09EBF0021CE4D /* full-screen@2x.png */; };
+		CC5A5BB61E6AEE5200BF60C2 /* PHmail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79708A9A1BB73C67007CE81D /* PHmail@2x.png */; };
+		CC5A5BB71E6AEE5200BF60C2 /* nabar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F066941B94E4E900D113F0 /* nabar@2x.png */; };
+		CC5A5BB81E6AEE5200BF60C2 /* PHmedrep@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79421EE91BB7EF950055D9B7 /* PHmedrep@3x.png */; };
+		CC5A5BB91E6AEE5200BF60C2 /* PHprescription@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79421EEB1BB7EF950055D9B7 /* PHprescription@3x.png */; };
+		CC5A5BBA1E6AEE5200BF60C2 /* wallet@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 791432AB1C32EF9D0031FB91 /* wallet@3x.png */; };
+		CC5A5BBB1E6AEE5200BF60C2 /* radioUnSelection@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD28091B80B991007CA448 /* radioUnSelection@3x.png */; };
+		CC5A5BBC1E6AEE5200BF60C2 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83B781E61B7915C10070645C /* Default-568h@2x.png */; };
+		CC5A5BBD1E6AEE5200BF60C2 /* groupList.json in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB2951D0CC433007DFE4C /* groupList.json */; };
+		CC5A5BBE1E6AEE5200BF60C2 /* selected.png in Resources */ = {isa = PBXBuildFile; fileRef = B4B4F10D1D394F4100EFCC0E /* selected.png */; };
+		CC5A5BBF1E6AEE5200BF60C2 /* MRSurveyListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7950AF1E1BBF8B1600A93106 /* MRSurveyListViewController.xib */; };
+		CC5A5BC01E6AEE5200BF60C2 /* notificationback@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79AC943B1B9DFDB800B81452 /* notificationback@3x.png */; };
+		CC5A5BC11E6AEE5200BF60C2 /* fbSelectedRadio@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79FFD25B1BB9DC3100CEE606 /* fbSelectedRadio@3x.png */; };
+		CC5A5BC21E6AEE5200BF60C2 /* Icon-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD278B1B80980F007CA448 /* Icon-40@2x.png */; };
+		CC5A5BC31E6AEE5200BF60C2 /* notification_dash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3E21B9CC98D001F1373 /* notification_dash@2x.png */; };
+		CC5A5BC41E6AEE5200BF60C2 /* PHproductcampaigns@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79421EED1BB7EF950055D9B7 /* PHproductcampaigns@2x.png */; };
+		CC5A5BC51E6AEE5200BF60C2 /* star@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79FFD25F1BB9DC3100CEE606 /* star@3x.png */; };
+		CC5A5BC61E6AEE5200BF60C2 /* profile_pic15.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3421D0CC8A6007DFE4C /* profile_pic15.jpeg */; };
+		CC5A5BC71E6AEE5200BF60C2 /* pcselect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E93631BB8528B0031EA34 /* pcselect@2x.png */; };
+		CC5A5BC81E6AEE5200BF60C2 /* profile_pic12.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB33F1D0CC8A6007DFE4C /* profile_pic12.jpeg */; };
+		CC5A5BC91E6AEE5200BF60C2 /* MRMyWallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCD1FD931D9FEFA800A12ED0 /* MRMyWallViewController.xib */; };
+		CC5A5BCA1E6AEE5200BF60C2 /* MRJoinGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AFF27A71D21BE7B00080DF0 /* MRJoinGroupViewController.xib */; };
+		CC5A5BCB1E6AEE5200BF60C2 /* MRPHDownloadSurveyReportsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC2025531E08D75B0042018E /* MRPHDownloadSurveyReportsViewController.xib */; };
+		CC5A5BCC1E6AEE5200BF60C2 /* profile_pic8.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3491D0CC8A6007DFE4C /* profile_pic8.jpeg */; };
+		CC5A5BCD1E6AEE5200BF60C2 /* logo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E02C571D4706E7003A1859 /* logo_icon@2x.png */; };
+		CC5A5BCE1E6AEE5200BF60C2 /* addProfileItemsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4B4F0FA1D38AEDF00EFCC0E /* addProfileItemsTableViewCell.xib */; };
+		CC5A5BCF1E6AEE5200BF60C2 /* news@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E36A1B9C78B5001F1373 /* news@2x.png */; };
+		CC5A5BD01E6AEE5200BF60C2 /* starunselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79FFD2601BB9DC3100CEE606 /* starunselected@2x.png */; };
+		CC5A5BD11E6AEE5200BF60C2 /* MRContactCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB2A21D0CC433007DFE4C /* MRContactCollectionCell.xib */; };
+		CC5A5BD21E6AEE5200BF60C2 /* locationPin@2x~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 79DE1BE01B826245005289D6 /* locationPin@2x~iPad.png */; };
+		CC5A5BD31E6AEE5200BF60C2 /* MRPHDashBoardViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79421F2D1BB83ABE0055D9B7 /* MRPHDashBoardViewController_iPhone.xib */; };
+		CC5A5BD41E6AEE5200BF60C2 /* eye.png in Resources */ = {isa = PBXBuildFile; fileRef = B465658A1D569EA80016CDA8 /* eye.png */; };
+		CC5A5BD51E6AEE5200BF60C2 /* post_image7.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3391D0CC8A6007DFE4C /* post_image7.jpeg */; };
+		CC5A5BD61E6AEE5200BF60C2 /* MRPHSurveyDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC1B0D971E04503D00278C58 /* MRPHSurveyDetailsViewController.xib */; };
+		CC5A5BD71E6AEE5200BF60C2 /* searc--for-drugs@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E36E1B9C78B5001F1373 /* searc--for-drugs@2x.png */; };
+		CC5A5BD81E6AEE5200BF60C2 /* camara-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7961A97D1B8F53C60035D63A /* camara-icon@2x.png */; };
+		CC5A5BD91E6AEE5200BF60C2 /* hospital@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7961A9621B8F25DA0035D63A /* hospital@2x.png */; };
+		CC5A5BDA1E6AEE5200BF60C2 /* dropDownButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79DE1BD51B826245005289D6 /* dropDownButton@2x.png */; };
+		CC5A5BDB1E6AEE5200BF60C2 /* PHnotification@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79173C561BB48EE100842E4C /* PHnotification@3x.png */; };
+		CC5A5BDC1E6AEE5200BF60C2 /* MRViewAppointmnetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79F84B1F1BE938310081613A /* MRViewAppointmnetViewController.xib */; };
+		CC5A5BDD1E6AEE5200BF60C2 /* crup-arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79A5DC701BA2092E001D872C /* crup-arrow@3x.png */; };
+		CC5A5BDE1E6AEE5200BF60C2 /* pcfedback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E935D1BB8528B0031EA34 /* pcfedback@2x.png */; };
+		CC5A5BDF1E6AEE5200BF60C2 /* medicine.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3901D0CC8C8007DFE4C /* medicine.jpg */; };
+		CC5A5BE01E6AEE5200BF60C2 /* MRPopoverControllerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB2B71D0CC433007DFE4C /* MRPopoverControllerViewController.xib */; };
+		CC5A5BE11E6AEE5200BF60C2 /* frsnooze@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7930A3A11BB91ECF003112E4 /* frsnooze@2x.png */; };
+		CC5A5BE21E6AEE5200BF60C2 /* post_image1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3311D0CC8A6007DFE4C /* post_image1.jpeg */; };
+		CC5A5BE31E6AEE5200BF60C2 /* MRMarketingCampaignController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCFFE2B81E62CF600051CC7E /* MRMarketingCampaignController.xib */; };
+		CC5A5BE41E6AEE5200BF60C2 /* ndchecked@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79AC945A1B9E0DA000B81452 /* ndchecked@3x.png */; };
+		CC5A5BE51E6AEE5200BF60C2 /* profile_pic11.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB33E1D0CC8A6007DFE4C /* profile_pic11.jpeg */; };
+		CC5A5BE61E6AEE5200BF60C2 /* ActivityScore@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3CA1B9CC674001F1373 /* ActivityScore@2x.png */; };
+		CC5A5BE71E6AEE5200BF60C2 /* post_image2.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3341D0CC8A6007DFE4C /* post_image2.jpeg */; };
+		CC5A5BE81E6AEE5200BF60C2 /* group_pic1.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB32C1D0CC8A6007DFE4C /* group_pic1.png */; };
+		CC5A5BE91E6AEE5200BF60C2 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27911B80980F007CA448 /* Icon-72@2x.png */; };
+		CC5A5BEA1E6AEE5200BF60C2 /* PHdrugsales@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79421EE41BB7EF950055D9B7 /* PHdrugsales@2x.png */; };
+		CC5A5BEB1E6AEE5200BF60C2 /* activity-score@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3601B9C78B5001F1373 /* activity-score@2x.png */; };
+		CC5A5BEC1E6AEE5200BF60C2 /* MRRegistationTwoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7961A9721B8F26160035D63A /* MRRegistationTwoViewController.xib */; };
+		CC5A5BED1E6AEE5200BF60C2 /* favorite@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 795365F51BA09EBF0021CE4D /* favorite@3x.png */; };
+		CC5A5BEE1E6AEE5200BF60C2 /* ndInput@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79AC946A1B9E116000B81452 /* ndInput@3x.png */; };
+		CC5A5BEF1E6AEE5200BF60C2 /* MRGroupPostItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB2AE1D0CC433007DFE4C /* MRGroupPostItemTableViewCell.xib */; };
+		CC5A5BF01E6AEE5200BF60C2 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 83B781E81B7915C10070645C /* Default.png */; };
+		CC5A5BF11E6AEE5200BF60C2 /* MRFavoritesNotificationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7953661A1BA0B7E40021CE4D /* MRFavoritesNotificationsViewController.xib */; };
+		CC5A5BF21E6AEE5200BF60C2 /* cncompany2@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79F4169A1B9F6E560089729B /* cncompany2@2x.jpg */; };
+		CC5A5BF31E6AEE5200BF60C2 /* frpie-bg@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7930A39D1BB91ECF003112E4 /* frpie-bg@2x.jpg */; };
+		CC5A5BF41E6AEE5200BF60C2 /* MRListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7969CFCD1BAF2E38004C2009 /* MRListViewController.xib */; };
+		CC5A5BF51E6AEE5200BF60C2 /* feedback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 795365F61BA09EBF0021CE4D /* feedback@2x.png */; };
+		CC5A5BF61E6AEE5200BF60C2 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27961B80980F007CA448 /* Icon-Small.png */; };
+		CC5A5BF71E6AEE5200BF60C2 /* NDcompany2-BG@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94511B9E0DA000B81452 /* NDcompany2-BG@2x.jpg */; };
+		CC5A5BF81E6AEE5200BF60C2 /* cnsort@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F4169E1B9F6E560089729B /* cnsort@2x.png */; };
+		CC5A5BF91E6AEE5200BF60C2 /* Icon-40.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD278A1B80980F007CA448 /* Icon-40.png */; };
+		CC5A5BFA1E6AEE5200BF60C2 /* MRWelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7961A9781B8F4E520035D63A /* MRWelcomeViewController.xib */; };
+		CC5A5BFB1E6AEE5200BF60C2 /* minus@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 791C37DC1C4FF96400914728 /* minus@3x.png */; };
+		CC5A5BFC1E6AEE5200BF60C2 /* calender-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F416801B9F5CDB0089729B /* calender-icon@3x.png */; };
+		CC5A5BFD1E6AEE5200BF60C2 /* profileBG.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24AA1D416AF900A3DD73 /* profileBG.png */; };
+		CC5A5BFE1E6AEE5200BF60C2 /* team@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 791C37E41C50256E00914728 /* team@2x.png */; };
+		CC5A5BFF1E6AEE5200BF60C2 /* MRAppointmentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79A360B81BA5821400F286E0 /* MRAppointmentCell.xib */; };
+		CC5A5C001E6AEE5200BF60C2 /* comapny-logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94331B9DFDB800B81452 /* comapny-logo@3x.png */; };
+		CC5A5C011E6AEE5200BF60C2 /* caclock-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E937E1BB869120031EA34 /* caclock-icon@2x.png */; };
+		CC5A5C021E6AEE5200BF60C2 /* discussion-forum@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3631B9C78B5001F1373 /* discussion-forum@3x.png */; };
+		CC5A5C031E6AEE5200BF60C2 /* meetings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3681B9C78B5001F1373 /* meetings@2x.png */; };
+		CC5A5C041E6AEE5200BF60C2 /* completed_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 791C37E01C50256E00914728 /* completed_icon@2x.png */; };
+		CC5A5C051E6AEE5200BF60C2 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD279A1B80980F007CA448 /* Icon@2x.png */; };
+		CC5A5C061E6AEE5200BF60C2 /* MRAppointmentListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79169E221BEBE70500C11D13 /* MRAppointmentListCell.xib */; };
+		CC5A5C071E6AEE5200BF60C2 /* hospital_selection@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7961A9611B8F25DA0035D63A /* hospital_selection@2x.png */; };
+		CC5A5C081E6AEE5200BF60C2 /* dashboard_menu@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 791432A71C32EB7D0031FB91 /* dashboard_menu@3x.png */; };
+		CC5A5C091E6AEE5200BF60C2 /* catrnsparent@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 796E93831BB869120031EA34 /* catrnsparent@3x.jpg */; };
+		CC5A5C0A1E6AEE5200BF60C2 /* pexels-photo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24CC1D4319EB00A3DD73 /* pexels-photo.jpg */; };
+		CC5A5C0B1E6AEE5200BF60C2 /* categoryBG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27FC1B80B37F007CA448 /* categoryBG.jpg */; };
+		CC5A5C0C1E6AEE5200BF60C2 /* surveys@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3721B9C78B5001F1373 /* surveys@2x.png */; };
+		CC5A5C0D1E6AEE5200BF60C2 /* frpie@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7930A39F1BB91ECF003112E4 /* frpie@2x.png */; };
+		CC5A5C0E1E6AEE5200BF60C2 /* MRRegistrationRoleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79FFD24E1BB9B83700CEE606 /* MRRegistrationRoleViewController.xib */; };
+		CC5A5C0F1E6AEE5200BF60C2 /* MRDrugTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A7169D61D27E23D00533A6D /* MRDrugTableViewCell.xib */; };
+		CC5A5C101E6AEE5200BF60C2 /* marketing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3661B9C78B5001F1373 /* marketing@2x.png */; };
+		CC5A5C111E6AEE5200BF60C2 /* my_contacts.json in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB2B81D0CC433007DFE4C /* my_contacts.json */; };
+		CC5A5C121E6AEE5200BF60C2 /* searchMed.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8A9FB4B71D2836C70095F690 /* searchMed.jpg */; };
+		CC5A5C131E6AEE5200BF60C2 /* MRPublicationsDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC0D64E01D8D5D3F0088016F /* MRPublicationsDetailsViewController.xib */; };
+		CC5A5C141E6AEE5200BF60C2 /* picklocation@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79FAA66E1C68DF71003F7518 /* picklocation@3x.png */; };
+		CC5A5C151E6AEE5200BF60C2 /* PHphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79708A9C1BB73C67007CE81D /* PHphone@2x.png */; };
+		CC5A5C161E6AEE5200BF60C2 /* bg@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27C71B809A80007CA448 /* bg@2x.jpg */; };
+		CC5A5C171E6AEE5200BF60C2 /* comapny-logo2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94341B9DFDB800B81452 /* comapny-logo2@2x.png */; };
+		CC5A5C181E6AEE5200BF60C2 /* caclock-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E937F1BB869120031EA34 /* caclock-icon@3x.png */; };
+		CC5A5C191E6AEE5200BF60C2 /* password.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27EE1B80A8C3007CA448 /* password.png */; };
+		CC5A5C1A1E6AEE5200BF60C2 /* MRDoctorActivityScoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79F29A6F1BE6330300063DC2 /* MRDoctorActivityScoreViewController.xib */; };
+		CC5A5C1B1E6AEE5200BF60C2 /* upcoming_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 791C37E71C50256E00914728 /* upcoming_icon@3x.png */; };
+		CC5A5C1C1E6AEE5200BF60C2 /* ddpresent-activity-hover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E939D1BB880C20031EA34 /* ddpresent-activity-hover@2x.png */; };
+		CC5A5C1D1E6AEE5200BF60C2 /* MRNotificationsDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79AC942E1B9DFB0300B81452 /* MRNotificationsDetailsViewController.xib */; };
+		CC5A5C1E1E6AEE5200BF60C2 /* HomeLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27C21B809A80007CA448 /* HomeLogo@2x.png */; };
+		CC5A5C1F1E6AEE5200BF60C2 /* ActivityScore@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3CB1B9CC674001F1373 /* ActivityScore@3x.png */; };
+		CC5A5C201E6AEE5200BF60C2 /* input@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79DE1BD71B826245005289D6 /* input@2x.png */; };
+		CC5A5C211E6AEE5200BF60C2 /* news_dash@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3CF1B9CC674001F1373 /* news_dash@3x.png */; };
+		CC5A5C221E6AEE5200BF60C2 /* wallet@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 791432AA1C32EF9D0031FB91 /* wallet@2x.png */; };
+		CC5A5C231E6AEE5200BF60C2 /* PHmarketingMenu@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79421EE71BB7EF950055D9B7 /* PHmarketingMenu@3x.png */; };
+		CC5A5C241E6AEE5200BF60C2 /* MRDoctorScoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79F29A6A1BE632D500063DC2 /* MRDoctorScoreViewController.xib */; };
+		CC5A5C251E6AEE5200BF60C2 /* privateHospital@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7961A9641B8F25DA0035D63A /* privateHospital@2x.png */; };
+		CC5A5C261E6AEE5200BF60C2 /* favFilter-unchecked@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7953661F1BA0BFD20021CE4D /* favFilter-unchecked@3x.png */; };
+		CC5A5C271E6AEE5200BF60C2 /* UINotificationChartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4C1D7161D97833E0037EBF6 /* UINotificationChartViewController.xib */; };
+		CC5A5C281E6AEE5200BF60C2 /* PHactivity@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79173C4C1BB48EE100842E4C /* PHactivity@2x.png */; };
+		CC5A5C291E6AEE5200BF60C2 /* MRNewProductCompaignsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 796E93701BB861E10031EA34 /* MRNewProductCompaignsViewController.xib */; };
+		CC5A5C2A1E6AEE5200BF60C2 /* dddoctor-analysis-normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E939C1BB880C20031EA34 /* dddoctor-analysis-normal@2x.png */; };
+		CC5A5C2B1E6AEE5200BF60C2 /* MRShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB28B1D0C9EC2007DFE4C /* MRShareViewController.xib */; };
+		CC5A5C2C1E6AEE5200BF60C2 /* profile_pic4.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3451D0CC8A6007DFE4C /* profile_pic4.jpeg */; };
+		CC5A5C2D1E6AEE5200BF60C2 /* MemberListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B465658F1D56B0E50016CDA8 /* MemberListViewController.xib */; };
+		CC5A5C2E1E6AEE5200BF60C2 /* MRDashBoardVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC463DE21D27A47E002AE85E /* MRDashBoardVC.xib */; };
+		CC5A5C2F1E6AEE5200BF60C2 /* email.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27EB1B80A8C3007CA448 /* email.png */; };
+		CC5A5C301E6AEE5200BF60C2 /* MRAddMembersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AFE8D221D12EB310000382E /* MRAddMembersViewController.xib */; };
+		CC5A5C311E6AEE5200BF60C2 /* PHdividers@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79173C521BB48EE100842E4C /* PHdividers@2x.png */; };
+		CC5A5C321E6AEE5200BF60C2 /* addicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 798A117F1B8AE17B003FF457 /* addicon@2x.png */; };
+		CC5A5C331E6AEE5200BF60C2 /* latestNotificatins@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E38A1B9C8979001F1373 /* latestNotificatins@3x.png */; };
+		CC5A5C341E6AEE5200BF60C2 /* MRDocotrActivityScoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 794000101BE61BAC0066151A /* MRDocotrActivityScoreViewController.xib */; };
+		CC5A5C351E6AEE5200BF60C2 /* notification_dash@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3E31B9CC98D001F1373 /* notification_dash@3x.png */; };
+		CC5A5C361E6AEE5200BF60C2 /* fbSelectedRadio@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79FFD25A1BB9DC3000CEE606 /* fbSelectedRadio@2x.png */; };
+		CC5A5C371E6AEE5200BF60C2 /* profileIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7977C47E1C63ED8F00A7C49A /* profileIcon@2x.png */; };
+		CC5A5C381E6AEE5200BF60C2 /* Icon-76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27931B80980F007CA448 /* Icon-76@2x.png */; };
+		CC5A5C391E6AEE5200BF60C2 /* MRContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB2A81D0CC433007DFE4C /* MRContactsViewController.xib */; };
+		CC5A5C3A1E6AEE5200BF60C2 /* NDcompany2-BG@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94521B9E0DA000B81452 /* NDcompany2-BG@3x.jpg */; };
+		CC5A5C3B1E6AEE5200BF60C2 /* MRSurveyDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7950AF231BBF91D700A93106 /* MRSurveyDetailsViewController.xib */; };
+		CC5A5C3C1E6AEE5200BF60C2 /* MRAddressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79D8CD8C1B83A5AE0089F770 /* MRAddressView.xib */; };
+		CC5A5C3D1E6AEE5200BF60C2 /* feedbackSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F074981BBF16970049FDE7 /* feedbackSelected@2x.png */; };
+		CC5A5C3E1E6AEE5200BF60C2 /* img1@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 795365FA1BA09EBF0021CE4D /* img1@2x.jpg */; };
+		CC5A5C3F1E6AEE5200BF60C2 /* MRPharmaNotificationDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79314AD71BD2776A00EB3A48 /* MRPharmaNotificationDetailsViewController.xib */; };
+		CC5A5C401E6AEE5200BF60C2 /* profile_pic2.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3431D0CC8A6007DFE4C /* profile_pic2.jpeg */; };
+		CC5A5C411E6AEE5200BF60C2 /* UICustomDatePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4B4F15B1D39E4F200EFCC0E /* UICustomDatePicker.xib */; };
+		CC5A5C421E6AEE5200BF60C2 /* person.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3AB1D0CCA0D007DFE4C /* person.png */; };
+		CC5A5C431E6AEE5200BF60C2 /* crthera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79A5DC6D1BA2092E001D872C /* crthera@2x.png */; };
+		CC5A5C441E6AEE5200BF60C2 /* MRPharmaMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79421F491BB83BBB0055D9B7 /* MRPharmaMenuViewController.xib */; };
+		CC5A5C451E6AEE5200BF60C2 /* White-right-arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94581B9E0DA000B81452 /* White-right-arrow@3x.png */; };
+		CC5A5C461E6AEE5200BF60C2 /* NDcompany1@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94501B9E0DA000B81452 /* NDcompany1@3x.jpg */; };
+		CC5A5C471E6AEE5200BF60C2 /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27921B80980F007CA448 /* Icon-76.png */; };
+		CC5A5C481E6AEE5200BF60C2 /* PHsurveys@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79173C581BB48EE100842E4C /* PHsurveys@2x.png */; };
+		CC5A5C491E6AEE5200BF60C2 /* frsnoozed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7930A3A21BB91ECF003112E4 /* frsnoozed@3x.png */; };
+		CC5A5C4A1E6AEE5200BF60C2 /* PHphone@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79708A9D1BB73C67007CE81D /* PHphone@3x.png */; };
+		CC5A5C4B1E6AEE5200BF60C2 /* MRFeedBackResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7930A3981BB91629003112E4 /* MRFeedBackResultCell.xib */; };
+		CC5A5C4C1E6AEE5200BF60C2 /* activity-score@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3611B9C78B5001F1373 /* activity-score@3x.png */; };
+		CC5A5C4D1E6AEE5200BF60C2 /* post_image3.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3351D0CC8A6007DFE4C /* post_image3.jpeg */; };
+		CC5A5C4E1E6AEE5200BF60C2 /* crossPlusButton.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24A41D41653700A3DD73 /* crossPlusButton.png */; };
+		CC5A5C4F1E6AEE5200BF60C2 /* right-arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3981B9C8979001F1373 /* right-arrow@3x.png */; };
+		CC5A5C501E6AEE5200BF60C2 /* PHmarketing@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79173C551BB48EE100842E4C /* PHmarketing@3x.png */; };
+		CC5A5C511E6AEE5200BF60C2 /* group_pic5.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3301D0CC8A6007DFE4C /* group_pic5.png */; };
+		CC5A5C521E6AEE5200BF60C2 /* ndchecked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94591B9E0DA000B81452 /* ndchecked@2x.png */; };
+		CC5A5C531E6AEE5200BF60C2 /* discussion-forum@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3621B9C78B5001F1373 /* discussion-forum@2x.png */; };
+		CC5A5C541E6AEE5200BF60C2 /* dsbg@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 796E93AE1BB881C90031EA34 /* dsbg@2x.jpg */; };
+		CC5A5C551E6AEE5200BF60C2 /* EditLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC87CD6E1D6E32E40083DB26 /* EditLocationViewController.xib */; };
+		CC5A5C561E6AEE5200BF60C2 /* MRAppointmentCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3B31B9C8E5F001F1373 /* MRAppointmentCollectionViewCell.xib */; };
+		CC5A5C571E6AEE5200BF60C2 /* PHmail@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79708A9B1BB73C67007CE81D /* PHmail@3x.png */; };
+		CC5A5C581E6AEE5200BF60C2 /* MRGroupsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB2B41D0CC433007DFE4C /* MRGroupsViewController.xib */; };
+		CC5A5C591E6AEE5200BF60C2 /* notificationbody-bg@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94361B9DFDB800B81452 /* notificationbody-bg@2x.jpg */; };
+		CC5A5C5A1E6AEE5200BF60C2 /* NDcompany4@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94551B9E0DA000B81452 /* NDcompany4@2x.jpg */; };
+		CC5A5C5B1E6AEE5200BF60C2 /* marketing@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3671B9C78B5001F1373 /* marketing@3x.png */; };
+		CC5A5C5C1E6AEE5200BF60C2 /* ProfileStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4B4F0F41D38963F00EFCC0E /* ProfileStoryboard.storyboard */; };
+		CC5A5C5D1E6AEE5200BF60C2 /* ndInput@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94691B9E116000B81452 /* ndInput@2x.png */; };
+		CC5A5C5E1E6AEE5200BF60C2 /* setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3701B9C78B5001F1373 /* setting@2x.png */; };
+		CC5A5C5F1E6AEE5200BF60C2 /* dashboard-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3C61B9CBE4C001F1373 /* dashboard-bg@2x.png */; };
+		CC5A5C601E6AEE5200BF60C2 /* ddpresent-activity-hover@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E93A71BB8816D0031EA34 /* ddpresent-activity-hover@3x.png */; };
+		CC5A5C611E6AEE5200BF60C2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83B782131B791E900070645C /* InfoPlist.strings */; };
+		CC5A5C621E6AEE5200BF60C2 /* cancelBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4746B201D6A877800325F9E /* cancelBtn@2x.png */; };
+		CC5A5C631E6AEE5200BF60C2 /* MPNotificationAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79A5DC5B1BA1EBBF001D872C /* MPNotificationAlertViewController.xib */; };
+		CC5A5C641E6AEE5200BF60C2 /* pcfeedback@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E935E1BB8528B0031EA34 /* pcfeedback@3x.png */; };
+		CC5A5C651E6AEE5200BF60C2 /* dropDownButton@2x~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 79DE1BD61B826245005289D6 /* dropDownButton@2x~iPad.png */; };
+		CC5A5C661E6AEE5200BF60C2 /* splashLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27841B8096D6007CA448 /* splashLogo@2x.png */; };
+		CC5A5C671E6AEE5200BF60C2 /* MPNotificatinsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94481B9E011D00B81452 /* MPNotificatinsTableViewCell.xib */; };
+		CC5A5C681E6AEE5200BF60C2 /* froverdue@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7930A39C1BB91ECF003112E4 /* froverdue@3x.png */; };
+		CC5A5C691E6AEE5200BF60C2 /* PHdashboard-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79173C501BB48EE100842E4C /* PHdashboard-bg@2x.png */; };
+		CC5A5C6A1E6AEE5200BF60C2 /* Signup_plain@2x~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27C01B809A80007CA448 /* Signup_plain@2x~iPad.png */; };
+		CC5A5C6B1E6AEE5200BF60C2 /* post_image5.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3371D0CC8A6007DFE4C /* post_image5.jpeg */; };
+		CC5A5C6C1E6AEE5200BF60C2 /* MRRegistationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27E71B80A11D007CA448 /* MRRegistationViewController.xib */; };
+		CC5A5C6D1E6AEE5200BF60C2 /* PHdoctor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79708A931BB73C67007CE81D /* PHdoctor@2x.png */; };
+		CC5A5C6E1E6AEE5200BF60C2 /* news_dash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3CE1B9CC674001F1373 /* news_dash@2x.png */; };
+		CC5A5C6F1E6AEE5200BF60C2 /* favoriteSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F074961BBF16970049FDE7 /* favoriteSelected@2x.png */; };
+		CC5A5C701E6AEE5200BF60C2 /* cncompany3@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79F4169D1B9F6E560089729B /* cncompany3@3x.jpg */; };
+		CC5A5C711E6AEE5200BF60C2 /* settings1.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24C21D4192AD00A3DD73 /* settings1.png */; };
+		CC5A5C721E6AEE5200BF60C2 /* addressbook-green-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B4746B311D6E78D500325F9E /* addressbook-green-icon.png */; };
+		CC5A5C731E6AEE5200BF60C2 /* MRTransformDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB2701D0C9E15007DFE4C /* MRTransformDetailViewController.xib */; };
+		CC5A5C741E6AEE5200BF60C2 /* group_pic3.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB32E1D0CC8A6007DFE4C /* group_pic3.png */; };
+		CC5A5C751E6AEE5200BF60C2 /* MRMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79539E991B90941D001516C3 /* MRMenuViewController.xib */; };
+		CC5A5C761E6AEE5200BF60C2 /* PHthera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79708A9E1BB73C67007CE81D /* PHthera@2x.png */; };
+		CC5A5C771E6AEE5200BF60C2 /* camara-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7961A97C1B8F53C60035D63A /* camara-icon@3x.png */; };
+		CC5A5C781E6AEE5200BF60C2 /* crgreydown-arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79A5DC6A1BA2092E001D872C /* crgreydown-arrow@3x.png */; };
+		CC5A5C791E6AEE5200BF60C2 /* MRReadNotificationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 795366151BA0B7A90021CE4D /* MRReadNotificationsViewController.xib */; };
+		CC5A5C7A1E6AEE5200BF60C2 /* feedbackSelected@3.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F074991BBF16970049FDE7 /* feedbackSelected@3.png */; };
+		CC5A5C7B1E6AEE5200BF60C2 /* MRShareOptionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC463DDD1D279DE7002AE85E /* MRShareOptionsViewController.xib */; };
+		CC5A5C7C1E6AEE5200BF60C2 /* HomeLogo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27C31B809A80007CA448 /* HomeLogo@3x.png */; };
+		CC5A5C7D1E6AEE5200BF60C2 /* PHdividers@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79173C531BB48EE100842E4C /* PHdividers@3x.png */; };
+		CC5A5C7E1E6AEE5200BF60C2 /* PHdashboard-banner@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79173C4F1BB48EE100842E4C /* PHdashboard-banner@3x.png */; };
+		CC5A5C7F1E6AEE5200BF60C2 /* settings@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3711B9C78B5001F1373 /* settings@3x.png */; };
+		CC5A5C801E6AEE5200BF60C2 /* MRServeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AC93CE11D183CCF00C2A864 /* MRServeViewController.xib */; };
+		CC5A5C811E6AEE5200BF60C2 /* gallery_pic.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24D51D45CDF400A3DD73 /* gallery_pic.png */; };
+		CC5A5C821E6AEE5200BF60C2 /* ddpresent-activity-normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E93A81BB8816D0031EA34 /* ddpresent-activity-normal@3x.png */; };
+		CC5A5C831E6AEE5200BF60C2 /* MRRegHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 798A118C1B8AEC90003FF457 /* MRRegHeaderView.xib */; };
+		CC5A5C841E6AEE5200BF60C2 /* post_image8.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB33A1D0CC8A6007DFE4C /* post_image8.jpeg */; };
+		CC5A5C851E6AEE5200BF60C2 /* reveal-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F066961B94E6D200D113F0 /* reveal-icon@3x.png */; };
+		CC5A5C861E6AEE5200BF60C2 /* MRNotificationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94291B9DFAF000B81452 /* MRNotificationsViewController.xib */; };
+		CC5A5C871E6AEE5200BF60C2 /* MRGroupMembersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC9037361D5D11F000FD15A7 /* MRGroupMembersViewController.xib */; };
+		CC5A5C881E6AEE5200BF60C2 /* MRMedRepDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79F84B131BE92CB70081613A /* MRMedRepDetailsViewController.xib */; };
+		CC5A5C891E6AEE5200BF60C2 /* categoryBG@2x~iPad.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27F91B80B37F007CA448 /* categoryBG@2x~iPad.jpg */; };
+		CC5A5C8A1E6AEE5200BF60C2 /* radioUnSelection@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD28081B80B991007CA448 /* radioUnSelection@2x.png */; };
+		CC5A5C8B1E6AEE5200BF60C2 /* PHmedrep@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79421EE81BB7EF950055D9B7 /* PHmedrep@2x.png */; };
+		CC5A5C8C1E6AEE5200BF60C2 /* transperent-bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79AC944B1B9E029A00B81452 /* transperent-bg@3x.png */; };
+		CC5A5C8D1E6AEE5200BF60C2 /* stepThree@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7961A9661B8F25DA0035D63A /* stepThree@2x.png */; };
+		CC5A5C8E1E6AEE5200BF60C2 /* MRCompaignsDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7930A3931BB9153A003112E4 /* MRCompaignsDetailsViewController.xib */; };
+		CC5A5C8F1E6AEE5200BF60C2 /* searchScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB249B1D40738A00A3DD73 /* searchScreen.png */; };
+		CC5A5C901E6AEE5200BF60C2 /* latestNotificatins@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3891B9C8979001F1373 /* latestNotificatins@2x.png */; };
+		CC5A5C911E6AEE5200BF60C2 /* MRMedrepMeetingsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79F5C9F51BB061BE00435B6C /* MRMedrepMeetingsCell.xib */; };
+		CC5A5C921E6AEE5200BF60C2 /* favFilter-wrong@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 795366231BA0BFD20021CE4D /* favFilter-wrong@3x.png */; };
+		CC5A5C931E6AEE5200BF60C2 /* PHmarketingMenu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79421EE61BB7EF950055D9B7 /* PHmarketingMenu@2x.png */; };
+		CC5A5C941E6AEE5200BF60C2 /* Edit Property-100.png in Resources */ = {isa = PBXBuildFile; fileRef = B4945C591D7B6B8800E8BBB7 /* Edit Property-100.png */; };
+		CC5A5C951E6AEE5200BF60C2 /* MRDoctorDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79421F3F1BB83BAE0055D9B7 /* MRDoctorDetailsViewController.xib */; };
+		CC5A5C961E6AEE5200BF60C2 /* logout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3641B9C78B5001F1373 /* logout@2x.png */; };
+		CC5A5C971E6AEE5200BF60C2 /* MRGroupsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB2B11D0CC433007DFE4C /* MRGroupsListViewController.xib */; };
+		CC5A5C981E6AEE5200BF60C2 /* Drug Search White.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CC9A70641D76227A00846D67 /* Drug Search White.jpg */; };
+		CC5A5C991E6AEE5200BF60C2 /* pcminus@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79169E1C1BEBDD6800C11D13 /* pcminus@3x.png */; };
+		CC5A5C9A1E6AEE5200BF60C2 /* PHproduct-campaigns@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79421EEC1BB7EF950055D9B7 /* PHproduct-campaigns@3x.png */; };
+		CC5A5C9B1E6AEE5200BF60C2 /* pcplus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E935F1BB8528B0031EA34 /* pcplus@2x.png */; };
+		CC5A5C9C1E6AEE5200BF60C2 /* posts.json in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB2B91D0CC433007DFE4C /* posts.json */; };
+		CC5A5C9D1E6AEE5200BF60C2 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27941B80980F007CA448 /* Icon-Small-50.png */; };
+		CC5A5C9E1E6AEE5200BF60C2 /* PHmarketing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79173C541BB48EE100842E4C /* PHmarketing@2x.png */; };
+		CC5A5C9F1E6AEE5200BF60C2 /* categoryBG-667h@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27FB1B80B37F007CA448 /* categoryBG-667h@2x.jpg */; };
+		CC5A5CA01E6AEE5200BF60C2 /* stepOne@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7961A9651B8F25DA0035D63A /* stepOne@2x.png */; };
+		CC5A5CA11E6AEE5200BF60C2 /* HomeLogo~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27BB1B809A80007CA448 /* HomeLogo~iPad.png */; };
+		CC5A5CA21E6AEE5200BF60C2 /* Signup_plain@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27C61B809A80007CA448 /* Signup_plain@3x.png */; };
+		CC5A5CA31E6AEE5200BF60C2 /* building-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F4167E1B9F5CDB0089729B /* building-icon@3x.png */; };
+		CC5A5CA41E6AEE5200BF60C2 /* stepTwo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7961A9671B8F25DA0035D63A /* stepTwo@2x.png */; };
+		CC5A5CA51E6AEE5200BF60C2 /* download@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 795365F31BA09EBF0021CE4D /* download@3x.png */; };
+		CC5A5CA61E6AEE5200BF60C2 /* download@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 795365F21BA09EBF0021CE4D /* download@2x.png */; };
+		CC5A5CA71E6AEE5200BF60C2 /* MRMedRepMeetingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79F5C9F01BB0586100435B6C /* MRMedRepMeetingsViewController.xib */; };
+		CC5A5CA81E6AEE5200BF60C2 /* picklocation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79FAA66D1C68DF71003F7518 /* picklocation@2x.png */; };
+		CC5A5CA91E6AEE5200BF60C2 /* Icon-Small-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27951B80980F007CA448 /* Icon-Small-50@2x.png */; };
+		CC5A5CAA1E6AEE5200BF60C2 /* MRContactDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB2A51D0CC433007DFE4C /* MRContactDetailViewController.xib */; };
+		CC5A5CAB1E6AEE5200BF60C2 /* cathera@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E93811BB869120031EA34 /* cathera@3x.png */; };
+		CC5A5CAC1E6AEE5200BF60C2 /* groups.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB38E1D0CC8C8007DFE4C /* groups.png */; };
+		CC5A5CAD1E6AEE5200BF60C2 /* Contacts.png in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB38C1D0CC8C8007DFE4C /* Contacts.png */; };
+		CC5A5CAE1E6AEE5200BF60C2 /* cncompany1@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79F416981B9F6E560089729B /* cncompany1@2x.jpg */; };
+		CC5A5CAF1E6AEE5200BF60C2 /* profile_pic1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB33C1D0CC8A6007DFE4C /* profile_pic1.jpeg */; };
+		CC5A5CB01E6AEE5200BF60C2 /* time-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F416861B9F5CDB0089729B /* time-icon@3x.png */; };
+		CC5A5CB11E6AEE5200BF60C2 /* Default@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83B781EA1B7915C10070645C /* Default@3x.png */; };
+		CC5A5CB21E6AEE5200BF60C2 /* suggested_contacts.json in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB2BA1D0CC433007DFE4C /* suggested_contacts.json */; };
+		CC5A5CB31E6AEE5200BF60C2 /* locationPin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79DE1BDF1B826245005289D6 /* locationPin@2x.png */; };
+		CC5A5CB41E6AEE5200BF60C2 /* MRFeedBackResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7930A38E1BB9151C003112E4 /* MRFeedBackResultViewController.xib */; };
+		CC5A5CB51E6AEE5200BF60C2 /* favFilter-unchecked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7953661E1BA0BFD20021CE4D /* favFilter-unchecked@2x.png */; };
+		CC5A5CB61E6AEE5200BF60C2 /* radioSelection@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD28061B80B991007CA448 /* radioSelection@2x.png */; };
+		CC5A5CB71E6AEE5200BF60C2 /* Icon-Small@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27981B80980F007CA448 /* Icon-Small@3x.png */; };
+		CC5A5CB81E6AEE5200BF60C2 /* MRCompetitorAnalasysViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 796E93921BB8784D0031EA34 /* MRCompetitorAnalasysViewController.xib */; };
+		CC5A5CB91E6AEE5200BF60C2 /* pending_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 791C37E31C50256E00914728 /* pending_icon@3x.png */; };
+		CC5A5CBA1E6AEE5200BF60C2 /* MPCallMedrepViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79A5DC611BA1ED21001D872C /* MPCallMedrepViewController.xib */; };
+		CC5A5CBB1E6AEE5200BF60C2 /* CameraClick.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24D21D45CD4C00A3DD73 /* CameraClick.png */; };
+		CC5A5CBC1E6AEE5200BF60C2 /* TutorialView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4F635081D53D0F1008CE7C7 /* TutorialView.xib */; };
+		CC5A5CBD1E6AEE5200BF60C2 /* cncompany1@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79F416991B9F6E560089729B /* cncompany1@3x.jpg */; };
+		CC5A5CBE1E6AEE5200BF60C2 /* MRDrugSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC649F561D0D1BA10012289C /* MRDrugSearchViewController.xib */; };
+		CC5A5CBF1E6AEE5200BF60C2 /* cncompany3@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79F4169C1B9F6E560089729B /* cncompany3@2x.jpg */; };
+		CC5A5CC01E6AEE5200BF60C2 /* MRNewProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 796E93751BB862530031EA34 /* MRNewProductCell.xib */; };
+		CC5A5CC11E6AEE5200BF60C2 /* favoriteSelected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F074971BBF16970049FDE7 /* favoriteSelected@3x.png */; };
+		CC5A5CC21E6AEE5200BF60C2 /* surveys_dashboard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3D41B9CC674001F1373 /* surveys_dashboard@2x.png */; };
+		CC5A5CC31E6AEE5200BF60C2 /* NDcompany4@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79AC94561B9E0DA000B81452 /* NDcompany4@3x.jpg */; };
+		CC5A5CC41E6AEE5200BF60C2 /* PHnotifications@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79173C571BB48EE100842E4C /* PHnotifications@2x.png */; };
+		CC5A5CC51E6AEE5200BF60C2 /* minus.png in Resources */ = {isa = PBXBuildFile; fileRef = 791C37DA1C4FF96400914728 /* minus.png */; };
+		CC5A5CC61E6AEE5200BF60C2 /* profile_pic14.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3411D0CC8A6007DFE4C /* profile_pic14.jpeg */; };
+		CC5A5CC71E6AEE5200BF60C2 /* pcright-arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 796E93621BB8528B0031EA34 /* pcright-arrow@3x.png */; };
+		CC5A5CC81E6AEE5200BF60C2 /* notification@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E36C1B9C78B5001F1373 /* notification@2x.png */; };
+		CC5A5CC91E6AEE5200BF60C2 /* smallTickmark@2x~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 79DE1BE21B826245005289D6 /* smallTickmark@2x~iPad.png */; };
+		CC5A5CCA1E6AEE5200BF60C2 /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = 79BD279C1B80980F007CA448 /* iTunesArtwork@2x */; };
+		CC5A5CCB1E6AEE5200BF60C2 /* cncompany2@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79F4169B1B9F6E560089729B /* cncompany2@3x.jpg */; };
+		CC5A5CCC1E6AEE5200BF60C2 /* bg~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27B91B809A80007CA448 /* bg~iPad.png */; };
+		CC5A5CCD1E6AEE5200BF60C2 /* downArrow@2x~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 79DE1BDE1B826245005289D6 /* downArrow@2x~iPad.png */; };
+		CC5A5CCE1E6AEE5200BF60C2 /* MRInviteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AFF27AF1D21C3DE00080DF0 /* MRInviteViewController.xib */; };
+		CC5A5CCF1E6AEE5200BF60C2 /* PHprescription@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79421EEA1BB7EF950055D9B7 /* PHprescription@2x.png */; };
+		CC5A5CD01E6AEE5200BF60C2 /* notificationback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79AC943A1B9DFDB800B81452 /* notificationback@2x.png */; };
+		CC5A5CD11E6AEE5200BF60C2 /* group_pic2.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB32D1D0CC8A6007DFE4C /* group_pic2.jpeg */; };
+		CC5A5CD21E6AEE5200BF60C2 /* pending_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 791C37E21C50256E00914728 /* pending_icon@2x.png */; };
+		CC5A5CD31E6AEE5200BF60C2 /* NotificationUUIDViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC649F4D1D0D181E0012289C /* NotificationUUIDViewController.xib */; };
+		CC5A5CD41E6AEE5200BF60C2 /* MRTransformTitleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC9BCEC71D0F3AB400702EBC /* MRTransformTitleCollectionViewCell.xib */; };
+		CC5A5CD51E6AEE5200BF60C2 /* MRCommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC01BA721D302ACF007E2AEB /* MRCommentViewController.xib */; };
+		CC5A5CD61E6AEE5200BF60C2 /* post_image6.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3381D0CC8A6007DFE4C /* post_image6.jpeg */; };
+		CC5A5CD71E6AEE5200BF60C2 /* MPTransformTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB26D1D0C9E15007DFE4C /* MPTransformTableViewCell.xib */; };
+		CC5A5CD81E6AEE5200BF60C2 /* MRPHProfileDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCBA484E1E369A64002548BF /* MRPHProfileDetailsViewController.xib */; };
+		CC5A5CD91E6AEE5200BF60C2 /* MRLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27DB1B809FD1007CA448 /* MRLoginViewController.xib */; };
+		CC5A5CDA1E6AEE5200BF60C2 /* crgreydown-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79A5DC691BA2092E001D872C /* crgreydown-arrow@2x.png */; };
+		CC5A5CDB1E6AEE5200BF60C2 /* TransformPosts.json in Resources */ = {isa = PBXBuildFile; fileRef = CC9857EF1D2E0B4D00C74438 /* TransformPosts.json */; };
+		CC5A5CDC1E6AEE5200BF60C2 /* upArrow@2x~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 79DE1BDA1B826245005289D6 /* upArrow@2x~iPad.png */; };
+		CC5A5CDD1E6AEE5200BF60C2 /* drug-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F416811B9F5CDB0089729B /* drug-icon@2x.png */; };
+		CC5A5CDE1E6AEE5200BF60C2 /* upcoming_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 791C37E61C50256E00914728 /* upcoming_icon@2x.png */; };
+		CC5A5CDF1E6AEE5200BF60C2 /* userLocal.png in Resources */ = {isa = PBXBuildFile; fileRef = B4BB24BC1D417E8000A3DD73 /* userLocal.png */; };
+		CC5A5CE01E6AEE5200BF60C2 /* profile_pic7.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3481D0CC8A6007DFE4C /* profile_pic7.jpeg */; };
+		CC5A5CE11E6AEE5200BF60C2 /* navigation-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F416831B9F5CDB0089729B /* navigation-icon@2x.png */; };
+		CC5A5CE21E6AEE5200BF60C2 /* right-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3971B9C8979001F1373 /* right-arrow@2x.png */; };
+		CC5A5CE31E6AEE5200BF60C2 /* bg@2x~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27B71B809A80007CA448 /* bg@2x~iPad.png */; };
+		CC5A5CE41E6AEE5200BF60C2 /* mrkt-cmpn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3CD1B9CC674001F1373 /* mrkt-cmpn@3x.png */; };
+		CC5A5CE51E6AEE5200BF60C2 /* logo_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E02C561D4706E7003A1859 /* logo_icon.png */; };
+		CC5A5CE61E6AEE5200BF60C2 /* pageviewdots@2x~iPad copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27BC1B809A80007CA448 /* pageviewdots@2x~iPad copy.png */; };
+		CC5A5CE71E6AEE5200BF60C2 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 79BD279B1B80980F007CA448 /* iTunesArtwork */; };
+		CC5A5CE81E6AEE5200BF60C2 /* PHlocations@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79708A981BB73C67007CE81D /* PHlocations@2x.png */; };
+		CC5A5CE91E6AEE5200BF60C2 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27991B80980F007CA448 /* Icon.png */; };
+		CC5A5CEA1E6AEE5200BF60C2 /* MRPHDashBoardViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79421F2B1BB83ABE0055D9B7 /* MRPHDashBoardViewController_iPad.xib */; };
+		CC5A5CEB1E6AEE5200BF60C2 /* MRDrugDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC649F531D0D1BA10012289C /* MRDrugDetailViewController.xib */; };
+		CC5A5CEC1E6AEE5200BF60C2 /* MRForgotPasswordTwoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7920D6921C1C87C9008D3386 /* MRForgotPasswordTwoViewController.xib */; };
+		CC5A5CED1E6AEE5200BF60C2 /* MRRegistrationRoleCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79FFD2531BB9BA7D00CEE606 /* MRRegistrationRoleCellTableViewCell.xib */; };
+		CC5A5CEE1E6AEE5200BF60C2 /* categoryBG@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 79BD27FE1B80B37F007CA448 /* categoryBG@3x.jpg */; };
+		CC5A5CEF1E6AEE5200BF60C2 /* MRCreateGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AFE8CD21D0EFFD30000382E /* MRCreateGroupViewController.xib */; };
+		CC5A5CF01E6AEE5200BF60C2 /* MRFavoriteFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7953662D1BA0C0300021CE4D /* MRFavoriteFilterViewController.xib */; };
+		CC5A5CF11E6AEE5200BF60C2 /* MPAppointmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79F416791B9F596B0089729B /* MPAppointmentViewController.xib */; };
+		CC5A5CF21E6AEE5200BF60C2 /* frpie-bg@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7930A39E1BB91ECF003112E4 /* frpie-bg@3x.jpg */; };
+		CC5A5CF31E6AEE5200BF60C2 /* mrkt-cmpn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7929E3CC1B9CC674001F1373 /* mrkt-cmpn@2x.png */; };
+		CC5A5CF41E6AEE5200BF60C2 /* MRProductBrocherViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79F84B191BE9354B0081613A /* MRProductBrocherViewController.xib */; };
+		CC5A5CF51E6AEE5200BF60C2 /* ddbg@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 796E939A1BB880C20031EA34 /* ddbg@2x.jpg */; };
+		CC5A5CF61E6AEE5200BF60C2 /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BD278D1B80980F007CA448 /* Icon-60.png */; };
+		CC5A5CF71E6AEE5200BF60C2 /* ddbg@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 796E93A41BB8816D0031EA34 /* ddbg@3x.jpg */; };
+		CC5A5CF81E6AEE5200BF60C2 /* post_image4.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC7DB3361D0CC8A6007DFE4C /* post_image4.jpeg */; };
+		CC5A5CF91E6AEE5200BF60C2 /* navigation-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79F416841B9F5CDB0089729B /* navigation-icon@3x.png */; };
+		CC5A5D021E6AEEEC00BF60C2 /* MRProdEnvironmentConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5A5D011E6AEEEC00BF60C2 /* MRProdEnvironmentConfig.m */; };
 		CC5DE8761D99DA0600B719A3 /* MRShareDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC86FE391D29A7780030B23D /* MRShareDetailViewController.xib */; };
 		CC649F4E1D0D181E0012289C /* NotificationUUIDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC649F4C1D0D181E0012289C /* NotificationUUIDViewController.m */; };
 		CC649F4F1D0D181E0012289C /* NotificationUUIDViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC649F4D1D0D181E0012289C /* NotificationUUIDViewController.xib */; };
@@ -2360,6 +3127,9 @@
 		CC463DE61D27B37B002AE85E /* MRAppConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRAppConstants.m; sourceTree = "<group>"; };
 		CC463DEA1D27B921002AE85E /* MRGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRGradientView.h; path = GradientView/MRGradientView.h; sourceTree = "<group>"; };
 		CC463DEB1D27B921002AE85E /* MRGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRGradientView.m; path = GradientView/MRGradientView.m; sourceTree = "<group>"; };
+		CC5A5CFF1E6AEE5200BF60C2 /* MedRepProd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MedRepProd.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC5A5D001E6AEE5200BF60C2 /* MedRepDev copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MedRepDev copy-Info.plist"; path = "/Users/vkatra/Documents/Personal/MedRep/SourceCode/Dec23/iOS-app-MedRep/MedRep/MedRepDev copy-Info.plist"; sourceTree = "<absolute>"; };
+		CC5A5D011E6AEEEC00BF60C2 /* MRProdEnvironmentConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRProdEnvironmentConfig.m; sourceTree = "<group>"; };
 		CC649F4B1D0D181E0012289C /* NotificationUUIDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationUUIDViewController.h; sourceTree = "<group>"; };
 		CC649F4C1D0D181E0012289C /* NotificationUUIDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationUUIDViewController.m; sourceTree = "<group>"; };
 		CC649F4D1D0D181E0012289C /* NotificationUUIDViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationUUIDViewController.xib; sourceTree = "<group>"; };
@@ -2584,6 +3354,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CC5A5AE21E6AEE5200BF60C2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CC5A5AE31E6AEE5200BF60C2 /* CoreGraphics.framework in Frameworks */,
+				CC5A5AE41E6AEE5200BF60C2 /* Pods_MedRepDev.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3733,6 +4512,7 @@
 		83B781E01B7913780070645C /* Communication */ = {
 			isa = PBXGroup;
 			children = (
+				CC5A5D011E6AEEEC00BF60C2 /* MRProdEnvironmentConfig.m */,
 				83B781FA1B7916B40070645C /* MRWebserviceHelper.h */,
 				83B781FB1B7916B40070645C /* MRWebserviceHelper.m */,
 				83B781FD1B7916CB0070645C /* MRWebserviceConstants.h */,
@@ -3886,6 +4666,7 @@
 				83C127EE1B77C88B00D2F08E /* Products */,
 				CEE2F1A4AA4B2FB2CD0887DA /* Pods */,
 				D68055C7E6A3DB980902A6E2 /* Frameworks */,
+				CC5A5D001E6AEE5200BF60C2 /* MedRepDev copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -3895,6 +4676,7 @@
 				83C127ED1B77C88B00D2F08E /* MedRep.app */,
 				83C128091B77C88B00D2F08E /* MedRepTests.xctest */,
 				CC7DB2161D0C8BEC007DFE4C /* MedRepDev.app */,
+				CC5A5CFF1E6AEE5200BF60C2 /* MedRepProd.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -4622,6 +5404,26 @@
 			productReference = 83C128091B77C88B00D2F08E /* MedRepTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		CC5A59F61E6AEE5200BF60C2 /* MedRepProd */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CC5A5CFC1E6AEE5200BF60C2 /* Build configuration list for PBXNativeTarget "MedRepProd" */;
+			buildPhases = (
+				CC5A59F71E6AEE5200BF60C2 /* [CP] Check Pods Manifest.lock */,
+				CC5A59F81E6AEE5200BF60C2 /* Sources */,
+				CC5A5AE21E6AEE5200BF60C2 /* Frameworks */,
+				CC5A5AE51E6AEE5200BF60C2 /* Resources */,
+				CC5A5CFA1E6AEE5200BF60C2 /* [CP] Embed Pods Frameworks */,
+				CC5A5CFB1E6AEE5200BF60C2 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MedRepProd;
+			productName = MedRep;
+			productReference = CC5A5CFF1E6AEE5200BF60C2 /* MedRepProd.app */;
+			productType = "com.apple.product-type.application";
+		};
 		CC7DB0201D0C8BEC007DFE4C /* MedRepDev */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CC7DB2131D0C8BEC007DFE4C /* Build configuration list for PBXNativeTarget "MedRepDev" */;
@@ -4667,6 +5469,9 @@
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 83C127EC1B77C88B00D2F08E;
 					};
+					CC5A59F61E6AEE5200BF60C2 = {
+						DevelopmentTeam = 9Y7Y82N227;
+					};
 					CC7DB0201D0C8BEC007DFE4C = {
 						DevelopmentTeam = 9Y7Y82N227;
 						ProvisioningStyle = Manual;
@@ -4694,6 +5499,7 @@
 				83C127EC1B77C88B00D2F08E /* MedRep */,
 				83C128081B77C88B00D2F08E /* MedRepTests */,
 				CC7DB0201D0C8BEC007DFE4C /* MedRepDev */,
+				CC5A59F61E6AEE5200BF60C2 /* MedRepProd */,
 			);
 		};
 /* End PBXProject section */
@@ -5241,6 +6047,545 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CC5A5AE51E6AEE5200BF60C2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CC5A5AE61E6AEE5200BF60C2 /* logout@3x.png in Resources */,
+				CC5A5AE71E6AEE5200BF60C2 /* commentBox.xib in Resources */,
+				CC5A5AE81E6AEE5200BF60C2 /* MRPharmaMenuCell.xib in Resources */,
+				CC5A5AE91E6AEE5200BF60C2 /* news@3x.png in Resources */,
+				CC5A5AEA1E6AEE5200BF60C2 /* dsbg@3x.jpg in Resources */,
+				CC5A5AEB1E6AEE5200BF60C2 /* feedback@3x.png in Resources */,
+				CC5A5AEC1E6AEE5200BF60C2 /* Icon-60@3x.png in Resources */,
+				CC5A5AED1E6AEE5200BF60C2 /* Icon-72.png in Resources */,
+				CC5A5AEE1E6AEE5200BF60C2 /* email@3x.png in Resources */,
+				CC5A5AEF1E6AEE5200BF60C2 /* calender-icon@2x.png in Resources */,
+				CC5A5AF01E6AEE5200BF60C2 /* PHsurveys@3x.png in Resources */,
+				CC5A5AF11E6AEE5200BF60C2 /* PendingContactTableViewCell.xib in Resources */,
+				CC5A5AF21E6AEE5200BF60C2 /* reminderSelected@3x.png in Resources */,
+				CC5A5AF31E6AEE5200BF60C2 /* profile_pic3.jpeg in Resources */,
+				CC5A5AF41E6AEE5200BF60C2 /* MRHomeViewContoller.xib in Resources */,
+				CC5A5AF51E6AEE5200BF60C2 /* Layer_1.png in Resources */,
+				CC5A5AF61E6AEE5200BF60C2 /* otptic@3x.png in Resources */,
+				CC5A5AF71E6AEE5200BF60C2 /* call-medrep@3x.png in Resources */,
+				CC5A5AF81E6AEE5200BF60C2 /* MRContactWithinGroupCollectionViewCell.xib in Resources */,
+				CC5A5AF91E6AEE5200BF60C2 /* categoryBG@2x.jpg in Resources */,
+				CC5A5AFA1E6AEE5200BF60C2 /* categoryBG-568h@2x.jpg in Resources */,
+				CC5A5AFB1E6AEE5200BF60C2 /* pageviewdots@2x~iPad.png in Resources */,
+				CC5A5AFC1E6AEE5200BF60C2 /* MROTPVerifiedViewController.xib in Resources */,
+				CC5A5AFD1E6AEE5200BF60C2 /* selected@2x.png in Resources */,
+				CC5A5AFE1E6AEE5200BF60C2 /* pencil.png in Resources */,
+				CC5A5AFF1E6AEE5200BF60C2 /* MRMedRepViewController.xib in Resources */,
+				CC5A5B001E6AEE5200BF60C2 /* pcminus@2x.png in Resources */,
+				CC5A5B011E6AEE5200BF60C2 /* pageviewdots~iPad.png in Resources */,
+				CC5A5B021E6AEE5200BF60C2 /* PendingContactCustomCell.xib in Resources */,
+				CC5A5B031E6AEE5200BF60C2 /* Drug_Search.jpg in Resources */,
+				CC5A5B041E6AEE5200BF60C2 /* compose.png in Resources */,
+				CC5A5B051E6AEE5200BF60C2 /* MRPHSurveyDetailsPendingDoctorTableViewCell.xib in Resources */,
+				CC5A5B061E6AEE5200BF60C2 /* userProfilePic.png in Resources */,
+				CC5A5B071E6AEE5200BF60C2 /* navLogo.png in Resources */,
+				CC5A5B081E6AEE5200BF60C2 /* pcselect@3x.png in Resources */,
+				CC5A5B091E6AEE5200BF60C2 /* logo_icon@3x.png in Resources */,
+				CC5A5B0A1E6AEE5200BF60C2 /* otptic@2x.png in Resources */,
+				CC5A5B0B1E6AEE5200BF60C2 /* password@3x.png in Resources */,
+				CC5A5B0C1E6AEE5200BF60C2 /* AddMemberTableViewCell.xib in Resources */,
+				CC5A5B0D1E6AEE5200BF60C2 /* profileBG1.png in Resources */,
+				CC5A5B0E1E6AEE5200BF60C2 /* MRMedRepListViewController.xib in Resources */,
+				CC5A5B0F1E6AEE5200BF60C2 /* PHdashboard-banner@2x.png in Resources */,
+				CC5A5B101E6AEE5200BF60C2 /* pcright-arrow@2x.png in Resources */,
+				CC5A5B111E6AEE5200BF60C2 /* MRMedRepTableCell.xib in Resources */,
+				CC5A5B121E6AEE5200BF60C2 /* privateHospital_selection@2x.png in Resources */,
+				CC5A5B131E6AEE5200BF60C2 /* telephone.png in Resources */,
+				CC5A5B141E6AEE5200BF60C2 /* otpTiccMark@2x~iPad.png in Resources */,
+				CC5A5B151E6AEE5200BF60C2 /* ndcompany3@2x.jpg in Resources */,
+				CC5A5B161E6AEE5200BF60C2 /* comapny-logo@2x.png in Resources */,
+				CC5A5B171E6AEE5200BF60C2 /* MRMedRepListTableCell.xib in Resources */,
+				CC5A5B181E6AEE5200BF60C2 /* MRConvertAppointmentCell.xib in Resources */,
+				CC5A5B191E6AEE5200BF60C2 /* notificationbody-bg@3x.jpg in Resources */,
+				CC5A5B1A1E6AEE5200BF60C2 /* splashLogo@3x.png in Resources */,
+				CC5A5B1B1E6AEE5200BF60C2 /* MRRegTableViewCell.xib in Resources */,
+				CC5A5B1C1E6AEE5200BF60C2 /* meetings@3x.png in Resources */,
+				CC5A5B1D1E6AEE5200BF60C2 /* bg@3x.png in Resources */,
+				CC5A5B1E1E6AEE5200BF60C2 /* NDcomapny-logo@2x.png in Resources */,
+				CC5A5B1F1E6AEE5200BF60C2 /* SearchPageBackground.png in Resources */,
+				CC5A5B201E6AEE5200BF60C2 /* categoryBG~iPad.jpg in Resources */,
+				CC5A5B211E6AEE5200BF60C2 /* MRGroupTableViewCell.xib in Resources */,
+				CC5A5B221E6AEE5200BF60C2 /* MRNotificationInsiderViewController.xib in Resources */,
+				CC5A5B231E6AEE5200BF60C2 /* cathera@2x.png in Resources */,
+				CC5A5B241E6AEE5200BF60C2 /* addressPinIcon@2x.png in Resources */,
+				CC5A5B251E6AEE5200BF60C2 /* time-icon@2x.png in Resources */,
+				CC5A5B261E6AEE5200BF60C2 /* search@2x.png in Resources */,
+				CC5A5B271E6AEE5200BF60C2 /* medrep@3x.png in Resources */,
+				CC5A5B281E6AEE5200BF60C2 /* NDcomapny-logo@3x.png in Resources */,
+				CC5A5B291E6AEE5200BF60C2 /* Default@2x.png in Resources */,
+				CC5A5B2A1E6AEE5200BF60C2 /* comapny-logo2@3x.png in Resources */,
+				CC5A5B2B1E6AEE5200BF60C2 /* search@3x.png in Resources */,
+				CC5A5B2C1E6AEE5200BF60C2 /* Signup_plain@2x.png in Resources */,
+				CC5A5B2D1E6AEE5200BF60C2 /* addicon@3x.png in Resources */,
+				CC5A5B2E1E6AEE5200BF60C2 /* unselected@2x.png in Resources */,
+				CC5A5B2F1E6AEE5200BF60C2 /* MRCustomTabBar.xib in Resources */,
+				CC5A5B301E6AEE5200BF60C2 /* ndcompany3@3x.jpg in Resources */,
+				CC5A5B311E6AEE5200BF60C2 /* dashboard-bg@3x.png in Resources */,
+				CC5A5B321E6AEE5200BF60C2 /* crgreyup-arrow@2x.png in Resources */,
+				CC5A5B331E6AEE5200BF60C2 /* MROptionsViewController.xib in Resources */,
+				CC5A5B341E6AEE5200BF60C2 /* pageviewdots@3x.png in Resources */,
+				CC5A5B351E6AEE5200BF60C2 /* MPCallMedrepViewController_iPhone.xib in Resources */,
+				CC5A5B361E6AEE5200BF60C2 /* crgreyup-arrow@3x.png in Resources */,
+				CC5A5B371E6AEE5200BF60C2 /* PHdoctor@3x.png in Resources */,
+				CC5A5B381E6AEE5200BF60C2 /* unselected.png in Resources */,
+				CC5A5B391E6AEE5200BF60C2 /* password@2x.png in Resources */,
+				CC5A5B3A1E6AEE5200BF60C2 /* NDcompany1@2x.jpg in Resources */,
+				CC5A5B3B1E6AEE5200BF60C2 /* MRShareDetailViewController.xib in Resources */,
+				CC5A5B3C1E6AEE5200BF60C2 /* reveal-icon.png in Resources */,
+				CC5A5B3D1E6AEE5200BF60C2 /* readnotification3@2x.jpg in Resources */,
+				CC5A5B3E1E6AEE5200BF60C2 /* pencil@2x.png in Resources */,
+				CC5A5B3F1E6AEE5200BF60C2 /* profile_pic6.jpeg in Resources */,
+				CC5A5B401E6AEE5200BF60C2 /* tips.png in Resources */,
+				CC5A5B411E6AEE5200BF60C2 /* reminder@3x.png in Resources */,
+				CC5A5B421E6AEE5200BF60C2 /* PendingContactsViewController.xib in Resources */,
+				CC5A5B431E6AEE5200BF60C2 /* PHlocations@3x.png in Resources */,
+				CC5A5B441E6AEE5200BF60C2 /* downArrow@2x.png in Resources */,
+				CC5A5B451E6AEE5200BF60C2 /* medrep@2x.png in Resources */,
+				CC5A5B461E6AEE5200BF60C2 /* dddoctor-analysis-normal@3x.png in Resources */,
+				CC5A5B471E6AEE5200BF60C2 /* MRDRActivityTableViewCell.xib in Resources */,
+				CC5A5B481E6AEE5200BF60C2 /* group_pic4.jpeg in Resources */,
+				CC5A5B491E6AEE5200BF60C2 /* btn@2x.png in Resources */,
+				CC5A5B4A1E6AEE5200BF60C2 /* pcplus@3x.png in Resources */,
+				CC5A5B4B1E6AEE5200BF60C2 /* post_image9.jpeg in Resources */,
+				CC5A5B4C1E6AEE5200BF60C2 /* White-right-arrow@2x.png in Resources */,
+				CC5A5B4D1E6AEE5200BF60C2 /* MRShareOptionTableViewCell.xib in Resources */,
+				CC5A5B4E1E6AEE5200BF60C2 /* call-medrep@2x.png in Resources */,
+				CC5A5B4F1E6AEE5200BF60C2 /* reg@2x.png in Resources */,
+				CC5A5B501E6AEE5200BF60C2 /* readnotification3@3x.jpg in Resources */,
+				CC5A5B511E6AEE5200BF60C2 /* ViewController.xib in Resources */,
+				CC5A5B521E6AEE5200BF60C2 /* crthera@3x.png in Resources */,
+				CC5A5B531E6AEE5200BF60C2 /* GroupPostChildTableViewCell.xib in Resources */,
+				CC5A5B541E6AEE5200BF60C2 /* surveys_dashboard@3x.png in Resources */,
+				CC5A5B551E6AEE5200BF60C2 /* profile_pic9.jpeg in Resources */,
+				CC5A5B561E6AEE5200BF60C2 /* PHdrugsales@3x.png in Resources */,
+				CC5A5B571E6AEE5200BF60C2 /* cnsort@3x.png in Resources */,
+				CC5A5B581E6AEE5200BF60C2 /* Doctor_Profile_Page.jpg in Resources */,
+				CC5A5B591E6AEE5200BF60C2 /* email@2x.png in Resources */,
+				CC5A5B5A1E6AEE5200BF60C2 /* input@2x~iPad.png in Resources */,
+				CC5A5B5B1E6AEE5200BF60C2 /* minus@2x.png in Resources */,
+				CC5A5B5C1E6AEE5200BF60C2 /* dashboard_menu@2x.png in Resources */,
+				CC5A5B5D1E6AEE5200BF60C2 /* MRCollectionView.xib in Resources */,
+				CC5A5B5E1E6AEE5200BF60C2 /* MRAppointmentListViewController.xib in Resources */,
+				CC5A5B5F1E6AEE5200BF60C2 /* PHthera@3x.png in Resources */,
+				CC5A5B601E6AEE5200BF60C2 /* Icon-60@2x.png in Resources */,
+				CC5A5B611E6AEE5200BF60C2 /* drug-icon@3x.png in Resources */,
+				CC5A5B621E6AEE5200BF60C2 /* favFilter-checked@3x.png in Resources */,
+				CC5A5B631E6AEE5200BF60C2 /* navLogo@3x.png in Resources */,
+				CC5A5B641E6AEE5200BF60C2 /* MRPHSurveyListViewController.xib in Resources */,
+				CC5A5B651E6AEE5200BF60C2 /* reminder@2x.png in Resources */,
+				CC5A5B661E6AEE5200BF60C2 /* profile_pic13.jpeg in Resources */,
+				CC5A5B671E6AEE5200BF60C2 /* surveys@3x.png in Resources */,
+				CC5A5B681E6AEE5200BF60C2 /* favFilter-checked@2x.png in Resources */,
+				CC5A5B691E6AEE5200BF60C2 /* MRTransformViewController.xib in Resources */,
+				CC5A5B6A1E6AEE5200BF60C2 /* favFilter-wrong@2x.png in Resources */,
+				CC5A5B6B1E6AEE5200BF60C2 /* fbUnSelectedRadio@2x.png in Resources */,
+				CC5A5B6C1E6AEE5200BF60C2 /* HomeLogo@2x~iPad.png in Resources */,
+				CC5A5B6D1E6AEE5200BF60C2 /* addicon.png in Resources */,
+				CC5A5B6E1E6AEE5200BF60C2 /* pageviewdots@2x.png in Resources */,
+				CC5A5B6F1E6AEE5200BF60C2 /* upArrow@2x.png in Resources */,
+				CC5A5B701E6AEE5200BF60C2 /* left-arrow@3x.png in Resources */,
+				CC5A5B711E6AEE5200BF60C2 /* profile_pic10.jpeg in Resources */,
+				CC5A5B721E6AEE5200BF60C2 /* img1@3x.jpg in Resources */,
+				CC5A5B731E6AEE5200BF60C2 /* MRShareDetailTableViewCell.xib in Resources */,
+				CC5A5B741E6AEE5200BF60C2 /* building-icon@2x.png in Resources */,
+				CC5A5B751E6AEE5200BF60C2 /* crdown-arrow@3x.png in Resources */,
+				CC5A5B761E6AEE5200BF60C2 /* fbUnSelectedRadio@3x.png in Resources */,
+				CC5A5B771E6AEE5200BF60C2 /* search-for-drugs@3x.png in Resources */,
+				CC5A5B781E6AEE5200BF60C2 /* profileIcon@3x.png in Resources */,
+				CC5A5B791E6AEE5200BF60C2 /* MRViewRepAppointmnetViewController.xib in Resources */,
+				CC5A5B7A1E6AEE5200BF60C2 /* Default-667h@2x.png in Resources */,
+				CC5A5B7B1E6AEE5200BF60C2 /* reveal-icon@2x.png in Resources */,
+				CC5A5B7C1E6AEE5200BF60C2 /* left-arrow@2x.png in Resources */,
+				CC5A5B7D1E6AEE5200BF60C2 /* PHdashboard-bg@3x.png in Resources */,
+				CC5A5B7E1E6AEE5200BF60C2 /* Contact.png in Resources */,
+				CC5A5B7F1E6AEE5200BF60C2 /* otpTiccMark@2x.png in Resources */,
+				CC5A5B801E6AEE5200BF60C2 /* MRAddMemberTableViewCell.xib in Resources */,
+				CC5A5B811E6AEE5200BF60C2 /* catransparent@2x.jpg in Resources */,
+				CC5A5B821E6AEE5200BF60C2 /* pencil@3x.png in Resources */,
+				CC5A5B831E6AEE5200BF60C2 /* post_image10.jpeg in Resources */,
+				CC5A5B841E6AEE5200BF60C2 /* smallTickmark@2x.png in Resources */,
+				CC5A5B851E6AEE5200BF60C2 /* MRCompetitorAnalasysCell.xib in Resources */,
+				CC5A5B861E6AEE5200BF60C2 /* froverdue@2x.png in Resources */,
+				CC5A5B871E6AEE5200BF60C2 /* ddpresent-activity-normal@2x.png in Resources */,
+				CC5A5B881E6AEE5200BF60C2 /* plus.png in Resources */,
+				CC5A5B891E6AEE5200BF60C2 /* team@3x.png in Resources */,
+				CC5A5B8A1E6AEE5200BF60C2 /* MRDoctorActivityScoreDetailsViewController.xib in Resources */,
+				CC5A5B8B1E6AEE5200BF60C2 /* starunselected@3x.png in Resources */,
+				CC5A5B8C1E6AEE5200BF60C2 /* MRForgotPasswordViewController.xib in Resources */,
+				CC5A5B8D1E6AEE5200BF60C2 /* crup-arrow@2x.png in Resources */,
+				CC5A5B8E1E6AEE5200BF60C2 /* NotificationWebViewController.xib in Resources */,
+				CC5A5B8F1E6AEE5200BF60C2 /* dddoctor-analysis-hover@2x.png in Resources */,
+				CC5A5B901E6AEE5200BF60C2 /* cancelBtn.png in Resources */,
+				CC5A5B911E6AEE5200BF60C2 /* MRNotificationChartStoryboard.storyboard in Resources */,
+				CC5A5B921E6AEE5200BF60C2 /* navLogo@2x.png in Resources */,
+				CC5A5B931E6AEE5200BF60C2 /* notification@3x.png in Resources */,
+				CC5A5B941E6AEE5200BF60C2 /* profile_pic5.jpeg in Resources */,
+				CC5A5B951E6AEE5200BF60C2 /* star@2x.png in Resources */,
+				CC5A5B961E6AEE5200BF60C2 /* crdown-arrow@2x.png in Resources */,
+				CC5A5B971E6AEE5200BF60C2 /* otpTiccMark@3x.png in Resources */,
+				CC5A5B981E6AEE5200BF60C2 /* MRMenuTableViewCell.xib in Resources */,
+				CC5A5B991E6AEE5200BF60C2 /* userProfilePic1.png in Resources */,
+				CC5A5B9A1E6AEE5200BF60C2 /* full-screen@3x.png in Resources */,
+				CC5A5B9B1E6AEE5200BF60C2 /* post_image11.jpeg in Resources */,
+				CC5A5B9C1E6AEE5200BF60C2 /* previewImage.png in Resources */,
+				CC5A5B9D1E6AEE5200BF60C2 /* Icon-40@3x.png in Resources */,
+				CC5A5B9E1E6AEE5200BF60C2 /* completed_icon@3x.png in Resources */,
+				CC5A5B9F1E6AEE5200BF60C2 /* dddoctor-analysis-hover@3x.png in Resources */,
+				CC5A5BA01E6AEE5200BF60C2 /* MRDoctorScoreTableCell.xib in Resources */,
+				CC5A5BA11E6AEE5200BF60C2 /* MRConvertAppointmentViewController.xib in Resources */,
+				CC5A5BA21E6AEE5200BF60C2 /* commentIcon.png in Resources */,
+				CC5A5BA31E6AEE5200BF60C2 /* SVProgressHUD.bundle in Resources */,
+				CC5A5BA41E6AEE5200BF60C2 /* MROTPViewController.xib in Resources */,
+				CC5A5BA51E6AEE5200BF60C2 /* favorite@2x.png in Resources */,
+				CC5A5BA61E6AEE5200BF60C2 /* MRDoctorDetailsTableViewCell.xib in Resources */,
+				CC5A5BA71E6AEE5200BF60C2 /* reg@3x.png in Resources */,
+				CC5A5BA81E6AEE5200BF60C2 /* frpie@3x.png in Resources */,
+				CC5A5BA91E6AEE5200BF60C2 /* reminderSelected@2x.png in Resources */,
+				CC5A5BAA1E6AEE5200BF60C2 /* Signup_plain~iPad.png in Resources */,
+				CC5A5BAB1E6AEE5200BF60C2 /* radioSelection@3x.png in Resources */,
+				CC5A5BAC1E6AEE5200BF60C2 /* Images.xcassets in Resources */,
+				CC5A5BAD1E6AEE5200BF60C2 /* Profile.json in Resources */,
+				CC5A5BAE1E6AEE5200BF60C2 /* Icon-Small@2x.png in Resources */,
+				CC5A5BAF1E6AEE5200BF60C2 /* MRContactWithinGroupCollectionCellCollectionViewCell.xib in Resources */,
+				CC5A5BB01E6AEE5200BF60C2 /* EditContactInfoViewController.xib in Resources */,
+				CC5A5BB11E6AEE5200BF60C2 /* Dashboard.jpg in Resources */,
+				CC5A5BB21E6AEE5200BF60C2 /* transperent-bg@2x.png in Resources */,
+				CC5A5BB31E6AEE5200BF60C2 /* MRMyWallItemTableViewCell.xib in Resources */,
+				CC5A5BB41E6AEE5200BF60C2 /* PHactivity@3x.png in Resources */,
+				CC5A5BB51E6AEE5200BF60C2 /* full-screen@2x.png in Resources */,
+				CC5A5BB61E6AEE5200BF60C2 /* PHmail@2x.png in Resources */,
+				CC5A5BB71E6AEE5200BF60C2 /* nabar@2x.png in Resources */,
+				CC5A5BB81E6AEE5200BF60C2 /* PHmedrep@3x.png in Resources */,
+				CC5A5BB91E6AEE5200BF60C2 /* PHprescription@3x.png in Resources */,
+				CC5A5BBA1E6AEE5200BF60C2 /* wallet@3x.png in Resources */,
+				CC5A5BBB1E6AEE5200BF60C2 /* radioUnSelection@3x.png in Resources */,
+				CC5A5BBC1E6AEE5200BF60C2 /* Default-568h@2x.png in Resources */,
+				CC5A5BBD1E6AEE5200BF60C2 /* groupList.json in Resources */,
+				CC5A5BBE1E6AEE5200BF60C2 /* selected.png in Resources */,
+				CC5A5BBF1E6AEE5200BF60C2 /* MRSurveyListViewController.xib in Resources */,
+				CC5A5BC01E6AEE5200BF60C2 /* notificationback@3x.png in Resources */,
+				CC5A5BC11E6AEE5200BF60C2 /* fbSelectedRadio@3x.png in Resources */,
+				CC5A5BC21E6AEE5200BF60C2 /* Icon-40@2x.png in Resources */,
+				CC5A5BC31E6AEE5200BF60C2 /* notification_dash@2x.png in Resources */,
+				CC5A5BC41E6AEE5200BF60C2 /* PHproductcampaigns@2x.png in Resources */,
+				CC5A5BC51E6AEE5200BF60C2 /* star@3x.png in Resources */,
+				CC5A5BC61E6AEE5200BF60C2 /* profile_pic15.jpeg in Resources */,
+				CC5A5BC71E6AEE5200BF60C2 /* pcselect@2x.png in Resources */,
+				CC5A5BC81E6AEE5200BF60C2 /* profile_pic12.jpeg in Resources */,
+				CC5A5BC91E6AEE5200BF60C2 /* MRMyWallViewController.xib in Resources */,
+				CC5A5BCA1E6AEE5200BF60C2 /* MRJoinGroupViewController.xib in Resources */,
+				CC5A5BCB1E6AEE5200BF60C2 /* MRPHDownloadSurveyReportsViewController.xib in Resources */,
+				CC5A5BCC1E6AEE5200BF60C2 /* profile_pic8.jpeg in Resources */,
+				CC5A5BCD1E6AEE5200BF60C2 /* logo_icon@2x.png in Resources */,
+				CC5A5BCE1E6AEE5200BF60C2 /* addProfileItemsTableViewCell.xib in Resources */,
+				CC5A5BCF1E6AEE5200BF60C2 /* news@2x.png in Resources */,
+				CC5A5BD01E6AEE5200BF60C2 /* starunselected@2x.png in Resources */,
+				CC5A5BD11E6AEE5200BF60C2 /* MRContactCollectionCell.xib in Resources */,
+				CC5A5BD21E6AEE5200BF60C2 /* locationPin@2x~iPad.png in Resources */,
+				CC5A5BD31E6AEE5200BF60C2 /* MRPHDashBoardViewController_iPhone.xib in Resources */,
+				CC5A5BD41E6AEE5200BF60C2 /* eye.png in Resources */,
+				CC5A5BD51E6AEE5200BF60C2 /* post_image7.jpeg in Resources */,
+				CC5A5BD61E6AEE5200BF60C2 /* MRPHSurveyDetailsViewController.xib in Resources */,
+				CC5A5BD71E6AEE5200BF60C2 /* searc--for-drugs@2x.png in Resources */,
+				CC5A5BD81E6AEE5200BF60C2 /* camara-icon@2x.png in Resources */,
+				CC5A5BD91E6AEE5200BF60C2 /* hospital@2x.png in Resources */,
+				CC5A5BDA1E6AEE5200BF60C2 /* dropDownButton@2x.png in Resources */,
+				CC5A5BDB1E6AEE5200BF60C2 /* PHnotification@3x.png in Resources */,
+				CC5A5BDC1E6AEE5200BF60C2 /* MRViewAppointmnetViewController.xib in Resources */,
+				CC5A5BDD1E6AEE5200BF60C2 /* crup-arrow@3x.png in Resources */,
+				CC5A5BDE1E6AEE5200BF60C2 /* pcfedback@2x.png in Resources */,
+				CC5A5BDF1E6AEE5200BF60C2 /* medicine.jpg in Resources */,
+				CC5A5BE01E6AEE5200BF60C2 /* MRPopoverControllerViewController.xib in Resources */,
+				CC5A5BE11E6AEE5200BF60C2 /* frsnooze@2x.png in Resources */,
+				CC5A5BE21E6AEE5200BF60C2 /* post_image1.jpeg in Resources */,
+				CC5A5BE31E6AEE5200BF60C2 /* MRMarketingCampaignController.xib in Resources */,
+				CC5A5BE41E6AEE5200BF60C2 /* ndchecked@3x.png in Resources */,
+				CC5A5BE51E6AEE5200BF60C2 /* profile_pic11.jpeg in Resources */,
+				CC5A5BE61E6AEE5200BF60C2 /* ActivityScore@2x.png in Resources */,
+				CC5A5BE71E6AEE5200BF60C2 /* post_image2.jpeg in Resources */,
+				CC5A5BE81E6AEE5200BF60C2 /* group_pic1.png in Resources */,
+				CC5A5BE91E6AEE5200BF60C2 /* Icon-72@2x.png in Resources */,
+				CC5A5BEA1E6AEE5200BF60C2 /* PHdrugsales@2x.png in Resources */,
+				CC5A5BEB1E6AEE5200BF60C2 /* activity-score@2x.png in Resources */,
+				CC5A5BEC1E6AEE5200BF60C2 /* MRRegistationTwoViewController.xib in Resources */,
+				CC5A5BED1E6AEE5200BF60C2 /* favorite@3x.png in Resources */,
+				CC5A5BEE1E6AEE5200BF60C2 /* ndInput@3x.png in Resources */,
+				CC5A5BEF1E6AEE5200BF60C2 /* MRGroupPostItemTableViewCell.xib in Resources */,
+				CC5A5BF01E6AEE5200BF60C2 /* Default.png in Resources */,
+				CC5A5BF11E6AEE5200BF60C2 /* MRFavoritesNotificationsViewController.xib in Resources */,
+				CC5A5BF21E6AEE5200BF60C2 /* cncompany2@2x.jpg in Resources */,
+				CC5A5BF31E6AEE5200BF60C2 /* frpie-bg@2x.jpg in Resources */,
+				CC5A5BF41E6AEE5200BF60C2 /* MRListViewController.xib in Resources */,
+				CC5A5BF51E6AEE5200BF60C2 /* feedback@2x.png in Resources */,
+				CC5A5BF61E6AEE5200BF60C2 /* Icon-Small.png in Resources */,
+				CC5A5BF71E6AEE5200BF60C2 /* NDcompany2-BG@2x.jpg in Resources */,
+				CC5A5BF81E6AEE5200BF60C2 /* cnsort@2x.png in Resources */,
+				CC5A5BF91E6AEE5200BF60C2 /* Icon-40.png in Resources */,
+				CC5A5BFA1E6AEE5200BF60C2 /* MRWelcomeViewController.xib in Resources */,
+				CC5A5BFB1E6AEE5200BF60C2 /* minus@3x.png in Resources */,
+				CC5A5BFC1E6AEE5200BF60C2 /* calender-icon@3x.png in Resources */,
+				CC5A5BFD1E6AEE5200BF60C2 /* profileBG.png in Resources */,
+				CC5A5BFE1E6AEE5200BF60C2 /* team@2x.png in Resources */,
+				CC5A5BFF1E6AEE5200BF60C2 /* MRAppointmentCell.xib in Resources */,
+				CC5A5C001E6AEE5200BF60C2 /* comapny-logo@3x.png in Resources */,
+				CC5A5C011E6AEE5200BF60C2 /* caclock-icon@2x.png in Resources */,
+				CC5A5C021E6AEE5200BF60C2 /* discussion-forum@3x.png in Resources */,
+				CC5A5C031E6AEE5200BF60C2 /* meetings@2x.png in Resources */,
+				CC5A5C041E6AEE5200BF60C2 /* completed_icon@2x.png in Resources */,
+				CC5A5C051E6AEE5200BF60C2 /* Icon@2x.png in Resources */,
+				CC5A5C061E6AEE5200BF60C2 /* MRAppointmentListCell.xib in Resources */,
+				CC5A5C071E6AEE5200BF60C2 /* hospital_selection@2x.png in Resources */,
+				CC5A5C081E6AEE5200BF60C2 /* dashboard_menu@3x.png in Resources */,
+				CC5A5C091E6AEE5200BF60C2 /* catrnsparent@3x.jpg in Resources */,
+				CC5A5C0A1E6AEE5200BF60C2 /* pexels-photo.jpg in Resources */,
+				CC5A5C0B1E6AEE5200BF60C2 /* categoryBG.jpg in Resources */,
+				CC5A5C0C1E6AEE5200BF60C2 /* surveys@2x.png in Resources */,
+				CC5A5C0D1E6AEE5200BF60C2 /* frpie@2x.png in Resources */,
+				CC5A5C0E1E6AEE5200BF60C2 /* MRRegistrationRoleViewController.xib in Resources */,
+				CC5A5C0F1E6AEE5200BF60C2 /* MRDrugTableViewCell.xib in Resources */,
+				CC5A5C101E6AEE5200BF60C2 /* marketing@2x.png in Resources */,
+				CC5A5C111E6AEE5200BF60C2 /* my_contacts.json in Resources */,
+				CC5A5C121E6AEE5200BF60C2 /* searchMed.jpg in Resources */,
+				CC5A5C131E6AEE5200BF60C2 /* MRPublicationsDetailsViewController.xib in Resources */,
+				CC5A5C141E6AEE5200BF60C2 /* picklocation@3x.png in Resources */,
+				CC5A5C151E6AEE5200BF60C2 /* PHphone@2x.png in Resources */,
+				CC5A5C161E6AEE5200BF60C2 /* bg@2x.jpg in Resources */,
+				CC5A5C171E6AEE5200BF60C2 /* comapny-logo2@2x.png in Resources */,
+				CC5A5C181E6AEE5200BF60C2 /* caclock-icon@3x.png in Resources */,
+				CC5A5C191E6AEE5200BF60C2 /* password.png in Resources */,
+				CC5A5C1A1E6AEE5200BF60C2 /* MRDoctorActivityScoreViewController.xib in Resources */,
+				CC5A5C1B1E6AEE5200BF60C2 /* upcoming_icon@3x.png in Resources */,
+				CC5A5C1C1E6AEE5200BF60C2 /* ddpresent-activity-hover@2x.png in Resources */,
+				CC5A5C1D1E6AEE5200BF60C2 /* MRNotificationsDetailsViewController.xib in Resources */,
+				CC5A5C1E1E6AEE5200BF60C2 /* HomeLogo@2x.png in Resources */,
+				CC5A5C1F1E6AEE5200BF60C2 /* ActivityScore@3x.png in Resources */,
+				CC5A5C201E6AEE5200BF60C2 /* input@2x.png in Resources */,
+				CC5A5C211E6AEE5200BF60C2 /* news_dash@3x.png in Resources */,
+				CC5A5C221E6AEE5200BF60C2 /* wallet@2x.png in Resources */,
+				CC5A5C231E6AEE5200BF60C2 /* PHmarketingMenu@3x.png in Resources */,
+				CC5A5C241E6AEE5200BF60C2 /* MRDoctorScoreViewController.xib in Resources */,
+				CC5A5C251E6AEE5200BF60C2 /* privateHospital@2x.png in Resources */,
+				CC5A5C261E6AEE5200BF60C2 /* favFilter-unchecked@3x.png in Resources */,
+				CC5A5C271E6AEE5200BF60C2 /* UINotificationChartViewController.xib in Resources */,
+				CC5A5C281E6AEE5200BF60C2 /* PHactivity@2x.png in Resources */,
+				CC5A5C291E6AEE5200BF60C2 /* MRNewProductCompaignsViewController.xib in Resources */,
+				CC5A5C2A1E6AEE5200BF60C2 /* dddoctor-analysis-normal@2x.png in Resources */,
+				CC5A5C2B1E6AEE5200BF60C2 /* MRShareViewController.xib in Resources */,
+				CC5A5C2C1E6AEE5200BF60C2 /* profile_pic4.jpeg in Resources */,
+				CC5A5C2D1E6AEE5200BF60C2 /* MemberListViewController.xib in Resources */,
+				CC5A5C2E1E6AEE5200BF60C2 /* MRDashBoardVC.xib in Resources */,
+				CC5A5C2F1E6AEE5200BF60C2 /* email.png in Resources */,
+				CC5A5C301E6AEE5200BF60C2 /* MRAddMembersViewController.xib in Resources */,
+				CC5A5C311E6AEE5200BF60C2 /* PHdividers@2x.png in Resources */,
+				CC5A5C321E6AEE5200BF60C2 /* addicon@2x.png in Resources */,
+				CC5A5C331E6AEE5200BF60C2 /* latestNotificatins@3x.png in Resources */,
+				CC5A5C341E6AEE5200BF60C2 /* MRDocotrActivityScoreViewController.xib in Resources */,
+				CC5A5C351E6AEE5200BF60C2 /* notification_dash@3x.png in Resources */,
+				CC5A5C361E6AEE5200BF60C2 /* fbSelectedRadio@2x.png in Resources */,
+				CC5A5C371E6AEE5200BF60C2 /* profileIcon@2x.png in Resources */,
+				CC5A5C381E6AEE5200BF60C2 /* Icon-76@2x.png in Resources */,
+				CC5A5C391E6AEE5200BF60C2 /* MRContactsViewController.xib in Resources */,
+				CC5A5C3A1E6AEE5200BF60C2 /* NDcompany2-BG@3x.jpg in Resources */,
+				CC5A5C3B1E6AEE5200BF60C2 /* MRSurveyDetailsViewController.xib in Resources */,
+				CC5A5C3C1E6AEE5200BF60C2 /* MRAddressView.xib in Resources */,
+				CC5A5C3D1E6AEE5200BF60C2 /* feedbackSelected@2x.png in Resources */,
+				CC5A5C3E1E6AEE5200BF60C2 /* img1@2x.jpg in Resources */,
+				CC5A5C3F1E6AEE5200BF60C2 /* MRPharmaNotificationDetailsViewController.xib in Resources */,
+				CC5A5C401E6AEE5200BF60C2 /* profile_pic2.jpeg in Resources */,
+				CC5A5C411E6AEE5200BF60C2 /* UICustomDatePicker.xib in Resources */,
+				CC5A5C421E6AEE5200BF60C2 /* person.png in Resources */,
+				CC5A5C431E6AEE5200BF60C2 /* crthera@2x.png in Resources */,
+				CC5A5C441E6AEE5200BF60C2 /* MRPharmaMenuViewController.xib in Resources */,
+				CC5A5C451E6AEE5200BF60C2 /* White-right-arrow@3x.png in Resources */,
+				CC5A5C461E6AEE5200BF60C2 /* NDcompany1@3x.jpg in Resources */,
+				CC5A5C471E6AEE5200BF60C2 /* Icon-76.png in Resources */,
+				CC5A5C481E6AEE5200BF60C2 /* PHsurveys@2x.png in Resources */,
+				CC5A5C491E6AEE5200BF60C2 /* frsnoozed@3x.png in Resources */,
+				CC5A5C4A1E6AEE5200BF60C2 /* PHphone@3x.png in Resources */,
+				CC5A5C4B1E6AEE5200BF60C2 /* MRFeedBackResultCell.xib in Resources */,
+				CC5A5C4C1E6AEE5200BF60C2 /* activity-score@3x.png in Resources */,
+				CC5A5C4D1E6AEE5200BF60C2 /* post_image3.jpeg in Resources */,
+				CC5A5C4E1E6AEE5200BF60C2 /* crossPlusButton.png in Resources */,
+				CC5A5C4F1E6AEE5200BF60C2 /* right-arrow@3x.png in Resources */,
+				CC5A5C501E6AEE5200BF60C2 /* PHmarketing@3x.png in Resources */,
+				CC5A5C511E6AEE5200BF60C2 /* group_pic5.png in Resources */,
+				CC5A5C521E6AEE5200BF60C2 /* ndchecked@2x.png in Resources */,
+				CC5A5C531E6AEE5200BF60C2 /* discussion-forum@2x.png in Resources */,
+				CC5A5C541E6AEE5200BF60C2 /* dsbg@2x.jpg in Resources */,
+				CC5A5C551E6AEE5200BF60C2 /* EditLocationViewController.xib in Resources */,
+				CC5A5C561E6AEE5200BF60C2 /* MRAppointmentCollectionViewCell.xib in Resources */,
+				CC5A5C571E6AEE5200BF60C2 /* PHmail@3x.png in Resources */,
+				CC5A5C581E6AEE5200BF60C2 /* MRGroupsViewController.xib in Resources */,
+				CC5A5C591E6AEE5200BF60C2 /* notificationbody-bg@2x.jpg in Resources */,
+				CC5A5C5A1E6AEE5200BF60C2 /* NDcompany4@2x.jpg in Resources */,
+				CC5A5C5B1E6AEE5200BF60C2 /* marketing@3x.png in Resources */,
+				CC5A5C5C1E6AEE5200BF60C2 /* ProfileStoryboard.storyboard in Resources */,
+				CC5A5C5D1E6AEE5200BF60C2 /* ndInput@2x.png in Resources */,
+				CC5A5C5E1E6AEE5200BF60C2 /* setting@2x.png in Resources */,
+				CC5A5C5F1E6AEE5200BF60C2 /* dashboard-bg@2x.png in Resources */,
+				CC5A5C601E6AEE5200BF60C2 /* ddpresent-activity-hover@3x.png in Resources */,
+				CC5A5C611E6AEE5200BF60C2 /* InfoPlist.strings in Resources */,
+				CC5A5C621E6AEE5200BF60C2 /* cancelBtn@2x.png in Resources */,
+				CC5A5C631E6AEE5200BF60C2 /* MPNotificationAlertViewController.xib in Resources */,
+				CC5A5C641E6AEE5200BF60C2 /* pcfeedback@3x.png in Resources */,
+				CC5A5C651E6AEE5200BF60C2 /* dropDownButton@2x~iPad.png in Resources */,
+				CC5A5C661E6AEE5200BF60C2 /* splashLogo@2x.png in Resources */,
+				CC5A5C671E6AEE5200BF60C2 /* MPNotificatinsTableViewCell.xib in Resources */,
+				CC5A5C681E6AEE5200BF60C2 /* froverdue@3x.png in Resources */,
+				CC5A5C691E6AEE5200BF60C2 /* PHdashboard-bg@2x.png in Resources */,
+				CC5A5C6A1E6AEE5200BF60C2 /* Signup_plain@2x~iPad.png in Resources */,
+				CC5A5C6B1E6AEE5200BF60C2 /* post_image5.jpeg in Resources */,
+				CC5A5C6C1E6AEE5200BF60C2 /* MRRegistationViewController.xib in Resources */,
+				CC5A5C6D1E6AEE5200BF60C2 /* PHdoctor@2x.png in Resources */,
+				CC5A5C6E1E6AEE5200BF60C2 /* news_dash@2x.png in Resources */,
+				CC5A5C6F1E6AEE5200BF60C2 /* favoriteSelected@2x.png in Resources */,
+				CC5A5C701E6AEE5200BF60C2 /* cncompany3@3x.jpg in Resources */,
+				CC5A5C711E6AEE5200BF60C2 /* settings1.png in Resources */,
+				CC5A5C721E6AEE5200BF60C2 /* addressbook-green-icon.png in Resources */,
+				CC5A5C731E6AEE5200BF60C2 /* MRTransformDetailViewController.xib in Resources */,
+				CC5A5C741E6AEE5200BF60C2 /* group_pic3.png in Resources */,
+				CC5A5C751E6AEE5200BF60C2 /* MRMenuViewController.xib in Resources */,
+				CC5A5C761E6AEE5200BF60C2 /* PHthera@2x.png in Resources */,
+				CC5A5C771E6AEE5200BF60C2 /* camara-icon@3x.png in Resources */,
+				CC5A5C781E6AEE5200BF60C2 /* crgreydown-arrow@3x.png in Resources */,
+				CC5A5C791E6AEE5200BF60C2 /* MRReadNotificationsViewController.xib in Resources */,
+				CC5A5C7A1E6AEE5200BF60C2 /* feedbackSelected@3.png in Resources */,
+				CC5A5C7B1E6AEE5200BF60C2 /* MRShareOptionsViewController.xib in Resources */,
+				CC5A5C7C1E6AEE5200BF60C2 /* HomeLogo@3x.png in Resources */,
+				CC5A5C7D1E6AEE5200BF60C2 /* PHdividers@3x.png in Resources */,
+				CC5A5C7E1E6AEE5200BF60C2 /* PHdashboard-banner@3x.png in Resources */,
+				CC5A5C7F1E6AEE5200BF60C2 /* settings@3x.png in Resources */,
+				CC5A5C801E6AEE5200BF60C2 /* MRServeViewController.xib in Resources */,
+				CC5A5C811E6AEE5200BF60C2 /* gallery_pic.png in Resources */,
+				CC5A5C821E6AEE5200BF60C2 /* ddpresent-activity-normal@3x.png in Resources */,
+				CC5A5C831E6AEE5200BF60C2 /* MRRegHeaderView.xib in Resources */,
+				CC5A5C841E6AEE5200BF60C2 /* post_image8.jpeg in Resources */,
+				CC5A5C851E6AEE5200BF60C2 /* reveal-icon@3x.png in Resources */,
+				CC5A5C861E6AEE5200BF60C2 /* MRNotificationsViewController.xib in Resources */,
+				CC5A5C871E6AEE5200BF60C2 /* MRGroupMembersViewController.xib in Resources */,
+				CC5A5C881E6AEE5200BF60C2 /* MRMedRepDetailsViewController.xib in Resources */,
+				CC5A5C891E6AEE5200BF60C2 /* categoryBG@2x~iPad.jpg in Resources */,
+				CC5A5C8A1E6AEE5200BF60C2 /* radioUnSelection@2x.png in Resources */,
+				CC5A5C8B1E6AEE5200BF60C2 /* PHmedrep@2x.png in Resources */,
+				CC5A5C8C1E6AEE5200BF60C2 /* transperent-bg@3x.png in Resources */,
+				CC5A5C8D1E6AEE5200BF60C2 /* stepThree@2x.png in Resources */,
+				CC5A5C8E1E6AEE5200BF60C2 /* MRCompaignsDetailsViewController.xib in Resources */,
+				CC5A5C8F1E6AEE5200BF60C2 /* searchScreen.png in Resources */,
+				CC5A5C901E6AEE5200BF60C2 /* latestNotificatins@2x.png in Resources */,
+				CC5A5C911E6AEE5200BF60C2 /* MRMedrepMeetingsCell.xib in Resources */,
+				CC5A5C921E6AEE5200BF60C2 /* favFilter-wrong@3x.png in Resources */,
+				CC5A5C931E6AEE5200BF60C2 /* PHmarketingMenu@2x.png in Resources */,
+				CC5A5C941E6AEE5200BF60C2 /* Edit Property-100.png in Resources */,
+				CC5A5C951E6AEE5200BF60C2 /* MRDoctorDetailsViewController.xib in Resources */,
+				CC5A5C961E6AEE5200BF60C2 /* logout@2x.png in Resources */,
+				CC5A5C971E6AEE5200BF60C2 /* MRGroupsListViewController.xib in Resources */,
+				CC5A5C981E6AEE5200BF60C2 /* Drug Search White.jpg in Resources */,
+				CC5A5C991E6AEE5200BF60C2 /* pcminus@3x.png in Resources */,
+				CC5A5C9A1E6AEE5200BF60C2 /* PHproduct-campaigns@3x.png in Resources */,
+				CC5A5C9B1E6AEE5200BF60C2 /* pcplus@2x.png in Resources */,
+				CC5A5C9C1E6AEE5200BF60C2 /* posts.json in Resources */,
+				CC5A5C9D1E6AEE5200BF60C2 /* Icon-Small-50.png in Resources */,
+				CC5A5C9E1E6AEE5200BF60C2 /* PHmarketing@2x.png in Resources */,
+				CC5A5C9F1E6AEE5200BF60C2 /* categoryBG-667h@2x.jpg in Resources */,
+				CC5A5CA01E6AEE5200BF60C2 /* stepOne@2x.png in Resources */,
+				CC5A5CA11E6AEE5200BF60C2 /* HomeLogo~iPad.png in Resources */,
+				CC5A5CA21E6AEE5200BF60C2 /* Signup_plain@3x.png in Resources */,
+				CC5A5CA31E6AEE5200BF60C2 /* building-icon@3x.png in Resources */,
+				CC5A5CA41E6AEE5200BF60C2 /* stepTwo@2x.png in Resources */,
+				CC5A5CA51E6AEE5200BF60C2 /* download@3x.png in Resources */,
+				CC5A5CA61E6AEE5200BF60C2 /* download@2x.png in Resources */,
+				CC5A5CA71E6AEE5200BF60C2 /* MRMedRepMeetingsViewController.xib in Resources */,
+				CC5A5CA81E6AEE5200BF60C2 /* picklocation@2x.png in Resources */,
+				CC5A5CA91E6AEE5200BF60C2 /* Icon-Small-50@2x.png in Resources */,
+				CC5A5CAA1E6AEE5200BF60C2 /* MRContactDetailViewController.xib in Resources */,
+				CC5A5CAB1E6AEE5200BF60C2 /* cathera@3x.png in Resources */,
+				CC5A5CAC1E6AEE5200BF60C2 /* groups.png in Resources */,
+				CC5A5CAD1E6AEE5200BF60C2 /* Contacts.png in Resources */,
+				CC5A5CAE1E6AEE5200BF60C2 /* cncompany1@2x.jpg in Resources */,
+				CC5A5CAF1E6AEE5200BF60C2 /* profile_pic1.jpeg in Resources */,
+				CC5A5CB01E6AEE5200BF60C2 /* time-icon@3x.png in Resources */,
+				CC5A5CB11E6AEE5200BF60C2 /* Default@3x.png in Resources */,
+				CC5A5CB21E6AEE5200BF60C2 /* suggested_contacts.json in Resources */,
+				CC5A5CB31E6AEE5200BF60C2 /* locationPin@2x.png in Resources */,
+				CC5A5CB41E6AEE5200BF60C2 /* MRFeedBackResultViewController.xib in Resources */,
+				CC5A5CB51E6AEE5200BF60C2 /* favFilter-unchecked@2x.png in Resources */,
+				CC5A5CB61E6AEE5200BF60C2 /* radioSelection@2x.png in Resources */,
+				CC5A5CB71E6AEE5200BF60C2 /* Icon-Small@3x.png in Resources */,
+				CC5A5CB81E6AEE5200BF60C2 /* MRCompetitorAnalasysViewController.xib in Resources */,
+				CC5A5CB91E6AEE5200BF60C2 /* pending_icon@3x.png in Resources */,
+				CC5A5CBA1E6AEE5200BF60C2 /* MPCallMedrepViewController.xib in Resources */,
+				CC5A5CBB1E6AEE5200BF60C2 /* CameraClick.png in Resources */,
+				CC5A5CBC1E6AEE5200BF60C2 /* TutorialView.xib in Resources */,
+				CC5A5CBD1E6AEE5200BF60C2 /* cncompany1@3x.jpg in Resources */,
+				CC5A5CBE1E6AEE5200BF60C2 /* MRDrugSearchViewController.xib in Resources */,
+				CC5A5CBF1E6AEE5200BF60C2 /* cncompany3@2x.jpg in Resources */,
+				CC5A5CC01E6AEE5200BF60C2 /* MRNewProductCell.xib in Resources */,
+				CC5A5CC11E6AEE5200BF60C2 /* favoriteSelected@3x.png in Resources */,
+				CC5A5CC21E6AEE5200BF60C2 /* surveys_dashboard@2x.png in Resources */,
+				CC5A5CC31E6AEE5200BF60C2 /* NDcompany4@3x.jpg in Resources */,
+				CC5A5CC41E6AEE5200BF60C2 /* PHnotifications@2x.png in Resources */,
+				CC5A5CC51E6AEE5200BF60C2 /* minus.png in Resources */,
+				CC5A5CC61E6AEE5200BF60C2 /* profile_pic14.jpeg in Resources */,
+				CC5A5CC71E6AEE5200BF60C2 /* pcright-arrow@3x.png in Resources */,
+				CC5A5CC81E6AEE5200BF60C2 /* notification@2x.png in Resources */,
+				CC5A5CC91E6AEE5200BF60C2 /* smallTickmark@2x~iPad.png in Resources */,
+				CC5A5CCA1E6AEE5200BF60C2 /* iTunesArtwork@2x in Resources */,
+				CC5A5CCB1E6AEE5200BF60C2 /* cncompany2@3x.jpg in Resources */,
+				CC5A5CCC1E6AEE5200BF60C2 /* bg~iPad.png in Resources */,
+				CC5A5CCD1E6AEE5200BF60C2 /* downArrow@2x~iPad.png in Resources */,
+				CC5A5CCE1E6AEE5200BF60C2 /* MRInviteViewController.xib in Resources */,
+				CC5A5CCF1E6AEE5200BF60C2 /* PHprescription@2x.png in Resources */,
+				CC5A5CD01E6AEE5200BF60C2 /* notificationback@2x.png in Resources */,
+				CC5A5CD11E6AEE5200BF60C2 /* group_pic2.jpeg in Resources */,
+				CC5A5CD21E6AEE5200BF60C2 /* pending_icon@2x.png in Resources */,
+				CC5A5CD31E6AEE5200BF60C2 /* NotificationUUIDViewController.xib in Resources */,
+				CC5A5CD41E6AEE5200BF60C2 /* MRTransformTitleCollectionViewCell.xib in Resources */,
+				CC5A5CD51E6AEE5200BF60C2 /* MRCommentViewController.xib in Resources */,
+				CC5A5CD61E6AEE5200BF60C2 /* post_image6.jpeg in Resources */,
+				CC5A5CD71E6AEE5200BF60C2 /* MPTransformTableViewCell.xib in Resources */,
+				CC5A5CD81E6AEE5200BF60C2 /* MRPHProfileDetailsViewController.xib in Resources */,
+				CC5A5CD91E6AEE5200BF60C2 /* MRLoginViewController.xib in Resources */,
+				CC5A5CDA1E6AEE5200BF60C2 /* crgreydown-arrow@2x.png in Resources */,
+				CC5A5CDB1E6AEE5200BF60C2 /* TransformPosts.json in Resources */,
+				CC5A5CDC1E6AEE5200BF60C2 /* upArrow@2x~iPad.png in Resources */,
+				CC5A5CDD1E6AEE5200BF60C2 /* drug-icon@2x.png in Resources */,
+				CC5A5CDE1E6AEE5200BF60C2 /* upcoming_icon@2x.png in Resources */,
+				CC5A5CDF1E6AEE5200BF60C2 /* userLocal.png in Resources */,
+				CC5A5CE01E6AEE5200BF60C2 /* profile_pic7.jpeg in Resources */,
+				CC5A5CE11E6AEE5200BF60C2 /* navigation-icon@2x.png in Resources */,
+				CC5A5CE21E6AEE5200BF60C2 /* right-arrow@2x.png in Resources */,
+				CC5A5CE31E6AEE5200BF60C2 /* bg@2x~iPad.png in Resources */,
+				CC5A5CE41E6AEE5200BF60C2 /* mrkt-cmpn@3x.png in Resources */,
+				CC5A5CE51E6AEE5200BF60C2 /* logo_icon.png in Resources */,
+				CC5A5CE61E6AEE5200BF60C2 /* pageviewdots@2x~iPad copy.png in Resources */,
+				CC5A5CE71E6AEE5200BF60C2 /* iTunesArtwork in Resources */,
+				CC5A5CE81E6AEE5200BF60C2 /* PHlocations@2x.png in Resources */,
+				CC5A5CE91E6AEE5200BF60C2 /* Icon.png in Resources */,
+				CC5A5CEA1E6AEE5200BF60C2 /* MRPHDashBoardViewController_iPad.xib in Resources */,
+				CC5A5CEB1E6AEE5200BF60C2 /* MRDrugDetailViewController.xib in Resources */,
+				CC5A5CEC1E6AEE5200BF60C2 /* MRForgotPasswordTwoViewController.xib in Resources */,
+				CC5A5CED1E6AEE5200BF60C2 /* MRRegistrationRoleCellTableViewCell.xib in Resources */,
+				CC5A5CEE1E6AEE5200BF60C2 /* categoryBG@3x.jpg in Resources */,
+				CC5A5CEF1E6AEE5200BF60C2 /* MRCreateGroupViewController.xib in Resources */,
+				CC5A5CF01E6AEE5200BF60C2 /* MRFavoriteFilterViewController.xib in Resources */,
+				CC5A5CF11E6AEE5200BF60C2 /* MPAppointmentViewController.xib in Resources */,
+				CC5A5CF21E6AEE5200BF60C2 /* frpie-bg@3x.jpg in Resources */,
+				CC5A5CF31E6AEE5200BF60C2 /* mrkt-cmpn@2x.png in Resources */,
+				CC5A5CF41E6AEE5200BF60C2 /* MRProductBrocherViewController.xib in Resources */,
+				CC5A5CF51E6AEE5200BF60C2 /* ddbg@2x.jpg in Resources */,
+				CC5A5CF61E6AEE5200BF60C2 /* Icon-60.png in Resources */,
+				CC5A5CF71E6AEE5200BF60C2 /* ddbg@3x.jpg in Resources */,
+				CC5A5CF81E6AEE5200BF60C2 /* post_image4.jpeg in Resources */,
+				CC5A5CF91E6AEE5200BF60C2 /* navigation-icon@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5876,6 +7221,51 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MedRepDev/Pods-MedRepDev-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		CC5A59F71E6AEE5200BF60C2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CC5A5CFA1E6AEE5200BF60C2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MedRepDev/Pods-MedRepDev-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CC5A5CFB1E6AEE5200BF60C2 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MedRepDev/Pods-MedRepDev-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -6124,6 +7514,246 @@
 			buildActionMask = 2147483647;
 			files = (
 				83C128101B77C88B00D2F08E /* MedRepTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CC5A59F81E6AEE5200BF60C2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CC5A59F91E6AEE5200BF60C2 /* MRAppointmentListViewController.m in Sources */,
+				CC5A59FA1E6AEE5200BF60C2 /* MRReplies+CoreDataProperties.m in Sources */,
+				CC5A59FB1E6AEE5200BF60C2 /* MRCompaignsDetailsViewController.m in Sources */,
+				CC5A59FC1E6AEE5200BF60C2 /* CommonTableViewCell.m in Sources */,
+				CC5A59FD1E6AEE5200BF60C2 /* Reachability.m in Sources */,
+				CC5A59FE1E6AEE5200BF60C2 /* TransformSubCategories.m in Sources */,
+				CC5A59FF1E6AEE5200BF60C2 /* ExperienceSummaryTableViewCell.m in Sources */,
+				CC5A5A001E6AEE5200BF60C2 /* EducationalQualifications.m in Sources */,
+				CC5A5A011E6AEE5200BF60C2 /* NotificationWebViewController.m in Sources */,
+				CC5A5A021E6AEE5200BF60C2 /* MRCommentViewController.m in Sources */,
+				CC5A5A031E6AEE5200BF60C2 /* MRNotificationsDetailsViewController.m in Sources */,
+				CC5A5A041E6AEE5200BF60C2 /* MRGroupPostItemTableViewCell.m in Sources */,
+				CC5A5A051E6AEE5200BF60C2 /* MRSuggestedContact+CoreDataProperties.m in Sources */,
+				CC5A5A061E6AEE5200BF60C2 /* AppDelegate.m in Sources */,
+				CC5A5A071E6AEE5200BF60C2 /* NTMonthYearPicker.m in Sources */,
+				CC5A5A081E6AEE5200BF60C2 /* MRPHSurveyStatistics+CoreDataClass.m in Sources */,
+				CC5A5A091E6AEE5200BF60C2 /* InterestViewController.m in Sources */,
+				CC5A5A0A1E6AEE5200BF60C2 /* WYPopoverController.m in Sources */,
+				CC5A5A0B1E6AEE5200BF60C2 /* MRViewRepAppointmnetViewController.m in Sources */,
+				CC5A5A0C1E6AEE5200BF60C2 /* ProfileBasicTableViewCell.m in Sources */,
+				CC5A5A0D1E6AEE5200BF60C2 /* PublicationsViewController.m in Sources */,
+				CC5A5D021E6AEEEC00BF60C2 /* MRProdEnvironmentConfig.m in Sources */,
+				CC5A5A0E1E6AEE5200BF60C2 /* MRForgotPasswordTwoViewController.m in Sources */,
+				CC5A5A0F1E6AEE5200BF60C2 /* MRCreateGroupViewController.m in Sources */,
+				CC5A5A101E6AEE5200BF60C2 /* MRDoctorDetailsTableViewCell.m in Sources */,
+				CC5A5A111E6AEE5200BF60C2 /* MRFeedBackResultCell.m in Sources */,
+				CC5A5A121E6AEE5200BF60C2 /* MPAppointmentViewController.m in Sources */,
+				CC5A5A131E6AEE5200BF60C2 /* ContactInfo.m in Sources */,
+				CC5A5A141E6AEE5200BF60C2 /* PieView.m in Sources */,
+				CC5A5A151E6AEE5200BF60C2 /* GroupPostChildTableViewCell.m in Sources */,
+				CC5A5A161E6AEE5200BF60C2 /* MRMedRepListTableCell.m in Sources */,
+				CC5A5A171E6AEE5200BF60C2 /* MRProfileDetailsViewController.m in Sources */,
+				CC5A5A181E6AEE5200BF60C2 /* MRShareOptionsViewController.m in Sources */,
+				CC5A5A191E6AEE5200BF60C2 /* KLCPopup.m in Sources */,
+				CC5A5A1A1E6AEE5200BF60C2 /* MRPostedReplies.m in Sources */,
+				CC5A5A1B1E6AEE5200BF60C2 /* MRMedRepMeetingsViewController.m in Sources */,
+				CC5A5A1C1E6AEE5200BF60C2 /* MRSuggestedContact.m in Sources */,
+				CC5A5A1D1E6AEE5200BF60C2 /* MRNotificationType.m in Sources */,
+				CC5A5A1F1E6AEE5200BF60C2 /* MRDrugTableViewCell.m in Sources */,
+				CC5A5A201E6AEE5200BF60C2 /* ExpericeFillUpTableViewCell.m in Sources */,
+				CC5A5A211E6AEE5200BF60C2 /* Base64Transcoder.m in Sources */,
+				CC5A5A221E6AEE5200BF60C2 /* MemberListViewController.m in Sources */,
+				CC5A5A231E6AEE5200BF60C2 /* MRCommon.m in Sources */,
+				CC5A5A241E6AEE5200BF60C2 /* MRSharePost.m in Sources */,
+				CC5A5A251E6AEE5200BF60C2 /* MRPharmaNotificationDetailsViewController.m in Sources */,
+				CC5A5A261E6AEE5200BF60C2 /* MRCompetitorAnalasysCell.m in Sources */,
+				CC5A5A271E6AEE5200BF60C2 /* MRDrugSearchViewController.m in Sources */,
+				CC5A5A281E6AEE5200BF60C2 /* MRMedRepListViewController.m in Sources */,
+				CC5A5A291E6AEE5200BF60C2 /* MRNotificationInsiderViewController.m in Sources */,
+				CC5A5A2A1E6AEE5200BF60C2 /* MRRole.m in Sources */,
+				CC5A5A2B1E6AEE5200BF60C2 /* MRCompetitorAnalasysViewController.m in Sources */,
+				CC5A5A2C1E6AEE5200BF60C2 /* AddressInfo.m in Sources */,
+				CC5A5A2D1E6AEE5200BF60C2 /* MRAppointmentCollectionViewCell.m in Sources */,
+				CC5A5A2E1E6AEE5200BF60C2 /* MRViewAppointmnetViewController.m in Sources */,
+				CC5A5A2F1E6AEE5200BF60C2 /* NotificationUUIDViewController.m in Sources */,
+				CC5A5A301E6AEE5200BF60C2 /* MRTherapeuticArea.m in Sources */,
+				CC5A5A311E6AEE5200BF60C2 /* MRGroupMembers.m in Sources */,
+				CC5A5A321E6AEE5200BF60C2 /* CommonBoxView.m in Sources */,
+				CC5A5A331E6AEE5200BF60C2 /* MRPHSurveyListViewController.m in Sources */,
+				CC5A5A341E6AEE5200BF60C2 /* MrGroupChildPost+CoreDataProperties.m in Sources */,
+				CC5A5A351E6AEE5200BF60C2 /* MRInterestArea.m in Sources */,
+				CC5A5A361E6AEE5200BF60C2 /* MRDrugDetailModel.m in Sources */,
+				CC5A5A371E6AEE5200BF60C2 /* ContactInfo+CoreDataProperties.m in Sources */,
+				CC5A5A381E6AEE5200BF60C2 /* MRAddMembersViewController.m in Sources */,
+				CC5A5A391E6AEE5200BF60C2 /* MRManagedObject.m in Sources */,
+				CC5A5A3A1E6AEE5200BF60C2 /* MRPendingRecordsCount+CoreDataProperties.m in Sources */,
+				CC5A5A3B1E6AEE5200BF60C2 /* MRContactsViewController.m in Sources */,
+				CC5A5A3C1E6AEE5200BF60C2 /* MRListViewController.m in Sources */,
+				CC5A5A3D1E6AEE5200BF60C2 /* MRGroupsViewController.m in Sources */,
+				CC5A5A3E1E6AEE5200BF60C2 /* MRTransformTitleCollectionViewCell.m in Sources */,
+				CC5A5A3F1E6AEE5200BF60C2 /* MRDRActivityTableViewCell.m in Sources */,
+				CC5A5A401E6AEE5200BF60C2 /* MRGroup+CoreDataProperties.m in Sources */,
+				CC5A5A411E6AEE5200BF60C2 /* MRShareDetailViewController.m in Sources */,
+				CC5A5A421E6AEE5200BF60C2 /* MRPendingRecordsCount.m in Sources */,
+				CC5A5A431E6AEE5200BF60C2 /* MRMedrepMeetingsCell.m in Sources */,
+				CC5A5A441E6AEE5200BF60C2 /* MRGroupPost+CoreDataProperties.m in Sources */,
+				CC5A5A451E6AEE5200BF60C2 /* ProfileAboutTableViewCell.m in Sources */,
+				CC5A5A461E6AEE5200BF60C2 /* MRGroupMembersViewController.m in Sources */,
+				CC5A5A471E6AEE5200BF60C2 /* GraphView.m in Sources */,
+				CC5A5A481E6AEE5200BF60C2 /* MRAppControl.m in Sources */,
+				CC5A5A491E6AEE5200BF60C2 /* MPNotificatinsTableViewCell.m in Sources */,
+				CC5A5A4A1E6AEE5200BF60C2 /* MRProfile.m in Sources */,
+				CC5A5A4B1E6AEE5200BF60C2 /* MRSurveyDetailsViewController.m in Sources */,
+				CC5A5A4C1E6AEE5200BF60C2 /* AddMemberTableViewCell.m in Sources */,
+				CC5A5A4D1E6AEE5200BF60C2 /* TutorialView.m in Sources */,
+				CC5A5A4E1E6AEE5200BF60C2 /* MRMedRepDetailsViewController.m in Sources */,
+				CC5A5A4F1E6AEE5200BF60C2 /* MRMarketingCampaignController.m in Sources */,
+				CC5A5A501E6AEE5200BF60C2 /* MRLoginViewController.m in Sources */,
+				CC5A5A511E6AEE5200BF60C2 /* MRDoctorActivityScoreViewController.m in Sources */,
+				CC5A5A521E6AEE5200BF60C2 /* MRInterestArea+CoreDataProperties.m in Sources */,
+				CC5A5A531E6AEE5200BF60C2 /* MRPHSurveyStatistics+CoreDataProperties.m in Sources */,
+				CC5A5A541E6AEE5200BF60C2 /* MRRegistrationRoleViewController.m in Sources */,
+				CC5A5A551E6AEE5200BF60C2 /* MRDoctorActivityScoreDetailsViewController.m in Sources */,
+				CC5A5A561E6AEE5200BF60C2 /* NSLongMonthComponent.m in Sources */,
+				CC5A5A571E6AEE5200BF60C2 /* MRWorkExperience.m in Sources */,
+				CC5A5A581E6AEE5200BF60C2 /* MRForgotPasswordViewController.m in Sources */,
+				CC5A5A591E6AEE5200BF60C2 /* MRParserHelper.m in Sources */,
+				CC5A5A5A1E6AEE5200BF60C2 /* MRReplies.m in Sources */,
+				CC5A5A5B1E6AEE5200BF60C2 /* MRServeViewController.m in Sources */,
+				CC5A5A5C1E6AEE5200BF60C2 /* basicInfoTableViewCell.m in Sources */,
+				CC5A5A5D1E6AEE5200BF60C2 /* MRConvertAppointmentCell.m in Sources */,
+				CC5A5A5E1E6AEE5200BF60C2 /* MRCustomTabBar.m in Sources */,
+				CC5A5A5F1E6AEE5200BF60C2 /* MRAppConstants.m in Sources */,
+				CC5A5A601E6AEE5200BF60C2 /* MRDoctorScoreViewController.m in Sources */,
+				CC5A5A611E6AEE5200BF60C2 /* NSBaseDateComponent+Private.m in Sources */,
+				CC5A5A621E6AEE5200BF60C2 /* MRAppointmentCell.m in Sources */,
+				CC5A5A631E6AEE5200BF60C2 /* NSBaseDateComponent.m in Sources */,
+				CC5A5A641E6AEE5200BF60C2 /* WYStoryboardPopoverSegue.m in Sources */,
+				CC5A5A651E6AEE5200BF60C2 /* UINotificationChartViewController.m in Sources */,
+				CC5A5A661E6AEE5200BF60C2 /* MRShareDetailTableViewCell.m in Sources */,
+				CC5A5A671E6AEE5200BF60C2 /* MRShareViewController.m in Sources */,
+				CC5A5A681E6AEE5200BF60C2 /* MRGroupTableViewCell.m in Sources */,
+				CC5A5A691E6AEE5200BF60C2 /* MRWelcomeViewController.m in Sources */,
+				CC5A5A6A1E6AEE5200BF60C2 /* MRMedRepTableCell.m in Sources */,
+				CC5A5A6B1E6AEE5200BF60C2 /* NSDate+Utilities.m in Sources */,
+				CC5A5A6C1E6AEE5200BF60C2 /* MRContactWithinGroupCollectionCellCollectionViewCell.m in Sources */,
+				CC5A5A6D1E6AEE5200BF60C2 /* SVProgressHUD.m in Sources */,
+				CC5A5A6E1E6AEE5200BF60C2 /* MPTransformTableViewCell.m in Sources */,
+				CC5A5A6F1E6AEE5200BF60C2 /* MRPublications.m in Sources */,
+				CC5A5A701E6AEE5200BF60C2 /* MRPublications+CoreDataProperties.m in Sources */,
+				CC5A5A711E6AEE5200BF60C2 /* MPNotificationAlertViewController.m in Sources */,
+				CC5A5A721E6AEE5200BF60C2 /* EditLocationViewController.m in Sources */,
+				CC5A5A731E6AEE5200BF60C2 /* MRFavoritesNotificationsViewController.m in Sources */,
+				CC5A5A741E6AEE5200BF60C2 /* MRAddressView.m in Sources */,
+				CC5A5A751E6AEE5200BF60C2 /* PieMenuItem.m in Sources */,
+				CC5A5A761E6AEE5200BF60C2 /* SWRevealViewController.m in Sources */,
+				CC5A5A771E6AEE5200BF60C2 /* MRPharmaMenuViewController.m in Sources */,
+				CC5A5A781E6AEE5200BF60C2 /* MRPHDashBoardViewController.m in Sources */,
+				CC5A5A791E6AEE5200BF60C2 /* MRPHSurveyPendingList+CoreDataClass.m in Sources */,
+				CC5A5A7A1E6AEE5200BF60C2 /* MRJoinGroupViewController.m in Sources */,
+				CC5A5A7B1E6AEE5200BF60C2 /* MrGroupChildPost.m in Sources */,
+				CC5A5A7C1E6AEE5200BF60C2 /* MRSurveyListViewController.m in Sources */,
+				CC5A5A7D1E6AEE5200BF60C2 /* MRContact+CoreDataProperties.m in Sources */,
+				CC5A5A7E1E6AEE5200BF60C2 /* MRDoctorDetailsViewController.m in Sources */,
+				CC5A5A7F1E6AEE5200BF60C2 /* MRMenuViewController.m in Sources */,
+				CC5A5A801E6AEE5200BF60C2 /* MRPHSurveyDetailsViewController.m in Sources */,
+				CC5A5A811E6AEE5200BF60C2 /* NSMediumMonthComponent.m in Sources */,
+				CC5A5A821E6AEE5200BF60C2 /* MRPopoverControllerViewController.m in Sources */,
+				CC5A5A831E6AEE5200BF60C2 /* MRRegHeaderView.m in Sources */,
+				CC5A5A841E6AEE5200BF60C2 /* MRGradientView.m in Sources */,
+				CC5A5A851E6AEE5200BF60C2 /* MRLocationManager.m in Sources */,
+				CC5A5A861E6AEE5200BF60C2 /* NSString+Date.m in Sources */,
+				CC5A5A871E6AEE5200BF60C2 /* MRDashBoardVC.m in Sources */,
+				CC5A5A881E6AEE5200BF60C2 /* MRAddMemberTableViewCell.m in Sources */,
+				CC5A5A891E6AEE5200BF60C2 /* MRInviteViewController.m in Sources */,
+				CC5A5A8A1E6AEE5200BF60C2 /* MRFavoriteFilterViewController.m in Sources */,
+				CC5A5A8B1E6AEE5200BF60C2 /* addProfileItemsTableViewCell.m in Sources */,
+				CC5A5A8C1E6AEE5200BF60C2 /* MRTransformPageData.m in Sources */,
+				CC5A5A8D1E6AEE5200BF60C2 /* MPCallMedrepViewController.m in Sources */,
+				CC5A5A8E1E6AEE5200BF60C2 /* AddressInfo+CoreDataProperties.m in Sources */,
+				CC5A5A8F1E6AEE5200BF60C2 /* MRShareOptionTableViewCell.m in Sources */,
+				CC5A5A901E6AEE5200BF60C2 /* AddressInfoTableViewCell.m in Sources */,
+				CC5A5A911E6AEE5200BF60C2 /* EditContactInfoViewController.m in Sources */,
+				CC5A5A921E6AEE5200BF60C2 /* UICustomDatePicker.m in Sources */,
+				CC5A5A931E6AEE5200BF60C2 /* MRTransformPageData+CoreDataProperties.m in Sources */,
+				CC5A5A941E6AEE5200BF60C2 /* MRNewProductCompaignsViewController.m in Sources */,
+				CC5A5A951E6AEE5200BF60C2 /* MRNotifications.m in Sources */,
+				CC5A5A961E6AEE5200BF60C2 /* NSDictionary+CaseInsensitive.m in Sources */,
+				CC5A5A971E6AEE5200BF60C2 /* MRTransformPost.m in Sources */,
+				CC5A5A981E6AEE5200BF60C2 /* main.m in Sources */,
+				CC5A5A991E6AEE5200BF60C2 /* MRMenuTableViewCell.m in Sources */,
+				CC5A5A9A1E6AEE5200BF60C2 /* MRMyWallViewController.m in Sources */,
+				CC5A5A9B1E6AEE5200BF60C2 /* ViewController.m in Sources */,
+				CC5A5A9C1E6AEE5200BF60C2 /* MRWebserviceHelper.m in Sources */,
+				CC5A5A9D1E6AEE5200BF60C2 /* NSShortMonthComponent.m in Sources */,
+				CC5A5A9E1E6AEE5200BF60C2 /* NSObject+Array.m in Sources */,
+				CC5A5A9F1E6AEE5200BF60C2 /* NSDayComponent.m in Sources */,
+				CC5A5AA01E6AEE5200BF60C2 /* MRSharePost+CoreDataProperties.m in Sources */,
+				CC5A5AA11E6AEE5200BF60C2 /* MRReadNotificationsViewController.m in Sources */,
+				CC5A5AA21E6AEE5200BF60C2 /* PendingContactCustomFilterTableViewCell.m in Sources */,
+				CC5A5AA31E6AEE5200BF60C2 /* MRDoctorScoreTableCell.m in Sources */,
+				CC5A5AA41E6AEE5200BF60C2 /* MRConvertAppointmentViewController.m in Sources */,
+				CC5A5AA51E6AEE5200BF60C2 /* NSYearComponent.m in Sources */,
+				CC5A5AA61E6AEE5200BF60C2 /* NSDateElement.m in Sources */,
+				CC5A5AA71E6AEE5200BF60C2 /* MRTransformDetailViewController.m in Sources */,
+				CC5A5AA81E6AEE5200BF60C2 /* UIPopoverController+iPhone.m in Sources */,
+				CC5A5AA91E6AEE5200BF60C2 /* MRGroupsListViewController.m in Sources */,
+				CC5A5AAA1E6AEE5200BF60C2 /* MRPHSurveyPendingList+CoreDataProperties.m in Sources */,
+				CC5A5AAB1E6AEE5200BF60C2 /* EducationDateTimeTableViewCell.m in Sources */,
+				CC5A5AAC1E6AEE5200BF60C2 /* MRContactDetailViewController.m in Sources */,
+				CC5A5AAD1E6AEE5200BF60C2 /* MRPostedReplies+CoreDataProperties.m in Sources */,
+				CC5A5AAE1E6AEE5200BF60C2 /* MRNotificationsViewController.m in Sources */,
+				CC5A5AAF1E6AEE5200BF60C2 /* MRRegistationTwoViewController.m in Sources */,
+				CC5A5AB01E6AEE5200BF60C2 /* MRPHSurveyDetailsPendingDoctorTableViewCell.m in Sources */,
+				CC5A5AB11E6AEE5200BF60C2 /* MRContactCollectionCell.m in Sources */,
+				CC5A5AB21E6AEE5200BF60C2 /* UILabel+WhiteUIDatePickerLabels.m in Sources */,
+				CC5A5AB31E6AEE5200BF60C2 /* PendingContactsViewController.m in Sources */,
+				CC5A5AB41E6AEE5200BF60C2 /* UIImage+Helpers.m in Sources */,
+				CC5A5AB51E6AEE5200BF60C2 /* MRMyWallItemTableViewCell.m in Sources */,
+				CC5A5AB61E6AEE5200BF60C2 /* MRRegistationViewController.m in Sources */,
+				CC5A5AB71E6AEE5200BF60C2 /* MROTPViewController.m in Sources */,
+				CC5A5AB81E6AEE5200BF60C2 /* MRAppointmentListCell.m in Sources */,
+				CC5A5AB91E6AEE5200BF60C2 /* MRDocotrActivityScoreViewController.m in Sources */,
+				CC5A5ABA1E6AEE5200BF60C2 /* MRProfile+CoreDataProperties.m in Sources */,
+				CC5A5ABB1E6AEE5200BF60C2 /* MRTransformViewController.m in Sources */,
+				CC5A5ABC1E6AEE5200BF60C2 /* MRHomeViewContoller.m in Sources */,
+				CC5A5ABD1E6AEE5200BF60C2 /* MRDatabaseHelper.m in Sources */,
+				CC5A5ABE1E6AEE5200BF60C2 /* CommonEducationTableViewCell.m in Sources */,
+				CC5A5ABF1E6AEE5200BF60C2 /* AddEducationViewController.m in Sources */,
+				CC5A5AC01E6AEE5200BF60C2 /* PieMenu.m in Sources */,
+				CC5A5AC11E6AEE5200BF60C2 /* MRWorkExperience+CoreDataProperties.m in Sources */,
+				CC5A5AC21E6AEE5200BF60C2 /* EducationalQualifications+CoreDataProperties.m in Sources */,
+				CC5A5AC31E6AEE5200BF60C2 /* MRContact.m in Sources */,
+				CC5A5AC41E6AEE5200BF60C2 /* TransformSubCategories+CoreDataProperties.m in Sources */,
+				CC5A5AC51E6AEE5200BF60C2 /* MRGroupPost.m in Sources */,
+				CC5A5AC61E6AEE5200BF60C2 /* GraphPoint.m in Sources */,
+				CC5A5AC71E6AEE5200BF60C2 /* MedRep.xcdatamodeld in Sources */,
+				CC5A5AC81E6AEE5200BF60C2 /* MRPharmaMenuCell.m in Sources */,
+				CC5A5AC91E6AEE5200BF60C2 /* MROptionsViewController.m in Sources */,
+				CC5A5ACA1E6AEE5200BF60C2 /* MRPHDownloadSurveyReportsViewController.m in Sources */,
+				CC5A5ACB1E6AEE5200BF60C2 /* MRTransformPost+CoreDataProperties.m in Sources */,
+				CC5A5ACC1E6AEE5200BF60C2 /* MRFeedBackResultViewController.m in Sources */,
+				CC5A5ACD1E6AEE5200BF60C2 /* MRGroup.m in Sources */,
+				CC5A5ACE1E6AEE5200BF60C2 /* PendingContactTableViewCell.m in Sources */,
+				CC5A5ACF1E6AEE5200BF60C2 /* MRCompanyDetails.m in Sources */,
+				CC5A5AD01E6AEE5200BF60C2 /* AddExperienceTableViewController.m in Sources */,
+				CC5A5AD11E6AEE5200BF60C2 /* MRCollectionView.m in Sources */,
+				CC5A5AD21E6AEE5200BF60C2 /* MRPublicationsDetailsViewController.m in Sources */,
+				CC5A5AD31E6AEE5200BF60C2 /* MRMedRepViewController.m in Sources */,
+				CC5A5AD41E6AEE5200BF60C2 /* ExperienceDateTimeTableViewCell.m in Sources */,
+				CC5A5AD51E6AEE5200BF60C2 /* MROTPVerifiedViewController.m in Sources */,
+				CC5A5AD61E6AEE5200BF60C2 /* NSData+Base64Additions.m in Sources */,
+				CC5A5AD71E6AEE5200BF60C2 /* MRDrugDetailViewController.m in Sources */,
+				CC5A5AD81E6AEE5200BF60C2 /* MRDataManger.m in Sources */,
+				CC5A5AD91E6AEE5200BF60C2 /* MRNewProductCell.m in Sources */,
+				CC5A5ADA1E6AEE5200BF60C2 /* CommonProfileSectionTableViewCell.m in Sources */,
+				CC5A5ADB1E6AEE5200BF60C2 /* ContactInfoTableViewCell.m in Sources */,
+				CC5A5ADC1E6AEE5200BF60C2 /* MRPHProfileDetailsViewController.m in Sources */,
+				CC5A5ADD1E6AEE5200BF60C2 /* MRProductBrocherViewController.m in Sources */,
+				CC5A5ADE1E6AEE5200BF60C2 /* MRGroupMembers+CoreDataProperties.m in Sources */,
+				CC5A5ADF1E6AEE5200BF60C2 /* MRRegTableViewCell.m in Sources */,
+				CC5A5AE01E6AEE5200BF60C2 /* MRRegistrationRoleCellTableViewCell.m in Sources */,
+				CC5A5AE11E6AEE5200BF60C2 /* MRContactWithinGroupCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6537,6 +8167,48 @@
 			};
 			name = Release;
 		};
+		CC5A5CFD1E6AEE5200BF60C2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 43B3FF9D0AD2D490EFCEB603 /* Pods-MedRepDev.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = MedRepDev.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ramesh Meesala (PR3BTD2UVE)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ramesh Meesala (PR3BTD2UVE)";
+				DEVELOPMENT_TEAM = 9Y7Y82N227;
+				INFOPLIST_FILE = "MedRepDev copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "12c4b738-780a-4ca6-871e-5ca5967c7ebe";
+				PROVISIONING_PROFILE_SPECIFIER = OTIS_MED_PROFILE;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		CC5A5CFE1E6AEE5200BF60C2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9CED4F97D3BC8D8D4CB9B81D /* Pods-MedRepDev.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = MedRepDev.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ramesh Meesala (PR3BTD2UVE)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ramesh Meesala (PR3BTD2UVE)";
+				DEVELOPMENT_TEAM = 9Y7Y82N227;
+				INFOPLIST_FILE = "MedRepDev copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "12c4b738-780a-4ca6-871e-5ca5967c7ebe";
+				PROVISIONING_PROFILE_SPECIFIER = OTIS_MED_PROFILE;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
 		CC7DB2141D0C8BEC007DFE4C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 43B3FF9D0AD2D490EFCEB603 /* Pods-MedRepDev.debug.xcconfig */;
@@ -6605,6 +8277,15 @@
 			buildConfigurations = (
 				83C128171B77C88B00D2F08E /* Debug */,
 				83C128181B77C88B00D2F08E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CC5A5CFC1E6AEE5200BF60C2 /* Build configuration list for PBXNativeTarget "MedRepProd" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CC5A5CFD1E6AEE5200BF60C2 /* Debug */,
+				CC5A5CFE1E6AEE5200BF60C2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
