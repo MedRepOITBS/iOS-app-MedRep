@@ -111,6 +111,7 @@ typedef enum kMRWebServiceType
     kMRWebServiceTypeRemoveConnection,
     kMRWebServiceTypeGetUserPreferences,
     kMRWebServiceTypeGetSearchContactList,
+    kMRWebServiceTypeGetMedicineOAuth,
     kMRWebServiceTypeGetMedicineSuggestions,
     kMRWebServiceTypeGetMedicineAlterations,
     kMRWebServiceTypeGetMedicineDetails,

@@ -20,6 +20,8 @@
 @property (nonatomic, strong) NSString *lastServiceURLString;
 @property (nonatomic, strong) completionHandler lastServiceCompletionhandler;
 
+@property (nonatomic, strong) NSString *drugSearchToken;
+
 @end
 
 @implementation MRWebserviceHelper
@@ -2590,6 +2592,100 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
 }
 
 //Drug Search
+
+- (void)getDrugSearchToken:(completionHandler)responceHandler{
+    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/oauth/token.json",kDrugSearchBaseURL];
+    
+    NSDictionary *reqDict = @{@"grant_type":@"client_credentials",
+                              @"client_id":@"94101c90442d8ccd61f4964d97198c549bb5d45e9df3631088ce0f316ac5a946",
+                              @"client_secret":@"d5cafb9dfe62656935682d8264c4848d99833885473b881c67dfb84852047863",
+                              @"scope": @"public read write"};
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:reqDict
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:nil];
+    NSURL *url = [NSURL URLWithString:stringFormOfUrl];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [urlRequest setTimeoutInterval:120];
+    
+    [urlRequest setHTTPMethod:@"POST"];
+    [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    [urlRequest setHTTPBody: jsonData];
+    
+    self.serviceType = kMRWebServiceTypeGetMedicineOAuth;
+    [self sendServiceRequest:urlRequest withHandler:responceHandler];
+}
+
+- (void)parseTokenResponse:(NSDictionary*)response {
+    if (response != nil && response.allKeys.count > 0) {
+        self.drugSearchToken = [response objectOrNilForKey:@"access_token"];
+    }
+}
+
+- (void)getMedicineSuggestions:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler{
+    if (self.drugSearchToken == nil || self.drugSearchToken.length == 0) {
+        __weak MRWebserviceHelper *weakSelf = self;
+        [self getDrugSearchToken:^(BOOL status, NSString *details, NSDictionary *responce) {
+            [weakSelf parseTokenResponse:responce];
+            [weakSelf fetchMedicineSuggestions:reqDict withHandler:responceHandler];
+        }];
+    } else {
+        [self fetchMedicineSuggestions:reqDict withHandler:responceHandler];
+    }
+}
+
+- (void)fetchMedicineSuggestions:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler{
+    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@autocomplete/medicines/brands/%@",kDrugSearchBaseURL, [reqDict objectOrNilForKey:@"id"]];
+    
+    NSString* urlTextEscaped = [stringFormOfUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    NSURL *url = [NSURL URLWithString:urlTextEscaped];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [urlRequest setTimeoutInterval:120];
+    [urlRequest setHTTPMethod:@"GET"];
+    
+    NSString *header = [NSString stringWithFormat:@"Bearer %@", self.drugSearchToken];
+    [urlRequest setValue:header forHTTPHeaderField:@"Authorization"];
+    
+    self.serviceType = kMRWebServiceTypeGetMedicineSuggestions;
+    [self sendServiceRequest:urlRequest withHandler:responceHandler];
+}
+
+- (void)getMedicineAlternatives:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler{
+    if (self.drugSearchToken == nil || self.drugSearchToken.length == 0) {
+        __weak MRWebserviceHelper *weakSelf = self;
+        [self getDrugSearchToken:^(BOOL status, NSString *details, NSDictionary *responce) {
+            [weakSelf parseTokenResponse:responce];
+            [weakSelf fetchMedicineAlternatives:reqDict withHandler:responceHandler];
+        }];
+    } else {
+        [self fetchMedicineAlternatives:reqDict withHandler:responceHandler];
+    }
+}
+
+- (void)fetchMedicineAlternatives:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler{
+    NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@medicines/brands/%@/alternatives?page=1&size=1000",kDrugSearchBaseURL, [reqDict objectOrNilForKey:@"id"]];
+    
+    NSURL *url = [NSURL URLWithString:stringFormOfUrl];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [urlRequest setTimeoutInterval:120];
+    [urlRequest setHTTPMethod:@"GET"];
+    
+    NSString *header = [NSString stringWithFormat:@"Bearer %@", self.drugSearchToken];
+    [urlRequest setValue:header forHTTPHeaderField:@"Authorization"];
+    
+    self.serviceType = kMRWebServiceTypeGetMedicineAlterations;
+    [self sendServiceRequest:urlRequest withHandler:responceHandler];
+}
+
+- (void)getMedicineDetails:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler{
+    [self getMedicineSuggestions:reqDict withHandler:responceHandler];
+}
+
+/*
 - (void)getMedicineSuggestions:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler{
     NSString *stringFormOfUrl = [NSString stringWithFormat:@"%@/medicine_suggestions/",kDrugSearchBaseURL];
     
@@ -2643,6 +2739,7 @@ http://183.82.106.234:8080/MedRepApplication/preapi/registration/getNewSMSOTP/ss
     self.serviceType = kMRWebServiceTypeGetMedicineDetails;
     [self sendServiceRequest:urlRequest withHandler:responceHandler];
 }
+*/
 
 + (id)parseNetworkResponse:(Class)inEntityClass andData:(NSArray*)data {
     

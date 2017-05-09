@@ -91,7 +91,7 @@
             break;
             
         case MRListVIewTypeMedicineList:
-            appointmentCell.textLabel.text = [self.listItems objectAtIndex:indexPath.row];
+            appointmentCell.textLabel.text = [[self.listItems objectAtIndex:indexPath.row] objectForKey:@"name"];
             break;
             
         case MRListVIewTypeNone:

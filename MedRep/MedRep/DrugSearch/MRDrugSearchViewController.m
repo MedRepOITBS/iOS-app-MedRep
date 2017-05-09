@@ -24,6 +24,7 @@
     
     NSString *searchString;
     NSString *selectedMedicine;
+    NSString *selectedMedicineId;
     NSMutableArray *medicineSuggestions;
     NSMutableArray *medicineAlterations;
     NSMutableArray *drugConstituentsArray;
@@ -201,7 +202,7 @@
     _selectedName.text = drugDetail.brand;
     _productType.text = drugDetail.category;
     _selectedDesc.text = drugDetail.manufacturer;
-    _selectedQty.text = [NSString stringWithFormat:@"%@ %@ - MRP ₹ %.1f",drugDetail.package_qty, drugDetail.package_type,[drugDetail.package_price doubleValue]];
+    _selectedQty.text = [NSString stringWithFormat:@"%@ - MRP ₹ %.2f",drugDetail.package_qty,[drugDetail.package_price doubleValue]];
     _composition.text = drugConstituentsArray.count ? [self prepareComposition] : @"Compositon details not available";
 }
 
@@ -291,7 +292,9 @@
 {
     NSDictionary *item = (NSDictionary*)listItem;
     if ([item objectForKey:@"selectedMedicine"]) {
-        selectedMedicine = [item objectForKey:@"selectedMedicine"];
+        NSDictionary *dict = [item objectForKey:@"selectedMedicine"];
+        selectedMedicine = [dict objectOrNilForKey:@"name"];
+        selectedMedicineId = [dict objectOrNilForKey:@"id"];
         self.searchBar.text = selectedMedicine;
         
         [self getMedicineDetails];
@@ -335,29 +338,33 @@
     [MRCommon showActivityIndicator:@"Loading..."];
     [[MRWebserviceHelper sharedWebServiceHelper] getMedicineSuggestions:dictReq withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
         [MRCommon stopActivityIndicator];
-        medicineSuggestions = [NSMutableArray array];
+        NSMutableArray *tempMedicineSuggestions = [NSMutableArray array];
         
         if (status) {
-            if ([responce[@"status"] isEqualToString:@"ok" ]) {
-                NSDictionary *resp = responce[@"response"];
-                if (resp) {
-                    NSArray *suggestions = resp[@"suggestions"];
-                    for (NSDictionary *dict in suggestions) {
-                        [medicineSuggestions addObject:dict[@"suggestion"]];
-                    }
+            NSArray *suggestions = responce[@"Responce"];
+            for (NSDictionary *dict in suggestions) {
+//                NSArray *constituentsList = [dict objectOrNilForKey:@"constituents"];
+//                for (NSDictionary *constituents in constituentsList) {
+//                    [tempMedicineSuggestions addObject:constituents[@"name"]];
+//                }
+                NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                            [dict objectOrNilForKey:@"name"], @"name",
+                                            [dict objectOrNilForKey:@"medicine_id"], @"id",
+                                            nil];
+                [tempMedicineSuggestions addObject:dictionary];
+            }
+            
+            if (tempMedicineSuggestions.count) {
+                medicineSuggestions = tempMedicineSuggestions;
+                [self showPopoverInView:self.searchBar];
+            }else{
+                [[[UIAlertView alloc] initWithTitle:@"" message:@"No drugs found!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+                if (self.myPopoverController) {
+                    UIView *overlayView = [self.view viewWithTag:2000];
+                    [overlayView removeFromSuperview];
                     
-                    if (medicineSuggestions.count) {
-                        [self showPopoverInView:self.searchBar];
-                    }else{
-                        [[[UIAlertView alloc] initWithTitle:@"" message:@"No drugs found!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
-                        if (self.myPopoverController) {
-                            UIView *overlayView = [self.view viewWithTag:2000];
-                            [overlayView removeFromSuperview];
-                            
-                            self.myPopoverController.delegate = nil;
-                            self.myPopoverController = nil;
-                        }
-                    }
+                    self.myPopoverController.delegate = nil;
+                    self.myPopoverController = nil;
                 }
             }
         }
@@ -372,7 +379,7 @@
 
 -(void) getMedicineAlternatives{
     NSMutableDictionary *dictReq = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                    selectedMedicine, @"id",
+                                    selectedMedicineId, @"id",
                                     kDrugSearchAPIKey, @"key",
                                     @"1000", @"limit",
                                     nil];
@@ -383,18 +390,16 @@
         medicineAlterations = [NSMutableArray array];
         
         if (status) {
-            NSDictionary *resp = responce[@"response"];
-            if (resp) {
-                NSArray *suggestions = resp[@"medicine_alternatives"];
-                for (NSDictionary *dict in suggestions) {
-                    MRDrugDetailModel *drug = [[MRDrugDetailModel alloc] initWithDict:dict];
-                    [medicineAlterations addObject:drug];
-                }
-                
-                if (medicineAlterations.count) {
-                    _suggestionView.hidden = NO;
-                    [_suggestionsTable reloadData];
-                }
+            NSArray *suggestions = responce[@"Responce"];
+            for (NSDictionary *dict in suggestions) {
+                MRDrugDetailModel *drug = [[MRDrugDetailModel alloc] initWithDict:dict];
+                [medicineAlterations addObject:drug];
+            }
+            
+            if (medicineAlterations.count) {
+                _suggestionView.hidden = NO;
+                [medicineAlterations sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"brand" ascending:true]]];
+                [_suggestionsTable reloadData];
             }
         }
         else
@@ -418,20 +423,22 @@
         drugConstituentsArray = [NSMutableArray array];
         
         if (status) {
-            if ([responce[@"status"] isEqualToString:@"ok" ]) {
-                NSDictionary *resp = responce[@"response"];
-                if (resp) {
-                    drugDetail = [[MRDrugDetailModel alloc] initWithDict:resp[@"medicine"]];
+            NSArray *suggestions = responce[@"Responce"];
+            
+            if (suggestions != nil && suggestions.count > 0) {
+                NSDictionary * dict = suggestions.firstObject;
+                if (dict != nil) {
+                    drugDetail = [[MRDrugDetailModel alloc] initWithDict:dict];
                     
-                    NSArray *suggestions = resp[@"constituents"];
-                    for (NSDictionary *dict in suggestions) {
-                        MRDrugConstituentsModel *drug = [[MRDrugConstituentsModel alloc] initWithDict:dict];
+                    NSArray *constituentsList = dict[@"constituents"];
+                    if (constituentsList != nil && constituentsList.count > 0) {
+                        MRDrugConstituentsModel *drug = [[MRDrugConstituentsModel alloc] initWithDict:constituentsList.firstObject];
                         [drugConstituentsArray addObject:drug];
                     }
-                    
-                    [self setDetailView];
                 }
             }
+            
+            [self setDetailView];
         }
         else
         {

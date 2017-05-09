@@ -37,18 +37,21 @@
     
     if(self)
     {
-        self.brand = [[infoDictionary objectForKey:@"brand"] isKindOfClass:[NSString class]] ? [infoDictionary objectForKey:@"brand"] : @"";
-        self.category = [[infoDictionary objectForKey:@"category"] isKindOfClass:[NSString class]] ? [infoDictionary objectForKey:@"category"] : @"";
-        self.d_class = [[infoDictionary objectForKey:@"d_class"] isKindOfClass:[NSString class]] ? [infoDictionary objectForKey:@"d_class"] : @"";
-        self.generic_id = [infoDictionary objectForKey:@"generic_id"];
-        self.idMedicine = [infoDictionary objectForKey:@"id"];
-        self.package_qty = [infoDictionary objectForKey:@"package_qty"];
+        self.brand = [[infoDictionary objectForKey:@"name"] isKindOfClass:[NSString class]] ? [infoDictionary objectForKey:@"name"] : @"";
+        
+        self.package_type = [[infoDictionary objectForKey:@"form"] isKindOfClass:[NSString class]] ? [infoDictionary objectForKey:@"form"] : @"";
+        self.unit_price = [infoDictionary objectForKey:@"price"];
+        self.generic_id = [infoDictionary objectForKey:@"medicine_id"];
+        self.idMedicine = [infoDictionary objectForKey:@"medicine_id"];
+        self.unit_qty = [infoDictionary objectForKey:@"standardUnits"];
+        self.unit_type = [[infoDictionary objectForKey:@"packageForm"] isKindOfClass:[NSString class]] ? [infoDictionary objectForKey:@"packageForm"] : @"";
+        
+        self.category = [[infoDictionary objectForKey:@"packageForm"] isKindOfClass:[NSString class]] ? [infoDictionary objectForKey:@"packageForm"] : @"";
+        self.d_class = [[infoDictionary objectForKey:@"form"] isKindOfClass:[NSString class]] ? [infoDictionary objectForKey:@"form"] : @"";
+        self.package_qty = [infoDictionary objectForKey:@"size"];
         self.manufacturer = [[infoDictionary objectForKey:@"manufacturer"] isKindOfClass:[NSString class]] ? [infoDictionary objectForKey:@"manufacturer"] : @"";
-        self.package_price = [infoDictionary objectForKey:@"package_price"];
-        self.package_type = [[infoDictionary objectForKey:@"package_type"] isKindOfClass:[NSString class]] ? [infoDictionary objectForKey:@"package_type"] : @"";
-        self.unit_price = [infoDictionary objectForKey:@"unit_price"];
-        self.unit_qty = [infoDictionary objectForKey:@"unit_qty"];
-        self.unit_type = [[infoDictionary objectForKey:@"unit_type"] isKindOfClass:[NSString class]] ? [infoDictionary objectForKey:@"unit_type"] : @"";
+        self.package_price = [infoDictionary objectForKey:@"price"];
+        
     }
     
     return self;
@@ -73,16 +76,24 @@
     return self;
 }
 
-- (id) initWithDict:(NSDictionary*)infoDictionary {
+- (id) initWithDict:(NSDictionary*)constituent {
     self = [self init] ;
     
     if(self)
     {
-        self.name = [[infoDictionary objectForKey:@"name"] isKindOfClass:[NSString class]] ? [infoDictionary objectForKey:@"name"] : @"";
-        self.qty = [infoDictionary objectForKey:@"qty"];
-        self.strength = [[infoDictionary objectForKey:@"strength"] isKindOfClass:[NSString class]] ? [infoDictionary objectForKey:@"strength"] : @"";
-        self.generic_id = [[infoDictionary objectForKey:@"generic_id"] isKindOfClass:[NSString class]] ? [infoDictionary objectForKey:@"generic_id"] : @"";
-        self.idConstituent = [infoDictionary objectForKey:@"id"];
+        if (constituent != nil) {
+            self.name = [[constituent objectForKey:@"name"] isKindOfClass:[NSString class]] ? [constituent objectForKey:@"name"] : @"";
+            self.strength = [[constituent objectForKey:@"strength"] isKindOfClass:[NSString class]] ? [constituent objectForKey:@"strength"] : @"";
+        } else {
+            self.name = @"";
+            self.strength = @"";
+        }
+        
+        self.qty = [constituent objectForKey:@"size"];
+        self.generic_id = [[constituent objectForKey:@"generic_id"] isKindOfClass:[NSString class]] ? [constituent objectForKey:@"medicine_id"] : @"";
+        self.idConstituent = [constituent objectForKey:@"id"];
+        
+        
     }
     
     return self;
