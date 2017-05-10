@@ -5,22 +5,6 @@
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
-      <BuildActionEntries>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "83C127EC1B77C88B00D2F08E"
-               BuildableName = "MedRep.app"
-               BlueprintName = "MedRep"
-               ReferencedContainer = "container:MedRep.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-      </BuildActionEntries>
    </BuildAction>
    <TestAction
       buildConfiguration = "Debug"
@@ -42,9 +26,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "83C127EC1B77C88B00D2F08E"
-            BuildableName = "MedRep.app"
-            BlueprintName = "MedRep"
+            BlueprintIdentifier = "CC5A59F61E6AEE5200BF60C2"
+            BuildableName = "MedRepProd.app"
+            BlueprintName = "MedRepProd"
             ReferencedContainer = "container:MedRep.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -65,9 +49,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "83C127EC1B77C88B00D2F08E"
-            BuildableName = "MedRep.app"
-            BlueprintName = "MedRep"
+            BlueprintIdentifier = "CC5A59F61E6AEE5200BF60C2"
+            BuildableName = "MedRepProd.app"
+            BlueprintName = "MedRepProd"
             ReferencedContainer = "container:MedRep.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -84,9 +68,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "83C127EC1B77C88B00D2F08E"
-            BuildableName = "MedRep.app"
-            BlueprintName = "MedRep"
+            BlueprintIdentifier = "CC5A59F61E6AEE5200BF60C2"
+            BuildableName = "MedRepProd.app"
+            BlueprintName = "MedRepProd"
             ReferencedContainer = "container:MedRep.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

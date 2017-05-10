@@ -310,6 +310,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat rowHeight = 240;
+    
     MRPostedReplies *post = [self.posts objectAtIndex:indexPath.row];
     
     if (post.fileUrl == nil || post.fileUrl.length == 0) {
@@ -318,6 +319,17 @@
     
     if (post.message == nil && post.message.length == 0) {
         rowHeight -= 15;
+    } else {
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width - 75, 20)];
+        [label setText:post.message];
+        [label setNumberOfLines:0];
+        [label setFont:[UIFont fontWithName:@"HelveticaNeue-Medium" size:12.0f]];
+        [label sizeToFit];
+        
+        CGFloat height = label.frame.size.height;
+        if (height > 21) {
+            rowHeight += (height + 21);
+        }
     }
     
     return rowHeight;

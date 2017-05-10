@@ -46,6 +46,7 @@
 
 - (void)fillCellWithData:(MRPostedReplies*)post
  andParentViewController:(UIViewController *)parentViewController {
+    
     self.parentViewController = parentViewController;
     self.post = post;
     

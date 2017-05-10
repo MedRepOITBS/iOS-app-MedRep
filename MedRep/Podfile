@@ -19,4 +19,10 @@ end
  
 target 'MedRep' do
     google_pods
+    pan_charts
+end
+
+target 'MedRepProd' do
+    google_pods
+    pan_charts
 end

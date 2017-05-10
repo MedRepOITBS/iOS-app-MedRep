@@ -578,6 +578,7 @@
 		8AFF27B11D21C3DE00080DF0 /* MRInviteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF27AE1D21C3DE00080DF0 /* MRInviteViewController.m */; };
 		8AFF27B21D21C3DE00080DF0 /* MRInviteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AFF27AF1D21C3DE00080DF0 /* MRInviteViewController.xib */; };
 		8AFF27B31D21C3DE00080DF0 /* MRInviteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AFF27AF1D21C3DE00080DF0 /* MRInviteViewController.xib */; };
+		98C1E2F3CF35A1A25518AED3 /* Pods_MedRepProd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D200AFF5899AF43034D61AD2 /* Pods_MedRepProd.framework */; };
 		B40E13921D3ECEA3005830DA /* ProfileStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4B4F0F41D38963F00EFCC0E /* ProfileStoryboard.storyboard */; };
 		B40E13931D3ED64B005830DA /* AddEducationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B4F0EB1D3842C500EFCC0E /* AddEducationViewController.m */; };
 		B40E13981D3F059C005830DA /* EducationalQualifications+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B40E13951D3F059C005830DA /* EducationalQualifications+CoreDataProperties.m */; };
@@ -2321,6 +2322,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0DC2E1386921604A6D72CA10 /* Pods-MedRepProd.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MedRepProd.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MedRepProd/Pods-MedRepProd.debug.xcconfig"; sourceTree = "<group>"; };
 		229BF51F0F884A49E2105072 /* Pods-MedRep.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MedRep.release.xcconfig"; path = "Pods/Target Support Files/Pods-MedRep/Pods-MedRep.release.xcconfig"; sourceTree = "<group>"; };
 		4297BBDCA398A0B5502B64DF /* Pods_MedRepDev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MedRepDev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		569B26224CAE05A0C1C7DF64 /* Pods-MedRepDev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MedRepDev.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MedRepDev/Pods-MedRepDev.debug.xcconfig"; sourceTree = "<group>"; };
@@ -3338,6 +3340,8 @@
 		CCFFE2B61E62CF600051CC7E /* MRMarketingCampaignController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRMarketingCampaignController.h; path = MarketingCampaign/MRMarketingCampaignController.h; sourceTree = "<group>"; };
 		CCFFE2B71E62CF600051CC7E /* MRMarketingCampaignController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRMarketingCampaignController.m; path = MarketingCampaign/MRMarketingCampaignController.m; sourceTree = "<group>"; };
 		CCFFE2B81E62CF600051CC7E /* MRMarketingCampaignController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MRMarketingCampaignController.xib; path = MarketingCampaign/MRMarketingCampaignController.xib; sourceTree = "<group>"; };
+		D200AFF5899AF43034D61AD2 /* Pods_MedRepProd.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MedRepProd.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EDAB6938E005D1AD206892E7 /* Pods-MedRepProd.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MedRepProd.release.xcconfig"; path = "Pods/Target Support Files/Pods-MedRepProd/Pods-MedRepProd.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3362,6 +3366,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC5A5AE31E6AEE5200BF60C2 /* CoreGraphics.framework in Frameworks */,
+				98C1E2F3CF35A1A25518AED3 /* Pods_MedRepProd.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5350,6 +5355,8 @@
 				229BF51F0F884A49E2105072 /* Pods-MedRep.release.xcconfig */,
 				569B26224CAE05A0C1C7DF64 /* Pods-MedRepDev.debug.xcconfig */,
 				AE168B5B0E6304EFCB7BEB1F /* Pods-MedRepDev.release.xcconfig */,
+				0DC2E1386921604A6D72CA10 /* Pods-MedRepProd.debug.xcconfig */,
+				EDAB6938E005D1AD206892E7 /* Pods-MedRepProd.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -5359,6 +5366,7 @@
 			children = (
 				6676633E7E8BB94241D0940B /* Pods_MedRep.framework */,
 				4297BBDCA398A0B5502B64DF /* Pods_MedRepDev.framework */,
+				D200AFF5899AF43034D61AD2 /* Pods_MedRepProd.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -5408,9 +5416,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CC5A5CFC1E6AEE5200BF60C2 /* Build configuration list for PBXNativeTarget "MedRepProd" */;
 			buildPhases = (
+				FA7192A7F295B95090677C29 /* [CP] Check Pods Manifest.lock */,
 				CC5A59F81E6AEE5200BF60C2 /* Sources */,
 				CC5A5AE21E6AEE5200BF60C2 /* Frameworks */,
 				CC5A5AE51E6AEE5200BF60C2 /* Resources */,
+				F09DD09609CD43AFFAD4B00D /* [CP] Embed Pods Frameworks */,
+				3E6C88438C8EA4C0EC870724 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -7158,6 +7169,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MedRep/Pods-MedRep-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		3E6C88438C8EA4C0EC870724 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MedRepProd/Pods-MedRepProd-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		4EF3F1D4719086EF38384136 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -7216,6 +7242,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MedRepDev/Pods-MedRepDev-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F09DD09609CD43AFFAD4B00D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MedRepProd/Pods-MedRepProd-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FA7192A7F295B95090677C29 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -8121,6 +8177,7 @@
 		};
 		CC5A5CFD1E6AEE5200BF60C2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0DC2E1386921604A6D72CA10 /* Pods-MedRepProd.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -8141,6 +8198,7 @@
 		};
 		CC5A5CFE1E6AEE5200BF60C2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EDAB6938E005D1AD206892E7 /* Pods-MedRepProd.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-MedRepProd.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>UICountingLabel.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -27,17 +32,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>0FB4AA7ED69C22625FC2C7B66995C1FD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>0FC1CB21D1B64FAAC47A6478616DA728</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6DC55AFE10C0F9A43653A8EE2B7AE50E</key>
+		<key>1621B01710DC5B7892E6F5CCAF230BA9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AA1A93CC0C685F0181E36EAD0D923D10</key>
+		<key>6DC55AFE10C0F9A43653A8EE2B7AE50E</key>
 		<dict>
 			<key>primary</key>
 			<true/>

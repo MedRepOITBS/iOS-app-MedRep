@@ -25,9 +25,9 @@
 #import "MRDrugSearchViewController.h"
 #import "MRMarketingCampaignController.h"
 
-#define kMenuList [NSArray arrayWithObjects:@"My Profile", @"Dashboard", @"Notifications", @"Surveys", @"Activities", @"Marketing Campaigns", @"MedRep Meeting", @"Discussion Forum", @"Search For Drugs", @"News & Updates", @"Invite Contacts",  @"Settings", @"Logout", nil]
+#define kMenuList [NSArray arrayWithObjects:@"My Profile", @"Dashboard", @"Notifications", @"Surveys", @"Activities", @"Marketing Campaigns", @"MedRep Meeting", @"Search For Drugs", @"News & Updates", @"Invite Contacts",  @"Logout", nil]
 
-#define kMenuListImages [NSArray arrayWithObjects:@"dashboard_menu@2x.png", @"Appointment", @"Survey", @"activity-score@2x.png", @"Advertising", @"meetings@2x.png", @"discussion-forum@2x.png", @"searc--for-drugs@2x.png", @"news@2x.png", @"Invite", @"setting@2x.png", @"logout@2x.png", nil]
+#define kMenuListImages [NSArray arrayWithObjects:@"dashboard_menu@2x.png", @"Appointment", @"Survey", @"activity-score@2x.png", @"Advertising", @"meetings@2x.png", @"searc--for-drugs@2x.png", @"news@2x.png", @"Invite", @"logout@2x.png", nil]
 
 
 @interface MRMenuViewController ()<UITableViewDataSource, UITableViewDelegate>
@@ -117,10 +117,6 @@
         if ([self.userData objectForKey:KProfilePicture])
         {
             
-            
-            
-            
-            
             NSURL * imageURL = [NSURL URLWithString:[self.userData objectForKey:KProfilePicture]];
             
 
@@ -152,13 +148,6 @@
                     });
                 });
             }
-            
-            
-            
-            
-            
-            
-            
         }
         else
         {
@@ -172,10 +161,11 @@
     
     regCell.menuTitle.text = [kMenuList objectAtIndex:indexPath.row];
     
-    if (indexPath.row ==7 || indexPath.row ==11) {
+    /* if (indexPath.row ==7 || indexPath.row ==11) {
         regCell.menuTitle.alpha = 0.5f;
     }
-    else {
+    else */
+    {
         regCell.menuTitle.alpha = 1.0f;
     }
     
@@ -304,11 +294,6 @@
             break;
         case 7:
         {
-            //[MRCommon showAlert:kComingsoonMSG delegate:nil];
-        }
-            break;
-        case 8:
-        {
             // Search For Drugs
             if ( ![frontNavigationController.topViewController isKindOfClass:[MRDrugSearchViewController class]] )
             {
@@ -324,7 +309,7 @@
             }
         }
             break;
-        case 9:
+        case 8:
         {
             // Transform Page -> News & Updates
             if ( ![frontNavigationController.topViewController isKindOfClass:[MRTransformViewController class]] )
@@ -341,7 +326,7 @@
             }
         }
             break;
-        case 10:
+        case 9:
         {
             if (![frontNavigationController.topViewController isKindOfClass:[MRInviteViewController class]])
             {
@@ -359,12 +344,7 @@
             }
         }
             break;
-        case 11:
-        {
-            //[MRCommon showAlert:kComingsoonMSG delegate:nil];
-        }
-            break;
-        case 12:
+        case 10:
         {
             if (self.delegate && [self.delegate respondsToSelector:@selector(loadLoginView)]) {
                 [MRCommon removedTokens];
