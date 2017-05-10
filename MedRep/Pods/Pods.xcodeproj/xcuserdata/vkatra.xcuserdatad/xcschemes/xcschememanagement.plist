@@ -6,43 +6,43 @@
 	<dict>
 		<key>PNChart.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>2</integer>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-MedRep.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-MedRepDev.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>3</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>UICountingLabel.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>4</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>016D982990393D4CF14C8AE7998AEC65</key>
+		<key>0FC1CB21D1B64FAAC47A6478616DA728</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3E3F76DFA74C9DF3C581151DA3C45EAC</key>
+		<key>6DC55AFE10C0F9A43653A8EE2B7AE50E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4FA84A1F6E4424F3880E59A5A8789A3C</key>
+		<key>AA1A93CC0C685F0181E36EAD0D923D10</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6C18C789438292FED01EB702705FC9AA</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>BDEC21C04275346D743AA8BF0DCFF78D</key>
+		<key>DA392EE8E5B24D16FB9910405A0AFC2E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
