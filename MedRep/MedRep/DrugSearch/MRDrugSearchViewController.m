@@ -370,9 +370,10 @@
         }
         else
         {
-            NSArray *erros =  [details componentsSeparatedByString:@"-"];
-            if (erros.count > 0)
-                [MRCommon showAlert:[erros lastObject] delegate:nil];
+//            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+//            if (erros.count > 0)
+//                [MRCommon showAlert:[erros lastObject] delegate:nil];
+            [MRCommon showAlert:@"Failed to find Drugs !!!" delegate:nil];
         }
     }];
 }
@@ -404,9 +405,10 @@
         }
         else
         {
-            NSArray *erros =  [details componentsSeparatedByString:@"-"];
-            if (erros.count > 0)
-                [MRCommon showAlert:[erros lastObject] delegate:nil];
+//            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+//            if (erros.count > 0)
+//                [MRCommon showAlert:[erros lastObject] delegate:nil];
+            [MRCommon showAlert:@"Failed to find Drugs !!!" delegate:nil];
         }
     }];
 }
@@ -442,9 +444,10 @@
         }
         else
         {
-            NSArray *erros =  [details componentsSeparatedByString:@"-"];
-            if (erros.count > 0)
-                [MRCommon showAlert:[erros lastObject] delegate:nil];
+//            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+//            if (erros.count > 0)
+//                [MRCommon showAlert:[erros lastObject] delegate:nil];
+            [MRCommon showAlert:@"Failed to find Drugs !!!" delegate:nil];
         }
     }];
 }

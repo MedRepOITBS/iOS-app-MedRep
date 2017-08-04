@@ -5464,6 +5464,7 @@
 					83C127EC1B77C88B00D2F08E = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = 9Y7Y82N227;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -8107,16 +8108,16 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = MedRep/MedRep.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Ramesh Meesala (PR3BTD2UVE)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ramesh Meesala (PR3BTD2UVE)";
-				DEVELOPMENT_TEAM = 9Y7Y82N227;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MedRep/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MACH_O_TYPE = mh_execute;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7cddcfe2-635a-4349-be7a-8569ba607036";
-				PROVISIONING_PROFILE_SPECIFIER = OTIS_MED_PROFILE;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -8129,14 +8130,16 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = MedRep/MedRep.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Ramesh Meesala (PR3BTD2UVE)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ramesh Meesala (PR3BTD2UVE)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MedRep/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MACH_O_TYPE = mh_execute;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c4d46433-dea4-407d-8f95-f9f1a3d92b26";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

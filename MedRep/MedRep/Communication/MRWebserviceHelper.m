@@ -140,7 +140,8 @@
                 else
                 {
                   [MRCommon stopActivityIndicator];
-                    if (self.serviceType != kMRWebServiceTypeRefreshToken && self.serviceType != kMRWebServiceTypeLogin)
+                    if (self.serviceType != kMRWebServiceTypeRefreshToken && self.serviceType != kMRWebServiceTypeLogin && self.serviceType != kMRWebServiceTypeGetMedicineAlterations
+                        && self.serviceType != kMRWebServiceTypeGetMedicineSuggestions)
                     {
                           [MRCommon showAlert:@"Failed to get a response from the server. Please try later." delegate:nil];
                     }
