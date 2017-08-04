@@ -13,6 +13,11 @@
 #import "MRLocationManager.h"
 #import "NotificationUUIDViewController.h"
 
+#import "SWRevealViewController.h"
+#import "MRTransformDetailViewController.h"
+@import GooglePlaces;
+@import GoogleMaps;
+
 @interface AppDelegate ()
 
 @property (nonatomic)  NotificationUUIDViewController *notificationViewController;
@@ -35,15 +40,20 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     // Override point for customization after application launch.
-    [self registerForNotification];
-    
+    [GMSServices provideAPIKey:@"AIzaSyBTgV7M14YRcPONkBYkcY8FLmXhA0ELJJA"];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.backgroundColor = [MRCommon colorFromHexString:kStatusBarColor];
     [self.window makeKeyAndVisible];
-
+    [GMSPlacesClient provideAPIKey:@"AIzaSyBTgV7M14YRcPONkBYkcY8FLmXhA0ELJJA"];
     _counterChildPost = 1000;
     //_launchScreen = @"Survey";
     //_launchScreen = @"Notifications";
+    
+    [MRAppControl sharedHelper].globalCache = [NSCache new];
+    
+    
+    MRAppControl *appController = [MRAppControl sharedHelper];
+    [appController launchWithApplicationMainWindow:self.window];
     
     return YES;
 }
@@ -52,41 +62,14 @@
     return _counterChildPost ++;
 
 }
-- (void)registerForNotification
-{
-    BOOL appRegisteredForAPNS = [[UIApplication sharedApplication] isRegisteredForRemoteNotifications];
-    if (appRegisteredForAPNS == false) {
-        
-        // Dummy Code
-        
-        // Launched from push notification
-        self.notificationViewController = [[NotificationUUIDViewController alloc] initWithNibName:@"NotificationUUIDViewController" bundle:nil];
-        self.notificationViewController.appWindow = self.window;
-        
-        self.window.rootViewController = self.notificationViewController;
-        
-    
-        if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)])
-        {
-            UIUserNotificationType types = UIUserNotificationTypeSound | UIUserNotificationTypeBadge | UIUserNotificationTypeAlert;
-            UIUserNotificationSettings *notificationSettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
-            [[UIApplication sharedApplication] registerUserNotificationSettings:notificationSettings];
-        }
-        
-        if ([UIApplication instancesRespondToSelector:@selector(registerForRemoteNotifications)])
-        {
-            [[UIApplication sharedApplication] registerForRemoteNotifications];
-        }
-        else
-        {
-            //[[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
-        }
-    } else {
-        MRAppControl *appController = [MRAppControl sharedHelper];
-        [appController launchWithApplicationMainWindow:self.window];
-    }
-}
 
+- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+    if ([self.window.rootViewController isKindOfClass:[SWRevealViewController class]] && [((UINavigationController*)((SWRevealViewController*)self.window.rootViewController).frontViewController).topViewController isKindOfClass:[MRTransformDetailViewController class]] && _enabledVideoRotation)
+    {
+        return UIInterfaceOrientationMaskAll;
+    }
+    else return UIInterfaceOrientationMaskPortrait;
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -104,6 +87,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [application setApplicationIconBadgeNumber:0];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -114,6 +98,7 @@
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
+    NSLog(@"Vamsi MedRep Local:%@",notification);
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [[UIApplication sharedApplication] cancelLocalNotification:notification];
     [MRCommon showAlert:notification.alertBody delegate:self];
@@ -129,8 +114,18 @@
     
     NSLog(@"The generated device token string is : %@",deviceTokenString);
     _token = deviceTokenString;
-    self.notificationViewController.token = deviceTokenString;
-    [self.notificationViewController refreshScreen];
+    
+    NSDictionary *userdata = [MRAppControl sharedHelper].userRegData;
+    NSDictionary *dataDict = @{@"regDeviceToken" : deviceTokenString,
+                               @"platform" : @"IOS"/*,
+                               @"docId" : [userdata objectOrNilForKey:@"doctorId"]*/};
+    
+    [[MRWebserviceHelper sharedWebServiceHelper] registerDeviceTokenWithPushAPI:dataDict
+                                                                    withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                                        if (status == NO) {
+                                                                            [MRCommon showAlert:@"Failed to register for Push Notifications !!!" delegate:nil];
+                                                                        }
+                                                                    }];
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
@@ -142,7 +137,22 @@
 }
 
 - (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    [MRCommon showAlert:[NSString stringWithFormat:@"Received Remote Notification\n%@", userInfo] delegate:self];
+    /*
+    NSLog(@"Vamsi MedRep userInfo:%@",userInfo);
+    
+    NSInteger badge_value = [UIApplication sharedApplication].applicationIconBadgeNumber;
+    NSLog(@"Vamsi MedRep : Current badge = %d", badge_value);
+    
+    badge_value+= [[[userInfo objectForKey:@"aps"] objectForKey:@"badge"]intValue];
+    NSLog(@"Vamsi MedRep : Totoal badge Value:%d",badge_value);
+    
+    for (id key in userInfo) {
+        NSLog(@"Vamsi MedRep key: %@, value: %@", key, [userInfo objectForKey:key]);
+    }
+    [UIApplication sharedApplication].applicationIconBadgeNumber = badge_value;
+    */
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
+                                                        object:nil];
 }
 
 #pragma mark - Core Data stack
@@ -223,6 +233,15 @@
             abort();
         }
     }
+}
+
+#pragma mark - Push Notification handling
+-(BOOL)application:(UIApplication *)application
+           openURL:(NSURL *)url
+ sourceApplication:(NSString *)sourceApplication
+        annotation:(id)annotation {
+    NSLog(@"received message, host : %@, path : %@", [url host], [url path]);
+    return true;
 }
 
 @end

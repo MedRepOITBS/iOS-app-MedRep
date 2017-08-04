@@ -10,14 +10,14 @@
 
 @class MRContact;
 @class MRGroup;
-@class MRGroupObject;
 
 @interface MRContactDetailViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property (strong, nonatomic) NSMutableArray *contactList;
+@property (nonatomic, assign) BOOL isSuggestedGroup;
 
+@property (nonatomic, assign) NSInteger launchMode;
+@property (nonatomic,weak) IBOutlet UIButton *viewMoreButton;
 - (void)setContact:(MRContact*)contact;
 - (void)setGroup:(MRGroup*)group;
-- (void)setGroupData:(MRGroupObject*)group;
-
+-(IBAction)viewMoreOption:(id)sender;
 @end

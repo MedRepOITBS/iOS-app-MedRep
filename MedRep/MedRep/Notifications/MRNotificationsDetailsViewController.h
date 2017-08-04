@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class MRNotifications;
+
 @interface MRNotificationsDetailsViewController : UIViewController
 
-@property (nonatomic, retain) NSDictionary *selectedNotification;
-@property (nonatomic, retain) NSArray *notificationDetailsList;
-@property (nonatomic, retain) NSArray *therapeuticNamesList;
+@property (nonatomic) MRNotifications *selectedNotification;
 
 @end

@@ -41,6 +41,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *dayButton;
 @property (weak, nonatomic) IBOutlet UIButton *weekButton;
 @property (weak, nonatomic) IBOutlet UIButton *monthButton;
+@property (weak, nonatomic) IBOutlet UIButton *hourButton;
 
 @property (nonatomic, strong) alertCompletionHandler okComplitionHandler;
 @property (nonatomic, strong) alertCompletionHandler cancelComplitionHandler;
@@ -49,9 +50,45 @@
 
 @implementation MPNotificationAlertViewController
 
+- (id)init {
+    if (self = [super init]) {
+        self.locatlNotificationType = 2;
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        self.locatlNotificationType = 2;
+    }
+    return self;
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil] ) {
+        self.locatlNotificationType = 2;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
-    self.dayButton.selected = YES;
-    self.locatlNotificationType = 1;
+    switch (self.locatlNotificationType) {
+        case 1:
+            self.hourButton.selected = YES;
+            break;
+            
+        case 3:
+            self.weekButton.selected = YES;
+            break;
+            
+        case 4:
+            self.monthButton.selected = YES;
+            break;
+            
+        default:
+            self.dayButton.selected = YES;
+            break;
+    }
     self.yesButtonOne.selected = NO;
     self.yesButtonTwo.selected = NO;
     
@@ -271,28 +308,40 @@
 - (IBAction)remindMeButtonAction:(UIButton *)sender
 {
     switch (sender.tag) {
-        case 1000:
+        case 999:
         {
-            self.dayButton.selected = YES;
+            self.hourButton.selected = YES;
+            self.dayButton.selected = NO;
             self.monthButton.selected = NO;
             self.weekButton.selected = NO;
             self.locatlNotificationType = 1;
         }
             break;
+        case 1000:
+        {
+            self.hourButton.selected = NO;
+            self.dayButton.selected = YES;
+            self.monthButton.selected = NO;
+            self.weekButton.selected = NO;
+            self.locatlNotificationType = 2;
+        }
+            break;
         case 1001:
         {
+            self.hourButton.selected = NO;
             self.dayButton.selected = NO;
             self.monthButton.selected = NO;
             self.weekButton.selected = YES;
-            self.locatlNotificationType = 2;
+            self.locatlNotificationType = 3;
         }
             break;
         case 1002:
         {
+            self.hourButton.selected = NO;
             self.dayButton.selected = NO;
             self.monthButton.selected = YES;
             self.weekButton.selected = NO;
-            self.locatlNotificationType = 3;
+            self.locatlNotificationType = 4;
         }
             break;
    

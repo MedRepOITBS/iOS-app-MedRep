@@ -13,12 +13,21 @@
 #import "MRConstants.h"
 #import <AVFoundation/AVFoundation.h>
 #import "MRContactsViewController.h"
+#import "MRGroup.h"
+#import "MRAppControl.h"
 
 @interface MRCreateGroupViewController () <UITextViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate> {
     UITextView *activeTxtView;
     NSData *groupIconData;
     BOOL isUpdateMode;
 }
+
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+
+@property (nonatomic) CGRect keyboardRect;
+@property (nonatomic) NSString *groupName;
+@property (nonatomic) NSString *shortDescription;
+@property (nonatomic) NSString *longDescription;
 
 @property (weak, nonatomic) IBOutlet UITextView *txtShortDesc;
 @property (weak, nonatomic) IBOutlet UITextView *txtLongDesc;
@@ -36,7 +45,7 @@
     // Do any additional setup after loading the view from its nib.
     
     self.navigationItem.title = @"Create Group";
-    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
+    //[self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
     
     UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonAction)];
     self.navigationItem.leftBarButtonItem = revealButtonItem;
@@ -56,9 +65,18 @@
     [[self.txtShortDesc layer] setBorderWidth:1.0];
     [[self.txtShortDesc layer] setCornerRadius:5];
     
-    [[self.imgView layer] setBorderColor:[[UIColor blackColor] CGColor]];
-    [[self.imgView layer] setBorderWidth:1.0];
-    [[self.imgView layer] setCornerRadius:5];
+    
+    UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
+    numberToolbar.barStyle = UIBarStyleDefault;
+    numberToolbar.items = [NSArray arrayWithObjects:
+                           [[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(closeOnKeyboardPressed:)],
+                           [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil],
+                           [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneOnKeyboardPressed:)],
+                           nil];
+    [numberToolbar sizeToFit];
+    self.txtName.inputAccessoryView = numberToolbar;
+    self.txtLongDesc.inputAccessoryView = numberToolbar;
+    self.txtShortDesc.inputAccessoryView = numberToolbar;
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imgTapped)];
     [_imgView addGestureRecognizer:tap];
@@ -67,15 +85,31 @@
         self.txtName.text = self.group.group_name;
         self.txtLongDesc.text = self.group.group_long_desc;
         self.txtShortDesc.text = self.group.group_short_desc;
-        UIImage *theImage= [MRCommon getImageFromBase64Data:[self.group.group_img_data dataUsingEncoding:NSUTF8StringEncoding]];
-        groupIconData = UIImageJPEGRepresentation(theImage, 1.0);
-        self.imgView.image = theImage;
+//        UIImage *theImage= [MRCommon getImageFromBase64Data:[self.group.group_img_data dataUsingEncoding:NSUTF8StringEncoding]];
+//        groupIconData = UIImageJPEGRepresentation(theImage, 1.0);
+        
+        [MRAppControl getGroupImage:self.group andImageView:self.imgView];
+        
         isUpdateMode = YES;
         self.navigationItem.title = @"Update Group";
         [_createBtn setTitle:@"Update Group" forState:UIControlStateNormal];
     }else{
         isUpdateMode = NO;
+        groupIconData = UIImagePNGRepresentation([UIImage imageNamed:@"group"]);
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardDidHideNotification object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -86,6 +120,28 @@
 - (void)backButtonAction{
     [activeTxtView resignFirstResponder];
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)closeOnKeyboardPressed:(id)sender {
+    if (activeTxtView == self.txtName) {
+        activeTxtView.text = self.groupName;
+    } else if (activeTxtView == self.txtShortDesc) {
+        activeTxtView.text = self.shortDescription;
+    } else {
+        activeTxtView.text = self.longDescription;
+    }
+    [activeTxtView resignFirstResponder];
+}
+
+- (void)doneOnKeyboardPressed:(id)sender {
+    if (activeTxtView == self.txtName) {
+        self.groupName = activeTxtView.text;
+    } else if (activeTxtView == self.txtShortDesc) {
+        self.shortDescription = activeTxtView.text;
+    } else {
+        self.longDescription = activeTxtView.text;
+    }
+    [activeTxtView resignFirstResponder];
 }
 
 /*
@@ -113,18 +169,14 @@
         return;
     }
     
-    if (!groupIconData) {
-        [[[UIAlertView alloc] initWithTitle:@"" message:@"Please select group icon!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
-        return;
-    }
-    
     NSMutableDictionary *dictReq = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                              _txtName.text,@"group_name",
                              _txtShortDesc.text, @"group_short_desc",
                              _txtLongDesc.text, @"group_long_desc",
-                             [groupIconData base64EncodedStringWithOptions:0], @"group_img_data",
-                             @"png",@"group_mimeType",
+                             [groupIconData base64EncodedStringWithOptions:0], @"imgData",
                              nil];
+    
+    [dictReq setObject:[MRAppControl getFileName] forKey:@"fileName"];
     
     if (isUpdateMode) {
         [MRCommon showActivityIndicator:@"Updating..."];
@@ -141,14 +193,44 @@
                 _txtName.text = @"";
                 _txtLongDesc.text = @"";
                 _txtShortDesc.text = @"";
-                [_imgView setImage:[UIImage imageNamed:@"Group.png"]];
+                [_imgView setImage:[UIImage imageNamed:@"group"]];
                 groupIconData = nil;
             }
-            else
-            {
-                NSArray *erros =  [details componentsSeparatedByString:@"-"];
-                if (erros.count > 0)
-                    [MRCommon showAlert:[erros lastObject] delegate:nil];
+            else {
+                NSString *errorCode = [MRDatabaseHelper getOAuthErrorCode:responce];
+                if ([errorCode isEqualToString:@"invalid_token"])
+                {
+                    [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+                     {
+                         [MRCommon savetokens:responce];
+                         [[MRWebserviceHelper sharedWebServiceHelper] updateGroup:dictReq withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                             [MRCommon stopActivityIndicator];
+                             if (status)
+                             {
+                                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Group updated!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                                 alert.tag = 11;
+                                 [alert show];
+                                 
+                                 _txtName.text = @"";
+                                 _txtLongDesc.text = @"";
+                                 _txtShortDesc.text = @"";
+                                 [_imgView setImage:[UIImage imageNamed:@"group"]];
+                                 groupIconData = nil;
+                             }else
+                             {
+                                 NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                                 if (erros.count > 0)
+                                     [MRCommon showAlert:[erros lastObject] delegate:nil];
+                             }
+                         }];
+                     }];
+                }
+                else
+                {
+                    NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                    if (erros.count > 0)
+                        [MRCommon showAlert:[erros lastObject] delegate:nil];
+                }
             }
         }];
     }else{
@@ -167,14 +249,46 @@
                 _txtName.text = @"";
                 _txtLongDesc.text = @"";
                 _txtShortDesc.text = @"";
-                [_imgView setImage:[UIImage imageNamed:@"Group.png"]];
+                [_imgView setImage:[UIImage imageNamed:@"group"]];
                 groupIconData = nil;
             }
-            else
-            {
-                NSArray *erros =  [details componentsSeparatedByString:@"-"];
-                if (erros.count > 0)
-                    [MRCommon showAlert:[erros lastObject] delegate:nil];
+            else {
+                NSString *errorCode = [MRDatabaseHelper getOAuthErrorCode:responce];
+                if ([errorCode isEqualToString:@"invalid_token"])
+                {
+                    [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+                     {
+                         [MRCommon savetokens:responce];
+                         [[MRWebserviceHelper sharedWebServiceHelper] createGroup:dictReq withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                             [MRCommon stopActivityIndicator];
+                             if (status)
+                             {
+                                 //[MRCommon showAlert:@"Group created!" delegate:nil];
+                                 
+                                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Group created!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                                 alert.tag = 11;
+                                 [alert show];
+                                 
+                                 _txtName.text = @"";
+                                 _txtLongDesc.text = @"";
+                                 _txtShortDesc.text = @"";
+                                 [_imgView setImage:[UIImage imageNamed:@"group"]];
+                                 groupIconData = nil;
+                             }else
+                             {
+                                 NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                                 if (erros.count > 0)
+                                     [MRCommon showAlert:[erros lastObject] delegate:nil];
+                             }
+                         }];
+                     }];
+                }
+                else
+                {
+                    NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                    if (erros.count > 0)
+                        [MRCommon showAlert:[erros lastObject] delegate:nil];
+                }
             }
         }];
     }
@@ -187,11 +301,27 @@
                 [self.navigationController popToViewController:vc animated:YES];
             }
         }
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
+                                                            object:nil];
     }
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    self.keyboardRect = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    self.keyboardRect = [self.view convertRect:self.keyboardRect fromView:nil]; //this is it!
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+    [self.scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView{
     activeTxtView = textView;
+    
+    if (activeTxtView == self.txtLongDesc) {
+        [self.scrollView setContentOffset:CGPointMake(0, textView.frame.origin.y - textView.frame.size.height) animated:YES];
+    }
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView{
@@ -253,7 +383,7 @@
     UIImage *theImage = [self imageWithImage:tmpImage convertToSize:CGSizeMake(newWidth, newHeight)];
     [_imgView setImage:theImage];
     
-    groupIconData = UIImageJPEGRepresentation(theImage, 1.0);
+    groupIconData = UIImagePNGRepresentation(theImage);
 }
 
 -(void)openCameraPicker{
@@ -268,13 +398,13 @@
         else if(authStatus == AVAuthorizationStatusDenied)
         {
             // denied
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Camera access disabled" message:@"SYW Relay needs access to your camera. Please check your privacy settings." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Camera access disabled" message:@"Medrep needs access to your camera. Please check your privacy settings." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
         }
         else if(authStatus == AVAuthorizationStatusRestricted)
         {
             // restricted, normally won't happen
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Camera access disabled" message:@"SYW Relay needs access to your camera. Please check your privacy settings." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Camera access disabled" message:@"Medrep needs access to your camera. Please check your privacy settings." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
         }
         else if(authStatus == AVAuthorizationStatusNotDetermined)

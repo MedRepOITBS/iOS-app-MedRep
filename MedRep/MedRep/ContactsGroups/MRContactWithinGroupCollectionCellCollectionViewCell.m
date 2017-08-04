@@ -9,6 +9,7 @@
 #import "MRContactWithinGroupCollectionCellCollectionViewCell.h"
 #import "MRContact.h"
 #import "MRGroup.h"
+#import "MRAppControl.h"
 
 @interface MRContactWithinGroupCollectionCellCollectionViewCell()
 
@@ -24,13 +25,14 @@
 }
 
 - (void)setContact:(MRContact *)contact {
-    self.imageView.image = [UIImage imageNamed:contact.profilePic];
-    self.label.text = contact.name;
+    [MRAppControl getContactImage:contact andImageView:self.imageView];
+    self.label.text = [MRAppControl getContactName:contact];
 }
 
 - (void)setGroup:(MRGroup *)group {
-    self.imageView.image = [UIImage imageNamed:group.groupPicture];
-    self.label.text = group.name;
+    [MRAppControl getGroupImage:group andImageView:self.imageView];
+    //[UIImage imageNamed:group.groupPicture];
+    self.label.text = group.group_name;
 }
 
 @end

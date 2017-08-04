@@ -9,9 +9,16 @@
 #import "MRGroup.h"
 #import "MRContact.h"
 #import "MRGroupPost.h"
+#import "MRPostedReplies.h"
 
 @implementation MRGroup
 
+@synthesize allMembers;
+
 // Insert code here to add functionality to your managed object subclass
+
++ (NSString*)primaryKeyColumnName {
+    return @"group_id";
+}
 
 @end

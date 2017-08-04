@@ -13,6 +13,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    [super awakeFromNib];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -87,6 +88,10 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(activateTextField:)]) {
+        [self.delegate activateTextField:textField];
+    }
+    
     if (self.delegate && [self.delegate respondsToSelector:@selector(inputTextFieldBeginEditingDelegate:)])
     {
         [self.delegate inputTextFieldBeginEditingDelegate:self];
@@ -95,6 +100,10 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(deActivateTextField)]) {
+        [self.delegate deActivateTextField];
+    }
+    
     if (textField.tag == 100)
     {
         if (self.delegate && [self.delegate respondsToSelector:@selector(inputTextFieldEndEditingDelegate:)])

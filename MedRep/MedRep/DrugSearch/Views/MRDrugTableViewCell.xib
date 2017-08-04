@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MRDrugTableViewCell" rowHeight="50" id="KGk-i7-Jjw" customClass="MRDrugTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wad-PG-qd6">
+                        <rect key="frame" x="8" y="5" width="224.5" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="uWK-vn-evl"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8GD-X8-tPj">
+                        <rect key="frame" x="8" y="27" width="224" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="OfJ-7P-i3z">
+                        <rect key="frame" x="242" y="10" width="70" height="30"/>
+                        <color key="backgroundColor" red="0.12549019610000001" green="0.69411764710000001" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="70" id="axI-fw-75e"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="3"/>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="OfJ-7P-i3z" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="0af-hm-hRc"/>
+                    <constraint firstItem="8GD-X8-tPj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="DXs-TI-0x7"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="8GD-X8-tPj" secondAttribute="bottom" constant="-3.5" id="OAg-Io-69o"/>
+                    <constraint firstItem="Wad-PG-qd6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-3" id="QnT-gn-aOf"/>
+                    <constraint firstItem="Wad-PG-qd6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="T20-qf-1mj"/>
+                    <constraint firstItem="8GD-X8-tPj" firstAttribute="top" secondItem="Wad-PG-qd6" secondAttribute="bottom" constant="2" id="YzF-D2-Tkl"/>
+                    <constraint firstItem="OfJ-7P-i3z" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="fgM-T3-FkY"/>
+                    <constraint firstItem="OfJ-7P-i3z" firstAttribute="leading" secondItem="8GD-X8-tPj" secondAttribute="trailing" constant="10" id="gAn-ip-1t7"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="OfJ-7P-i3z" secondAttribute="bottom" constant="2" id="pGE-3W-dsa"/>
+                    <constraint firstItem="OfJ-7P-i3z" firstAttribute="leading" secondItem="Wad-PG-qd6" secondAttribute="trailing" constant="9.5" id="x28-yI-keE"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="brand" destination="Wad-PG-qd6" id="ykN-PB-3UK"/>
+                <outlet property="company" destination="8GD-X8-tPj" id="CgB-Yz-weo"/>
+                <outlet property="type" destination="OfJ-7P-i3z" id="U6S-7H-oyJ"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

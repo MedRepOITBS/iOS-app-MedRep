@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="MRCustomTabBar">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Buz-YG-Gtm">
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connect" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="57j-gV-9Ce">
+                            <constraints>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="bTq-r6-P3R"/>
+                                <constraint firstAttribute="height" constant="21" id="ela-4W-qcn"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Connect" translatesAutoresizingMaskIntoConstraints="NO" id="ZwL-nx-oFB">
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="60S-8F-gQC"/>
+                                <constraint firstAttribute="width" constant="30" id="cKo-h8-4ao"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    <gestureRecognizers/>
+                    <constraints>
+                        <constraint firstItem="ZwL-nx-oFB" firstAttribute="centerY" secondItem="Buz-YG-Gtm" secondAttribute="centerY" id="L8o-z7-cVt"/>
+                        <constraint firstItem="ZwL-nx-oFB" firstAttribute="top" secondItem="Buz-YG-Gtm" secondAttribute="top" constant="2" id="ZR2-4r-gXU"/>
+                        <constraint firstAttribute="bottom" secondItem="57j-gV-9Ce" secondAttribute="bottom" id="cP7-8Y-4T7"/>
+                        <constraint firstItem="57j-gV-9Ce" firstAttribute="centerX" secondItem="Buz-YG-Gtm" secondAttribute="centerX" id="fS2-K0-gpz"/>
+                        <constraint firstItem="ZwL-nx-oFB" firstAttribute="centerY" secondItem="Buz-YG-Gtm" secondAttribute="centerY" id="fiC-3c-ZNo"/>
+                        <constraint firstItem="ZwL-nx-oFB" firstAttribute="centerX" secondItem="Buz-YG-Gtm" secondAttribute="centerX" id="zhV-fJ-1TG"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="L8o-z7-cVt"/>
+                            <exclude reference="fiC-3c-ZNo"/>
+                        </mask>
+                    </variation>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="pUO-ej-tiH" appends="YES" id="uDc-dy-tDG"/>
+                    </connections>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Pt-5R-pdf">
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="1" id="ghn-OC-Gpz"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1aO-be-Yy7">
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TransformTabIcon" translatesAutoresizingMaskIntoConstraints="NO" id="jYK-0F-5MD">
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="2fo-9Q-Ghd"/>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="FdO-Y7-sNM"/>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="Oos-b2-azj"/>
+                                <constraint firstAttribute="width" constant="30" id="iQl-T6-sXP"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transform" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fWT-yM-IrR">
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="CxU-6K-7W7"/>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="ThZ-0r-RuR"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.1019607843" green="0.52156862749999999" blue="0.83529411760000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <gestureRecognizers/>
+                    <constraints>
+                        <constraint firstItem="fWT-yM-IrR" firstAttribute="centerX" secondItem="1aO-be-Yy7" secondAttribute="centerX" id="L2w-qT-snS"/>
+                        <constraint firstItem="jYK-0F-5MD" firstAttribute="centerX" secondItem="1aO-be-Yy7" secondAttribute="centerX" id="Qmg-pj-RSO"/>
+                        <constraint firstItem="jYK-0F-5MD" firstAttribute="top" secondItem="1aO-be-Yy7" secondAttribute="top" constant="2" id="tnD-yw-gu5"/>
+                        <constraint firstAttribute="bottom" secondItem="fWT-yM-IrR" secondAttribute="bottom" id="wU1-Sp-vPQ"/>
+                    </constraints>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="eKP-gt-XWz" appends="YES" id="Y1Q-u1-BuT"/>
+                    </connections>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hWt-rB-Cn1">
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="1" id="pZ0-Zq-yYI"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6fh-O4-2is">
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mnN-zh-Sac">
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="I00-ja-rMl"/>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="Vtl-vP-Dng"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Share" translatesAutoresizingMaskIntoConstraints="NO" id="a8P-iA-jrs">
+                            <constraints>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="74L-Qj-WbQ"/>
+                                <constraint firstAttribute="width" constant="30" id="M2k-Eu-bf0"/>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="Zfu-h9-33W"/>
+                                <constraint firstAttribute="height" constant="30" id="kYk-t1-jiq"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    <gestureRecognizers/>
+                    <constraints>
+                        <constraint firstItem="mnN-zh-Sac" firstAttribute="centerX" secondItem="6fh-O4-2is" secondAttribute="centerX" id="14B-XQ-JT2"/>
+                        <constraint firstItem="a8P-iA-jrs" firstAttribute="top" secondItem="6fh-O4-2is" secondAttribute="top" constant="2" id="4Sh-Rd-HdV"/>
+                        <constraint firstItem="a8P-iA-jrs" firstAttribute="centerX" secondItem="6fh-O4-2is" secondAttribute="centerX" id="XTP-xX-n6q"/>
+                        <constraint firstAttribute="bottom" secondItem="mnN-zh-Sac" secondAttribute="bottom" id="Yet-da-iRO"/>
+                    </constraints>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="wX5-Es-D0b" appends="YES" id="KHr-ou-qtZ"/>
+                    </connections>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QqM-aT-bvX">
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="1" id="eii-5E-jWS"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qJy-pP-LdW">
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Serve" translatesAutoresizingMaskIntoConstraints="NO" id="7Ru-bc-UBb">
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="5bb-yT-S40"/>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="Gye-3u-X8B"/>
+                                <constraint firstAttribute="width" constant="30" id="LAx-OH-FuQ"/>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="gYc-2t-z8d"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Serve" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="neS-mL-vW1">
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="Mjz-aP-tfz"/>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="RCI-FB-cNY"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    <gestureRecognizers/>
+                    <constraints>
+                        <constraint firstItem="neS-mL-vW1" firstAttribute="centerX" secondItem="qJy-pP-LdW" secondAttribute="centerX" id="7pc-vm-4DP"/>
+                        <constraint firstItem="7Ru-bc-UBb" firstAttribute="centerX" secondItem="qJy-pP-LdW" secondAttribute="centerX" id="GRq-sz-Fa8"/>
+                        <constraint firstAttribute="bottom" secondItem="neS-mL-vW1" secondAttribute="bottom" id="Pdf-uo-zmv"/>
+                        <constraint firstItem="7Ru-bc-UBb" firstAttribute="top" secondItem="qJy-pP-LdW" secondAttribute="top" constant="2" id="gsb-D8-Uga"/>
+                    </constraints>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="DTA-ED-j0K" appends="YES" id="gZd-YD-2Pa"/>
+                    </connections>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.12549019610000001" green="0.69411764710000001" blue="0.54117647059999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="6fh-O4-2is" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.25" id="0Pr-rA-8RF"/>
+                <constraint firstItem="qJy-pP-LdW" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="0ih-x5-wq0"/>
+                <constraint firstAttribute="bottom" secondItem="6fh-O4-2is" secondAttribute="bottom" id="1cL-a0-D9O"/>
+                <constraint firstItem="8Pt-5R-pdf" firstAttribute="leading" secondItem="Buz-YG-Gtm" secondAttribute="trailing" constant="-2" id="40w-KD-6qd"/>
+                <constraint firstItem="QqM-aT-bvX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="CIi-QH-4hS"/>
+                <constraint firstItem="Buz-YG-Gtm" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.25" id="FGK-Fd-39I"/>
+                <constraint firstItem="hWt-rB-Cn1" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="FnO-sY-0dI"/>
+                <constraint firstAttribute="bottom" secondItem="QqM-aT-bvX" secondAttribute="bottom" id="GNy-qD-UNP"/>
+                <constraint firstItem="Buz-YG-Gtm" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Hvd-rJ-mnx"/>
+                <constraint firstItem="1aO-be-Yy7" firstAttribute="leading" secondItem="Buz-YG-Gtm" secondAttribute="trailing" id="L8D-06-D9a"/>
+                <constraint firstAttribute="trailing" secondItem="qJy-pP-LdW" secondAttribute="trailing" id="Lhi-GS-4hC"/>
+                <constraint firstAttribute="bottom" secondItem="Buz-YG-Gtm" secondAttribute="bottom" id="U4v-Jm-OIr"/>
+                <constraint firstItem="1aO-be-Yy7" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.25" id="UlD-Wg-QBO"/>
+                <constraint firstAttribute="bottom" secondItem="1aO-be-Yy7" secondAttribute="bottom" id="V43-MY-ruE"/>
+                <constraint firstItem="hWt-rB-Cn1" firstAttribute="leading" secondItem="1aO-be-Yy7" secondAttribute="trailing" constant="-2" id="WHO-ta-H8r"/>
+                <constraint firstItem="1aO-be-Yy7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="YmF-XB-nlH"/>
+                <constraint firstItem="6fh-O4-2is" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="aqg-3c-baG"/>
+                <constraint firstItem="Buz-YG-Gtm" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="chP-Hd-uhy"/>
+                <constraint firstItem="qJy-pP-LdW" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.25" id="eFE-Kh-w77"/>
+                <constraint firstItem="Buz-YG-Gtm" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="3:1" id="efi-dT-cMM"/>
+                <constraint firstAttribute="bottom" secondItem="hWt-rB-Cn1" secondAttribute="bottom" id="fYT-6P-Lpn"/>
+                <constraint firstItem="6fh-O4-2is" firstAttribute="leading" secondItem="1aO-be-Yy7" secondAttribute="trailing" id="gMJ-ck-a6e"/>
+                <constraint firstItem="8Pt-5R-pdf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="q6m-Um-wnN"/>
+                <constraint firstAttribute="bottom" secondItem="qJy-pP-LdW" secondAttribute="bottom" id="rFz-HK-cee"/>
+                <constraint firstItem="QqM-aT-bvX" firstAttribute="leading" secondItem="6fh-O4-2is" secondAttribute="trailing" constant="-2" id="sS1-KP-59K"/>
+                <constraint firstAttribute="bottom" secondItem="8Pt-5R-pdf" secondAttribute="bottom" id="stk-0O-n0P"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="efi-dT-cMM"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="connectView" destination="Buz-YG-Gtm" id="nMd-kQ-EWm"/>
+                <outlet property="serveView" destination="qJy-pP-LdW" id="hwX-Ub-5y1"/>
+                <outlet property="shareView" destination="6fh-O4-2is" id="2Rg-3V-FyH"/>
+                <outlet property="transformView" destination="1aO-be-Yy7" id="qqj-FI-4wt"/>
+            </connections>
+        </view>
+        <tapGestureRecognizer id="pUO-ej-tiH">
+            <connections>
+                <action selector="connectButtonTapped:" destination="iN0-l3-epB" id="TMD-F7-ciY"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="eKP-gt-XWz">
+            <connections>
+                <action selector="transformButtonTapped:" destination="iN0-l3-epB" id="q4Q-ha-pQu"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="wX5-Es-D0b">
+            <connections>
+                <action selector="shareButtonTapped:" destination="iN0-l3-epB" id="3Jy-oh-c8b"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="DTA-ED-j0K">
+            <connections>
+                <action selector="serveButtonTapped:" destination="iN0-l3-epB" id="tt2-C0-kOF"/>
+            </connections>
+        </tapGestureRecognizer>
+    </objects>
+    <resources>
+        <image name="Connect" width="30" height="30"/>
+        <image name="Serve" width="30" height="30"/>
+        <image name="Share" width="30" height="30"/>
+        <image name="TransformTabIcon" width="30" height="30"/>
+    </resources>
+</document>

@@ -8,10 +8,17 @@
 
 #import "PendingContactTableViewCell.h"
 
+@interface PendingContactTableViewCell ()
+
+@property (weak, nonatomic) IBOutlet UIButton *rejectButton;
+
+@end
+
 @implementation PendingContactTableViewCell
 
 - (void)awakeFromNib {
     // Initialization code
+    self.rejectButton.layer.cornerRadius = self.rejectButton.bounds.size.width / 2.0;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

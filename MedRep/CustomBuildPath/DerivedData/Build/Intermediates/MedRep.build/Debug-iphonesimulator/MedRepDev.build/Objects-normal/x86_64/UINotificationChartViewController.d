@@ -1,0 +1,23 @@
+dependencies: \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Notifications/UINotificationChartViewController.m \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Notifications/UINotificationChartViewController.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/CustomBuildPath/DerivedData/Build/Products/Debug-iphonesimulator/PNChart/PNChart.framework/Headers/PNChart.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/CustomBuildPath/DerivedData/Build/Products/Debug-iphonesimulator/PNChart/PNChart.framework/Headers/PNColor.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/CustomBuildPath/DerivedData/Build/Products/Debug-iphonesimulator/PNChart/PNChart.framework/Headers/PNLineChart.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/CustomBuildPath/DerivedData/Build/Products/Debug-iphonesimulator/PNChart/PNChart.framework/Headers/PNChartDelegate.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/CustomBuildPath/DerivedData/Build/Products/Debug-iphonesimulator/PNChart/PNChart.framework/Headers/PNGenericChart.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/CustomBuildPath/DerivedData/Build/Products/Debug-iphonesimulator/PNChart/PNChart.framework/Headers/PNLineChartData.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/CustomBuildPath/DerivedData/Build/Products/Debug-iphonesimulator/PNChart/PNChart.framework/Headers/PNLineChartDataItem.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/CustomBuildPath/DerivedData/Build/Products/Debug-iphonesimulator/PNChart/PNChart.framework/Headers/PNBarChart.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/CustomBuildPath/DerivedData/Build/Products/Debug-iphonesimulator/PNChart/PNChart.framework/Headers/PNBar.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/CustomBuildPath/DerivedData/Build/Products/Debug-iphonesimulator/PNChart/PNChart.framework/Headers/PNCircleChart.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/CustomBuildPath/DerivedData/Build/Products/Debug-iphonesimulator/UICountingLabel/UICountingLabel.framework/Modules/module.modulemap \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/CustomBuildPath/DerivedData/Build/Products/Debug-iphonesimulator/UICountingLabel/UICountingLabel.framework/Headers/UICountingLabel.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/CustomBuildPath/DerivedData/Build/Products/Debug-iphonesimulator/UICountingLabel/UICountingLabel.framework/Headers/UICountingLabel-umbrella.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/CustomBuildPath/DerivedData/Build/Products/Debug-iphonesimulator/PNChart/PNChart.framework/Headers/PNPieChart.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/CustomBuildPath/DerivedData/Build/Products/Debug-iphonesimulator/PNChart/PNChart.framework/Headers/PNPieChartDataItem.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/CustomBuildPath/DerivedData/Build/Products/Debug-iphonesimulator/PNChart/PNChart.framework/Headers/PNScatterChart.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/CustomBuildPath/DerivedData/Build/Products/Debug-iphonesimulator/PNChart/PNChart.framework/Headers/PNScatterChartData.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/CustomBuildPath/DerivedData/Build/Products/Debug-iphonesimulator/PNChart/PNChart.framework/Headers/PNScatterChartDataItem.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/CustomBuildPath/DerivedData/Build/Products/Debug-iphonesimulator/PNChart/PNChart.framework/Headers/PNRadarChart.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/CustomBuildPath/DerivedData/Build/Products/Debug-iphonesimulator/PNChart/PNChart.framework/Headers/PNRadarChartDataItem.h

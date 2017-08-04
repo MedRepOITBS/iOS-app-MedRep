@@ -17,6 +17,7 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) NSString *token;
 @property (strong, nonatomic) NSString *launchScreen;
+@property (assign, nonatomic) BOOL enabledVideoRotation;
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;

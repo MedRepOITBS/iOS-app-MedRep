@@ -20,10 +20,14 @@
 #import "MRSurveyListViewController.h"
 #import "MRProfileDetailsViewController.h"
 #import "MRDoctorActivityScoreViewController.h"
+#import "MRInviteViewController.h"
+#import "MRTransformViewController.h"
+#import "MRDrugSearchViewController.h"
+#import "MRMarketingCampaignController.h"
 
-#define kMenuList [NSArray arrayWithObjects:@"My Profile", @"Dashboard", @"Notifications", @"Surveys", @"Activity Score", @"Marketing Campaigns", @"MedRep Meeting", @"Discussion Forum", @"Search For Drugs", @"News & Updates", @"Settings", @"Logout", nil]
+#define kMenuList [NSArray arrayWithObjects:@"My Profile", @"Dashboard", @"Notifications", @"Surveys", @"Activities", @"Marketing Campaigns", @"MedRep Meeting", @"Search For Drugs", @"News & Updates", @"Invite Contacts",  @"Logout", nil]
 
-#define kMenuListImages [NSArray arrayWithObjects:@"dashboard_menu@2x.png", @"notification@2x.png", @"surveys@2x.png", @"activity-score@2x.png", @"marketing@2x.png", @"meetings@2x.png", @"discussion-forum@2x.png", @"searc--for-drugs@2x.png", @"news@2x.png", @"setting@2x.png", @"logout@2x.png", nil]
+#define kMenuListImages [NSArray arrayWithObjects:@"dashboard_menu@2x.png", @"Appointment", @"Survey", @"activity-score@2x.png", @"Advertising", @"meetings@2x.png", @"searc--for-drugs@2x.png", @"news@2x.png", @"Invite", @"logout@2x.png", nil]
 
 
 @interface MRMenuViewController ()<UITableViewDataSource, UITableViewDelegate>
@@ -44,13 +48,16 @@
     }
 
     // Do any additional setup after loading the view from its nib.
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refreshMenu)
+                                                 name:kNotificationRefreshMenu
+                                               object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -109,7 +116,38 @@
     {
         if ([self.userData objectForKey:KProfilePicture])
         {
-            regCell.cellIcon.image = (indexPath.row > 0) ? [UIImage imageNamed:[kMenuListImages objectAtIndex:indexPath.row -1]] : [MRCommon getImageFromBase64Data:[self.userData objectForKey:KProfilePicture]];
+            
+            NSURL * imageURL = [NSURL URLWithString:[self.userData objectForKey:KProfilePicture]];
+            
+
+            UIImage *image;
+            if (indexPath.row>0) {
+                image = [UIImage imageNamed:[kMenuListImages objectAtIndex:indexPath.row -1]];
+                if (image == nil) {
+                    image = [UIImage imageNamed:@"profileIcon.png"];
+                }else{
+                    
+                    regCell.cellIcon.image = image;
+                    
+                }
+ 
+            
+            }else {
+                dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+                dispatch_async(queue, ^{
+                    NSData *data = [NSData dataWithContentsOfURL:imageURL];
+                    UIImage *image = [UIImage imageWithData:data];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if (image!=nil) {
+                            regCell.cellIcon.image = image;
+                        }else{
+                            regCell.cellIcon.image = [UIImage imageNamed:@"profileIcon.png"];
+                        }
+                        
+             
+                    });
+                });
+            }
         }
         else
         {
@@ -123,10 +161,11 @@
     
     regCell.menuTitle.text = [kMenuList objectAtIndex:indexPath.row];
     
-    if (indexPath.row == 5 || indexPath.row ==7 || indexPath.row ==8 || indexPath.row ==9 || indexPath.row ==10) {
+    /* if (indexPath.row ==7 || indexPath.row ==11) {
         regCell.menuTitle.alpha = 0.5f;
     }
-    else {
+    else */
+    {
         regCell.menuTitle.alpha = 1.0f;
     }
     
@@ -147,10 +186,13 @@
             {
 //                MRRegistationViewController *regViewController = [[MRRegistationViewController alloc] initWithNibName:@"MRRegistationViewController" bundle:nil];
 //                regViewController.isFromSinUp = NO;
-                MRProfileDetailsViewController *profViewController = [[MRProfileDetailsViewController alloc] initWithNibName:@"MRProfileDetailsViewController" bundle:nil];
+                
+                UIStoryboard *sb = [UIStoryboard storyboardWithName:@"ProfileStoryboard" bundle:nil];
+                MRProfileDetailsViewController *profViewController = [sb instantiateInitialViewController];
+                
+//                MRProfileDetailsViewController *profViewController = [[MRProfileDetailsViewController alloc] initWithNibName:@"AddExperienceTableViewController" bundle:nil];
                 profViewController.isFromSinUp = NO;
                 UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:profViewController];
-                navigationController.navigationBarHidden = YES;
                 [revealController pushFrontViewController:navigationController animated:YES];
             }
             else
@@ -163,7 +205,7 @@
         {
             if (![frontNavigationController.topViewController isKindOfClass:[MRDashBoardVC class]])
             {
-                MRDashBoardVC *dashboardViewCont = [[MRDashBoardVC alloc] initWithNibName:[MRCommon nibNameForDevice:@"MRDashBoardVC"] bundle:nil];
+                MRDashBoardVC *dashboardViewCont = [[MRDashBoardVC alloc] initWithNibName:@"MRDashBoardVC" bundle:nil];
                 UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:dashboardViewCont];
                 [revealController pushFrontViewController:navigationController animated:YES];
             }
@@ -222,7 +264,17 @@
             break;
         case 5:
         {
-            //[MRCommon showAlert:kComingsoonMSG delegate:nil];
+            if ( ![frontNavigationController.topViewController isKindOfClass:[MRMarketingCampaignController class]] )
+            {
+                MRMarketingCampaignController *marketingCampignViewController = [[MRMarketingCampaignController alloc] initWithNibName:@"MRMarketingCampaignController" bundle:nil];
+                
+                UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:marketingCampignViewController];
+                [revealController pushFrontViewController:navigationController animated:YES];
+            }
+            else
+            {
+                [revealController revealToggle:self];
+            }
         }
             break;
         case 6:
@@ -242,25 +294,57 @@
             break;
         case 7:
         {
-            //[MRCommon showAlert:kComingsoonMSG delegate:nil];
+            // Search For Drugs
+            if ( ![frontNavigationController.topViewController isKindOfClass:[MRDrugSearchViewController class]] )
+            {
+                MRDrugSearchViewController *drugSearchViewController =
+                [[MRDrugSearchViewController alloc] initWithNibName:@"MRDrugSearchViewController" bundle:nil];
+                
+                UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:drugSearchViewController];
+                [revealController pushFrontViewController:navigationController animated:YES];
+            }
+            else
+            {
+                [revealController revealToggle:self];
+            }
         }
             break;
         case 8:
         {
-            //[MRCommon showAlert:kComingsoonMSG delegate:nil];
+            // Transform Page -> News & Updates
+            if ( ![frontNavigationController.topViewController isKindOfClass:[MRTransformViewController class]] )
+            {
+                MRTransformViewController *transformViewController =
+                                [[MRTransformViewController alloc] initWithNibName:@"MRTransformViewController" bundle:nil];
+                
+                UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:transformViewController];
+                [revealController pushFrontViewController:navigationController animated:YES];
+            }
+            else
+            {
+                [revealController revealToggle:self];
+            }
         }
             break;
         case 9:
         {
-            //[MRCommon showAlert:kComingsoonMSG delegate:nil];
+            if (![frontNavigationController.topViewController isKindOfClass:[MRInviteViewController class]])
+            {
+                
+                /*
+                MRInviteViewController *notifications = [[MRInviteViewController alloc] initWithNibName:@"MRInviteViewController" bundle:nil];
+                notifications.isFromMenu = YES;
+                UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:notifications];
+                [revealController pushFrontViewController:navigationController animated:YES];
+           */
+                [MRAppControl invokeInviteContact:self];
+
+            } else {
+                [revealController revealToggle:self];
+            }
         }
             break;
         case 10:
-        {
-            //[MRCommon showAlert:kComingsoonMSG delegate:nil];
-        }
-            break;
-        case 11:
         {
             if (self.delegate && [self.delegate respondsToSelector:@selector(loadLoginView)]) {
                 [MRCommon removedTokens];
@@ -279,7 +363,7 @@
 {
     SWRevealViewController *revealController = self.revealViewController;
 
-    MRDashBoardVC *dashboardViewCont = [[MRDashBoardVC alloc] initWithNibName:[MRCommon nibNameForDevice:@"MRDashBoardVC"] bundle:nil];
+    MRDashBoardVC *dashboardViewCont = [[MRDashBoardVC alloc] initWithNibName:@"MRDashBoardVC" bundle:nil];
     
     UINavigationController *dashboardNavCont = [[UINavigationController alloc] initWithRootViewController:dashboardViewCont];
     [revealController pushFrontViewController:dashboardNavCont animated:YES];
@@ -295,6 +379,11 @@
     [revealController pushFrontViewController:navigationController animated:YES];
 
 }
+
+- (void)refreshMenu {
+    [self.menuList reloadData];
+}
+
 /*
 #pragma mark - Navigation
 

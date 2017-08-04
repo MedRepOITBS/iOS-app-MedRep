@@ -14,7 +14,8 @@
 #import "MRCommon.h"
 #import "MROTPVerifiedViewController.h"
 #import "MRForgotPasswordViewController.h"
-
+#import "AppDelegate.h"
+#import "MRAppConstants.h"
 @interface MRLoginViewController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIView *loginInputView;
 @property (weak, nonatomic) IBOutlet UIButton *signinButton;
@@ -70,8 +71,9 @@
 //    self.emailTextField.text      = @"Manager@erfolg.com";
 //    self.passwordTxtField.text    = @"manager";
     
-    self.emailTextField.text      = @"dineshreddy06@gmail.com";
-    self.passwordTxtField.text    = @"dinesh";
+    
+    self.emailTextField.text      = (NSString *)[[NSUserDefaults standardUserDefaults] objectForKey:kUserName];
+    self.passwordTxtField.text    = (NSString *) [[NSUserDefaults standardUserDefaults] objectForKey:KPassword];
     
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -107,12 +109,15 @@
             
             if (status)
             {
+                [[NSUserDefaults standardUserDefaults] setObject:self.emailTextField.text forKey:kUserName];
+                [[NSUserDefaults standardUserDefaults] setObject:self.passwordTxtField.text forKey:KPassword];
                 [MRCommon setLoginEmail:self.emailTextField.text];
                 [MRCommon savetokens:responce];
                 [[MRWebserviceHelper sharedWebServiceHelper] getMyRole:^(BOOL status, NSString *details, NSDictionary *responce) {
                     
                     if (status)
                     {
+                        
                         [MRCommon stopActivityIndicator];
 
                         [MRAppControl sharedHelper].userType = [[responce objectForKey:@"roleId"] integerValue];
@@ -134,8 +139,18 @@
                                      [MRCommon stopActivityIndicator];
                                      if (status)
                                      {
+                                         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                                         [userDefaults setObject:[NSDate date] forKey:kLastLoginTime];
+                                         
                                          [[MRAppControl sharedHelper] setUserDetails:responce];
                                          [[MRAppControl sharedHelper] loadDashboardScreen];
+                                         [MRAppControl registerForPushNotification];
+                                         
+                                         /*
+                                         if (APP_DELEGATE.token.length) {
+                                             [[MRAppControl sharedHelper] registerDeviceToken];
+                                         }
+                                          */
                                      }
                                  }];
                             }
@@ -148,6 +163,7 @@
                                      {
                                          [[MRAppControl sharedHelper] setUserDetails:responce];
                                          [[MRAppControl sharedHelper] loadDashboardScreen];
+                                         [MRAppControl registerForPushNotification];
                                      }
                                  }];
                                 
@@ -163,24 +179,17 @@
                     }
                 }];
             }
-            else if (NO == [MRCommon isStringEmpty:details])
-            {
+            else {
                 [MRCommon stopActivityIndicator];
-                NSArray *erros =  [details componentsSeparatedByString:@"-"];
-                if (erros.count > 0)
-                [MRCommon showAlert:[erros lastObject] delegate:nil];
-            } else {
-                // vamsi, dummy
-                NSMutableDictionary *dict = [NSMutableDictionary new];
-                [dict setValue:@"Dinesh" forKey:@"firstName"];
-                [dict setValue:@"Reddy" forKey:@"lastName"];
-                [dict setValue:[NSNumber numberWithInteger:1] forKey:@"roleId"];
-                [dict setValue:@"1" forKey:@"therapeuticId"];
-                [dict setValue:[NSDictionary new] forKey:@"locations"];
                 
-                [MRCommon stopActivityIndicator];
-                 [[MRAppControl sharedHelper] setUserDetails:dict];
-                         [[MRAppControl sharedHelper] loadDashboardScreen];
+                if (NO == [MRCommon isStringEmpty:details])
+                {
+                    NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                    if (erros.count > 0)
+                    [MRCommon showAlert:[erros lastObject] delegate:nil];
+                } else {
+                    [MRCommon showAlert:@"Login failed !!!" delegate:self];
+                }
             }
         }];
     }

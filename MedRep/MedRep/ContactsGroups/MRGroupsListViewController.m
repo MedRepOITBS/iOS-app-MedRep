@@ -15,8 +15,7 @@
 #import "MRCreateGroupViewController.h"
 #import "MRWebserviceHelper.h"
 #import "MRCommon.h"
-#import "MRGroupUserObject.h"
-#import "MRGroupObject.h"
+#import "MRGroup.h"
 
 @interface MRGroupsListViewController () <UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UIActionSheetDelegate>{
     NSMutableArray *groupsArray;
@@ -54,7 +53,7 @@
     [self.view addGestureRecognizer:self.tapGesture];
     
     self.navigationItem.title = @"Groups";
-    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
+    //[self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
     
     UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonAction)];
     self.navigationItem.leftBarButtonItem = revealButtonItem;
@@ -64,11 +63,14 @@
     
     [self.groupList registerNib:[UINib nibWithNibName:@"MRGroupTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"groupCell"];
     // Do any additional setup after loading the view from its nib.
-    self.groups = [MRDatabaseHelper getGroups];
-    self.filteredGroups = self.groups;
-    
-    filteredGroupsArray = [NSMutableArray array];
-    groupsArray = [NSMutableArray array];
+    [MRDatabaseHelper getGroups:^(id result) {
+        self.groups = result;
+        self.filteredGroups = self.groups;
+        
+        filteredGroupsArray = [NSMutableArray array];
+        groupsArray = [NSMutableArray array];
+        [self.groupList reloadData];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -115,7 +117,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     MRContactDetailViewController* detailViewController = [[MRContactDetailViewController alloc] init];
-    [detailViewController setGroupData:filteredGroupsArray[indexPath.row]];
+    [detailViewController setGroup:filteredGroupsArray[indexPath.row]];
     [self.navigationController pushViewController:detailViewController animated:YES];
 }
 
@@ -173,26 +175,10 @@
 }
 
 - (void)getGroupList{
-    [MRCommon showActivityIndicator:@"Requesting..."];
-    [[MRWebserviceHelper sharedWebServiceHelper] getGroupListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-        [MRCommon stopActivityIndicator];
-        if (status)
-        {
-            groupsArray = [NSMutableArray array];
-            NSArray *responseArray = responce[@"Responce"];
-            for (NSDictionary *dic in responseArray) {
-                MRGroupObject *groupObj = [[MRGroupObject alloc] initWithDict:dic];
-                [groupsArray addObject:groupObj];
-            }
-            filteredGroupsArray = groupsArray;
-            [_groupList reloadData];
-        }
-        else
-        {
-            NSArray *erros =  [details componentsSeparatedByString:@"-"];
-            if (erros.count > 0)
-                [MRCommon showAlert:[erros lastObject] delegate:nil];
-        }
+    [MRDatabaseHelper getGroups:^(id result) {
+        groupsArray = result;
+        filteredGroupsArray = groupsArray;
+        [_groupList reloadData];
     }];
 }
 

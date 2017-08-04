@@ -1,0 +1,34 @@
+dependencies: \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Share/MRShareDetailViewController.m \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Share/MRShareDetailViewController.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Share/MRShareDetailTableViewCell.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Common/MRCommon.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Communication/MRDevEnvironmentConfig.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/MRAppConstants.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Model/MRGroupPost.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Model/MRGroupPost+CoreDataProperties.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/CoreData/MRDatabaseHelper.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/ContactsGroups/GroupPostChildTableViewCell.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Model/MrGroupChildPost.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Model/MrGroupChildPost+CoreDataProperties.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Appcontrol/MRAppControl.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Model/MRSharePost.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/BaseDataModel/MRManagedObject.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Model/MRSharePost+CoreDataProperties.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Model/Messages/MRTransformPost.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Model/Messages/MRTransformPost+CoreDataProperties.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Share/MRShareOptionsViewController.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Common/MRConstants.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/AppDelegate.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/CoreData/MRDataManger.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Communication/MRWebserviceHelper.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Communication/MRWebserviceConstants.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/BaseDataModel/NSDictionary+CaseInsensitive.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Common/NSData+Base64Additions.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Model/MRPostedReplies.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Model/MRPostedReplies+CoreDataProperties.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Common/KLCPopup/KLCPopup.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/CommonBoxView.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Helper/NSDate+Utilities.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Transform/MRTransformViewController.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/ProfileDetails/MRProfileDetailsViewController.h

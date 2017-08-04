@@ -21,6 +21,13 @@
 #import "MRPharmaMenuViewController.h"
 #import "MRWelcomeViewController.h"
 #import "MROTPVerifiedViewController.h"
+#import "AppDelegate.h"
+#import "MRContact.h"
+#import "MRGroup.h"
+#import "MRPostedReplies.h"
+#import "MRGroupMembers.h"
+#import "KLCPopup.h"
+#import "CommonBoxView.h"
 
 @interface MRAppControl () <SWRevealViewControllerDelegate, ViewControllerDelegate,MRMenuViewControllerDelegate,MRPharmaMenuViewControllerDelegate,MRWelcomeViewControllerDelegate>
 
@@ -50,9 +57,9 @@
     self.userPreferenceData = [[NSMutableDictionary alloc] init];
     
     [self resetUserData];
-//    [self.userRegData setObject:@"" forKey:KFirstName];
-//    [self.userRegData setObject:@"" forKey:KLastName];
-//    [self.userRegData setObject:@"" forKey:KDoctorRegID];
+    [self.userRegData setObject:@"" forKey:KFirstName];
+    [self.userRegData setObject:@"" forKey:KLastName];
+    [self.userRegData setObject:@"" forKey:KDoctorRegID];
 //    [self.userRegData setObject:@"" forKey:KPassword];
 //    
 //    [self.userRegData setObject:@"" forKey:kManagerMobileNumber];
@@ -139,6 +146,16 @@
     [self.userRegData setObject:[details objectOrNilForKey:@"lastName"] forKey:KLastName];
     [self.userRegData setObject:[details objectOrNilForKey:@"userId"] forKey:@"userId"];
     [self.userRegData setObject:[details objectOrNilForKey:@"status"] forKey:@"status"];
+    [self.userRegData setObjectForKey:kDisplayName andValue:[details objectOrNilForKey:kDisplayName]];
+    
+    id locations = [details objectOrNilForKey:@"locations"];
+    if ([locations isKindOfClass:[NSArray class]]) {
+        id firstObject = ((NSArray*)locations).firstObject;
+        if ([firstObject isKindOfClass:[NSDictionary class]]) {
+            NSString *city = [firstObject objectForKey:KCity];
+            [self.userRegData setObject:city forKey:KCity];
+        }
+    }
     
     if (self.userType == 1 || self.userType == 2)
     {
@@ -171,15 +188,22 @@
         }
     }
     
+    [self.userRegData setObjectForKey:KTitle andValue:[details objectOrNilForKey:KTitle]];
+    
     //[self.userRegData setObject:@"medrep@123" forKey:KPassword];
-    NSDictionary *temp = [details objectForKey:@"profilePicture"];
-    [self.userRegData setObject:[details objectOrNilForKey:KTitle] forKey:KTitle];
+    id temp = [details objectForKey:@"profilePicture"];
 
-    if ([temp isKindOfClass:[NSDictionary class]])
+    if (temp != nil && [temp isKindOfClass:[NSDictionary class]])
     {
-        [self.userRegData setObject:[temp objectForKey:@"data"] forKey:KProfilePicture];
+        [self.userRegData setObjectForKey:KProfilePicture andValue:[temp objectForKey:@"imageUrl"]];
+    } else {
+        temp = [details objectForKey:@"dPicture"];
+        if ([temp isKindOfClass:[NSString class]]) {
+            [self.userRegData setObjectForKey:KProfilePicture andValue:temp];
+        }
     }
-
+    
+    
     [self.userRegData setObject:[NSMutableArray arrayWithObjects:[details objectOrNilForKey:@"mobileNo"],[details objectOrNilForKey:@"phoneNo"], nil] forKey:KMobileNumber];
     [self.userRegData setObject:[NSMutableArray arrayWithObjects:[details objectOrNilForKey:@"emailId"],[details objectOrNilForKey:@"alternateEmailId"], nil] forKey:KEmail];
     
@@ -202,7 +226,8 @@
         
         for (NSDictionary *dataDict in location)
         {
-            [array addObject:[NSMutableDictionary dictionaryWithObjectsAndKeys:[dataDict objectOrNilForKey:@"address1"],KAddressOne, [dataDict objectOrNilForKey:@"address2"],KAdresstwo, [dataDict objectOrNilForKey:@"zipcode"],KZIPCode, [dataDict objectOrNilForKey:@"state"],KState, [dataDict objectOrNilForKey:@"city"],KCity, [dataDict objectOrNilForKey:KType],KType, nil]];
+            [array addObject:[NSMutableDictionary dictionaryWithObjectsAndKeys:[dataDict objectOrNilForKey:@"locationId"],KLocationId,
+                              [dataDict objectOrNilForKey:@"address1"],KAddressOne, [dataDict objectOrNilForKey:@"address2"],KAdresstwo, [dataDict objectOrNilForKey:@"zipcode"],KZIPCode, [dataDict objectOrNilForKey:@"state"],KState, [dataDict objectOrNilForKey:@"city"],KCity, [dataDict objectOrNilForKey:KType],KType, nil]];
         }
         
         [self.userRegData setObject:array forKey:KRegistarionStageTwo];
@@ -222,23 +247,6 @@
 
 - (void)launchSplashView
 {
-//    if([[UINavigationBar class] respondsToSelector:@selector(appearance)]) //iOS >=5.0
-//    {
-//         UIImage *image = [UIImage imageNamed:@"nabar@2x.png"];
-//        [[UINavigationBar appearance] setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
-//        [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
-//        [[UIBarButtonItem appearanceWhenContainedIn: [UINavigationBar class], nil] setTintColor:[UIColor blackColor]];
-//        
-//        [[UINavigationBar appearance] setTitleTextAttributes:
-//         [NSDictionary dictionaryWithObjectsAndKeys:
-//          [UIColor whiteColor],
-//          NSForegroundColorAttributeName,nil]];
-//    }
-//
-//    MRPHDashBoardViewController *test = [[MRPHDashBoardViewController alloc] initWithNibName:@"MRPHDashBoardViewController" bundle:nil];
-//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:test];
-//    self.appMainWindow.rootViewController = nav;
-
     [self loadMasterData];
     self.viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
     self.viewController.delegate = self;
@@ -253,11 +261,13 @@
     [self performSelector:@selector(hideSplashScreen) withObject:nil afterDelay:0.5f ];
 
 }
+
 -(void)hideSplashScreen
 {
     [self.viewController.activityIndicator stopAnimating];
     [self applyFadeAnimation];
     [self loadHomeScreen];
+    
     //[self loadPharmaDashboard];
     /*
     if (nil == [MRDefaults objectForKey:kRefreshToken])
@@ -422,30 +432,19 @@
 {
     if (self.userType == 1 || self.userType == 2)
     {
-        MRDashBoardVC *dashboardViewCont = [[MRDashBoardVC alloc] initWithNibName:[MRCommon nibNameForDevice:@"MRDashBoardVC"] bundle:nil];
+        MRDashBoardVC *dashboardViewCont = [[MRDashBoardVC alloc] initWithNibName:@"MRDashBoardVC" bundle:nil];
         
         UINavigationController *dashboardNavCont = [[UINavigationController alloc] initWithRootViewController:dashboardViewCont];
-        
-        dashboardNavCont.navigationBar.tintColor        = [UIColor whiteColor];
-        UIImage *image = [UIImage imageNamed:@"nabar@2x.png"];
-        if([[UINavigationBar class] respondsToSelector:@selector(appearance)]) //iOS >=5.0
-        {
-            [[UINavigationBar appearance] setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
-            [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
-            [[UIBarButtonItem appearanceWhenContainedIn: [UINavigationBar class], nil] setTintColor:[UIColor blackColor]];
-            
-            [[UINavigationBar appearance] setTitleTextAttributes:
-             [NSDictionary dictionaryWithObjectsAndKeys:
-              [UIColor whiteColor],
-              NSForegroundColorAttributeName,nil]];
-        }
+        [MRCommon applyNavigationBarStyling:dashboardNavCont];
         
         MRMenuViewController *menuSlidingViewCont = [[MRMenuViewController alloc] initWithNibName:@"MRMenuViewController" bundle:nil];
         menuSlidingViewCont.delegate = self;
         UINavigationController *menuSlidingNavCont = [[UINavigationController alloc] initWithRootViewController:menuSlidingViewCont];
         menuSlidingNavCont.navigationBar.tintColor        =  [UIColor whiteColor];
+
         SWRevealViewController *revealController = [[SWRevealViewController alloc] initWithRearViewController:menuSlidingNavCont frontViewController:dashboardNavCont];
         revealController.delegate = self;
+        
         [[NSNotificationCenter defaultCenter] addObserver:menuSlidingViewCont selector:@selector(loadDashboard) name:kDashboardNotificationFromRegistartionScren object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:menuSlidingViewCont selector:@selector(loadAppointmentList) name:kMedRepMeetingsNotification object:nil];
         
@@ -524,14 +523,31 @@
 
 - (NSArray*)getNotificationByCompanyID:(NSInteger)companyID
 {
-    NSArray *filteredArray          = [self.notifications filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"companyId == %d", companyID]];
+    NSPredicate *companyPredicate = [NSPredicate predicateWithFormat:@"companyId == %d", companyID];
+    NSPredicate *favPredicate = [NSPredicate predicateWithFormat:@"favourite == %d", NO];
+    NSPredicate *viewedStatus = [NSPredicate predicateWithFormat:@"readNotification = %d", NO];
+    
+    NSCompoundPredicate *predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[companyPredicate, favPredicate, viewedStatus]];
+    NSArray *filteredArray = [[MRDataManger sharedManager] fetchObjectList:kNotificationsEntity attributeName:@"notificationName"
+                                                                 predicate:predicate
+                                                                 sortOrder:SORT_ORDER_ASCENDING];
+    
+//    NSArray *filteredArray          = [self.notifications filteredArrayUsingPredicate:predicate];
     
     return filteredArray;
 }
 
 - (NSArray*)getNotificationByTherapeuticName:(NSString*)therapeuticName withCompanyID:(NSInteger)companyID
 {
-    NSArray *filteredArray          = [self.notifications filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"companyId == %d AND therapeuticName == %@", companyID,therapeuticName]];
+    NSPredicate *therapueticAreaPredicate = [NSPredicate predicateWithFormat:@"therapeuticName == %@", therapeuticName];
+    
+    NSPredicate *companyPredicate = [NSPredicate predicateWithFormat:@"companyId == %d", companyID];
+    NSPredicate *favPredicate = [NSPredicate predicateWithFormat:@"favourite == %d", NO];
+    
+    NSCompoundPredicate *predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[companyPredicate, favPredicate, therapueticAreaPredicate]];
+    NSArray *filteredArray = [[MRDataManger sharedManager] fetchObjectList:kNotificationsEntity attributeName:@"notificationName"
+                                                                 predicate:predicate
+                                                                 sortOrder:SORT_ORDER_ASCENDING];
     
     return filteredArray;
 }
@@ -540,6 +556,9 @@
 - (void)loadMasterData
 {
     if ([self internetCheck] == NO) return;
+    
+    [[MRDataManger sharedManager] removeAllObjects:kTherapeuticAreaEntity
+                                     withPredicate:nil];
     
     if ([MRDatabaseHelper  getObjectDataExistance:kTherapeuticAreaEntity] == NO)
     {
@@ -572,6 +591,8 @@
         }];
 
     }
+    
+    [[MRDataManger sharedManager] removeAllObjects:kCompanyDetailsEntity withPredicate:nil];
 
     if ([MRDatabaseHelper  getObjectDataExistance:kCompanyDetailsEntity] == NO)
     {
@@ -698,6 +719,396 @@
     NSString *company = [self.userRegData objectForKey:KDoctorRegID];
     NSDictionary *comapnyDetails = [self getCompanyDetailsByID:[company intValue]];
     return  [MRCommon getImageFromBase64Data:[[comapnyDetails objectForKey:@"displayPicture"] objectForKey:@"data"]];
+}
+
+-(void)registerDeviceToken{
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                          APP_DELEGATE.token, @"regDeviceToken",
+                          @"IOS", @"platform",
+                          nil];
+    
+    [[MRWebserviceHelper sharedWebServiceHelper] registerDeviceToken:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+    }];
+}
+
++ (NSString*)getContactName:(MRContact*)contact {
+    NSMutableString *name = [NSMutableString stringWithString:@""];
+    if (contact != nil) {
+        if (contact.firstName != nil && contact.firstName.length > 0) {
+            name = [NSMutableString stringWithString:contact.firstName];
+        }
+        
+        if (contact.lastName != nil && contact.lastName.length > 0) {
+            if (name.length > 0) {
+                [name appendString:@" "];
+            }
+            
+            [name appendString:contact.lastName];
+        }
+    }
+    return name;
+}
+
++ (NSString*)getGroupMemberName:(MRGroupMembers*)members {
+    NSMutableString *name = [NSMutableString stringWithString:@""];
+    if (members != nil) {
+        if (members.firstName != nil && members.firstName.length > 0) {
+            name = [NSMutableString stringWithString:members.firstName];
+        }
+        
+        if (members.lastName != nil && members.lastName.length > 0) {
+            if (name.length > 0) {
+                [name appendString:@" "];
+            }
+            
+            [name appendString:members.lastName];
+        }
+    }
+    return name;
+}
+
++ (void)getPharmaRepImage:(NSString*)repId repURL:(NSString*)repURL andImageView:(UIImageView*)parentView {
+    parentView.image = nil;
+    
+    if (repURL != nil && repURL.length > 0) {
+        parentView.image = [UIImage imageNamed:@"Icon-60.png"];
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            NSString *key = [NSString stringWithFormat:@"%@_contactImage", repId];
+            id imageData = [[MRAppControl sharedHelper].globalCache objectForKey:key];
+            if (imageData == nil) {
+                imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:repURL]];
+                [[MRAppControl sharedHelper].globalCache setObject:imageData forKey:key];
+            }
+            if (imageData != nil) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    parentView.image = [UIImage imageWithData:imageData];
+                });
+            }
+        });
+    } else {
+        parentView.image = [UIImage imageNamed:@"Icon-60.png"];
+    }
+}
+
++ (void)getContactImage:(MRContact*)contact andImageView:(UIImageView*)parentView {
+    parentView.image = nil;
+    
+    if (contact.dPicture != nil && contact.dPicture.length > 0) {
+        parentView.image = [UIImage imageNamed:@"user"];
+        
+        NSString *key = [NSString stringWithFormat:@"%ld_contactImage", contact.contactId.longValue];
+        id imageData = [[MRAppControl sharedHelper].globalCache objectForKey:key];
+        if (imageData != nil) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                parentView.image = [UIImage imageWithData:imageData];
+            });
+        }
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            NSString *key = [NSString stringWithFormat:@"%ld_contactImage", contact.contactId.longValue];
+            id imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:contact.dPicture]];
+            if (imageData != nil) {
+                [[MRAppControl sharedHelper].globalCache setObject:imageData forKey:key];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    parentView.image = [UIImage imageWithData:imageData];
+                });
+            }
+        });
+    } else {
+        NSString *fullName = [MRAppControl getContactName:contact];
+        if (fullName != nil && fullName.length > 0) {
+            parentView.image = nil;
+            UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:parentView.bounds];
+            subscriptionTitleLabel.textAlignment = NSTextAlignmentCenter;
+            subscriptionTitleLabel.font = [UIFont systemFontOfSize:15.0];
+            subscriptionTitleLabel.textColor = [UIColor lightGrayColor];
+            subscriptionTitleLabel.layer.cornerRadius = 5.0;
+            subscriptionTitleLabel.layer.masksToBounds = YES;
+            subscriptionTitleLabel.layer.borderWidth =1.0;
+            subscriptionTitleLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
+            
+            NSArray *substrngs = [fullName componentsSeparatedByString:@" "];
+            NSString *imageString = @"";
+            for(NSString *str in substrngs){
+                if (str.length > 0) {
+                    imageString = [imageString stringByAppendingString:[NSString stringWithFormat:@"%c",[str characterAtIndex:0]]];
+                }
+            }
+            subscriptionTitleLabel.text = imageString.length > 2 ? [imageString substringToIndex:2] : imageString;
+            [parentView addSubview:subscriptionTitleLabel];
+        } else {
+            parentView.image = [UIImage imageNamed:@"user"];
+        }
+    }
+}
+
++ (void)getGroupMemberImage:(MRGroupMembers*)member andImageView:(UIImageView*)parentView {
+    if (member.imageUrl != nil && member.imageUrl.length > 0) {
+        parentView.image = [UIImage imageNamed:@"user"];
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:member.imageUrl]];
+            if (imageData != nil) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    parentView.image = [UIImage imageWithData:imageData];
+                });
+            }
+        });
+    } else {
+        NSString *fullName = [MRAppControl getGroupMemberName:member];
+        if (fullName != nil && fullName.length > 0) {
+            parentView.image = nil;
+            UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:parentView.bounds];
+            subscriptionTitleLabel.textAlignment = NSTextAlignmentCenter;
+            subscriptionTitleLabel.font = [UIFont systemFontOfSize:12.0];
+            subscriptionTitleLabel.textColor = [UIColor lightGrayColor];
+            subscriptionTitleLabel.layer.cornerRadius = 5.0;
+            subscriptionTitleLabel.layer.masksToBounds = YES;
+            subscriptionTitleLabel.layer.borderWidth =1.0;
+            subscriptionTitleLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
+            
+            NSArray *substrngs = [fullName componentsSeparatedByString:@" "];
+            NSString *imageString = @"";
+            for(NSString *str in substrngs){
+                if (str.length > 0) {
+                    imageString = [imageString stringByAppendingString:[NSString stringWithFormat:@"%c",[str characterAtIndex:0]]];
+                }
+            }
+            subscriptionTitleLabel.text = imageString.length > 2 ? [imageString substringToIndex:2] : imageString;
+            [parentView addSubview:subscriptionTitleLabel];
+            
+            NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:subscriptionTitleLabel
+                                                                              attribute:NSLayoutAttributeLeading
+                                                                              relatedBy:NSLayoutRelationEqual
+                                                                                 toItem:parentView
+                                                                              attribute:NSLayoutAttributeLeading
+                                                                             multiplier:1.0 constant:0];
+            NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:subscriptionTitleLabel
+                                                                               attribute:NSLayoutAttributeTrailing
+                                                                               relatedBy:NSLayoutRelationEqual
+                                                                                  toItem:parentView
+                                                                               attribute:NSLayoutAttributeTrailing
+                                                                              multiplier:1.0 constant:0];
+            NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:subscriptionTitleLabel
+                                                                                attribute:NSLayoutAttributeBottom
+                                                                                relatedBy:NSLayoutRelationEqual
+                                                                                   toItem:parentView
+                                                                                attribute:NSLayoutAttributeBottom
+                                                                               multiplier:1.0 constant:0];
+            NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:subscriptionTitleLabel
+                                                                             attribute:NSLayoutAttributeTop
+                                                                             relatedBy:NSLayoutRelationEqual
+                                                                                toItem:parentView
+                                                                             attribute:NSLayoutAttributeTop
+                                                                            multiplier:1.0 constant:0];
+            
+            [parentView.superview addConstraints:@[leftConstraint, rightConstraint, bottomConstraint, topConstraint]];
+            
+        } else {
+            parentView.image = [UIImage imageNamed:@"person"];
+        }
+    }
+}
+
++ (UIImage*)getRepliedByProfileImage:(MRPostedReplies*)replies andImageView:(UIImageView*)parentView {
+    UIImage *image = [UIImage imageNamed:@"person"];
+    [parentView setImage:image];
+    
+    if (replies != nil) {
+        if (replies.displayPicture != nil && replies.displayPicture.length > 0) {
+            [parentView setImage:image];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:replies.displayPicture]];
+                if (imageData != nil) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        parentView.image = [UIImage imageWithData:imageData];
+                    });
+                }
+            });
+        }
+    }
+    
+    return image;
+}
+
++ (void)getGroupImage:(MRGroup*)group andImageView:(UIImageView*)parentView {
+    if (group.group_img_data != nil && group.group_img_data.length > 0) {
+        parentView.image = [UIImage imageWithData:group.group_img_data];
+    } else if (group.imageUrl != nil && group.imageUrl.length > 0) {
+        parentView.image = [UIImage imageNamed:@"group"];
+        NSString *key = [NSString stringWithFormat:@"%ld_groupImage", group.group_id.longValue];
+        id imageData = [[MRAppControl sharedHelper].globalCache objectForKey:key];
+        if (imageData != nil) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                parentView.image = [UIImage imageWithData:imageData];
+            });
+        }
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            NSString *key = [NSString stringWithFormat:@"%ld_groupImage", group.group_id.longValue];
+            id imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:group.imageUrl]];
+            if (imageData != nil) {
+                [[MRAppControl sharedHelper].globalCache setObject:imageData forKey:key];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    parentView.image = [UIImage imageWithData:imageData];
+                });
+            }
+        });
+    }
+    else if (group.group_name != nil && group.group_name.length > 0) {
+        UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:parentView.bounds];
+        subscriptionTitleLabel.textAlignment = NSTextAlignmentCenter;
+        subscriptionTitleLabel.font = [UIFont systemFontOfSize:15.0];
+        subscriptionTitleLabel.textColor = [UIColor lightGrayColor];
+        subscriptionTitleLabel.layer.cornerRadius = 5.0;
+        subscriptionTitleLabel.layer.masksToBounds = YES;
+        subscriptionTitleLabel.layer.borderWidth =1.0;
+        subscriptionTitleLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        
+        NSArray *substrngs = [group.group_name componentsSeparatedByString:@" "];
+        NSString *imageString = @"";
+        for(NSString *str in substrngs){
+            if (str.length > 0) {
+                imageString = [imageString stringByAppendingString:[NSString stringWithFormat:@"%c",[str characterAtIndex:0]]];
+            }
+        }
+        subscriptionTitleLabel.text = imageString.length > 2 ? [imageString substringToIndex:2] : imageString;
+        [parentView addSubview:subscriptionTitleLabel];
+        
+        [parentView setImage:nil];
+    } else {
+        parentView.image = [UIImage imageNamed:@"group"];
+    }
+}
+
++ (void)getNotificationImage:notificationId displayPicture:(NSString*)path andImageView:(UIImageView*)parentView {
+    parentView.image = nil;
+    
+    if (path != nil && path.length > 0) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            NSString *tempString = @"temp";
+            NSArray *subStrings = [path componentsSeparatedByString:@"/"];
+            if (subStrings != nil && subStrings.count > 0) {
+                tempString = [subStrings objectAtIndex:subStrings.count - 1];
+            }
+            
+            NSString *key = [NSString stringWithFormat:@"%@_%@_companyImage", notificationId, tempString];
+            id imageData = [[MRAppControl sharedHelper].globalCache objectForKey:key];
+            if (imageData != nil) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    parentView.image = [UIImage imageWithData:imageData];
+                });
+            }
+            
+            imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:path]];
+            if (imageData != nil) {
+                [[MRAppControl sharedHelper].globalCache setObject:imageData forKey:key];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    parentView.image = [UIImage imageWithData:imageData];
+                });
+            }
+        });
+    }
+}
+
++(NSString*)getFileName {
+    
+    NSMutableString *fileName = [NSMutableString new];
+    
+    NSNumber *doctorId = [MRAppControl sharedHelper].userRegData[@"doctorId"];
+    if (doctorId != nil) {
+        [fileName appendFormat:@"%ld",doctorId.longValue];
+    } else {
+        NSString *name = [MRAppControl sharedHelper].userRegData[@"FirstName"];
+        if (name != nil && name.length > 0) {
+            [fileName appendString:name];
+        }
+    }
+    
+    NSNumber *tempDate = [NSNumber numberWithDouble:[NSDate date].timeIntervalSinceReferenceDate];
+    if (tempDate != nil) {
+        if (fileName != nil && fileName.length > 0) {
+            [fileName appendString:@"_"];
+        }
+        
+        [fileName appendFormat:@"%ld.png", tempDate.longValue];
+    }
+    
+    if (fileName != nil && fileName.length > 0) {
+        fileName = [[fileName stringByReplacingOccurrencesOfString:@" " withString:@""] mutableCopy];
+    }
+    
+    return fileName;
+}
+
++ (KLCPopup*)setupCommentBox:(id)delegate {
+    NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"commentBox" owner:self options:nil];
+    
+    CommonBoxView *commentBoxView = (CommonBoxView *)[arr objectAtIndex:0];
+    [commentBoxView setDelegate:delegate];
+    KLCPopup *commentBoxKLCPopView = [KLCPopup popupWithContentView:commentBoxView
+                                                  showType:KLCPopupShowTypeSlideInFromBottom
+                                               dismissType:KLCPopupDismissTypeSlideOutToBottom
+                                                  maskType:KLCPopupMaskTypeDimmed
+                                  dismissOnBackgroundTouch:YES
+                                     dismissOnContentTouch:NO];
+    [commentBoxKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutCenter)];
+    
+    return commentBoxKLCPopView;
+}
+
++ (void)invokeInviteContact:(UIViewController*)viewController {
+    NSString *textToShare = [NSString stringWithFormat:@"%@ %@ has invited you to join 'MedRep', a digital collboration platform for doctors. Please Download from iTunes and Google Playstore. iTunes link https://itunes.apple.com/in/app/medrep/id1087940083?mt=8 ", [MRAppControl sharedHelper].userRegData[@"FirstName"],[MRAppControl sharedHelper].userRegData[@"LastName"]];
+    NSURL *myWebsite = [NSURL URLWithString:@"http://www.erfolglifesciences.com/"];
+    
+    NSArray *objectsToShare = @[textToShare, myWebsite];
+    
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
+    
+    
+    [viewController presentViewController:activityVC animated:YES completion:nil];
+}
+
++ (BOOL)isRegisteredForPush {
+    BOOL status = NO;
+    
+//    status = [[UIApplication sharedApplication] isRegisteredForRemoteNotifications];
+    UIUserNotificationSettings *notificationSettings = [[UIApplication sharedApplication] currentUserNotificationSettings];
+    
+    if (notificationSettings != nil) {
+        if (notificationSettings.types == UIUserNotificationTypeAlert ||
+            notificationSettings.types == UIUserNotificationTypeSound ||
+            notificationSettings.types == UIUserNotificationTypeBadge) {
+            status = YES;
+        }
+    }
+    
+    return status;
+}
+
++ (void)registerForPushNotification
+{
+    BOOL appRegisteredForAPNS = [MRAppControl isRegisteredForPush];
+    
+    if (appRegisteredForAPNS == false) {
+        
+        if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)])
+        {
+            UIUserNotificationType types = UIUserNotificationTypeSound | UIUserNotificationTypeBadge | UIUserNotificationTypeAlert;
+            UIUserNotificationSettings *notificationSettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
+            [[UIApplication sharedApplication] registerUserNotificationSettings:notificationSettings];
+        }
+        
+        if ([UIApplication instancesRespondToSelector:@selector(registerForRemoteNotifications)])
+        {
+            [[UIApplication sharedApplication] registerForRemoteNotifications];
+        }
+        else
+        {
+            [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
+        }
+    }
 }
 
 @end

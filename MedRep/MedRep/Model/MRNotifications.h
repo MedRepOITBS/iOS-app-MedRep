@@ -9,14 +9,17 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+#import "MRManagedObject.h"
 
-@interface MRNotifications : NSManagedObject
+@interface MRNotifications : MRManagedObject
 
 @property (nonatomic, retain) NSNumber * companyId;
 @property (nonatomic, retain) NSString * companyName;
 @property (nonatomic, retain) NSString * createdBy;
 @property (nonatomic, retain) NSString * createdOn;
+@property (nonatomic, retain) NSString * dPicture;
 @property (nonatomic, retain) NSString * externalRef;
+@property (nonatomic, retain) NSNumber * favourite;
 @property (nonatomic, retain) NSNumber * favNotification;
 @property (nonatomic, retain) NSString * fileList;
 @property (nonatomic, retain) NSString * notificationDesc;
@@ -36,6 +39,10 @@
 @property (nonatomic, retain) NSString * updatedBy;
 @property (nonatomic, retain) NSString * updatedOn;
 @property (nonatomic, retain) NSString * validUpto;
+@property (nonatomic, retain) NSNumber * viewCount;
+@property (nonatomic, retain) NSString * viewStatus;
 @property (nonatomic, retain) NSNumber *feedback;
+
+- (NSDictionary*)getNotificationDetails;
 
 @end

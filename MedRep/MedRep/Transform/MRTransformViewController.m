@@ -6,18 +6,34 @@
 //  Copyright © 2016 MedRep. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import "MRTransformViewController.h"
 #import "MRTransformTitleCollectionViewCell.h"
-#import "MPTransformData.h"
-#import "MRDatabaseHelper.h"
+#import "MRTransformPost.h"
 #import "MRTransformDetailViewController.h"
 #import "MPTransformTableViewCell.h"
 #import "SWRevealViewController.h"
 #import "MRContactsViewController.h"
+#import "MRGroupsListViewController.h"
+#import "PendingContactsViewController.h"
+#import "MRMyWallViewController.h"
+#import <AVFoundation/AVFoundation.h>
+#import "MRServeViewController.h"
+#import "MRConstants.h"
+#import "MRCustomTabBar.h"
+#import "TransformSubCategories.h"
 
 @interface MRTransformViewController () <UICollectionViewDelegate, UICollectionViewDataSource,
                                          UITableViewDelegate, UITableViewDataSource,
-                                        SWRevealViewControllerDelegate>
+SWRevealViewControllerDelegate, UISearchBarDelegate>{
+    int i;
+    NSTimer *timer;
+}
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *therapeuticAreaDropDownWidthConstraint;
+@property (weak, nonatomic) IBOutlet UIView *therapeuticAreaDropDown;
+@property (weak, nonatomic) IBOutlet UILabel *currentTherapeuticAreaTitleView;
+@property (weak, nonatomic) IBOutlet UITableView *therapeuticAreaListTableView;
+@property (weak, nonatomic) IBOutlet UIControl *therapeuticAreaListTableViewContainerview;
 
 @property (strong, nonatomic) IBOutlet UIView *navView;
 
@@ -25,21 +41,19 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *contentTableView;
 
-@property (weak, nonatomic) IBOutlet UIView *connectView;
-
-@property (weak, nonatomic) IBOutlet UIView *transformView;
-
-@property (weak, nonatomic) IBOutlet UIView *shareView;
-
-@property (weak, nonatomic) IBOutlet UIView *serveView;
-
-@property UIView *activeView;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @property NSArray *categories;
-@property (strong, nonatomic) NSMutableArray *contentData;
-@property (strong, nonatomic) NSMutableArray *filteredData;
+@property (strong, nonatomic) NSArray *contentData;
+@property (strong, nonatomic) NSArray *filteredData;
+@property (strong, nonatomic) UITapGestureRecognizer* tapGesture;
+@property (strong, nonatomic) NSMutableArray *searchResults;
+
+@property NSArray *therapeuticAreasList;
 
 @property NSInteger currentIndex;
+
+@property (strong, nonatomic) UIView *tabBarView;
 
 @end
 
@@ -59,20 +73,31 @@
                                                                         action:@selector(revealToggle:)];
     
     self.navigationItem.leftBarButtonItem = revealButtonItem;
-    self.navigationItem.title = @"VAMSI";
-    self.navigationController.navigationBar.topItem.title = @"VAMSI";
-    self.title = @"VAMSI";
-    UILabel *titleLabel = [UILabel new];
-    titleLabel.text = @"XXX";
-    self.navigationItem.titleView = titleLabel;
     
     UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navView];
     self.navigationItem.rightBarButtonItem = rightButtonItem;
     
+    self.navigationItem.title = @"Transform";
+    
+//    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName]];
+    
     self.currentIndex = 0;
-    self.activeView = self.transformView;
+    
+    UITapGestureRecognizer *recoginzer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                 action:@selector(dropDownClicked)];
+    [recoginzer setNumberOfTapsRequired:1];
+    [self.therapeuticAreaDropDown addGestureRecognizer:recoginzer];
+    [self.therapeuticAreaDropDown.layer setCornerRadius:5.0];
+    self.therapeuticAreaDropDownWidthConstraint.constant = 0.0;
+    [self.therapeuticAreaDropDown setHidden:YES];
+    
+    [self.therapeuticAreaListTableViewContainerview addTarget:self
+                                                       action:@selector(therapeuticAreaListTableViewContainerviewTapped)
+                                             forControlEvents:UIControlEventTouchUpInside];
+    [self.therapeuticAreaListTableViewContainerview setHidden:YES];
+    
 //    self.prevIndex = 0;
-    self.categories = @[@"Latest", @"Trending", @"BBC", @"Journals", @"Case Studies"];
+    self.categories = @[@"News & Updates", @"Therapeutic Area", @"Regulatory", @"Education", @"Journals", @"Medical Innovation", @"Podcasts / Webcasts", @"Best Practices", @"Case Studies", @"Whitepapers", @"Videos", @"Clinical Trials"];
     
     [self.contentTableView setDelegate:self];
     [self.contentTableView setDataSource:self];
@@ -83,13 +108,89 @@
     
     [self.titleCollectionView registerNib:[UINib nibWithNibName:@"MRTransformTitleCollectionViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"transformTitleCollectionViewCell"];
     
-    [self createDummyData];
-    self.filteredData = self.contentData;
+    self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
+    self.tapGesture.numberOfTapsRequired = 1;
+    self.tapGesture.cancelsTouchesInView = YES;
+    self.tapGesture.enabled = NO;
+    [self.view addGestureRecognizer:self.tapGesture];
+    [self.therapeuticAreaListTableView.layer setCornerRadius:5.0];
+//    [self.therapeuticAreaListTableView setHidden:YES];
+    
+    MRCustomTabBar *tabBarView = (MRCustomTabBar*)[MRCommon createTabBarView:self.view];
+    [tabBarView setNavigationController:self.navigationController];
+    [tabBarView setTransformViewController:self];
+    [tabBarView updateActiveViewController:self andTabIndex:DoctorPlusTabTransform];
+    
+    self.tabBarView = (UIView*)tabBarView;
+
+    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:self.contentTableView
+                                                                        attribute:NSLayoutAttributeBottomMargin
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self.view
+                                                                        attribute:NSLayoutAttributeBottom
+                                                                       multiplier:1.0 constant:0];
+    
+    [self.view addConstraint:bottomConstraint];
+    
+    [self resetDashboardCounter];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [MRCommon applyNavigationBarStyling:self.navigationController];
+    [self fetchNewsAndUpdates:[self.categories objectAtIndex:self.currentIndex]];
+}
+
+-(void) viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    i = 0;
+    [timer invalidate];
+}
+
+- (void)resetDashboardCounter {
+    NSDictionary *dict = @{@"resetDoctorPlusCount":[NSNumber numberWithBool:true],
+                           @"resetNotificationCount":[NSNumber numberWithBool:false],
+                           @"resetSurveyCount": [NSNumber numberWithBool:false]};
+    [[MRWebserviceHelper sharedWebServiceHelper] getPendingCount:dict andHandler:^(BOOL status, NSString *details, NSDictionary *responce)
+     {
+         if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+         {
+             [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+              {
+                  [MRCommon savetokens:responce];
+                  [[MRWebserviceHelper sharedWebServiceHelper] getPendingCount:dict andHandler:^(BOOL status, NSString *details, NSDictionary *responce)
+                   {
+                       
+                   }];
+                  
+              }];
+         }
+     }];
+}
+
+-(void)AutoScroll
+{
+    int width = _titleCollectionView.contentSize.width - _titleCollectionView.frame.size.width;
+    if (i >= (width > 0 ? width + 10 : 0)) {
+        i= 0;
+    }
+    [self.titleCollectionView setContentOffset:CGPointMake(i++, 0)];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    i = scrollView.contentOffset.x;
+}
+
+- (void)viewTapped:(UITapGestureRecognizer*)tapGesture {
+    [self.searchBar resignFirstResponder];
+    self.tapGesture.enabled = NO;
 }
 
 #pragma mark - UICollectionView methods
@@ -112,181 +213,324 @@
     return cell;
 }
 
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    float widthIs = [self.categories[indexPath.row] boundingRectWithSize:CGSizeMake(500, 30) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{ NSFontAttributeName:[UIFont boldSystemFontOfSize:12.0] } context:nil].size.width;
+    return CGSizeMake(widthIs+30, 30);
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionView *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    return 4; // This is the minimum inter item spacing, can be more
+}
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSInteger prevIndex = self.currentIndex;
-    self.currentIndex = indexPath.row;
-    
-    NSString *currentCategory = self.categories[indexPath.row];
-    if (currentCategory != nil && [currentCategory caseInsensitiveCompare:@"Latest"] == NSOrderedSame) {
-        self.filteredData = self.contentData;
-    } else {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self.source == %@", currentCategory];
-        self.filteredData = [self.contentData filteredArrayUsingPredicate:predicate];
+    if (self.currentIndex != indexPath.row) {
+        NSInteger prevIndex = self.currentIndex;
+        self.currentIndex = indexPath.row;
+        
+        if (self.currentIndex == 1) {
+            self.therapeuticAreaDropDownWidthConstraint.constant = 142.0;
+            [self.therapeuticAreaDropDown setHidden:NO];
+            [self.currentTherapeuticAreaTitleView setText:@"All"];
+        } else {
+            self.therapeuticAreaDropDownWidthConstraint.constant = 0.0;
+            [self.therapeuticAreaDropDown setHidden:YES];
+        }
+        
+        NSString *currentCategory = self.categories[indexPath.row];
+        [self fetchNewsAndUpdates:currentCategory];
+        
+        [self.titleCollectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:prevIndex
+                                                                               inSection:0],
+                                                            indexPath]];
     }
+}
+
+
+#pragma mark - SearchBar Delegate Methods
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+
     
-    [self.titleCollectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:prevIndex
-                                                                           inSection:0],
-                                                        indexPath]];
-    [self.contentTableView reloadData];
+    if ([searchText isEqualToString:@""]) {
+        self.filteredData = [self.contentData mutableCopy];
+//        [self.contentTableView reloadData];
+        
+    }else{
+        self.filteredData  =  [[self.contentData filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(%K contains[cd] %@)",@"titleDescription",searchText]] mutableCopy];
+//        [
+    }
+     [self.contentTableView reloadData];
+    
+    
+}
+
+
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+    [searchBar resignFirstResponder];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
+    
+    searchBar.text=@"";
+    
+    [searchBar setShowsCancelButton:NO animated:YES];
+    [searchBar resignFirstResponder];
+    self.contentTableView.allowsSelection = YES;
+    self.contentTableView.scrollEnabled = YES;
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    self.tapGesture.enabled = YES;
 }
 
 #pragma mark - UITableView methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.filteredData.count;
+//    if (tableView == self.searchDisplayController.searchResultsTableView) {
+//        return self.searchResults.count;
+//        
+//    }
+//
+    if (tableView.tag == 500) {
+        return self.therapeuticAreasList.count;
+    } else {
+        return self.filteredData.count;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 112.0;
+    if (tableView.tag == 500) {
+        return UITableViewAutomaticDimension;
+    } else {
+        return 112.0;
+    }
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *CellIdentifier = @"MPTransformTableViewCell";
-    MPTransformTableViewCell *regCell = (MPTransformTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    if (regCell == nil)
-    {
-        NSArray *nibViews = [[NSBundle mainBundle] loadNibNamed:@"MPTransformTableViewCell" owner:nil options:nil];
-        regCell = (MPTransformTableViewCell *)[nibViews lastObject];
+    if (tableView.tag == 500) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellIdentifier"];
+        if (cell == nil)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                           reuseIdentifier:@"cellIdentifier"];
+            cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:12.0];
+            [cell.textLabel setBackgroundColor:[UIColor clearColor]];
+            [cell setBackgroundColor:[UIColor clearColor]];
+        }
+        [cell.textLabel setText:[self.therapeuticAreasList objectAtIndex:indexPath.row]];
+        
+        return cell;
+    } else {
+        NSString *CellIdentifier = @"MPTransformTableViewCell";
+        MPTransformTableViewCell *regCell = (MPTransformTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        if (regCell == nil)
+        {
+            NSArray *nibViews = [[NSBundle mainBundle] loadNibNamed:@"MPTransformTableViewCell" owner:nil options:nil];
+            regCell = (MPTransformTableViewCell *)[nibViews lastObject];
+        }
+        MRTransformPost *transformData;
+    //    if (tableView == self.searchDisplayController.searchResultsTableView) {
+    //
+    //   transformData = self.searchResults[indexPath.row];
+    //    }else{
+           transformData = self.filteredData[indexPath.row];
+            
+    //    }
+        
+        if (transformData != nil) {
+            NSLog(@"Image URL ; %@", transformData.coverImgUrl);
+            if (transformData.coverImgUrl != nil && transformData.coverImgUrl.length > 0) {
+                
+                if (transformData.newsId != nil && transformData.newsId.integerValue == 1082) {
+                    NSLog(@"Image URL ; %@", transformData.coverImgUrl);
+                }
+                
+                regCell.img.image = [UIImage imageNamed:@"RssNew"];
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    NSString *key = [NSString stringWithFormat:@"%ld_fileUrl", transformData.newsId.longValue];
+                    [[MRAppControl sharedHelper].globalCache objectForKey:key];
+                    
+                    NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:transformData.coverImgUrl]];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if (imageData != nil) {
+                            regCell.img.image = [UIImage imageWithData:imageData];
+                        }
+                    });
+                });
+            } else {
+                if (transformData.url != nil && transformData.url.length > 0) {
+                    if (transformData.contentType.integerValue == kTransformContentTypeImage) {
+                        regCell.img.image = [UIImage imageNamed:transformData.url];
+                    } else if (transformData.contentType.integerValue == kTransformContentTypeVideo) {
+                        regCell.img.image = [UIImage imageNamed:@"video"];
+                    } else if (transformData.contentType.integerValue == kTransformContentTypePDF) {
+                        regCell.img.image = [UIImage imageNamed:@"pdf"];
+                    } else {
+                        regCell.img.image = [UIImage imageNamed:@"RssNew"];
+                    }
+                } else {
+                    regCell.img.image = [UIImage imageNamed:@"RssNew"];
+                }
+            }
+            
+            if (transformData.titleDescription != nil && transformData.titleDescription.length > 0) {
+                regCell.titleLbl.text = transformData.titleDescription;
+                [regCell.titleLbl sizeToFit];
+                [regCell.titleLbl layoutIfNeeded];
+            } else {
+                regCell.titleLbl.text = @"";
+            }
+            
+            if (transformData.shortArticleDescription != nil && transformData.shortArticleDescription.length > 0) {
+                regCell.descLbl.text = transformData.shortArticleDescription;
+            } else {
+                regCell.descLbl.text = @"";
+            }
+            
+            NSString *source = @"";
+            if (transformData.source != nil && transformData.source.length > 0) {
+                source = transformData.source;
+            }
+                
+            regCell.sourceLabel.text = [NSString stringWithFormat:@"SOURCE : %@, %@", source, [MRCommon stringFromDate:transformData.postedOn withDateFormate:@"YYYY-MM-dd"]];
+        }
+        
+        return regCell;
     }
-    
-    MPTransformData *transformData = self.filteredData[indexPath.row];
-    if (transformData != nil) {
-        if (transformData.icon != nil && transformData.icon.length > 0) {
-            regCell.img.image = [UIImage imageNamed:transformData.icon];
-        }
-        
-        if (transformData.title != nil && transformData.title.length > 0) {
-            regCell.titleLbl.text = transformData.title;
-            [regCell.titleLbl sizeToFit];
-            [regCell.titleLbl layoutIfNeeded];
-        }
-        
-        if (transformData.shortDescription != nil && transformData.shortDescription.length > 0) {
-            regCell.descLbl.text = transformData.shortDescription;
-        }
-        
-        if (transformData.source != nil && transformData.source.length > 0) {
-            regCell.sourceLabel.text = [NSString stringWithFormat:@"SOURCE : %@", transformData.source];
-        }
-    }
-    
-    return regCell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MRTransformDetailViewController *notiFicationViewController = [[MRTransformDetailViewController alloc] initWithNibName:@"MRTransformDetailViewController" bundle:nil];
-    notiFicationViewController.selectedContent = self.contentData[indexPath.row];
-    //notiFicationViewController.selectedContent = [self.contentData objectAtIndex:indexPath.row];
-    [self.navigationController pushViewController:notiFicationViewController animated:YES];
+    if (tableView.tag == 500) {
+        [self therapeuticAreaListTableViewContainerviewTapped];
+        if (indexPath.row == 0) {
+            self.filteredData = self.contentData;
+            [self.currentTherapeuticAreaTitleView setText:@"All"];
+        } else {
+            NSString *category = [self.therapeuticAreasList objectAtIndex:indexPath.row];
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @"subCategory",
+                                      category];
+            self.filteredData = [self.contentData filteredArrayUsingPredicate:predicate];
+            [self.currentTherapeuticAreaTitleView setText:category];
+        }
+        
+        [self.contentTableView reloadData];
+        
+        if (self.filteredData != nil && self.filteredData.count > 0) {
+            [self.contentTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
+                                     atScrollPosition:UITableViewScrollPositionTop
+                                             animated:YES];
+        }
+    } else {
+        MRTransformDetailViewController *notiFicationViewController = [[MRTransformDetailViewController alloc] initWithNibName:@"MRTransformDetailViewController" bundle:nil];
+        
+    //    if (tableView == self.searchDisplayController.searchResultsTableView) {
+    //
+    //        notiFicationViewController.post = self.searchResults[indexPath.row];
+    //        
+    //    }else{
+        notiFicationViewController.currentTabIndex = self.currentIndex;
+            notiFicationViewController.post = self.filteredData[indexPath.row];
+            
+    //    }
+        [self.navigationController pushViewController:notiFicationViewController animated:YES];
+    }
 }
 
-- (IBAction)connectButtonTapped:(id)sender {
-    self.activeView = ((UITapGestureRecognizer *)sender).view;
-    MRContactsViewController *notiFicationViewController = [[MRContactsViewController alloc] initWithNibName:@"MRContactsViewController" bundle:nil];
-       //notiFicationViewController.selectedContent = [self.contentData objectAtIndex:indexPath.row];
-    [self.navigationController pushViewController:notiFicationViewController animated:NO];
-
+#pragma mark - Fetch News & Updates
+- (void)fetchNewsAndUpdates:(NSString*)category {
+    NSString *methodName = kNewsAndTransformAPIMethodName;
+    if (self.currentIndex == 0) {
+        methodName = kNewsAndUpdatesAPIMethodName;
+        category = nil;
+    } else {
+        category = [category stringByReplacingOccurrencesOfString:@" "  withString:@""];
+    }
     
+    [MRDatabaseHelper fetchNewsAndUpdates:category methodName:methodName
+                              withHandler:^(id result) {
+        self.contentData = result;
+        
+//        NSString *currentCategory = self.categories[self.currentIndex];
+//        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self.source == %@", currentCategory];
+//        self.filteredData = [[self.contentData filteredArrayUsingPredicate:predicate] mutableCopy];
+
+        self.filteredData = self.contentData;
+        NSMutableArray *therapeuticAreasList = [NSMutableArray new];
+
+        if (self.currentIndex == 1) {
+            
+            NSArray *subCategories = [[MRDataManger sharedManager] fetchObjectList:NSStringFromClass(TransformSubCategories.class)];
+
+            [therapeuticAreasList addObject:@"All"];
+            [therapeuticAreasList addObjectsFromArray:[subCategories valueForKey:@"title"]];
+                                  
+            NSOrderedSet *orderedSet = [NSOrderedSet orderedSetWithArray:therapeuticAreasList];
+                                  
+            self.therapeuticAreasList = orderedSet.array;
+        }
+                                  
+        [self.contentTableView reloadData];
+    }];
 }
-
-- (IBAction)transformButtonTapped:(id)sender {
-    self.transformView = ((UITapGestureRecognizer *)sender).view;
-}
-
-- (IBAction)shareButtonTapped:(id)sender {
-    self.shareView = ((UITapGestureRecognizer *)sender).view;
-}
-
-- (IBAction)serveButtonTapped:(id)sender {
-    self.serveView = ((UITapGestureRecognizer *)sender).view;
-}
-
-
 
 #pragma mark - Dummy Data
 
-- (void)createDummyData {
-    // Create Dummy Data
-    self.contentData = [NSMutableArray new];
+- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
+{
+
+    self.searchResults  =  [[self.filteredData filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(%K contains[cd] %@)",@"titleDescription",searchText]] mutableCopy];
+//    self.searchResults  =  [[self.filteredData filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(%K contains[cd] %@) OR (%K contains[cd] %@)",@"titleDescription",searchText,@"lastName",searchText]] mutableCopy];
+
+}
+
+#pragma mark - UISearchDisplayController delegate methods
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller
+shouldReloadTableForSearchString:(NSString *)searchString
+{
+    [self filterContentForSearchText:searchString
+                               scope:[[self.searchDisplayController.searchBar scopeButtonTitles]
+                                      objectAtIndex:[self.searchDisplayController.searchBar
+                                                     selectedScopeButtonIndex]]];
     
-    MPTransformData *transformData = [MPTransformData new];
-    [transformData setSource:@"BBC"];
-    [transformData setIcon:@"comapny-logo.png"];
-    [transformData setTitle:@"Could High-Dose Vitamin D Help Fight Multiple Sclerosis"];
-    [transformData setShortDescription:@"Supplementation appears safe but experts says it's too soon for general..."];
-    [transformData setDetailDescription:@"Supplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for general"];
-    [self.contentData addObject:transformData];
+    return YES;
+}
+
+-(UIImage *)generateImageForVideoLink:(NSString *)str
+{
+    AVURLAsset *asset=[[AVURLAsset alloc] initWithURL:[NSURL URLWithString:str] options:nil];
+    AVAssetImageGenerator *generator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+    generator.appliesPreferredTrackTransform=TRUE;
+    CMTime thumbTime = CMTimeMakeWithSeconds(0,30);
+    __block UIImage *thumbImg;
+    AVAssetImageGeneratorCompletionHandler handler = ^(CMTime requestedTime, CGImageRef im, CMTime actualTime, AVAssetImageGeneratorResult result, NSError *error){
+        if (result != AVAssetImageGeneratorSucceeded) {
+            NSLog(@"couldn't generate thumbnail, error:%@", error);
+        }
+        thumbImg=[UIImage imageWithCGImage:im];
+    };
     
-    transformData = [MPTransformData new];
-    [transformData setSource:@"BBC"];
-    [transformData setIcon:@"PHdashboard-banner.png"];
-    [transformData setTitle:@"Painkillers Often Gateway to Heroin for U.S Teens: Survey"];
-    [transformData setShortDescription:@"Heroin is cheaper, easier to obtain than narcotics like OxyContin experts say..."];
-    [transformData setDetailDescription:@""];
-    [self.contentData addObject:transformData];
-    
-    transformData = [MPTransformData new];
-    [transformData setSource:@"BBC"];
-    [transformData setIcon:@"PHdashboard-bg.png"];
-    [transformData setTitle:@"It's Not Too late"];
-    [transformData setShortDescription:@"Influenza activity usually active in Janurary or February..."];
-    [transformData setDetailDescription:@""];
-    [self.contentData addObject:transformData];
-    
-    transformData = [MPTransformData new];
-    [transformData setSource:@"My own source defined"];
-    [transformData setIcon:@"comapny-logo2.png"];
-    [transformData setTitle:@"Best Cancer Screening Methods"];
-    [transformData setShortDescription:@"Source:HealthDay - Related Medline Plus"];
-    [transformData setDetailDescription:@""];
-    [self.contentData addObject:transformData];
-    
-    transformData = [MPTransformData new];
-    [transformData setSource:@"ABC"];
-    [transformData setIcon:@"bg.png"];
-    [transformData setTitle:@"Could High-Dose Vitamin D Help Fight Multiple Sclerosis"];
-    [transformData setShortDescription:@"Supplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for generalSupplementation appears safe but experts says it's too soon for general"];
-    [transformData setDetailDescription:@""];
-    [self.contentData addObject:transformData];
-    
-    transformData = [MPTransformData new];
-    [transformData setSource:@"XYZ"];
-    [transformData setIcon:@"latestNotificatins.png"];
-    [transformData setTitle:@"Painkillers Often Gateway to Heroin for U.S Teens: Survey"];
-    [transformData setShortDescription:@"Heroin is cheaper, easier to obtain than narcotics like OxyContin experts say..."];
-    [transformData setDetailDescription:@"Heroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts sayHeroin is cheaper, easier to obtain than narcotics like OxyContin experts say"];
-    [self.contentData addObject:transformData];
-    
-    if ([MRDatabaseHelper getContacts].count == 0) {
-        
-        NSString* filePath = [[NSBundle mainBundle] pathForResource:@"groupList" ofType:@"json"];
-        NSData* data = [NSData dataWithContentsOfFile:filePath];
-        NSError *error;
-        NSArray* groupsArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-        [MRDatabaseHelper addGroups:groupsArray];
-        
-        filePath = [[NSBundle mainBundle] pathForResource:@"my_contacts" ofType:@"json"];
-        data = [NSData dataWithContentsOfFile:filePath];
-        NSArray* contactsArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-        [MRDatabaseHelper addContacts:contactsArray];
-        
-        filePath = [[NSBundle mainBundle] pathForResource:@"suggested_contacts" ofType:@"json"];
-        data = [NSData dataWithContentsOfFile:filePath];
-        contactsArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-        [MRDatabaseHelper addSuggestedContacts:contactsArray];
-        
-        filePath = [[NSBundle mainBundle] pathForResource:@"posts" ofType:@"json"];
-        data = [NSData dataWithContentsOfFile:filePath];
-        NSArray* postsArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-        [MRDatabaseHelper addGroupPosts:postsArray];
-        
-        
-    }
+    CGSize maxSize = CGSizeMake(320, 180);
+    generator.maximumSize = maxSize;
+    [generator generateCGImagesAsynchronouslyForTimes:[NSArray arrayWithObject:[NSValue valueWithCMTime:thumbTime]] completionHandler:handler];
+    return thumbImg;
+}
+
+#pragma mark - drop down clicked
+- (void)dropDownClicked {
+    [self.therapeuticAreaListTableViewContainerview setHidden:NO];
+    [self.therapeuticAreaListTableView setHidden:NO];
+    [self.therapeuticAreaListTableView reloadData];
+}
+
+- (void)therapeuticAreaListTableViewContainerviewTapped {
+    [self.therapeuticAreaListTableView setHidden:YES];
+    [self.therapeuticAreaListTableViewContainerview setHidden:YES];
 }
 
 /*

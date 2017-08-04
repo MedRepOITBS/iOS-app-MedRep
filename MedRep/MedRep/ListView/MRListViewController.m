@@ -62,8 +62,18 @@
     switch (self.listType)
     {
         case MRListVIewTypeTherapetic:
+            NSLog(@"Vamsi : %@", [[self.listItems objectAtIndex:indexPath.row] objectForKey:@"therapeuticName"]);
            appointmentCell.textLabel.text = [[self.listItems objectAtIndex:indexPath.row] objectForKey:@"therapeuticName"];
             break;
+            
+        case MRListVIewTypeRegYear:
+            appointmentCell.textLabel.text = [self.listItems objectAtIndex:indexPath.row];
+            break;
+            
+        case MRListVIewTypeStateCouncil:
+            appointmentCell.textLabel.text = [self.listItems objectAtIndex:indexPath.row];
+            break;
+            
         case MRListVIewTypeAddress:
         {
             appointmentCell.textLabel.text = (self.isFromCallMedrep && self.listItems.count == indexPath.row) ? @"Current Location": [self getAddressString:[self.listItems objectAtIndex:indexPath.row]];
@@ -77,8 +87,13 @@
             break;
         case   MRListVIewTypeNotificationTherapetic:
             appointmentCell.textLabel.text = [self.listItems objectAtIndex:indexPath.row];
-\
+
             break;
+            
+        case MRListVIewTypeMedicineList:
+            appointmentCell.textLabel.text = [[self.listItems objectAtIndex:indexPath.row] objectForKey:@"name"];
+            break;
+            
         case MRListVIewTypeNone:
         default:
             break;
@@ -146,6 +161,18 @@
         if (self.listType == MRListVIewTypeNotificationTherapetic)
         {
             [self.delegate selectedListItem:[NSDictionary dictionaryWithObject:[self.listItems objectAtIndex:indexPath.row] forKey:@"therapeuticName"]];
+        }
+        else if (self.listType == MRListVIewTypeRegYear)
+        {
+            [self.delegate selectedListItem:[NSDictionary dictionaryWithObject:[self.listItems objectAtIndex:indexPath.row] forKey:@"yearReg"]];
+        }
+        else if (self.listType == MRListVIewTypeStateCouncil)
+        {
+            [self.delegate selectedListItem:[NSDictionary dictionaryWithObject:[self.listItems objectAtIndex:indexPath.row] forKey:@"stateCouncil"]];
+        }
+        else if (self.listType == MRListVIewTypeMedicineList)
+        {
+            [self.delegate selectedListItem:[NSDictionary dictionaryWithObject:[self.listItems objectAtIndex:indexPath.row] forKey:@"selectedMedicine"]];
         }
         else
         {

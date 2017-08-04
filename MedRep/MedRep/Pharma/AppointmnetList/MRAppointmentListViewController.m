@@ -123,7 +123,7 @@
         if (status)
         {
             [MRCommon stopActivityIndicator];
-            self.convertAppointments = [responce objectForKey:kResponce];
+            self.convertAppointments = [self filterTeamPendingAppointments:[responce objectForKey:kResponce]];
             if (self.convertAppointments.count == 0)
             {
                 [MRCommon showAlert:@"No pending appointments found" delegate:nil];
@@ -140,7 +140,7 @@
                       if (status)
                       {
                           [MRCommon stopActivityIndicator];
-                          self.convertAppointments = [responce objectForKey:kResponce];
+                          self.convertAppointments = [self filterTeamPendingAppointments:[responce objectForKey:kResponce]];
                           if (self.convertAppointments.count == 0)
                           {
                               [MRCommon showAlert:@"No pending appointments found" delegate:nil];
@@ -155,6 +155,19 @@
     }];
 }
 
+- (NSArray*)filterTeamPendingAppointments:(NSArray*)pendingAppointments {
+    NSArray *filteredList = nil;
+    
+    if (pendingAppointments != nil && pendingAppointments.count > 0) {
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"startDate"
+                                                                         ascending:NO];
+        filteredList = [pendingAppointments sortedArrayUsingDescriptors:@[sortDescriptor]];
+    }
+    
+    return filteredList;
+}
+
+
 - (void)callServiceTeamPendingAppointment
 {
     [MRCommon showActivityIndicator:@"Loading..."];
@@ -163,7 +176,7 @@
         if (status)
         {
             [MRCommon stopActivityIndicator];
-            self.convertAppointments = [responce objectForKey:kResponce];
+            self.convertAppointments = [self filterTeamPendingAppointments:[responce objectForKey:kResponce]];
             if (self.convertAppointments.count == 0)
             {
                 [MRCommon showAlert:@"No pending appointments found" delegate:nil];
@@ -180,7 +193,7 @@
                       if (status)
                       {
                           [MRCommon stopActivityIndicator];
-                          self.convertAppointments = [responce objectForKey:kResponce];
+                          self.convertAppointments = [self filterTeamPendingAppointments:[responce objectForKey:kResponce]];
                           if (self.convertAppointments.count == 0)
                           {
                               [MRCommon showAlert:@"No pending appointments found" delegate:nil];
@@ -338,7 +351,7 @@
     }
     NSDictionary *dict =[self.convertAppointments objectAtIndex:indexPath.row];
     productCell.profileImage.image = [UIImage imageNamed:@"profileIcon.png"];
-    productCell.profileName.text = [NSString stringWithFormat:@"Meeting With Dr %@",[dict objectForKey:@"doctorName"]];
+    productCell.profileName.text = [NSString stringWithFormat:@"Meeting With %@",[dict objectOrNilForKey:@"doctorName"]];
     productCell.appointmnetTime.text = [self getAppointmnetDateTime:[dict objectForKey:@"startDate"]];
     productCell.locationLabel.text = @"";//[dict objectForKey:@"location"];
     [productCell loadProfileImage:[dict objectForKey:@"doctorId"]];
@@ -462,7 +475,7 @@
         if (status)
         {
             [MRCommon stopActivityIndicator];
-            self.convertAppointments = [responce objectForKey:kResponce];
+            self.convertAppointments = [self filterTeamPendingAppointments:[responce objectForKey:kResponce]];
             if (self.convertAppointments.count == 0)
             {
                 if (self.appointnetType == 1)
@@ -484,7 +497,7 @@
                       if (status)
                       {
                           [MRCommon stopActivityIndicator];
-                          self.convertAppointments = [responce objectForKey:kResponce];
+                          self.convertAppointments = [self filterTeamPendingAppointments:[responce objectForKey:kResponce]];
                           if (self.convertAppointments.count == 0)
                           {
                               if (self.appointnetType == 1)
@@ -513,7 +526,7 @@
         if (status)
         {
             [MRCommon stopActivityIndicator];
-            self.convertAppointments = [responce objectForKey:kResponce];
+            self.convertAppointments = [self filterTeamPendingAppointments:[responce objectForKey:kResponce]];
             if (self.convertAppointments.count == 0)
             {
                 if (self.appointnetType == 1)
@@ -535,7 +548,7 @@
                       if (status)
                       {
                           [MRCommon stopActivityIndicator];
-                          self.convertAppointments = [responce objectForKey:kResponce];
+                          self.convertAppointments = [self filterTeamPendingAppointments:[responce objectForKey:kResponce]];
                           if (self.convertAppointments.count == 0)
                           {
                               if (self.appointnetType == 1)

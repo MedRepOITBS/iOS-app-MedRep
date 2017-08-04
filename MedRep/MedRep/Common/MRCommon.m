@@ -14,6 +14,7 @@
 #import "MRAppControl.h"
 #import "MRWebserviceConstants.h"
 #import "MRDevEnvironmentConfig.h"
+#import "MRGradientView.h"
 
 @import EventKit;
 
@@ -221,6 +222,26 @@
     return [self deviceHasScreenWithIdiom:UIUserInterfaceIdiomPhone scale:3.0 height:736.0];
 }
 
+
++(NSInteger)getMonthIndexForShortName:(NSString *)shortAbbreviation{
+    __block NSInteger monthIndex = -1;
+    
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    NSArray *dfShortMonthSymbols =  [df shortMonthSymbols];
+    [dfShortMonthSymbols enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSString *monthName = obj;
+        
+        if ([shortAbbreviation isEqualToString:monthName]) {
+            monthIndex = idx;
+            
+            *stop = TRUE;
+        }
+        
+        
+    }];
+    
+    return monthIndex+1;
+}
 + (BOOL) deviceHasScreenWithIdiom:(UIUserInterfaceIdiom)userInterfaceIdiom scale:(CGFloat)scale height:(CGFloat)height
 {
     CGRect mainScreenBounds = [[UIScreen mainScreen] bounds];
@@ -248,21 +269,12 @@
 
 + (NSString*)nibNameForDevice:(NSString*)nibName
 {
-    if ([MRCommon deviceHasThreePointFiveInchScreen])
+    if ([MRCommon deviceHasThreePointFiveInchScreen] ||
+        [MRCommon deviceHasFourInchScreen] ||
+        [MRCommon deviceHasFourPointSevenInchScreen] ||
+        [MRCommon deviceHasFivePointFiveInchScreen])
     {
-        return [NSString stringWithFormat:@"%@_iPhone", nibName];
-    }
-    else if ([MRCommon deviceHasFourInchScreen])
-    {
-        return [NSString stringWithFormat:@"%@_iPhone5", nibName];
-    }
-    else if ([MRCommon deviceHasFourPointSevenInchScreen])
-    {
-        return [NSString stringWithFormat:@"%@_iPhone6", nibName];
-    }
-    else if ([MRCommon deviceHasFivePointFiveInchScreen])
-    {
-        return [NSString stringWithFormat:@"%@_iPhone6Plus", nibName]; 
+        return [NSString stringWithFormat:@"%@_iPhone", nibName]; 
     }
     else if ([MRCommon isHD])
     {
@@ -425,6 +437,7 @@
     // NSLog(@"%@ === %@",[MRCommon stringFromDate:[NSDate date] withDateFormate:@"YYYYMMdd"],[MRCommon stringFromDate:[NSDate date] withDateFormate:@"YYYYMMddhhmmss"]);
     NSDateFormatter *dateformat    = [[NSDateFormatter alloc]init];
     [dateformat setDateFormat:formatter];
+    [dateformat setLocale:[NSLocale currentLocale]];
     NSString *resultantDate        = [dateformat stringFromDate:date];
     return  resultantDate;
 }
@@ -438,6 +451,7 @@
     // NSLog(@"%@ === %@",[MRCommon stringFromDate:[NSDate date] withDateFormate:@"YYYYMMdd"],[MRCommon stringFromDate:[NSDate date] withDateFormate:@"YYYYMMddhhmmss"]);
     NSDateFormatter *dateformat    = [[NSDateFormatter alloc]init];
     [dateformat setDateFormat:formatter];
+    [dateformat setLocale:[NSLocale currentLocale]];
     NSDate *resultantDate        = [dateformat dateFromString:strdate];
     return  resultantDate;
 }
@@ -544,9 +558,107 @@
     return selectedColor;
 }
 
-+ (void)getNotificationImageByID:(NSInteger)notificationID forImage:(void (^)(UIImage *image))donloadedImage
++ (void)parseNotificationMessage:(NSDictionary*)responce
+                        forImage:(void (^)(NSString *image))donloadedImage{
+    if (responce != nil) {
+        NSString *contentLocation = [responce objectOrNilForKey:@"contentLocation"];
+        if (contentLocation != nil && contentLocation.length > 0) {
+            /*
+            dispatch_queue_t queue = dispatch_queue_create("com.medrep", 0);
+            
+            dispatch_async(queue,
+                           ^{
+                               if ([[MRAppControl sharedHelper] internetCheck])
+                               {
+                                    NSURL *url = [[NSURL alloc] initWithString:contentLocation];
+                                    NSData *mydata = [[NSData alloc] initWithContentsOfURL:url];
+                                    
+                                    if (mydata != nil)
+                                    {
+                                        UIImage *tempImg = [[UIImage alloc] initWithData:mydata];
+                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                            [MRCommon stopActivityIndicator];
+                                            donloadedImage (tempImg);
+                                        });
+                                    }
+                                    else
+                                    {
+                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                            [MRCommon stopActivityIndicator];
+                                            donloadedImage (nil);
+                                        });
+                                    }
+                               } else {
+                                   dispatch_async(dispatch_get_main_queue(), ^{
+                                       [MRCommon stopActivityIndicator];
+                                       donloadedImage(nil);
+                                   });
+                               }
+                           });
+             */
+            [MRCommon stopActivityIndicator];
+            donloadedImage(contentLocation);
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MRCommon stopActivityIndicator];
+                donloadedImage(nil);
+            });
+        }
+    } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [MRCommon stopActivityIndicator];
+            donloadedImage(nil);
+        });
+    }
+}
+
++ (void)parseNotificationContent:(NSInteger)notificationID
+                          status:(BOOL)status responce:(NSDictionary*)responce
+                        forImage:(void (^)(NSString *image))donloadedImage {
+    if (status)
+    {
+        [MRCommon parseNotificationMessage:responce forImage:donloadedImage];
+    }
+    else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+    {
+        [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+         {
+             [MRCommon savetokens:responce];
+             [[MRWebserviceHelper sharedWebServiceHelper] getMyNotificationContent:notificationID
+                                                                       withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                                           [MRCommon parseNotificationContent:notificationID
+                                                                                                       status:status responce:responce
+                                                                                                     forImage:donloadedImage];
+                                                                       }];
+         }];
+    }
+    else
+    {
+        [MRCommon stopActivityIndicator];
+        donloadedImage(nil);
+    }
+}
+
++ (void)getProductBroucher:(NSInteger)notificationID forImage:(void (^)(NSString *image))donloadedImage
 {
-     NSString *imageurl  = [NSString stringWithFormat:@"%@/api/doctor/getMyNotificationContent/%ld?access_token=%@",kBaseURL,notificationID,[MRDefaults objectForKey:kAuthenticationToken]];
+    [[MRWebserviceHelper sharedWebServiceHelper] getProductBroucher:notificationID
+                                                              withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                                  [MRCommon parseNotificationContent:notificationID
+                                                                                              status:status responce:responce
+                                                                                            forImage:donloadedImage];
+                                                              }];
+}
+
++ (void)getNotificationImageByID:(NSInteger)notificationID forImage:(void (^)(NSString *image))donloadedImage
+{
+    [[MRWebserviceHelper sharedWebServiceHelper] getMyNotificationContent:notificationID
+                                                              withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                                  [MRCommon parseNotificationContent:notificationID
+                                                                                              status:status responce:responce
+                                                                   forImage:donloadedImage];
+                                                              }];
+    /*
+     NSString *imageurl  = [NSString stringWithFormat:@"%@/doctor/getMyNotificationContent/%ld?token=%@",kBaseWebURL,notificationID,[MRDefaults objectForKey:kAuthenticationToken]];
     
     dispatch_queue_t queue = dispatch_queue_create("com.medrep", 0);
     dispatch_queue_t main = dispatch_get_main_queue();
@@ -586,6 +698,7 @@
                            donloadedImage (nil);
                        }
                    });
+     */
 }
 
 + (void)getPharmaNotificationImageByID:(NSInteger)notificationID forImage:(void (^)(UIImage *image))donloadedImage
@@ -657,6 +770,120 @@
     NSDictionary *theDictionary=[unarchiver decodeObjectForKey:key];
     [unarchiver finishDecoding];
     return (nil == theDictionary) ? [NSDictionary dictionary] : theDictionary;
+}
+
++ (UIColor *)colorFromHexString:(NSString *)hexString {
+    unsigned rgbValue = 0;
+    NSScanner *scanner = [NSScanner scannerWithString:hexString];
+    [scanner setScanLocation:1]; // bypass '#' character
+    [scanner scanHexInt:&rgbValue];
+    return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
+}
+
++ (void)setStatusBarBackgroundColor:(UIColor *)color {
+    
+    UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
+    
+    if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
+        statusBar.backgroundColor = color;
+    }
+}
+
++ (UIView*)createTabBarView:(UIView*)parentView {
+    UIView *tabBarView = [[NSBundle mainBundle] loadNibNamed:@"MRCustomTabBar" owner:self
+                                                  options:nil].firstObject;
+    [tabBarView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    [parentView addSubview:tabBarView];
+    
+    NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:tabBarView
+                                                                      attribute:NSLayoutAttributeLeading
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:parentView
+                                                                      attribute:NSLayoutAttributeLeading
+                                                                     multiplier:1.0 constant:0];
+    NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:tabBarView
+                                                                      attribute:NSLayoutAttributeTrailing
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:parentView
+                                                                      attribute:NSLayoutAttributeTrailing
+                                                                     multiplier:1.0 constant:0];
+    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:tabBarView
+                                                                      attribute:NSLayoutAttributeBottom
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:parentView
+                                                                      attribute:NSLayoutAttributeBottom
+                                                                     multiplier:1.0 constant:0];
+    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:tabBarView
+                                                                      attribute:NSLayoutAttributeHeight
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:nil
+                                                                      attribute:NSLayoutAttributeHeight
+                                                                     multiplier:1.0 constant:50.0];
+    
+    [parentView addConstraints:@[leftConstraint, rightConstraint, bottomConstraint, heightConstraint]];
+    return tabBarView;
+}
+
++ (void)applyNavigationBarStyling:(UINavigationController*)navigationController {
+    [MRCommon applyNavigationBarStyling:navigationController andBarColor:kStatusBarColor];
+}
+
++ (void)applyNavigationBarStyling:(UINavigationController*)navigationController
+                    andBarColor:(NSString*)barColor {
+
+    [[UINavigationBar appearance] setTitleTextAttributes:@{
+                                            NSForegroundColorAttributeName:[UIColor whiteColor],
+                                            NSFontAttributeName: [UIFont boldSystemFontOfSize:16.0]
+                                            }];
+    
+    
+    // shadowImage removes under navigation line
+    navigationController.navigationBar.shadowImage = [UIImage new];
+    navigationController.navigationBar.barTintColor = [MRCommon colorFromHexString:barColor];
+    navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    navigationController.navigationBar.translucent = false;
+    [navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    [navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName]];
+    
+//    // Set Navigation Bar as gradient
+//    CGFloat statusHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+//    CGFloat navHeight = navigationController.navigationBar.frame.size.height;
+//    
+//    CGRect bounds = [UIScreen mainScreen].bounds;
+//    CGFloat width = bounds.size.width;
+//    
+//    UIView *gradImage = [[MRGradientView alloc] initWithFrame:CGRectMake(0, 0, width, statusHeight + navHeight)];
+//    
+//    UIGraphicsBeginImageContext(gradImage.frame.size);
+//    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+//    [gradImage.layer renderInContext:UIGraphicsGetCurrentContext()];
+//    UIGraphicsEndImageContext();
+//    [navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+}
+
++ (NSString*)stringWithRelativeWordsForDate:(NSDate*)date {
+    NSString *dateString = @"";
+    if (date != nil) {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+        [dateFormatter setDoesRelativeDateFormatting:YES];
+        dateString = [dateFormatter stringFromDate:date];
+    }
+    return dateString;
+}
+
++ (NSString*)convertDateToString:(NSDate*)date andFormat:(NSString*)dateFormat {
+    NSString *dateString = @"";
+    
+    if (date != nil) {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:dateFormat];
+        [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:kStandardTimeZone]];
+        dateString = [dateFormatter stringFromDate:date];
+    }
+    
+    return dateString;
 }
 
 @end

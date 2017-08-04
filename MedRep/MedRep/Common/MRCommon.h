@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MRDevEnvironmentConfig.h"
+#import "MRAppConstants.h"
 
 @import UIKit;
 
@@ -98,8 +99,10 @@
 
 + (UIColor*)getColorForIndex:(NSInteger)index;
 
++ (void)getProductBroucher:(NSInteger)notificationID forImage:(void (^)(NSString *image))donloadedImage;
+
 + (void)getNotificationImageByID:(NSInteger)notificationID
-                       forImage:(void (^)(UIImage *image))donloadedImage;
+                       forImage:(void (^)(NSString *image))donloadedImage;
 
 + (NSString*)getUpperCaseLetter:(NSString*)notificationName;
 
@@ -109,4 +112,18 @@
 
 + (void)getPharmaNotificationImageByID:(NSInteger)notificationID
                               forImage:(void (^)(UIImage *image))donloadedImage;
+
++ (UIColor *)colorFromHexString:(NSString *)hexString;
+
++ (void)setStatusBarBackgroundColor:(UIColor *)color;
+
++ (UIView*)createTabBarView:(UIView*)parentView;
+
++ (void)applyNavigationBarStyling:(UINavigationController*)navigationController;
++ (void)applyNavigationBarStyling:(UINavigationController*)navigationController
+                      andBarColor:(NSString*)barColor;
+
++ (NSString*)stringWithRelativeWordsForDate:(NSDate*)date;
++ (NSString*)convertDateToString:(NSDate*)date andFormat:(NSString*)dateFormat;
++(NSInteger)getMonthIndexForShortName:(NSString *)shortAbbreviation;
 @end

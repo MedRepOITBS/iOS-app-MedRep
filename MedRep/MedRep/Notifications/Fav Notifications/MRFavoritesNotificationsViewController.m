@@ -14,10 +14,7 @@
 #import "MRDatabaseHelper.h"
 #import "MRCommon.h"
 #import "MRConstants.h"
-
-#define kImagesArray [NSArray arrayWithObjects:@"img1@2x.jpg",@"NDcompany4@2x.jpg",@"readnotification3@2x.jpg", nil]
-#define kDrugNameArray [NSArray arrayWithObjects:@"Test 1",@"Test 2",@"Test 3", nil]
-#define kCompanyNamesArray [NSArray arrayWithObjects:@"Description 1",@"Description 2",@"Description 3", nil]
+#import "MRNotifications.h"
 
 @interface MRFavoritesNotificationsViewController ()<UITableViewDataSource, UITableViewDelegate, MRFavoriteFilterViewControllerDelegate, SWRevealViewControllerDelegate>
 
@@ -34,31 +31,34 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    SWRevealViewController *revealController = [self revealViewController];
-    revealController.delegate = self;
-    [revealController panGestureRecognizer];
-    [revealController tapGestureRecognizer];
+    self.navigationItem.title = @"Favorites";
     
-    
-    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon.png"]
-                                                                         style:UIBarButtonItemStylePlain target:revealController action:@selector(revealToggle:)];
-    
+    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonAction:)];
     self.navigationItem.leftBarButtonItem = revealButtonItem;
     
     UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navView];
-    self.navigationItem.rightBarButtonItem = rightButtonItem;
+    UIBarButtonItem *sortButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"cnsort.png"] style:UIBarButtonItemStylePlain target:self action:@selector(sortByButtonAction:)];
     
-    [MRDatabaseHelper getNotifications:NO withFavourite:YES withNotificationsList:^(NSArray *fetchList) {
-        self.notificationDetailsList = fetchList;
-        [self.notificationsTableView reloadData];
-    }];
-
+    [self.navigationItem setRightBarButtonItems:@[rightButtonItem, sortButtonItem]];
+    
     // Do any additional setup after loading the view from its nib.
+    [self fetchData];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
+
+- (void)fetchData {
+    [MRDatabaseHelper getNotifications:NO withFavourite:YES withNotificationsList:^(NSArray *fetchList) {
+        self.notificationDetailsList = fetchList;
+        [self.notificationsTableView reloadData];
+    }];
 }
 
 - (IBAction)backButtonAction:(id)sender
@@ -114,7 +114,8 @@
         regCell                             = (MPNotificatinsTableViewCell *)[nibViews lastObject];
         
     }
-    NSDictionary *notification              = [self.notificationDetailsList objectAtIndex:indexPath.row];
+    MRNotifications *currentNotification = [self.notificationDetailsList objectAtIndex:indexPath.row];
+    NSDictionary *notification = [currentNotification toDictionary];
     
     regCell.notificationLetter.hidden       = NO;
     regCell.notificationLetter.backgroundColor = [MRCommon getColorForIndex:indexPath.row];
@@ -134,7 +135,10 @@
 {
     //[MRCommon showAlert:kComingsoonMSG delegate:nil];
     MRNotificationInsiderViewController *notificationInsiderVc =[[MRNotificationInsiderViewController alloc] initWithNibName:@"MRNotificationInsiderViewController" bundle:nil];
-    notificationInsiderVc.notificationDetails = [self.notificationDetailsList objectAtIndex:indexPath.row];
+    
+    MRNotifications *selectedNotification = [self.notificationDetailsList objectAtIndex:indexPath.row];
+    notificationInsiderVc.notificationId = [NSNumber numberWithLong:selectedNotification.notificationId.longValue];
+    
     [self.navigationController pushViewController:notificationInsiderVc animated:YES];
 }
 
@@ -142,23 +146,14 @@
 - (void)loadNotificationsOnFilter:(NSString*)companyName
                withTherapiticName:(NSString*)therapeuticName
 {
-    [MRDatabaseHelper getNotificationsByFilter:companyName withTherapeuticName:therapeuticName withNotificationsList:^(NSArray *fetchList) {
-        if ([MRCommon isStringEmpty:companyName] && [MRCommon isStringEmpty:therapeuticName])
-        {
-            [MRDatabaseHelper getNotifications:NO
-                                 withFavourite:YES
-                         withNotificationsList:^(NSArray *fetchList)
-            {
-                self.notificationDetailsList = fetchList;
-                [self.notificationsTableView reloadData];
-            }];
-        }
-        else
-        {
-            self.notificationDetailsList = fetchList;
-            [self.notificationsTableView reloadData];
-        }
-    }];
+    [MRDatabaseHelper getNotificationsByFilter:companyName withTherapeuticName:therapeuticName
+                                                isRead:NO
+             isFavourite:YES
+                                  withNotificationsList:^(NSArray *fetchList) {
+                             
+                             self.notificationDetailsList = fetchList;
+                            [self.notificationsTableView reloadData];
+                         }];
 }
 
 - (void)revealController:(SWRevealViewController *)revealController didMoveToPosition:(FrontViewPosition)position

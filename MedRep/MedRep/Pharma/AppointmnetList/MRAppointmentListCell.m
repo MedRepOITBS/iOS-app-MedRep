@@ -31,11 +31,26 @@
     [[MRWebserviceHelper sharedWebServiceHelper] getDoctorProfileForPharma:[NSString stringWithFormat:@"%lld",[doctorId longLongValue]] withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
         if (status)
         {
-            self.profileName.text = [NSString stringWithFormat:@"Meeting With Dr %@ %@",[responce objectForKey:@"firstName"],[responce objectForKey:@"lastName"]];
+            self.profileName.text = [NSString stringWithFormat:@"Meeting With %@ %@",[responce objectForKey:@"firstName"],[responce objectForKey:@"lastName"]];
             if ([[responce objectForKey:KProfilePicture] isKindOfClass:[NSDictionary class]])
             {
+                
+                NSDictionary *temp = [responce objectForKey:@"profilePicture"];
 
-            self.profileImage.image = [MRCommon getImageFromBase64Data:[[responce objectForKey:KProfilePicture] objectForKey:@"data"]];
+                
+                NSURL * imageURL = [NSURL URLWithString:[temp objectForKey:KProfilePicture]];
+                
+                
+                dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+                dispatch_async(queue, ^{
+                    NSData *data = [NSData dataWithContentsOfURL:imageURL];
+                    UIImage *image = [UIImage imageWithData:data];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        self.profileImage.image = image;
+                    });  
+                });
+                
+       
             }
         }
         else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
@@ -48,11 +63,26 @@
                       [MRCommon stopActivityIndicator];
                       if (status)
                       {
-                          self.profileName.text = [NSString stringWithFormat:@"Meeting With DR %@ %@",[responce objectForKey:@"firstName"],[responce objectForKey:@"lastName"]];
+                          self.profileName.text = [NSString stringWithFormat:@"Meeting With %@ %@",[responce objectForKey:@"firstName"],[responce objectForKey:@"lastName"]];
                           if ([[responce objectForKey:KProfilePicture] isKindOfClass:[NSDictionary class]])
                           {
-
-                          self.profileImage.image = [MRCommon getImageFromBase64Data:[[responce objectForKey:KProfilePicture] objectForKey:@"data"]];
+                              NSDictionary *temp = [responce objectForKey:@"profilePicture"];
+                              
+                              
+                              NSURL * imageURL = [NSURL URLWithString:[temp objectForKey:KProfilePicture]];
+                              
+                              
+                              dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+                              dispatch_async(queue, ^{
+                                  NSData *data = [NSData dataWithContentsOfURL:imageURL];
+                                  UIImage *image = [UIImage imageWithData:data];
+                                  dispatch_async(dispatch_get_main_queue(), ^{
+                                      self.profileImage.image = image;
+                                  });  
+                              });
+                              
+                             
+                        
                           }
                       }
                   }];

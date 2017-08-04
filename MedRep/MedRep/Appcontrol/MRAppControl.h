@@ -10,7 +10,7 @@
 @import UIKit;
 @class Reachability;
 
-@class ViewController;
+@class ViewController, MRContact, MRGroup, MRGroupMembers, MRPostedReplies, KLCPopup;
 
 @interface MRAppControl : NSObject
 {
@@ -18,6 +18,7 @@
     BOOL                   isInternetAvailable;
 }
 
+@property (strong, atomic) NSCache *globalCache;
 @property (strong, nonatomic) UIWindow *appMainWindow;
 @property (strong, nonatomic) ViewController *viewController;
 @property (assign, nonatomic) NSInteger userType;
@@ -32,7 +33,9 @@
 @property (strong, nonatomic) NSArray *roles;
 @property (strong, nonatomic) NSArray *companyDetails;
 
-
+@property (assign, nonatomic) NSInteger pendingNotificationCount;
+@property (assign, nonatomic) NSInteger pendingSurveysCount;
+@property (assign, nonatomic) NSInteger pendingDashboardCount;
 
 + (MRAppControl*)sharedHelper;
 - (void)launchWithApplicationMainWindow:(UIWindow *)mainWindow;
@@ -55,5 +58,28 @@
                                withCompanyID:(NSInteger)companyID;
 - (void)resetUserData;
 - (UIImage*)getCompanyImage;
+
+-(void)registerDeviceToken;
+
++ (NSString*)getContactName:(MRContact*)contact;
++ (NSString*)getGroupMemberName:(MRGroupMembers*)members;
+
++ (void)getPharmaRepImage:(NSString*)repId repURL:(NSString*)repURL
+             andImageView:(UIImageView*)parentView;
+
++ (void)getContactImage:(MRContact*)contact andImageView:(UIImageView*)parentView;
++ (void)getGroupMemberImage:(MRGroupMembers*)member andImageView:(UIImageView*)parentView;
++ (UIImage*)getRepliedByProfileImage:(MRPostedReplies*)replies andImageView:(UIImageView*)parentView;
+
++ (void)getGroupImage:(MRGroup*)group andImageView:(UIImageView*)parentView;
++ (void)getNotificationImage:(NSString*)notificationId displayPicture:(NSString*)path
+                andImageView:(UIImageView*)parentView;
+
++ (NSString*)getFileName;
++ (KLCPopup*)setupCommentBox:(id)delegate;
+
++ (void)invokeInviteContact:(UIViewController*)viewController;
+
++ (void)registerForPushNotification;
 
 @end

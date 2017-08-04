@@ -17,12 +17,12 @@
 #import "MRConstants.h"
 #import "MRCommon.h"
 #import "MRAppControl.h"
+#import "MRNotifications.h"
 
 #define kImagesArray [NSArray arrayWithObjects:@"comapny-logo@2x.png",@"comapny-logo2@2x.png",@"", nil]
 
 @interface MRNotificationsViewController ()<UITableViewDataSource,UITableViewDelegate, SWRevealViewControllerDelegate>
 
-@property (weak, nonatomic) IBOutlet UIView *titleView;
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
 @property (weak, nonatomic) IBOutlet UIButton *favoritesButton;
 @property (weak, nonatomic) IBOutlet UIButton *readNotifications;
@@ -38,22 +38,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    SWRevealViewController *revealController = [self revealViewController];
-    revealController.delegate = self;
-    [revealController panGestureRecognizer];
-    [revealController tapGestureRecognizer];
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.navigationItem.title = @"Notifications";
     
-    
-    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon.png"]
-                                                                         style:UIBarButtonItemStylePlain target:revealController action:@selector(revealToggle:)];
-    
+    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonAction:)];
     self.navigationItem.leftBarButtonItem = revealButtonItem;
     
     UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navView];
     self.navigationItem.rightBarButtonItem = rightButtonItem;
+    
     [MRCommon showActivityIndicator:@"Loading..."];
     
     NSString *notificationsDate = ([MRDatabaseHelper getObjectDataExistance:kNotificationsEntity]) ?  [MRCommon stringFromDate:[MRDefaults objectForKey:kNotificationFetchedDate] withDateFormate:@"YYYYMMdd"] : @"20150101";
+    notificationsDate = @"20160101";
+    
+    self.notifications = nil;
+    
     [[MRWebserviceHelper sharedWebServiceHelper] getMyNotifications:notificationsDate withHandler:^(BOOL status, NSString *details, NSDictionary *responce)
      {
          if (status)
@@ -72,6 +72,7 @@
                  [MRCommon showAlert:@"No Notifications found." delegate:nil];
              }
              
+             [self resetNotificationsCounter];
              [self.notificationTableview reloadData];
             // NSLog(@"%@",self.notifications);
          }
@@ -83,6 +84,7 @@
                   [[MRWebserviceHelper sharedWebServiceHelper] getMyNotifications:[MRCommon stringFromDate:[NSDate date] withDateFormate:@"YYYYMMdd"] withHandler:^(BOOL status, NSString *details, NSDictionary *responce)
                    {
                        [MRCommon stopActivityIndicator];
+                       [self resetNotificationsCounter];
                        if (status)
                        {
                            [MRAppControl sharedHelper].notifications = [responce objectForKey:kResponce];
@@ -107,6 +109,7 @@
          else
          {
              [MRCommon stopActivityIndicator];
+             [self resetNotificationsCounter];
              [MRCommon showAlert:@"No New Notifications found." delegate:nil];
              if (nil == self.notifications)
                  self.notifications = [[NSMutableArray alloc] init];
@@ -117,6 +120,32 @@
     }];
 
     // Do any additional setup after loading the view from its nib.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MRCommon applyNavigationBarStyling:self.navigationController];
+}
+
+- (void)resetNotificationsCounter {
+    NSDictionary *dict = @{@"resetDoctorPlusCount":[NSNumber numberWithBool:false],
+                           @"resetNotificationCount":[NSNumber numberWithBool:true],
+                           @"resetSurveyCount": [NSNumber numberWithBool:false]};
+    [[MRWebserviceHelper sharedWebServiceHelper] getPendingCount:dict andHandler:^(BOOL status, NSString *details, NSDictionary *responce)
+     {
+         if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+         {
+             [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+              {
+                  [MRCommon savetokens:responce];
+                  [[MRWebserviceHelper sharedWebServiceHelper] getPendingCount:dict andHandler:^(BOOL status, NSString *details, NSDictionary *responce)
+                   {
+                       
+                   }];
+                  
+              }];
+         }
+     }];
 }
 
 - (void)getMutableNotifications:(NSArray*)notifictions
@@ -131,12 +160,15 @@
     [MRDatabaseHelper getNotifications:NO withFavourite:NO withNotificationsList:^(NSArray *fetchList)
     {
         [MRAppControl sharedHelper].notifications = fetchList;
-        for (NSDictionary *dict in fetchList)
+        
+        NSArray *uniqueCompanies = [fetchList valueForKeyPath:@"@distinctUnionOfObjects.companyId"];
+        
+        for (NSString *companyId in uniqueCompanies)
         {
-            NSArray *filteredArray          = [self.notifications filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"companyId == %@", [dict objectForKey:@"companyId"]]];
+            NSArray *filteredArray          = [fetchList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"companyId == %@", companyId]];
             
-            if (filteredArray && filteredArray.count == 0) {
-                [self.notifications addObject:[NSMutableDictionary dictionaryWithDictionary:dict]];
+            if (filteredArray && filteredArray.count > 0) {
+                [self.notifications addObject:filteredArray.firstObject];
             }
         }
     }];
@@ -215,9 +247,8 @@
         
     }
     
-    NSDictionary *dict                          = [self.notifications objectAtIndex:indexPath.row];
-    
-    NSDictionary *comapnyDetails                = [[MRAppControl sharedHelper] getCompanyDetailsByID:[[dict objectForKey:@"companyId"] intValue]];
+    MRNotifications *notification = [self.notifications objectAtIndex:indexPath.row];
+    NSDictionary *dict = [notification toDictionary];
     
     regCell.notificationLetter.hidden           = YES;
     
@@ -225,8 +256,15 @@
     
     regCell.indicationNewLabel.hidden           = ([[[dict objectForKey:@"status"] uppercaseString] isEqualToString:[@"New" uppercaseString]]) ? NO : YES;
     regCell.companyLabel.hidden             = NO;
-    regCell.companyLabel.text               = [comapnyDetails objectForKey:@"companyName"];
-    regCell.companyLogo.image               = [MRCommon getImageFromBase64Data:[[comapnyDetails objectForKey:@"displayPicture"] objectForKey:@"data"]];
+    regCell.companyLabel.text               = [dict objectForKey:@"companyName"];
+    id displayPicture = [dict objectForKey:@"dPicture"];
+    if (displayPicture != nil) {
+//        NSDictionary *comapnyDetails                = [[MRAppControl sharedHelper] getCompanyDetailsByID:[[dict objectForKey:@"companyId"] intValue]];
+        [MRAppControl getNotificationImage:[dict objectForKey:@"companyId"]
+                             displayPicture:displayPicture andImageView:regCell.companyLogo];
+    } else {
+        regCell.companyLogo.image = nil;
+    }
     
     return regCell;
 }
@@ -241,11 +279,11 @@
 - (NSInteger)getCompanyCount
 {
     NSMutableArray * array= [[NSMutableArray alloc] init];
-    for (NSDictionary *notification in self.notifications)
+    for (MRNotifications *notification in self.notifications)
     {
-        if (NO == [array containsObject:[notification objectForKey:@"companyId"]])
+        if (NO == [array containsObject:notification.companyId])
         {
-            [array addObject:[notification objectForKey:@"companyId"]];
+            [array addObject:notification.companyId];
         }
     }
     return array.count;

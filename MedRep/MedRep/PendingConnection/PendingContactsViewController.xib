@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="customFilterTableView" destination="coy-XS-M30" id="5rI-7m-T52"/>
                 <outlet property="customFilterView" destination="FzY-S0-K9K" id="na0-3n-OeA"/>
+                <outlet property="emptyMessageLabel" destination="NQK-sK-udZ" id="zAp-zA-Wn6"/>
                 <outlet property="heightConstraint" destination="vkw-9B-TLB" id="flb-bv-nc5"/>
                 <outlet property="navView" destination="X3B-0o-bWJ" id="5cv-ps-SX6"/>
                 <outlet property="pendingTableView" destination="FWL-it-OZ0" id="tmV-Mh-poX"/>
@@ -164,6 +165,12 @@
                         <action selector="backButtonTapped:" destination="-1" eventType="touchUpInside" id="1mn-bd-fzU"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="No pending connections are there !!!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NQK-sK-udZ">
+                    <rect key="frame" x="8" y="52" width="359" height="36"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -172,6 +179,7 @@
                 <constraint firstAttribute="trailing" secondItem="FWL-it-OZ0" secondAttribute="trailing" id="4Xc-h4-fGN"/>
                 <constraint firstItem="42n-VN-DnW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="5eQ-sW-D7N"/>
                 <constraint firstItem="FWL-it-OZ0" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="44" id="64k-e8-hxW"/>
+                <constraint firstAttribute="trailing" secondItem="NQK-sK-udZ" secondAttribute="trailing" constant="8" id="6DQ-En-kaW"/>
                 <constraint firstItem="6Sz-o9-MmJ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="BQL-rS-t8q"/>
                 <constraint firstAttribute="bottom" secondItem="FWL-it-OZ0" secondAttribute="bottom" id="BwQ-cS-YdA"/>
                 <constraint firstItem="6Sz-o9-MmJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Drg-fi-gGb"/>
@@ -184,11 +192,13 @@
                 <constraint firstItem="tgk-Rm-rLk" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="a7b-l7-fDZ"/>
                 <constraint firstItem="FWL-it-OZ0" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="amc-ej-URt"/>
                 <constraint firstAttribute="bottom" secondItem="FWL-it-OZ0" secondAttribute="bottom" constant="8" id="bU8-Zw-Tis"/>
+                <constraint firstItem="NQK-sK-udZ" firstAttribute="top" secondItem="42n-VN-DnW" secondAttribute="bottom" constant="8" id="bn4-o3-k4g"/>
                 <constraint firstItem="tgk-Rm-rLk" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="cyY-EL-9gF"/>
                 <constraint firstItem="42n-VN-DnW" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="dT3-xs-fa0"/>
                 <constraint firstAttribute="trailing" secondItem="tgk-Rm-rLk" secondAttribute="trailing" constant="8" id="lRi-pU-xQD"/>
                 <constraint firstItem="FWL-it-OZ0" firstAttribute="top" secondItem="42n-VN-DnW" secondAttribute="bottom" id="pkJ-oo-wcl"/>
                 <constraint firstItem="FzY-S0-K9K" firstAttribute="top" secondItem="tgk-Rm-rLk" secondAttribute="bottom" id="trH-jy-EwF"/>
+                <constraint firstItem="NQK-sK-udZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="uc4-Qe-bWn"/>
                 <constraint firstItem="FzY-S0-K9K" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="wUD-Ik-ABj"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -226,7 +236,7 @@
             <rect key="frame" x="0.0" y="0.0" width="40" height="33"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="Icon-40.png" translatesAutoresizingMaskIntoConstraints="NO" id="kR2-9a-zFf">
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="logo_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="kR2-9a-zFf">
                     <rect key="frame" x="0.0" y="0.0" width="40" height="33"/>
                 </imageView>
             </subviews>
@@ -239,7 +249,7 @@
     </objects>
     <resources>
         <image name="Contact.png" width="50" height="50"/>
-        <image name="Icon-40.png" width="40" height="40"/>
         <image name="Triangle 1" width="13" height="12"/>
+        <image name="logo_icon.png" width="35" height="33"/>
     </resources>
 </document>

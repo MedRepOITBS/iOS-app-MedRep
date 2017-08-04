@@ -7,13 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MRGroupObject.h"
 
-@class MRContact;
+@class MRContact, MRGroup;
 
 @interface MRContactCollectionCell : UICollectionViewCell
 
 - (void)setData:(MRContact*)contact;
-- (void)setGroupData:(MRGroupObject*)group;
+- (void)setGroupData:(MRGroup*)group;
 
 @end

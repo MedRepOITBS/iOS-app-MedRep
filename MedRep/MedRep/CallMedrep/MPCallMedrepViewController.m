@@ -87,8 +87,8 @@
     else
     {
         self.drugSubTitle.text = [self.notificationDetails objectForKey:@"notificationName"];
-        self.TherapeuticSubTitle.text = [self.selectedNotification objectForKey:@"therapeuticName"];
-        self.companySubTitle.text = [self.selectedNotification objectForKey:@"companyName"];
+        self.TherapeuticSubTitle.text = [self.notificationDetails objectForKey:@"therapeuticName"];
+        self.companySubTitle.text = [self.notificationDetails objectForKey:@"companyName"];
         NSArray *items = [[MRAppControl sharedHelper].userRegData objectForKey:KRegistarionStageTwo];
         NSDictionary *item = [items objectAtIndex:0];
          self.locationTextField.text = [NSString stringWithFormat:@"%@,%@,%@",[item objectForKey:KAddressOne],[item objectForKey:KAdresstwo],[item objectForKey:KCity]];
@@ -160,13 +160,14 @@
              [MRCommon showAlert:@"Select future time" delegate:nil];
              return;
     }
+    
     NSMutableDictionary *appointmentDetails = [[NSMutableDictionary alloc] init];
     
     if (!self.isFromReschedule)
     {
-        [appointmentDetails setObject:[self.selectedNotification objectForKey:@"notificationName"] forKey:@"notificationName"];
-        [appointmentDetails setObject:[self.selectedNotification objectForKey:@"notificationDesc"] forKey:@"notificationDesc"];
-        [appointmentDetails setObject:[self.selectedNotification objectForKey:@"notificationId"] forKey:@"notificationId"];
+        [appointmentDetails setObject:[self.notificationDetails objectForKey:@"notificationName"] forKey:@"notificationName"];
+        [appointmentDetails setObject:[self.notificationDetails objectForKey:@"notificationDesc"] forKey:@"notificationDesc"];
+        [appointmentDetails setObject:[self.notificationDetails objectForKey:@"notificationId"] forKey:@"notificationId"];
         [appointmentDetails setObject:[MRCommon stringFromDate:self.cellRepDatePicker.date withDateFormate:@"YYYYMMddHHmmss"] forKey:@"startDate"];
         
        // [MRCommon stringFromDate:self.cellRepDatePicker.date withDateFormate:@"YYYYMMddHHmmss"];
@@ -203,12 +204,15 @@
         [appointmentDetails setObject:duration forKey:@"duration"];
     }
     
+    NSString *activityIndicator = self.isFromReschedule ? @"Rescheduling..." : @"Scheduling...";
+    [MRCommon showActivityIndicator:activityIndicator];
     
     [[MRWebserviceHelper sharedWebServiceHelper] createNewAppointment:appointmentDetails
                                                          isFromUpdate:!self.isFromReschedule
                                                           withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
         if (status)
         {
+            [MRCommon stopActivityIndicator];
             [self showConformationAlert];
 
            // [self moveBackOnEventSync];
@@ -223,12 +227,29 @@
                                                                        withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
                      if (status)
                      {
+                         [MRCommon stopActivityIndicator];
                          [self showConformationAlert];
+                     } else if (status == NO) {
+                         [MRCommon stopActivityIndicator];
+                         [self showConflictMessage:responce];
                      }
                  }];
              }];
+        } else {
+            [MRCommon stopActivityIndicator];
+            if (status == NO) {
+                [self showConflictMessage:responce];
+            }
         }
     }];
+}
+
+- (void)showConflictMessage:(NSDictionary *)response {
+    NSString *error = [response objectOrNilForKey:@"status"];
+    if (error != nil && error.length > 0 &&
+        [error caseInsensitiveCompare:@"Error"] == NSOrderedSame) {
+        [MRCommon showAlert:[response objectOrNilForKey:@"message"] delegate:self];
+    }
 }
 
 - (void)showConformationAlert
@@ -273,7 +294,8 @@
 
 - (void)moveBackOnEventSync
 {
-    [MRCommon syncEventInCalenderAlongWithEventTitle:[self.selectedNotification objectForKey:@"notificationName"]
+    NSString *calendarEvent = [NSString stringWithFormat:@"%@ : %@", self.companySubTitle.text, self.drugSubTitle.text];
+    [MRCommon syncEventInCalenderAlongWithEventTitle:calendarEvent
                                      withDescription:[self.selectedNotification objectForKey:@"location"]
                                         withDuration:[[self.selectedNotification objectForKey:@"duration"] integerValue]
                                            eventDate:self.cellRepDatePicker.date

@@ -9,10 +9,10 @@
 #import "PendingContactsViewController.h"
 #import "PendingContactCustomFilterTableViewCell.h"
 #import "PendingContactTableViewCell.h"
-#import "MRCommon.h"
-#import "MRWebserviceHelper.h"
-#import "MRGroupUserObject.h"
-#import "MRGroupObject.h"
+#import "MRConstants.h"
+#import "MRContact.h"
+#import "MRGroup.h"
+#import "MRContactsViewController.h"
 
 @interface PendingContactsViewController () <MRPendingMemberProtocol> {
     NSMutableArray *fileredContacts;
@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *pendingTableView;
 @property (nonatomic,strong) NSMutableArray *pendingContactListArra;
 @property (strong, nonatomic) IBOutlet UIView *navView;
+@property (weak, nonatomic) IBOutlet UILabel *emptyMessageLabel;
 
 @end
 
@@ -44,15 +45,47 @@
 
 -(void) acceptAction:(NSInteger)index{
     if (_gid > 0) {
-        MRGroupUserObject *user = _pendingContactListArra[index];
-        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:_gid,@"group_id", [NSString stringWithFormat:@"%@",user.userId],@"member_id",@"ACTIVE",@"status", nil];
+        MRContact *user = _pendingContactListArra[index];
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:_gid,@"group_id", [NSString stringWithFormat:@"%ld",user.doctorId.longValue],@"member_id",@"ACTIVE",@"status", nil];
         
         [MRCommon showActivityIndicator:@"Requesting..."];
         [[MRWebserviceHelper sharedWebServiceHelper] updateGroupMembersStatus:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
             [MRCommon stopActivityIndicator];
             if (status)
             {
-                [self.navigationController popViewControllerAnimated:YES];
+                for (UIViewController *vc in self.parentViewController.childViewControllers) {
+                    if ([vc isKindOfClass:[MRContactsViewController class]]) {
+                        [self.navigationController popToViewController:vc animated:YES];
+                    }
+                }
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
+                                                                    object:nil];
+            }
+            else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+            {
+                [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+                 {
+                     [MRCommon savetokens:responce];
+                     [[MRWebserviceHelper sharedWebServiceHelper] updateGroupMembersStatus:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                         [MRCommon stopActivityIndicator];
+                         if (status)
+                         {
+                             for (UIViewController *vc in self.parentViewController.childViewControllers) {
+                                 if ([vc isKindOfClass:[MRContactsViewController class]]) {
+                                     [self.navigationController popToViewController:vc animated:YES];
+                                 }
+                             }
+                             
+                             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
+                                                                                 object:nil];
+                         }else
+                         {
+                             NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                             if (erros.count > 0)
+                                 [MRCommon showAlert:[erros lastObject] delegate:nil];
+                         }
+                     }];
+                 }];
             }
             else
             {
@@ -62,15 +95,48 @@
             }
         }];
     }else{
-        MRGroupUserObject *user = _pendingContactListArra[index];
-        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",user.userId],@"member_id",@"ACTIVE",@"status", nil];
+        MRContact *user = _pendingContactListArra[index];
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@[[NSString stringWithFormat:@"%ld",user.doctorId.longValue]],@"connList",@"ACTIVE",@"status", nil];
         
         [MRCommon showActivityIndicator:@"Requesting..."];
         [[MRWebserviceHelper sharedWebServiceHelper] updateConnectionStatus:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
             [MRCommon stopActivityIndicator];
             if (status)
             {
-                [self.navigationController popViewControllerAnimated:YES];
+                for (UIViewController *vc in self.parentViewController.childViewControllers) {
+                    if ([vc isKindOfClass:[MRContactsViewController class]]) {
+                        [self.navigationController popToViewController:vc animated:YES];
+                    }
+                }
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
+                                                                    object:nil];
+            }
+            else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+            {
+                [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+                 {
+                     [MRCommon savetokens:responce];
+                     [[MRWebserviceHelper sharedWebServiceHelper] updateConnectionStatus:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                         [MRCommon stopActivityIndicator];
+                         if (status)
+                         {
+                             for (UIViewController *vc in self.parentViewController.childViewControllers) {
+                                 if ([vc isKindOfClass:[MRContactsViewController class]]) {
+                                     [self.navigationController popToViewController:vc animated:YES];
+                                 }
+                             }
+                             
+                             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
+                                                                                 object:nil];
+                         }else
+                         {
+                             NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                             if (erros.count > 0)
+                                 [MRCommon showAlert:[erros lastObject] delegate:nil];
+                         }
+                     }];
+                 }];
             }
             else
             {
@@ -84,15 +150,48 @@
 
 -(void) rejectAction:(NSInteger)index{
     if (_gid > 0) {
-        MRGroupUserObject *user = _pendingContactListArra[index];
-        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:_gid,@"group_id",@[[NSString stringWithFormat:@"%@",user.userId]],@"memberList", nil];
+        MRContact *user = _pendingContactListArra[index];
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:_gid,@"group_id",@[[NSString stringWithFormat:@"%ld",user.doctorId.longValue]],@"memberList", nil];
         
         [MRCommon showActivityIndicator:@"Requesting..."];
         [[MRWebserviceHelper sharedWebServiceHelper] removeGroupMember:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
             [MRCommon stopActivityIndicator];
             if (status)
             {
-                [self.navigationController popViewControllerAnimated:YES];
+                for (UIViewController *vc in self.parentViewController.childViewControllers) {
+                    if ([vc isKindOfClass:[MRContactsViewController class]]) {
+                        [self.navigationController popToViewController:vc animated:YES];
+                    }
+                }
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
+                                                                    object:nil];
+            }
+            else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+            {
+                [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+                 {
+                     [MRCommon savetokens:responce];
+                     [[MRWebserviceHelper sharedWebServiceHelper] removeGroupMember:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                         [MRCommon stopActivityIndicator];
+                         if (status)
+                         {
+                             for (UIViewController *vc in self.parentViewController.childViewControllers) {
+                                 if ([vc isKindOfClass:[MRContactsViewController class]]) {
+                                     [self.navigationController popToViewController:vc animated:YES];
+                                 }
+                             }
+                             
+                             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
+                                                                                 object:nil];
+                         }else
+                         {
+                             NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                             if (erros.count > 0)
+                                 [MRCommon showAlert:[erros lastObject] delegate:nil];
+                         }
+                     }];
+                 }];
             }
             else
             {
@@ -102,15 +201,48 @@
             }
         }];
     }else{
-        MRGroupUserObject *user = _pendingContactListArra[index];
-        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@[[NSString stringWithFormat:@"%@",user.userId]],@"memberList", nil];
+        MRContact *user = _pendingContactListArra[index];
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@[[NSString stringWithFormat:@"%ld",user.doctorId.longValue]],@"connList",@"REJECT",@"status", nil];
         
         [MRCommon showActivityIndicator:@"Requesting..."];
         [[MRWebserviceHelper sharedWebServiceHelper] removeConnection:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
             [MRCommon stopActivityIndicator];
             if (status)
             {
-                [self.navigationController popViewControllerAnimated:YES];
+                for (UIViewController *vc in self.parentViewController.childViewControllers) {
+                    if ([vc isKindOfClass:[MRContactsViewController class]]) {
+                        [self.navigationController popToViewController:vc animated:YES];
+                    }
+                }
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
+                                                                    object:nil];
+            }
+            else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+            {
+                [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+                 {
+                     [MRCommon savetokens:responce];
+                     [[MRWebserviceHelper sharedWebServiceHelper] removeConnection:dict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                         [MRCommon stopActivityIndicator];
+                         if (status)
+                         {
+                             for (UIViewController *vc in self.parentViewController.childViewControllers) {
+                                 if ([vc isKindOfClass:[MRContactsViewController class]]) {
+                                     [self.navigationController popToViewController:vc animated:YES];
+                                 }
+                             }
+                             
+                             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRefreshContactList
+                                                                                 object:nil];
+                         }else
+                         {
+                             NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                             if (erros.count > 0)
+                                 [MRCommon showAlert:[erros lastObject] delegate:nil];
+                         }
+                     }];
+                 }];
             }
             else
             {
@@ -169,7 +301,7 @@
     // Do any additional setup after loading the view from its nib.
     
     self.navigationItem.title = @"Pending Connections";
-    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
+    //[self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
     
     UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonAction)];
     self.navigationItem.leftBarButtonItem = revealButtonItem;
@@ -181,9 +313,11 @@
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [self refreshLabels];
+    
     if (_isFromGroup) {
         [self getPendingGroups];
-        self.navigationItem.title = @"Pending Groups";
+        self.navigationItem.title = @"Waiting for Approval";
     }else if (_isFromMember) {
         [self getPendingMembers];
         self.navigationItem.title = @"Pending Members";
@@ -198,78 +332,51 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)refreshLabels {
+    
+    if (fileredContacts == nil || fileredContacts.count == 0) {
+        [self.emptyMessageLabel setHidden:false];
+        [self.pendingTableView setHidden:true];
+        
+        NSString *key = kNoPendingContacts;
+        
+        if (_isFromGroup) {
+            key = kNoPendingGroups;
+        } else if (_isFromMember) {
+            key = kNoPendingGroupMembers;
+        }
+        
+        [self.emptyMessageLabel setText:NSLocalizedString(key, "")];
+    } else {
+        [self.emptyMessageLabel setHidden:true];
+        [self.pendingTableView setHidden:false];
+        
+        [self.pendingTableView reloadData];
+    }
+}
+
 -(void)getPendingConnections {
-    [MRCommon showActivityIndicator:@"Requesting..."];
-    [[MRWebserviceHelper sharedWebServiceHelper] fetchPendingConnectionsListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-        [MRCommon stopActivityIndicator];
-        if (status)
-        {
-            fileredContacts = [NSMutableArray array];
-            _pendingContactListArra = [NSMutableArray array];
-            NSArray *responseArray = responce[@"Responce"];
-            for (NSDictionary *dic in responseArray) {
-                MRGroupUserObject *groupObj = [[MRGroupUserObject alloc] initWithDict:dic];
-                [_pendingContactListArra addObject:groupObj];
-            }
-            fileredContacts = _pendingContactListArra;
-            [_pendingTableView reloadData];
-        }
-        else
-        {
-            NSArray *erros =  [details componentsSeparatedByString:@"-"];
-            if (erros.count > 0)
-                [MRCommon showAlert:[erros lastObject] delegate:nil];
-        }
+    [MRDatabaseHelper getPendingContacts:^(id result) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K like [cd]%@", @"connStatus", @"PENDING"];
+        fileredContacts = [[[MRDataManger sharedManager] fetchObjectList:kContactEntity predicate:predicate] mutableCopy];
+        _pendingContactListArra = fileredContacts;
+        [self refreshLabels];
     }];
 }
 
 -(void)getPendingMembers {
-    [MRCommon showActivityIndicator:@"Requesting..."];
-    [[MRWebserviceHelper sharedWebServiceHelper] fetchPendingMembersListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-        [MRCommon stopActivityIndicator];
-        if (status)
-        {
-            fileredContacts = [NSMutableArray array];
-            _pendingContactListArra = [NSMutableArray array];
-            NSArray *responseArray = responce[@"Responce"];
-            for (NSDictionary *dic in responseArray) {
-                MRGroupUserObject *groupObj = [[MRGroupUserObject alloc] initWithDict:dic];
-                [_pendingContactListArra addObject:groupObj];
-            }
-            fileredContacts = _pendingContactListArra;
-            [_pendingTableView reloadData];
-        }
-        else
-        {
-            NSArray *erros =  [details componentsSeparatedByString:@"-"];
-            if (erros.count > 0)
-                [MRCommon showAlert:[erros lastObject] delegate:nil];
-        }
+    [MRDatabaseHelper getPendingGroupMembers:_gid andResponseHandler:^(id result) {
+        fileredContacts = result;
+        _pendingContactListArra = result;
+        [self refreshLabels];
     }];
 }
 
 -(void)getPendingGroups {
-    [MRCommon showActivityIndicator:@"Requesting..."];
-    [[MRWebserviceHelper sharedWebServiceHelper] fetchPendingGroupsListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
-        [MRCommon stopActivityIndicator];
-        if (status)
-        {
-            fileredContacts = [NSMutableArray array];
-            _pendingContactListArra = [NSMutableArray array];
-            NSArray *responseArray = responce[@"Responce"];
-            for (NSDictionary *dic in responseArray) {
-                MRGroupObject *groupObj = [[MRGroupObject alloc] initWithDict:dic];
-                [_pendingContactListArra addObject:groupObj];
-            }
-            fileredContacts = _pendingContactListArra;
-            [_pendingTableView reloadData];
-        }
-        else
-        {
-            NSArray *erros =  [details componentsSeparatedByString:@"-"];
-            if (erros.count > 0)
-                [MRCommon showAlert:[erros lastObject] delegate:nil];
-        }
+    [MRDatabaseHelper getPendingGroups:^(id result) {
+        fileredContacts = result;
+        _pendingContactListArra = result;
+        [self refreshLabels];
     }];
 }
 
@@ -315,86 +422,34 @@
         }
         
         cell.cellDelegate = self;
-        cell.acceptBtn.tag = indexPath.row;
-        cell.rejectBtn.tag = indexPath.row;
+        cell.tag = indexPath.row;
         
         if (_isFromGroup) {
-            MRGroupObject *contact = [fileredContacts objectAtIndex:indexPath.row];
-            for (UIView *view in cell.profilePic.subviews) {
-                if ([view isKindOfClass:[UILabel class]]) {
-                    [view removeFromSuperview];
-                }
+            MRGroup *group = [fileredContacts objectAtIndex:indexPath.row];
+            NSString *groupName = @"";
+            if (group.group_name != nil) {
+                groupName = group.group_name;
             }
+            cell.userName.text = groupName;
             
-            NSString *fullName = [NSString stringWithFormat:@"%@",contact.group_name];
-            cell.userName.text = fullName;
-            cell.phoneNo.text = contact.group_short_desc;
-            if (contact.group_img_data.length) {
-                cell.profilePic.image = [MRCommon getImageFromBase64Data:[contact.group_img_data dataUsingEncoding:NSUTF8StringEncoding]];
-            } else {
-                cell.profilePic.image = nil;
-                if (fullName.length > 0) {
-                    UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:cell.profilePic.bounds];
-                    subscriptionTitleLabel.textAlignment = NSTextAlignmentCenter;
-                    subscriptionTitleLabel.font = [UIFont systemFontOfSize:15.0];
-                    subscriptionTitleLabel.textColor = [UIColor lightGrayColor];
-                    subscriptionTitleLabel.layer.cornerRadius = 5.0;
-                    subscriptionTitleLabel.layer.masksToBounds = YES;
-                    subscriptionTitleLabel.layer.borderWidth =1.0;
-                    subscriptionTitleLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
-                    
-                    NSArray *substrngs = [fullName componentsSeparatedByString:@" "];
-                    NSString *imageString = @"";
-                    for(NSString *str in substrngs){
-                        if (str.length > 0) {
-                            imageString = [imageString stringByAppendingString:[NSString stringWithFormat:@"%c",[str characterAtIndex:0]]];
-                        }
-                    }
-                    subscriptionTitleLabel.text = imageString.length > 2 ? [imageString substringToIndex:2] : imageString;
-                    [cell.profilePic addSubview:subscriptionTitleLabel];
-                }
-            }
-            
-            cell.acceptBtn.hidden = YES;
-            cell.rejectBtn.hidden = YES;
+            cell.phoneNo.text = @"";
+            [cell.profilePic setImage:nil];
+            [MRAppControl getGroupImage:group andImageView:cell.profilePic];
+            cell.acceptConnectionView.hidden = YES;
+            cell.rejectConnectionView.hidden = YES;
             
             return cell;
         }
-        MRGroupUserObject *contact = [fileredContacts objectAtIndex:indexPath.row];
-        for (UIView *view in cell.profilePic.subviews) {
-            if ([view isKindOfClass:[UILabel class]]) {
-                [view removeFromSuperview];
-            }
+        
+        if (!_canEdit && _isFromMember) {
+            cell.acceptConnectionView.hidden = YES;
+            cell.rejectConnectionView.hidden = YES;
         }
         
-        NSString *fullName = [NSString stringWithFormat:@"%@ %@",contact.firstName, contact.lastName];
-        cell.userName.text = fullName;
+        MRContact *contact = [fileredContacts objectAtIndex:indexPath.row];
+        cell.userName.text = [MRAppControl getContactName:contact];
         cell.phoneNo.text = contact.therapeuticArea;
-        if (contact.imgData.length) {
-            cell.profilePic.image = [MRCommon getImageFromBase64Data:[contact.imgData dataUsingEncoding:NSUTF8StringEncoding]];
-        } else {
-            cell.profilePic.image = nil;
-            if (fullName.length > 0) {
-                UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:cell.profilePic.bounds];
-                subscriptionTitleLabel.textAlignment = NSTextAlignmentCenter;
-                subscriptionTitleLabel.font = [UIFont systemFontOfSize:15.0];
-                subscriptionTitleLabel.textColor = [UIColor lightGrayColor];
-                subscriptionTitleLabel.layer.cornerRadius = 5.0;
-                subscriptionTitleLabel.layer.masksToBounds = YES;
-                subscriptionTitleLabel.layer.borderWidth =1.0;
-                subscriptionTitleLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
-                
-                NSArray *substrngs = [fullName componentsSeparatedByString:@" "];
-                NSString *imageString = @"";
-                for(NSString *str in substrngs){
-                    if (str.length > 0) {
-                        imageString = [imageString stringByAppendingString:[NSString stringWithFormat:@"%c",[str characterAtIndex:0]]];
-                    }
-                }
-                subscriptionTitleLabel.text = imageString.length > 2 ? [imageString substringToIndex:2] : imageString;
-                [cell.profilePic addSubview:subscriptionTitleLabel];
-            }
-        }
+        [MRAppControl getContactImage:contact andImageView:cell.profilePic];
         
         return cell;
     }
@@ -445,7 +500,11 @@
     if (searchText.length == 0) {
         fileredContacts = _pendingContactListArra;
     } else {
-        fileredContacts = [[_pendingContactListArra filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K contains[cd] %@",@"firstName",searchText]] mutableCopy];
+        if (_isFromGroup) {
+            fileredContacts = [[_pendingContactListArra filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K contains[cd] %@", @"group_name", searchText]] mutableCopy];
+        } else {
+            fileredContacts = [[_pendingContactListArra filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(%K contains[cd] %@) OR (%K contains[cd] %@)",@"firstName",searchText,@"lastName",searchText]] mutableCopy];
+        }
     }
     [_pendingTableView reloadData];
 }

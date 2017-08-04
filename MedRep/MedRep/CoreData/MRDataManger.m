@@ -180,6 +180,10 @@ static MRDataManger *sharedDataManager = nil;
     [self dbSaveInContext:[self getNewPrivateManagedObjectContext]];
 }
 
+- (void)dbSaveOnPrivateContext:(NSManagedObjectContext*)context
+{
+    [self dbSaveInContext:context];
+}
 
 - (NSManagedObject *)createObjectForEntity:(NSString *)entity
 {
@@ -192,6 +196,11 @@ static MRDataManger *sharedDataManager = nil;
 }
 
 - (NSArray *)fetchObjectList:(NSString *)entity
+{
+    return [self fetchObjectList:entity inContext:self.managedObjectContext];
+}
+
+- (NSArray *)fetchObjectList:(NSString *)entity sortBy:(NSString*)column andSortOrder:(BOOL)sortOrder
 {
     return [self fetchObjectList:entity inContext:self.managedObjectContext];
 }
@@ -241,9 +250,9 @@ static MRDataManger *sharedDataManager = nil;
     [self removeObject:managedObject inContext:self.managedObjectContext];
 }
 
-- (void)removeAllObjects:(NSString *)entity
+- (void)removeAllObjects:(NSString *)entity withPredicate:(NSPredicate*)predicate
 {
-    [self removeAllObjects:entity inContext:self.managedObjectContext];
+    [self removeAllObjects:entity inContext:self.managedObjectContext andPredicate:predicate];
 }
 
 - (NSInteger)countOfObjects:(NSString *)entity
@@ -290,7 +299,7 @@ static MRDataManger *sharedDataManager = nil;
         [context save:&error];
         
         // Save the changes on the main context
-        [context.parentContext performBlock:^{
+        [context.parentContext performBlockAndWait:^{
             NSError *parentError = nil;
             [context.parentContext save:&parentError];
         }];
@@ -303,13 +312,58 @@ static MRDataManger *sharedDataManager = nil;
     return [NSEntityDescription insertNewObjectForEntityForName:entity inManagedObjectContext:context];
 }
 
-- (NSArray *)fetchObjectList:(NSString *)entity inContext:(NSManagedObjectContext *)context{
-    
+- (NSArray *)fetchUniqueObjectListAsDictionary:(NSString *)entity sortColumn:(NSString*)sortColumn {
+    NSManagedObjectContext *context = self.managedObjectContext;
     [self assertConditionForContext:context];
     
     NSEntityDescription *entityDescription = [NSEntityDescription entityForName:entity inManagedObjectContext:context];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:entityDescription];
+    [fetchRequest setReturnsDistinctResults:YES];
+    [fetchRequest setResultType:NSDictionaryResultType];
+    
+    if (sortColumn != nil && sortColumn.length > 0) {
+        [fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:sortColumn
+                                                                     ascending:YES]]];
+    }
+    
+    __block NSArray *result = nil;
+    
+    [context performBlockAndWait:^{
+        
+        NSError *error = nil;
+        result = [context executeFetchRequest:fetchRequest error:&error];
+        if (nil != error)
+        {
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        }
+    }];
+    
+    return (0 == result.count) ? nil : result;
+}
+
+- (NSArray *)fetchObjectList:(NSString *)entity inContext:(NSManagedObjectContext *)context{
+    return [self performFetch:entity inContext:context sortColumn:nil andSortOrder:false];
+}
+
+- (NSArray *)fetchObjectList:(NSString *)entity inContext:(NSManagedObjectContext *)context
+                  sortColumn:(NSString*)column andSortOrder:(BOOL)sortOrder {
+    return [self performFetch:entity inContext:context sortColumn:column andSortOrder:false];
+}
+
+- (NSArray*)performFetch:(NSString*)entity inContext:(NSManagedObjectContext*)context
+              sortColumn:(NSString*)column andSortOrder:(BOOL)sortOrder
+{
+    [self assertConditionForContext:context];
+    
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:entity inManagedObjectContext:context];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:entityDescription];
+    
+    if (column != nil && column.length > 0) {
+        NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:column ascending:sortOrder];
+        [fetchRequest setSortDescriptors:@[sort]];
+    }
     
     __block NSArray *result = nil;
     
@@ -509,7 +563,8 @@ static MRDataManger *sharedDataManager = nil;
     }];
 }
 
-- (void)removeAllObjects:(NSString *)entity inContext:(NSManagedObjectContext *)context{
+- (void)removeAllObjects:(NSString *)entity inContext:(NSManagedObjectContext *)context
+            andPredicate:(NSPredicate*)predicate {
     
     [self assertConditionForContext:context];
     
@@ -518,6 +573,10 @@ static MRDataManger *sharedDataManager = nil;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:entityDescription];
     [fetchRequest setIncludesPropertyValues:NO];
+    
+    if (predicate != nil) {
+        [fetchRequest setPredicate:predicate];
+    }
     
     __block NSArray *result = nil;
     

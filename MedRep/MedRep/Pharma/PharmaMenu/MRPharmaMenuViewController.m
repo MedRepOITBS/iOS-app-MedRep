@@ -19,9 +19,9 @@
 #import "MRMedRepViewController.h"
 #import "MRDocotrActivityScoreViewController.h"
 #import "MRNewProductCompaignsViewController.h"
-#import "MRProfileDetailsViewController.h"
+#import "MRPHProfileDetailsViewController.h"
 
-#define kMenuList [NSArray arrayWithObjects:@"My Profile", @"Dashboard", @"Product Campaigns", @"Doctor Activity Score", @"Surveys", @"MedRep", @"Other Marketing Campaigns", @"Drug Sales", @"Prescription Activites", @"News & Updates", @"Settings & Preferences", @"Logout", nil]
+#define kMenuList [NSArray arrayWithObjects:@"My Profile", @"Dashboard", @"Product Campaigns", @" Activities", @"Surveys", @"MedRep", @"Other Marketing Campaigns", @"Drug Sales", @"Prescription Activites", @"News & Updates", @"Settings & Preferences", @"Logout", nil]
 
 #define kMenuListImages [NSArray arrayWithObjects:@"dashboard_menu@2x.png", @"PHproductcampaigns@2x.png", @"activity-score@2x.png", @"surveys@2x.png", @"PHmedrep@2x.png", @"marketing@2x.png", @"PHdrugsales@2x.png", @"PHprescription@2x.png", @"news@2x.png", @"setting@2x.png", @"logout@2x.png", nil]
 
@@ -109,7 +109,31 @@
     {
         if ([self.userData objectForKey:KProfilePicture])
         {
-            regCell.cellIcon.image = (indexPath.row > 0) ? [UIImage imageNamed:[kMenuListImages objectAtIndex:indexPath.row -1]] : [MRCommon getImageFromBase64Data:[self.userData objectForKey:KProfilePicture]];
+            
+            id imageData = [self.userData objectForKey:KProfilePicture];
+            if ([imageData isKindOfClass:[NSData class]]) {
+                UIImage *image = [UIImage imageWithData:imageData];
+                regCell.cellIcon.image = image;
+            } else {
+            
+                NSURL * imageURL = [NSURL URLWithString:[self.userData objectForKey:KProfilePicture]];
+                
+                
+                
+                if (indexPath.row>0) {
+                    regCell.cellIcon.image = [UIImage imageNamed:[kMenuListImages objectAtIndex:indexPath.row -1]];
+                }else {
+                    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+                    dispatch_async(queue, ^{
+                        NSData *data = [NSData dataWithContentsOfURL:imageURL];
+                        UIImage *image = [UIImage imageWithData:data];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            regCell.cellIcon.image = image;
+                        });
+                    });
+                }
+            }
+        
         }
         else
         {
@@ -144,7 +168,7 @@
         {
             if (![frontNavigationController.topViewController isKindOfClass:[MRRegistationViewController class]])
             {                
-                MRProfileDetailsViewController *profViewController = [[MRProfileDetailsViewController alloc] initWithNibName:@"MRProfileDetailsViewController" bundle:nil];
+                MRPHProfileDetailsViewController *profViewController = [[MRPHProfileDetailsViewController alloc] initWithNibName:@"MRPHProfileDetailsViewController" bundle:nil];
                 profViewController.isFromSinUp = NO;
                 
                 UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:profViewController];

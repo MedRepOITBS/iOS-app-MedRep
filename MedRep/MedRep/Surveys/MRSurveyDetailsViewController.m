@@ -14,7 +14,6 @@
 
 @interface MRSurveyDetailsViewController ()<UIWebViewDelegate, SWRevealViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *surveyWebView;
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
 @property (strong, nonatomic) IBOutlet UIView *navView;
 
@@ -23,17 +22,10 @@
 @implementation MRSurveyDetailsViewController
 - (void)getMenuNavigationButtonWithController:(SWRevealViewController *)revealViewCont NavigationItem:(UINavigationItem *)navigationItem1
 {
-    SWRevealViewController *revealController = revealViewCont;
-    revealController.delegate = self;
-    //[NSArray arrayWithObjects:@"pcselect@2x.png",@"pcfedback@2x.png",@"pcplus@2x.png",nil];
-    [revealController panGestureRecognizer];
-    [revealController tapGestureRecognizer];
+    self.navigationItem.title = @"Survey Details";
     
-    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon.png"]
-                                                                         style:UIBarButtonItemStylePlain target:revealController action:@selector(revealToggle:)];
-    
-    revealButtonItem.tintColor = [UIColor blackColor];
-    navigationItem1.leftBarButtonItem = revealButtonItem;
+    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backButton:)];
+    self.navigationItem.leftBarButtonItem = revealButtonItem;
     
     UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navView];
     self.navigationItem.rightBarButtonItem = rightButtonItem;
@@ -53,7 +45,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.titleLabel.text = self.surveyName;
+    self.navigationItem.title = self.surveyName;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

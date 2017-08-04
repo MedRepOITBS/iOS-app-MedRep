@@ -2,7 +2,7 @@
 //  MRGroupPost+CoreDataProperties.h
 //  MedRep
 //
-//  Created by Namit Nayak on 6/11/16.
+//  Created by Vamsi Katragadda on 7/6/16.
 //  Copyright © 2016 MedRep. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -15,12 +15,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MRGroupPost (CoreDataProperties)
 
-@property (nonatomic) int64_t numberOfLikes;
-@property (nonatomic) int64_t numberOfComments;
-@property (nonatomic) int64_t numberOfShares;
-@property (nonatomic) int64_t groupPostId;
+@property (nullable, nonatomic, retain) NSNumber *groupPostId;
+@property (nullable, nonatomic, retain) NSNumber *numberOfComments;
+@property (nullable, nonatomic, retain) NSNumber *numberOfLikes;
+@property (nullable, nonatomic, retain) NSNumber *numberOfShares;
 @property (nullable, nonatomic, retain) NSString *postPic;
 @property (nullable, nonatomic, retain) NSString *postText;
+@property (nullable, nonatomic, retain) NSDate *postedOn;
 @property (nullable, nonatomic, retain) MRContact *contact;
 @property (nullable, nonatomic, retain) MRGroup *group;
 @property (nullable, nonatomic, retain) NSOrderedSet<MrGroupChildPost *> *replyPost;

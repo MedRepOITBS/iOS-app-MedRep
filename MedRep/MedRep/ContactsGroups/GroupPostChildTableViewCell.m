@@ -7,17 +7,140 @@
 //
 
 #import "GroupPostChildTableViewCell.h"
+#import "MRConstants.h"
+#import "MRDataManger.h"
+#import "MRAppControl.h"
+#import "NSDate+Utilities.h"
+#import "MRPostedReplies.h"
+#import "MRSharePost.h"
+#import "MRProfileDetailsViewController.h"
+
+@interface GroupPostChildTableViewCell ()
+
+@property (nonatomic) MRPostedReplies *post;
+
+@property (nonatomic) UIViewController *parentViewController;
+
+@property (weak, nonatomic) IBOutlet UIImageView *commentPic;
+@property (weak, nonatomic) IBOutlet UILabel *postText;
+@property (weak,nonatomic) IBOutlet UILabel *profileNameLabel;
+@property (strong,nonatomic) IBOutlet NSLayoutConstraint *heightConstraint;
+@property (weak, nonatomic) IBOutlet UIImageView *profilePic;
+@property (weak, nonatomic) IBOutlet UILabel *postedDate;
+@property (strong,nonatomic) IBOutlet NSLayoutConstraint *verticalContstraint;
+
+@end
 
 @implementation GroupPostChildTableViewCell
 
 - (void)awakeFromNib {
     // Initialization code
+    [super awakeFromNib];   
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)fillCellWithData:(MRPostedReplies*)post
+ andParentViewController:(UIViewController *)parentViewController {
+    
+    self.parentViewController = parentViewController;
+    self.post = post;
+    
+    MRSharePost *sharePost = nil;
+    if (post.parentSharePostId != nil) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"sharePostId", post.parentSharePostId.longValue];
+        sharePost = [[MRDataManger sharedManager] fetchObject:kMRSharePost predicate:predicate];
+    }
+    
+    if (post.fileUrl == nil || post.fileUrl.length == 0) {
+        if (sharePost != nil && sharePost.objectData != nil) {
+            self.heightConstraint.constant = 146;
+            self.commentPic.image = [UIImage imageWithData:sharePost.objectData];
+        } else {
+            self.heightConstraint.constant = 0;
+        }
+    } else {
+        self.heightConstraint.constant = 146;
+        
+        UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        // If you need custom color, use color property
+        // activityIndicator.color = yourDesirableColor;
+        [self.commentPic addSubview:activityIndicator];
+        [activityIndicator startAnimating];
+        
+        self.commentPic.image = nil;
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            
+            NSString *key = [NSString stringWithFormat:@"%@_fileUrl", post.topic_id];
+            [[MRAppControl sharedHelper].globalCache objectForKey:key];
+            
+            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:post.fileUrl]];
+            if (imageData != nil) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.commentPic.image = [UIImage imageWithData:imageData];
+                    [activityIndicator stopAnimating];
+                    [activityIndicator removeFromSuperview];
+                });
+            }
+        });
+    }
+    
+    NSString *postText = @"";
+    if (post.message != nil && post.message.length > 0) {
+        postText = post.message;
+    } else {
+        if (postText == nil || postText.length == 0) {
+            if (sharePost != nil && sharePost.titleDescription != nil) {
+                postText = sharePost.titleDescription;
+            }
+        }
+    }
+    
+    self.postText.text = postText;
+    [self.postText sizeToFit];
+    
+    NSString *postedBy = @"";
+    if (post.doctor_Name != nil && post.doctor_Name.length > 0) {
+        postedBy = post.doctor_Name;
+    }
+    self.profileNameLabel.text = postedBy;
+    
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                 action:@selector(authorImageSelected)];
+    [recognizer setNumberOfTapsRequired:1];
+    [self.profilePic addGestureRecognizer:recognizer];
+    [MRAppControl getRepliedByProfileImage:post andImageView:self.profilePic];
+    
+    
+    NSString *tempDate = @"";
+    if (post.postedOn != nil) {
+        tempDate = [NSString stringWithFormat:@"%@",[post.postedOn stringWithFormat:kIdletimeFormat]];
+    }
+    
+    self.postedDate.text = tempDate;
+}
+
+- (void)authorImageSelected {
+    if (self.parentViewController != nil) {
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"ProfileStoryboard" bundle:nil];
+        MRProfileDetailsViewController *profViewController = [sb instantiateInitialViewController];
+        if (self.post.member_id != nil && self.post.member_id.longValue > 0) {
+            profViewController.doctorId = self.post.member_id.longValue;
+        } else if (self.post.doctor_id != nil && self.post.doctor_id.longValue > 0) {
+            profViewController.doctorId = self.post.doctor_id.longValue;
+        } else if (self.post.contactId != nil && self.post.contactId.longValue > 0) {
+            profViewController.doctorId = self.post.contactId.longValue;
+        }
+        
+        profViewController.isFromSinUp = NO;
+        [profViewController setShowAsReadable:YES];
+        [self.parentViewController.navigationController pushViewController:profViewController animated:YES];
+    }
 }
 
 @end

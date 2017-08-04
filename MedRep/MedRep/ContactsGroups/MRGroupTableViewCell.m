@@ -10,6 +10,7 @@
 #import "MRGroup.h"
 #import "MRContactWithinGroupCollectionCellCollectionViewCell.h"
 #import "MRCommon.h"
+#import "MRAppControl.h"
 
 @interface MRGroupTableViewCell()
 
@@ -37,16 +38,16 @@
 
 - (void)setGroup:(MRGroup*)group {
     [self.collectionView registerNib:[UINib nibWithNibName:@"MRContactWithinGroupCollectionCellCollectionViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"contactWithinGroupCell"];
-    self.groupImageView.image = [UIImage imageNamed:group.groupPicture];
-    self.nameLabel.text = group.name;
+    [MRAppControl getGroupImage:group andImageView:self.groupImageView];
+    self.nameLabel.text = group.group_name;
     self.groupObject = group;
-    self.contacts = [group.contacts allObjects];
+    self.contacts = [group.members allObjects];
     
 }
 
-- (void)setGroupData:(MRGroupObject*)group {
+- (void)setGroupData:(MRGroup*)group {
     [self.collectionView registerNib:[UINib nibWithNibName:@"MRContactWithinGroupCollectionCellCollectionViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"contactWithinGroupCell"];
-    self.groupImageView.image = [MRCommon getImageFromBase64Data:[group.group_img_data dataUsingEncoding:NSUTF8StringEncoding]];
+    [MRAppControl getGroupImage:group andImageView:self.groupImageView];
     self.nameLabel.text = group.group_name;
     //self.groupObject = group;
     self.contacts = nil;

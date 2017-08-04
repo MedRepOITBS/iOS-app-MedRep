@@ -66,7 +66,7 @@
     [self getMenuNavigationButtonWithController:[self revealViewController] NavigationItem:self.navigationItem];
 
     self.titleLabel.text = @"Doctor Details";
-    self.nameLabel.text = [NSString stringWithFormat:@"Dr. %@",[self.appointmnetDetails objectForKey:@"doctorName"]];
+    self.nameLabel.text = [NSString stringWithFormat:@"%@",[self.appointmnetDetails objectForKey:@"doctorName"]];
     self.therepaticLabel.text = [self.appointmnetDetails objectForKey:@"therapeuticName"];
     [MRCommon showActivityIndicator:@""];
     [self loadProfileImage:[self.appointmnetDetails objectForKey:@"doctorId"]];
@@ -116,7 +116,7 @@
         [MRCommon stopActivityIndicator];
         if (status)
         {
-            self.nameLabel.text = [NSString stringWithFormat:@"Dr. %@ %@",[responce objectForKey:@"firstName"],[responce objectForKey:@"lastName"]];
+            self.nameLabel.text = [NSString stringWithFormat:@"%@ %@",[responce objectForKey:@"firstName"],[responce objectForKey:@"lastName"]];
             //self.profileImage.image = [MRCommon getImageFromBase64Data:[[responce objectForKey:KProfilePicture] objectForKey:@"data"]];
         }
         else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
@@ -129,7 +129,7 @@
                       [MRCommon stopActivityIndicator];
                       if (status)
                       {
-                          self.nameLabel.text = [NSString stringWithFormat:@"Dr. %@ %@",[responce objectForKey:@"firstName"],[responce objectForKey:@"lastName"]];
+                          self.nameLabel.text = [NSString stringWithFormat:@"%@ %@",[responce objectForKey:@"firstName"],[responce objectForKey:@"lastName"]];
                           //self.profileImage.image = [MRCommon getImageFromBase64Data:[[responce objectForKey:KProfilePicture] objectForKey:@"data"]];
                       }
                   }];

@@ -13,8 +13,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    [self.img.layer setBorderWidth:1.0];
-    [self.img.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
+//    [self.img.layer setBorderWidth:1.0];
+//    [self.img.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -19,6 +19,7 @@
 #import "MRNewProductCompaignsViewController.h"
 #import "MRMedRepListViewController.h"
 #import "MRViewRepAppointmnetViewController.h"
+#import "MRPHSurveyListViewController.h"
 
 @interface MRPHDashBoardViewController ()<SWRevealViewControllerDelegate>
 
@@ -55,12 +56,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.latestSurveysButton.enabled = NO;
-    self.latestSurveysButton.alpha = 0.5f;
-    self.surveysImage.alpha = 0.5f;
-
-     NSDictionary *userData = [MRAppControl sharedHelper].userRegData;
-    self.userNameLabel.text = [NSString stringWithFormat:@"Welcome %@. %@ %@",[userData objectForKey:KTitle],[userData objectForKey:KFirstName],[userData objectForKey:KLastName]];
+    NSDictionary *userData = [MRAppControl sharedHelper].userRegData;
+    self.userNameLabel.text = [NSString stringWithFormat:@"Welcome %@ %@",[userData objectForKey:KFirstName],[userData objectForKey:KLastName]];
     
     SWRevealViewController *revealController = [self revealViewController];
     revealController.delegate = self;
@@ -79,6 +76,9 @@
     self.currentIndex = 0;
     [self enableDisableLeftButton:NO];
     [self enableDisableRightButton:YES];
+    
+    [self.appointmentTableview registerNib:[UINib nibWithNibName:@"MRAppointmentCell"
+                                                          bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"MRAppointmentCell"];
 
     [self setUPTableView];
 
@@ -87,35 +87,35 @@
 
 - (void)setUPTableView
 {
-    self.appointmentTableview.transform = CGAffineTransformMakeRotation(-M_PI * 0.5);
-    self.appointmentTableview.scrollEnabled = NO;
-    self.appointmentTableview.showsHorizontalScrollIndicator =
-    self.appointmentTableview.showsVerticalScrollIndicator = YES;
-    if ([MRCommon deviceHasThreePointFiveInchScreen])
-    {
-        self.appointmentTableview.frame = CGRectMake(40, 45, 240, 46);
-    }
-    else if ([MRCommon deviceHasFourInchScreen])
-    {
-        self.appointmentTableview.frame = CGRectMake(40, 45, 240, 65);
-    }
-    else if ([MRCommon deviceHasFourPointSevenInchScreen])
-    {
-        self.appointmentTableview.frame = CGRectMake(40, 57, 292, 80);
-    }
-    else if ([MRCommon deviceHasFivePointFiveInchScreen])
-    {
-        CGRect frame = self.appointmentTableview.frame;
-        frame.origin.x = 40;
-        frame.origin.y = 150;
-        frame.size.width = 331;
-        frame.size.height = 90;
-        self.appointmentTableview.frame =  frame;
-    }
-    else if ([MRCommon isHD])
-    {
-        self.appointmentTableview.frame = CGRectMake(70, 64, 628, 210);
-    }
+//    self.appointmentTableview.transform = CGAffineTransformMakeRotation(-M_PI * 0.5);
+//    self.appointmentTableview.scrollEnabled = NO;
+//    self.appointmentTableview.showsHorizontalScrollIndicator =
+//    self.appointmentTableview.showsVerticalScrollIndicator = YES;
+//    if ([MRCommon deviceHasThreePointFiveInchScreen])
+//    {
+//        self.appointmentTableview.frame = CGRectMake(40, 45, 240, 46);
+//    }
+//    else if ([MRCommon deviceHasFourInchScreen])
+//    {
+//        self.appointmentTableview.frame = CGRectMake(40, 45, 240, 65);
+//    }
+//    else if ([MRCommon deviceHasFourPointSevenInchScreen])
+//    {
+//        self.appointmentTableview.frame = CGRectMake(40, 57, 292, 80);
+//    }
+//    else if ([MRCommon deviceHasFivePointFiveInchScreen])
+//    {
+//        CGRect frame = self.appointmentTableview.frame;
+//        frame.origin.x = 40;
+//        frame.origin.y = 150;
+//        frame.size.width = 331;
+//        frame.size.height = 90;
+//        self.appointmentTableview.frame =  frame;
+//    }
+//    else if ([MRCommon isHD])
+//    {
+//        self.appointmentTableview.frame = CGRectMake(70, 64, 628, 210);
+//    }
     
     if ([MRAppControl sharedHelper].userType == 3) //pharma
     {
@@ -124,6 +124,9 @@
     else if ([MRAppControl sharedHelper].userType == 4) //manager
     {
         [self callpendingAppointents];
+    } else {
+        [self enableDisableLeftButton:NO];
+        [self enableDisableRightButton:NO];
     }
 
     
@@ -148,10 +151,10 @@
     return self.myAppointments.count;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return self.appointmentTableview.frame.size.width;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return self.appointmentTableview.frame.size.height;
+//}
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -219,6 +222,9 @@
 - (IBAction)latestSurveysButtonAction:(id)sender
 {
     //[MRCommon showAlert:kComingsoonMSG delegate:self];
+    MRPHSurveyListViewController *surveyListViewController = [[MRPHSurveyListViewController alloc] initWithNibName:@"MRPHSurveyListViewController" bundle:nil];
+    surveyListViewController.isFromMenu = NO;
+    [self.navigationController pushViewController:surveyListViewController animated:YES];
 }
 
 - (IBAction)doctorActivityButtonAction:(id)sender
@@ -268,7 +274,7 @@
     
     [self.appointmentTableview scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.currentIndex inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     
-    [self enableDisableRightButton:(self.myAppointments.count == self.currentIndex + 1) ? NO : YES];
+    [self enableDisableRightButton:(self.myAppointments.count <= self.currentIndex + 1) ? NO : YES];
 }
 
 - (void)revealController:(SWRevealViewController *)revealController didMoveToPosition:(FrontViewPosition)position
@@ -361,12 +367,24 @@
     }];
 }
 
+- (NSArray*)filterPendingAppointments:(NSArray*)pendingAppointments {
+    NSArray *filteredList = nil;
+    
+    if (pendingAppointments != nil && pendingAppointments.count > 0) {
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"startDate"
+                                                                         ascending:NO];
+        filteredList = [pendingAppointments sortedArrayUsingDescriptors:@[sortDescriptor]];
+    }
+    
+    return filteredList;
+}
+
 - (void)callpendingAppointents
 {
     [[MRWebserviceHelper sharedWebServiceHelper] getMyTeamPendingAppointments:^(BOOL status, NSString *details, NSDictionary *responce) {
         if (status)
         {
-            self.myAppointments = [responce objectForKey:kResponce];
+            self.myAppointments = [self filterPendingAppointments:[responce objectForKey:kResponce]];
             
             [[MRAppControl sharedHelper] setMyAppointmentDetails:[responce objectForKey:kResponce]];
             
@@ -396,7 +414,7 @@
                   {
                       if (status)
                       {
-                          self.myAppointments = [responce objectForKey:kResponce];
+                          self.myAppointments = [self filterPendingAppointments:[responce objectForKey:kResponce]];
                           
                           [[MRAppControl sharedHelper] setMyAppointmentDetails:[responce objectForKey:kResponce]];
                           

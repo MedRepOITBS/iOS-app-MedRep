@@ -8,20 +8,24 @@
 
 #import <UIKit/UIKit.h>
 
-@class MRGroupPost;
+@class MRSharePost;
 @protocol MRGroupPostItemTableViewCellDelegate;
+
 @interface MRGroupPostItemTableViewCell : UITableViewCell
+
 @property (nonatomic,weak) id<MRGroupPostItemTableViewCellDelegate> delegate;
 
-- (void)setPostContent:(MRGroupPost*)post;
+@property (nonatomic,weak) UITableView *parentTableView;
+- (void)setPostContent:(MRSharePost*)post tagIndex:(NSInteger)tagIndex
+andParentViewController:(UIViewController*)parentViewController;
 
 @end
 
 @protocol MRGroupPostItemTableViewCellDelegate <NSObject>
 @optional
 
--(void)mrGroupPostItemTableViewCell:(MRGroupPostItemTableViewCell *)cell withCommentButtonTapped:(id)sender;
-
-
+- (void)commentButtonTapped:(MRSharePost*)post;
+- (void)likeButtonTapped:(NSInteger)index;
+- (void)shareButtonTapped:(MRSharePost*)groupPost;
 
 @end

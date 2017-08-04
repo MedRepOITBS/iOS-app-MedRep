@@ -14,4 +14,6 @@
 
 @property (assign, nonatomic) BOOL isFromSinUp;
 @property (assign, nonatomic) BOOL isFromEditing;
+
+-(IBAction)whyThisBtnTapped:(id)sender;
 @end

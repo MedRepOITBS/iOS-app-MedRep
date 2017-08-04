@@ -7,8 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MRDataManger.h"
-
 
 #define kRoleEntity                 @"MRRole"
 #define kTherapeuticAreaEntity      @"MRTherapeuticArea"
@@ -18,28 +16,63 @@
 
 #define kContactEntity              @"MRContact"
 #define kGroupEntity                @"MRGroup"
+#define kGroupMembersEntity         @"MRGroupMembers"
 #define kGroupPostEntity            @"MRGroupPost"
 #define kSuggestedContactEntity     @"MRSuggestedContact"
 #define kGroupChildPostEntity       @"MrGroupChildPost"
 
+#define kMRTransformPost     @"MRTransformPost"
+#define kMRSharePost         @"MRSharePost"
+#define kMRPostedReplies     @"MRPostedReplies"
+
+#define kMRTransformPageData     @"MRTransformPageData"
+
+#define kPendingRecordsCountEntity  @"MRPendingRecordsCount"
+
+#define kSurveyStatisticsEntity  @"MRPHSurveyStatistics"
+#define kSurveyStatisticsPendingListEntity  @"MRPHSurveyPendingList"
+
 @class MRGroupPost;
+@class MRTransformPost, MRSharePost;
+
+typedef void (^WebServiceResponseHandler)(id result);
+
 @interface MRDatabaseHelper : NSObject
 {
     
 }
 
+FOUNDATION_EXPORT NSString* const kNewsAndUpdatesAPIMethodName;
+FOUNDATION_EXPORT NSString* const kNewsAndTransformAPIMethodName;
+
 + (MRDatabaseHelper *)sharedHelper;
 
-+ (void)addContacts:(NSArray*)contacts;
++ (NSString*)getOAuthErrorCode:(NSDictionary*)response;
+
 + (void)addSuggestedContacts:(NSArray*)contacts;
-+ (void)addGroups:(NSArray*)groups;
-+ (void)addGroupPosts:(NSArray*)groupPosts;
+//+ (void)addGroupPosts:(NSArray*)groupPosts;
 
++ (void)getGroups:(WebServiceResponseHandler)responseHandler;
++ (void)getMoreGroups:(WebServiceResponseHandler)responseHandler;
++ (void)getGroupDetail:(NSInteger)groupId withHandler:(WebServiceResponseHandler)responseHandler;
++ (void)getSuggestedGroups:(WebServiceResponseHandler)responseHandler;
++ (void)getPendingGroups:(WebServiceResponseHandler)responseHandler;
++ (void)getPendingGroupMembers:(NSNumber*)gid andResponseHandler:(WebServiceResponseHandler)responseHandler;
 
-+ (NSArray*)getContacts;
-+ (NSArray*)getSuggestedContacts;
-+ (NSArray*)getGroups;
++ (void)getContacts:(WebServiceResponseHandler)responseHandler;
++ (void)getContactsByCity:(NSString*)city groupId:(NSString*)groupId responseHandler:(WebServiceResponseHandler)responseHandler;
++ (void)getContactDetail:(NSInteger)contactId withHandler:(WebServiceResponseHandler)responseHandler;
++ (void)getSuggestedContacts:(WebServiceResponseHandler)responseHandler;
++ (void)getPendingContacts:(WebServiceResponseHandler)responseHandler;
 
++ (void)getContactsBySearchString:(NSString*)searchText
+                          groupId:(NSString*)groupId
+               andResponseHandler:(WebServiceResponseHandler)responseHandler;
+
++ (void)getGroupMemberStatusWithId:(NSInteger)groupId
+                        andHandler:(WebServiceResponseHandler)responseHandler;
+
++ (NSArray*)getObjectsForType:(NSString*)entityName andPredicate:(NSPredicate*)predicate;
 
 + (void)addRole:(NSArray*)roles;
 + (void)addTherapeuticArea:(NSArray*)therapeuticAreaList;
@@ -72,9 +105,73 @@
 
 + (void)getNotificationsByFilter:(NSString*)companyName
              withTherapeuticName:(NSString*)therapeuticName
+                          isRead:(BOOL)isRead
+                     isFavourite:(BOOL)isFavourite
            withNotificationsList:(void (^)(NSArray *fetchList))objectsListt;
 
 + (void)cleanDatabaseOnLogout;
++(MRGroupPost *)getGroupPostForPostID:(NSNumber *)groupId;
 + (void)addGroupChildPost:(MRGroupPost*)post withPostDict:(NSDictionary *)myDict;
 +(NSArray *)getContactListForContactID:(int64_t)contactID;
+
++ (NSArray*)getShareArticles;
++ (void)shareAnArticle:(NSInteger)postType transformPost:(MRTransformPost*)transformPost
+     withHandler:(WebServiceResponseHandler)handler;
+
++ (void)addCommentToAPost:(MRSharePost*)inPost
+                     text:(NSString*)text
+              contentData:(NSData*)data
+              contentType:(NSInteger)contentType;
+
++ (void)shareAPostWithContactOrGroup:(MRSharePost*)inPost
+                                text:(NSString*)text
+                         contentData:(NSData*)data
+                         contentType:(NSInteger)contentType
+                           contactId:(NSInteger)contactId
+                             groupId:(NSInteger)groupId;
+
++ (NSArray*)getTransformArticles;
++ (void)addTransformArticles:(NSArray*)posts;
++(void)addProfileData:(NSInteger)doctorId responseHandler:(WebServiceResponseHandler)responseHandler;
++(NSArray *)getProfileData;
+
++(void)fetchMyWallPosts:(WebServiceResponseHandler)responseHandler;
++(void)fetchShare:(WebServiceResponseHandler)responseHandler;
++ (void)fetchNewsAndUpdates:(NSString*)category
+                 methodName:(NSString*)methodName
+                withHandler:(WebServiceResponseHandler)responseHandler;
+
++ (void)addConnections:(NSArray*)selectedContacts
+     andResponseHandler:(WebServiceResponseHandler)handler;
+
++ (void)postANewTopic:(NSDictionary*)reqDict withHandler:(WebServiceResponseHandler)responseHandler;
+
++ (void)fetchShareDetailsById:(NSInteger)topicId
+                  withHandler:(WebServiceResponseHandler)responseHandler;
+
+
++(void)deleteWorkExperienceFromTable:(NSNumber *)workExpID withHandler:(WebServiceResponseHandler)responseHandler;
++(void)deleteEducationQualificationFromTable:(NSNumber *)educationID withHandler:(WebServiceResponseHandler)responseHandler;
++(void)deleteInterestAreaFromTable:(NSNumber *)interestID withHandler:(WebServiceResponseHandler)responseHandler;
++(void)deletePublicationAreaFromTable:(NSNumber *)publicationID withHandler:(WebServiceResponseHandler)responseHandler;
+
++ (void)getMessagesOfAMember:(NSInteger)memberId
+                     groupId:(NSInteger)groupId
+                 withHandler:(WebServiceResponseHandler)handler;
++(void)addInterestArea:(NSArray *)_array  andHandler:(WebServiceResponseHandler)responseHandler;
++(void)addPublications:(NSDictionary *)dictonary andHandler:(WebServiceResponseHandler)responseHandler;
++(void)addEducationQualification:(NSDictionary *)dictonary andHandler:(WebServiceResponseHandler)responseHandler;
++(void)addWorkExperience :(NSDictionary *)dictionary andHandler:(WebServiceResponseHandler)responseHandler;
+
+
++(void)updateInterest:(NSDictionary *)dictonary withInterestAreaID:(NSNumber *)iD  andHandler:(WebServiceResponseHandler)responseHandler;
+
++(void)updatePublication:(NSDictionary *)dictonary withPublicationID:(NSNumber *)iD  andHandler:(WebServiceResponseHandler)responseHandler;
++(void)updateEducationQualification:(NSDictionary *)dictonary withEducationQualificationID:(NSNumber *)iD  andHandler:(WebServiceResponseHandler)responseHandler;
++(void)updateWorkExperience:(NSDictionary *)workExpDict withWorkExperienceID:(NSNumber *)iD  andHandler:(WebServiceResponseHandler)responseHandler;
+
++ (void)editLocation:dataDict andHandler:(WebServiceResponseHandler)responseHandler;
++ (void)deleteLocation:dataDict andHandler:(WebServiceResponseHandler)responseHandler;
++ (void)editContactInfo:dataDict andHandler:(WebServiceResponseHandler)responseHandler;
+
 @end

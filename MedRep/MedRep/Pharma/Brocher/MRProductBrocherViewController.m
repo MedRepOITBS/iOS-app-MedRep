@@ -15,8 +15,7 @@
 @interface MRProductBrocherViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *titlelabel;
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet UIImageView *productImageView;
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (strong, nonatomic) IBOutlet UIView *navView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *notificationImageHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *notificationImageWidthConstraint;
@@ -53,6 +52,9 @@
     self.noticationImages = [[NSMutableDictionary alloc] init];
 
     [self getMenuNavigationButtonWithController:[self revealViewController] NavigationItem:self.navigationItem];
+    
+    [MRCommon showActivityIndicator:@"Loading..."];
+    
     [[MRWebserviceHelper sharedWebServiceHelper] getNotificationById:[NSString stringWithFormat:@"%ld",(long)self.notificationID] withHandler:^(BOOL status, NSString *details, NSDictionary *responce)
     {
         if (status)
@@ -60,6 +62,11 @@
             self.detailsList = [responce objectForKey:@"notificationDetails"];
             if (self.detailsList.count > 0)
             {
+                NSDictionary *details = self.detailsList.firstObject;
+                if (details != nil) {
+                    [self.titlelabel setText:[details objectOrNilForKey:@"notificationDesc"]];
+                }
+                
                 [self loadImages];
                 
                 if(self.detailsList.count == 1)
@@ -117,11 +124,13 @@
 
 - (void)loadImages
 {
-    [MRCommon getNotificationImageByID:[[[self.detailsList objectAtIndex:self.imagesCount] objectForKey:@"detailId"] integerValue] forImage:^(UIImage *image)
+    [MRCommon getProductBroucher:[[[self.detailsList objectAtIndex:self.imagesCount] objectForKey:@"detailId"] integerValue] forImage:^(NSString *imagePath)
      {
-         if (image)
+         if (imagePath != nil && imagePath.length > 0)
          {
-             [self.noticationImages setObject:image forKey:[[self.detailsList objectAtIndex:self.imagesCount] objectForKey:@"detailId"]];
+             [self.webView setHidden:NO];
+             
+             [self.noticationImages setObject:imagePath forKey:[[self.detailsList objectAtIndex:self.imagesCount] objectForKey:@"detailId"]];
              
              if (self.imagesCount == 0)
              {
@@ -145,7 +154,8 @@
              [MRCommon stopActivityIndicator];
              self.notificationImageHeightConstraint.constant = 0;
              self.notificationImageWidthConstraint.constant = 0;
-             self.productImageView.image = [UIImage imageNamed:@""];
+             //self.productImageView.image = [UIImage imageNamed:@""];
+             [self.webView setHidden:YES];
          }
      }];
 
@@ -170,12 +180,12 @@
 
 - (void)updateNotification:(NSNumber*)imageId
 {
-    UIImage *image = [self.noticationImages objectForKey:imageId];
-    self.notificationImageHeightConstraint.constant = self.scrollView.frame.size.height;
-    self.notificationImageWidthConstraint.constant = self.scrollView.frame.size.width;
-    self.productImageView.image = image;
-    self.scrollView.contentSize = image.size;
-    [self.view updateConstraints];    [self.view updateConstraints];
+    NSString *image = [self.noticationImages objectOrNilForKey:imageId];
+//    self.notificationImageHeightConstraint.constant = self.scrollView.frame.size.height;
+//    self.notificationImageWidthConstraint.constant = self.scrollView.frame.size.width;
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:image]]];
+//    self.scrollView.contentSize = self.productImageView.image.size;
+//    [self.view updateConstraints];    [self.view updateConstraints];
 }
 
 - (void)didReceiveMemoryWarning {

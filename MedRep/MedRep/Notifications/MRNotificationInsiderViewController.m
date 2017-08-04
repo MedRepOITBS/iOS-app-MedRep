@@ -18,25 +18,25 @@
 #import "MRDatabaseHelper.h"
 #import "MRNotifications.h"
 
-@interface MRNotificationInsiderViewController ()<UIScrollViewDelegate, SWRevealViewControllerDelegate, UIAlertViewDelegate>
-{
-    SWRevealViewController *revealController;
-}
-@property (weak, nonatomic) IBOutlet UIView *tiltleView;
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UIButton *backbutton;
+#import <AVFoundation/AVFoundation.h>
+#import <AVKit/AVKit.h>
+
+@interface MRNotificationInsiderViewController ()<UIScrollViewDelegate,UIAlertViewDelegate, UIWebViewDelegate>
+
+@property (nonatomic) AVPlayerViewController *av;
+
 @property (weak, nonatomic) IBOutlet UIView *topView;
-@property (weak, nonatomic) IBOutlet UILabel *drugNamelabel;
-@property (weak, nonatomic) IBOutlet UILabel *companyNamelabel;
-@property (weak, nonatomic) IBOutlet UIImageView *notifcationImage;
-@property (weak, nonatomic) IBOutlet UILabel *contentHeaderLabel;
-@property (weak, nonatomic) IBOutlet UITextView *contentTextView;
+@property (weak, nonatomic) IBOutlet UITextView *contentHeaderLabel;
 @property (weak, nonatomic) IBOutlet UILabel *rHilightLabel;
 @property (weak, nonatomic) IBOutlet UILabel *favHilightLabel;
 @property (weak, nonatomic) IBOutlet UILabel *fedHilightLabel;
 @property (weak, nonatomic) IBOutlet UIScrollView *contentScrollView;
 
+@property (weak, nonatomic) IBOutlet UILabel *drugNameLabel;
+
 @property (strong, nonatomic) IBOutlet UIView *navView;
+@property (strong, nonatomic) IBOutlet UIView *navViewExitFullScreen;
+
 @property (weak, nonatomic) IBOutlet UIView *footerView;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *buttonImageHorizontalSpace;
@@ -45,7 +45,6 @@
 @property (assign, nonatomic) NSTimer *loopTimer;
 @property (weak, nonatomic) IBOutlet UIImageView *feedBackImage;
 @property (weak, nonatomic) IBOutlet UIImageView *favoriteImage;
-@property (weak, nonatomic) IBOutlet UIView *fullscreenView;
 @property (weak, nonatomic) IBOutlet UILabel *favoriteThisLabel;
 @property (weak, nonatomic) IBOutlet UILabel *feedbackLabel;
 @property (nonatomic, assign) BOOL favourite;
@@ -59,7 +58,9 @@
 @property (nonatomic, assign) NSInteger imagesCount;
 @property (nonatomic, assign) NSInteger currentImageIndex;
 @property (weak, nonatomic) IBOutlet UIImageView *reminderIcon;
+
 @property (nonatomic, retain) MRNotifications *notification;
+@property (nonatomic) NSDictionary *notificationDetails;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewHeight;
@@ -69,9 +70,20 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *fullScreenImageViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *fullScreenImageViewWidth;
-@property (weak, nonatomic) IBOutlet UIImageView *fullScreenNotificationImage;
+//@property (weak, nonatomic) IBOutlet UIImageView *fullScreenNotificationImage;
+//@property (weak, nonatomic) IBOutlet UIImageView *notifcationImage;
+
+@property (weak, nonatomic) IBOutlet UIWebView *notifcationImage;
+@property (weak, nonatomic) IBOutlet UIWebView *fullScreenNotificationImage;
+
 @property (weak, nonatomic) IBOutlet UIScrollView *fullScreenScrollView;
 @property (weak, nonatomic) IBOutlet UILabel *contentTitleLabel;
+
+@property (nonatomic, strong) NSString *remindMeValue;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentHeaderLabelHeightConstraint;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentTitleHeightConstraint;
 
 @end
 
@@ -79,6 +91,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.remindMeValue = @"";
+    
+    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonAction:)];
+    self.navigationItem.leftBarButtonItem = revealButtonItem;
+    
+    UITapGestureRecognizer *recoginzer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fullScreenButtonAction:)];
+    [recoginzer setNumberOfTapsRequired:1];
+    [self.navView addGestureRecognizer:recoginzer];
+    
+    UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navView];
+    self.navigationItem.rightBarButtonItem = rightButtonItem;
     
     [self.contentScrollView setZoomScale:1.0];
     [self.contentScrollView setMinimumZoomScale:0.5];
@@ -103,22 +127,12 @@
     [self addSwipeGesture];
     [self resetSelection];
     self.rHilightLabel.backgroundColor = kRGBCOLOR(22, 107, 170);
-    revealController = [self revealViewController];
-    revealController.delegate = self;
-    [revealController panGestureRecognizer];
-    [revealController tapGestureRecognizer];
-    
-    
-    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon.png"]
-                                                                         style:UIBarButtonItemStylePlain target:revealController action:@selector(revealToggle:)];
-    
-    self.navigationItem.leftBarButtonItem = revealButtonItem;
     
     self.favoriteImage.image = [UIImage imageNamed:@"favorite.png"];
     self.feedBackImage.image = [UIImage imageNamed:@"feedback.png"];
     self.reminderIcon.image = [UIImage imageNamed:@"reminder.png"];
     
-    NSArray *notificationTypeList = [[MRDataManger sharedManager] fetchObjectList:kNotificationsEntity predicate:[NSPredicate predicateWithFormat:@"notificationId == %@", [self.notificationDetails objectForKey:@"notificationId"]]];
+    NSArray *notificationTypeList = [[MRDataManger sharedManager] fetchObjectList:kNotificationsEntity predicate:[NSPredicate predicateWithFormat:@"notificationId == %ld", self.notificationId.integerValue]];
     
     self.notification = notificationTypeList.firstObject;
     
@@ -127,44 +141,41 @@
         self.feedBackImage.image = [UIImage imageNamed:@"feedbackSelected.png"];
     }
     
-    if ([self.notification.favNotification boolValue])
+    if ([self.notification.favourite boolValue])
     {
         self.favoriteImage.image = [UIImage imageNamed:@"favoriteSelected.png"];
     }
     
+    self.notificationDetails = [self.notification getNotificationDetails];
     
-    UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navView];
-    self.navigationItem.rightBarButtonItem = rightButtonItem;
-    
-    self.selectedNotification = [[MRAppControl sharedHelper] getNotificationByID:[[self.notificationDetails objectForKey:@"notificationId"] integerValue]];
-    
-    [MRDatabaseHelper updateNotifiction:[self.notificationDetails objectForKey:@"notificationId"] userFavouriteSatus:NO userReadStatus:YES withSavedStatus:^(BOOL isScuccess) {
-        
-    }];
-
-    if (self.selectedNotification)
+    if (self.notificationDetails)
     {
-        self.contentHeaderLabel.text = [self.selectedNotification objectForKey:@"notificationDesc"];
-        self.contentTextView.text = [self.notificationDetails objectForKey:@"detailDesc"];
-        self.companyNamelabel.text = [self.selectedNotification objectForKey:@"companyName"];
-        self.drugNamelabel.text = [self.notificationDetails objectForKey:@"detailTitle"];
+        self.drugNameLabel.text = [NSString stringWithFormat:@"\t%@",[self.notificationDetails objectForKey:@"detailTitle"]];
         
-        self.titleLabel.text = [self.selectedNotification objectForKey:@"companyName"];
+        self.navigationItem.title = self.notification.notificationName;
         [MRCommon showActivityIndicator:@"Loading..."];
-        self.detailsList = [self.notificationDetails objectForKey:@"notificationDetails"];
+        self.detailsList = @[self.notificationDetails];
+        [self adjustHeightsWithContent];
         [self loadImages];
     }
     self.loopTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTimerLabel) userInfo:nil repeats:YES];
     
-    [self hideNavigationButton];
     self.imagesCount = 0;
-    if (self.detailsList.count > 1)
-    {
-        [self showNavigationButton];
-    }
+    
+    [self.notifcationImage setAllowsInlineMediaPlayback:YES];
+    self.notifcationImage.mediaPlaybackRequiresUserAction = YES;
+    
+    [self.fullScreenNotificationImage setAllowsInlineMediaPlayback:YES];
+    self.fullScreenNotificationImage.mediaPlaybackRequiresUserAction = YES;
     
     // Do any additional setup after loading the view from its nib.
+    [self.notifcationImage setDelegate:self];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
     
+    [self.av.player pause];
 }
 
 - (void)addSwipeGesture
@@ -194,49 +205,126 @@
 
 - (void)loadImages
 {
-    [MRCommon getNotificationImageByID:[[[self.detailsList objectAtIndex:self.imagesCount] objectForKey:@"detailId"] integerValue] forImage:^(UIImage *image)
+    NSDictionary *firstDetailObject = self.detailsList.firstObject;
+    [MRCommon getNotificationImageByID:[[firstDetailObject objectForKey:@"detailId"] integerValue]
+                              forImage:^(NSString *image)
      {
          if (image)
          {
-             [self.noticationImages setObject:image forKey:[[self.detailsList objectAtIndex:self.imagesCount] objectForKey:@"detailId"]];
-             NSLog(@"%@",NSStringFromCGRect(self.contentScrollView.frame));
-             self.contentViewHeight.constant = self.contentScrollView.frame.size.height + 130;
-             self.contentViewWidth.constant =  self.contentScrollView.frame.size.width;
-             [self updateViewConstraints];
-             
-             if (self.imagesCount == 0)
-             {
-                 [self updateNotification:[[self.detailsList objectAtIndex:self.imagesCount] objectForKey:@"detailId"]];
-                 self.currentImageIndex = 0;
-             }
-             
-             self.imagesCount++;
-             
-             if (self.imagesCount < self.detailsList.count)
-             {
-                 [self loadImages];
-             }
-             else if (self.imagesCount == self.detailsList.count)
-             {
-                 [MRCommon stopActivityIndicator];
+             id value = [firstDetailObject objectForKey:@"detailId"];
+             if (value != nil) {
+                 NSNumber *tempValue = (NSNumber*)value;
+                 [self.noticationImages setObject:image forKey:[NSString stringWithFormat:@"%ld",(long)tempValue.integerValue]];
+                 
+                 self.contentViewHeight.constant = self.contentScrollView.frame.size.height + 130;
+                 self.contentViewWidth.constant =  self.contentScrollView.frame.size.width;
+                 [self updateViewConstraints];
+              
+                 [self updateNotification:[firstDetailObject objectForKey:@"detailId"] andContentType:[firstDetailObject objectForKey:@"contentType"]];
              }
          }
          else
          {
              [MRCommon stopActivityIndicator];
-             self.notifcationImage.image = [UIImage imageNamed:@""];
-             self.fullScreenNotificationImage.image = image;
+//             self.notifcationImage.image = [UIImage imageNamed:@""];
+//             self.fullScreenNotificationImage.image = image;
          }
      }];
 }
+    
+- (BOOL)shouldLaunchAVPlayer:(NSString*)contentType {
+    BOOL status = NO;
+    
+    if(contentType != nil &&
+       ([contentType caseInsensitiveCompare:@"MP4"] == NSOrderedSame ||
+        [contentType caseInsensitiveCompare:@"WMV"] == NSOrderedSame ||
+        [contentType caseInsensitiveCompare:@"MP3"] == NSOrderedSame ||
+        [contentType caseInsensitiveCompare:@"3GP"] == NSOrderedSame)) {
+           status = NO;
+       }
+    
+    return status;
+}
 
-- (void)updateNotification:(NSNumber*)imageId
+- (void)updateNotification:(NSNumber*)imageId andContentType:(NSString*)contentType
 {
-    UIImage *image = [self.noticationImages objectForKey:imageId];
-    self.fullScreenNotificationImage.image = image;
-    self.notifcationImage.image = image;
-    self.contentTitleLabel.text = [[self.detailsList objectAtIndex:self.currentImageIndex] objectForKey:@"detailTitle"];
-    self.contentHeaderLabel.text = [[self.detailsList objectAtIndex:self.currentImageIndex] objectForKey:@"detailDesc"];
+    if (imageId != nil) {
+        NSString *key = [NSString stringWithFormat:@"%ld",(long)imageId.integerValue];
+        NSString *image = [self.noticationImages objectForKey:key];
+        
+        if ([self shouldLaunchAVPlayer:contentType]) {
+            [self.notifcationImage setHidden:YES];
+            
+            self.av = [[AVPlayerViewController alloc] init];
+            
+            self.av.view.frame = self.notifcationImage.frame;
+//            [self.av setShowsPlaybackControls:NO];
+            
+            AVPlayer *avPlayer = [AVPlayer playerWithURL:[NSURL URLWithString:image]];
+            self.av.player = avPlayer;
+            [avPlayer seekToTime:kCMTimeZero];
+            [avPlayer pause];
+            
+            [self addChildViewController:self.av];
+            [self.view addSubview:self.av.view];
+            [self.av.player addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+            [self.av didMoveToParentViewController:self];
+            [self.av.contentOverlayView addObserver:self forKeyPath:@"bounds" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+            
+        } else {
+            [self.notifcationImage setHidden:NO];
+            [self.notifcationImage loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:image]]];
+        }
+//        self.fullScreenNotificationImage.image = image;
+//        self.notifcationImage.image = image;
+    }
+}
+
+- (void)adjustHeightsWithContent {
+    
+    NSString *text = [[self.detailsList objectAtIndex:self.currentImageIndex] objectForKey:@"detailDesc"];
+    
+    if (text != nil && text.length > 0) {
+        self.contentHeaderLabel.text = text;
+        
+        NSAttributedString *attributedText =
+            [[NSAttributedString alloc] initWithString:self.contentHeaderLabel.text
+                                        attributes:@{NSFontAttributeName: self.contentHeaderLabel.font}];
+        
+        CGRect rect = [attributedText boundingRectWithSize:(CGSize){self.contentHeaderLabel.frame.size.width, CGFLOAT_MAX}
+                                                   options:NSStringDrawingUsesLineFragmentOrigin
+                                                   context:nil];
+        
+        CGFloat labelHeight = rect.size.height;
+        
+        if (labelHeight > 72) {
+            labelHeight = 72;
+        }
+        
+        self.contentHeaderLabelHeightConstraint.constant = labelHeight;
+    }
+    
+    NSString *contentTitle = [[self.detailsList objectAtIndex:self.currentImageIndex] objectForKey:@"detailTitle"];
+    
+    if (contentTitle != nil && contentTitle.length > 0) {
+        self.contentTitleLabel.text = contentTitle;
+        
+        NSAttributedString *contentTitleAttributedText =
+                [[NSAttributedString alloc] initWithString:contentTitle
+                                        attributes:@{NSFontAttributeName: self.contentTitleLabel.font}];
+        
+        CGRect contentTitleRect = [contentTitleAttributedText boundingRectWithSize:(CGSize){self.contentTitleLabel.frame.size.width, CGFLOAT_MAX}
+                                                   options:NSStringDrawingUsesLineFragmentOrigin
+                                                   context:nil];
+        
+        CGFloat contentTitleLabelHeight = contentTitleRect.size.height;
+        
+        if (contentTitleLabelHeight > 72) {
+            contentTitleLabelHeight = 72;
+        }
+        
+        self.contentTitleHeightConstraint.constant = contentTitleLabelHeight;
+    }
 }
 
 - (UIView*)viewForZoomingInScrollView:(UIScrollView *)scrollView
@@ -269,6 +357,8 @@
     if (!self.isFullScreen)
     {
         [self updateNotification];
+        [self.av.player removeObserver:self forKeyPath:@"status" context:NULL];
+        [self.av.contentOverlayView removeObserver:self forKeyPath:@"bounds" context:NULL];
         [self.navigationController popViewControllerAnimated:YES];
     }
     else
@@ -391,8 +481,7 @@
 {
     MPCallMedrepViewController *callMedrep = [[MPCallMedrepViewController alloc] initWithNibName:[MRCommon deviceHasThreePointFiveInchScreen] ? @"MPCallMedrepViewController_iPhone" : @"MPCallMedrepViewController" bundle:nil];
     callMedrep.isFromReschedule = NO;
-    callMedrep.selectedNotification = self.selectedNotification;
-    callMedrep.notificationDetails = self.notificationDetails;
+    callMedrep.notificationDetails = [self.notification toDictionary];
     [self.navigationController pushViewController:callMedrep animated:YES];
 }
 
@@ -403,6 +492,9 @@
     self.rHilightLabel.backgroundColor = kRGBCOLOR(22, 107, 170);
 
     viewController = [[MPNotificationAlertViewController alloc] initWithNibName:@"MPNotificationAlertViewController" bundle:nil];
+    
+    viewController.locatlNotificationType = [self reverseLocalNotification:self.remindMeValue];
+    
     [self.view addSubview:viewController.view];
     
     [MRCommon addUpdateConstarintsTo:self.view withChildView:viewController.view];
@@ -440,6 +532,23 @@
     }];
 }
 
+- (NSInteger)reverseLocalNotification:(NSString*)remindMeValue
+{
+    NSInteger notificationType = 2;
+    
+    if (remindMeValue != nil && remindMeValue.length > 0) {
+        if ([remindMeValue caseInsensitiveCompare:@"1h"] == NSOrderedSame) {
+            notificationType = 1;
+        } else if ([remindMeValue caseInsensitiveCompare:@"1w"] == NSOrderedSame) {
+            notificationType = 3;
+        } else if ([remindMeValue caseInsensitiveCompare:@"1m"] == NSOrderedSame) {
+            notificationType = 4;
+        }
+    }
+    
+    return notificationType;
+}
+
 - (void)configureLocalNotification:(NSInteger)notificationType
 {
     UILocalNotification *localNotif = [[UILocalNotification alloc] init];
@@ -448,20 +557,30 @@
     
     switch (notificationType) {
         case 1:
-            localNotif.fireDate = [NSDate dateTomorrow];
+            self.remindMeValue = @"1h";
+            localNotif.fireDate = [NSDate dateWithHoursFromNow:1];
             break;
         case 2:
-            localNotif.fireDate = [NSDate nextWeek];
+            self.remindMeValue = @"1d";
+            localNotif.fireDate = [NSDate dateTomorrow];
             break;
         case 3:
+            self.remindMeValue = @"1w";
+            localNotif.fireDate = [NSDate nextWeek];
+            break;
+        case 4:
+            self.remindMeValue = @"1m";
             localNotif.fireDate = [NSDate nextMonh];
             break;
      
         default:
+            self.remindMeValue = @"";
             break;
     }
+    //localNotif.fireDate = [NSDate dateWithMinutesFromNow:notificationType];
+    
     localNotif.timeZone = [NSTimeZone defaultTimeZone];
-    localNotif.alertBody = @"scdeule remider"; // add notification discription
+    localNotif.alertBody = [NSString stringWithFormat:@"Reminder: %@ - %@", self.notification.companyName, [self.notificationDetails objectOrNilForKey:@"detailTitle"]]; // add notification discription
     localNotif.alertAction = @"View";
     localNotif.soundName = UILocalNotificationDefaultSoundName;
     
@@ -487,8 +606,6 @@
     [MRDatabaseHelper updateNotifiction:[self.notificationDetails objectForKey:@"notificationId"] userFavouriteSatus:YES userReadStatus:YES withSavedStatus:^(BOOL isScuccess) {
         
     }];
-
-
 }
 
 - (void)submitFeedBack
@@ -498,7 +615,8 @@
     [notificationdict setObject:[self.notificationDetails objectForKey:@"notificationId"] forKey:@"notificationId"];
     [notificationdict setObject:@"Viewed"  forKey:@"viewStatus"];
     NSString *fav = (self.favourite == YES) ? @"Y" : @"N";
-    [notificationdict setObject:fav  forKey:@"favourite"];
+    
+    [notificationdict setObject:[NSNumber numberWithBool:self.favourite] forKey:@"favourite"];
     
     [notificationdict setObject:[NSNumber numberWithFloat:self.rating]  forKey:@"rating"];
     
@@ -510,6 +628,7 @@
     [notificationdict setObject:[MRCommon stringFromDate:[NSDate date] withDateFormate:@"YYYYMMddHHmmss"]  forKey:@"viewedOn"];
     
     [notificationdict setObject:[self.notificationDetails objectForKey:@"notificationId"]  forKey:@"userNotificationId"];
+    [notificationdict setObject:[self.notificationDetails objectForKey:@"notificationId"]  forKey:@"notificationId"];
     
     [MRCommon showActivityIndicator:@"Sending..."];
     [[MRWebserviceHelper sharedWebServiceHelper] updateNotification:notificationdict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
@@ -544,21 +663,19 @@
 {
     NSMutableDictionary *notificationdict = [[NSMutableDictionary alloc] init];
     
-    [notificationdict setObject:[self.notificationDetails objectForKey:@"notificationId"] forKey:@"notificationId"];
+    [notificationdict setObject:[self.notificationDetails objectOrNilForKey:@"notificationId"] forKey:@"notificationId"];
     [notificationdict setObject:@"Viewed"  forKey:@"viewStatus"];
     
-    if (self.favourite == YES)
-    {
-            NSString *fav = @"Y";
-            [notificationdict setObject:fav  forKey:@"favourite"];
+    [notificationdict setObject:[NSNumber numberWithBool:self.favourite] forKey:@"favourite"];
+    
+    if (self.remindMeValue != nil && self.remindMeValue.length > 0) {
+        [notificationdict setObject:self.remindMeValue forKey:@"remindMe"];
     }
     
-    //[notificationdict setObject:[NSNumber numberWithFloat:self.rating]  forKey:@"rating"];
-    
-//    fav = @"";
-//    [notificationdict setObject:fav  forKey:@"prescribe"];
-//    fav = @"";
-//    [notificationdict setObject:fav  forKey:@"recomend"];
+    NSNumber *loggedInDoctorId = [MRAppControl sharedHelper].userRegData[@"doctorId"];
+    if (loggedInDoctorId != nil) {
+        [notificationdict setObject:loggedInDoctorId forKey:@"doctorId"];
+    }
     
     [notificationdict setObject:[MRCommon stringFromDate:[NSDate date] withDateFormate:@"YYYYMMddHHmmss"]  forKey:@"viewedOn"];
     
@@ -567,6 +684,7 @@
     [[MRWebserviceHelper sharedWebServiceHelper] updateNotification:notificationdict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
         if (status)
         {
+            [self updateNotificationInStorage:notificationdict];
         }
         else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
         {
@@ -576,6 +694,7 @@
                 [[MRWebserviceHelper sharedWebServiceHelper] updateNotification:notificationdict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
                     if (status)
                     {
+                        [self updateNotificationInStorage:notificationdict];
                     }
                 }];
             }];
@@ -586,6 +705,19 @@
             [MRCommon showAlert:@"Faild to update the notification." delegate:nil];
         }
     }];
+}
+
+- (void)updateNotificationInStorage:(NSDictionary*)notification {
+   MRNotifications *currentNotification = [[MRDataManger sharedManager] fetchObject:kNotificationsEntity
+                                    predicate:[NSPredicate predicateWithFormat:@"notificationId == %@", [notification objectOrNilForKey:@"notificationId"]]];
+    
+    currentNotification.viewStatus = [notification objectOrNilForKey:@"viewStatus"];
+    currentNotification.favourite = [NSNumber numberWithBool:self.favourite];
+    
+    [currentNotification.managedObjectContext save:nil];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRefreshNotificationsDetails
+                                                        object:nil];
 }
 
 - (IBAction)feedbackButtonAction:(id)sender
@@ -667,6 +799,8 @@
 {
     self.rightButton.hidden = YES;
     self.leftButton.hidden  = YES;
+    
+    [self.navigationController setNavigationBarHidden:YES];
 }
 
 - (IBAction)leftButtonAction:(id)sender
@@ -677,7 +811,7 @@
     }
     
     self.currentImageIndex++;
-    [self updateNotification:[[self.detailsList objectAtIndex:self.currentImageIndex] objectForKey:@"detailId"]];
+//    [self updateNotification:[[self.detailsList objectAtIndex:self.currentImageIndex] objectForKey:@"detailId"]];
 }
 
 - (IBAction)rightButtonAction:(id)sender
@@ -687,7 +821,7 @@
         self.currentImageIndex = self.detailsList.count;
     }
     self.currentImageIndex--;
-    [self updateNotification:[[self.detailsList objectAtIndex:self.currentImageIndex] objectForKey:@"detailId"]];
+//    [self updateNotification:[[self.detailsList objectAtIndex:self.currentImageIndex] objectForKey:@"detailId"]];
 
 }
 
@@ -706,6 +840,22 @@
 
 - (void)showFullScreen
 {
+    NSDictionary *currentNotificationDetails = [self.detailsList objectAtIndex:self.currentImageIndex];
+    NSNumber *imageId = [currentNotificationDetails objectForKey:@"detailId"];
+    if (imageId != nil) {
+        NSString *key = [NSString stringWithFormat:@"%ld",(long)imageId.integerValue];
+        NSString *image = [self.noticationImages objectForKey:key];
+        
+        [self.fullScreenNotificationImage loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:image]]];
+    }
+    
+    UITapGestureRecognizer *recoginzer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fullScreenButtonAction:)];
+    [recoginzer setNumberOfTapsRequired:1];
+    [self.navViewExitFullScreen addGestureRecognizer:recoginzer];
+    
+    UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navViewExitFullScreen];
+    self.navigationItem.rightBarButtonItem = rightButtonItem;
+    
     [self.fullScreenScrollView setZoomScale:1.0];
     [self.fullScreenScrollView setMinimumZoomScale:0.5];
     [self.fullScreenScrollView setMaximumZoomScale:5.0];
@@ -715,31 +865,35 @@
     self.isFullScreen = YES;
     self.contentView.hidden = YES;
     self.footerView.hidden = YES;
-    self.drugNamelabel.hidden = YES;
-    self.companyNamelabel.hidden = YES;
-    self.fullscreenView.hidden = YES;
-    self.navigationItem.leftBarButtonItem = nil;
+    self.drugNameLabel.hidden = YES;
     self.navigationItem.hidesBackButton = YES;
     self.fullScreenImageViewHeight.constant = self.fullScreenContentView.frame.size.height;
     self.fullScreenImageViewWidth.constant = self.fullScreenContentView.frame.size.width;
-    self.titleLabel.text = @"Notification details";
     [self updateViewConstraints];
+    
+    NSString *contentType = [self.notificationDetails objectOrNilForKey:@"contentType"];
+    if ([self shouldLaunchAVPlayer:contentType]) {
+        [self.fullScreenNotificationImage setHidden:YES];
+    } else {
+        [self.fullScreenNotificationImage setHidden:NO];
+    }
 }
 
 - (void)hideFullScreen
 {
+    UITapGestureRecognizer *recoginzer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fullScreenButtonAction:)];
+    [recoginzer setNumberOfTapsRequired:1];
+    [self.navView addGestureRecognizer:recoginzer];
+    
+    UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navView];
+    self.navigationItem.rightBarButtonItem = rightButtonItem;
+    
     self.fullScreenContentView.hidden = YES;
     [self.view sendSubviewToBack:self.fullScreenContentView];
     self.isFullScreen = NO;
     self.contentView.hidden = NO;
     self.footerView.hidden = NO;
-    self.drugNamelabel.hidden = NO;
-    self.companyNamelabel.hidden = NO;
-    self.fullscreenView.hidden = NO;
-    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon.png"]
-                                                                         style:UIBarButtonItemStylePlain target:revealController action:@selector(revealToggle:)];
-    self.navigationItem.leftBarButtonItem = revealButtonItem;
-    self.titleLabel.text = [self.selectedNotification objectForKey:@"companyName"];
+    self.drugNameLabel.hidden = NO;
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -747,6 +901,57 @@
     if (buttonIndex == 1 && alertView.tag == 999888) {
         [self sendfeedback];
     }
+}
+
+#pragma mark - UIWebViewDelegate
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    NSLog(@"%@", error.localizedDescription);
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *, id> *)change context:(void *)context {
+    if (object == self.av.contentOverlayView) {
+        if ([keyPath isEqualToString:@"bounds"]) {
+            CGRect oldBounds = [change[NSKeyValueChangeOldKey] CGRectValue], newBounds = [change[NSKeyValueChangeNewKey] CGRectValue];
+            BOOL wasFullscreen = CGRectEqualToRect(oldBounds, [UIScreen mainScreen].bounds), isFullscreen = CGRectEqualToRect(newBounds, [UIScreen mainScreen].bounds);
+            if (isFullscreen && !wasFullscreen) {
+                if (CGRectEqualToRect(oldBounds, CGRectMake(0, 0, newBounds.size.height, newBounds.size.width))) {
+                    NSLog(@"rotated fullscreen");
+                }
+                else {
+                    NSLog(@"entered fullscreen");
+                    [self showFullScreen];
+                }
+            }
+            else if (!isFullscreen && wasFullscreen) {
+                NSLog(@"exited fullscreen");
+                [self hideFullScreen];
+            }
+        }
+    } else if (object == self.av.player) {
+        if ([keyPath isEqualToString:@"status"]) {
+            if ([object isKindOfClass:[AVPlayer class]]) {
+                AVPlayer *player = (AVPlayer*)object;
+                if (player != nil) {
+                    AVPlayerItem *playerItem = player.currentItem;
+                    NSLog(@"%ld",(long)playerItem.status);
+                    [player play];
+                }
+            }
+        }
+    }
+}
+
+#pragma mark - AVPlayerViewControllerDelegate
+- (void)playerViewController:(AVPlayerViewController *)playerViewController failedToStartPictureInPictureWithError:(NSError *)error {
+    NSLog(@"%@",error.localizedDescription);
+}
+
+- (void)playerViewControllerDidStartPictureInPicture:(AVPlayerViewController *)playerViewController {
+    NSLog(@"%s",__PRETTY_FUNCTION__);
+}
+
+- (void)playerViewControllerWillStartPictureInPicture:(AVPlayerViewController *)playerViewController {
+    NSLog(@"%s",__PRETTY_FUNCTION__);
 }
 
 @end

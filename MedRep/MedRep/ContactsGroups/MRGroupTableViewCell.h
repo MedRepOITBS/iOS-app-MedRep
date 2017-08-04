@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MRGroupObject.h"
+#import "MRGroup.h"
 
 @class MRGroup;
 
 @interface MRGroupTableViewCell : UITableViewCell
 
 - (void)setGroup:(MRGroup*)group;
-- (void)setGroupData:(MRGroupObject*)group;
+- (void)setGroupData:(MRGroup*)group;
 
 @end

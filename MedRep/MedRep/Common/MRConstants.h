@@ -27,6 +27,15 @@ typedef enum
     SORT_ORDER_DESCENDING
 } SORT_ORDER;
 
+#import "AppDelegate.h"
+#import "MRAppConstants.h"
+#import "MRCommon.h"
+#import "MRDataManger.h"
+#import "MRDatabaseHelper.h"
+#import "MRWebserviceHelper.h"
+#import "NSDictionary+CaseInsensitive.h"
+#import "NSData+Base64Additions.h"
+#import "MRAppControl.h"
 
 #define APP_DELEGATE ((AppDelegate *)[UIApplication sharedApplication].delegate)
 
@@ -56,16 +65,21 @@ typedef enum
 #define KMobileNumber           @"MobileNumber"
 #define KEmail                  @"Email"
 #define KProfilePicture         @"profilePicture"
+#define kDisplayName            @"displayName"
 
 #define KRegistarionStageTwo    @"RegistarionStageTwo"
 
+#define KLocationId             @"locationId"
 #define KAddressOne             @"address1"
 #define KAdresstwo              @"address2"
 #define KState                  @"State"
+#define KStateSmall             @"state"
 #define KCity                   @"city"
 #define KZIPCode                @"ZIPCode"
+#define KZIPCodeSmall           @"zipcode"
 #define KTitle                  @"title"
-#define KType                  @"type"
+#define KType                   @"type"
+#define KCountry               @"country"
 //#define kAreaWorkLocation       @"AreaWorkLocation"
 
 #define KAreasCovered           @"coveredArea"
@@ -135,3 +149,25 @@ typedef enum
 
  */
 
+typedef NS_ENUM(NSInteger, DoctorPlusTabIndex) {
+    DoctorPlusTabConnect,
+    DoctorPlusTabTransform,
+    DoctorPlusTabShare,
+    DoctorPlusTabServe
+};
+
+typedef NS_ENUM(NSInteger, TransformContentType) {
+    kTransformContentTypeNone = 0,
+    kTransformContentTypeImage,
+    kTransformContentTypePDF,
+    kTransformContentTypeVideo,
+    kTransformContentTypeText
+};
+
+typedef NS_ENUM(NSInteger, ContactDetailLaunchMode) {
+    kContactDetailLaunchModeNone = 0,
+    kContactDetailLaunchModeContact,
+    kContactDetailLaunchModeSuggestedContact,
+    kContactDetailLaunchModeGroup,
+    kContactDetailLaunchModeSuggestedGroup
+};

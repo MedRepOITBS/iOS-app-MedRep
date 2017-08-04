@@ -21,8 +21,12 @@
 #import "MRTransformViewController.h"
 #import "MRDrugSearchViewController.h"
 #import "AppDelegate.h"
+#import "MRCustomTabBar.h"
+#import "MRMarketingCampaignController.h"
 
 @interface MRDashBoardVC () <UITableViewDataSource, UITableViewDelegate, SWRevealViewControllerDelegate>
+
+@property (weak, nonatomic) IBOutlet UIView *titleView;
 
 @property (strong, nonatomic) IBOutlet UIView *navView;
 @property (weak, nonatomic) IBOutlet UIButton *leftButton;
@@ -31,18 +35,23 @@
 @property (weak, nonatomic) IBOutlet UIView *notificationsView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIView *optionsView;
-@property (weak, nonatomic) IBOutlet UIButton *notificationsButton;
-@property (weak, nonatomic) IBOutlet UIButton *surveysButton;
-@property (weak, nonatomic) IBOutlet UIButton *activityScoreButton;
-@property (weak, nonatomic) IBOutlet UIButton *marketingCompaginsButton;
-@property (weak, nonatomic) IBOutlet UIButton *searchButton;
-@property (weak, nonatomic) IBOutlet UIButton *newsButon;
 @property (strong, nonatomic) NSArray *myAppointments;
 @property (assign, nonatomic) NSInteger currentIndex;
 
 @property (weak, nonatomic) IBOutlet UIImageView *newsImage;
 @property (weak, nonatomic) IBOutlet UIImageView *searchImage;
 @property (weak, nonatomic) IBOutlet UIImageView *marketingCampImage;
+
+@property (weak, nonatomic) IBOutlet UIView *notificationsSuperView;
+@property (weak, nonatomic) IBOutlet UIView *marketingCampaignSuperView;
+@property (weak, nonatomic) IBOutlet UIView *surveysSuperView;
+@property (weak, nonatomic) IBOutlet UIView *searchForDrugsSuperView;
+@property (weak, nonatomic) IBOutlet UIView *activityScoreSuperView;
+@property (weak, nonatomic) IBOutlet UIView *doctorPlusSuperView;
+
+@property (weak, nonatomic) IBOutlet UILabel *notificationPendingCountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *surveysPendingCountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *doctorPlusPendingCountLabel;
 
 @end
 
@@ -51,9 +60,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.marketingCompaginsButton.alpha = 0.5;
-    self.marketingCompaginsButton.enabled = NO;
-    self.marketingCampImage.alpha = 0.4f;
+//    self.marketingCampaignSuperView.alpha = 0.5;
+//    self.marketingCampaignSuperView.userInteractionEnabled = NO;
+//    self.marketingCampaignSuperView.alpha = 0.4f;
     
     SWRevealViewController *revealController = [self revealViewController];
     revealController.delegate = self;
@@ -80,6 +89,11 @@
 {
     [super viewWillAppear:animated];
     
+    [self getPendingCounts];
+    
+    [self.titleView setBackgroundColor:[MRCommon colorFromHexString:kStatusBarColor]];
+    [MRCommon applyNavigationBarStyling:self.navigationController];
+    
     if ([APP_DELEGATE.launchScreen isEqualToString:@"Survey"]) {
         MRSurveyListViewController *surveyListViewController = [[MRSurveyListViewController alloc] initWithNibName:@"MRSurveyListViewController" bundle:nil];
         surveyListViewController.isFromMenu = NO;
@@ -93,6 +107,7 @@
       [self getAppointmnets];
     }
 }
+
 - (void)enableDisableLeftButton:(BOOL)isEnable
 {
     self.leftButton.enabled = isEnable;
@@ -114,32 +129,126 @@
 }
 - (void)setUpUI
 {
-    self.appointmentsTableView.transform = CGAffineTransformMakeRotation(-M_PI * 0.5);
-    
-    if([MRCommon deviceHasThreePointFiveInchScreen])
-    {
-        [self.appointmentsTableView setFrame:CGRectMake(43 , 50, 234 , 50)];
-    }
-    else if([MRCommon deviceHasFourInchScreen])
-    {
-        [self.appointmentsTableView setFrame:CGRectMake(43 , 65, 234 , 50)];
-    }
-    else if([MRCommon deviceHasFourPointSevenInchScreen])
-    {
-        [self.appointmentsTableView setFrame:CGRectMake(52 , 70, 270 , 90)];
-
-    }
-    else if([MRCommon deviceHasFivePointFiveInchScreen])
-    {
-        [self.appointmentsTableView setFrame:CGRectMake(57 , 80, 300 , 90)];
-    }
-
-    
     NSDictionary *userData = [MRAppControl sharedHelper].userRegData;
-    self.titleLabel.text = [NSString stringWithFormat:@"Welcome %@. %@ %@", [userData objectForKey:KTitle],[userData objectForKey:KFirstName],[userData objectForKey:KLastName]];
-    self.appointmentsTableView.showsHorizontalScrollIndicator = NO;
-    self.appointmentsTableView.showsVerticalScrollIndicator   = NO;
-    self.appointmentsTableView.scrollEnabled = NO;
+    self.titleLabel.text = [NSString stringWithFormat:@"Welcome %@ %@", [userData objectForKey:KFirstName],[userData objectForKey:KLastName]];
+    
+    UITapGestureRecognizer *notificationsSuperViewTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                 action:@selector(latestnotificationsButtonAction:)];
+    [notificationsSuperViewTapRecognizer setNumberOfTapsRequired:1];
+    [self.notificationsSuperView addGestureRecognizer:notificationsSuperViewTapRecognizer];
+    
+    UITapGestureRecognizer *marketingCampaignSuperViewTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                 action:@selector(marketingCompaginsButtonAction:)];
+    [marketingCampaignSuperViewTapRecognizer setNumberOfTapsRequired:1];
+    [self.marketingCampaignSuperView addGestureRecognizer:marketingCampaignSuperViewTapRecognizer];
+    
+    UITapGestureRecognizer *surveysSuperViewTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                 action:@selector(surveysButtonAction:)];
+    [surveysSuperViewTapRecognizer setNumberOfTapsRequired:1];
+    [self.surveysSuperView addGestureRecognizer:surveysSuperViewTapRecognizer];
+    
+    UITapGestureRecognizer *searchForDrugsSuperViewTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                 action:@selector(searchButtonAction:)];
+    [searchForDrugsSuperViewTapRecognizer setNumberOfTapsRequired:1];
+    [self.searchForDrugsSuperView addGestureRecognizer:searchForDrugsSuperViewTapRecognizer];
+    
+    UITapGestureRecognizer *activityScoreSuperViewTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                 action:@selector(activityScoreButtonAction:)];
+    [activityScoreSuperViewTapRecognizer setNumberOfTapsRequired:1];
+    [self.activityScoreSuperView addGestureRecognizer:activityScoreSuperViewTapRecognizer];
+    
+    UITapGestureRecognizer *doctorPlusSuperViewTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                 action:@selector(newsButtonAction:)];
+    [doctorPlusSuperViewTapRecognizer setNumberOfTapsRequired:1];
+    [self.doctorPlusSuperView addGestureRecognizer:doctorPlusSuperViewTapRecognizer];
+    
+    [self.notificationPendingCountLabel.layer setMasksToBounds:YES];
+    self.notificationPendingCountLabel.layer.cornerRadius = 8.0f;
+    [self.notificationPendingCountLabel setHidden:YES];
+    
+    [self.surveysPendingCountLabel.layer setMasksToBounds:YES];
+    self.surveysPendingCountLabel.layer.cornerRadius = 8.0f;
+    [self.surveysPendingCountLabel setHidden:YES];
+    
+    [self.doctorPlusPendingCountLabel.layer setMasksToBounds:YES];
+    self.doctorPlusPendingCountLabel.layer.cornerRadius = 8.0f;
+    [self.doctorPlusPendingCountLabel setHidden:YES];
+}
+
+- (void)setPendingCountValuesInRespectiveLables:(NSDictionary*)data {
+    NSInteger notificationsCount = 0;
+    NSInteger surveysCount = 0;
+    NSInteger dashboardCount = 0;
+    
+    if (data != nil) {
+        id value = [data objectForCaseInsensitiveKey:@"notificationsCount"];
+        if (value != nil && [value isKindOfClass:[NSNumber class]]) {
+            notificationsCount = ((NSNumber*)value).integerValue;
+        }
+        
+        value = [data objectForCaseInsensitiveKey:@"surveyCount"];
+        if (value != nil && [value isKindOfClass:[NSNumber class]]) {
+            surveysCount = ((NSNumber*)value).integerValue;
+        }
+        
+        value = [data objectForCaseInsensitiveKey:@"doctorPlusCount"];
+        if (value != nil && [value isKindOfClass:[NSNumber class]]) {
+            dashboardCount = ((NSNumber*)value).integerValue;
+        }
+    }
+    
+    [MRAppControl sharedHelper].pendingNotificationCount = notificationsCount;
+    [MRAppControl sharedHelper].pendingSurveysCount = surveysCount;
+    [MRAppControl sharedHelper].pendingDashboardCount = dashboardCount;
+    
+    if (notificationsCount > 0) {
+        [self.notificationPendingCountLabel setHidden:NO];
+        [self.notificationPendingCountLabel setText:[NSString stringWithFormat:@"%ld", (long)notificationsCount]];
+    } else {
+        [self.notificationPendingCountLabel setHidden:YES];
+    }
+    
+    if (surveysCount > 0) {
+        [self.surveysPendingCountLabel setHidden:NO];
+        [self.surveysPendingCountLabel setText:[NSString stringWithFormat:@"%ld", (long)surveysCount]];
+    } else {
+        [self.surveysPendingCountLabel setHidden:YES];
+    }
+    
+    if (dashboardCount > 0) {
+        [self.doctorPlusPendingCountLabel setHidden:NO];
+        [self.doctorPlusPendingCountLabel setText:[NSString stringWithFormat:@"%ld", (long)dashboardCount]];
+    } else {
+        [self.doctorPlusPendingCountLabel setHidden:YES];
+    }
+}
+
+- (void)getPendingCounts {
+    NSDictionary *dict = @{@"resetDoctorPlusCount":[NSNumber numberWithBool:false],
+                           @"resetNotificationCount":[NSNumber numberWithBool:false],
+                           @"resetSurveyCount": [NSNumber numberWithBool:false]};
+    [[MRWebserviceHelper sharedWebServiceHelper] getPendingCount:dict andHandler:^(BOOL status, NSString *details, NSDictionary *responce)
+     {
+         if (status)
+         {
+             [self setPendingCountValuesInRespectiveLables:[responce objectForCaseInsensitiveKey:kResult]];
+         }
+         else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+         {
+             [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+              {
+                  [MRCommon savetokens:responce];
+                  [[MRWebserviceHelper sharedWebServiceHelper] getPendingCount:dict andHandler:^(BOOL status, NSString *details, NSDictionary *responce)
+                   {
+                       if (status)
+                       {
+                           [self setPendingCountValuesInRespectiveLables:[responce objectForCaseInsensitiveKey:kResult]];
+                       }
+                   }];
+                  
+              }];
+         }
+     }];
 }
 
 - (void)getAppointmnets
@@ -253,6 +362,10 @@
 - (IBAction)marketingCompaginsButtonAction:(id)sender
 {
     //[MRCommon showAlert:kComingsoonMSG delegate:nil];
+    
+    MRMarketingCampaignController *marketingCampignViewController = [[MRMarketingCampaignController alloc] initWithNibName:@"MRMarketingCampaignController" bundle:nil];
+    
+    [self.navigationController pushViewController:marketingCampignViewController animated:YES];
 }
 
 - (IBAction)searchButtonAction:(id)sender
@@ -270,11 +383,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.myAppointments.count;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return self.appointmentsTableView.frame.size.width;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

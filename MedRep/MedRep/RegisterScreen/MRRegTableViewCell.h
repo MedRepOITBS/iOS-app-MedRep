@@ -21,6 +21,12 @@ typedef enum
 
 @protocol MRRegTableViewCellDelagte <NSObject>
 
+@optional
+- (void)activateTextField:(UITextField*)textField;
+
+@optional
+- (void)deActivateTextField;
+
 - (void)mOneButtonActionDelegate:(MRRegTableViewCell*)cell;
 - (void)mTwoButtonActionDelegate:(MRRegTableViewCell*)cell;
 - (void)areaWorkLocationButtonActionDelegate:(MRRegTableViewCell*)cell;

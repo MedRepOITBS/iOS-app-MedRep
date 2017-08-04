@@ -1,0 +1,28 @@
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+ 
+# My other pods
+ 
+def google_pods
+    pod 'GooglePlaces', '= 2.0.1'
+    pod 'GoogleMaps', '= 2.0.1'
+
+end
+ 
+def pan_charts
+pod 'PNChart’
+end
+target 'MedRepDev' do
+    google_pods
+    pan_charts
+end
+ 
+target 'MedRep' do
+    google_pods
+    pan_charts
+end
+
+target 'MedRepProd' do
+    google_pods
+    pan_charts
+end

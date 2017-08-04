@@ -11,14 +11,12 @@
 #import "MRAppControl.h"
 #import "MRCommon.h"
 
-@interface NotificationWebViewController () <SWRevealViewControllerDelegate>
+@interface NotificationWebViewController () <SWRevealViewControllerDelegate, UIWebViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIImageView *companyLogoImage;
 @property (weak, nonatomic) IBOutlet UIWebView *web;
 @property (strong, nonatomic) IBOutlet UIView *navView;
-@property (weak, nonatomic) IBOutlet UILabel *titleLogo;
-@property (weak, nonatomic) IBOutlet UIView *titleView;
-@property (weak, nonatomic) IBOutlet UIView *logoView;
+@property (weak, nonatomic) IBOutlet UILabel *titleView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleViewHeightConstraint;
 
 @end
 
@@ -39,16 +37,20 @@
     UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navView];
     self.navigationItem.rightBarButtonItem = rightButtonItem;
     
-    NSDictionary *comapnyDetails = [[MRAppControl sharedHelper] getCompanyDetailsByID:[[self.selectedNotification objectForKey:@"companyId"] intValue]];
-    self.companyLogoImage.image =  [MRCommon getImageFromBase64Data:[[comapnyDetails objectForKey:@"displayPicture"] objectForKey:@"data"]];
-    
     self.navigationItem.title = _isFromTransform ? @"Details" : @"Notification Details";
-    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
+    //[self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
+    
+    if (self.headerTitle == nil || self.headerTitle.length == 0) {
+        self.titleViewHeightConstraint.constant = 0;
+        [self.titleView setHidden:YES];
+    } else {
+        [self.titleView setText:self.headerTitle];
+    }
+    
+    [MRCommon showActivityIndicator:@"Loading..."];
+    [self.web setDelegate:self];
     
     //self.notificationDetailsList = [self.selectedNotification objectForKey:@"notificationDetails"];
-    self.titleLogo.text = [self.selectedNotification objectForKey:@"companyName"];
-    self.titleLogo.hidden = YES;//[self.selectedNotification objectForKey:@"companyName"];
-    
     [self loadNotificationDetails];
 }
 
@@ -69,8 +71,12 @@
 
 - (void)loadNotificationDetails
 {
+    if (self.urlLink == nil || self.urlLink.length == 0) {
+        self.urlLink = @"http://www.apple.com/in/";//@"http://medrep.in";
+    }
+    
     self.notificationDetailsList = [[MRAppControl sharedHelper] getNotificationByCompanyID:[[self.selectedNotification objectForKey:@"companyId"] integerValue]];
-    [_web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://medrep.in"]]];
+    [_web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlLink]]];
 }
 
 - (void)backButtonAction
@@ -88,6 +94,11 @@
     {
         self.view.userInteractionEnabled = YES;
     }
+}
+
+#pragma mark - UIWebViewDelegate
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [MRCommon stopActivityIndicator];
 }
 
 @end

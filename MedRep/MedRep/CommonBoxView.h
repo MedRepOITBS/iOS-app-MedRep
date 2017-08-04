@@ -8,25 +8,19 @@
 
 #import <UIKit/UIKit.h>
 @protocol CommonBoxViewDelegate;
-@class MRContact,MRGroup;
-@interface CommonBoxView : UIView <UITextViewDelegate>
-@property (weak, nonatomic) IBOutlet UIImageView *personImageView;
-@property (weak, nonatomic) IBOutlet UILabel *personNameLbl;
-@property (weak, nonatomic) IBOutlet UIImageView *shareImageView;
-@property (weak, nonatomic) IBOutlet UITextView *commentTextView;
-@property (weak, nonatomic) IBOutlet UILabel *hintCameraLbl;
 
-@property (weak, nonatomic) IBOutlet UIView *commentParentView;
-@property (weak, nonatomic) IBOutlet UIButton *cameraBtn;
+@class MRContact, MRGroup, MRSharePost;
+
+@interface CommonBoxView : UIView <UITextViewDelegate>
+@property (weak, nonatomic) IBOutlet UITextView *commentTextView;
+@property (weak, nonatomic) IBOutlet UITextField *titleTextField;
+@property (weak,nonatomic) IBOutlet UITextField *descriptionTextField;
 @property (nonatomic,weak) id<CommonBoxViewDelegate> delegate;
 
-- (void)setContact:(MRContact*)contact;
-- (void)setGroup:(MRGroup*)group;
-- (IBAction)cameraBtnTapped:(id)sender;
-- (IBAction)okButtonTapped:(id)sender;
-- (IBAction)cancelButtonTapped:(id)sender;
+-(void)setData:(MRContact*)contact group:(MRGroup*)group andSharedPost:(MRSharePost*)sharePost;
+-(MRSharePost *)getSelectedPost;
 -(void)setImageForShareImage:(UIImage *)image;
--(void)setData:(NSIndexPath *)indexPath;
+
 @end
 
 @protocol CommonBoxViewDelegate <NSObject>
@@ -35,6 +29,8 @@
 -(void)commonBoxCameraButtonTapped;
 -(void)commonBoxOkButtonPressedWithData:(NSDictionary *)dictData withIndexPath:(NSIndexPath *)indexPath;
 -(void)commonBoxCancelButtonPressed;
-
-
+-(void)commonBoxCameraGalleryButtonTapped;
+- (void)commentPosted;
+- (void)commentPostedWithData:(NSString*)message andImageData:(NSData*)imageData
+                withSharePost:(MRSharePost*)sharePost;
 @end

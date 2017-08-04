@@ -12,6 +12,7 @@
 
 @property (nonatomic, assign) BOOL isFromGroup;
 @property (nonatomic, assign) BOOL isFromMember;
-@property (strong, nonatomic) NSString *gid;
+@property (nonatomic, assign) BOOL canEdit;
+@property (strong, nonatomic) NSNumber *gid;
 
 @end

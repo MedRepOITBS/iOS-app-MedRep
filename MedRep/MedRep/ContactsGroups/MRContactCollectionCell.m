@@ -7,8 +7,10 @@
 //
 
 #import "MRContactCollectionCell.h"
-#import "MRGroupUserObject.h"
 #import "MRCommon.h"
+#import "MRAppControl.h"
+#import "MRContact.h"
+#import "MRGroup.h"
 
 @interface MRContactCollectionCell()
 
@@ -22,39 +24,22 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    [super awakeFromNib];
 }
 
-- (void)setGroupData:(MRGroupObject*)group{
+- (void)setGroupData:(MRGroup*)group{
     for (UIView *view in self.picture.subviews) {
         if ([view isKindOfClass:[UILabel class]]) {
             [view removeFromSuperview];
         }
     }
     
-    self.picture.image = [MRCommon getImageFromBase64Data:[group.group_img_data dataUsingEncoding:NSUTF8StringEncoding]];
+    NSLog(@"%@", group.group_name);
     self.name.text = group.group_name;
     self.detail.text = group.group_short_desc;
     
-    if (group.group_name.length > 0 && !group.group_img_data.length) {
-        UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:self.picture.bounds];
-        subscriptionTitleLabel.textAlignment = NSTextAlignmentCenter;
-        subscriptionTitleLabel.font = [UIFont systemFontOfSize:15.0];
-        subscriptionTitleLabel.textColor = [UIColor lightGrayColor];
-        subscriptionTitleLabel.layer.cornerRadius = 5.0;
-        subscriptionTitleLabel.layer.masksToBounds = YES;
-        subscriptionTitleLabel.layer.borderWidth =1.0;
-        subscriptionTitleLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
-        
-        NSArray *substrngs = [group.group_name componentsSeparatedByString:@" "];
-        NSString *imageString = @"";
-        for(NSString *str in substrngs){
-            if (str.length > 0) {
-                imageString = [imageString stringByAppendingString:[NSString stringWithFormat:@"%c",[str characterAtIndex:0]]];
-            }
-        }
-        subscriptionTitleLabel.text = imageString.length > 2 ? [imageString substringToIndex:2] : imageString;
-        [self.picture addSubview:subscriptionTitleLabel];
-    }
+    [self.picture setImage:nil];
+    [MRAppControl getGroupImage:group andImageView:self.picture];
 }
 
 //{"name":"John Doe","description":"ortho","profile_pic":""}
@@ -95,41 +80,17 @@
     }
 }*/
 
-- (void)setData:(MRGroupUserObject*)contact {
+- (void)setData:(MRContact*)contact {
     for (UIView *view in self.picture.subviews) {
         if ([view isKindOfClass:[UILabel class]]) {
             [view removeFromSuperview];
         }
     }
     
-    NSString *fullName = [NSString stringWithFormat:@"%@ %@",contact.firstName, contact.lastName];
+    NSString *fullName = [MRAppControl getContactName:contact];
     self.name.text = fullName;
-    self.detail.text = contact.therapeuticName;
-    if (contact.imgData.length) {
-        self.picture.image = [MRCommon getImageFromBase64Data:[contact.imgData dataUsingEncoding:NSUTF8StringEncoding]];
-    } else {
-        self.picture.image = nil;
-        if (fullName.length > 0) {
-            UILabel *subscriptionTitleLabel = [[UILabel alloc] initWithFrame:self.picture.bounds];
-            subscriptionTitleLabel.textAlignment = NSTextAlignmentCenter;
-            subscriptionTitleLabel.font = [UIFont systemFontOfSize:15.0];
-            subscriptionTitleLabel.textColor = [UIColor lightGrayColor];
-            subscriptionTitleLabel.layer.cornerRadius = 5.0;
-            subscriptionTitleLabel.layer.masksToBounds = YES;
-            subscriptionTitleLabel.layer.borderWidth =1.0;
-            subscriptionTitleLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
-            
-            NSArray *substrngs = [fullName componentsSeparatedByString:@" "];
-            NSString *imageString = @"";
-            for(NSString *str in substrngs){
-                if (str.length > 0) {
-                    imageString = [imageString stringByAppendingString:[NSString stringWithFormat:@"%c",[str characterAtIndex:0]]];
-                }
-            }
-            subscriptionTitleLabel.text = imageString.length > 2 ? [imageString substringToIndex:2] : imageString;
-            [self.picture addSubview:subscriptionTitleLabel];
-        }
-    }
+    self.detail.text = contact.therapeuticArea.length ? contact.therapeuticArea : contact.therapeuticName;
+    [MRAppControl getContactImage:contact andImageView:self.picture];
 }
 
 @end

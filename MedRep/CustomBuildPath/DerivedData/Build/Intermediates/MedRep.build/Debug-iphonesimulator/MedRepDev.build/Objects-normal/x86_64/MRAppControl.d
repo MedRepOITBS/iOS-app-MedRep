@@ -1,0 +1,36 @@
+dependencies: \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Appcontrol/MRAppControl.m \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Appcontrol/MRAppControl.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Common/MRCommon.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Communication/MRDevEnvironmentConfig.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/MRAppConstants.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Common/MRConstants.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/AppDelegate.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/CoreData/MRDataManger.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/CoreData/MRDatabaseHelper.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Communication/MRWebserviceHelper.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Communication/MRWebserviceConstants.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/BaseDataModel/NSDictionary+CaseInsensitive.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Common/NSData+Base64Additions.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Helper/Reachability.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/SWRevealViewCont/SWRevealViewController.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/ViewController.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Home/MRHomeViewContoller.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Login/MRLoginViewController.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Menu/MRMenuViewController.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Dashboard/MRDashBoardVC.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Pharma/PHDashboard/MRPHDashBoardViewController.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Pharma/PharmaMenu/MRPharmaMenuViewController.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/WelcomeScreen/MRWelcomeViewController.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/OtpScreen/MROTPVerifiedViewController.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Model/MRContact.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/BaseDataModel/MRManagedObject.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Model/MRContact+CoreDataProperties.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Model/MRGroup.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Model/MRGroup+CoreDataProperties.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Model/MRGroupMembers.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Model/MRGroupMembers+CoreDataProperties.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Model/MRPostedReplies.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Model/MRPostedReplies+CoreDataProperties.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/Common/KLCPopup/KLCPopup.h \
+  /Users/vkatra/Documents/Personal/MedRep/SourceCode/Sep4/iOS-app-MedRep/MedRep/MedRep/CommonBoxView.h

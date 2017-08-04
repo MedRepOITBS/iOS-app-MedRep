@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MRShareViewController">
             <connections>
-                <outlet property="bottomHeight" destination="Fyh-Ph-hg1" id="oe1-UF-nIn"/>
+                <outlet property="emptyMessage" destination="dpb-O7-ImQ" id="Dtl-e1-oeU"/>
                 <outlet property="navView" destination="YeC-pW-rN6" id="h4M-nH-KG0"/>
                 <outlet property="postsTableView" destination="FjW-Hl-Vrd" id="kNs-2m-JxQ"/>
-                <outlet property="searchBar" destination="toD-2Y-nCn" id="VFl-Cw-EjA"/>
+                <outlet property="searchBar" destination="toD-2Y-nCn" id="PQy-lV-Gv8"/>
+                <outlet property="takeMeToMyShareView" destination="wn4-mn-La2" id="qNT-8r-M6K"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,49 +21,95 @@
             <rect key="frame" x="0.0" y="64" width="375" height="603"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="toD-2Y-nCn">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="toD-2Y-nCn">
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="hvy-Q0-dDd"/>
                     </constraints>
                     <textInputTraits key="textInputTraits"/>
                     <connections>
-                        <outlet property="delegate" destination="-1" id="fgy-0J-dD1"/>
+                        <outlet property="delegate" destination="-1" id="x6c-cp-x9G"/>
                     </connections>
                 </searchBar>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FjW-Hl-Vrd">
-                    <rect key="frame" x="8" y="44" width="359" height="509"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="4tc-jZ-ypg"/>
                         <outlet property="delegate" destination="-1" id="Y02-Ab-OZ2"/>
                     </connections>
                 </tableView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No posts are shared yet !!!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dpb-O7-ImQ">
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lds-OU-f6b">
+                    <constraints>
+                        <constraint firstAttribute="width" constant="30" id="T1S-FI-dl3"/>
+                        <constraint firstAttribute="height" constant="30" id="fVG-vW-5sB"/>
+                    </constraints>
+                    <state key="normal" image="compose.png"/>
+                    <connections>
+                        <action selector="postANewTopicButtonClicked:" destination="-1" eventType="touchUpInside" id="RTt-ZE-dEL"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wn4-mn-La2">
+                    <color key="backgroundColor" red="0.12549019610000001" green="0.69411764710000001" blue="0.54117647059999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="JbE-3f-9jh"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                    <state key="normal" title="Take me to &quot;My Share&quot;">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="takeMeToMyShareViewTapped:" destination="-1" eventType="touchUpInside" id="htH-dM-mXL"/>
+                    </connections>
+                </button>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="lds-OU-f6b" firstAttribute="top" secondItem="toD-2Y-nCn" secondAttribute="top" id="2MZ-nh-hn6"/>
                 <constraint firstItem="toD-2Y-nCn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="C71-mZ-fxz"/>
                 <constraint firstItem="toD-2Y-nCn" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="CEy-zj-mfE"/>
-                <constraint firstAttribute="bottom" secondItem="FjW-Hl-Vrd" secondAttribute="bottom" constant="50" id="Fyh-Ph-hg1"/>
-                <constraint firstAttribute="trailing" secondItem="toD-2Y-nCn" secondAttribute="trailing" id="Oh8-7x-nqg"/>
+                <constraint firstItem="dpb-O7-ImQ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="K2m-ur-BSx"/>
+                <constraint firstAttribute="trailing" secondItem="toD-2Y-nCn" secondAttribute="trailing" constant="35" id="Oh8-7x-nqg"/>
+                <constraint firstAttribute="trailing" secondItem="lds-OU-f6b" secondAttribute="trailing" constant="5" id="QD0-pl-qhU"/>
+                <constraint firstItem="dpb-O7-ImQ" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="RpP-Ge-dC8"/>
                 <constraint firstItem="FjW-Hl-Vrd" firstAttribute="top" secondItem="toD-2Y-nCn" secondAttribute="bottom" id="WGc-iJ-goz"/>
                 <constraint firstAttribute="trailing" secondItem="FjW-Hl-Vrd" secondAttribute="trailing" constant="8" id="WlQ-NI-gNa"/>
-                <constraint firstItem="FjW-Hl-Vrd" firstAttribute="top" secondItem="toD-2Y-nCn" secondAttribute="bottom" id="pog-Mo-3gO"/>
+                <constraint firstItem="wn4-mn-La2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="Wnk-eQ-DJP"/>
+                <constraint firstItem="lds-OU-f6b" firstAttribute="centerY" secondItem="toD-2Y-nCn" secondAttribute="centerY" id="cSg-LS-6C7"/>
+                <constraint firstItem="lds-OU-f6b" firstAttribute="bottom" secondItem="toD-2Y-nCn" secondAttribute="bottom" id="dDE-si-hTl"/>
+                <constraint firstItem="lds-OU-f6b" firstAttribute="centerX" secondItem="toD-2Y-nCn" secondAttribute="centerX" id="eDL-yD-zAB"/>
+                <constraint firstAttribute="bottom" secondItem="wn4-mn-La2" secondAttribute="bottom" constant="5" id="jK7-8V-7mK"/>
+                <constraint firstItem="wn4-mn-La2" firstAttribute="top" secondItem="FjW-Hl-Vrd" secondAttribute="bottom" constant="10" id="kOd-VR-caZ"/>
+                <constraint firstItem="dpb-O7-ImQ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="66" id="kao-bh-cet"/>
+                <constraint firstAttribute="trailing" secondItem="wn4-mn-La2" secondAttribute="trailing" constant="10" id="ovm-Mw-9u5"/>
                 <constraint firstItem="FjW-Hl-Vrd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="s90-Ei-imQ"/>
+                <constraint firstItem="lds-OU-f6b" firstAttribute="centerY" secondItem="toD-2Y-nCn" secondAttribute="centerY" id="vQw-kW-OPr"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="RpP-Ge-dC8"/>
+                    <exclude reference="2MZ-nh-hn6"/>
+                    <exclude reference="dDE-si-hTl"/>
+                    <exclude reference="eDL-yD-zAB"/>
+                    <exclude reference="vQw-kW-OPr"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="227.5" y="216.5"/>
         </view>
         <view contentMode="scaleToFill" id="YeC-pW-rN6">
             <rect key="frame" x="0.0" y="0.0" width="40" height="33"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="Icon-40.png" translatesAutoresizingMaskIntoConstraints="NO" id="tDF-eF-1ez">
-                    <rect key="frame" x="0.0" y="0.0" width="40" height="33"/>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="logo_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="tDF-eF-1ez">
+                    <frame key="frameInset" width="40" height="33"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -69,6 +117,7 @@
         </view>
     </objects>
     <resources>
-        <image name="Icon-40.png" width="40" height="40"/>
+        <image name="compose.png" width="128" height="128"/>
+        <image name="logo_icon.png" width="34" height="33"/>
     </resources>
 </document>

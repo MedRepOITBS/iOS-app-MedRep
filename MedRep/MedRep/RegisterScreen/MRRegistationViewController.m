@@ -16,9 +16,11 @@
 #import "MRConstants.h"
 #import "MRWebserviceHelper.h"
 #import "MRLocationManager.h"
+#import "TutorialView.h"
+#import "KLCPopup.h"
 
 #define kHeaderView     [NSArray arrayWithObjects:@"ADD MOBILE NUMBER",@"ALTERNATIVE EMAIL ADDRESS", nil]
-#define kPlaceHolders   [NSArray arrayWithObjects:@"DOCTOR REGISTRATION ID", @"FIRST NAME", @"LAST NAME", @"MOBILE NUMBER", @"MOBILE NUMBER", nil]
+#define kPlaceHolders   [NSArray arrayWithObjects:@"MCI REGISTRATION ID", @"FIRST NAME", @"LAST NAME", @"MOBILE NUMBER", @"MOBILE NUMBER", nil]
 
 //@"PRIMARY MOBILE NUMBER"
 
@@ -46,9 +48,23 @@ typedef void(^selectedComapany)(NSString *companyName);
 @property (assign, nonatomic) NSInteger selectedUserType;
 @property (strong, nonatomic) WYPopoverController *myPopoverController;
 @property (nonatomic, strong) selectedComapany userSelectedCompany;
+@property (strong,nonatomic) KLCPopup *tutorialViewKLCPopView;
+@property (strong,nonatomic) TutorialView *tutorialView;
 @end
 
 @implementation MRRegistationViewController
+
+-(void)setupTutorialView{
+    
+    NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"TutorialView" owner:self options:nil];
+    
+    _tutorialView = (TutorialView *)[arr objectAtIndex:0];
+    _tutorialView.layer.cornerRadius = 10;
+    [_tutorialView.titleLabel setText:@"Doctor Details"];
+    [_tutorialView.descriptionTextView setText:@"We request all users to mention accurate information within this field as our Background Verification team thoroughly checks the validity of this data. Once verified, the user can receive information on this application."];
+    _tutorialViewKLCPopView = [KLCPopup popupWithContentView:self.tutorialView];
+    [_tutorialViewKLCPopView showWithLayout:KLCPopupLayoutMake(KLCPopupHorizontalLayoutCenter, KLCPopupVerticalLayoutCenter)];
+}
 
 - (void)viewDidLoad {
     
@@ -64,6 +80,8 @@ typedef void(^selectedComapany)(NSString *companyName);
     [super viewDidLoad];
     
     self.registrationTable.contentInset = UIEdgeInsetsMake(-30, 0, 0, -20);
+    
+    
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -147,7 +165,10 @@ typedef void(^selectedComapany)(NSString *companyName);
         self.bottomConstraint.constant = 50;
     }
 }
-
+-(IBAction)whyThisBtnTapped:(id)sender{
+    [self setupTutorialView];
+    
+}
 - (NSInteger)getEmailCount:(NSArray*)emaileNumbers
 {
     NSInteger count = 0;
@@ -709,11 +730,11 @@ typedef void(^selectedComapany)(NSString *companyName);
 - (BOOL)validateData
 {
     BOOL isSuccess = YES;
-    if ([MRAppControl sharedHelper].userType == 1)
+    if ([MRAppControl sharedHelper].userType == 2)
     {
         if ([MRCommon isStringEmpty:[self.userDeatils objectForKey:KDoctorRegID]])
         {
-            [MRCommon showAlert:@"Doctor registration ID should not be empty." delegate:nil];
+            [MRCommon showAlert:@"MCI registration ID should not be empty." delegate:nil];
             isSuccess = NO;
             return isSuccess;
         }

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MRPHSurveyListViewController">
+            <connections>
+                <outlet property="navView" destination="TBx-Lc-QDo" id="pWm-ne-unr"/>
+                <outlet property="surveysList" destination="3oC-ad-XZj" id="0EF-EH-ZTW"/>
+                <outlet property="view" destination="4Id-Pu-ntb" id="yy3-fH-quG"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="4Id-Pu-ntb">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="notificationbody-bg.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="lEX-Uv-jJ9"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="70" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="3oC-ad-XZj">
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="Fxf-Nb-GAH"/>
+                        <outlet property="delegate" destination="-1" id="SrH-Sg-bA0"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="3oC-ad-XZj" firstAttribute="top" secondItem="4Id-Pu-ntb" secondAttribute="top" id="8y7-OU-R51"/>
+                <constraint firstAttribute="bottom" secondItem="3oC-ad-XZj" secondAttribute="bottom" id="J8s-eu-FmA"/>
+                <constraint firstAttribute="bottom" secondItem="lEX-Uv-jJ9" secondAttribute="bottom" id="MpZ-tq-NL6"/>
+                <constraint firstAttribute="trailing" secondItem="lEX-Uv-jJ9" secondAttribute="trailing" id="Y58-Zz-aeh"/>
+                <constraint firstItem="lEX-Uv-jJ9" firstAttribute="top" secondItem="4Id-Pu-ntb" secondAttribute="top" id="ZBa-bG-6vK"/>
+                <constraint firstItem="lEX-Uv-jJ9" firstAttribute="leading" secondItem="4Id-Pu-ntb" secondAttribute="leading" id="ayr-mQ-O53"/>
+                <constraint firstItem="3oC-ad-XZj" firstAttribute="leading" secondItem="4Id-Pu-ntb" secondAttribute="leading" id="kHN-Id-hyn"/>
+                <constraint firstAttribute="trailing" secondItem="3oC-ad-XZj" secondAttribute="trailing" id="mCi-ir-ydP"/>
+            </constraints>
+            <point key="canvasLocation" x="205" y="377"/>
+        </view>
+        <view contentMode="scaleToFill" id="TBx-Lc-QDo">
+            <rect key="frame" x="0.0" y="0.0" width="40" height="33"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="logo_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="uh7-1g-xm1">
+                    <frame key="frameInset" width="40" height="33"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-29" y="-100.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="logo_icon.png" width="34" height="33"/>
+        <image name="notificationbody-bg.jpg" width="320" height="453"/>
+    </resources>
+</document>

@@ -8,14 +8,16 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "MRManagedObject.h"
 
-@class MRContact, MRGroupPost;
+@class MRContact, MRPostedReplies;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MRGroup : NSManagedObject
+@interface MRGroup : MRManagedObject
 
 // Insert code here to declare functionality of your managed object subclass
+@property (nonatomic) NSArray *allMembers;
 
 @end
 

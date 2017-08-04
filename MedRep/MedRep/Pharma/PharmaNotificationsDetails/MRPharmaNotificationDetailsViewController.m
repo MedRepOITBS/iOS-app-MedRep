@@ -29,9 +29,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *drugNamelabel;
 @property (weak, nonatomic) IBOutlet UILabel *companyNamelabel;
 @property (weak, nonatomic) IBOutlet UIImageView *notifcationImage;
-@property (weak, nonatomic) IBOutlet UILabel *contentHeaderLabel;
-@property (weak, nonatomic) IBOutlet UIScrollView *contentScrollView;
-@property (weak, nonatomic) IBOutlet UILabel *contentTitleLabel;
+@property (weak, nonatomic) IBOutlet UITextView *contentHeaderLabel;
+@property (weak, nonatomic) IBOutlet UITextView *contentTitleLabel;
 
 @property (strong, nonatomic) IBOutlet UIView *navView;
 @property (weak, nonatomic) IBOutlet UIView *footerView;
@@ -52,12 +51,14 @@
 @property (nonatomic, assign) NSInteger imagesCount;
 @property (nonatomic, assign) NSInteger currentImageIndex;
 
-@property (weak, nonatomic) IBOutlet UIScrollView *topScrollView;
-
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewHeight;
 @property (weak, nonatomic) IBOutlet UIView *imageContentView;
-@property (weak, nonatomic) IBOutlet UIImageView *topNotificationImage;
+
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraintForTopImage;
+
+@property (nonatomic, assign) BOOL loadImagesNow;
 
 @end
 
@@ -66,10 +67,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.contentScrollView setZoomScale:1.0];
-    [self.contentScrollView setMinimumZoomScale:0.5];
-    [self.contentScrollView setMaximumZoomScale:5.0];
-
+    self.loadImagesNow = NO;
     self.noticationImages = [[NSMutableDictionary alloc] init];
     
     self.timer = 5;
@@ -110,9 +108,10 @@
         self.drugNamelabel.text = [self.notificationDetails objectForKey:@"detailTitle"];
         
         self.titleLabel.text = [self.selectedNotification objectForKey:@"companyName"];
-        [MRCommon showActivityIndicator:@"Loading..."];
+//        [MRCommon showActivityIndicator:@"Loading..."];
         self.detailsList = [self.notificationDetails objectForKey:@"notificationDetails"];
-        [self loadImages];
+        [MRCommon showActivityIndicator:@"Loading..."];
+        self.loadImagesNow = YES;
     }
     self.loopTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTimerLabel) userInfo:nil repeats:YES];
     
@@ -125,6 +124,17 @@
     
     // Do any additional setup after loading the view from its nib.
     
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if (self.loadImagesNow) {
+        self.loadImagesNow = NO;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self loadImages];
+        });
+    }
 }
 
 - (void)addSwipeGesture
@@ -154,16 +164,21 @@
 
 - (void)loadImages
 {
-    [MRCommon getPharmaNotificationImageByID:[[[self.detailsList objectAtIndex:self.imagesCount] objectForKey:@"detailId"] integerValue] forImage:^(UIImage *image)
-     {
+     id notificationDetailsArray = [self.selectedNotification objectForKey:@"notificationDetails"];
+     if (notificationDetailsArray != nil) {
+         
+         NSDictionary *notificationDetails;
+         if ([notificationDetailsArray isKindOfClass:[NSArray class]]) {
+             NSArray *tempNotificationDetailsArray = (NSArray*)notificationDetailsArray;
+             notificationDetails = tempNotificationDetailsArray.firstObject;
+         } else if ([notificationDetailsArray isKindOfClass:[NSDictionary class]]) {
+             notificationDetails = notificationDetailsArray;
+         }
+         
+         NSString *image = [notificationDetails objectOrNilForKey:@"contentLocation"];
          if (image)
          {
              [self.noticationImages setObject:image forKey:[[self.detailsList objectAtIndex:self.imagesCount] objectForKey:@"detailId"]];
-             
-             self.contentViewHeight.constant = self.topScrollView.frame.size.height + 130;
-             self.contentViewWidth.constant =  self.topScrollView.frame.size.width;
-             [self updateViewConstraints];
-
              
              if (self.imagesCount == 0)
              {
@@ -182,30 +197,51 @@
                  [MRCommon stopActivityIndicator];
              }
          }
-         else
-         {
+     }
+     else
+     {
+         dispatch_async(dispatch_get_main_queue(), ^{
              [MRCommon stopActivityIndicator];
              self.notificationImageHeightConstraint.constant = 0;
              self.notificationImageWidthConstraint.constant = 0;
              self.notifcationImage.image = [UIImage imageNamed:@""];
-             self.topNotificationImage.image = [UIImage imageNamed:@""];
-
-         }
-     }];
+         });
+     }
 }
 
 
 - (void)updateNotification:(NSNumber*)imageId
 {
-    UIImage *image = [self.noticationImages objectForKey:imageId];
-    self.notificationImageHeightConstraint.constant = self.contentScrollView.frame.size.height;
-    self.notificationImageWidthConstraint.constant = self.contentScrollView.frame.size.width;
-    self.notifcationImage.image = image;
-    self.topNotificationImage.image = image;
+    NSString *image = [self.noticationImages objectForKey:imageId];
+    self.notifcationImage.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:image]] scale:1.0];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:image]]];
+//    .image = self.notifcationImage.image;
+    
     self.contentTitleLabel.text = [[self.detailsList objectAtIndex:self.currentImageIndex] objectForKey:@"detailTitle"];
-    self.contentHeaderLabel.text = [[self.detailsList objectAtIndex:self.currentImageIndex] objectForKey:@"detailDesc"];
+    
+    NSString *contentTitle = [[self.detailsList objectAtIndex:self.currentImageIndex] objectForKey:@"detailDesc"];
+    
+    if (contentTitle != nil && contentTitle.length > 0) {
+        self.contentHeaderLabel.text = contentTitle;
+        
+        NSAttributedString *contentTitleAttributedText =
+        [[NSAttributedString alloc] initWithString:contentTitle
+                                        attributes:@{NSFontAttributeName: self.contentHeaderLabel.font}];
+        
+        CGRect contentTitleRect = [contentTitleAttributedText boundingRectWithSize:(CGSize){self.contentHeaderLabel.frame.size.width, CGFLOAT_MAX}
+                                                                           options:NSStringDrawingUsesLineFragmentOrigin
+                                                                           context:nil];
+        
+        CGFloat contentTitleLabelHeight = contentTitleRect.size.height;
+        
+        if (contentTitleLabelHeight > 90) {
+            contentTitleLabelHeight = 130;
+        }
+        contentTitleLabelHeight += 40;
+        
+        self.heightConstraintForTopImage.constant = contentTitleLabelHeight;
+    }
 
-    self.contentScrollView.contentSize = image.size;
     [self.view updateConstraints];
 }
 
@@ -354,14 +390,10 @@
     self.isFullScreenShown = isFullScreen;
     if (isFullScreen)
     {
-        [self.contentScrollView setZoomScale:1.0];
-        [self.contentScrollView setMinimumZoomScale:0.5];
-        [self.contentScrollView setMaximumZoomScale:5.0];
-
         self.topView.hidden = NO;
         self.footerView.hidden= YES;
         self.contentView.hidden = YES;
-        self.imageConstarintViewConstaint.constant = -40;
+        self.imageConstarintViewConstaint.constant = 0;
         self.navigationItem.leftBarButtonItem = nil;
         self.navigationItem.hidesBackButton = YES;
         self.fullscreenView.hidden = YES;
@@ -373,7 +405,7 @@
         self.topView.hidden = YES;
         self.footerView.hidden= NO;
         self.contentView.hidden = NO;
-        self.imageConstarintViewConstaint.constant = 0;
+        self.imageConstarintViewConstaint.constant = 40;
         self.fullscreenView.hidden = NO;
         self.drugNamelabel.hidden = NO;
         self.titleLabel.text = [self.selectedNotification objectForKey:@"companyName"];

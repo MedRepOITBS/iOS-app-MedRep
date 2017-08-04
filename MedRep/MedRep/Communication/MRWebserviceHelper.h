@@ -10,6 +10,8 @@
 #import "MRWebserviceConstants.h"
 #import "MRDevEnvironmentConfig.h"
 
+@class NSManagedObjectContext;
+
 typedef void(^completionHandler)(BOOL status, NSString *details, NSDictionary *responce);
 
 @interface MRWebserviceHelper : NSObject
@@ -43,6 +45,11 @@ typedef void(^completionHandler)(BOOL status, NSString *details, NSDictionary *r
 
 - (void)getPharmaProfileDetails:(completionHandler)responceHandler;
 
+- (void)getSurveysListByPharma:(completionHandler)responceHandler;
+- (void)getSurveyStatistics:(NSString*)surveyId andHandler:(completionHandler)responceHandler;
+- (void)sendReminderToDoctorForSurvey:(NSInteger)surveyId doctorId:(NSInteger)doctorId
+                           andHandler:(completionHandler)responceHandler;
+- (void)getPendingDoctorsListInSurvey:(NSString*)surveyId andHandler:(completionHandler)responceHandler;
 - (void)getMyPendingSurveysDetails:(completionHandler)responceHandler;
 
 - (void)getMyRepsDetails:(completionHandler)responceHandler;
@@ -72,6 +79,9 @@ typedef void(^completionHandler)(BOOL status, NSString *details, NSDictionary *r
                 isFromUpdate:(BOOL)isFromCreate
                  withHandler:(completionHandler)responceHandler;
 
+- (void)getProductBroucher:(NSInteger)detailNotificationId
+               withHandler:(completionHandler)responceHandler;
+
 - (void)getMyNotificationContent:(NSInteger)detailNotificationId
                      withHandler:(completionHandler)responceHandler;
 
@@ -84,6 +94,7 @@ withComplitionHandler:(completionHandler)responceHandler;
 - (void)getRecreateOTP:(NSString*)str
  withComplitionHandler:(completionHandler)responceHandler;
 
+- (void)getPendingCount:(NSDictionary*)dict andHandler:(completionHandler)responceHandler;
 
 - (void)getMyAppointments:(NSString*)appointmentDetails
                  withHandler:(completionHandler)responceHandler;
@@ -162,8 +173,6 @@ withComplitionHandler:(completionHandler)responceHandler;
 
 - (void)getMyTeamPendingAppointments:(completionHandler)responceHandler;
 
-- (void)getNewswithHandler:(completionHandler)responceHandler;
-
 - (void)getMaterialwithHandler:(completionHandler)responceHandler;
 
 - (void)createGroup:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
@@ -178,11 +187,13 @@ withComplitionHandler:(completionHandler)responceHandler;
 
 - (void)getGroupListwithHandler:(completionHandler)responceHandler;
 
+- (void)getGroupDetail:(NSInteger)groupId withHandler:(completionHandler)responseHandler;
+
 - (void)getSuggestedGroupListwithHandler:(completionHandler)responceHandler;
 
 - (void)getContactListwithHandler:(completionHandler)responceHandler;
 
-- (void)getSearchContactList:(NSString *)str withHandler:(completionHandler)responceHandler;
+- (void)getSearchContactList:(NSString *)str groupId:(NSString*)groupId withHandler:(completionHandler)responceHandler;
 
 - (void)getSuggestedContactListwithHandler:(completionHandler)responceHandler;
 
@@ -190,15 +201,17 @@ withComplitionHandler:(completionHandler)responceHandler;
 
 - (void)updateGroupMembersStatus:(NSDictionary *)dict withHandler:(completionHandler)responceHandler;
 
-- (void)getGroupMembersStatusWithId:(NSString *)groupId withHandler:(completionHandler)responceHandler;
+- (void)getGroupMembersStatusWithId:(NSInteger)groupId withHandler:(completionHandler)responceHandler;
 
 - (void)removeGroupMember:(NSDictionary *)dict withHandler:(completionHandler)responceHandler;
 
 - (void)getUserPreferences:(completionHandler)responceHandler;
 
+- (void)getContactDetail:(NSInteger)contactId withHandler:(completionHandler)responseHandler;
+
 - (void)fetchPendingConnectionsListwithHandler:(completionHandler)responceHandler;
 
-- (void)getAllContactsByCityListwithHandler:(completionHandler)responceHandler;
+- (void)getAllContactsByCityListwithHandler:(NSString*)groupId andCompletionHandler:(completionHandler)responceHandler;
 
 - (void)getDoctorContactsListwithHandler:(completionHandler)responceHandler;
 
@@ -210,7 +223,81 @@ withComplitionHandler:(completionHandler)responceHandler;
 
 - (void)removeConnection:(NSDictionary *)dict withHandler:(completionHandler)responceHandler;
 
-- (void)fetchPendingMembersListwithHandler:(completionHandler)responceHandler;
+- (void)getAllGroupListwithHandler:(completionHandler)responceHandler;
+
+- (void)joinGroup:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
+
+- (void)inviteContacts:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
+
+- (void)fetchPendingMembersList:(NSString *)groupID withHandler:(completionHandler)responceHandler;
+
+- (void)leaveGroup:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
+
+- (void)deleteConnection:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
+
+- (void)getMedicineSuggestions:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
+
+- (void)getMedicineAlternatives:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
+
+- (void)getMedicineDetails:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
+
+- (void)registerDeviceToken:(NSDictionary *)reqDict withHandler:(completionHandler)responceHandler;
+
+-(void)getShareByDate:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler;
+
+-(void)getNewsAndUpdates:(NSString*)category
+              methodName:(NSString*)methodName
+             withHandler:(completionHandler)responseHandler;
+
+-(void)getContactsAndGroups:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler;
+
+-(void)getMyWallPosts:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler;
+
+-(void)getShare:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler;
+
+-(void)updateComment:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler;
+
+-(void)updateShareCount:(NSDictionary *)reqDict withHandler:(completionHandler)responseHandler;
+
+-(void)addOrUpdateEducationArea:(NSArray *)reqDict withUpdateFlag:(BOOL)isUpdate withHandler: (completionHandler)responseHandler;
+-(void)addorUpdateInterestArea:(NSArray *)reqDict withUpdateFlag:(BOOL)isUpdate  withHandler:(completionHandler)responseHandler;
+-(void)addOrUpdatePulblishArticle:(NSArray *)reqDict withUpdateFlag:(BOOL)isUpdate withHandler:(completionHandler)responseHandler;
+-(void)addOrUpdateProfileAbout:(NSDictionary *)reqDict withUpdateFlag:(BOOL)isUpdate withHandler:(completionHandler)responseHandler;
+-(void)addOrUpdateWorkExperience:(NSArray *)reqDict withUpdateFlag:(BOOL)isUpdate withHandler:(completionHandler)responseHandler;
+
+-(void)deleteWorkExperience:(NSNumber *)workExpID withHandler:(completionHandler)responseHandler;
+-(void)deleteEducationQualification:(NSNumber *)educationQualID withHandler:(completionHandler)responseHandler;
+-(void)deleteInterestArea:(NSNumber *)interestID withHandler:(completionHandler)responseHandler;
+-(void)deletePublish:(NSNumber *)publicationID withHandler:(completionHandler)responseHandler;
+
+
+
++ (id)parseNetworkResponse:(Class)inEntityClass andData:(NSArray*)data;
+
++ (NSArray*)parseRecords:(Class)entityClass allRecords:(NSArray*)allRecords
+                 context:(NSManagedObjectContext*)context andData:(NSArray*)data;
+
+- (void)postNewTopic:(NSDictionary*)reqDict withHandler:(completionHandler)responceHandler;
+-(void)fetchDoctorInfoWithHandler:(NSInteger)doctorId responseHandler:(completionHandler)responseHandler;
+
+- (void)updateLikes:(NSInteger)postType
+          likeCount:(BOOL)like
+          messageId:(NSInteger)messageId
+        withHandler:(completionHandler)responceHandler;
+
+- (void)getShareDetailsById:(NSInteger)topicId
+                withHandler:(completionHandler)responseHandler;
+
+- (void)getPostsForAMember:(NSInteger)contactId groupId:(NSInteger)groupId
+               withHandler:(completionHandler)responseHandler;
+
+- (void)editLocation:(id)reqDict withHandler:(completionHandler)responceHandler;
+- (void)deleteLocation:(id)reqDict withHandler:(completionHandler)responceHandler;
+- (void)editContactInfo:(id)reqDict withHandler:(completionHandler)responceHandler;
+
+- (void)registerDeviceTokenWithPushAPI:(id)reqDict withHandler:(completionHandler)responceHandler;
+
+-(void)getSurveyReports:(NSInteger)surveyId withHandler:(completionHandler)responseHandler;
 
 @end
 
@@ -272,5 +359,22 @@ withComplitionHandler:(completionHandler)responceHandler;
     }
     return [NSDictionary dictionaryWithDictionary:[replaced copy]];
 }
+
+@end
+
+@interface NSMutableDictionary (CategoryName)
+
+- (void)setObjectForKey:(id)aKey andValue:(id)value;
+
+@end
+
+@implementation NSMutableDictionary (CategoryName)
+
+- (void)setObjectForKey:(id)aKey andValue:(id)value {
+    if (value != nil) {
+        [self setObject:value forKey:aKey];
+    }
+}
+
 @end
 

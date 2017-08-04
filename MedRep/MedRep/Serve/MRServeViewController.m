@@ -7,17 +7,22 @@
 //
 
 #import "MRServeViewController.h"
-#import "MRTabView.h"
 #import "SWRevealViewController.h"
 #import "MRContactsViewController.h"
 #import "MRGroupsListViewController.h"
 #import "PendingContactsViewController.h"
-#import "MRShareViewController.h"
+#import "MRMyWallViewController.h"
 #import "MRTransformViewController.h"
+#import "MRCommon.h"
+#import "MRCustomTabBar.h"
+#import "MRAppConstants.h"
+#import "MRConstants.h"
 
-@interface MRServeViewController () <MRTabViewDelegate, SWRevealViewControllerDelegate>
+@interface MRServeViewController () <SWRevealViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *navView;
+@property (strong, nonatomic) UIView *tabBarView;
+@property (weak, nonatomic) IBOutlet UIImageView *bgView;
 
 @end
 
@@ -27,7 +32,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"Serve";
-    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
+    //[self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
     
     SWRevealViewController *revealController = [self revealViewController];
     revealController.delegate = self;
@@ -42,11 +47,32 @@
     
     UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navView];
     self.navigationItem.rightBarButtonItem = rightButtonItem;
+    
+    MRCustomTabBar *tabBarView = (MRCustomTabBar*)[MRCommon createTabBarView:self.view];
+    [tabBarView setNavigationController:self.navigationController];
+    [tabBarView setServeViewController:self];
+    [tabBarView updateActiveViewController:self andTabIndex:DoctorPlusTabServe];
+    
+    self.tabBarView = (UIView*)tabBarView;
+    
+    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:self.bgView
+                                                                        attribute:NSLayoutAttributeBottomMargin
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self.view
+                                                                        attribute:NSLayoutAttributeBottom
+                                                                       multiplier:1.0 constant:0];
+    
+    [self.view addConstraint:bottomConstraint];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MRCommon applyNavigationBarStyling:self.navigationController];
 }
 
 /*
@@ -59,41 +85,11 @@
 }
 */
 
--(void) viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    
-    NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"MRTabView" owner:self options:nil];
-    MRTabView *tabView = (MRTabView *)[subviewArray objectAtIndex:0];
-    tabView.delegate = self;
-    tabView.serveView.backgroundColor = [UIColor colorWithRed:26/255.0 green:133/255.0 blue:213/255.0 alpha:1];
-    [self.view addSubview:tabView];
-    
-    [tabView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[view]-0-|" options:NSLayoutFormatAlignAllBottom metrics:nil views:@{@"view":tabView}]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:tabView
-                                                          attribute:NSLayoutAttributeHeight
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:tabView
-                                                          attribute:NSLayoutAttributeHeight
-                                                         multiplier:0
-                                                           constant:50]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:tabView
-                                                          attribute:NSLayoutAttributeBottom
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.view
-                                                          attribute:NSLayoutAttributeBottom
-                                                         multiplier:1
-                                                           constant:0]];
-}
-
 - (void)connectButtonTapped {
     MRContactsViewController* contactsViewCont = [[MRContactsViewController alloc] initWithNibName:@"MRContactsViewController" bundle:nil];
     MRGroupsListViewController* groupsListViewController = [[MRGroupsListViewController alloc] initWithNibName:@"MRGroupsListViewController" bundle:[NSBundle mainBundle]];
     contactsViewCont.groupsListViewController = groupsListViewController;
     
-    PendingContactsViewController *pendingViewController =[[PendingContactsViewController alloc] initWithNibName:@"PendingContactsViewController" bundle:[NSBundle mainBundle]];
-    
-    contactsViewCont.pendingContactsViewController = pendingViewController;
     [self.navigationController pushViewController:contactsViewCont animated:NO];
 }
 
@@ -103,7 +99,7 @@
 }
 
 - (void)shareButtonTapped {
-    MRShareViewController* contactsViewCont = [[MRShareViewController alloc] initWithNibName:@"MRShareViewController" bundle:nil];
+    MRMyWallViewController* contactsViewCont = [[MRMyWallViewController alloc] initWithNibName:@"MRMyWallViewController" bundle:nil];
     [self.navigationController pushViewController:contactsViewCont animated:NO];
 }
 

@@ -45,9 +45,9 @@
     [revealController panGestureRecognizer];
     [revealController tapGestureRecognizer];
     
+    self.navigationItem.title = @"Notification Details";
     
-    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon.png"]
-                                                                         style:UIBarButtonItemStylePlain target:revealController action:@selector(revealToggle:)];
+    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonAction:)];
     
     self.navigationItem.leftBarButtonItem = revealButtonItem;
     
@@ -173,7 +173,9 @@
 {
     MRNotificationInsiderViewController *prodcutDetails = [[MRNotificationInsiderViewController alloc] initWithNibName:@"MRNotificationInsiderViewController" bundle:nil];
     
-    prodcutDetails.notificationDetails = [[MRAppControl sharedHelper] getNotificationByID:[[self.selectedAppointment objectForKey:@"notificationId"] integerValue]];
+    // vamsi
+//    prodcutDetails.notificationDetails = [[MRAppControl sharedHelper] getNotificationByID:[[self.selectedAppointment objectForKey:@"notificationId"] integerValue]];
+    
     [self.navigationController pushViewController:prodcutDetails animated:YES];
 }
 

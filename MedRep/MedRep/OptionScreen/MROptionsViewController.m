@@ -64,21 +64,21 @@
 {
     //[MRCommon showAlert:kComingsoonMSG delegate:self];
 //    return;
-//    [self resetButtonStatus];
-//    [[MRAppControl sharedHelper].userRegData setObject:[NSNumber numberWithInteger:0] forKey:KDoctorRegID];
-//
-//    [MRAppControl sharedHelper].userType = 3;
-//    NSString *btnName = @"radioSelection@2x.png";
-//    [self.pharmacyButton setBackgroundImage:[UIImage imageNamed:btnName] forState:UIControlStateNormal];
+    [self resetButtonStatus];
+    [[MRAppControl sharedHelper].userRegData setObject:[NSNumber numberWithInteger:0] forKey:KDoctorRegID];
+
+    [MRAppControl sharedHelper].userType = 3;
+    NSString *btnName = @"radioSelection@2x.png";
+    [self.pharmacyButton setBackgroundImage:[UIImage imageNamed:btnName] forState:UIControlStateNormal];
 }
 
 - (IBAction)patientButtonAction:(id)sender
 {
    // [MRCommon showAlert:kComingsoonMSG delegate:self];
-//    [self resetButtonStatus];
-//    [MRAppControl sharedHelper].userType = 4;
-//    NSString *btnName = @"radioSelection@2x.png";
-//    [self.patientButton setBackgroundImage:[UIImage imageNamed:btnName] forState:UIControlStateNormal];
+    [self resetButtonStatus];
+    [MRAppControl sharedHelper].userType = 4;
+    NSString *btnName = @"radioSelection@2x.png";
+    [self.patientButton setBackgroundImage:[UIImage imageNamed:btnName] forState:UIControlStateNormal];
 }
 
 

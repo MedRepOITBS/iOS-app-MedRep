@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "contacts.png",
+      "filename" : "Conference Call-30.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "contacts-1.png",
+      "filename" : "Conference Call-60.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "contacts-2.png",
+      "filename" : "Conference Call-90.png",
       "scale" : "3x"
     }
   ],

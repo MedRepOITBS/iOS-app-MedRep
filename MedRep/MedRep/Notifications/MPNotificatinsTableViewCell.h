@@ -23,6 +23,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *notificationLetter;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *notificationLetterBottomConstratint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *notificationLetterLeadingConstratint;
+@property (weak, nonatomic) IBOutlet UIButton *downloadSurveyReportButton;
 
 - (void)configureCompanyNotifcationcell:(NSIndexPath*)indexpath;
+
+- (void)enableDownloadReportButton:(BOOL)hidden;
+- (void)setSurveyReport:(NSNumber*)surveyId;
+
+- (void)removeDownloadReportAction;
+
 @end

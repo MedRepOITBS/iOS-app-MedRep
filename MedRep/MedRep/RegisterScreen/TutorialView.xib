@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="TutorialView">
+            <rect key="frame" x="0.0" y="0.0" width="302" height="200"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VVj-PK-SEQ">
+                    <constraints>
+                        <constraint firstAttribute="height" constant="36" id="Ztd-Oe-WnO"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="TlM-pb-HJw">
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    <string key="text">We request all users to mention accurate information within this field as our Background Verification team thoroughly checks the validity of this data. Once verified, the user can receive information on this application.</string>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
+                    <connections>
+                        <outlet property="delegate" destination="iN0-l3-epB" id="ntX-7Y-VWc"/>
+                    </connections>
+                </textView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Abc-Wr-UNx">
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="8CO-jy-sCx"/>
+                    </constraints>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="tips.png" translatesAutoresizingMaskIntoConstraints="NO" id="lxY-i8-nbj">
+                    <frame key="frameInset" minX="8" minY="39" width="32" height="33"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" red="0.063637127825581369" green="0.80620015369999998" blue="0.67384148649731013" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="TlM-pb-HJw" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="0cl-VW-H8y"/>
+                <constraint firstAttribute="trailing" secondItem="TlM-pb-HJw" secondAttribute="trailing" constant="10" id="2u7-f7-0Yr"/>
+                <constraint firstItem="VVj-PK-SEQ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="52" id="BKc-IJ-Bb8"/>
+                <constraint firstItem="VVj-PK-SEQ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="38" id="JFa-bT-sHW"/>
+                <constraint firstItem="TlM-pb-HJw" firstAttribute="top" secondItem="VVj-PK-SEQ" secondAttribute="bottom" constant="3" id="Kg1-sb-Nze"/>
+                <constraint firstAttribute="bottom" secondItem="TlM-pb-HJw" secondAttribute="bottom" constant="-3" id="N03-GC-TmV"/>
+                <constraint firstItem="Abc-Wr-UNx" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="52" id="RaC-zU-p2l"/>
+                <constraint firstAttribute="trailing" secondItem="VVj-PK-SEQ" secondAttribute="trailing" constant="10" id="cfv-lq-y2N"/>
+                <constraint firstItem="Abc-Wr-UNx" firstAttribute="top" secondItem="VVj-PK-SEQ" secondAttribute="bottom" constant="-8" id="cqd-z5-kvm"/>
+                <constraint firstAttribute="trailing" secondItem="Abc-Wr-UNx" secondAttribute="trailing" constant="8" id="p9L-7x-vgR"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="descriptionTextView" destination="TlM-pb-HJw" id="0po-nU-1pX"/>
+                <outlet property="titleLabel" destination="VVj-PK-SEQ" id="5yz-vJ-TYp"/>
+            </connections>
+            <point key="canvasLocation" x="299" y="117"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="tips.png" width="128" height="128"/>
+    </resources>
+</document>

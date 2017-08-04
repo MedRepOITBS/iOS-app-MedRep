@@ -28,17 +28,10 @@
 @implementation MRSurveyListViewController
 - (void)getMenuNavigationButtonWithController:(SWRevealViewController *)revealViewCont NavigationItem:(UINavigationItem *)navigationItem1
 {
-    SWRevealViewController *revealController = revealViewCont;
-    revealController.delegate = self;
-    //[NSArray arrayWithObjects:@"pcselect@2x.png",@"pcfedback@2x.png",@"pcplus@2x.png",nil];
-    [revealController panGestureRecognizer];
-    [revealController tapGestureRecognizer];
+    self.navigationItem.title = @"Surveys";
     
-    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reveal-icon.png"]
-                                                                         style:UIBarButtonItemStylePlain target:revealController action:@selector(revealToggle:)];
-    
-    revealButtonItem.tintColor = [UIColor blackColor];
-    navigationItem1.leftBarButtonItem = revealButtonItem;
+    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notificationback.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonAction:)];
+    self.navigationItem.leftBarButtonItem = revealButtonItem;
     
     UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.navView];
     self.navigationItem.rightBarButtonItem = rightButtonItem;
@@ -59,6 +52,9 @@
                  [MRCommon showAlert:@"No pending surveys found." delegate:nil];
              }
              [self.surveysList reloadData];
+             
+             // Reset Survey Count
+             [self resetSurveyCounter];
          }
          else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
          {
@@ -68,6 +64,7 @@
                   [[MRWebserviceHelper sharedWebServiceHelper] getMyPendingSurveysDetails:^(BOOL status, NSString *details, NSDictionary *responce)
                    {
                        [MRCommon stopActivityIndicator];
+                       [self resetSurveyCounter];
                        if (status)
                        {
                            self.surveysListArray = [responce objectForKey:kResponce];
@@ -79,16 +76,45 @@
          else
          {
              [MRCommon stopActivityIndicator];
+             [self resetSurveyCounter];
              [MRCommon showAlert:@"No pending surveys found." delegate:nil];
          }
      }];
     [self getMenuNavigationButtonWithController:[self revealViewController] NavigationItem:self.navigationItem];
 }
 
+- (void)resetSurveyCounter {
+    NSDictionary *dict = @{@"resetDoctorPlusCount":[NSNumber numberWithBool:false],
+                           @"resetNotificationCount":[NSNumber numberWithBool:false],
+                           @"resetSurveyCount": [NSNumber numberWithBool:true]};
+    [[MRWebserviceHelper sharedWebServiceHelper] getPendingCount:dict andHandler:^(BOOL status, NSString *details, NSDictionary *responce)
+     {
+         if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+         {
+             [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+              {
+                  [MRCommon savetokens:responce];
+                  [[MRWebserviceHelper sharedWebServiceHelper] getPendingCount:dict andHandler:^(BOOL status, NSString *details, NSDictionary *responce)
+                   {
+
+                   }];
+                  
+              }];
+         }
+     }];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [MRCommon applyNavigationBarStyling:self.navigationController];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (IBAction)backButtonAction:(id)sender
 {
     if (self.isFromMenu)
@@ -143,7 +169,10 @@
         regCell                             = (MPNotificatinsTableViewCell *)[nibViews lastObject];
         
     }
+    [regCell enableDownloadReportButton:NO];
+    
     NSDictionary *survey              = [self.surveysListArray objectAtIndex:indexPath.row];
+    [regCell setSurveyReport:[survey valueForKey:@"surveyId"]];
     
     regCell.notificationLetter.hidden       = NO;
     regCell.notificationLetter.backgroundColor = [MRCommon getColorForIndex:indexPath.row];
@@ -156,6 +185,9 @@
     regCell.medicineLabel.text              = [survey objectForKey:@"surveyDescription"];
     
     regCell.arrowImage.image                = [UIImage imageNamed:@"White-right-arrow@2x.png"];
+    
+    [regCell.downloadSurveyReportButton setImage:[UIImage imageNamed:@"RequestReport"] forState:UIControlStateNormal];
+    
     return regCell;
 }
 

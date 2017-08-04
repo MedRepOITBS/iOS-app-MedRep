@@ -19,9 +19,29 @@
 #import "MRGroupPost.h"
 #import "MrGroupChildPost.h"
 #import "AppDelegate.h"
+#import "NSDate+Utilities.h"
+#import "MRSharePost.h"
+#import "MRPostedReplies.h"
+#import "MRTransformPost.h"
+#import "MRAppControl.h"
+#import "MRWebserviceHelper.h"
+#import "MRConstants.h"
+#import "NSData+Base64Additions.h"
+#import "MRProfile.h"
+#import "MRWorkExperience.h"
+#import "MRInterestArea.h"
+#import "EducationalQualifications.h"
+#import "MRPublications.h"
+#import "MRPendingRecordsCount.h"
+#import "AddressInfo.h"
+#import "ContactInfo.h"
+
 static MRDatabaseHelper *sharedDataManager = nil;
 
 @implementation MRDatabaseHelper
+
+NSString* const kNewsAndUpdatesAPIMethodName = @"getNewsAndUpdates";
+NSString* const kNewsAndTransformAPIMethodName = @"getNewsAndTransform";
 
 + (MRDatabaseHelper *)sharedHelper
 {
@@ -34,23 +54,22 @@ static MRDatabaseHelper *sharedDataManager = nil;
 
 }
 
-+ (void)addContacts:(NSArray*)contacts {
-    for (NSDictionary *myDict in contacts) {
-        MRContact *contact  = (MRContact*)[[MRDataManger sharedManager] createObjectForEntity:kContactEntity];
-        contact.contactId = [[myDict objectForKey:@"id"] integerValue];
-        contact.name = [myDict objectForKey:@"name"];
-        contact.profilePic  = [myDict objectForKey:@"profile_pic"];
-        contact.role      = [myDict objectForKey:@"role"];
-        NSArray* groupIds = [myDict objectForKey:@"groupId"];
-        if (groupIds.count > 0) {
-            NSArray* groups = [MRDatabaseHelper getGroupsForIds:groupIds];
-            if (groups.count > 0) {
-                contact.groups = [NSSet setWithArray:groups];
++ (NSString*)getOAuthErrorCode:(NSDictionary*)response {
+    NSString *errorCode = [response objectForKey:@"oauth2ErrorCode"];
+    if (errorCode == nil || errorCode.length == 0) {
+        id tempErrorCode = [response objectForKey:@"Responce"];
+        if (tempErrorCode != nil) {
+            if ([tempErrorCode isKindOfClass:[NSArray class]]) {
+                NSArray *tempArray = (NSArray*)tempErrorCode;
+                NSDictionary *tempObject = tempArray.firstObject;
+                errorCode = [tempObject objectForKey:@"oauth2ErrorCode"];
+            } else if ([tempErrorCode isKindOfClass:[NSDictionary class]]) {
+                NSDictionary *tempObject = tempErrorCode;
+                errorCode = [tempObject objectForKey:@"oauth2ErrorCode"];;
             }
         }
-        
     }
-    [[MRDataManger sharedManager] saveContext];
+    return errorCode;
 }
 
 + (void)addSuggestedContacts:(NSArray*)contacts {
@@ -64,16 +83,6 @@ static MRDatabaseHelper *sharedDataManager = nil;
     [[MRDataManger sharedManager] saveContext];
 }
 
-//{"name":"John Doe","postText":"Guys, these drugs look promising!","likes":10,"comments":23,"shares":3,"profile_pic":"","post_pic":"medicine.jpg"}
-+ (void)addGroups:(NSArray*)groups {
-    for (NSDictionary *myDict in groups) {
-        MRGroup *group  = (MRGroup*)[[MRDataManger sharedManager] createObjectForEntity:kGroupEntity];
-        group.groupId = [[myDict objectForKey:@"id"] integerValue];
-        group.name = [myDict objectForKey:@"name"];
-        group.groupPicture = [myDict objectForKey:@"groupPicture"];
-    }
-    [[MRDataManger sharedManager] saveContext];
-}
 + (void)addGroupChildPost:(MRGroupPost*)post withPostDict:(NSDictionary *)myDict{
    
         MrGroupChildPost *postChild  = (MrGroupChildPost*)[[MRDataManger sharedManager] createObjectForEntity:kGroupChildPostEntity];
@@ -87,34 +96,608 @@ static MRDatabaseHelper *sharedDataManager = nil;
     
     [[MRDataManger sharedManager] saveContext];
 }
++(MRSharePost *)getGroupPostForPostID:(NSNumber *)postId{
+    
+    MRGroupPost* contact = [[MRDataManger sharedManager] fetchObject:kGroupPostEntity predicate:[NSPredicate predicateWithFormat:@"groupPostId == %@",postId]];
+    return contact;
 
-+ (void)addGroupPosts:(NSArray*)posts {
-    for (NSDictionary *myDict in posts) {
-        MRGroupPost *post  = (MRGroupPost*)[[MRDataManger sharedManager] createObjectForEntity:kGroupPostEntity];
-        post.groupPostId = [[myDict objectForKey:@"id"] integerValue];
-        post.postPic = [myDict objectForKey:@"post_pic"];
-        post.postText = [myDict objectForKey:@"postText"];
-        post.numberOfComments = [[myDict objectForKey:@"comments"] integerValue];
-        post.numberOfLikes = [[myDict objectForKey:@"likes"] integerValue];
-        post.numberOfShares = [[myDict objectForKey:@"shares"] integerValue];
-        NSInteger contactId = [[myDict objectForKey:@"contactId"] integerValue];
-        if (contactId) {
-            MRContact* contact = [MRDatabaseHelper getContactForId:contactId];
-            if (contact) {
-                [post setContact:contact];
-            }
-        }
-        NSInteger groupId = [[myDict objectForKey:@"groupId"] integerValue];
-        if (groupId) {
-            MRGroup* group = [MRDatabaseHelper getGroupForId:groupId];
-            if (group) {
-                [post setGroup:group];
-            }
-        }
+}
++(NSNumber *)getLastgroupPostID {
+    
+    NSArray *fetchAllGroupPosts = [[MRDataManger sharedManager] fetchObjectList:kGroupPostEntity];
+    NSNumber *grpPostID = [[NSNumber alloc]initWithInt:0];
+    if (fetchAllGroupPosts.count>0) {
+        MRGroupPost *post = [fetchAllGroupPosts lastObject];
+        grpPostID  = post.groupPostId;
+        
     }
-    [[MRDataManger sharedManager] saveContext];
+    return grpPostID;
 }
 
++ (NSNumber*)convertStringToNSNumber:(id)value {
+    NSNumber *convertedValue = [NSNumber numberWithLong:0];
+    if ([value isKindOfClass:[NSString class]]) {
+        NSString *tempValue = value;
+        convertedValue = [NSNumber numberWithLong:tempValue.longLongValue];
+    }
+    
+    return convertedValue;
+}
+
++ (void)makeServiceCallForGroupsFetch:(BOOL)status details:(NSString*)details
+                             response:(NSDictionary*)response
+                     andResponseHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon stopActivityIndicator];
+    if (status)
+    {
+        [MRDatabaseHelper filterGroupResponse:response andResponseHandler:responseHandler];
+    }
+    else {
+        NSString *errorCode = [MRDatabaseHelper getOAuthErrorCode:response];
+        if ([errorCode isEqualToString:@"invalid_token"])
+        {
+            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+             {
+                 [MRCommon savetokens:responce];
+                 [[MRWebserviceHelper sharedWebServiceHelper] getGroupListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                     [MRCommon stopActivityIndicator];
+                     if (status)
+                     {
+                         [MRDatabaseHelper filterGroupResponse:responce andResponseHandler:responseHandler];
+                     } else
+                     {
+                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                         if (erros.count > 0)
+                         [MRCommon showAlert:[erros lastObject] delegate:nil];
+                     }
+                 }];
+             }];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+            [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }
+}
+
++ (void)filterGroupResponse:(NSDictionary*)response andResponseHandler:(WebServiceResponseHandler) responseHandler {
+    id result = [MRWebserviceHelper parseNetworkResponse:MRGroup.class
+                                                 andData:[response valueForKey:@"Responce"]];
+    if (responseHandler != nil) {
+        NSArray *tempResults = [[MRDataManger sharedManager] fetchObjectList:kGroupEntity];
+        
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"group_name" ascending:true];
+        result = [tempResults sortedArrayUsingDescriptors:@[sortDescriptor]];
+        responseHandler(result);
+    }
+}
+
++ (void)makeServiceCallForFetchingGroups:(BOOL)status details:(NSString*)details
+                             response:(NSDictionary*)response
+                   andResponseHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon stopActivityIndicator];
+    if (status)
+    {
+        [MRDatabaseHelper filterRootLevelGroupResponse:response andResponseHandler:responseHandler];
+    }
+    else {
+        NSString *errorCode = [MRDatabaseHelper getOAuthErrorCode:response];
+        if ([errorCode isEqualToString:@"invalid_token"])
+        {
+            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+             {
+                 [MRCommon savetokens:responce];
+                 [[MRWebserviceHelper sharedWebServiceHelper] getGroupListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                     [MRCommon stopActivityIndicator];
+                     if (status)
+                     {
+                         [MRDatabaseHelper filterRootLevelGroupResponse:responce
+                                                     andResponseHandler:responseHandler];
+                     } else
+                     {
+                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                         if (erros.count > 0)
+                             [MRCommon showAlert:[erros lastObject] delegate:nil];
+                     }
+                 }];
+             }];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }
+}
+
++ (void)filterRootLevelGroupResponse:(NSDictionary*)response andResponseHandler:(WebServiceResponseHandler) responseHandler {
+    if (response != nil && [response allKeys].count > 0) {
+        id pendingGroups = [response objectOrNilForKey:@"pendingGroups"];
+        if (pendingGroups != nil) {
+            MRDataManger *dbManager = [MRDataManger sharedManager];
+            NSManagedObjectContext *context = [dbManager getNewPrivateManagedObjectContext];
+            
+            NSArray *pendingRecordsCount = [[MRDataManger sharedManager] fetchObjectList:kPendingRecordsCountEntity
+                                                                               inContext:context];
+            
+            MRManagedObject *entity = nil;
+            if (pendingRecordsCount == nil) {
+                NSString *entityName = NSStringFromClass(MRPendingRecordsCount.class);
+                
+                NSEntityDescription *entityDescription = [[[dbManager managedObjectModel] entitiesByName] objectForKey:entityName];
+                
+                entity = [[MRManagedObject alloc] initWithEntity:entityDescription
+                                  insertIntoManagedObjectContext:context];
+            } else {
+                entity = pendingRecordsCount.firstObject;
+            }
+            
+            NSNumber *tempCount = nil;
+            if ([pendingGroups isKindOfClass:[NSNumber class]]) {
+                tempCount = pendingGroups;
+            }
+            
+            [entity setValue:[NSNumber numberWithLong:tempCount.longValue] forKey:@"pendingGroups"];
+            [dbManager dbSaveInContext:context];
+        }
+        id groups = [response objectOrNilForKey:@"groups"];
+        if (groups != nil) {
+            id result = [MRWebserviceHelper parseNetworkResponse:MRGroup.class
+                                                         andData:groups];
+            if (responseHandler != nil) {
+                NSArray *tempResults = [[MRDataManger sharedManager] fetchObjectList:kGroupEntity];
+                
+                NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"group_name" ascending:true];
+                result = [tempResults sortedArrayUsingDescriptors:@[sortDescriptor]];
+                responseHandler(result);
+            }
+        } else {
+            if (responseHandler != nil) {
+                responseHandler(nil);
+            }
+        }
+    } else {
+        if (responseHandler != nil) {
+            responseHandler(nil);
+        }
+    }
+}
+
++ (void)getGroups:(WebServiceResponseHandler)responseHandler {
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] getGroupListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [[MRDataManger sharedManager] removeAllObjects:kGroupEntity withPredicate:nil];
+        [MRDatabaseHelper makeServiceCallForFetchingGroups:status details:details
+                                                  response:responce
+                                        andResponseHandler:responseHandler];
+    }];
+}
+
++ (void)getMoreGroups:(WebServiceResponseHandler)responseHandler {
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] getAllGroupListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [[MRDataManger sharedManager] removeAllObjects:kGroupEntity withPredicate:nil];
+        [MRDatabaseHelper makeServiceCallForGroupsFetch:status details:details
+                                               response:responce
+                                     andResponseHandler:responseHandler];
+    }];
+}
+
++ (void)getSuggestedGroups:(WebServiceResponseHandler)responseHandler {
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] getSuggestedGroupListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [[MRDataManger sharedManager] removeAllObjects:kGroupEntity withPredicate:nil];
+        [MRDatabaseHelper makeServiceCallForGroupsFetch:status details:details
+                                                 response:responce
+                                       andResponseHandler:responseHandler];
+    }];
+}
+
++ (void)getGroupDetail:(NSInteger)groupId withHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] getGroupDetail:groupId
+                                                      withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                          if (responce != nil) {
+                                                              id result = [responce objectOrNilForKey:@"result"];
+                                                              if (result != nil && [result isKindOfClass:[NSDictionary class]]) {
+                                                                  NSDictionary *tempResult = result;
+                                                                  id group = [tempResult objectOrNilForKey:@"group"];
+                                                                  if (group != nil && [group isKindOfClass:[NSDictionary class]]) {
+                                                                      [[MRDataManger sharedManager] removeAllObjects:kGroupEntity withPredicate:nil];
+                                                                      [MRDatabaseHelper makeServiceCallForGroupsFetch:status details:details
+                                                                                                             response:@{@"Responce": @[group]}
+                                                                                                   andResponseHandler:responseHandler];
+                                                                  } else {
+                                                                      responseHandler(nil);
+                                                                  }
+                                                              } else {
+                                                                  responseHandler(nil);
+                                                              }
+                                                          } else {
+                                                              responseHandler(nil);
+                                                          }
+                                                      }];
+}
+
++ (void)getPendingGroups:(WebServiceResponseHandler)responseHandler {
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] fetchPendingGroupsListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [[MRDataManger sharedManager] removeAllObjects:kGroupEntity withPredicate:nil];
+        [MRDatabaseHelper makeServiceCallForGroupsFetch:status details:details
+                                                 response:responce
+                                       andResponseHandler:responseHandler];
+    }];
+}
+
++ (void)makeServiceCallForContactsFetch:(BOOL)status details:(NSString*)details
+                               response:(NSDictionary*)response
+                     andResponseHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon stopActivityIndicator];
+    if (status)
+    {
+        [MRDatabaseHelper filterContactResponse:response andResponseHandler:responseHandler];
+    }
+    else {
+        NSString *errorCode = [MRDatabaseHelper getOAuthErrorCode:response];
+        
+        if ([errorCode isEqualToString:@"invalid_token"])
+        {
+            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+             {
+                 [MRCommon savetokens:responce];
+                 [[MRWebserviceHelper sharedWebServiceHelper] getContactListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                     [MRCommon stopActivityIndicator];
+                     if (status)
+                     {
+                         [MRDatabaseHelper filterContactResponse:responce andResponseHandler:responseHandler];
+                     } else
+                     {
+                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                         if (erros.count > 0)
+                         [MRCommon showAlert:[erros lastObject] delegate:nil];
+                     }
+                 }];
+             }];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+            [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }
+}
+
++ (void)filterContactResponse:(NSDictionary*)response andResponseHandler:(WebServiceResponseHandler) responseHandler {
+    id result = [MRWebserviceHelper parseNetworkResponse:MRContact.class
+                                                 andData:[response valueForKey:@"Responce"]];
+    if (responseHandler != nil) {
+        NSArray *tempResults = [[MRDataManger sharedManager] fetchObjectList:kContactEntity];
+        
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:true];
+        result = [tempResults sortedArrayUsingDescriptors:@[sortDescriptor]];
+        responseHandler(result);
+    }
+}
+
++ (void)makeServiceCallForFetchingConnections:(BOOL)status details:(NSString*)details
+                               response:(NSDictionary*)response
+                     andResponseHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon stopActivityIndicator];
+    if (status)
+    {
+        [MRDatabaseHelper filterRootLevelContactResponse:response andResponseHandler:responseHandler];
+    }
+    else {
+        NSString *errorCode = [MRDatabaseHelper getOAuthErrorCode:response];
+        
+        if ([errorCode isEqualToString:@"invalid_token"])
+        {
+            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+             {
+                 [MRCommon savetokens:responce];
+                 [[MRWebserviceHelper sharedWebServiceHelper] getContactListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                     [MRCommon stopActivityIndicator];
+                     if (status)
+                     {
+                         [MRDatabaseHelper filterRootLevelContactResponse:responce andResponseHandler:responseHandler];
+                     } else
+                     {
+                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                         if (erros.count > 0)
+                             [MRCommon showAlert:[erros lastObject] delegate:nil];
+                     }
+                 }];
+             }];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }
+}
+
++ (void)filterRootLevelContactResponse:(NSDictionary*)response andResponseHandler:(WebServiceResponseHandler) responseHandler {
+    if (response != nil && [response allKeys].count > 0) {
+        id tempValue = [response valueForKey:@"result"];
+        if (tempValue != nil && [tempValue isKindOfClass:[NSDictionary class]]) {
+            id pendingConnections = [tempValue objectOrNilForKey:@"pendingConnections"];
+            if (pendingConnections != nil) {
+                MRDataManger *dbManager = [MRDataManger sharedManager];
+                NSManagedObjectContext *context = [dbManager getNewPrivateManagedObjectContext];
+                
+                NSArray *pendingRecordsCount = [[MRDataManger sharedManager] fetchObjectList:kPendingRecordsCountEntity
+                                                                                   inContext:context];
+                
+                MRManagedObject *entity = nil;
+                if (pendingRecordsCount == nil) {
+                    NSString *entityName = NSStringFromClass(MRPendingRecordsCount.class);
+                    
+                    NSEntityDescription *entityDescription = [[[dbManager managedObjectModel] entitiesByName] objectForKey:entityName];
+                    
+                    entity = [[MRManagedObject alloc] initWithEntity:entityDescription
+                                      insertIntoManagedObjectContext:context];
+                } else {
+                    entity = pendingRecordsCount.firstObject;
+                }
+                
+                NSNumber *tempCount = nil;
+                if ([pendingConnections isKindOfClass:[NSNumber class]]) {
+                    tempCount = pendingConnections;
+                }
+                
+                [entity setValue:[NSNumber numberWithLong:tempCount.longValue] forKey:@"pendingConnections"];
+                [dbManager dbSaveInContext:context];
+            }
+            id myContacts = [tempValue objectOrNilForKey:@"myContacts"];
+            if (myContacts != nil && [myContacts isKindOfClass:[NSArray class]]) {
+                id result = [MRWebserviceHelper parseNetworkResponse:MRContact.class
+                                                             andData:myContacts];
+                if (responseHandler != nil) {
+                    NSArray *tempResults = [[MRDataManger sharedManager] fetchObjectList:kContactEntity];
+                    
+                    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:true];
+                    result = [tempResults sortedArrayUsingDescriptors:@[sortDescriptor]];
+                    responseHandler(result);
+                }
+            } else {
+                if (responseHandler != nil) {
+                    responseHandler(nil);
+                }
+            }
+        } else {
+            if (responseHandler != nil) {
+                responseHandler(nil);
+            }
+        }
+    } else {
+        if (responseHandler != nil) {
+            responseHandler(nil);
+        }
+    }
+}
+
++ (void)getContacts:(WebServiceResponseHandler)responseHandler {
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] getContactListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [[MRDataManger sharedManager] removeAllObjects:kContactEntity withPredicate:nil];
+        [MRDatabaseHelper makeServiceCallForFetchingConnections:status details:details
+                                                 response:responce
+                                       andResponseHandler:responseHandler];
+    }];
+}
+
++ (void)getContactsByCity:(NSString*)city groupId:(NSString*)groupId
+          responseHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] getAllContactsByCityListwithHandler:groupId andCompletionHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [[MRDataManger sharedManager] removeAllObjects:kContactEntity withPredicate:nil];
+        [MRDatabaseHelper makeServiceCallForContactsFetch:status details:details
+                                                 response:responce
+                                       andResponseHandler:responseHandler];
+    }];
+}
+
++ (void)getSuggestedContacts:(WebServiceResponseHandler)responseHandler {
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] getSuggestedContactListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [[MRDataManger sharedManager] removeAllObjects:kContactEntity withPredicate:nil];
+        [MRDatabaseHelper makeServiceCallForContactsFetch:status details:details
+                                                 response:responce
+                                       andResponseHandler:responseHandler];
+    }];
+}
+
++ (void)getContactDetail:(NSInteger)contactId withHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] getContactDetail:contactId
+                                                      withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                          if (responce != nil) {
+                                                              id result = [responce objectOrNilForKey:@"result"];
+                                                              if (result != nil && [result isKindOfClass:[NSDictionary class]]) {
+                                                                  NSDictionary *tempResult = result;
+                                                                  id contact = [tempResult objectOrNilForKey:@"userDetails"];
+                                                                  if (contact != nil && [contact isKindOfClass:[NSDictionary class]]) {
+                                                                      [[MRDataManger sharedManager] removeAllObjects:kContactEntity withPredicate:nil];
+                                                                      
+                                                                      [MRDatabaseHelper makeServiceCallForContactsFetch:status details:details
+                                                                                                             response:@{@"Responce": @[contact]}
+                                                                                                   andResponseHandler:responseHandler];
+                                                                  } else {
+                                                                      responseHandler(nil);
+                                                                  }
+                                                              } else {
+                                                                  responseHandler(nil);
+                                                              }
+                                                          } else {
+                                                              responseHandler(nil);
+                                                          }
+    }];
+}
+
++ (void)getPendingContacts:(WebServiceResponseHandler)responseHandler {
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] fetchPendingConnectionsListwithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [MRDatabaseHelper makeServiceCallForContactsFetch:status details:details
+                                                 response:responce
+                                       andResponseHandler:responseHandler];
+    }];
+}
+
++ (void)getPendingGroupMembers:(NSNumber*)gid
+            andResponseHandler:(WebServiceResponseHandler)responseHandler {
+    NSString *groupId = @"";
+    if (gid != nil) {
+        groupId = gid.stringValue;
+    }
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] fetchPendingMembersList:groupId withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [[MRDataManger sharedManager] removeAllObjects:kContactEntity withPredicate:nil];
+        [MRDatabaseHelper makeServiceCallForContactsFetch:status details:details
+                                                 response:responce
+                                       andResponseHandler:responseHandler];
+    }];
+}
+
++ (void)getContactsBySearchString:(NSString*)searchText
+                          groupId:(NSString*)groupId
+               andResponseHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon showActivityIndicator:@"searching..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] getSearchContactList:searchText
+                                                              groupId:groupId
+                                                          withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [[MRDataManger sharedManager] removeAllObjects:kContactEntity withPredicate:nil];
+        [MRDatabaseHelper makeServiceCallForContactsFetch:status details:details
+                                                 response:responce
+                                       andResponseHandler:responseHandler];
+    }];
+}
+
++ (void)getGroupMemberStatus:(WebServiceResponseHandler)responseHandler {
+//    [MRCommon showActivityIndicator:@"Requesting..."];
+//    [[MRWebserviceHelper sharedWebServiceHelper] getGroupMembersStatuswithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+//        [MRCommon stopActivityIndicator];
+//        if (status)
+//        {
+//            NSArray *responseArray = responce[@"Responce"];
+//            groupsArrayObj = [NSMutableArray array];
+//            groupMemberArray = [NSMutableArray array];
+//            
+//            for (NSDictionary *memberDict in responseArray) {
+//                MRGroup *groupObj = [[MRGroup alloc] initWithDict:memberDict];
+//                [groupsArrayObj addObject:groupObj];
+//                if ([groupObj.group_name isEqualToString:self.mainGroupObj.group_name]) {
+//                    groupMemberArray = groupObj.member;
+//                }
+//            }
+//            [self.collectionView reloadData];
+//        }
+//        else if ([[responce objectForKey:@"oauth2ErrorCode"] isEqualToString:@"invalid_token"])
+//        {
+//            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+//             {
+//                 [MRCommon savetokens:responce];
+//                 [[MRWebserviceHelper sharedWebServiceHelper] getGroupMembersStatuswithHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+//                     [MRCommon stopActivityIndicator];
+//                     if (status)
+//                     {
+//                         NSArray *responseArray = responce[@"Responce"];
+//                         groupsArrayObj = [NSMutableArray array];
+//                         groupMemberArray = [NSMutableArray array];
+//                         
+//                         for (NSDictionary *memberDict in responseArray) {
+//                             MRGroupObject *groupObj = [[MRGroupObject alloc] initWithDict:memberDict];
+//                             [groupsArrayObj addObject:groupObj];
+//                             if ([groupObj.group_name isEqualToString:self.mainGroupObj.group_name]) {
+//                                 groupMemberArray = groupObj.member;
+//                             }
+//                         }
+//                         [self.collectionView reloadData];
+//                     }else
+//                     {
+//                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
+//                         if (erros.count > 0)
+//                             [MRCommon showAlert:[erros lastObject] delegate:nil];
+//                     }
+//                 }];
+//             }];
+//        }
+//        else
+//        {
+//            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+//            if (erros.count > 0)
+//                [MRCommon showAlert:[erros lastObject] delegate:nil];
+//        }
+//    }];
+}
+
++ (void)filterGroupDetailsResponse:(NSDictionary*)response andResponseHandler:(WebServiceResponseHandler) responseHandler {
+    id result = [MRWebserviceHelper parseNetworkResponse:MRGroup.class
+                                                 andData:[response valueForKey:@"Responce"]];
+    if (responseHandler != nil) {
+        NSArray *tempResults = [[MRDataManger sharedManager] fetchObjectList:kGroupEntity];
+        
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"group_id" ascending:true];
+        result = [tempResults sortedArrayUsingDescriptors:@[sortDescriptor]];
+        responseHandler(result);
+    }
+}
+
++ (void)makeServiceCallForGroupDetailsFetch:(NSInteger)groupId status:(BOOL)status details:(NSString*)details
+                               response:(NSDictionary*)response
+                     andResponseHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon stopActivityIndicator];
+    if (status)
+    {
+        [MRDatabaseHelper filterGroupDetailsResponse:response andResponseHandler:responseHandler];
+    }
+    else {
+        NSString *errorCode = [MRDatabaseHelper getOAuthErrorCode:response];
+        if ([errorCode isEqualToString:@"invalid_token"])
+        {
+            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+             {
+                 [MRCommon savetokens:responce];
+                 [[MRWebserviceHelper sharedWebServiceHelper] getGroupMembersStatusWithId:groupId withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                     [MRCommon stopActivityIndicator];
+                     if (status)
+                     {
+                         [MRDatabaseHelper filterGroupDetailsResponse:responce andResponseHandler:responseHandler];
+                     } else
+                     {
+                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                         if (erros.count > 0)
+                             [MRCommon showAlert:[erros lastObject] delegate:nil];
+                     }
+                 }];
+             }];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }
+}
+
++ (void)getGroupMemberStatusWithId:(NSInteger)groupId
+                        andHandler:(WebServiceResponseHandler)responseHandler {
+    
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] getGroupMembersStatusWithId:groupId withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [MRDatabaseHelper makeServiceCallForGroupDetailsFetch:groupId status:status details:details
+                                                 response:responce
+                                       andResponseHandler:responseHandler];
+    }];
+}
+
+     
 + (MRContact*)getContactForId:(NSInteger)contactId {
     MRContact* contact = [[MRDataManger sharedManager] fetchObject:kContactEntity predicate:[NSPredicate predicateWithFormat:@"contactId == %@",[NSNumber numberWithInteger:contactId]]];
     return contact;
@@ -137,9 +720,22 @@ static MRDatabaseHelper *sharedDataManager = nil;
     return group;
 }
 
-+ (NSArray*)getContacts {
-    NSArray *contacts = [[MRDataManger sharedManager] fetchObjectList:kContactEntity];
-    return contacts;
++ (NSArray*)getSuggestedContacts {
+    NSArray *groups = [[MRDataManger sharedManager] fetchObjectList:kSuggestedContactEntity];
+    return groups;
+}
+
++ (NSArray*)getObjectsForType:(NSString*)entityName andPredicate:(NSPredicate*)predicate {
+    NSArray *objects = nil;
+    
+    if (predicate != nil) {
+        objects = [[MRDataManger sharedManager] fetchObjectList:entityName
+                                                      predicate:predicate];
+    } else {
+        objects = [[MRDataManger sharedManager] fetchObjectList:entityName];
+    }
+    
+    return objects;
 }
 +(NSArray *)getContactListForContactID:(int64_t)contactID {
     
@@ -147,16 +743,6 @@ static MRDatabaseHelper *sharedDataManager = nil;
     
     NSArray *contacts = [[MRDataManger sharedManager] fetchObjectList:kContactEntity predicate:predicate];
     return contacts;
-}
-
-+ (NSArray*)getGroups {
-    NSArray *groups = [[MRDataManger sharedManager] fetchObjectList:kGroupEntity];
-    return groups;
-}
-
-+ (NSArray*)getSuggestedContacts {
-    NSArray *groups = [[MRDataManger sharedManager] fetchObjectList:kSuggestedContactEntity];
-    return groups;
 }
 
 + (void)addRole:(NSArray*)roles
@@ -220,6 +806,11 @@ static MRDatabaseHelper *sharedDataManager = nil;
 
 + (void)addNotifications:(NSArray*)notificationsList
 {
+    [[MRDataManger sharedManager] removeAllObjects:kNotificationsEntity withPredicate:nil];
+    
+    [MRWebserviceHelper parseNetworkResponse:NSClassFromString(kNotificationsEntity) andData:notificationsList];
+    
+    /*
     for (NSDictionary *myNotificationDict in notificationsList)
     {
         
@@ -275,14 +866,18 @@ static MRDatabaseHelper *sharedDataManager = nil;
             notification.validUpto      = [myNotificationDict objectForKey:@"validUpto"];
         }
     }
-    
+    */
     [[MRDataManger sharedManager] saveContext];
+     
     [MRDefaults setObject:[NSDate date] forKey:kNotificationFetchedDate];
 }
 
 + (BOOL)getObjectDataExistance:(NSString*)managedObject
 {
-    return ([[MRDataManger sharedManager] countOfObjects:managedObject] == 0) ? NO : YES;
+    NSInteger numberOfObjects = 0;
+    numberOfObjects = [[MRDataManger sharedManager] countOfObjects:managedObject];
+    
+    return (numberOfObjects == 0) ? NO : YES;
 }
 
 + (void)getRoles:(void (^)(NSArray *fetchList))objectsList
@@ -364,108 +959,70 @@ static MRDatabaseHelper *sharedDataManager = nil;
    withNotificationsList:(void (^)(NSArray *fetchList))objectsList
 {
     NSArray *notificationTypeList   = nil;
+    NSPredicate *predicate = nil;
     
     if (isFav)
     {
-        notificationTypeList   = [[MRDataManger sharedManager] fetchObjectList:kNotificationsEntity predicate:[NSPredicate predicateWithFormat:@"favNotification == %@", [NSNumber numberWithBool:isFav]]];
+        predicate = [NSPredicate predicateWithFormat:@"favourite == %d", isFav];
     }
     else if (isRead)
     {
-        notificationTypeList   = [[MRDataManger sharedManager] fetchObjectList:kNotificationsEntity predicate:[NSPredicate predicateWithFormat:@"readNotification == %@", [NSNumber numberWithBool:isRead]]];
+        predicate = [NSPredicate predicateWithFormat:@"readNotification == %d", isRead];
     }
     else
     {
         notificationTypeList   = [[MRDataManger sharedManager] fetchObjectList:kNotificationsEntity];
     }
     
-    NSMutableArray *array           = [NSMutableArray array];
-    for (MRNotifications *notification in notificationTypeList)
-    {
-          NSMutableDictionary *myNotificationDict = [NSMutableDictionary dictionary];
-        
-         [myNotificationDict setObject:notification.companyId   forKey:@"companyId"];
-         [myNotificationDict setObject:notification.companyName forKey:@"companyName"];
-         [myNotificationDict setObject:notification.createdBy   forKey:@"createdBy"];
-         [myNotificationDict setObject:notification.createdOn   forKey:@"createdOn"];
-         [myNotificationDict setObject:notification.externalRef forKey:@"externalRef"];
-         [myNotificationDict setObject:notification.favNotification forKey:@"favNotification"];
-         //[myNotificationDict setObject:notification.fileList    forKey:@"fileList"];
-         [myNotificationDict setObject:notification.notificationDesc    forKey:@"notificationDesc"];
-         [myNotificationDict setObject:[MRCommon unArchiveDataToDictionary:notification.notificationDetails forKey:@"notificationDetails"] forKey:@"notificationDetails"];
-         [myNotificationDict setObject:notification.notificationId  forKey:@"notificationId"];
-         [myNotificationDict setObject:notification.notificationName    forKey:@"notificationName"];
-         [myNotificationDict setObject:notification.readNotification    forKey:@"readNotification"];;
-         [myNotificationDict setObject:notification.status  forKey:@"status"];
-       //  [myNotificationDict setObject:notification.therapeuticDropDownValues   forKey:@"therapeuticDropDownValues"];
-         [myNotificationDict setObject:notification.therapeuticId   forKey:@"therapeuticId"];
-         [myNotificationDict setObject:notification.therapeuticName forKey:@"therapeuticName"];
-//         [myNotificationDict setObject:notification.totalConvertedToAppointment forKey:@"totalConvertedToAppointment"];
-//         [myNotificationDict setObject:notification.totalPendingNotifcation forKey:@"totalPendingNotifcation"];
-//         [myNotificationDict setObject:notification.totalSentNotification   forKey:@"totalSentNotification"];
-//         [myNotificationDict setObject:notification.totalViewedNotifcation  forKey:@"totalViewedNotifcation"];
-         [myNotificationDict setObject:notification.typeId  forKey:@"typeId"];
-         [myNotificationDict setObject:notification.updatedBy   forKey:@"updatedBy"];
-         [myNotificationDict setObject:notification.updatedOn   forKey:@"updatedOn"];
-         [myNotificationDict setObject:notification.validUpto   forKey:@"validUpto"];
-         [array addObject:myNotificationDict];
-    }
+    notificationTypeList = [[MRDataManger sharedManager] fetchObjectList:kNotificationsEntity
+                                                               attributeName:@"updatedOn"
+                                                                   predicate:predicate sortOrder:SORT_ORDER_DESCENDING];
     
-    objectsList(array);
+    objectsList(notificationTypeList);
 }
 
 + (void)getNotificationsByFilter:(NSString*)companyName
            withTherapeuticName:(NSString*)therapeuticName
+                          isRead:(BOOL)isRead
+                     isFavourite:(BOOL)isFavourite
    withNotificationsList:(void (^)(NSArray *fetchList))objectsList
 {
     NSArray *notificationsList   = nil;
     
-    if (![MRCommon isStringEmpty:companyName] && ![MRCommon isStringEmpty:therapeuticName])
-    {
-        notificationsList   = [[MRDataManger sharedManager] fetchObjectList:kNotificationsEntity predicate:[NSPredicate predicateWithFormat:@"companyName == %@ AND therapeuticName == %@", companyName,therapeuticName]];
-    }
-    else if (![MRCommon isStringEmpty:companyName])
-    {
-        notificationsList   = [[MRDataManger sharedManager] fetchObjectList:kNotificationsEntity predicate:[NSPredicate predicateWithFormat:@"companyName == %@", companyName]];
-    }
-    else if (![MRCommon isStringEmpty:therapeuticName])
-    {
-        notificationsList   = [[MRDataManger sharedManager] fetchObjectList:kNotificationsEntity predicate:[NSPredicate predicateWithFormat:@"therapeuticName == %@", therapeuticName]];
+    NSPredicate *companyNamePredicate = nil;
+    NSPredicate *therapeuticAreaPredicate = nil;
+    NSPredicate *readPredicate = nil;
+    NSPredicate *favouritePredicate = nil;
+    
+    NSMutableArray *predicatesArray = [NSMutableArray new];
+    
+    if (![MRCommon isStringEmpty:companyName]) {
+        companyNamePredicate = [NSPredicate predicateWithFormat:@"companyName == [cd]%@", companyName];
+        [predicatesArray addObject:companyNamePredicate];
+
     }
     
-    NSMutableArray *array           = [NSMutableArray array];
-    
-    for (MRNotifications *notification in notificationsList)
-    {
-        NSMutableDictionary *myNotificationDict = [NSMutableDictionary dictionary];
-        
-        [myNotificationDict setObject:notification.companyId   forKey:@"companyId"];
-        [myNotificationDict setObject:notification.companyName forKey:@"companyName"];
-        [myNotificationDict setObject:notification.createdBy   forKey:@"createdBy"];
-        [myNotificationDict setObject:notification.createdOn   forKey:@"createdOn"];
-        [myNotificationDict setObject:notification.externalRef forKey:@"externalRef"];
-        [myNotificationDict setObject:notification.favNotification forKey:@"favNotification"];
-//        [myNotificationDict setObject:notification.fileList    forKey:@"fileList"];
-        [myNotificationDict setObject:notification.notificationDesc    forKey:@"notificationDesc"];
-        [myNotificationDict setObject:[MRCommon unArchiveDataToDictionary:notification.notificationDetails forKey:@"notificationDetails"] forKey:@"notificationDetails"];
-        [myNotificationDict setObject:notification.notificationId  forKey:@"notificationId"];
-        [myNotificationDict setObject:notification.notificationName    forKey:@"notificationName"];
-        [myNotificationDict setObject:notification.readNotification    forKey:@"readNotification"];;
-        [myNotificationDict setObject:notification.status  forKey:@"status"];
-//        [myNotificationDict setObject:notification.therapeuticDropDownValues   forKey:@"therapeuticDropDownValues"];
-        [myNotificationDict setObject:notification.therapeuticId   forKey:@"therapeuticId"];
-        [myNotificationDict setObject:notification.therapeuticName forKey:@"therapeuticName"];
-//        [myNotificationDict setObject:notification.totalConvertedToAppointment forKey:@"totalConvertedToAppointment"];
-//        [myNotificationDict setObject:notification.totalPendingNotifcation forKey:@"totalPendingNotifcation"];
-//        [myNotificationDict setObject:notification.totalSentNotification   forKey:@"totalSentNotification"];
-//        [myNotificationDict setObject:notification.totalViewedNotifcation  forKey:@"totalViewedNotifcation"];
-        [myNotificationDict setObject:notification.typeId  forKey:@"typeId"];
-        [myNotificationDict setObject:notification.updatedBy   forKey:@"updatedBy"];
-        [myNotificationDict setObject:notification.updatedOn   forKey:@"updatedOn"];
-        [myNotificationDict setObject:notification.validUpto   forKey:@"validUpto"];
-        [array addObject:myNotificationDict];
+    if (![MRCommon isStringEmpty:therapeuticName]) {
+        therapeuticAreaPredicate = [NSPredicate predicateWithFormat:@"therapeuticName == [cd]%@", therapeuticName];
+        [predicatesArray addObject:therapeuticAreaPredicate];
     }
     
-    objectsList(array);
+    if (isRead) {
+        readPredicate = [NSPredicate predicateWithFormat:@"readNotification == %d", isRead];
+        [predicatesArray addObject:readPredicate];
+    }
+    
+    if (isFavourite) {
+        favouritePredicate = [NSPredicate predicateWithFormat:@"favourite == %d", isFavourite];
+        [predicatesArray addObject:favouritePredicate];
+    }
+    
+    NSPredicate *predicate = [NSCompoundPredicate andPredicateWithSubpredicates:predicatesArray];
+    
+    notificationsList   = [[MRDataManger sharedManager] fetchObjectList:kNotificationsEntity
+                                                                  attributeName:@"updatedOn"predicate:predicate
+                               sortOrder:SORT_ORDER_DESCENDING];
+    objectsList(notificationsList);
 }
 
 + (void)updateNotifiction:(NSNumber*)notificationID
@@ -482,6 +1039,7 @@ static MRDatabaseHelper *sharedDataManager = nil;
     if (isFav)
     {
         notification.favNotification = [NSNumber numberWithBool:isFav];
+        notification.favourite = [NSNumber numberWithBool:isFav];
     }
     else if (isRead)
     {
@@ -515,6 +1073,1424 @@ static MRDatabaseHelper *sharedDataManager = nil;
 
 + (void)cleanDatabaseOnLogout
 {
-    [[MRDataManger sharedManager] removeAllObjects:kNotificationsEntity];
+    [[MRDataManger sharedManager] removeAllObjects:kNotificationsEntity withPredicate:nil];
 }
+
++ (NSArray*)getShareArticles {
+    NSArray *articles = [[MRDataManger sharedManager] fetchObjectList:kMRSharePost attributeName:@"postedOn" sortOrder:SORT_ORDER_DESCENDING];
+    return articles;
+}
+
++ (void)shareAnArticle:(NSInteger)postType transformPost:(MRTransformPost*)transformPost
+           withHandler:(WebServiceResponseHandler)handler {
+    NSDictionary *dataDict = @{@"topic_id" : transformPost.transformPostId,
+                               @"postMessage" :
+                                     @{@"postType" : [NSNumber numberWithInteger:postType]}
+                              };
+    
+    
+    [MRDatabaseHelper postANewTopic:dataDict withHandler:handler];
+    
+    
+//    NSInteger sharePostId = [[NSDate date] timeIntervalSince1970];
+//    
+//    MRDataManger *dbManager = [MRDataManger sharedManager];
+//    
+//    NSManagedObjectContext *context = [dbManager getNewPrivateManagedObjectContext];
+//    
+//    MRSharePost *post  = (MRSharePost*)[dbManager createObjectForEntity:kMRSharePost
+//                                                              inContext:context];
+//    post.sharePostId = [NSNumber numberWithLong:sharePostId];
+//    post.postedOn = [NSDate date];
+//    post.likesCount = [NSNumber numberWithLong:0];
+//    post.commentsCount = [NSNumber numberWithLong:0];
+//    post.shareCount = [NSNumber numberWithLong:1];
+//    
+//    post.sharedByProfileId = [NSNumber numberWithLong:0];
+//    
+//    MRAppControl *appControl = [MRAppControl sharedHelper];
+//    NSDictionary *userDetailsDict = appControl.userRegData;
+//    post.sharedByProfileName = [userDetailsDict objectOrNilForKey:@"displayName"];
+//    
+//    id profilePicData = [userDetailsDict objectForKey:KProfilePicture];
+//    if (profilePicData != nil && [profilePicData isKindOfClass:[NSDictionary class]])
+//    {
+//        profilePicData = [profilePicData objectForKey:@"data"];
+//    }
+//    
+//    if (profilePicData != nil) {
+//        if ([profilePicData isKindOfClass:[NSString class]]) {
+//            post.shareddByProfilePic = [NSData decodeBase64ForString:profilePicData];
+//        } else {
+//            post.shareddByProfilePic = profilePicData;
+//        }
+//    }
+//    
+//    post.parentTransformPostId = transformPost.transformPostId;
+//    post.titleDescription = transformPost.titleDescription;
+//    post.shortText = transformPost.shortArticleDescription;
+//    post.detailedText = transformPost.detailedDescription;
+//    post.contentType = transformPost.contentType;
+//    post.url = transformPost.url;
+//    post.source = @"Transform";
+//    
+//    // Create a child post as well to show in activities section
+//    MRPostedReplies *childPost = (MRPostedReplies*)[dbManager createObjectForEntity:kMRPostedReplies
+//                                                                  inContext:context];
+//    childPost.parentSharePostId = [NSNumber numberWithLong:post.sharePostId.longValue];
+//    childPost.postedReplyId = [NSNumber numberWithLong:[[NSDate date] timeIntervalSince1970]];
+//    childPost.text = [NSString stringWithFormat:@"Shared the article"];
+//    childPost.postedOn = post.postedOn;
+//    
+//    childPost.contentType = [NSNumber numberWithInteger:kTransformContentTypeText];
+//    childPost.postedBy = post.sharedByProfileName;
+//    childPost.postedByProfilePic = post.shareddByProfilePic;
+//    
+//    [post addPostedRepliesObject:childPost];
+//    
+//    [dbManager dbSaveInContext:context];
+}
+
++ (void)addCommentToAPost:(MRSharePost*)inPost
+                     text:(NSString*)text
+              contentData:(NSData*)data
+              contentType:(NSInteger)contentType {
+    
+    // Set the current user in sharedBy
+    MRAppControl *appControl = [MRAppControl sharedHelper];
+    NSDictionary *userDetailsDict = appControl.userRegData;
+    NSString *sharedByProfileName = [userDetailsDict objectOrNilForKey:@"displayName"];
+    
+    id profilePicData = [userDetailsDict objectForKey:KProfilePicture];
+    if (profilePicData != nil && [profilePicData isKindOfClass:[NSDictionary class]])
+    {
+        profilePicData = [profilePicData objectForKey:@"data"];
+    }
+    
+    NSData *shareddByProfilePic = nil;
+    
+    if (profilePicData != nil) {
+        if ([profilePicData isKindOfClass:[NSString class]]) {
+            shareddByProfilePic = [NSData decodeBase64ForString:profilePicData];
+        } else {
+            shareddByProfilePic = profilePicData;
+        }
+    }
+    
+    // Create new reply post
+    MRDataManger *dbManager = [MRDataManger sharedManager];
+    
+    NSManagedObjectContext *context = [dbManager getNewPrivateManagedObjectContext];
+
+    
+   
+    MRPostedReplies *childPost = (MRPostedReplies*)[dbManager createObjectForEntity:kMRPostedReplies
+                                                                          inContext:context];
+    
+    childPost.postedReplyId = [NSNumber numberWithLong:[[NSDate date] timeIntervalSince1970]];
+    childPost.postedOn = [NSDate date];
+    childPost.message = text;
+    childPost.doctor_Name = sharedByProfileName;
+    
+    // Set the content type
+    childPost.contentType = [NSNumber numberWithInteger:contentType];
+    
+    // Update the current post
+    if (inPost != nil && inPost.sharePostId != nil) {
+        childPost.parentSharePostId = [NSNumber numberWithLong:inPost.sharePostId.longValue];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"sharePostId", inPost.sharePostId.longValue];
+        MRSharePost *post = [dbManager fetchObject:kMRSharePost predicate:predicate inContext:context];
+        [post addPostedRepliesObject:childPost];
+        
+        NSInteger commentCount = 1;
+        if (post.commentsCount != nil) {
+            commentCount = post.commentsCount.longValue + 1;
+        }
+        post.commentsCount = [NSNumber numberWithLong:commentCount];
+    }
+    
+    [dbManager dbSaveInContext:context];
+}
+
++ (void)shareAPostWithContactOrGroup:(MRSharePost*)inPost
+                             text:(NSString*)text
+                      contentData:(NSData*)data
+                      contentType:(NSInteger)contentType
+                        contactId:(NSInteger)contactId
+                          groupId:(NSInteger)groupId {
+    
+    // Set the current user in sharedBy
+    MRAppControl *appControl = [MRAppControl sharedHelper];
+    NSDictionary *userDetailsDict = appControl.userRegData;
+    NSString *sharedByProfileName = [userDetailsDict objectOrNilForKey:@"displayName"];
+    
+    id profilePicData = [userDetailsDict objectForKey:KProfilePicture];
+    if (profilePicData != nil && [profilePicData isKindOfClass:[NSDictionary class]])
+    {
+        profilePicData = [profilePicData objectForKey:@"data"];
+    }
+    
+    NSData *shareddByProfilePic = nil;
+    
+    if (profilePicData != nil) {
+        if ([profilePicData isKindOfClass:[NSString class]]) {
+            shareddByProfilePic = [NSData decodeBase64ForString:profilePicData];
+        } else {
+            shareddByProfilePic = profilePicData;
+        }
+    }
+    
+    // Create new reply post
+    MRDataManger *dbManager = [MRDataManger sharedManager];
+    
+    NSManagedObjectContext *context = [dbManager getNewPrivateManagedObjectContext];
+    MRPostedReplies *childPost = (MRPostedReplies*)[dbManager createObjectForEntity:kMRPostedReplies
+                                                                          inContext:context];
+    
+    childPost.postedReplyId = [NSNumber numberWithLong:[[NSDate date] timeIntervalSince1970]];
+    childPost.postedOn = [NSDate date];
+    childPost.message = text;
+    childPost.doctor_Name = sharedByProfileName;
+    
+    // Set the content type
+    childPost.contentType = [NSNumber numberWithInteger:contentType];
+    
+    MRContact *contact;
+    MRGroup *group;
+    if (contactId > 0) {
+        childPost.contactId = [NSNumber numberWithLong:contactId];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"contactId", contactId];
+        contact = [dbManager fetchObject:kContactEntity predicate:predicate inContext:context];
+        childPost.contactRelationship = contact;
+    }
+    if (groupId > 0) {
+        childPost.groupId = [NSNumber numberWithLong:groupId];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"group_id", groupId];
+        group = [dbManager fetchObject:kGroupEntity predicate:predicate inContext:context];
+        childPost.groupRelationship = group;
+    }
+    
+    // Update the current post
+    if (inPost != nil && inPost.sharePostId != nil) {
+        childPost.parentSharePostId = [NSNumber numberWithLong:inPost.sharePostId.longValue];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"sharePostId", inPost.sharePostId.longValue];
+        MRSharePost *post = [dbManager fetchObject:kMRSharePost predicate:predicate inContext:context];
+        [post addPostedRepliesObject:childPost];
+        
+        if (contact != nil) {
+            [contact addCommentsObject:childPost];
+        }
+        NSInteger shareCount = 1;
+        if (post.shareCount != nil) {
+            shareCount = post.shareCount.longValue + 1;
+        }
+        post.shareCount = [NSNumber numberWithLong:shareCount];
+    }
+    
+    [dbManager dbSaveInContext:context];
+}
+
++ (void)addCommentToAPost:(MRSharePost*)inPost
+                     text:(NSString*)text
+              contentData:(NSData*)data
+                contactId:(NSInteger)contactId
+                  groupId:(NSInteger)groupId
+              posteByContactName:(NSString*)name
+       postedByContactPic:(NSString*)pic
+        postedByContactId:(NSString*)profileId
+       updateCommentCount:(BOOL)updateCommentCount
+      andUpdateShareCount:(BOOL)updateShareCount {
+    MRDataManger *dbManager = [MRDataManger sharedManager];
+    
+    NSManagedObjectContext *context = [dbManager getNewPrivateManagedObjectContext];
+    MRPostedReplies *childPost = (MRPostedReplies*)[dbManager createObjectForEntity:kMRPostedReplies
+                                                                          inContext:context];
+    
+    childPost.parentSharePostId = [NSNumber numberWithLong:inPost.sharePostId.longValue];
+    childPost.postedReplyId = [NSNumber numberWithLong:[[NSDate date] timeIntervalSince1970]];
+    childPost.postedOn = [NSDate date];
+    childPost.message = text;
+    childPost.contentType = [NSNumber numberWithInteger:kTransformContentTypeText];
+    childPost.doctor_Name = name;
+    
+    if (contactId > 0) {
+        childPost.contactId = [NSNumber numberWithLong:contactId];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"contactId", contactId];
+        MRContact *contact = [dbManager fetchObject:kContactEntity predicate:predicate inContext:context];
+        childPost.contactRelationship = contact;
+    }
+    if (groupId > 0) {
+        childPost.groupId = [NSNumber numberWithLong:groupId];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"group_id", groupId];
+        MRGroup *group = [dbManager fetchObject:kGroupEntity predicate:predicate inContext:context];
+        childPost.groupRelationship = group;
+    }
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", @"sharePostId", inPost.sharePostId.longValue];
+    MRSharePost *post = [dbManager fetchObject:kMRSharePost predicate:predicate inContext:context];
+    [post addPostedRepliesObject:childPost];
+    
+    if (updateCommentCount) {
+        NSInteger commentCount = 1;
+        if (post.commentsCount != nil) {
+            commentCount = post.commentsCount.longValue + 1;
+        }
+        post.commentsCount = [NSNumber numberWithLong:commentCount];
+    }
+    
+    if (updateShareCount) {
+        NSInteger shareCount = 1;
+        if (post.shareCount != nil) {
+            shareCount = post.shareCount.longValue + 1;
+        }
+        post.shareCount = [NSNumber numberWithLong:shareCount];
+    }
+    
+    [dbManager dbSaveInContext:context];
+}
+
++ (NSArray*)getTransformArticles {
+    NSArray *articles = [[MRDataManger sharedManager] fetchObjectList:kMRTransformPost attributeName:@"postedOn" sortOrder:SORT_ORDER_DESCENDING];
+    return articles;
+}
+
++(NSArray *)getProfileData{
+    NSArray *profileAra = [[MRDataManger sharedManager] fetchObjectList:@"MRProfile"];
+    return profileAra;
+    
+}
+
+
+
++(void)deleteWorkExperienceFromTable:(NSNumber *)workExpID withHandler:(WebServiceResponseHandler)responseHandler{
+    NSArray *profileAra = [[MRDataManger sharedManager] fetchObjectList:@"MRProfile"];
+    MRProfile * profile = [profileAra lastObject];
+    MRWorkExperience *workExp = [[MRDataManger sharedManager] fetchObject:@"MRWorkExperience" predicate:[NSPredicate predicateWithFormat:@"id == %@",workExpID]];
+    
+    [profile removeWorkExperienceObject:workExp];
+    
+    [[MRDataManger sharedManager] removeObject:workExp];
+    [[MRDataManger sharedManager] saveContext];
+    
+    [[MRWebserviceHelper sharedWebServiceHelper] deleteWorkExperience:workExpID withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+       
+        responseHandler(responce);
+        
+    }];
+    
+}
++(void)deleteEducationQualificationFromTable:(NSNumber *)educationID withHandler:(WebServiceResponseHandler)responseHandler{
+    
+    NSArray *profileAra = [[MRDataManger sharedManager] fetchObjectList:@"MRProfile"];
+    MRProfile * profile = [profileAra lastObject];
+    EducationalQualifications *educationExp = [[MRDataManger sharedManager] fetchObject:@"EducationalQualifications" predicate:[NSPredicate predicateWithFormat:@"id == %@",educationID]];
+    
+    [profile removeEducationlQualificationObject:educationExp];
+    
+    [[MRDataManger sharedManager] removeObject:educationExp];
+    [[MRDataManger sharedManager] saveContext];
+
+    [[MRWebserviceHelper sharedWebServiceHelper] deleteEducationQualification:educationID withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        responseHandler(responce);
+    }];
+}
++(void)deleteInterestAreaFromTable:(NSNumber *)interestID withHandler:(WebServiceResponseHandler)responseHandler{
+    [[MRWebserviceHelper sharedWebServiceHelper] deleteInterestArea:interestID withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        NSArray *profileAra = [[MRDataManger sharedManager] fetchObjectList:@"MRProfile"];
+        MRProfile * profile = [profileAra lastObject];
+        MRInterestArea *interestArea = [[MRDataManger sharedManager] fetchObject:@"MRInterestArea" predicate:[NSPredicate predicateWithFormat:@"id == %@",interestID]];
+        
+        [profile removeInterestAreaObject:interestArea];
+        [[MRDataManger sharedManager] removeObject:interestArea];
+        
+        [[MRDataManger sharedManager] saveContext];
+
+        responseHandler(responce);
+}];
+    
+}
++(void)deletePublicationAreaFromTable:(NSNumber *)publicationID withHandler:(WebServiceResponseHandler)responseHandler{
+    NSArray *profileAra = [[MRDataManger sharedManager] fetchObjectList:@"MRProfile"];
+    MRProfile * profile = [profileAra lastObject];
+    MRPublications *publicationObj = [[MRDataManger sharedManager] fetchObject:@"MRPublications" predicate:[NSPredicate predicateWithFormat:@"id == %@",publicationID]];
+    
+    [profile removePublicationsObject:publicationObj];
+    
+    [[MRDataManger sharedManager] removeObject:publicationObj];
+    [[MRDataManger sharedManager] saveContext];
+[[MRWebserviceHelper sharedWebServiceHelper] deletePublish:publicationID withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+    responseHandler(responce);
+}];
+    
+}
+
++(void)addInterestArea:(NSArray *)_array  andHandler:(WebServiceResponseHandler)responseHandler
+{
+    NSArray *profileAra = [[MRDataManger sharedManager] fetchObjectList:@"MRProfile"];
+    MRProfile * profile = [profileAra lastObject];
+    
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[_array lastObject],@"name",nil];
+    
+    
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    [array addObject: dict];
+    
+    [[MRWebserviceHelper sharedWebServiceHelper] addorUpdateInterestArea:array withUpdateFlag:NO withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        
+            NSLog(@"%@",responce);
+               MRInterestArea *interestArea = (MRInterestArea *)[[MRDataManger sharedManager] createObjectForEntity:@"MRInterestArea"];
+                    interestArea.name  = [_array lastObject];
+                    interestArea.id = [[responce objectForKey:@"id"] objectAtIndex:0];
+                    [profile addInterestAreaObject:interestArea];
+                    responseHandler(@"TRUE");
+        
+            
+                
+                [[MRDataManger sharedManager] saveContext];
+
+            
+        }];
+        
+    
+    
+
+}
+
++(void)updateInterest:(NSDictionary *)dictonary withInterestAreaID:(NSNumber *)iD  andHandler:(WebServiceResponseHandler)responseHandler{
+ 
+    MRInterestArea *interestArea = [[MRDataManger sharedManager] fetchObject:@"MRInterestArea" predicate:[NSPredicate predicateWithFormat:@"id == %@",iD]];
+    
+    NSMutableArray *arrayObj = [[NSMutableArray alloc] init];
+    
+    [arrayObj addObject:dictonary];
+    
+
+    [[MRWebserviceHelper sharedWebServiceHelper] addorUpdateInterestArea:arrayObj withUpdateFlag:YES withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        
+        interestArea.name  = [dictonary objectForKey:@"name"];
+        [[MRDataManger sharedManager] saveContext];
+        responseHandler(@"TRUE");
+
+        
+    }];
+    
+    
+}
+
+
+
++(void)updatePublication:(NSDictionary *)dictonary withPublicationID:(NSNumber *)iD  andHandler:(WebServiceResponseHandler)responseHandler{
+
+    MRPublications *publications = [[MRDataManger sharedManager] fetchObject:@"MRPublications" predicate:[NSPredicate predicateWithFormat:@"id == %@",iD]];
+    
+    NSMutableArray *arrayObj = [[NSMutableArray alloc] init];
+    
+    [arrayObj addObject:dictonary];
+    
+
+
+    [[MRWebserviceHelper sharedWebServiceHelper] addOrUpdatePulblishArticle:arrayObj withUpdateFlag:YES withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        publications.articleName = [dictonary objectForKey:@"articleName"];
+        publications.publication = [dictonary objectForKey:@"publication"];
+        publications.year = [dictonary objectForKey:@"year"];
+        publications.url = [dictonary objectForKey:@"url"];
+        
+        [[MRDataManger sharedManager] saveContext];
+        responseHandler(@"TRUE");
+
+        
+    }];
+    
+}
++(void)addPublications:(NSDictionary *)dictonary andHandler:(WebServiceResponseHandler)responseHandler  {
+   
+    
+    NSMutableArray *requestAr = [[NSMutableArray alloc] init];
+    
+    [requestAr addObject:dictonary];
+    
+    [[MRWebserviceHelper sharedWebServiceHelper] addOrUpdatePulblishArticle:requestAr withUpdateFlag:NO withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        
+        
+        NSArray *profileAra = [[MRDataManger sharedManager] fetchObjectList:@"MRProfile"];
+        MRProfile * profile = [profileAra lastObject];
+        if (profile!=nil) {
+            
+            MRPublications * publications = (MRPublications *)[[MRDataManger sharedManager] createObjectForEntity:@"MRPublications"];
+            
+            publications.articleName = [dictonary objectForKey:@"articleName"];
+            publications.publication = [dictonary objectForKey:@"publication"];
+            publications.year = [dictonary objectForKey:@"year"];
+            publications.url = [dictonary objectForKey:@"url"];
+
+            publications.id = [[responce objectForKey:@"id"] objectAtIndex:0];
+            responseHandler(@"TRUE");
+            [profile addPublicationsObject:publications];
+            [[MRDataManger sharedManager] saveContext];
+
+            
+            
+        }
+
+        
+    }];
+    
+    
+}
+
+
++(void)updateEducationQualification:(NSDictionary *)dictonary withEducationQualificationID:(NSNumber *)iD  andHandler:(WebServiceResponseHandler)responseHandler{
+    
+    
+    EducationalQualifications *educationQualification = [[MRDataManger sharedManager] fetchObject:@"EducationalQualifications" predicate:[NSPredicate predicateWithFormat:@"id == %@",iD]];
+    
+    NSMutableArray *arrayObj = [[NSMutableArray alloc] init];
+    
+    [arrayObj addObject:dictonary];
+    
+    [[MRWebserviceHelper sharedWebServiceHelper] addOrUpdateEducationArea:arrayObj withUpdateFlag:YES withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        educationQualification.degree = [dictonary objectForKey:@"degree"];
+        educationQualification.yearOfPassout = [dictonary objectForKey:@"yearOfPassout"];
+        educationQualification.collegeName = [dictonary objectForKey:@"collegeName"];
+        educationQualification.course = [dictonary objectForKey:@"course"];
+        educationQualification.aggregate = [NSNumber numberWithFloat:[[dictonary objectForKey:@"aggregate"]integerValue]];
+        
+        [[MRDataManger sharedManager] saveContext];
+        responseHandler(@"TRUE");
+
+    }];
+    
+}
+
++(void)addEducationQualification:(NSDictionary *)dictonary andHandler:(WebServiceResponseHandler)responseHandler {
+    NSArray *profileAra = [[MRDataManger sharedManager] fetchObjectList:@"MRProfile"];
+    MRProfile * profile = [profileAra lastObject];
+
+    if (profile!=nil) {
+        
+        NSMutableArray *arrayObj = [[NSMutableArray alloc] init];
+        
+        [arrayObj addObject:dictonary];
+        
+        [[MRWebserviceHelper sharedWebServiceHelper] addOrUpdateEducationArea:arrayObj withUpdateFlag:NO withHandler:^(BOOL status, NSString *details, NSDictionary *responce)  {
+            
+            
+            NSLog(@"%@",responce);
+            
+          
+            EducationalQualifications * educationQualification = (EducationalQualifications *)[[MRDataManger sharedManager] createObjectForEntity:@"EducationalQualifications"];
+            educationQualification.id = [[responce objectForKey:@"id"] objectAtIndex:0];
+            educationQualification.degree = [dictonary objectForKey:@"degree"];
+            educationQualification.yearOfPassout = [dictonary objectForKey:@"yearOfPassout"];
+            educationQualification.collegeName = [dictonary objectForKey:@"collegeName"];
+            educationQualification.course = [dictonary objectForKey:@"course"];
+            educationQualification.aggregate = [NSNumber numberWithFloat:[[dictonary objectForKey:@"aggregate"]integerValue]];
+            
+            
+            [profile addEducationlQualificationObject:educationQualification];
+            [[MRDataManger sharedManager] saveContext];
+            responseHandler(@"TRUE");
+            
+        }];
+
+        
+    }
+
+}
+
+
+
++(void)updateWorkExperience:(NSDictionary *)workExpDict withWorkExperienceID:(NSNumber *)iD  andHandler:(WebServiceResponseHandler)responseHandler{
+    
+    
+    MRWorkExperience *workExp = [[MRDataManger sharedManager] fetchObject:@"MRWorkExperience" predicate:[NSPredicate predicateWithFormat:@"id == %@",iD]];
+    
+
+    
+    NSArray *arrayObj = [NSArray arrayWithObject:workExpDict];
+[[MRWebserviceHelper sharedWebServiceHelper] addOrUpdateWorkExperience:arrayObj withUpdateFlag:YES withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+   
+    workExp.designation = [workExpDict objectForKey:@"designation"];
+    workExp.fromDate = [workExpDict objectForKey:@"fromDate"];
+    workExp.toDate = [workExpDict objectForKey:@"toDate"];
+    workExp.hospital = [workExpDict objectForKey:@"hospital"];
+    workExp.location = [workExpDict objectForKey:@"location"];
+    workExp.currentJob = [workExpDict objectForKey:@"currentJob"];
+    workExp.summary = [workExpDict objectForKey:@"summary"];
+    
+
+    [[MRDataManger sharedManager] saveContext];
+    
+    responseHandler(@"TRUE");
+}];
+    
+//    [[MRDataManger sharedManager] fetchObject:@"MRWorkExperience" inContext:<#(NSManagedObjectContext *)#>]
+    
+    
+}
++(void)addWorkExperience :(NSDictionary *)dictionary andHandler:(WebServiceResponseHandler)responseHandler{
+   
+    NSArray *profileAra = [[MRDataManger sharedManager] fetchObjectList:@"MRProfile"];
+    MRProfile * profile = [profileAra lastObject];
+    if (profile!=nil) {
+        
+        
+        /*
+         [{
+         "hospital":"Apollo Hospital",
+         "fromDate":"02-06-1987",
+         "toDate":"02-06-1988",
+         "location":"Nellore",
+         "designation":"ENT"
+         }]
+         */
+        
+        NSArray *obj = [NSArray arrayWithObject:dictionary];
+        [[MRWebserviceHelper sharedWebServiceHelper] addOrUpdateWorkExperience:obj withUpdateFlag:NO withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+            NSDictionary *workExpDict  = (NSDictionary *)dictionary;
+            MRWorkExperience * workExp = (MRWorkExperience *)[[MRDataManger sharedManager] createObjectForEntity:@"MRWorkExperience"];
+            workExp.id = [[responce objectForKey:@"id"] objectAtIndex:0];
+
+            workExp.designation = [workExpDict objectForKey:@"designation"];
+            workExp.fromDate = [workExpDict objectForKey:@"fromDate"];
+            workExp.toDate = [workExpDict objectForKey:@"toDate"];
+            workExp.hospital = [workExpDict objectForKey:@"hospital"];
+            workExp.location = [workExpDict objectForKey:@"location"];
+            workExp.currentJob = [workExpDict objectForKey:@"currentJob"];
+            workExp.summary = [workExpDict objectForKey:@"summary"];
+            
+            responseHandler(@"TRUE");
+            [profile addWorkExperienceObject:workExp];
+            [[MRDataManger sharedManager] saveContext];
+
+        }];
+    }
+}
+
++(void)addProfileData:(NSInteger)doctorId responseHandler:(WebServiceResponseHandler)responseHandler{
+
+    [[MRWebserviceHelper sharedWebServiceHelper] fetchDoctorInfoWithHandler:doctorId
+                                                            responseHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        NSLog(@"%@",responce);
+                                                                
+        MRDataManger *dbManager = [MRDataManger sharedManager];
+
+         NSManagedObjectContext *context = [dbManager getNewPrivateManagedObjectContext];
+        [[MRDataManger sharedManager] removeAllObjects:@"MRProfile" inContext:context
+                                          andPredicate:nil];
+        
+        NSDictionary * result =[responce objectForKey:@"result"];
+        
+        NSDictionary *aboutDict = [result objectForKey:@"about"];
+        MRProfile * profile = (MRProfile *)[[MRDataManger sharedManager] createObjectForEntity:@"MRProfile"];
+        profile.name = [aboutDict objectForKey:@"name"];
+        profile.dPicture = [result objectOrNilForKey:@"dPicture"];
+        profile.location = [aboutDict objectForKey:@"location"];
+        profile.designation = [aboutDict objectForKey:@"designation"];
+        profile.id = [NSNumber numberWithInteger:[[aboutDict  objectForKey:@"id"] integerValue]];
+        profile.doctorId = [NSNumber numberWithInteger:[[aboutDict  objectForKey:@"doctorId"] integerValue]];
+        
+        NSArray * workExpArra = [result objectForKey:@"workexperiences"];
+        [workExpArra enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSDictionary *workExpDict  = (NSDictionary *)obj;
+            MRWorkExperience * workExp = (MRWorkExperience *)[[MRDataManger sharedManager] createObjectForEntity:@"MRWorkExperience"];
+            workExp.id = [workExpDict objectForKey:@"id"];
+            workExp.designation = [workExpDict objectForKey:@"designation"];
+            workExp.fromDate = [workExpDict objectForKey:@"fromDate"];
+            workExp.toDate = [workExpDict objectForKey:@"toDate"];
+            workExp.hospital = [workExpDict objectForKey:@"hospital"];
+            workExp.location = [workExpDict objectForKey:@"location"];
+            workExp.currentJob = [workExpDict objectForKey:@"currentJob"];
+            workExp.summary = [workExpDict objectForKey:@"summary"];
+            [profile addWorkExperienceObject:workExp];
+            
+        }];
+        NSArray *addressInfoArra= [result objectForKey:@"address"];
+        
+        
+        
+        [addressInfoArra enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+            AddressInfo *addressInfo =(AddressInfo *)[[MRDataManger sharedManager] createObjectForEntity:@"AddressInfo"];
+            
+            NSDictionary *addressDict = (NSDictionary *)obj;
+            [addressInfo updateFromDictionary:addressDict];
+            
+            [profile addAddressInfoObject:addressInfo];
+        }];
+                                                                
+        NSDictionary *contactInfoDict = [result objectForKey:@"contactInfo"];
+        if (contactInfoDict!=nil) {
+            
+            NSArray *records = [MRWebserviceHelper parseRecords:ContactInfo.class
+                                  allRecords:nil
+                                     context:profile.managedObjectContext
+                                     andData:@[contactInfoDict]];
+            
+            if (records != nil && records.count > 0) {
+                profile.contactInfo = records.firstObject;
+            }
+        } else {
+            profile.contactInfo = nil;
+        }
+        
+        NSArray *educationQualificationArra = [result objectForKey:@"educationdetails"];
+        
+        [educationQualificationArra enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+            EducationalQualifications * educationQualification = (EducationalQualifications *)[[MRDataManger sharedManager] createObjectForEntity:@"EducationalQualifications"];
+            NSDictionary *dictEdu = (NSDictionary *)obj;
+            educationQualification.degree = [dictEdu objectForKey:@"degree"];
+            educationQualification.yearOfPassout = [dictEdu objectForKey:@"yearOfPassout"];
+            educationQualification.collegeName = [dictEdu objectForKey:@"collegeName"];
+            educationQualification.course = [dictEdu objectForKey:@"course"];
+            educationQualification.aggregate = [dictEdu objectForKey:@"aggregate"];
+            educationQualification.id = [dictEdu objectForKey:@"id"];
+            
+            [profile addEducationlQualificationObject:educationQualification];
+        
+        }];
+        
+        NSArray *interestArra = [result objectForKey:@"interests"];
+        [interestArra enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            NSDictionary *interestAraDict = (NSDictionary *)obj;
+            MRInterestArea * interestArea = (MRInterestArea *)[[MRDataManger sharedManager] createObjectForEntity:@"MRInterestArea"];
+            interestArea.name = [interestAraDict objectForKey:@"name"];
+           interestArea.id = [interestAraDict objectForKey:@"id"];
+            
+            [profile addInterestAreaObject:interestArea];
+            
+            
+        }];
+
+        NSArray *publicationsArra = [result objectForKey:@"publications"];
+        [publicationsArra enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            NSDictionary *publicationAraDict = (NSDictionary *)obj;
+            MRPublications * interestArea = (MRPublications *)[[MRDataManger sharedManager] createObjectForEntity:@"MRPublications"];
+            interestArea.publication = [publicationAraDict objectForKey:@"publication"];
+            interestArea.articleName = [publicationAraDict objectForKey:@"articleName"];
+            interestArea.year = [publicationAraDict objectForKey:@"year"];
+            interestArea.url = [publicationAraDict objectForKey:@"url"];
+            interestArea.id = [publicationAraDict objectForKey:@"id"];
+            [profile addPublicationsObject:interestArea];
+            
+        }];
+        [[MRDataManger sharedManager] saveContext];
+
+        id profileAra = [[MRDataManger sharedManager] fetchObjectList:@"MRProfile"];
+        
+        responseHandler(profileAra);
+        
+        NSDictionary *data = @{@"locations" : addressInfoArra,
+                               @"profilePicture" : [result objectOrNilForKey:@"dPicture"],
+                               @"mobileNo" : [contactInfoDict objectOrNilForKey:@"mobileNo"],
+                               @"phoneNo" : [contactInfoDict objectOrNilForKey:@"phoneNo"],
+                               @"emailId" : [contactInfoDict objectOrNilForKey:@"emailId"],
+                               @"alternateEmailId" : [contactInfoDict objectOrNilForKey:@"alternateEmailId"]};
+        [[MRAppControl sharedHelper] setUserDetails:data];
+        
+    }];
+    
+}
+
++ (void)addTransformArticles:(NSArray*)posts {
+    for (NSDictionary *myDict in posts) {
+        MRTransformPost *post  = (MRTransformPost*)[[MRDataManger sharedManager] createObjectForEntity:kMRTransformPost];
+        post.transformPostId = [MRDatabaseHelper convertStringToNSNumber:[myDict objectForKey:@"transformPostId"]];
+        post.url = [myDict objectForKey:@"url"];
+        post.contentType = [myDict objectForKey:@"contextType"];
+        post.detailedDescription = [myDict objectForKey:@"detailedDescription"];
+        post.titleDescription = [myDict objectForKey:@"titleDescription"];
+        post.source = [myDict objectForKey:@"source"];
+        post.shortArticleDescription = [myDict objectForKey:@"shortArticleDescription"];
+        
+        NSDate *currentDate = nil;
+        id dateValue = [myDict objectForKey:@"postedOn"];
+        
+        if ([dateValue isKindOfClass:[NSString class]]) {
+            currentDate = [NSDate convertStringToNSDate:dateValue dateFormat:kDefaultDateFormat];
+        } else {
+            currentDate = dateValue;
+        }
+        post.postedOn = currentDate;
+    }
+    [[MRDataManger sharedManager] saveContext];
+}
+
++(void)fetchMyWallPosts:(WebServiceResponseHandler)responseHandler{
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    
+    [[MRWebserviceHelper sharedWebServiceHelper] getMyWallPosts:nil
+                                              withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                  [[MRDataManger sharedManager] removeAllObjects:kMRSharePost withPredicate:nil];
+                                                  
+                                                  id result = [MRWebserviceHelper parseNetworkResponse:NSClassFromString(kMRSharePost)
+                                                               
+                                                                                               andData:[responce valueForKey:@"result"]];
+                                                  responseHandler(result);
+                                                  
+                                              }];
+    
+    
+}
+
++(void)fetchShare:(WebServiceResponseHandler)responseHandler{
+    [MRCommon showActivityIndicator:@"Requesting..."];
+
+    
+    
+    [[MRWebserviceHelper sharedWebServiceHelper] getShare:nil
+                                              withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                  [[MRDataManger sharedManager] removeAllObjects:kMRSharePost withPredicate:nil];
+                              
+                                                  id result = [MRWebserviceHelper parseNetworkResponse:NSClassFromString(kMRSharePost)
+                                                               
+                                                                                        andData:[responce valueForKey:@"Responce"]];
+                                                  responseHandler(result);
+                                                  
+                                              }];
+    
+    
+}
+
++ (void)fetchNewsAndUpdates:(NSString*)category
+                 methodName:(NSString*)methodName
+                withHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] getNewsAndUpdates:category
+                                                        methodName:methodName
+                                                       withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                    
+        [[MRDataManger sharedManager] removeAllObjects:kMRTransformPageData withPredicate:nil];
+        [[MRDataManger sharedManager] removeAllObjects:kMRTransformPost withPredicate:nil];
+        [MRDatabaseHelper makeServiceCallForNewsAndUpdatesFetch:category
+                                                     methodName:methodName
+                                                         status:status
+                                                        details:details
+                                                 response:responce
+                                       andResponseHandler:responseHandler];
+    }];
+}
+
++ (void)makeServiceCallForNewsAndUpdatesFetch:(NSString*)category
+                                   methodName:(NSString*)methodName
+                                       status:(BOOL)status
+                                      details:(NSString*)details
+                                     response:(NSDictionary*)response
+                           andResponseHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon stopActivityIndicator];
+    if (status)
+    {
+        [MRDatabaseHelper parseNewsAndUpdatesResponse:response category:category
+                                   andResponseHandler:responseHandler];
+    }
+    else {
+        NSString *errorCode = [MRDatabaseHelper getOAuthErrorCode:response];
+        if ([errorCode isEqualToString:@"invalid_token"])
+        {
+            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+             {
+                 [MRCommon savetokens:responce];
+                 [[MRWebserviceHelper sharedWebServiceHelper] getNewsAndUpdates:category
+                                                                     methodName:methodName
+                                                                    withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                     [MRCommon stopActivityIndicator];
+                     if (status)
+                     {
+                         [MRDatabaseHelper parseNewsAndUpdatesResponse:responce
+                                                            category:category
+                                                    andResponseHandler:responseHandler];
+                     } else
+                     {
+                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                         if (erros.count > 0)
+                             [MRCommon showAlert:[erros lastObject] delegate:nil];
+                     }
+                 }];
+             }];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0) {
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+            }
+            
+            if (responseHandler != nil) {
+                responseHandler(nil);
+            }
+        }
+    }
+}
+
++ (void)parseNewsAndUpdatesResponse:(NSDictionary*)response
+                         category:(NSString*)category
+                 andResponseHandler:(WebServiceResponseHandler) responseHandler {
+    
+    id result;
+    if (category == nil) {
+        result = [MRWebserviceHelper parseNetworkResponse:NSClassFromString(kMRTransformPost)
+                                                  andData:[response valueForKey:@"Responce"]];
+    } else if (category != nil && category.length > 0) {
+        result = [MRWebserviceHelper parseNetworkResponse:NSClassFromString(kMRTransformPageData)
+                                              andData:@[response]];
+    }
+    if (responseHandler != nil) {
+        NSArray *tempResults = [[MRDataManger sharedManager] fetchObjectList:kMRTransformPost];
+        
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"postedOn" ascending:false];
+        NSSortDescriptor *titleDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"titleDescription" ascending:true];
+        result = [tempResults sortedArrayUsingDescriptors:@[sortDescriptor, titleDescriptor]];
+        responseHandler(result);
+    }
+}
+
++ (void)addConnections:(NSArray*)selectedContacts
+    andResponseHandler:(WebServiceResponseHandler)handler {
+    NSMutableDictionary *dictReq = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                    selectedContacts, @"connIdList",
+                                    nil];
+    
+    [MRCommon showActivityIndicator:@"Adding..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] addMembers:dictReq withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [MRCommon stopActivityIndicator];
+        if (status) {
+            if (handler != nil) {\
+                handler([NSNumber numberWithBool:status]);
+                [MRCommon showAlert:NSLocalizedString(kConnectionAdded, "") delegate:nil];
+            }
+        }
+        else {
+            NSString *errorCode = [MRDatabaseHelper getOAuthErrorCode:responce];
+            if ([errorCode isEqualToString:@"invalid_token"])
+            {
+                [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+                 {
+                     [MRCommon savetokens:responce];
+                     [[MRWebserviceHelper sharedWebServiceHelper] addMembers:dictReq withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                         [MRCommon stopActivityIndicator];
+                         if (status) {
+                             if (handler != nil) {
+                                 handler([NSNumber numberWithBool:status]);
+                                 [MRCommon showAlert:NSLocalizedString(kConnectionAdded, "") delegate:nil];
+                             }
+                         }else
+                         {
+                             [[MRDatabaseHelper sharedHelper] showErrorMessageForAddConnection:responce andString:details];
+                         }
+                     }];
+                 }];
+            }
+            else
+            {
+                [[MRDatabaseHelper sharedHelper] showErrorMessageForAddConnection:responce andString:details];
+            }
+        }
+    }];
+}
+
+- (void)showErrorMessageForAddConnection:(id)responce andString:(NSString*)details {
+    if ([responce isKindOfClass:[NSDictionary class]]) {
+        id message = [responce objectOrNilForKey:@"message"];
+        if (message != nil && [message isKindOfClass:[NSString class]]) {
+            NSString *tempMessage = message;
+            if (tempMessage.length > 0) {
+                [MRCommon showAlert:tempMessage delegate:nil];
+            }
+        }
+    } else {
+        NSArray *erros =  [details componentsSeparatedByString:@"-"];
+        if (erros.count > 0)
+            [MRCommon showAlert:[erros lastObject] delegate:nil];
+    }
+}
+
++ (void)postANewTopic:(NSDictionary*)reqDict withHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] postNewTopic:reqDict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+        [MRDatabaseHelper makeServiceCallForPostANewTopic:reqDict
+                                                    status:status
+                                                  details:details
+                                               response:responce
+                                     andResponseHandler:responseHandler];
+    }];
+}
+
++ (void)makeServiceCallForPostANewTopic:reqDict
+                                 status:(BOOL)status
+                                details:(NSString*)details
+                             response:(NSDictionary*)response
+                   andResponseHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon stopActivityIndicator];
+    if (status)
+    {
+        responseHandler([NSNumber numberWithBool:status]);
+    }
+    else {
+        NSString *errorCode = [MRDatabaseHelper getOAuthErrorCode:response];
+        if ([errorCode isEqualToString:@"invalid_token"])
+        {
+            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce) {
+                 [MRCommon savetokens:responce];
+                 [[MRWebserviceHelper sharedWebServiceHelper] postNewTopic:reqDict withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                     [MRCommon stopActivityIndicator];
+                     if (status)
+                     {
+                         responseHandler([NSNumber numberWithBool:status]);
+                     } else
+                     {
+                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                         if (erros.count > 0)
+                             [MRCommon showAlert:[erros lastObject] delegate:nil];
+                     }
+                 }];
+             }];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }
+}
+
++ (void)fetchShareDetailsById:(NSInteger)topicId
+                withHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] getShareDetailsById:topicId
+                                                       withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                           [MRDatabaseHelper makeServiceCallForGetShareDetailsById:topicId
+                                                                                                            status:status
+                                                                                                           details:details
+                                                                                                          response:responce
+                                                                                                andResponseHandler:responseHandler];
+                                                       }];
+}
+
++ (void)makeServiceCallForGetShareDetailsById:(NSInteger)topicId
+                                       status:(BOOL)status
+                                      details:(NSString*)details
+                                     response:(NSDictionary*)response
+                           andResponseHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon stopActivityIndicator];
+    if (status)
+    {
+        [MRDatabaseHelper parseGetShareDetailsByIdResponse:response andResponseHandler:responseHandler];
+    }
+    else {
+        NSString *errorCode = [MRDatabaseHelper getOAuthErrorCode:response];
+        if ([errorCode isEqualToString:@"invalid_token"])
+        {
+            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+             {
+                 [MRCommon savetokens:responce];
+                 [[MRWebserviceHelper sharedWebServiceHelper] getShareDetailsById:topicId
+                                                                    withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                                        [MRCommon stopActivityIndicator];
+                                                                        if (status)
+                                                                        {
+                                                                            [MRDatabaseHelper parseGetShareDetailsByIdResponse:responce
+                                                                                                       andResponseHandler:responseHandler];
+                                                                        } else
+                                                                        {
+                                                                            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                                                                            if (erros.count > 0)
+                                                                                [MRCommon showAlert:[erros lastObject] delegate:nil];
+                                                                        }
+                                                                    }];
+             }];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0) {
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+            }
+            
+            if (responseHandler != nil) {
+                responseHandler(nil);
+            }
+        }
+    }
+}
+
++ (void)parseGetShareDetailsByIdResponse:(NSDictionary*)response
+                 andResponseHandler:(WebServiceResponseHandler) responseHandler {
+    id result = [MRWebserviceHelper parseNetworkResponse:NSClassFromString(kMRPostedReplies)
+                                                 andData:[response valueForKey:@"Responce"]];
+    if (responseHandler != nil) {
+        responseHandler(result);
+    }
+}
+
++ (void)getMessagesOfAMember:(NSInteger)memberId
+                     groupId:(NSInteger)groupId
+                 withHandler:(WebServiceResponseHandler)handler {
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] getPostsForAMember:memberId
+                                                            groupId:groupId
+                                                         withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                             [[MRDataManger sharedManager] removeAllObjects:kMRPostedReplies withPredicate:nil];
+                                                             
+                                                             [MRDatabaseHelper makeServiceCallForGetMessagesOfAMember:memberId
+                                                                                                              groupId:groupId
+                                                                                                              status:status
+                                                                                                             details:details
+                                                                                                            response:responce
+                                                                                                  andResponseHandler:handler];
+                                                         }];
+}
+
++ (void)makeServiceCallForGetMessagesOfAMember:(NSInteger)memberId
+                                       groupId:(NSInteger)groupId
+                                       status:(BOOL)status
+                                      details:(NSString*)details
+                                     response:(NSDictionary*)response
+                           andResponseHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon stopActivityIndicator];
+    if (status)
+    {
+        [MRDatabaseHelper parseGetShareDetailsByIdResponse:response andResponseHandler:responseHandler];
+    }
+    else {
+        NSString *errorCode = [MRDatabaseHelper getOAuthErrorCode:response];
+        if ([errorCode isEqualToString:@"invalid_token"])
+        {
+            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+             {
+                 [MRCommon savetokens:responce];
+                 [[MRWebserviceHelper sharedWebServiceHelper] getPostsForAMember:memberId
+                                                                           groupId:groupId
+                                                                      withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                                          [MRCommon stopActivityIndicator];
+                                                                          if (status)
+                                                                          {
+                                                                              [MRDatabaseHelper parseGetShareDetailsByIdResponse:responce
+                                                                                                              andResponseHandler:responseHandler];
+                                                                          } else
+                                                                          {
+                                                                              NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                                                                              if (erros.count > 0)
+                                                                                  [MRCommon showAlert:[erros lastObject] delegate:nil];
+                                                                          }
+                                                                      }];
+             }];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0) {
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+            }
+            
+            if (responseHandler != nil) {
+                responseHandler(nil);
+            }
+        }
+    }
+}
+
++ (void)editLocation:dataDict andHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] editLocation:dataDict
+                                                  withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                      [MRDatabaseHelper makeServiceCallForEditLocation:dataDict
+                                                                                                status:status
+                                                                                               details:details
+                                                                                              response:responce
+                                                                                    andResponseHandler:responseHandler];
+    }];
+}
+
++ (void)makeServiceCallForEditLocation:(id)dataDict
+                                status:(BOOL)status
+                               details:(NSString*)details
+                              response:(NSDictionary*)response
+                           andResponseHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon stopActivityIndicator];
+    if (status)
+    {
+        [MRDatabaseHelper updateLocationDataInCoreData:dataDict
+                                              response:response
+                                    andResponseHandler:responseHandler];
+    }
+    else {
+        NSString *errorCode = [MRDatabaseHelper getOAuthErrorCode:response];
+        
+        if ([errorCode isEqualToString:@"invalid_token"])
+        {
+            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+             {
+                 [MRCommon savetokens:responce];
+                 [[MRWebserviceHelper sharedWebServiceHelper] editLocation:dataDict
+                                                               withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                     [MRCommon stopActivityIndicator];
+                     if (status)
+                     {
+                         [MRDatabaseHelper updateLocationDataInCoreData:dataDict
+                                                               response:response
+                                                     andResponseHandler:responseHandler];
+                     } else
+                     {
+                         NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                         if (erros.count > 0)
+                             [MRCommon showAlert:[erros lastObject] delegate:nil];
+                     }
+                 }];
+             }];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }
+}
+
++ (void)updateLocationDataInCoreData:dataDict
+                            response:(NSDictionary*)response
+                  andResponseHandler:(WebServiceResponseHandler) responseHandler {
+    if (response != nil && [response allKeys].count > 0) {
+        id tempValue = [response valueForKey:@"status"];
+        if (tempValue != nil) {
+            if ([tempValue isKindOfClass:[NSString class]]) {
+                NSString *status = tempValue;
+                if (status.length > 0  && [status caseInsensitiveCompare:@"success"] == NSOrderedSame) {
+                    if ([dataDict isKindOfClass:[NSArray class]]) {
+                        NSArray *tempLocationArray = dataDict;
+                        id locationDataDict = [tempLocationArray firstObject];
+                        if (locationDataDict != nil && [locationDataDict isKindOfClass:[NSDictionary class] ]) {
+                            [MRWebserviceHelper parseNetworkResponse:AddressInfo.class
+                                                             andData:@[locationDataDict]];
+                        }
+                    }else if ([dataDict isKindOfClass:[NSDictionary class]]) {
+                        ContactInfo *entity = [[MRDataManger sharedManager] fetchObject:NSStringFromClass(ContactInfo.class)];
+                        [entity updateFromDictionary:dataDict];
+                    }
+                    responseHandler(tempValue);
+                } else {
+                    if (responseHandler != nil) {
+                        responseHandler(nil);
+                    }
+                }
+            } else {
+                if (responseHandler != nil) {
+                    responseHandler(nil);
+                }
+            }
+        } else {
+            if (responseHandler != nil) {
+                responseHandler(nil);
+            }
+        }
+    } else {
+        if (responseHandler != nil) {
+            responseHandler(nil);
+        }
+    }
+}
+
++ (void)deleteLocation:dataDict andHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] deleteLocation:dataDict
+                                                  withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                      [MRDatabaseHelper makeServiceCallForDeleteLocation:dataDict
+                                                                                                status:status
+                                                                                               details:details
+                                                                                              response:responce
+                                                                                    andResponseHandler:responseHandler];
+                                                  }];
+}
+
++ (void)makeServiceCallForDeleteLocation:(id)dataDict
+                                status:(BOOL)status
+                               details:(NSString*)details
+                              response:(NSDictionary*)response
+                    andResponseHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon stopActivityIndicator];
+    if (status)
+    {
+        [MRDatabaseHelper deleteLocationDataInCoreData:dataDict
+                                              response:response
+                                    andResponseHandler:responseHandler];
+    }
+    else {
+        NSString *errorCode = [MRDatabaseHelper getOAuthErrorCode:response];
+        
+        if ([errorCode isEqualToString:@"invalid_token"])
+        {
+            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+             {
+                 [MRCommon savetokens:responce];
+                 [[MRWebserviceHelper sharedWebServiceHelper] deleteLocation:dataDict
+                                                               withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                                   [MRCommon stopActivityIndicator];
+                                                                   if (status)
+                                                                   {
+                                                                       [MRDatabaseHelper deleteLocationDataInCoreData:dataDict
+                                                                                                             response:response
+                                                                                                   andResponseHandler:responseHandler];
+                                                                   } else
+                                                                   {
+                                                                       NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                                                                       if (erros.count > 0)
+                                                                           [MRCommon showAlert:[erros lastObject] delegate:nil];
+                                                                   }
+                                                               }];
+             }];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }
+}
+
++ (void)deleteLocationDataInCoreData:dataDict
+                            response:(NSDictionary*)response
+                  andResponseHandler:(WebServiceResponseHandler) responseHandler {
+    if (response != nil && [response allKeys].count > 0) {
+        id tempValue = [response valueForKey:@"status"];
+        if (tempValue != nil) {
+            if ([tempValue isKindOfClass:[NSString class]]) {
+                NSString *status = tempValue;
+                if (status.length > 0  && [status caseInsensitiveCompare:@"success"] == NSOrderedSame) {
+                    if ([dataDict isKindOfClass:[NSArray class]]) {
+                        NSArray *tempLocationArray = dataDict;
+                        id locationDataDict = [tempLocationArray firstObject];
+                        if (locationDataDict != nil && [locationDataDict isKindOfClass:[NSDictionary class] ]) {
+//                            [MRWebserviceHelper parseNetworkResponse:AddressInfo.class
+//                                                             andData:@[locationDataDict]];
+                        }
+                    }
+                    responseHandler(tempValue);
+                } else {
+                    if (responseHandler != nil) {
+                        responseHandler(nil);
+                    }
+                }
+            } else {
+                if (responseHandler != nil) {
+                    responseHandler(nil);
+                }
+            }
+        } else {
+            if (responseHandler != nil) {
+                responseHandler(nil);
+            }
+        }
+    } else {
+        if (responseHandler != nil) {
+            responseHandler(nil);
+        }
+    }
+}
+
++ (void)editContactInfo:dataDict andHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon showActivityIndicator:@"Requesting..."];
+    [[MRWebserviceHelper sharedWebServiceHelper] editContactInfo:dataDict
+                                                  withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                      [MRDatabaseHelper makeServiceCallForEditContactInfo:dataDict
+                                                                                                status:status
+                                                                                               details:details
+                                                                                              response:responce
+                                                                                    andResponseHandler:responseHandler];
+                                                  }];
+}
+
++ (void)makeServiceCallForEditContactInfo:(id)dataDict
+                                status:(BOOL)status
+                               details:(NSString*)details
+                              response:(NSDictionary*)response
+                    andResponseHandler:(WebServiceResponseHandler)responseHandler {
+    [MRCommon stopActivityIndicator];
+    if (status)
+    {
+        [MRDatabaseHelper updateLocationDataInCoreData:dataDict
+                                              response:response
+                                    andResponseHandler:responseHandler];
+    }
+    else {
+        NSString *errorCode = [MRDatabaseHelper getOAuthErrorCode:response];
+        
+        if ([errorCode isEqualToString:@"invalid_token"])
+        {
+            [[MRWebserviceHelper sharedWebServiceHelper] refreshToken:^(BOOL status, NSString *details, NSDictionary *responce)
+             {
+                 [MRCommon savetokens:responce];
+                 [[MRWebserviceHelper sharedWebServiceHelper] editContactInfo:dataDict
+                                                               withHandler:^(BOOL status, NSString *details, NSDictionary *responce) {
+                                                                   [MRCommon stopActivityIndicator];
+                                                                   if (status)
+                                                                   {
+                                                                       [MRDatabaseHelper updateLocationDataInCoreData:dataDict
+                                                                                                             response:response
+                                                                                                   andResponseHandler:responseHandler];
+                                                                   } else
+                                                                   {
+                                                                       NSArray *erros =  [details componentsSeparatedByString:@"-"];
+                                                                       if (erros.count > 0)
+                                                                           [MRCommon showAlert:[erros lastObject] delegate:nil];
+                                                                   }
+                                                               }];
+             }];
+        }
+        else
+        {
+            NSArray *erros =  [details componentsSeparatedByString:@"-"];
+            if (erros.count > 0)
+                [MRCommon showAlert:[erros lastObject] delegate:nil];
+        }
+    }
+}
+
++ (void)updateContactInfoInCoreData:dataDict
+                            response:(NSDictionary*)response
+                  andResponseHandler:(WebServiceResponseHandler) responseHandler {
+    if (response != nil && [response allKeys].count > 0) {
+        id tempValue = [response valueForKey:@"status"];
+        if (tempValue != nil) {
+            if ([tempValue isKindOfClass:[NSString class]]) {
+                NSString *status = tempValue;
+                if (status.length > 0  && [status caseInsensitiveCompare:@"success"] == NSOrderedSame) {
+                    if ([dataDict isKindOfClass:[NSArray class]]) {
+                        NSArray *tempLocationArray = dataDict;
+                        id locationDataDict = [tempLocationArray firstObject];
+                        if (locationDataDict != nil && [locationDataDict isKindOfClass:[NSDictionary class] ]) {
+                            [MRWebserviceHelper parseNetworkResponse:AddressInfo.class
+                                                             andData:@[locationDataDict]];
+                        }
+                    }else if ([dataDict isKindOfClass:[NSDictionary class]]) {
+                        ContactInfo *entity = [[MRDataManger sharedManager] fetchObject:NSStringFromClass(ContactInfo.class)];
+                        [entity updateFromDictionary:dataDict];
+                    }
+                    responseHandler(tempValue);
+                } else {
+                    if (responseHandler != nil) {
+                        responseHandler(nil);
+                    }
+                }
+            } else {
+                if (responseHandler != nil) {
+                    responseHandler(nil);
+                }
+            }
+        } else {
+            if (responseHandler != nil) {
+                responseHandler(nil);
+            }
+        }
+    } else {
+        if (responseHandler != nil) {
+            responseHandler(nil);
+        }
+    }
+}
+
 @end
